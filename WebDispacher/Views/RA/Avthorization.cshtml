@@ -1,0 +1,66 @@
+﻿<div class="bodySt">
+    <label class="labelHeadSt">
+        Sign in to Dashboard
+    </label><br /><br />
+    <form method="post" action="~/RA/Avthorization">
+        <label class="labelSt">
+            Email
+        </label><br/>
+        <input class="textInpSt" type="text" name="Email" /> <br>
+        <label class="labelSt">
+            Password
+        </label> <br/>
+        <input class="textInpSt" type="password" name="Password" /> <br>
+        <input class="btnInpSt" type="submit" value="Sign In" />
+    </form>
+</div>
+
+<style>
+    .bodySt {
+        position:absolute;
+        top:35%;
+        left:35%;
+    }
+
+    .textInpSt {
+        margin: 5px;
+        width: 350px;
+        height: 35px;
+        border-radius: 5px;
+        font-size: 27px;
+        color: #ff6a00;
+        border-color: rgba(233, 172, 97, 0.82);
+        border-style:double;
+    }
+
+    .labelSt {
+        margin: 7px;
+        font-size: 18px;
+        color: #ff6a00;
+    }
+
+    .labelHeadSt {
+        margin: 10px;
+        font-size: 22px;
+        color: #ff6a00;
+    }
+
+    .btnInpSt {
+        margin: 5px;
+        width: 100px;
+        height: 35px;
+        border-radius: 5px;
+        font-size: 23px;
+        color: #ff6a00;
+        border-color: rgba(233, 172, 97, 0.82);
+        border-style: double;
+    }
+
+    .btnInpSt:hover {
+        background-color:#c5c7d0;
+    }
+
+        .btnInpSt:active {
+            background-color: #e2d0bb;
+        }
+</style>
