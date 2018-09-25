@@ -8,11 +8,29 @@ namespace WebDispacher.Service
 {
     public class ManagerDispatch
     {
-        SqlEntityFramworke _sqlEntityFramworke = null;
+        public SqlEntityFramworke _sqlEntityFramworke = null;
 
         public ManagerDispatch()
         {
             _sqlEntityFramworke = new SqlEntityFramworke();
+        }
+
+        public bool Avthorization(string login, string password)
+        {
+            return _sqlEntityFramworke.ExistsDataUser(login, password);
+        }
+
+        public bool CheckKey(string key)
+        {
+            return _sqlEntityFramworke.CheckKeyDb(key);
+        }
+
+        public int Createkey(string login, string password)
+        {
+            Random random = new Random();
+            int key = random.Next(1000, 1000000000);
+            _sqlEntityFramworke.SaveKeyDatabays(login, password, key);
+            return key;
         }
     }
 }

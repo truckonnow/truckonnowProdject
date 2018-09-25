@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDispacher", "WebDispacher\WebDispacher.csproj", "{DFF19FF4-82AB-4261-8CFB-D08070FAC1DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebDispacher", "WebDispacher\WebDispacher.csproj", "{DFF19FF4-82AB-4261-8CFB-D08070FAC1DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser", "Parser\Parser.csproj", "{7755E01D-7F6F-46E6-99EF-0FBC73DEF5F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{DFF19FF4-82AB-4261-8CFB-D08070FAC1DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFF19FF4-82AB-4261-8CFB-D08070FAC1DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFF19FF4-82AB-4261-8CFB-D08070FAC1DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7755E01D-7F6F-46E6-99EF-0FBC73DEF5F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7755E01D-7F6F-46E6-99EF-0FBC73DEF5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7755E01D-7F6F-46E6-99EF-0FBC73DEF5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7755E01D-7F6F-46E6-99EF-0FBC73DEF5F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

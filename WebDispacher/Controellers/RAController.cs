@@ -9,28 +9,54 @@ namespace WebDispacher.Controellers
 {
     public class RAController : Controller
     {
-        ManagerDispatch managerDispatch = null;
+        ManagerDispatch managerDispatch = new ManagerDispatch();
 
         public IActionResult Index()
         {
-            return View("Avthorization");
+            IActionResult actionResult = null;
+            ViewData["hidden"] = "hidden";
+            ViewData["TextError"] = "";
+            if(Request.Cookies.ContainsKey("KeyAvtho"))
+            {
+                actionResult = Redirect("/Dashbord/Order/NewLoad");
+            }
+            else
+            {
+                actionResult = View("Avthorization");
+            }
+            return actionResult;
         }
 
         [HttpPost]
         public IActionResult Avthorization(string Email, string Password)
         {
-            managerDispatch = new ManagerDispatch();
+            IActionResult actionResult = null;
             try
             {
                 if (Email == null || Password == null)
                     throw new Exception();
-                
-            }
-            catch(Exception)
-            {
+                if (managerDispatch.Avthorization(Email, Password))
+                {
+                    ViewData["hidden"] = "";
+                    actionResult = Redirect("/Dashbord/Order/NewLoad");
+                    int key = managerDispatch.Createkey(Email, Password);
+                    Response.Cookies.Append("KeyAvtho", key.ToString());
+                }
+                else
+                {
+                    ViewData["hidden"] = "hidden";
+                    ViewData["TextError"] = "Password or mail have been entered incorrectly";
+                    actionResult = View("Avthorization");
+                }
 
             }
-            return null;
+            catch (Exception)
+            {
+                ViewData["hidden"] = "hidden";
+                ViewData["TextError"] = "Password or mail have been entered incorrectly";
+                actionResult = View("Avthorization");
+            }
+            return actionResult;
         }
     }
 }

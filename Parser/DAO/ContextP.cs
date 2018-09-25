@@ -1,17 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Parser.Dao.Models;
+using Parser.DAO.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using WebDispacher.Dao.Models;
-using WebDispacher.DAO.Models;
 
-namespace WebDispacher.Dao
+namespace Parser.DAO
 {
-    public class ContextP : DbContext
+    class ContextP : DbContext
     {
-        public DbSet<Users> User { get; set; }
         public DbSet<Shipping> Shipping { get; set; }
+        public DbSet<Users> User { get; set; }
 
         public ContextP()
         {

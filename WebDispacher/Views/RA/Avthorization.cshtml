@@ -13,6 +13,9 @@
         <input class="textInpSt" type="password" name="Password" /> <br>
         <input class="btnInpSt" type="submit" value="Sign In" />
     </form>
+    <span class="errSpanSt">
+        @ViewData["TextError"]
+    </span>
 </div>
 
 <style>
@@ -63,4 +66,10 @@
         .btnInpSt:active {
             background-color: #e2d0bb;
         }
+
+    .errSpanSt {
+        margin: 5px;
+        color: #ff0000;
+        font-size: 18px;
+    }
 </style>
