@@ -10,13 +10,13 @@ namespace Parser.Servise
 {
     public class ManagerParser
     {
-        private SqlEntityFramworkeP _sqlEntityFramworkeP = null;
+        private SqlCommandParser _sqlEntityFramworkeP = null;
         private ConnectorDispatch connectorDispatch = null;
 
         public ManagerParser()
         {
             connectorDispatch = new ConnectorDispatch();
-            _sqlEntityFramworkeP = new SqlEntityFramworkeP();
+            _sqlEntityFramworkeP = new SqlCommandParser();
             WorkParser();
         }
 

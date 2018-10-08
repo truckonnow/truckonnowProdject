@@ -8,11 +8,11 @@ namespace WebDispacher.Service
 {
     public class ManagerDispatch
     {
-        public SqlEntityFramworke _sqlEntityFramworke = null;
+        public SqlCommadWebDispatch _sqlEntityFramworke = null;
 
         public ManagerDispatch()
         {
-            _sqlEntityFramworke = new SqlEntityFramworke();
+            _sqlEntityFramworke = new SqlCommadWebDispatch();
         }
 
         public bool Avthorization(string login, string password)

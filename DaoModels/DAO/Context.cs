@@ -1,19 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebDispacher.Dao.Models;
-using WebDispacher.DAO.Models;
+﻿using DaoModels.DAO.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace WebDispacher.Dao
+namespace DaoModels.DAO
 {
-    public class ContextP : DbContext
+    public class Context : DbContext
     {
-        public DbSet<Users> User { get; set; }
         public DbSet<Shipping> Shipping { get; set; }
+        public DbSet<Users> User { get; set; }
 
-        public ContextP()
+        public Context()
         {
             Database.EnsureCreated();
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Parser.Dao.Models
+namespace DaoModel.DAO.Models
 {
     public class Users
     {

@@ -1,20 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Parser.Dao.Models;
-using Parser.DAO.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DaoModel.DAO.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace Parser.DAO
+namespace DaoModel.DAO
 {
-    class ContextP : DbContext
+    public class Context : DbContext
     {
         public DbSet<Shipping> Shipping { get; set; }
         public DbSet<Users> User { get; set; }
 
-        public ContextP()
+        public Context()
         {
             Database.EnsureCreated();
         }

@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DaoModels.DAO;
+using DaoModels.DAO.Models;
+using System;
 using System.Linq;
-using System.Threading.Tasks;
-using WebDispacher.Dao.Models;
 
 namespace WebDispacher.Dao
 {
-    public class SqlEntityFramworke
+    public class SqlCommadWebDispatch
     {
         private Context context = null;
        
-        public SqlEntityFramworke()
+        public SqlCommadWebDispatch()
         {
             context = new Context();
         }
