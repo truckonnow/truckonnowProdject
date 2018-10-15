@@ -1,6 +1,7 @@
 ﻿using DaoModels.DAO;
 using DaoModels.DAO.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace WebDispacher.Dao
@@ -36,6 +37,13 @@ namespace WebDispacher.Dao
         public bool CheckKeyDb(string key)
         {
             return context.User.FirstOrDefault(u => u.KeyAuthorized == key) != null;
+        }
+
+        public List<Shipping> GetShipping(string status)
+        {
+            List <Shipping> shipping = null;
+            shipping = context.Shipping.ToList().FindAll(s => s.CurrentStatus == "NewLoad");
+            return shipping;
         }
     }
 }

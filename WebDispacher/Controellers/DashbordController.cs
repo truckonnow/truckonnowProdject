@@ -22,6 +22,7 @@ namespace WebDispacher.Controellers
 
                 if (managerDispatch.CheckKey(key))
                 {
+                    ViewBag.Orders = managerDispatch.GetShippings("NewLoad");
                     actionResult = View("NewLoad");
                 }
                 else

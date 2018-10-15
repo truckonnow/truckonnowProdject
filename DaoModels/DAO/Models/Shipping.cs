@@ -8,11 +8,14 @@ namespace DaoModels.DAO.Models
     {
         public string Id { get; set; } //Idload
         public string CurrentStatus { get; set; }
+        public string LastUpdated { get; set; }
+        public string CDReference { get; set; }
+        public string UrlReqvest { get; set; }
 
         //////////////////////////ORDER INFORMATION
 
         public string DispatchDate { get; set; }
-        public string PickupEstimated { get; set; }
+        public string PickupExactly { get; set; }
         public string DeliveryEstimated { get; set; }
         public string ShipVia { get; set; }
         public string Condition { get; set; }
@@ -20,13 +23,14 @@ namespace DaoModels.DAO.Models
         public string TotalPaymentToCarrier { get; set; }
         public string OnDeliveryToCarrier { get; set; }
         public string CompanyOwesCarrier { get; set; }
-        public string Description { get; set; }
+        //public string Description { get; set; }
 
         /////////////////////////CONTACT INFORMATION
 
         public string ContactC { get; set; }
         public string PhoneC { get; set; }
         public string FaxC { get; set; }
+        public string IccmcC { get; set; }
 
         /////////////////////////VEHICLE INFORMATION
 
@@ -52,11 +56,10 @@ namespace DaoModels.DAO.Models
         public string CoordinatesD { get; set; }
         public string PhoneD { get; set; }
 
-        /////////////////////////DISPATCH INFORMATION
+        /////////////////////////DISPATCH INSTRUCTIONS
 
         public string Titl1DI { get; set; }
-        public string Titl2DI { get; set; }
-        public string Titl3DI { get; set; }
-        public string Titl4DI { get; set; }
+
+        public List<VehiclwInformation> VehiclwInformations { get; set; }
     }
 }

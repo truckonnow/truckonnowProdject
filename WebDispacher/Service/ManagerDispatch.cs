@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DaoModels.DAO.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,6 +32,11 @@ namespace WebDispacher.Service
             int key = random.Next(1000, 1000000000);
             _sqlEntityFramworke.SaveKeyDatabays(login, password, key);
             return key;
+        }
+
+        public List<Shipping> GetShippings(string status)
+        {
+            return _sqlEntityFramworke.GetShipping(status);
         }
     }
 }
