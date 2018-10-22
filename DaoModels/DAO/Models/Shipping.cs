@@ -7,6 +7,8 @@ namespace DaoModels.DAO.Models
     public class Shipping
     {
         public string Id { get; set; } //Idload
+        public string InternalLoadID { get; set; }
+        public string Driver { get; set; }
         public string CurrentStatus { get; set; }
         public string LastUpdated { get; set; }
         public string CDReference { get; set; }
@@ -23,7 +25,7 @@ namespace DaoModels.DAO.Models
         public string TotalPaymentToCarrier { get; set; }
         public string OnDeliveryToCarrier { get; set; }
         public string CompanyOwesCarrier { get; set; }
-        //public string Description { get; set; }
+        public string Description { get; set; }
 
         /////////////////////////CONTACT INFORMATION
 
@@ -47,13 +49,19 @@ namespace DaoModels.DAO.Models
         /////////////////////////PICKUP INFORMATION
 
         public string ContactNameP { get; set; }
-        public string CoordinatesP { get; set; }
+        public string AddresP { get; set; }
+        public string StateP { get; set; }
+        public string ZipP { get; set; }
+        public string CityP { get; set; }
         public string PhoneP { get; set; }
 
         /////////////////////////DELIVERY INFORMATION
 
         public string ContactNameD { get; set; }
-        public string CoordinatesD { get; set; }
+        public string AddresD { get; set; }
+        public string StateD { get; set; }
+        public string ZipD { get; set; }
+        public string CityD { get; set; }
         public string PhoneD { get; set; }
 
         /////////////////////////DISPATCH INSTRUCTIONS

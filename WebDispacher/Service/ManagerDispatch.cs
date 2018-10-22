@@ -34,9 +34,14 @@ namespace WebDispacher.Service
             return key;
         }
 
-        public List<Shipping> GetShippings(string status)
+        public List<Shipping> GetOrders(string status, int page)
         {
-            return _sqlEntityFramworke.GetShipping(status);
+            return _sqlEntityFramworke.GetShippings(status, page);
+        }
+
+        public Shipping GetOrder(string id)
+        {
+            return _sqlEntityFramworke.GetShipping(id);
         }
     }
 }

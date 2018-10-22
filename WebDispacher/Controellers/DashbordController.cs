@@ -12,7 +12,7 @@ namespace WebDispacher.Controellers
         ManagerDispatch managerDispatch = new ManagerDispatch();
         
         [Route("Dashbord/Order/NewLoad")]
-        public IActionResult NewLoad()
+        public IActionResult NewLoad(int page)
         {
             IActionResult actionResult = null;
             try
@@ -22,7 +22,7 @@ namespace WebDispacher.Controellers
 
                 if (managerDispatch.CheckKey(key))
                 {
-                    ViewBag.Orders = managerDispatch.GetShippings("NewLoad");
+                    ViewBag.Orders = managerDispatch.GetOrders("NewLoad", page);
                     actionResult = View("NewLoad");
                 }
                 else
@@ -234,6 +234,44 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     actionResult = View("Pickedup");
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = Redirect("http://localhost:22929");
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return actionResult;
+        }
+
+        [Route("Dashbord/Order/FullInfoOrder")]
+        public IActionResult FullInfoOrder(string id, string stasus)
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                string key = null;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+
+                if (managerDispatch.CheckKey(key))
+                {
+                    if (id != "" && id != null)
+                    {
+                        ViewBag.Order = managerDispatch.GetOrder(id);
+                        actionResult = View("FullInfoOrder");
+                    }
+                    else
+                    {
+                        actionResult = Redirect($"http://localhost:22929/Dashbord/Order/{stasus}");
+                    }
                 }
                 else
                 {

@@ -64,8 +64,6 @@ namespace Parser.Servise
         public void ParseDataInUrl(string sourse, string UrlReqvest)
         {
             Shipping shipping = new Shipping();
-            try
-            {
                 LogEr.Logerr("Info", $"Parsing of html data", "ParseDataInUrl", DateTime.Now.ToShortTimeString());
                 shipping.UrlReqvest = UrlReqvest;
                 SetHeadInform(sourse, ref shipping);
@@ -76,51 +74,62 @@ namespace Parser.Servise
                 SetDispatchInform(sourse, ref shipping);
                 SetVehicleInform(sourse, ref shipping);
                 LogEr.Logerr("Info", $"Successful parsing of their html, Load id {shipping.Id}", "ParseDataInUrl", DateTime.Now.ToShortTimeString());
-            }
-            catch(Exception)
-            {
-                LogEr.Logerr("Info", $"Unsuccessful parsing of their html, Load id {shipping.Id}", "ParseDataInUrl", DateTime.Now.ToShortTimeString());
-            }
             Task.Run(async() => await sqlCommandParser.AddOrder(shipping));
         }
 
         private void SetHeadInform(string sourse, ref Shipping shipping)
         {
-            IHtmlDocument htmlDocument = htmlParser.Parse(sourse);
-            var element = htmlDocument.GetElementsByClassName("col-xs-12 col-sm-7 col-md-8")[0]
-                .GetElementsByTagName("p");
-            shipping.Id = element[0].TextContent.Remove(0, element[0].TextContent.IndexOf(": ") + 2);
-            shipping.CurrentStatus = "NewLoad"; //element[1].TextContent.Remove(0, element[1].TextContent.IndexOf(": ") + 2);
-            shipping.LastUpdated = element[2].TextContent.Remove(0, element[2].TextContent.IndexOf(": ") + 2);
-            shipping.CDReference = element[3].TextContent.Remove(0, element[3].TextContent.IndexOf(": ") + 2);
+            try
+            {
+                IHtmlDocument htmlDocument = htmlParser.Parse(sourse);
+                var element = htmlDocument.GetElementsByClassName("col-xs-12 col-sm-7 col-md-8")[0]
+                    .GetElementsByTagName("p");
+                shipping.Id = element[0].TextContent.Remove(0, element[0].TextContent.IndexOf(": ") + 2);
+                shipping.CurrentStatus = "NewLoad"; //element[1].TextContent.Remove(0, element[1].TextContent.IndexOf(": ") + 2);
+                shipping.LastUpdated = element[2].TextContent.Remove(0, element[2].TextContent.IndexOf(": ") + 2);
+                shipping.CDReference = element[3].TextContent.Remove(0, element[3].TextContent.IndexOf(": ") + 2);
+            }
+            catch(Exception)
+            {
+                LogEr.Logerr("Error", $"some data is not added, Load id {shipping.Id}, Url: {shipping.UrlReqvest}", "SetHeadInform", DateTime.Now.ToShortTimeString());
+            }
         }
 
         private void SetOrderInform(string sourse, ref Shipping shipping)
         {
-            IHtmlDocument htmlDocument = htmlParser.Parse(sourse);
-            var element = htmlDocument.GetElementById("sheetDetails")
-                .GetElementsByClassName("panel panel-default")[1]
-                .GetElementsByClassName("panel-body")[0]
-                .GetElementsByClassName("col-xs-12 col-sm-6");
-            var el = element[0].GetElementsByTagName("p");
-            shipping.DispatchDate = el[0].TextContent.Remove(0, el[0].TextContent.IndexOf("Dispatch Date: ")+"Dispatch Date: ".Length);
-            shipping.DispatchDate = shipping.DispatchDate.Remove(shipping.DispatchDate.IndexOf("\n"));
-            shipping.PickupExactly = el[0].TextContent.Remove(0, el[0].TextContent.IndexOf("Pickup Exactly: ") + "Pickup Exactly: ".Length);
-            shipping.PickupExactly = shipping.PickupExactly.Remove(shipping.PickupExactly.IndexOf("\n"));
-            shipping.DeliveryEstimated = el[0].TextContent.Remove(0, el[0].TextContent.IndexOf("Delivery Estimated: ") + "Delivery Estimated: ".Length);
-            shipping.DeliveryEstimated = shipping.DeliveryEstimated.Remove(shipping.DeliveryEstimated.IndexOf("\n"));
-            shipping.ShipVia = el[1].TextContent.Remove(0, el[1].TextContent.IndexOf(": ") + 2);
-            shipping.Condition = el[2].TextContent.Remove(0, el[2].TextContent.IndexOf(": ") + 2);
-            shipping.PriceListed = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("Price Listed:")+ "Price Listed:".Length);
-            shipping.PriceListed = shipping.PriceListed.Remove(shipping.PriceListed.IndexOf("\n"));
-            shipping.TotalPaymentToCarrier = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("Total Payment to Carrier: ")+ "Total Payment to Carrier: ".Length);
-            shipping.TotalPaymentToCarrier = shipping.TotalPaymentToCarrier.Remove(shipping.TotalPaymentToCarrier.IndexOf(" \n"));
-            shipping.OnDeliveryToCarrier = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("to Carrier:\n")+ "to Carrier:\n".Length);
-            shipping.OnDeliveryToCarrier = shipping.OnDeliveryToCarrier.Remove(0, shipping.OnDeliveryToCarrier.IndexOf("\n")+2).TrimStart();
-            shipping.OnDeliveryToCarrier = shipping.OnDeliveryToCarrier.Remove(shipping.OnDeliveryToCarrier.IndexOf("\n"));
-            shipping.CompanyOwesCarrier = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("Company")+ "Company** owes Carrier:\n".Length);
-            shipping.CompanyOwesCarrier = shipping.CompanyOwesCarrier.Remove(0, shipping.CompanyOwesCarrier.IndexOf("\n")).TrimStart();
-            shipping.CompanyOwesCarrier = shipping.CompanyOwesCarrier.Remove(shipping.CompanyOwesCarrier.IndexOf("\n"));
+            try
+            {
+                IHtmlDocument htmlDocument = htmlParser.Parse(sourse);
+                var element = htmlDocument.GetElementById("sheetDetails")
+                    .GetElementsByClassName("panel panel-default")[1]
+                    .GetElementsByClassName("panel-body")[0]
+                    .GetElementsByClassName("col-xs-12 col-sm-6");
+                var el = element[0].GetElementsByTagName("p");
+                shipping.DispatchDate = el[0].TextContent.Remove(0, el[0].TextContent.IndexOf("Dispatch Date: ") + "Dispatch Date: ".Length);
+                shipping.DispatchDate = shipping.DispatchDate.Remove(shipping.DispatchDate.IndexOf("\n"));
+                shipping.PickupExactly = el[0].TextContent.Remove(0, el[0].TextContent.IndexOf("Pickup Exactly: ") + "Pickup Exactly: ".Length);
+                shipping.PickupExactly = shipping.PickupExactly.Remove(shipping.PickupExactly.IndexOf("\n"));
+                shipping.DeliveryEstimated = el[0].TextContent.Remove(0, el[0].TextContent.IndexOf("Delivery Estimated: ") + "Delivery Estimated: ".Length);
+                shipping.DeliveryEstimated = shipping.DeliveryEstimated.Remove(shipping.DeliveryEstimated.IndexOf("\n"));
+                shipping.ShipVia = el[1].TextContent.Remove(0, el[1].TextContent.IndexOf(": ") + 2);
+                shipping.Condition = el[2].TextContent.Remove(0, el[2].TextContent.IndexOf(": ") + 2);
+                shipping.PriceListed = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("Price Listed:") + "Price Listed:".Length);
+                shipping.PriceListed = shipping.PriceListed.Remove(shipping.PriceListed.IndexOf("\n"));
+                shipping.TotalPaymentToCarrier = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("Total Payment to Carrier: ") + "Total Payment to Carrier: ".Length);
+                shipping.TotalPaymentToCarrier = shipping.TotalPaymentToCarrier.Remove(shipping.TotalPaymentToCarrier.IndexOf(" \n"));
+
+                shipping.OnDeliveryToCarrier = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("to Carrier:\n") + "to Carrier:\n".Length);
+                shipping.OnDeliveryToCarrier = shipping.OnDeliveryToCarrier.Remove(0, shipping.OnDeliveryToCarrier.IndexOf("\n") + 2).TrimStart();
+                shipping.OnDeliveryToCarrier = shipping.OnDeliveryToCarrier.Remove(shipping.OnDeliveryToCarrier.IndexOf("\n"));
+
+                shipping.CompanyOwesCarrier = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("Company") + "Company** owes Carrier:\n".Length);
+                shipping.CompanyOwesCarrier = shipping.CompanyOwesCarrier.Remove(0, shipping.CompanyOwesCarrier.IndexOf("\n")).TrimStart();
+                shipping.CompanyOwesCarrier = shipping.CompanyOwesCarrier.Remove(shipping.CompanyOwesCarrier.IndexOf("\n"));
+            }
+            catch (Exception)
+            {
+                LogEr.Logerr("Error", $"some data is not added, Load id {shipping.Id}, Url: {shipping.UrlReqvest}", "SetOrderInform", DateTime.Now.ToShortTimeString());
+            }
         }
 
         private void SetContactInform(string sourse, ref Shipping shipping)
@@ -143,22 +152,39 @@ namespace Parser.Servise
             }
             catch (Exception)
             {
-
+                LogEr.Logerr("Error", $"some data is not added, Load id {shipping.Id}, Url: {shipping.UrlReqvest}", "SetContactInform", DateTime.Now.ToShortTimeString());
             }
         }
 
         private void SetPickupInform(string sourse, ref Shipping shipping)
-        {   
-            IHtmlDocument htmlDocument = htmlParser.Parse(sourse);
-            var element = htmlDocument.GetElementById("sheetBottom")
-                .GetElementsByClassName("col-xs-12 col-sm-6 col-md-4")[0]
-                .GetElementsByClassName("panel panel-default")[0]
-                .GetElementsByClassName("panel-body")[0].Children;
-            shipping.ContactNameP = element[0].TextContent.Trim();
-            shipping.ContactNameP = shipping.ContactNameP.Remove(shipping.ContactNameP.IndexOf("\n"));
-            shipping.CoordinatesP = element[0].TextContent.Trim();
-            shipping.CoordinatesP = shipping.CoordinatesP.Remove(0, shipping.CoordinatesP.IndexOf("\n") + 2).Trim(); ;
-            shipping.PhoneP = element[2].TextContent;
+        {
+            try
+            {
+                IHtmlDocument htmlDocument = htmlParser.Parse(sourse);
+                var element = htmlDocument.GetElementById("sheetBottom")
+                    .GetElementsByClassName("col-xs-12 col-sm-6 col-md-4")[0]
+                    .GetElementsByClassName("panel panel-default")[0]
+                    .GetElementsByClassName("panel-body")[0].Children;
+                shipping.ContactNameP = element[0].TextContent.Trim();
+                shipping.ContactNameP = shipping.ContactNameP.Remove(shipping.ContactNameP.IndexOf("\n"));
+                shipping.AddresP = element[0].TextContent.Trim();
+                shipping.AddresP = shipping.AddresP.Remove(0, shipping.ContactNameP.Length).Trim();
+                if (shipping.AddresP[0] == '(')
+                {
+                    shipping.AddresP = shipping.AddresP.Remove(0, shipping.AddresP.IndexOf(')') + 2).Trim();
+                }
+                shipping.AddresP = shipping.AddresP.Remove(shipping.AddresP.IndexOf("\n")).Trim();
+                shipping.CityP = element[0].TextContent.Remove(0, element[0].TextContent.IndexOf(shipping.AddresP) + shipping.AddresP.Length).Trim();
+                shipping.CityP = shipping.CityP.Remove(shipping.CityP.IndexOf(',')).Trim();
+                shipping.StateP = element[0].TextContent.Remove(0, element[0].TextContent.IndexOf(shipping.CityP) + shipping.CityP.Length + 2).Trim();
+                shipping.StateP = shipping.StateP.Remove(2);
+                shipping.ZipP = element[0].TextContent.Remove(0, element[0].TextContent.IndexOf(shipping.StateP) + shipping.StateP.Length + 2).Trim();
+                shipping.PhoneP = element[element.Length - 1].TextContent;
+            }
+            catch (Exception)
+            {
+                LogEr.Logerr("Error", $"some data is not added, Load id {shipping.Id}, Url: {shipping.UrlReqvest}", "SetPickupInform", DateTime.Now.ToShortTimeString());
+            }
         }
 
         private void SetDeliveryInform(string sourse, ref Shipping shipping)
@@ -172,56 +198,73 @@ namespace Parser.Servise
                     .GetElementsByClassName("panel-body")[0].Children;
                 shipping.ContactNameD = element[0].TextContent.Trim();
                 shipping.ContactNameD = shipping.ContactNameD.Remove(shipping.ContactNameD.IndexOf("\n"));
-                shipping.CoordinatesD = element[0].TextContent.Trim();
-                string tempStr = shipping.CoordinatesD.Remove(0, shipping.CoordinatesD.IndexOf("\n") + 2).Trim();
-                if (tempStr[0] == '(')
+                shipping.AddresD = element[0].TextContent.Trim();
+                shipping.AddresD = shipping.AddresD.Remove(0, shipping.ContactNameD.Length).Trim();
+                if (shipping.AddresD[0] == '(')
                 {
-                    string subName = $" {tempStr.Remove(tempStr.IndexOf(')') + 1)}";
-                    shipping.CoordinatesD += $" {subName}";
-                    tempStr = tempStr.Remove(0, subName.Length).Trim();
+                    shipping.AddresD = shipping.AddresD.Remove(0, shipping.AddresD.IndexOf(')') + 2).Trim();
                 }
-                shipping.CoordinatesD = tempStr;
-                shipping.PhoneD = element[2].TextContent;
+                shipping.AddresD = shipping.AddresD.Remove(shipping.AddresD.IndexOf("\n")).Trim();
+                shipping.CityD = element[0].TextContent.Remove(0, element[0].TextContent.IndexOf(shipping.AddresD) + shipping.AddresD.Length).Trim();
+                shipping.CityD = shipping.CityD.Remove(shipping.CityD.IndexOf(',')).Trim();
+                shipping.StateD = element[0].TextContent.Remove(0, element[0].TextContent.IndexOf(shipping.CityD) + shipping.CityD.Length + 2).Trim();
+                shipping.StateD = shipping.StateD.Remove(2);
+                shipping.ZipD = element[0].TextContent.Remove(0, element[0].TextContent.IndexOf(shipping.StateD) + shipping.StateD.Length + 2).Trim();
+                shipping.PhoneP = element[element.Length - 1].TextContent;
             }
             catch (Exception)
             {
-
+                LogEr.Logerr("Error", $"some data is not added, Load id {shipping.Id}, Url: {shipping.UrlReqvest}", "SetDeliveryInform", DateTime.Now.ToShortTimeString());
             }
         }
 
         private void SetVehicleInform(string sourse, ref Shipping shipping)
         {
-            shipping.VehiclwInformations = new List<VehiclwInformation>();
-            VehiclwInformation vehiclwInformation = null;
-            IHtmlDocument htmlDocument = htmlParser.Parse(sourse);
-            var vehicles = htmlDocument.GetElementById("sheetBottom")
-                .GetElementsByClassName("panel panel-default")[0]
-                .GetElementsByClassName("panel-body table-responsive")[0]
-                .GetElementsByClassName("table table-striped table-hover")[0]
-                .GetElementsByTagName("tbody")[0].GetElementsByTagName("tr");
-            foreach(var vehicle in vehicles)
+            try
             {
-                vehiclwInformation = new VehiclwInformation();
-                vehiclwInformation.Year = vehicle.Children[1].TextContent.Trim();
-                vehiclwInformation.Make = vehicle.Children[2].TextContent.Trim();
-                vehiclwInformation.Model = vehicle.Children[3].TextContent.Trim();
-                vehiclwInformation.Type = vehicle.Children[4].TextContent.Trim();
-                vehiclwInformation.Color = vehicle.Children[5].TextContent.Trim();
-                vehiclwInformation.Plate = vehicle.Children[6].TextContent.Trim();
-                vehiclwInformation.VIN = vehicle.Children[7].TextContent.Trim();
-                vehiclwInformation.Lot = vehicle.Children[8].TextContent.Trim();
-                vehiclwInformation.AdditionalInfo = vehicle.Children[9].TextContent.Trim();
-                shipping.VehiclwInformations.Add(vehiclwInformation);
+                shipping.VehiclwInformations = new List<VehiclwInformation>();
+                VehiclwInformation vehiclwInformation = new VehiclwInformation();
+                IHtmlDocument htmlDocument = htmlParser.Parse(sourse);
+                var vehicles = htmlDocument.GetElementById("sheetBottom")
+                    .GetElementsByClassName("panel panel-default")[0]
+                    .GetElementsByClassName("panel-body table-responsive")[0]
+                    .GetElementsByClassName("table table-striped table-hover")[0]
+                    .GetElementsByTagName("tbody")[0].GetElementsByTagName("tr");
+                foreach (var vehicle in vehicles)
+                {
+                    vehiclwInformation = new VehiclwInformation();
+                    vehiclwInformation.Year = vehicle.Children[1].TextContent.Trim();
+                    vehiclwInformation.Make = vehicle.Children[2].TextContent.Trim();
+                    vehiclwInformation.Model = vehicle.Children[3].TextContent.Trim();
+                    vehiclwInformation.Type = vehicle.Children[4].TextContent.Trim();
+                    vehiclwInformation.Color = vehicle.Children[5].TextContent.Trim();
+                    vehiclwInformation.Plate = vehicle.Children[6].TextContent.Trim();
+                    vehiclwInformation.VIN = vehicle.Children[7].TextContent.Trim();
+                    vehiclwInformation.Lot = vehicle.Children[8].TextContent.Trim();
+                    vehiclwInformation.AdditionalInfo = vehicle.Children[9].TextContent.Trim();
+                    shipping.VehiclwInformations.Add(vehiclwInformation);
+                }
+            }
+            catch (Exception)
+            {
+                LogEr.Logerr("Error", $"some data is not added, Load id {shipping.Id}, Url: {shipping.UrlReqvest}", "SetVehicleInform", DateTime.Now.ToShortTimeString());
             }
         }
 
         private void SetDispatchInform(string sourse, ref Shipping shipping)
         {
-            IHtmlDocument htmlDocument = htmlParser.Parse(sourse);
-            var element = htmlDocument.GetElementById("sheetBottom")
-                .GetElementsByClassName("col-xs-12 col-md-4")[2]
-                .Children[0].Children[1];
-            shipping.Titl1DI = element.TextContent;
+            try
+            {
+                IHtmlDocument htmlDocument = htmlParser.Parse(sourse);
+                var element = htmlDocument.GetElementById("sheetBottom")
+                    .GetElementsByClassName("col-xs-12 col-md-4")[2]
+                    .Children[0].Children[1];
+                shipping.Titl1DI = element.TextContent;
+            }
+            catch (Exception)
+            {
+                LogEr.Logerr("Error", $"some data is not added, Load id {shipping.Id}, Url: {shipping.UrlReqvest}", "SetDispatchInform", DateTime.Now.ToShortTimeString());
+            }
         }
     }
 }

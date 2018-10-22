@@ -32,6 +32,11 @@ namespace Parser.DAO
             }
         }
 
+        public bool CheckUrlOrder(Shipping shipping)
+        {
+            return context.Shipping.FirstOrDefault(s => s.UrlReqvest == shipping.UrlReqvest) != null; ;
+        }
+
         private bool CheckOrder(Shipping shipping)
         { 
             return context.Shipping.FirstOrDefault(s => s.Id == shipping.Id) != null; ;

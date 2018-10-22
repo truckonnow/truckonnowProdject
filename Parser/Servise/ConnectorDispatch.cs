@@ -107,6 +107,7 @@ namespace Parser.Servise
                                 catch (Exception)
                                 {
                                     LogEr.Logerr("Error", $"Unsuccessful html pulling by reference: {urlpage}", "Worker", DateTime.Now.ToShortTimeString());
+                                    //https://www.centraldispatch.com//protected/dispatch/view?dsid=17990722
                                 }
                             }
                             LogEr.Logerr("Info", $"The number of successfully elongated html for links: {countLick}", "Worker", DateTime.Now.ToShortTimeString());

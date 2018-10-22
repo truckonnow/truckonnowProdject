@@ -13,13 +13,22 @@ namespace Parser.Servise
 
         private static void InfoLog(string infoText, string nameMethod, string date)
         {
-            File.AppendAllText($"Log/AllLog/{DateTime.Now.ToShortDateString()}.txt".Replace(':', ' '), $"|INFO|Name method: {nameMethod}|Date: {date}|Info: {infoText}|{Environment.NewLine}");
+            try
+            {
+                File.AppendAllText($"Log/AllLog/{DateTime.Now.ToShortDateString()}.txt".Replace(':', ' '), $"|INFO|Name method: {nameMethod}|Date: {date}|Info: {infoText}|{Environment.NewLine}");
+                Console.Write($"|INFO|Name method: {nameMethod}|Date: {date}|Info: {infoText}|{Environment.NewLine}");
+            }
+            catch (Exception)
+            {
+
+            }
         }
         
         private static void ErrorLog(string infoText, string nameMethod, string date)
         {
             File.AppendAllText($"./Log/AllLog/{DateTime.Now.ToShortDateString()}.txt".Replace(':', ' '), $"|Error|Name method: {nameMethod}|Date: {date}|Info: {infoText}|{Environment.NewLine}");
             File.AppendAllText($"./Log/Error/{DateTime.Now.ToShortDateString()}.txt".Replace(':', ' '), $"|Error|Name method: {nameMethod}|Date: {date}|Info: {infoText}|{Environment.NewLine}");
+            Console.Write($"|Error|Name method: {nameMethod}|Date: {date}|Info: {infoText}|{Environment.NewLine}");
         }
 
         public static void Logerr(string typeData, string infoText, string nameMethod, string date)

@@ -1,0 +1,226 @@
+﻿<div class="body">
+    <input class="backBtn" type="button" value="← Back to Orders" onclick="history.back();" />
+    <div class="headData">
+        <span class="inpHead">Load id: @ViewBag.Order.Id</span>
+        <span class="inpHead">Price: @ViewBag.Order.TotalPaymentToCarrier</span>
+        <span class="inpHead">Status: @ViewBag.Order.CurrentStatus</span>
+    </div>
+    <div class="bodyTable">
+        <h4 class="headTabe">Vehicles</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>VIN</th>
+                    <th>Year</th>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Type</th>
+                    <th>Color</th>
+                    <th>Lot Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < ViewBag.Order.VehiclwInformations.Count; i++)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td>@ViewBag.Order.VehiclwInformations[i].VIN</td>
+                        <td>@ViewBag.Order.VehiclwInformations[i].Year</td>
+                        <td>@ViewBag.Order.VehiclwInformations[i].Make</td>
+                        <td>@ViewBag.Order.VehiclwInformations[i].Model</td>
+                        <td>@ViewBag.Order.VehiclwInformations[i].Type</td>
+                        <td>@ViewBag.Order.VehiclwInformations[i].Color</td>
+                        <td>@ViewBag.Order.VehiclwInformations[i].Lot</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="fullData">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Origin</h3>
+            </div>
+            <div>
+                <p class="list-group-item">@ViewBag.Order.AddresP, @ViewBag.Order.CityP, 
+                    <br/> @ViewBag.Order.StateP, @ViewBag.Order.ZipP</p>
+                <hr />
+                <span class="list-group-item">Contact: @ViewBag.Order.ContactNameP</span>
+                <span class="list-group-item">Phone: @ViewBag.Order.PhoneP</span>
+                <span class="list-group-item">Pickup date: @ViewBag.Order.PickupExactly</span>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Destination</h3>
+            </div>
+            <div>
+                <p class="list-group-item">
+                    @ViewBag.Order.AddresD, @ViewBag.Order.CityD,
+                    <br /> @ViewBag.Order.StateD, @ViewBag.Order.ZipD
+                </p>
+                <hr />
+                <span class="list-group-item">Contact: @ViewBag.Order.ContactNameD</span>
+                <span class="list-group-item">Phone: @ViewBag.Order.PhoneD</span>
+                <span class="list-group-item">Delivery date: @ViewBag.Order.DeliveryEstimated</span>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Payment Information</h3>
+            </div>
+            <div>
+                <span class="list-group-item">Price: @ViewBag.Order.TotalPaymentToCarrier</span>
+                <span class="list-group-item">Payment Method: @ViewBag.Order.OnDeliveryToCarrier</span>
+                <hr />
+                <span class="list-group-item">it Add</span>
+            </div>
+        </div>
+    </div>
+    <div class="fullData">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Customer</h3>
+            </div>
+            <div>
+                <span class="list-group-item">Contact: @ViewBag.Order.ContactC</span>
+                <span class="list-group-item">Phone: @ViewBag.Order.PhoneC</span>
+                <span class="list-group-item">Fax: @ViewBag.Order.FaxC</span>
+                <span class="list-group-item">Iccmc: @ViewBag.Order.IccmcC</span>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Instructions</h3>
+            </div>
+            <div class="outer">
+                <span class="list-group-item inner">@ViewBag.Order.Titl1DI</span>
+            </div>
+        </div>
+        <div>
+            <div>
+                <span></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <style>
+            * {
+                margin: 0px;
+            }
+
+
+            .panel-title {
+                font-size: 22px;
+            }
+
+            .panel-heading {
+                padding: 10px 15px;
+                border-bottom: 1px solid transparent;
+                border-top-left-radius: 3px;
+                border-top-right-radius: 3px;
+                background: rgba(243, 167, 76, 0.18);
+                border-color: #f3a74c;
+            }
+
+            .list-group-item {
+                display: block;
+                padding: 8px 20px;
+                width: 100%;
+                font-size: 18px;
+                width: 95%;
+            }
+
+
+            .panel {
+                border-radius: 4px;
+                -webkit-box-shadow: 3px 5px 24px 2px rgba(243,167,76,0.28);
+                -moz-box-shadow: 3px 5px 24px 2px rgba(243,167,76,0.28);
+                box-shadow: 3px 5px 24px 2px rgba(243,167,76,0.28);
+                margin:5px;
+                max-width: 70%;
+            }
+
+            .bodyTable {
+                margin: 15px;
+            }
+
+            .headTabe {
+                font-size: 21px;
+                margin-left: 10px;
+                color: #f3a74c;
+            }
+
+            tr {
+                display: table-row;
+                vertical-align: inherit;
+                border-color: inherit;
+            }
+
+
+            .table {
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+
+            td, th {
+                text-align: center;
+                border-radius: 5px;
+                color: #f3a74c;
+            }
+
+            td {
+                background-color: rgba(243, 167, 76, 0.09);
+            }
+
+            th {
+                border-bottom: solid;
+                border-color: rgba(243, 167, 76, 0.54);
+            }
+
+            .fullData {
+                display: flex;
+                justify-content: space-between;
+                padding: 25px;
+            }
+
+            .headData {
+                padding: 10px;
+                border-bottom: solid;
+                border-width: 1px;
+                border-color: #f3a74c;
+                border-radius: 6px;
+                -webkit-box-shadow: inset 1px 14px 103px -41px rgba(255,132,0,1);
+                -moz-box-shadow: inset 1px 14px 103px -41px rgba(255,132,0,1);
+                box-shadow: inset 1px 14px 103px -41px rgba(255,132,0,1);
+                display: flex;
+                justify-content: space-around;
+            }
+
+            .inpHead {
+                font-size: 19px;
+                color: #f3a74c;
+            }
+
+            .body {
+                margin-top: 30px;
+                margin-left: 5px;
+                margin-right: 5px;
+                padding: 10px;
+            }
+
+            .backBtn {
+                background: none;
+                border: none;
+                font-size: 17px;
+                color: #ffd7a6;
+                margin-bottom: 20px;
+            }
+
+                .backBtn:hover {
+                    color: #f3a74c;
+                }
+        </style>
