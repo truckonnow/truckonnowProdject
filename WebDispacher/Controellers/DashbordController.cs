@@ -19,7 +19,6 @@ namespace WebDispacher.Controellers
             {
                 string key = null;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
-
                 if (managerDispatch.CheckKey(key))
                 {
                     ViewBag.Orders = managerDispatch.GetOrders("NewLoad", page);
@@ -38,7 +37,6 @@ namespace WebDispacher.Controellers
             {
 
             }
-
             return actionResult;
         }
 
@@ -50,7 +48,6 @@ namespace WebDispacher.Controellers
             {
                 string key = null;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
-
                 if (managerDispatch.CheckKey(key))
                 {
                     actionResult = View("Archived");
@@ -68,7 +65,6 @@ namespace WebDispacher.Controellers
             {
 
             }
-
             return actionResult;
         }
 
@@ -80,7 +76,6 @@ namespace WebDispacher.Controellers
             {
                 string key = null;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
-
                 if (managerDispatch.CheckKey(key))
                 {
                     actionResult = View("Assigned");
@@ -98,7 +93,6 @@ namespace WebDispacher.Controellers
             {
 
             }
-
             return actionResult;
         }
 
@@ -110,7 +104,6 @@ namespace WebDispacher.Controellers
             {
                 string key = null;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
-
                 if (managerDispatch.CheckKey(key))
                 {
                     actionResult = View("Billed");
@@ -128,7 +121,6 @@ namespace WebDispacher.Controellers
             {
 
             }
-
             return actionResult;
         }
 
@@ -140,7 +132,6 @@ namespace WebDispacher.Controellers
             {
                 string key = null;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
-
                 if (managerDispatch.CheckKey(key))
                 {
                     actionResult = View("Deleted");
@@ -158,7 +149,6 @@ namespace WebDispacher.Controellers
             {
 
             }
-
             return actionResult;
         }
 
@@ -170,7 +160,6 @@ namespace WebDispacher.Controellers
             {
                 string key = null;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
-
                 if (managerDispatch.CheckKey(key))
                 {
                     actionResult = View("Delivered");
@@ -188,7 +177,6 @@ namespace WebDispacher.Controellers
             {
 
             }
-
             return actionResult;
         }
 
@@ -200,7 +188,6 @@ namespace WebDispacher.Controellers
             {
                 string key = null;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
-
                 if (managerDispatch.CheckKey(key))
                 {
                     actionResult = View("Paid");
@@ -218,7 +205,6 @@ namespace WebDispacher.Controellers
             {
 
             }
-
             return actionResult;
         }
 
@@ -230,7 +216,6 @@ namespace WebDispacher.Controellers
             {
                 string key = null;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
-
                 if (managerDispatch.CheckKey(key))
                 {
                     actionResult = View("Pickedup");
@@ -248,7 +233,6 @@ namespace WebDispacher.Controellers
             {
 
             }
-
             return actionResult;
         }
 
@@ -260,7 +244,6 @@ namespace WebDispacher.Controellers
             {
                 string key = null;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
-
                 if (managerDispatch.CheckKey(key))
                 {
                     if (id != "" && id != null)
@@ -286,7 +269,42 @@ namespace WebDispacher.Controellers
             {
 
             }
+            return actionResult;
+        }
 
+        [Route("Dashbord/Order/Edit")]
+        public IActionResult EditOrder(string id, string stasus)
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                string key = null;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    if (id != "" && id != null)
+                    {
+                        ViewBag.Order = managerDispatch.GetOrder(id);
+                        actionResult = View("EditOrder");
+                    }
+                    else
+                    {
+                        actionResult = Redirect($"http://localhost:22929/Dashbord/Order/{stasus}");
+                    }
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = Redirect("http://localhost:22929");
+                }
+            }
+            catch (Exception)
+            {
+
+            }
             return actionResult;
         }
     }

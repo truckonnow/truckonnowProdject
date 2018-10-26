@@ -68,7 +68,14 @@ namespace WebDispacher.Dao
             }
             else
             {
-                shipping = shipping.GetRange(0, 20);
+                try
+                {
+                    shipping = shipping.GetRange(0, 20);
+                }
+                catch (Exception)
+                {
+                    shipping = shipping.GetRange(0, shipping.Count % 20);
+                }
             }
             return shipping;
         }

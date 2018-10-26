@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 
 namespace DaoModels.DAO.Models
@@ -26,6 +25,7 @@ namespace DaoModels.DAO.Models
         public string OnDeliveryToCarrier { get; set; }
         public string CompanyOwesCarrier { get; set; }
         public string Description { get; set; }
+        public string BrokerFee { get; set; }
 
         /////////////////////////CONTACT INFORMATION
 
@@ -48,26 +48,29 @@ namespace DaoModels.DAO.Models
 
         /////////////////////////PICKUP INFORMATION
 
+        public string NameP { get; set; }
         public string ContactNameP { get; set; }
         public string AddresP { get; set; }
         public string StateP { get; set; }
         public string ZipP { get; set; }
         public string CityP { get; set; }
         public string PhoneP { get; set; }
+        public string EmailP { get; set; }
 
         /////////////////////////DELIVERY INFORMATION
 
+        public string NameD { get; set; }
         public string ContactNameD { get; set; }
         public string AddresD { get; set; }
         public string StateD { get; set; }
         public string ZipD { get; set; }
         public string CityD { get; set; }
         public string PhoneD { get; set; }
+        public string EmailD { get; set; }
 
         /////////////////////////DISPATCH INSTRUCTIONS
 
         public string Titl1DI { get; set; }
-
         public List<VehiclwInformation> VehiclwInformations { get; set; }
     }
 }

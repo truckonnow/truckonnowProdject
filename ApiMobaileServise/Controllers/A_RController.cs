@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ApiMobaileServise.Models;
 using ApiMobaileServise.Servise;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace ApiMobaileServise.Controllers
 {
@@ -13,29 +11,38 @@ namespace ApiMobaileServise.Controllers
     {
         ManagerMobileApi managerMobileApi = null;
 
-        [HttpGet]
-        [Route("Avtorization")]
-        public string TestAvtorization(string email, string password)
-        {
-            ResponseAppS<string> responseAppS = null;
-            if ((email != "" && email != null)&&(password != "" && password != null))
-            {
-                responseAppS = new ResponseAppS<string>();
-                managerMobileApi = new ManagerMobileApi();
-            }
-            else
-            {
-
-            }
-            return "2";
-        }
-
         [HttpPost]
         [Route("Avtorization")]
         public string Avtorization(string email, string password)
         {
-            managerMobileApi = new ManagerMobileApi();
-            return "2";
+            string token = null;
+            string respons = null;
+            if ((email != "" || email != null) && (password != "" || password != null))
+            {
+                managerMobileApi = new ManagerMobileApi();
+                token = managerMobileApi.Avtorization(email, password);
+                if (token != null && token != "")
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", token));
+                }
+                else
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Password or mail was not correct", ""));
+                }
+            }
+            else
+            {
+                if (email != "" || email != null)
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Email field is empty", ""));
+                }
+                else if (password != "" || password != null)
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Password field is empty", ""));
+                }
+            }
+            managerMobileApi = null;
+            return respons;
         }
     }
 }

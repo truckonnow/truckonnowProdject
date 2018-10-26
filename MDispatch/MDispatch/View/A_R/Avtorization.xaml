@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDispatch.View.A_R.Avtorization"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="25" BackgroundColor="White">
+                <Image Source="" HeightRequest="200" WidthRequest="200" HorizontalOptions="Center"/>
+                <StackLayout Margin="10">
+                    <Label x:Name="lUsName" Text="USERNAME" TextColor="#b8babb" Margin="4,0,0,0" FontSize="14" VerticalTextAlignment="Start"/>
+                    <Entry x:Name="eUsName" TextColor="#0A2328" HeightRequest="40" FontSize="14" TextChanged="Entry_TextChanged_1" Text="{Binding Username}"/>
+                    <Label x:Name="lPassword" Text="PASSWORD" TextColor="#b8babb" Margin="4,0,0,0" FontSize="14" VerticalTextAlignment="Start"/>
+                    <Entry TextColor="#0A2328" HeightRequest="40" FontSize="14" TextChanged="Entry_TextChanged" IsPassword="True" Text="{Binding Password}"/>
+                    <Button Text="Sig In" TextColor="White" BackgroundColor="#65CAE1" Command="{Binding AvtorizationCommand}"/>
+                    <Label Text="Forgot password?" HorizontalTextAlignment="End" FontSize="12"/>
+                    <Label Text="{Binding FeedBack}" TextColor="Red" FontSize="11" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

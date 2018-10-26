@@ -1,3 +1,4 @@
+using MDispatch.View.A_R;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,8 +11,8 @@ namespace MDispatch
 		public App ()
 		{
 			InitializeComponent();
-            
-		}
+            MainPage = new NavigationPage(new Avtorization());
+        }
 
 		protected override void OnStart ()
 		{

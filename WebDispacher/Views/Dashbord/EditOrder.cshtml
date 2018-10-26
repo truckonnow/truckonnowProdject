@@ -1,5 +1,115 @@
 ﻿<div class="body">
     <input class="backBtn" type="button" value="← Back to Orders" onclick="history.back();" />
+    <div class="contentBody">
+        <div class="content">
+            <p class="inpLabe">Load Id</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.Id" />
+            <p class="inpLabe">Internal Load ID</p>
+            <input class="inpText" type="text" value="" />
+            <p class="inpLabe">Driver</p>
+            <input class="inpText" type="text" value="" />
+        </div>
+        <div class="content">
+            <p class="inpLabe">Status</p>
+            <input class="inpText" type="text" value="" />
+            <p class="inpLabe">Instructions</p>
+            <textarea class="inpText" style="height:92px;">@ViewBag.Order.Titl1DI</textarea>
+        </div>
+    </div>
+    <div class="contentBody">
+        <div class="content">
+            <h2 style="color:#f3a74c;margin-bottom:2px;">Pickup Information</h2>
+            <p class="inpLabe">Name</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.NameP" />
+            <p class="inpLabe">Contact</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.ContactNameP" />
+            <p class="inpLabe">Address</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.AddresP" />
+            <p class="inpLabe">City</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.CityP" />
+            <p class="inpLabe">State</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.StateP" />
+            <p class="inpLabe">Zip</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.ZipP" />
+            <p class="inpLabe">Phone</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.PhoneP" />
+            <p class="inpLabe">Email</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.EmailP" />
+            <p class="inpLabe">Scheduled Pickup Date</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.PickupExactly" />
+        </div>
+        <div class="content">
+            <h2 style="color:#f3a74c;margin-bottom:2px;">Delivery Information</h2>
+            <p class="inpLabe">Name</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.NameD" />
+            <p class="inpLabe">Contact</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.ContactNameD" />
+            <p class="inpLabe">Address</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.AddresD" />
+            <p class="inpLabe">City</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.CityD" />
+            <p class="inpLabe">State</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.StateD" />
+            <p class="inpLabe">Zip</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.ZipD" />
+            <p class="inpLabe">Phone</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.PhoneD" />
+            <p class="inpLabe">Email</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.EmailD" />
+            <p class="inpLabe">Scheduled Pickup Date</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.DeliveryEstimated" />
+        </div>
+    </div>
+    <div class="bodyTable">
+        <h4 class="headTabe">Vehicles</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>VIN</th>
+                    <th>Year</th>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Type</th>
+                    <th>Color</th>
+                    <th>Lot Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < ViewBag.Order.VehiclwInformations.Count; i++)
+                {
+                    <tr id="@ViewBag.Order.VehiclwInformations[i].Id">
+                        <td>@i</td>
+                        <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].VIN" /></td>
+                        <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Year" /></td>
+                        <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Make" /></td>
+                        <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Model" /></td>
+                        <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Type" /></td>
+                        <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Color" /></td>
+                        <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Lot" /></td>
+                        <td><input id="btn_@ViewBag.Order.VehiclwInformations[i].Id" class="inpTextTr btnD" type="button" value="D" /></td>
+                        <td><input class="inpTextTr btnD" type="button" value="+" /></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <hr style="border-color:rgba(243, 167, 76, 0.29);margin:10px;" />
+    <div class="contentBody">
+        <div class="content">
+            <h2 style="color:#f3a74c;margin-bottom:2px;">Delivery Information</h2>
+            <p class="inpLabe">Payment Information</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.TotalPaymentToCarrier" />
+            <p class="inpLabe">Price</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.PriceListed" />
+            <p class="inpLabe">Broker Fee</p>
+            <input class="inpText" type="text" value="@ViewBag.Order.BrokerFee" />
+        </div>
+        <div class="content">
+            <p class="inpLabe">Payment terms</p>
+            <textarea class="inpText" style="height:92px;">IT ADD</textarea>
+        </div>
+    </div>
 </div>
 
         <style>
@@ -7,7 +117,80 @@
                 margin: 0px;
             }
 
+            .btnD:hover {
+                background: rgba(243, 167, 76, 0.29);
+            }
 
+            .inpTextTr {
+                border: none;
+                width: 97%;
+                background-color: rgba(243, 167, 76, 0.09);
+                color: #f3a74c;
+            }
+
+            tr {
+                display: table-row;
+                vertical-align: inherit;
+                border-color: inherit;
+            }
+
+            td, th {
+                text-align: center;
+                border-radius: 5px;
+                color: #f3a74c;
+            }
+
+            td {
+                background-color: rgba(243, 167, 76, 0.09);
+            }
+
+            th {
+                border-bottom: solid;
+                border-color: rgba(243, 167, 76, 0.54);
+            }
+
+            .table {
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .headTabe {
+                font-size: 21px;
+                margin-left: 10px;
+                color: #f3a74c;
+            }
+
+                .bodyTable {
+                margin: 15px;
+            }
+
+            .inpLabe {
+                font-size: 18px;
+                color: #f3a74c;
+                margin-top:10px;
+            }
+
+            .inpText {
+                width: 100%;
+                height: 20px;
+                border-width: 1px;
+                border-style: double;
+                border-radius: 7px;
+                padding: 2px;
+                font-size: 18px;
+                color: #f3a74c;
+                margin-bottom: 15px;
+            }
+
+            .content {
+                width: 40%;
+            }
+
+            .contentBody {
+                display:flex;
+                justify-content:space-around;
+            }
 
             .backBtn {
                 background: none;
