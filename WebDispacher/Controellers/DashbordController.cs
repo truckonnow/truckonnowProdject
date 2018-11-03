@@ -22,6 +22,7 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     ViewBag.Orders = managerDispatch.GetOrders("NewLoad", page);
+                    ViewBag.Drivers = managerDispatch.GetDrivers(-1);
                     actionResult = View("NewLoad");
                 }
                 else
@@ -40,8 +41,84 @@ namespace WebDispacher.Controellers
             return actionResult;
         }
 
+        [Route("Dashbord/Assign")]
+        [HttpPost]
+        public string DriverSelect(string idOrder, string idDriver)
+        {
+            bool actionResult = false;
+            try
+            {
+                string key = null;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    if((idDriver != null && idDriver != "") && (idOrder != null && idOrder != ""))
+                    {
+                        managerDispatch.Assign(idOrder, idDriver);
+                        actionResult = true;
+                    }
+                    else
+                    {
+                        actionResult = false;
+                    }
+                    
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = false;
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult.ToString();
+        }
+
+        [Route("Dashbord/Unassign")]
+        [HttpPost]
+        public string DriverUnSelect(string idOrder)
+        {
+            bool actionResult = false;
+            try
+            {
+                string key = null;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    if (idOrder != null && idOrder != "")
+                    {
+                        managerDispatch.Unassign(idOrder); 
+                        actionResult = true;
+                    }
+                    else
+                    {
+                        actionResult = false;
+                    }
+
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = false;
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult.ToString();
+        }
+
         [Route("Dashbord/Order/Archived")]
-        public IActionResult Archived()
+        public IActionResult Archived(int page)
         {
             IActionResult actionResult = null;
             try
@@ -69,7 +146,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Assigned")]
-        public IActionResult Assigned()
+        public IActionResult Assigned(int page)
         {
             IActionResult actionResult = null;
             try
@@ -78,6 +155,8 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
+                    ViewBag.Orders = managerDispatch.GetOrders("Assigned", page);
+                    ViewBag.Drivers = managerDispatch.GetDrivers(-1);
                     actionResult = View("Assigned");
                 }
                 else
@@ -97,7 +176,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Billed")]
-        public IActionResult Billed()
+        public IActionResult Billed(int page)
         {
             IActionResult actionResult = null;
             try
@@ -125,7 +204,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Deleted")]
-        public IActionResult Deleted()
+        public IActionResult Deleted(int page)
         {
             IActionResult actionResult = null;
             try
@@ -153,7 +232,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Delivered")]
-        public IActionResult Delivered()
+        public IActionResult Delivered(int page)
         {
             IActionResult actionResult = null;
             try
@@ -162,6 +241,8 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
+                    ViewBag.Orders = managerDispatch.GetOrders("Delivered", page);
+                    ViewBag.Drivers = managerDispatch.GetDrivers(-1);
                     actionResult = View("Delivered");
                 }
                 else
@@ -181,7 +262,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Paid")]
-        public IActionResult Paid()
+        public IActionResult Paid(int page)
         {
             IActionResult actionResult = null;
             try
@@ -209,7 +290,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Pickedup")]
-        public IActionResult Pickedup()
+        public IActionResult Pickedup(int page)
         {
             IActionResult actionResult = null;
             try
@@ -218,6 +299,8 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
+                    ViewBag.Orders = managerDispatch.GetOrders("Pickedup", page);
+                    ViewBag.Drivers = managerDispatch.GetDrivers(-1);
                     actionResult = View("Pickedup");
                 }
                 else

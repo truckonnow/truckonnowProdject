@@ -80,6 +80,59 @@ namespace WebDispacher.Dao
             return shipping;
         }
 
+        public List<Driver> GetDrivers(int page)
+        {
+            Init();
+            List<Driver> drivers = null;
+            drivers = context.Drivers.ToList();
+
+            if (page == -1)
+            {
+            }
+            else if(page != 0)
+            {
+                try
+                {
+                    drivers = drivers.GetRange((20 * page) - 20, 20);
+                }
+                catch (Exception)
+                {
+                    drivers = drivers.GetRange((20 * page) - 20, drivers.Count % 20);
+                }
+            }
+            else
+            {
+                try
+                {
+                    drivers = drivers.GetRange(0, 20);
+                }
+                catch (Exception)
+                {
+                    drivers = drivers.GetRange(0, drivers.Count % 20);
+                }
+            }
+            return drivers;
+        }
+
+        public async void AddDriversInOrder(string idOrder, string idDriver)
+        {
+            Init();
+            Shipping shipping = context.Shipping.FirstOrDefault<Shipping>(s => s.Id == idOrder);
+            Driver driver = context.Drivers.FirstOrDefault<Driver>(d => d.Id == Convert.ToInt32(idDriver));
+            shipping.Driverr = driver;
+            shipping.CurrentStatus = "Assigned";
+            await context.SaveChangesAsync();
+        }
+
+        public async void RemoveDriversInOrder(string idOrder)
+        {
+            Init();
+            Shipping shipping = context.Shipping.FirstOrDefault<Shipping>(s => s.Id == idOrder);
+            shipping.Driverr = null;
+            shipping.CurrentStatus = "NewLoad";
+            await context.SaveChangesAsync();
+        }
+
         public Shipping GetShipping(string id)
         {
             Init();

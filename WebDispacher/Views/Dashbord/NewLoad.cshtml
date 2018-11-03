@@ -39,13 +39,40 @@
                 </div>
                 <div class="blockData" style="margin-left:auto;">
                     <a class="btnId" style="width:100px" href="/Dashbord/Order/Edit?id=@ViewBag.Orders[i].Id&stasus=NewLoad">Edit</a>
+                    <select  onchange="SelectAssining(this.options[this.selectedIndex].value)" class="btnId" style="width:100px">
+                        <option value="">Assign</option>
+                        @for (int j = 0; j < ViewBag.Drivers.Count; j++)
+                        {
+                            <option value="@ViewBag.Orders[i].Id,@ViewBag.Drivers[j].Id">@ViewBag.Drivers[j].FullName</option>
+                        }
+                    </select>
                 </div>
             </div>
         </div>
         }
     </div>
 </div>
+<script>
+    function SelectAssining(idOrderAndIdDriver) {
+        let statusResponse;
+        if (idOrderAndIdDriver != "") {
+            let idOrder = idOrderAndIdDriver.split(',')[0];
+            let idDriver = idOrderAndIdDriver.split(',')[1];
+            let url = "http://localhost:22929/Dashbord/Assign";
+            let xmlHttp = new XMLHttpRequest();
+            var body = 'idOrder=' + encodeURIComponent(idOrder) +
+                '&idDriver=' + encodeURIComponent(idDriver);
+            xmlHttp.open("POST", url, false);
+            xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xmlHttp.send(body);
+            statusResponse = xmlHttp.responseText;
+        }
 
+        if (statusResponse == "True") {
+            window.location.reload();
+        }
+    }
+</script>
 <style>
     * {
         margin:0px;

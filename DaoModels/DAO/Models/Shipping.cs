@@ -72,5 +72,9 @@ namespace DaoModels.DAO.Models
 
         public string Titl1DI { get; set; }
         public List<VehiclwInformation> VehiclwInformations { get; set; }
+
+        ////////////////////////////////////////////////
+        
+        public Driver Driverr { get; set; }
     }
 }

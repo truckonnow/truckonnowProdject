@@ -26,6 +26,26 @@ namespace WebDispacher.Service
             return _sqlEntityFramworke.CheckKeyDb(key);
         }
 
+        public List<Driver> GetDrivers(int pag)
+        {
+            return _sqlEntityFramworke.GetDrivers( pag);
+        }
+
+        public void Assign(string idOrder, string idDriver)
+        {
+            _sqlEntityFramworke.AddDriversInOrder(idOrder, idDriver);
+        }
+
+        public void Unassign(string idOrder)
+        {
+            _sqlEntityFramworke.RemoveDriversInOrder(idOrder);
+        }
+
+        //public Shipping GetDriver()
+        //{
+        //    return _sqlEntityFramworke.GetShipping(id);
+        //}
+
         public int Createkey(string login, string password)
         {
             Random random = new Random();

@@ -1,0 +1,65 @@
+﻿<div class="body">
+    <div class="contentBody">
+        @for (int i = 0; i < ViewBag.Drivers.Count; i++)
+        {
+        <div class="contentDriver">
+            <p class="inpData">@ViewBag.Drivers[i].FullName</p>
+            <p class="inpData">Trailer capacity: @ViewBag.Drivers[i].TrailerCapacity</p>
+            <span class="inpData">Email: @ViewBag.Drivers[i].EmailAddress</span>
+            <span class="inpData">, </span>
+            <span class="inpData">Phone: @ViewBag.Drivers[i].PhoneNumber</span><br/> <br />
+            <input class="btnId" value="Edit" type="button" />
+            <input class="btnId" value="Reactivate" type="button" />
+            <input class="btnId" value="Remove" type="button" />
+        </div>
+        }
+    </div>
+</div>
+
+        <style>
+            * {
+                margin: 0px;
+            }
+
+            .btnId:hover {
+                background-color: #ffbd6b;
+                color: white;
+            }
+
+            .btnId {
+                color: #ffbd6b;
+                background: none;
+                border-color: #ffbd6b;
+                display: inline-block;
+                padding: 8px;
+                font-size: 11px;
+                font-weight: 400;
+                text-align: center;
+                border: 2px solid;
+                border-radius: 4px;
+            }
+
+            .inpData {
+                font-size: 18px;
+                color: #f3a74c;
+            }
+
+            .contentDriver {
+                padding: 20px;
+                border-width: 1px;
+                border-style: double;
+                border-color: #f3a74c;
+                width:80%;
+            }
+
+            .contentBody {
+                margin: 10px;
+            }
+
+            .body {
+                margin-top: 30px;
+                margin-left: 5px;
+                margin-right: 5px;
+                padding: 10px;
+            }
+        </style>

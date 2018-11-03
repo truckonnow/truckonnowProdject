@@ -1,7 +1,10 @@
 ﻿using MDispatch.Service;
+using MDispatch.View.TabPage;
 using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace MDispatch.ViewModels
 {
@@ -43,13 +46,17 @@ namespace MDispatch.ViewModels
             }
         }
          
-        private void Avtorization()
+        private async void Avtorization()
         {
             string token = null;
             string description = null;
-            //CrossSettings.Current.GetValueOrDefault("userName", "");
-            int state = managerDispatchMob.A_RWork("authorisation", Username, Password, ref description, ref token);
-            if(state == 1)
+            ;
+            int state = 3;
+            await Task.Run(() =>
+            {
+                //state = managerDispatchMob.A_RWork("authorisation", Username, Password, ref description, ref token);
+            });
+            if (state == 1)
             {
                 FeedBack = "Not Network";
             }
@@ -59,7 +66,8 @@ namespace MDispatch.ViewModels
             }
             else if(state == 3)
             {
-                FeedBack = token;
+                CrossSettings.Current.AddOrUpdateValue("Token", token);
+                Application.Current.MainPage = new TabPage(managerDispatchMob);
             }
             else if(state == 4)
             {
