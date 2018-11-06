@@ -1,4 +1,6 @@
 using MDispatch.View.A_R;
+using MDispatch.View.TabPage;
+using Plugin.Settings;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,7 +13,15 @@ namespace MDispatch
 		public App ()
 		{
 			InitializeComponent();
-            MainPage = new NavigationPage(new Avtorization());
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            if (token == "")
+            {
+                MainPage = new NavigationPage(new Avtorization());
+            }
+            else
+            {
+                MainPage = new TabPage(new Service.ManagerDispatchMob());
+            }
         }
 
 		protected override void OnStart ()

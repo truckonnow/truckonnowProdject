@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace MDispatch.Models
+{
+    public class Driver
+    {
+        public int Id { get; set; }
+        public string EmailOrLogin { get; set; }
+        public string FullName { get; set; }
+        public string EmailAddress { get; set; }
+        public string PhoneNumber { get; set; }
+        public string TrailerCapacity { get; set; }
+        public string DriversLicenseNumber { get; set; }
+        public string IssuingState_Province { get; set; }
+        public string Password { get; set; }
+        public string Token { get; set; }
+    }
+}

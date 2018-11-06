@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDispatch.View.TabPage.Tab.ActivePage"
+             Title="Active">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView ItemsSource="{Binding Shippings}"
+                      HasUnevenRows="True" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Frame Margin="5" Padding="0" BackgroundColor="White" HasShadow="True" CornerRadius="5" OutlineColor="#C3CBCD">
+                                    <StackLayout Orientation="Horizontal">
+                                        <BoxView BackgroundColor="#65CAE1" WidthRequest="8" />
+                                        <StackLayout Padding="10">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="Load Id:" FontSize="16"/>
+                                                <Label Text="{Binding Id}" FontSize="16"/> 
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <ListView ItemsSource="{Binding VehiclwInformations}"
+                                                          HasUnevenRows="True" SeparatorVisibility="None">
+                                                    <ListView.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <ViewCell>
+                                                                <ViewCell.View>
+                                                                    <StackLayout Orientation="Horizontal">
+                                                                        <Label Text="{Binding Year}"/>
+                                                                        <Label Text="{Binding Make}"/>
+                                                                        <Label Text="{Binding Model}"/>
+                                                                    </StackLayout>
+                                                                </ViewCell.View>
+                                                            </ViewCell>
+                                                        </DataTemplate>
+                                                    </ListView.ItemTemplate>
+                                                </ListView>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

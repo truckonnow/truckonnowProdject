@@ -23,12 +23,31 @@
     <EmbeddedResource Update="View\A_R\Avtorization.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="View\TabPage\Tab\ActivePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="View\TabPage\TabPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\TabPage\Tab\ArchivedPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\TabPage\Tab\DeiveredPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Folder Include="NewElement\" />
+    <Folder Include="Service\Settings\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="View\TabPage\Tab\ArchivedPage.xaml.cs">
+      <DependentUpon>ArchivedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\TabPage\Tab\DeiveredPage.xaml.cs">
+      <DependentUpon>DeiveredPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

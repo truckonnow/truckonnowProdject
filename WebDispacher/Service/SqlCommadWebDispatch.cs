@@ -20,6 +20,7 @@ namespace WebDispacher.Dao
         {
             context.Shipping.Load();
             context.VehiclwInformation.Load();
+            context.Drivers.Load();
         }
 
         public bool ExistsDataUser(string login, string password)

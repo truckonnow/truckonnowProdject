@@ -1,7 +1,6 @@
-﻿using System;
+﻿using DaoModels.DAO.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApiMobaileServise.Servise
 {
@@ -20,8 +19,19 @@ namespace ApiMobaileServise.Servise
             if (sqlCommandApiMobile.CheckEmailAndPsw(email, password))
             {
                 token = CreateToken(email, password);
+                sqlCommandApiMobile.SaveToken(email, password, token);
             }
             return token;
+        }
+
+        public bool GetOrdersForToken(string token, string status, ref List<Shipping> shippings)
+        {
+            bool isToken = sqlCommandApiMobile.CheckToken(token);
+            if (isToken)
+            {
+                shippings = sqlCommandApiMobile.GetOrdersForToken(token, status);
+            }
+            return isToken;
         }
 
         private string CreateToken(string email, string password)
@@ -31,7 +41,6 @@ namespace ApiMobaileServise.Servise
             {
                 token += i * new Random().Next(1, 1000) + email[i]; 
             }
-
             for (int i = 0; i < password.Length; i++)
             {
                 token += i * new Random().Next(1, 1000) + password[i];
