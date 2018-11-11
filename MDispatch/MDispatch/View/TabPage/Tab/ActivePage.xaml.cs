@@ -22,5 +22,10 @@ namespace MDispatch.View.TabPage.Tab
 			InitializeComponent ();
             BindingContext = this.activeMV;
 		}
-	}
+
+        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            activeMV.Init();
+        }
+    }
 }

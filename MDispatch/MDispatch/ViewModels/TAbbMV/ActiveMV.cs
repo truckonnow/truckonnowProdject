@@ -16,8 +16,8 @@ namespace MDispatch.ViewModels.TAbbMV
 
         public ActiveMV(ManagerDispatchMob managerDispatchMob)
         {
-            Shippings = new List<Shipping>();
-            //VehiclwInformation vehiclwInformation = new VehiclwInformation();
+            //Shippings = new List<Shipping>();
+            VehiclwInformation vehiclwInformation = new VehiclwInformation();
             //vehiclwInformation.Year = "1992";
             //vehiclwInformation.Make = "Porsche";
             //vehiclwInformation.Model = "911";
@@ -28,9 +28,9 @@ namespace MDispatch.ViewModels.TAbbMV
             //shipping.CityP = "dallas";
             //shipping.StateP = "TX";
             //shipping.PickupExactly = "10.01.18";
-            //shipping.CityP = "north";
-            //shipping.StateP = "OH";
-            //shipping.PickupExactly = "11.01.18";
+            //shipping.CityD = "north";
+            //shipping.StateD = "OH";
+            //shipping.DispatchDate = "12.01.18";
             //Shippings.Add(shipping);
             //Shippings.Add(shipping);
             this.managerDispatchMob = managerDispatchMob;
