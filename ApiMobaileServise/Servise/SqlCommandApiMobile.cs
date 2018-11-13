@@ -1,10 +1,8 @@
 ﻿using DaoModels.DAO;
 using DaoModels.DAO.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApiMobaileServise.Servise
 {
@@ -27,13 +25,13 @@ namespace ApiMobaileServise.Servise
         public bool CheckEmailAndPsw(string email, string password)
         {
             Init();
-            return context.Drivers.FirstOrDefault(d => d.EmailOrLogin == email && d.Password == password) != null ? true : false;
+            return context.Drivers.FirstOrDefault(d => d.EmailAddress == email && d.Password == password) != null ? true : false;
         }
 
         public async void SaveToken(string email, string password, string token)
         {
             Init();
-            Driver driver = context.Drivers.FirstOrDefault(d => d.EmailOrLogin == email && d.Password == password);
+            Driver driver = context.Drivers.FirstOrDefault(d => d.EmailAddress == email && d.Password == password);
             driver.Token = token;
             await context.SaveChangesAsync();
         }

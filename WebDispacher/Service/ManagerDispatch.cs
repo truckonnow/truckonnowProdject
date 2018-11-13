@@ -1,8 +1,6 @@
 ﻿using DaoModels.DAO.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WebDispacher.Dao;
 
 namespace WebDispacher.Service
@@ -62,6 +60,32 @@ namespace WebDispacher.Service
         public Shipping GetOrder(string id)
         {
             return _sqlEntityFramworke.GetShipping(id);
+        }
+        
+        public void Updateorder(string idOrder, string idLoad, string internalLoadID, string driver, string status, string instructions, string nameP, string contactP,
+            string addressP, string cityP, string stateP, string zipP, string phoneP, string emailP, string scheduledPickupDateP, string nameD, string contactD, string addressD,
+            string cityD, string stateD, string zipD, string phoneD, string emailD, string ScheduledPickupDateD, string paymentMethod, string price, string paymentTerms, string brokerFee)
+        {
+            _sqlEntityFramworke.UpdateorderInDb(idOrder, idLoad, internalLoadID, driver, status, instructions, nameP, contactP, addressP, cityP, stateP, zipP,
+                        phoneP, emailP, scheduledPickupDateP, nameD, contactD, addressD, cityD, stateD, zipD, phoneD, emailD, ScheduledPickupDateD, paymentMethod,
+                        price, paymentTerms, brokerFee);
+        }
+
+        public void CreateDriver(string fullName, string emailAddress, string password, string phoneNumbe, string trailerCapacity, string driversLicenseNumber)
+        {
+            Driver driver = new Driver();
+            driver.FullName = fullName;
+            driver.EmailAddress = emailAddress;
+            driver.Password = password;
+            driver.PhoneNumber = phoneNumbe;
+            driver.TrailerCapacity = trailerCapacity;
+            driver.DriversLicenseNumber = driversLicenseNumber;
+            _sqlEntityFramworke.AddDriver(driver);
+        }
+
+        public void RemoveDrive(int id)
+        {
+            _sqlEntityFramworke.RemoveDriveInDb(id);
         }
     }
 }

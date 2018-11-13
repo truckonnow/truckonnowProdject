@@ -1,148 +1,151 @@
 ﻿<div class="body">
     <input class="backBtn" type="button" value="← Back to Orders" onclick="history.back();" />
-    <div class="contentBody">
-        <div class="content">
-            <p class="inpLabe">Load Id</p>
-            <input id="idLoad" class="inpText" type="text" value="@ViewBag.Order.Id" />
-            <p class="inpLabe">Internal Load ID</p>
-            <input id="internalLoadID" class="inpText" type="text" value="" />
-            <p class="inpLabe">Driver</p>
-            <select id="driver" class="dropDown">
-                <option value="">------------------------------------</option>
-            </select>
-        </div>
-        <div class="content">
-            <p class="inpLabe">Status</p>
-            <select id="status" class="dropDown">
-                <option value="">------------------------------------</option>
-                <option value="NewLoad">NewLoad</option>
-                <option value="Piked up">Piked up</option>
-                <option value="Delivered">Delivered</option>
-            </select>
-            <p class="inpLabe">Instructions</p>
-            <textarea id="instructions" class="inpText" style="height:92px;">@ViewBag.Order.Titl1DI</textarea>
-        </div>
-    </div>
-    <div class="contentBody">
-        <div class="content">
-            <h2 style="color:#f3a74c;margin-bottom:2px;">Pickup Information</h2>
-            <p class="inpLabe">Name</p>
-            <input id="nameP" class="inpText" type="text" value="@ViewBag.Order.NameP" />
-            <p class="inpLabe">Contact</p>
-            <input id="contactP" class="inpText" type="text" value="@ViewBag.Order.ContactNameP" />
-            <p class="inpLabe">Address</p>
-            <input id="addressP" class="inpText" type="text" value="@ViewBag.Order.AddresP" />
-            <p class="inpLabe">City</p>
-            <input id="cityP" class="inpText" type="text" value="@ViewBag.Order.CityP" />
-            <p class="inpLabe">State</p>
-            <input id="stateP" class="inpText" type="text" value="@ViewBag.Order.StateP" />
-            <p class="inpLabe">Zip</p>
-            <input id="zipP" class="inpText" type="text" value="@ViewBag.Order.ZipP" />
-            <p class="inpLabe">Phone</p>
-            <input id="phoneP" class="inpText" type="text" value="@ViewBag.Order.PhoneP" />
-            <p class="inpLabe">Email</p>
-            <input id="emailP" class="inpText" type="text" value="@ViewBag.Order.EmailP" />
-            <p class="inpLabe">Scheduled Pickup Date</p>
-            <input id="scheduledPickupDateP" class="inpText" type="text" value="@ViewBag.Order.PickupExactly" />
-        </div>
-        <div class="content">
-            <h2 style="color:#f3a74c;margin-bottom:2px;">Delivery Information</h2>
-            <p class="inpLabe">Name</p>
-            <input id="nameD" class="inpText" type="text" value="@ViewBag.Order.NameD" />
-            <p class="inpLabe">Contact</p>
-            <input id="contactD" class="inpText" type="text" value="@ViewBag.Order.ContactNameD" />
-            <p class="inpLabe">Address</p>
-            <input id="addressD" class="inpText" type="text" value="@ViewBag.Order.AddresD" />
-            <p class="inpLabe">City</p>
-            <input id="cityD" class="inpText" type="text" value="@ViewBag.Order.CityD" />
-            <p class="inpLabe">State</p>
-            <input id="stateD" class="inpText" type="text" value="@ViewBag.Order.StateD" />
-            <p class="inpLabe">Zip</p>
-            <input id="zipD" class="inpText" type="text" value="@ViewBag.Order.ZipD" />
-            <p class="inpLabe">Phone</p>
-            <input id="phoneD" class="inpText" type="text" value="@ViewBag.Order.PhoneD" />
-            <p class="inpLabe">Email</p>
-            <input id="emailD" class="inpText" type="text" value="@ViewBag.Order.EmailD" />
-            <p class="inpLabe">Scheduled Pickup Date</p>
-            <input id="scheduledPickupDateD" class="inpText" type="text" value="@ViewBag.Order.DeliveryEstimated" />
-        </div>
-    </div>
-    <div class="bodyTable">
-        <h4 class="headTabe">Vehicles</h4>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>VIN</th>
-                    <th>Year</th>
-                    <th>Make</th>
-                    <th>Model</th>
-                    <th>Type</th>
-                    <th>Color</th>
-                    <th>Lot Number</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (int i = 0; i < ViewBag.Order.VehiclwInformations.Count; i++)
-                {
-                    <tr id="@ViewBag.Order.VehiclwInformations[i].Id">
-                        <td>@i</td>
-                        <td><input id="V_@ViewBag.Order.VehiclwInformations[i].Id" class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].VIN" /></td>
-                        <td><input id="Y_@ViewBag.Order.VehiclwInformations[i].Id" class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Year" /></td>
-                        <td><input id="Ma_@ViewBag.Order.VehiclwInformations[i].Id" class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Make" /></td>
-                        <td><input id="Mo_@ViewBag.Order.VehiclwInformations[i].Id" class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Model" /></td>
-                        <td><input id="T_@ViewBag.Order.VehiclwInformations[i].Id" class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Type" /></td>
-                        <td><input id="C_@ViewBag.Order.VehiclwInformations[i].Id" class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Color" /></td>
-                        <td><input id="L_@ViewBag.Order.VehiclwInformations[i].Id" class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Lot" /></td>
-                        <td><input id="btn_@ViewBag.Order.VehiclwInformations[i].Id" class="inpTextTr btnD" type="button" value="D" /></td>
-                        <td><input class="inpTextTr btnD" type="button" value="+" /></td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <hr style="border-color:rgba(243, 167, 76, 0.29);margin:10px;" />
-    <div class="contentBody">
-        <div class="content">
-            <h2 style="color:#f3a74c;margin-bottom:2px;">Delivery Information</h2>
-            <p class="inpLabe">Payment Information</p>
-            <input id="paymentInformation" class="inpText" type="text" value="@ViewBag.Order.TotalPaymentToCarrier" />
-            <p class="inpLabe">Price</p>
-            <input id="price" class="inpText" type="text" value="@ViewBag.Order.PriceListed" />
-            <p class="inpLabe">Broker Fee</p>   
-            <input id="brokerFee" class="inpText" type="text" value="@ViewBag.Order.BrokerFee" />
-        </div>
-        <div class="content">
-            <p class="inpLabe">Payment terms</p>
-            <textarea id="paymentterms" class="inpText" style="height:92px;">IT ADD</textarea>
-            <div style="display:flex;">
-                <input class="btnSave" value="Save" type="button" onclick="Save()"/>
+    <form action="SavaOrder" method="post">
+        <input type="text" name="idOrder" style="display:none;" value="@ViewBag.Order.Id"/>
+        <div class="contentBody">
+            <div class="content">
+                <p class="inpLabe">Load Id</p>
+                <input name="idLoad" class="inpText" type="text" value="@ViewBag.Order.idOrder" />
+                <p class="inpLabe">Internal Load ID</p>
+                <input name="internalLoadID" class="inpText" type="text" value="@ViewBag.Order.InternalLoadID" />
+                <p class="inpLabe">Driver</p>
+                <select name="driver" class="dropDown">
+                    <option value="">------------------------------------</option>
+                </select>
+            </div>
+            <div class="content">
+                <p class="inpLabe">Status</p>
+                <select name="status" class="dropDown">
+                    <option value="">------------------------------------</option>
+                    <option value="NewLoad">NewLoad</option>
+                    <option value="Piked up">Piked up</option>
+                    <option value="Delivered">Delivered</option>
+                </select>
+                <p class="inpLabe">Instructions</p>
+                <textarea name="instructions" class="inpText" style="height:92px;">@ViewBag.Order.Titl1DI</textarea>
             </div>
         </div>
-    </div>
+        <div class="contentBody">
+            <div class="content">
+                <h2 style="color:#f3a74c;margin-bottom:2px;">Pickup Information</h2>
+                <p class="inpLabe">Name</p>
+                <input name="nameP" class="inpText" type="text" value="@ViewBag.Order.NameP" />
+                <p class="inpLabe">Contact</p>
+                <input name="contactP" class="inpText" type="text" value="@ViewBag.Order.ContactNameP" />
+                <p class="inpLabe">Address</p>
+                <input name="addressP" class="inpText" type="text" value="@ViewBag.Order.AddresP" />
+                <p class="inpLabe">City</p>
+                <input name="cityP" class="inpText" type="text" value="@ViewBag.Order.CityP" />
+                <p class="inpLabe">State</p>
+                <input name="stateP" class="inpText" type="text" value="@ViewBag.Order.StateP" />
+                <p class="inpLabe">Zip</p>
+                <input name="zipP" class="inpText" type="text" value="@ViewBag.Order.ZipP" />
+                <p class="inpLabe">Phone</p>
+                <input name="phoneP" class="inpText" type="text" value="@ViewBag.Order.PhoneP" />
+                <p class="inpLabe">Email</p>
+                <input name="emailP" class="inpText" type="text" value="@ViewBag.Order.EmailP" />
+                <p class="inpLabe">Scheduled Pickup Date</p>
+                <input name="scheduledPickupDate" class="inpText" type="text" value="@ViewBag.Order.PickupExactly" />
+            </div>
+            <div class="content">
+                <h2 style="color:#f3a74c;margin-bottom:2px;">Delivery Information</h2>
+                <p class="inpLabe">Name</p>
+                <input name="nameD" class="inpText" type="text" value="@ViewBag.Order.NameD" />
+                <p class="inpLabe">Contact</p>
+                <input name="contactD" class="inpText" type="text" value="@ViewBag.Order.ContactNameD" />
+                <p class="inpLabe">Address</p>
+                <input name="addressD" class="inpText" type="text" value="@ViewBag.Order.AddresD" />
+                <p class="inpLabe">City</p>
+                <input name="cityD" class="inpText" type="text" value="@ViewBag.Order.CityD" />
+                <p class="inpLabe">State</p>
+                <input name="stateD" class="inpText" type="text" value="@ViewBag.Order.StateD" />
+                <p class="inpLabe">Zip</p>
+                <input name="zipD" class="inpText" type="text" value="@ViewBag.Order.ZipD" />
+                <p class="inpLabe">Phone</p>
+                <input name="phoneD" class="inpText" type="text" value="@ViewBag.Order.PhoneD" />
+                <p class="inpLabe">Email</p>
+                <input name="emailD" class="inpText" type="text" value="@ViewBag.Order.EmailD" />
+                <p class="inpLabe">Scheduled Pickup Date</p>
+                <input name="scheduledPickupDateD" class="inpText" type="text" value="@ViewBag.Order.DeliveryEstimated" />
+            </div>
+        </div>
+        <div class="bodyTable">
+            <h4 class="headTabe">Vehicles</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>VIN</th>
+                        <th>Year</th>
+                        <th>Make</th>
+                        <th>Model</th>
+                        <th>Type</th>
+                        <th>Color</th>
+                        <th>Lot Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < ViewBag.Order.VehiclwInformations.Count; i++)
+                    {
+                        <tr id="@ViewBag.Order.VehiclwInformations[i].Id">
+                            <td>@i</td>
+                            <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].VIN" /></td>
+                            <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Year" /></td>
+                            <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Make" /></td>
+                            <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Model" /></td>
+                            <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Type" /></td>
+                            <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Color" /></td>
+                            <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Lot" /></td>
+                            <td><input class="inpTextTr btnD" type="button" value="D" /></td>
+                            <td><input class="inpTextTr btnD" type="button" value="+" /></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <hr style="border-color:rgba(243, 167, 76, 0.29);margin:10px;" />
+        <div class="contentBody">
+            <div class="content">
+                <h2 style="color:#f3a74c;margin-bottom:2px;">Payment Information</h2>
+                <p class="inpLabe">Payment method</p>
+                <input name="paymentMethod" class="inpText" type="text" value="@ViewBag.Order.TotalPaymentToCarrier" />
+                <p class="inpLabe">Price</p>
+                <input name="price" class="inpText" type="text" value="@ViewBag.Order.PriceListed" />
+                <p class="inpLabe">Broker Fee</p>
+                <input name="brokerFee" class="inpText" type="text" value="@ViewBag.Order.BrokerFee" />
+            </div>
+            <div class="content">
+                <p class="inpLabe">Payment terms</p>
+                <textarea name="paymentTerms" class="inpText" style="height:92px;">IT ADD</textarea>
+                <div style="display:flex;">
+                    <input class="btnSave" value="Save" type="submit" />
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 <script>
-    function Save() {
-        var jsonReqvest;
-        jsonReqvest += "{ Shipping:{HeadInfo:" + GetHeadInfo() + ",PickupInformation:" + GetPickupInformation() + ",DeliveryInformation:" + GetDeliveryInformation()+"}";
-    }
+    //function Save() {
+    //    var jsonReqvest;
+    //    jsonReqvest += "{ Shipping:{HeadInfo:" + GetHeadInfo() + ",PickupInformation:" + GetPickupInformation() + ",DeliveryInformation:" + GetDeliveryInformation()+"}";
+    //}
 
-    function GetHeadInfo() {
-        let elDrive = document.getElementById("driver");
-        let elStatus = document.getElementById("status");
-        let headInfo = "{IdLoad:" + idLoad.value + ",InternalLoadID:" + internalLoadID.value + ",Driver:" + elDrive.children[elDrive.selectedIndex].value + ",Status:" + elStatus.children[elStatus.selectedIndex].value + "Instructions" + instructions.value + "}";
-        return headInfo;
-    }
+    //function GetHeadInfo() {
+    //    let elDrive = document.getElementById("driver");
+    //    let elStatus = document.getElementById("status");
+    //    let headInfo = "{IdLoad:" + idLoad.value + ",InternalLoadID:" + internalLoadID.value + ",Driver:" + elDrive.children[elDrive.selectedIndex].value + ",Status:" + elStatus.children[elStatus.selectedIndex].value + "Instructions" + instructions.value + "}";
+    //    return headInfo;
+    //}
 
-    function GetPickupInformation() {
-        let PickupInformation = "{NameP:" + nameP.value + ",ContactP:" + contactP.value + ",AddressP:" + addressP.value + ",CityP" + cityP.value + ",StateP:" + stateP.value + ",ZipP:" + zipP.value + ",PhoneP" + phoneP.value + ",EmailP" + emailP.value + ",ScheduledPickupDateP" + scheduledPickupDateP.value + "}";
-        return PickupInformation;
-    }
+    //function GetPickupInformation() {
+    //    let PickupInformation = "{NameP:" + nameP.value + ",ContactP:" + contactP.value + ",AddressP:" + addressP.value + ",CityP" + cityP.value + ",StateP:" + stateP.value + ",ZipP:" + zipP.value + ",PhoneP" + phoneP.value + ",EmailP" + emailP.value + ",ScheduledPickupDateP" + scheduledPickupDateP.value + "}";
+    //    return PickupInformation;
+    //}
 
-    function GetDeliveryInformation() {
-        let DeliveryInformation = "{NameD:" + nameD.value + ",ContactP:" + contactD.value + ",AddressD:" + addressD.value + ",CityD" + cityD.value + ",StateD:" + stateD.value + ",ZipD:" + zipD.value + ",PhoneD" + phoneD.value + ",EmailD" + emailD.value + ",ScheduledPickupDateD" + scheduledPickupDateD.value + "}";
-        return DeliveryInformation;
-    }
+    //function GetDeliveryInformation() {
+    //    let DeliveryInformation = "{NameD:" + nameD.value + ",ContactP:" + contactD.value + ",AddressD:" + addressD.value + ",CityD" + cityD.value + ",StateD:" + stateD.value + ",ZipD:" + zipD.value + ",PhoneD" + phoneD.value + ",EmailD" + emailD.value + ",ScheduledPickupDateD" + scheduledPickupDateD.value + "}";
+    //    return DeliveryInformation;
+    //}
 </script>
         <style>
             * {

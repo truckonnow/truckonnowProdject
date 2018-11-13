@@ -1,15 +1,10 @@
 ﻿using AngleSharp.Dom.Html;
 using AngleSharp.Parser.Html;
 using DaoModels.DAO.Models;
-using Newtonsoft.Json;
 using Parser.DAO;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Parser.Servise
@@ -84,7 +79,9 @@ namespace Parser.Servise
                 IHtmlDocument htmlDocument = htmlParser.Parse(sourse);
                 var element = htmlDocument.GetElementsByClassName("col-xs-12 col-sm-7 col-md-8")[0]
                     .GetElementsByTagName("p");
+
                 shipping.Id = element[0].TextContent.Remove(0, element[0].TextContent.IndexOf(": ") + 2);
+                shipping.idOrder = element[0].TextContent.Remove(0, element[0].TextContent.IndexOf(": ") + 2);
                 shipping.CurrentStatus = "NewLoad"; //element[1].TextContent.Remove(0, element[1].TextContent.IndexOf(": ") + 2);
                 shipping.LastUpdated = element[2].TextContent.Remove(0, element[2].TextContent.IndexOf(": ") + 2);
                 shipping.CDReference = element[3].TextContent.Remove(0, element[3].TextContent.IndexOf(": ") + 2);
@@ -117,11 +114,9 @@ namespace Parser.Servise
                 shipping.PriceListed = shipping.PriceListed.Remove(shipping.PriceListed.IndexOf("\n"));
                 shipping.TotalPaymentToCarrier = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("Total Payment to Carrier: ") + "Total Payment to Carrier: ".Length);
                 shipping.TotalPaymentToCarrier = shipping.TotalPaymentToCarrier.Remove(shipping.TotalPaymentToCarrier.IndexOf(" \n"));
-
                 shipping.OnDeliveryToCarrier = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("to Carrier:\n") + "to Carrier:\n".Length);
                 shipping.OnDeliveryToCarrier = shipping.OnDeliveryToCarrier.Remove(0, shipping.OnDeliveryToCarrier.IndexOf("\n") + 2).TrimStart();
                 shipping.OnDeliveryToCarrier = shipping.OnDeliveryToCarrier.Remove(shipping.OnDeliveryToCarrier.IndexOf("\n"));
-
                 shipping.CompanyOwesCarrier = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("Company") + "Company** owes Carrier:\n".Length);
                 shipping.CompanyOwesCarrier = shipping.CompanyOwesCarrier.Remove(0, shipping.CompanyOwesCarrier.IndexOf("\n")).TrimStart();
                 shipping.CompanyOwesCarrier = shipping.CompanyOwesCarrier.Remove(shipping.CompanyOwesCarrier.IndexOf("\n"));

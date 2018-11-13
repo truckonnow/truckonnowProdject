@@ -137,9 +137,54 @@ namespace WebDispacher.Dao
         public Shipping GetShipping(string id)
         {
             Init();
-            Shipping shipping = null;
-            shipping = context.Shipping.FirstOrDefault(s => s.Id == id);
-            return shipping;
+            return context.Shipping.FirstOrDefault(s => s.Id == id);
+        }
+
+        public async void UpdateorderInDb(string idOrder, string idLoad, string internalLoadID, string driver, string status, string instructions, string nameP, string contactP,
+            string addressP, string cityP, string stateP, string zipP, string phoneP, string emailP, string scheduledPickupDateP, string nameD, string contactD, string addressD,
+            string cityD, string stateD, string zipD, string phoneD, string emailD, string ScheduledPickupDateD, string paymentMethod, string price, string paymentTerms, string brokerFee)
+        {
+            Init();
+            Shipping shipping = context.Shipping.FirstOrDefault(s => s.Id == idOrder);
+            shipping.idOrder = idLoad != null ? idLoad : shipping.Id;
+            shipping.InternalLoadID = internalLoadID != null ? internalLoadID : shipping.InternalLoadID;
+            //shipping.Driverr = internalLoadID != null ? internalLoadID : shipping.InternalLoadID;
+            shipping.CurrentStatus = status != null ? status : shipping.CurrentStatus;
+            shipping.Titl1DI = instructions != null ? instructions : shipping.Titl1DI;
+            shipping.NameP = nameP != null ? nameP : shipping.NameD;
+            shipping.ContactNameP = contactP != null ? contactP : shipping.ContactNameP;
+            shipping.AddresP = addressP != null ? addressP : shipping.AddresP;
+            shipping.CityP = addressP != null ? addressP : shipping.CityP;
+            shipping.StateP = stateP != null ? stateP : shipping.StateP;
+            shipping.ZipP = zipP != null ? zipP : shipping.ZipP;
+            shipping.PhoneP = phoneP != null ? phoneP : shipping.PhoneP;
+            shipping.EmailP = emailP != null ? emailP : shipping.EmailP;
+            shipping.PickupExactly = scheduledPickupDateP != null ? scheduledPickupDateP : shipping.PickupExactly;
+            shipping.NameD = nameD != null ? nameD : shipping.NameD;
+            shipping.ContactNameD = contactD != null ? contactD : shipping.ContactNameD;
+            shipping.AddresD = addressD != null ? addressD : shipping.AddresD;
+            shipping.CityD = addressD != null ? addressD : shipping.CityD;
+            shipping.StateD = stateD != null ? stateD : shipping.StateD;
+            shipping.ZipD = zipD != null ? zipD : shipping.ZipD;
+            shipping.PhoneD = phoneD != null ? phoneD : shipping.PhoneD;
+            shipping.EmailD = emailD != null ? emailD : shipping.EmailD;
+            shipping.DeliveryEstimated = ScheduledPickupDateD != null ? ScheduledPickupDateD : shipping.DeliveryEstimated;
+            shipping.TotalPaymentToCarrier = paymentMethod != null ? paymentMethod : shipping.TotalPaymentToCarrier;
+            shipping.PriceListed = price != null ? price : shipping.PriceListed;
+            shipping.BrokerFee = brokerFee != null ? brokerFee : shipping.BrokerFee;
+            await context.SaveChangesAsync();
+        }
+
+        public async void AddDriver(Driver driver)
+        {
+            await context.Drivers.AddAsync(driver);
+            await context.SaveChangesAsync();
+        }
+
+        public async void RemoveDriveInDb(int id)
+        {
+            context.Drivers.Remove(context.Drivers.FirstOrDefault(d => d.Id == id));
+            await context.SaveChangesAsync();
         }
     }
 }
