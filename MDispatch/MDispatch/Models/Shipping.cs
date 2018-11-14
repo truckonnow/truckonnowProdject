@@ -5,7 +5,8 @@ namespace MDispatch.Models
 {
     public class Shipping
     {
-        public string Id { get; set; } //Idload
+        public string Id { get; set; }
+        public string idOrder { get; set; }
         public string InternalLoadID { get; set; }
         public string Driver { get; set; }
         public string CurrentStatus { get; set; }

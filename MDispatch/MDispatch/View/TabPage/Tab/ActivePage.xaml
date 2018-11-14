@@ -17,11 +17,15 @@
                             <ViewCell.View>
                                 <Frame Margin="5" Padding="0" BackgroundColor="White" HasShadow="True" CornerRadius="5" OutlineColor="#C3CBCD">
                                     <StackLayout Orientation="Horizontal">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="2" />
+                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1" NumberOfTapsRequired="1"/>
+                                        </StackLayout.GestureRecognizers>
                                         <BoxView BackgroundColor="#65CAE1" WidthRequest="8" />
                                         <StackLayout Padding="10">
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="Load Id:" FontSize="17"/>
-                                                <Label Text="{Binding Id}" FontSize="17"/> 
+                                                <Label Text="{Binding idOrder}" FontSize="17"/>
                                             </StackLayout>
                                             <StackLayout Orientation="Horizontal">
                                                 <ListView ItemsSource="{Binding VehiclwInformations}"
@@ -30,7 +34,11 @@
                                                         <DataTemplate>
                                                             <ViewCell>
                                                                 <ViewCell.View>     
-                                                                    <StackLayout Orientation="Horizontal" HeightRequest="20" BackgroundColor="White">
+                                                                    <StackLayout Orientation="Horizontal" HeightRequest="20">
+                                                                        <StackLayout.GestureRecognizers>
+                                                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2" NumberOfTapsRequired="2" />
+                                                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2" NumberOfTapsRequired="1"/>
+                                                                        </StackLayout.GestureRecognizers>
                                                                         <Label Text="{Binding Year}" FontSize="16" />
                                                                         <Label Text="{Binding Make}" FontSize="16" />
                                                                         <Label Text="{Binding Model}" FontSize="16" />

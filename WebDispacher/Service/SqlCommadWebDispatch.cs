@@ -154,7 +154,7 @@ namespace WebDispacher.Dao
             shipping.NameP = nameP != null ? nameP : shipping.NameD;
             shipping.ContactNameP = contactP != null ? contactP : shipping.ContactNameP;
             shipping.AddresP = addressP != null ? addressP : shipping.AddresP;
-            shipping.CityP = addressP != null ? addressP : shipping.CityP;
+            shipping.CityP = cityP != null ? cityP : shipping.CityP;
             shipping.StateP = stateP != null ? stateP : shipping.StateP;
             shipping.ZipP = zipP != null ? zipP : shipping.ZipP;
             shipping.PhoneP = phoneP != null ? phoneP : shipping.PhoneP;
@@ -163,7 +163,7 @@ namespace WebDispacher.Dao
             shipping.NameD = nameD != null ? nameD : shipping.NameD;
             shipping.ContactNameD = contactD != null ? contactD : shipping.ContactNameD;
             shipping.AddresD = addressD != null ? addressD : shipping.AddresD;
-            shipping.CityD = addressD != null ? addressD : shipping.CityD;
+            shipping.CityD = cityD != null ? cityD : shipping.CityD;
             shipping.StateD = stateD != null ? stateD : shipping.StateD;
             shipping.ZipD = zipD != null ? zipD : shipping.ZipD;
             shipping.PhoneD = phoneD != null ? phoneD : shipping.PhoneD;
