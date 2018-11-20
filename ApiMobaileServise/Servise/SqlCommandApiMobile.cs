@@ -28,6 +28,23 @@ namespace ApiMobaileServise.Servise
             return context.Drivers.FirstOrDefault(d => d.EmailAddress == email && d.Password == password) != null ? true : false;
         }
 
+        public async void SavePikedUpInDb(string idOrder, string name, string contactName, string address, string city, string state, string zip, string phone, string email)
+        {
+            Shipping shipping = context.Shipping.FirstOrDefault(s => s.Id == idOrder);
+            if(shipping != null)
+            {
+                shipping.NameP = name;
+                shipping.ContactNameP = contactName;
+                shipping.AddresP = address;
+                shipping.CityP = city;
+                shipping.StateP = state;
+                shipping.ZipP = zip;
+                shipping.PhoneP = phone;
+                shipping.EmailP = email;
+                await context.SaveChangesAsync();
+            }
+        }
+
         public async void SaveToken(string email, string password, string token)
         {
             Init();

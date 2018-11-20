@@ -66,7 +66,7 @@ namespace MDispatch.ViewModels
             else if(state == 3)
             {
                 CrossSettings.Current.AddOrUpdateValue("Token", token);
-                Application.Current.MainPage = new TabPage(managerDispatchMob);
+                Application.Current.MainPage = new NavigationPage(new TabPage(managerDispatchMob));
             }
             else if(state == 4)
             {

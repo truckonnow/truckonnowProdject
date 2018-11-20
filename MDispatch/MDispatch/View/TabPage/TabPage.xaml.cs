@@ -1,5 +1,4 @@
 ﻿using MDispatch.Service;
-using MDispatch.View.A_R;
 using MDispatch.View.TabPage.Tab;
 using MDispatch.ViewModels.TAbbPage;
 using Xamarin.Forms;
@@ -18,6 +17,7 @@ namespace MDispatch.View.TabPage
         {
             tablePageMV = new TablePageMV(managerDispatchMob);
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
             On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
             BindingContext = this.tablePageMV;
             InitActivePage(managerDispatchMob);
@@ -27,10 +27,8 @@ namespace MDispatch.View.TabPage
 
         private void InitActivePage(ManagerDispatchMob managerDispatchMob)
         {
-            NavigationPage navigationPage = new NavigationPage(new ActivePage(tablePageMV.activeMV, managerDispatchMob));
+            NavigationPage navigationPage = new NavigationPage(new ActivePage(managerDispatchMob, Navigation));
             navigationPage.Title = "Active";
-            navigationPage.BarBackgroundColor = Color.FromHex("#f3f3f3");
-            navigationPage.BarTextColor = Color.Black;
             Children.Add(navigationPage);
         }
 
@@ -38,8 +36,6 @@ namespace MDispatch.View.TabPage
         {
             NavigationPage navigationPage = new NavigationPage(new DeiveredPage());
             navigationPage.Title = "Deiveredge";
-            navigationPage.BarBackgroundColor = Color.FromHex("#f3f3f3");
-            navigationPage.BarTextColor = Color.Black;
             Children.Add(navigationPage);
         }
 
@@ -47,8 +43,6 @@ namespace MDispatch.View.TabPage
         {
             NavigationPage navigationPage = new NavigationPage(new ArchivedPage());
             navigationPage.Title = "Archived";
-            navigationPage.BarBackgroundColor = Color.FromHex("#f3f3f3");
-            navigationPage.BarTextColor = Color.Black;
             Children.Add(navigationPage);
         }
     }

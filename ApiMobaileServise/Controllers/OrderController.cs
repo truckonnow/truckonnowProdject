@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ApiMobaileServise.Models;
 using ApiMobaileServise.Servise;
 using DaoModels.DAO.Models;
@@ -38,6 +36,31 @@ namespace ApiMobaileServise.Controllers
                 }
             }
             catch(Exception)
+            {
+                respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
+            }
+            return respons;
+        }
+
+        [HttpPost]
+        [Route("SavePikedUp")]
+        public string SavePikedUp(string token, string idOrder, string name, string contactName, string address, string city, string state, string zip, string phone, string email)
+        {
+            string respons = null;
+            try
+            {
+                bool isToken = ManagerMobileApi.CheckToken(token);
+                if (isToken)
+                {
+                    ManagerMobileApi.SavepikedUp(idOrder, name, contactName, address, city, state, zip, phone, email);
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", ""));
+                }
+                else
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Token does not Valid", null));
+                }
+            }
+            catch (Exception)
             {
                 respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
             }

@@ -1,8 +1,6 @@
 ﻿using MDispatch.Models;
 using Plugin.Connectivity;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MDispatch.Service
 {
@@ -35,6 +33,22 @@ namespace MDispatch.Service
                 if (typeOrder == "OrderGet")
                 {
                     stateOrder = orderGet.ActiveOreder(token, status, ref description, ref shippings);
+                }
+            }
+            orderGet = null;
+            return stateOrder;
+        }
+
+
+        public int OrderOneWork(string typeOrder, string token, string idOrder, string name, string contactName, string address, string city, string state, string zip, string phone, string email, ref string description)
+        {
+            orderGet = new OrderGet();
+            int stateOrder = 1;
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                if (typeOrder == "SavePikedUp")
+                {
+                    stateOrder = orderGet.SavePikedUp(token, idOrder, name, contactName, address, city, state, zip, phone, email, ref description);
                 }
             }
             orderGet = null;

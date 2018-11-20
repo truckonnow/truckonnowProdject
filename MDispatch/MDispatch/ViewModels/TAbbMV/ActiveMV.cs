@@ -1,21 +1,23 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
 using Plugin.Settings;
+using Prism.Commands;
 using Prism.Mvvm;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
+using Xamarin.Forms;
 
 namespace MDispatch.ViewModels.TAbbMV
 {
     public class ActiveMV : BindableBase
     {
-        private ManagerDispatchMob managerDispatchMob = null;
+        public ManagerDispatchMob managerDispatchMob = null;
+        public INavigation Navigation { get; set; }
+        public DelegateCommand RefreshCommand { get; set; }
 
-        public ActiveMV(ManagerDispatchMob managerDispatchMob)
+        public ActiveMV(ManagerDispatchMob managerDispatchMob, INavigation navigation)
         {
+            Navigation = navigation;
             //Shippings = new List<Shipping>();
             VehiclwInformation vehiclwInformation = new VehiclwInformation();
             //vehiclwInformation.Year = "1992";
@@ -34,6 +36,7 @@ namespace MDispatch.ViewModels.TAbbMV
             //Shippings.Add(shipping);
             //Shippings.Add(shipping);
             this.managerDispatchMob = managerDispatchMob;
+            RefreshCommand = new DelegateCommand(Init);
             Init();
         }
 
@@ -44,8 +47,16 @@ namespace MDispatch.ViewModels.TAbbMV
             set => SetProperty(ref shippings, value);
         }
 
+        private bool isRefr = false;
+        public bool IsRefr
+        {
+            get => isRefr;
+            set => SetProperty(ref isRefr, value);
+        } 
+        
         public async void Init()
         {
+            IsRefr = true;
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
@@ -70,6 +81,7 @@ namespace MDispatch.ViewModels.TAbbMV
             {
                 //FeedBack = "Technical work on the service";
             }
+            IsRefr = false;
         }
     }
 }

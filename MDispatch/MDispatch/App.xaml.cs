@@ -1,14 +1,13 @@
 using MDispatch.View.A_R;
 using MDispatch.View.TabPage;
 using Plugin.Settings;
-using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-[assembly: XamlCompilation (XamlCompilationOptions.Compile)]
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MDispatch
 {
-	public partial class App : Application
+    public partial class App : Application
 	{
 		public App ()
 		{
@@ -20,7 +19,7 @@ namespace MDispatch
             }
             else
             {
-                MainPage = new TabPage(new Service.ManagerDispatchMob());
+                MainPage = new NavigationPage(new TabPage(new Service.ManagerDispatchMob()));
             }
         }
 

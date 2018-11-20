@@ -24,6 +24,16 @@ namespace ApiMobaileServise.Servise
             return token;
         }
 
+        public void SavepikedUp(string idOrder, string name, string contactName, string address, string city, string state, string zip, string phone, string email)
+        {
+            sqlCommandApiMobile.SavePikedUpInDb(idOrder, name, contactName, address, city, state, zip, phone, email);
+        }
+
+        public bool CheckToken(string token)
+        {
+            return sqlCommandApiMobile.CheckToken(token);
+        }
+
         public bool GetOrdersForToken(string token, string status, ref List<Shipping> shippings)
         {
             bool isToken = sqlCommandApiMobile.CheckToken(token);
