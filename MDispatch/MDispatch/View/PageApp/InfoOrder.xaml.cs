@@ -23,5 +23,12 @@ namespace MDispatch.View.PageApp
         {
             listVehic.HeightRequest = 100 + Convert.ToInt32(infoOrderMV.Shipping.VehiclwInformations.Count * 135);
         }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Button button = ((Button)sender);
+            string id = button.FindByName<Label>("idL").Text;
+            infoOrderMV.ToPhotoFull(infoOrderMV.Shipping.VehiclwInformations.Find(v => v.Id == id));
+        }
     }
 }

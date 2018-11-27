@@ -3,22 +3,49 @@ using MDispatch.Service;
 using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MDispatch.ViewModels.PageAppMV
 {
-    public class EditPickedupMV : BindableBase
+    public class EditPaymentInfoMV : BindableBase
     {
         public ManagerDispatchMob managerDispatchMob = null;
-        public DelegateCommand SavePikedUpCommand { get; set; }
+        public DelegateCommand SavePaymentUpCommand { get; set; }
         public INavigation Navigationn { get; set; }
 
-        public EditPickedupMV(ManagerDispatchMob managerDispatchMob, Shipping shipping)
+        public EditPaymentInfoMV(ManagerDispatchMob managerDispatchMob, Shipping shipping)
         {
             this.managerDispatchMob = managerDispatchMob;
             Shipping = shipping;
-            SavePikedUpCommand = new DelegateCommand(SavePikedUp);
+            SavePaymentUpCommand = new DelegateCommand(SavePayments);
+            SorseDropDown = new string[]
+            {
+                "Other",
+                "COD",
+                "COP",
+                "QuickPay",
+                "Comcheck",
+                "5 days",
+                "7 days",
+                "10 days",
+                "15 days",
+                "20 days",
+                "30 days",
+                "45 days",
+                "CKOD",
+                "ACH"
+            };
+        }
+
+        private string[] sorseDropDown = null;
+        public string[] SorseDropDown
+        {
+            get => sorseDropDown;
+            set => SetProperty(ref sorseDropDown, value);
         }
 
         private Shipping shipping = null;
@@ -28,22 +55,14 @@ namespace MDispatch.ViewModels.PageAppMV
             set => SetProperty(ref shipping, value);
         }
 
-        //private string feedback = "";
-        //public string Feedback
-        //{
-        //    get => feedback;
-        //    set => SetProperty(ref feedback, value);
-        //}
-
-        private async void SavePikedUp()
+        private async void SavePayments()
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
             await Task.Run(() =>
             {
-                state = managerDispatchMob.OrderOneWork("Save", Shipping.Id, token, Shipping.idOrder, Shipping.NameP, Shipping.ContactNameP, Shipping.AddresP, 
-                    Shipping.CityP, Shipping.StateP, Shipping.ZipP, Shipping.PhoneP, Shipping.EmailP, "PikedUp", ref description);
+                state = managerDispatchMob.OrderOneWork("Save", Shipping.Id, token, "Payment", Shipping.PriceListed, Shipping.OnDeliveryToCarrier, ref description);
             });
             await Navigationn.PopAsync(true);
             if (state == 1)
@@ -56,7 +75,7 @@ namespace MDispatch.ViewModels.PageAppMV
             }
             else if (state == 3)
             {
-                
+
                 //Feedback = "";
             }
             else if (state == 4)

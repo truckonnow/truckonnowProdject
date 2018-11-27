@@ -28,11 +28,12 @@ namespace ApiMobaileServise.Servise
             return context.Drivers.FirstOrDefault(d => d.EmailAddress == email && d.Password == password) != null ? true : false;
         }
 
-        public async void SavePikedUpInDb(string idOrder, string name, string contactName, string address, string city, string state, string zip, string phone, string email)
+        public async void SavePikedUpInDb(string id, string idOrder, string name, string contactName, string address, string city, string state, string zip, string phone, string email)
         {
-            Shipping shipping = context.Shipping.FirstOrDefault(s => s.Id == idOrder);
+            Shipping shipping = context.Shipping.FirstOrDefault(s => s.Id == id);
             if(shipping != null)
             {
+                shipping.idOrder = idOrder;
                 shipping.NameP = name;
                 shipping.ContactNameP = contactName;
                 shipping.AddresP = address;
@@ -41,6 +42,35 @@ namespace ApiMobaileServise.Servise
                 shipping.ZipP = zip;
                 shipping.PhoneP = phone;
                 shipping.EmailP = email;
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public async void SaveDeliveryInDb(string id, string idOrder, string name, string contactName, string address, string city, string state, string zip, string phone, string email)
+        {
+            Shipping shipping = context.Shipping.FirstOrDefault(s => s.Id == id);
+            if (shipping != null)
+            {
+                shipping.idOrder = idOrder;
+                shipping.NameD = name;
+                shipping.ContactNameD = contactName;
+                shipping.AddresD = address;
+                shipping.CityD = city;
+                shipping.StateD = state;
+                shipping.ZipD = zip;
+                shipping.PhoneD = phone;
+                shipping.EmailD = email;
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public async void SavePaymentsInDb(string id, string payment, string paymentTeams)
+        {
+            Shipping shipping = context.Shipping.FirstOrDefault(s => s.Id == id);
+            if (shipping != null)
+            {
+                shipping.PriceListed = payment;
+                shipping.OnDeliveryToCarrier = paymentTeams;
                 await context.SaveChangesAsync();
             }
         }

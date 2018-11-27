@@ -40,15 +40,31 @@ namespace MDispatch.Service
         }
 
 
-        public int OrderOneWork(string typeOrder, string token, string idOrder, string name, string contactName, string address, string city, string state, string zip, string phone, string email, ref string description)
+        public int OrderOneWork(string typeOrder, string id, string token, string idOrder, string name, string contactName, string address,
+            string city, string state, string zip, string phone, string email, string typeSave, ref string description)
         {
             orderGet = new OrderGet();
             int stateOrder = 1;
             if (CrossConnectivity.Current.IsConnected)
             {
-                if (typeOrder == "SavePikedUp")
+                if (typeOrder == "Save")
                 {
-                    stateOrder = orderGet.SavePikedUp(token, idOrder, name, contactName, address, city, state, zip, phone, email, ref description);
+                    stateOrder = orderGet.Save(token, id, idOrder, name, contactName, address, city, state, zip, phone, email, typeSave, ref description);
+                }
+            }
+            orderGet = null;
+            return stateOrder;
+        }
+
+        public int OrderOneWork(string typeOrder, string id, string token, string typeSave, string payment, string paymentTeams, ref string description)
+        {
+            orderGet = new OrderGet();
+            int stateOrder = 1;
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                if (typeOrder == "Save")
+                {
+                    stateOrder = orderGet.Save(token, id, typeSave, payment, paymentTeams, ref description);
                 }
             }
             orderGet = null;

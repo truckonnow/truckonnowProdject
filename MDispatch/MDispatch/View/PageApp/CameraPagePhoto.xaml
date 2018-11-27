@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<camera:CameraPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDispatch.View.PageApp.CameraPagePhoto"
+             xmlns:camera="clr-namespace:MDispatch.NewElement"
+                   Title="MDispatch" OnPhotoResult="CameraPage_OnPhotoResult">
+    <ContentPage.Content>
+        <StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</camera:CameraPage>

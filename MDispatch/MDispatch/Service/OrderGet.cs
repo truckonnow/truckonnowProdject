@@ -38,17 +38,19 @@ namespace MDispatch.Service
             }
         }
 
-        public int SavePikedUp(string token, string idOrder, string name, string contactName, string address, string city, string state, string zip, string phone, string email, ref string description)
+        public int Save(string token, string id, string idOrder, string name, string contactName, string address, 
+            string city, string state, string zip, string phone, string email, string typeSave, ref string description)
         {
             IRestResponse response = null;
             string content = null;
             try
             {
-                RestClient client = new RestClient("http://192.168.0.103:8888");
-                RestRequest request = new RestRequest("Mobile/SavePikedUp", Method.POST);
+                RestClient client = new RestClient("http://192.168.0.102:8888");
+                RestRequest request = new RestRequest("Mobile/SaveOrder", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
                 request.AddParameter("token", token);
+                request.AddParameter("id", id);
                 request.AddParameter("idOrder", idOrder);
                 request.AddParameter("name", name);
                 request.AddParameter("contactName", contactName);
@@ -58,6 +60,39 @@ namespace MDispatch.Service
                 request.AddParameter("zip", zip);
                 request.AddParameter("phone", phone);
                 request.AddParameter("email", email);
+                request.AddParameter("typeSave", typeSave);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description);
+            }
+        }
+
+        public int Save(string token, string id, string typeSave, string payment, string paymentTeams, ref string description)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                RestClient client = new RestClient("http://192.168.0.102:8888");
+                RestRequest request = new RestRequest("Mobile/SaveOrder1", Method.POST);
+                request.AddHeader("Accept", "application/json");
+                request.Parameters.Clear();
+                request.AddParameter("token", token);
+                request.AddParameter("id", id);
+                request.AddParameter("payment", payment);
+                request.AddParameter("paymentTeams", paymentTeams);
+                request.AddParameter("typeSave", typeSave);
                 response = client.Execute(request);
                 content = response.Content;
             }
@@ -112,7 +147,7 @@ namespace MDispatch.Service
             else
             {
                 description = responseAppS
-                    .Value<string>("description");
+                    .Value<string>("Description");
                 return 2;
             }
         }

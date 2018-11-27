@@ -24,9 +24,27 @@ namespace ApiMobaileServise.Servise
             return token;
         }
 
-        public void SavepikedUp(string idOrder, string name, string contactName, string address, string city, string state, string zip, string phone, string email)
+       
+
+        public void SavepOrder(string id, string idOrder, string name, string contactName, string address, 
+            string city, string state, string zip, string phone, string email, string typeSave)
         {
-            sqlCommandApiMobile.SavePikedUpInDb(idOrder, name, contactName, address, city, state, zip, phone, email);
+            if (typeSave == "PikedUp")
+            {
+                sqlCommandApiMobile.SavePikedUpInDb(id, idOrder, name, contactName, address, city, state, zip, phone, email);
+            }
+            else if(typeSave == "Delivery")
+            {
+                sqlCommandApiMobile.SaveDeliveryInDb(id, idOrder, name, contactName, address, city, state, zip, phone, email);
+            }
+        }
+
+        public void SavepOrder(string id, string typeSave, string payment, string paymentTeams)
+        {
+            if (typeSave == "Payment")
+            {
+                sqlCommandApiMobile.SavePaymentsInDb(id, payment, paymentTeams);
+            }
         }
 
         public bool CheckToken(string token)

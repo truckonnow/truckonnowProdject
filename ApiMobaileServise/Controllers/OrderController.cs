@@ -43,8 +43,9 @@ namespace ApiMobaileServise.Controllers
         }
 
         [HttpPost]
-        [Route("SavePikedUp")]
-        public string SavePikedUp(string token, string idOrder, string name, string contactName, string address, string city, string state, string zip, string phone, string email)
+        [Route("SaveOrder")]
+        public string Save(string token, string id, string idOrder, string name, string contactName, 
+            string address, string city, string state, string zip, string phone, string email, string typeSave)
         {
             string respons = null;
             try
@@ -52,7 +53,32 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = ManagerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    ManagerMobileApi.SavepikedUp(idOrder, name, contactName, address, city, state, zip, phone, email);
+                    ManagerMobileApi.SavepOrder(id, idOrder, name, contactName, address, city, state, zip, phone, email, typeSave);
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", ""));
+                }
+                else
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Token does not Valid", null));
+                }
+            }
+            catch (Exception)
+            {
+                respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
+            }
+            return respons;
+        }
+
+        [HttpPost]
+        [Route("SaveOrder1")]
+        public string Save(string token, string id, string typeSave, string payment, string paymentTeams)
+        {
+            string respons = null;
+            try
+            {
+                bool isToken = ManagerMobileApi.CheckToken(token);
+                if (isToken)
+                {
+                    ManagerMobileApi.SavepOrder(id, typeSave, payment, paymentTeams);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", ""));
                 }
                 else

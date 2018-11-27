@@ -8,9 +8,11 @@
     <PackageReference Include="LiveXAML" Version="2.1.45" />
     <PackageReference Include="Prism.Forms" Version="7.0.0.396" />
     <PackageReference Include="RestSharp" Version="106.5.4" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="1.1.4.168" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.Forms" Version="3.1.0.637273" />
+    <PackageReference Include="Xamarin.Forms.InputKit" Version="2.3.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,7 +25,19 @@
     <EmbeddedResource Update="View\A_R\Avtorization.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="View\PageApp\CameraPagePhoto.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\PageApp\DialogPage\EditPayment.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\PageApp\EditDeliveryInformation.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="View\PageApp\EditPicupInfo.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\PageApp\FullPagePhoto.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\PageApp\InfoOrder.xaml">
@@ -47,11 +61,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="NewElement\" />
     <Folder Include="Service\Settings\" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="View\PageApp\CameraPagePhoto.xaml.cs">
+      <DependentUpon>CameraPagePhoto.xaml</DependentUpon>
+    </Compile>
     <Compile Update="View\TabPage\Tab\ArchivedPage.xaml.cs">
       <DependentUpon>ArchivedPage.xaml</DependentUpon>
     </Compile>

@@ -53,7 +53,7 @@ namespace MDispatch.ViewModels
             int state = 3;
             await Task.Run(() =>
             {
-                state = managerDispatchMob.A_RWork("authorisation", Username, Password, ref description, ref token);
+                state = 3; //managerDispatchMob.A_RWork("authorisation", Username, Password, ref description, ref token);
             });
             if (state == 1)
             {

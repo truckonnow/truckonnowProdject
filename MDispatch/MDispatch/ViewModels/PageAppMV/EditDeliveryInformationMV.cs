@@ -3,22 +3,25 @@ using MDispatch.Service;
 using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MDispatch.ViewModels.PageAppMV
 {
-    public class EditPickedupMV : BindableBase
+    public class EditDeliveryInformationMV : BindableBase
     {
         public ManagerDispatchMob managerDispatchMob = null;
         public DelegateCommand SavePikedUpCommand { get; set; }
         public INavigation Navigationn { get; set; }
 
-        public EditPickedupMV(ManagerDispatchMob managerDispatchMob, Shipping shipping)
+        public EditDeliveryInformationMV(ManagerDispatchMob managerDispatchMob, Shipping shipping)
         {
             this.managerDispatchMob = managerDispatchMob;
             Shipping = shipping;
-            SavePikedUpCommand = new DelegateCommand(SavePikedUp);
+            SavePikedUpCommand = new DelegateCommand(SaveDelivery);
         }
 
         private Shipping shipping = null;
@@ -28,22 +31,15 @@ namespace MDispatch.ViewModels.PageAppMV
             set => SetProperty(ref shipping, value);
         }
 
-        //private string feedback = "";
-        //public string Feedback
-        //{
-        //    get => feedback;
-        //    set => SetProperty(ref feedback, value);
-        //}
-
-        private async void SavePikedUp()
+        private async void SaveDelivery()
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
             await Task.Run(() =>
             {
-                state = managerDispatchMob.OrderOneWork("Save", Shipping.Id, token, Shipping.idOrder, Shipping.NameP, Shipping.ContactNameP, Shipping.AddresP, 
-                    Shipping.CityP, Shipping.StateP, Shipping.ZipP, Shipping.PhoneP, Shipping.EmailP, "PikedUp", ref description);
+                state = managerDispatchMob.OrderOneWork("Save", Shipping.Id, token, Shipping.idOrder, Shipping.NameD, Shipping.ContactNameD, Shipping.AddresD,
+                    Shipping.CityD, Shipping.StateD, Shipping.ZipD, Shipping.PhoneD, Shipping.EmailD, "Delivery", ref description);
             });
             await Navigationn.PopAsync(true);
             if (state == 1)
@@ -56,7 +52,7 @@ namespace MDispatch.ViewModels.PageAppMV
             }
             else if (state == 3)
             {
-                
+
                 //Feedback = "";
             }
             else if (state == 4)
