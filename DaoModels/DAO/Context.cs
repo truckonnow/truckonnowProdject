@@ -9,7 +9,8 @@ namespace DaoModels.DAO
         public DbSet<Users> User { get; set; }
         public DbSet<VehiclwInformation> VehiclwInformation { get; set; }
         public DbSet<Driver> Drivers { get; set; }
-        
+        public DbSet<Photo> Photos { get; set; }
+
         public Context()
         {
             Database.EnsureCreated();

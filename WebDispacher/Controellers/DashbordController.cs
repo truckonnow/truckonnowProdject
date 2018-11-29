@@ -297,7 +297,7 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    ViewBag.Orders = managerDispatch.GetOrders("Pickedup", page);
+                    ViewBag.Orders = managerDispatch.GetOrders("Picked up", page);
                     ViewBag.Drivers = managerDispatch.GetDrivers(-1);
                     actionResult = View("Pickedup");
                 }

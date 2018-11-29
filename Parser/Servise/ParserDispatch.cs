@@ -79,7 +79,6 @@ namespace Parser.Servise
                 IHtmlDocument htmlDocument = htmlParser.Parse(sourse);
                 var element = htmlDocument.GetElementsByClassName("col-xs-12 col-sm-7 col-md-8")[0]
                     .GetElementsByTagName("p");
-
                 shipping.Id = element[0].TextContent.Remove(0, element[0].TextContent.IndexOf(": ") + 2);
                 shipping.idOrder = element[0].TextContent.Remove(0, element[0].TextContent.IndexOf(": ") + 2);
                 shipping.CurrentStatus = "NewLoad"; //element[1].TextContent.Remove(0, element[1].TextContent.IndexOf(": ") + 2);

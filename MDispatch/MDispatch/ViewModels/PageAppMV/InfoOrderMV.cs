@@ -64,7 +64,7 @@ namespace MDispatch.ViewModels.PageAppMV
 
         public async void ToPhotoFull(VehiclwInformation vehiclwInformation)
         {
-            await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, vehiclwInformation), true);
+            await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, vehiclwInformation, Shipping), true);
         }
     }
 }

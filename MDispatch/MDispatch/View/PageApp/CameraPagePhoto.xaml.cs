@@ -22,16 +22,10 @@ namespace MDispatch.View.PageApp
 
         private async void CameraPage_OnPhotoResult(PhotoResultEventArgs result)
         {
-            //string strm = "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
             await Navigation.PopAsync(true);
             if (!result.Success)
                 return;
-            //using (var imageFile = new FileStream(filepath, FileMode.Create))
-            //{
-            //    imageFile.Write(bytess, 0, bytess.Length);
-            //    imageFile.Flush();
-            //}
-
+            fullPagePhotoMV.SetPhoto(result.Image);
             fullPagePhotoMV.SourseImage = ImageSource.FromStream(() => new MemoryStream(result.Image));
         }
 

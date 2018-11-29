@@ -8,6 +8,7 @@ namespace MDispatch.Service
     {
         private A_R a_R = null;
         private OrderGet orderGet = null;
+        private Photo photo = null;
 
         public int A_RWork(string typeR_A, string login, string password, ref string description, ref string token)
         {
@@ -69,6 +70,21 @@ namespace MDispatch.Service
             }
             orderGet = null;
             return stateOrder;
+        }
+
+        public int PhotoWork(string typePhoto, string token, string id, byte[] PhotoInArrayByte, ref string description)
+        {
+            photo = new Photo();
+            int statePhoto = 1;
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                if (typePhoto == "SavePhoto")
+                {
+                    statePhoto = photo.SaveTakeNewPhoto(token, id, PhotoInArrayByte, ref description);
+                }
+            }
+            photo = null;
+            return statePhoto;
         }
     }
 }

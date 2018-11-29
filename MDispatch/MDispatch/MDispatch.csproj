@@ -61,10 +61,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Service\Settings\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="View\PageApp\CameraPagePhoto.xaml.cs">
       <DependentUpon>CameraPagePhoto.xaml</DependentUpon>
     </Compile>
@@ -74,5 +70,9 @@
     <Compile Update="View\TabPage\Tab\DeiveredPage.xaml.cs">
       <DependentUpon>DeiveredPage.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Service\Settings\" />
   </ItemGroup>
 </Project>

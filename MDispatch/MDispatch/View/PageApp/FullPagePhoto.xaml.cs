@@ -16,9 +16,9 @@ namespace MDispatch.View.PageApp
     public partial class FullPagePhoto : ContentPage
     {
         private FullPagePhotoMV fullPagePhotoMV = null;
-        public FullPagePhoto(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation)
+        public FullPagePhoto(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping)
         {
-            fullPagePhotoMV = new FullPagePhotoMV(managerDispatchMob, vehiclwInformation);
+            fullPagePhotoMV = new FullPagePhotoMV(managerDispatchMob, vehiclwInformation, shipping);
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = fullPagePhotoMV;

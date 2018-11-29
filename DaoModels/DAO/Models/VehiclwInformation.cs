@@ -16,5 +16,6 @@ namespace DaoModels.DAO.Models
         public string VIN { get; set; }
         public string Lot { get; set; }
         public string AdditionalInfo { get; set; }
+        public List<Photo> Photos { get; set; }
     }
 }

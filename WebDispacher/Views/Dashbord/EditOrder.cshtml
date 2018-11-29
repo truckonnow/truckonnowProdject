@@ -18,7 +18,7 @@
                 <select name="status" class="dropDown">
                     <option value="">------------------------------------</option>
                     <option value="NewLoad">NewLoad</option>
-                    <option value="Piked up">Piked up</option>
+                    <option value="Picked up">Picked up</option>
                     <option value="Delivered">Delivered</option>
                 </select>
                 <p class="inpLabe">Instructions</p>
@@ -108,7 +108,10 @@
             <div class="content">
                 <h2 style="color:#f3a74c;margin-bottom:2px;">Payment Information</h2>
                 <p class="inpLabe">Payment method</p>
-                <input name="paymentMethod" class="inpText" type="text" value="@ViewBag.Order.TotalPaymentToCarrier" />
+                <select name="paymentMethod" class="dropDown">
+                    <option value="">------------------------------------</option>
+                    <option value="NewLoad">NewLoad</option>
+                </select>
                 <p class="inpLabe">Price</p>
                 <input name="price" class="inpText" type="text" value="@ViewBag.Order.PriceListed" />
                 <p class="inpLabe">Broker Fee</p>

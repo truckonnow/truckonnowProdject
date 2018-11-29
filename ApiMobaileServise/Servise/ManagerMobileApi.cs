@@ -1,6 +1,7 @@
 ﻿using DaoModels.DAO.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace ApiMobaileServise.Servise
 {
@@ -11,6 +12,15 @@ namespace ApiMobaileServise.Servise
         public ManagerMobileApi()
         {
             sqlCommandApiMobile = new SqlCommandApiMobile();
+            CheckAndCreatedFolder();
+        }
+
+        private void CheckAndCreatedFolder()
+        {
+            if(!Directory.Exists("PhotoCars"))
+            {
+                Directory.CreateDirectory("PhotoCars");
+            }
         }
 
         public string Avtorization(string email, string password)
@@ -23,9 +33,7 @@ namespace ApiMobaileServise.Servise
             }
             return token;
         }
-
-       
-
+        
         public void SavepOrder(string id, string idOrder, string name, string contactName, string address, 
             string city, string state, string zip, string phone, string email, string typeSave)
         {
