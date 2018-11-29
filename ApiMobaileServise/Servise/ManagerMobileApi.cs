@@ -15,6 +15,16 @@ namespace ApiMobaileServise.Servise
             CheckAndCreatedFolder();
         }
 
+        public string GetNamePhoto(string id)
+        {
+            return sqlCommandApiMobile.GetNumberPhoto(id);
+        }
+
+        public void SavePhoto(string id, string path)
+        {
+            sqlCommandApiMobile.SavePhotoInDb(id, path);
+        }
+
         private void CheckAndCreatedFolder()
         {
             if(!Directory.Exists("PhotoCars"))

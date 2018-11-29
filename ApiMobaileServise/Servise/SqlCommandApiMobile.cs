@@ -1,6 +1,7 @@
 ﻿using DaoModels.DAO;
 using DaoModels.DAO.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,12 +21,41 @@ namespace ApiMobaileServise.Servise
             context.Shipping.Load();
             context.VehiclwInformation.Load();
             context.Drivers.Load();
+            context.Photos.Load();
         }
 
         public bool CheckEmailAndPsw(string email, string password)
         {
             Init();
             return context.Drivers.FirstOrDefault(d => d.EmailAddress == email && d.Password == password) != null ? true : false;
+        }
+
+        public string GetNumberPhoto(string id)
+        {
+            Init();
+            string lNumber = "";
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == id);
+            if(vehiclwInformation.Photos != null)
+            {
+                lNumber = vehiclwInformation.Photos.Count.ToString();
+                lNumber = (Convert.ToInt32(lNumber) + 1).ToString();
+            }
+            else
+            {
+                lNumber = "1";
+            }
+            return lNumber;
+        }
+    
+        public async void SavePhotoInDb(string id, string patch)
+        {
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == id);
+            if (vehiclwInformation.Photos == null)
+            {
+                vehiclwInformation.Photos = new List<Photo>();
+            }
+            vehiclwInformation.Photos.Add(new Photo() { path = patch });
+            await context.SaveChangesAsync();
         }
 
         public async void SavePikedUpInDb(string id, string idOrder, string name, string contactName, string address, string city, string state, string zip, string phone, string email)

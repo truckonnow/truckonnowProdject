@@ -47,7 +47,7 @@ namespace MDispatch.ViewModels.PageAppMV
             int state = 0;
             await Task.Run(() =>
             {
-                state = managerDispatchMob.PhotoWork("SavePhoto", token, Shipping.Id, PhotoInArrayByte, ref description);
+                state = managerDispatchMob.PhotoWork("SavePhoto", token, VehiclwInformation.Id, PhotoInArrayByte, ref description);
             });
             if (state == 1)
             {

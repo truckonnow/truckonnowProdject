@@ -29,7 +29,10 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = ManagerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    using (var imageFile = new FileStream("PhotoCars/img.png", FileMode.Create))
+                    string numberPhoto = ManagerMobileApi.GetNamePhoto(id);
+                    CreatePhotoFolderVehiclw("ForVehiclwInformation");
+                    ManagerMobileApi.SavePhoto(id, $"PhotoCars/ForVehiclwInformation/{id}{numberPhoto}.png");
+                    using (var imageFile = new FileStream($"PhotoCars/ForVehiclwInformation/{id}{numberPhoto}.png", FileMode.Create))
                     {
                         imageFile.Write(photoInArrayByte, 0, photoInArrayByte.Length);
                         imageFile.Flush();
@@ -46,6 +49,14 @@ namespace ApiMobaileServise.Controllers
                 respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
             }
             return respons;
+        }
+
+        private void CreatePhotoFolderVehiclw(string typePhotoCreate)
+        {
+            if (!Directory.Exists($"PhotoCars/{typePhotoCreate}"))
+            {
+                Directory.CreateDirectory($"PhotoCars/{typePhotoCreate}");
+            }
         }
 
     }
