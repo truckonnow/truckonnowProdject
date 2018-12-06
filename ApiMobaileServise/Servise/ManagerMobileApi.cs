@@ -20,6 +20,9 @@ namespace ApiMobaileServise.Servise
             return sqlCommandApiMobile.GetNumberPhoto(id);
         }
 
+        
+        
+
         public void SavePhoto(string id, string path)
         {
             sqlCommandApiMobile.SavePhotoInDb(id, path);

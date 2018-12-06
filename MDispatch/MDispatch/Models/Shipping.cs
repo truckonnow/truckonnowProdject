@@ -75,7 +75,75 @@ namespace MDispatch.Models
         public List<VehiclwInformation> VehiclwInformations { get; set; }
 
         ////////////////////////////////////////////////
-        
+
         public Driver Driverr { get; set; }
+
+        /////////////////////////////////////////////
+
+        public VehiclwInformation VehiclwInformation1
+        {
+            get
+            {
+                VehiclwInformation VehiclwInformation = null;
+                if (VehiclwInformations.Count > 0)
+                {
+                    VehiclwInformation = VehiclwInformations[0];
+                }
+                else
+                {
+                    VehiclwInformation = new VehiclwInformation();
+                }
+                return VehiclwInformation;
+            }
+        }
+        public VehiclwInformation VehiclwInformation2
+        {
+            get
+            {
+                VehiclwInformation VehiclwInformation = null;
+                if (VehiclwInformations.Count > 1)
+                {
+                    VehiclwInformation = VehiclwInformations[1];
+                }
+                else
+                {
+                    VehiclwInformation = new VehiclwInformation();
+                }
+                return VehiclwInformation;
+            }
+        }
+        public int CountVehiclw
+        {
+            get => VehiclwInformations.Count - 2;
+        }
+        public bool IsVehiclw1
+        {
+            get => VehiclwInformations[0] != null;
+        }
+        public bool IsVehiclw2
+        {
+            get
+            {
+                bool isVehiclw = false;
+                if(VehiclwInformations.Count > 1)
+                {
+                    isVehiclw = true;
+                }
+                return isVehiclw;
+            }
+        }
+        public bool IsVehiclw3
+        {
+            get
+            {
+                bool isVehiclw = false;
+                if (VehiclwInformations.Count > 2)
+                {
+                    isVehiclw = true;
+                }
+                return isVehiclw;
+            }
+        }
+
     }
 }

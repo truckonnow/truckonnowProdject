@@ -28,5 +28,10 @@ namespace MDispatch.View.PageApp
         {
             Navigation.PushAsync(new CameraPagePhoto(fullPagePhotoMV));
         }
+
+        private void MessagesListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            fullPagePhotoMV.SourseImage = (ImageSource)e.SelectedItem;
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace MDispatch.Models
+﻿using System.Collections.Generic;
+
+namespace MDispatch.Models
 {
     public class VehiclwInformation
     {
@@ -12,5 +14,6 @@
         public string VIN { get; set; }
         public string Lot { get; set; }
         public string AdditionalInfo { get; set; }
+        public List<Photo> Photos { get; set; }
     }
 }

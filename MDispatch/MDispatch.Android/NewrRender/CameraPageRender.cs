@@ -161,7 +161,6 @@ namespace MDispatch.Droid.NewrRender
             }
             else
             {
-
                 camera.SetDisplayOrientation(0);
                 camera.StartPreview();
             }
@@ -173,24 +172,21 @@ namespace MDispatch.Droid.NewrRender
         public void OnSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)
         {
             if (ContextCompat.CheckSelfPermission(Activity, Manifest.Permission.Camera) != Permission.Granted)
-                //ask for authorisation
+            {
                 ActivityCompat.RequestPermissions(Activity, new string[] { Manifest.Permission.Camera }, 50);
+                (Element as CameraPage).Cancel();
+            }
             else
             {
                 camera = Android.Hardware.Camera.Open();
                 var parameters = camera.GetParameters();
                 var aspect = ((decimal)height) / ((decimal)width);
-
-                // Find the preview aspect ratio that is closest to the surface aspect
                 var previewSize = parameters.SupportedPreviewSizes
                                             .OrderBy(s => Math.Abs(s.Width / (decimal)s.Height - aspect))
                                             .First();
-
                 System.Diagnostics.Debug.WriteLine($"Preview sizes: {parameters.SupportedPreviewSizes.Count}");
-
                 parameters.SetPreviewSize(previewSize.Width, previewSize.Height);
                 camera.SetParameters(parameters);
-
                 camera.SetPreviewTexture(surface);
                 StartCamera();
             }
@@ -213,7 +209,10 @@ namespace MDispatch.Droid.NewrRender
 
         public bool OnSurfaceTextureDestroyed(Android.Graphics.SurfaceTexture surface)
         {
-            StopCamera();
+            if (camera != null)
+            {
+                StopCamera();
+            }
             return true;
         }
 

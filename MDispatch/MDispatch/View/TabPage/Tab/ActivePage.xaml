@@ -27,10 +27,19 @@
                                                 <Label Text="{Binding idOrder}" FontSize="17"/>
                                                 <Label x:Name="idOrder" Text="{Binding Id}" IsVisible="False" FontSize="17"/>
                                             </StackLayout>
-                                            <StackLayout Orientation="Horizontal">
-                                                <Label Text="{Binding VehiclwInformations.Count}" FontSize="16" TextColor="Black"/>
-                                                <Label Text="vehicles" FontSize="16" TextColor="Black"/>
-                                            </StackLayout>
+                                            <FlexLayout Direction="Column">
+                                                <StackLayout Orientation="Horizontal" IsVisible="{Binding IsVehiclw1}">
+                                                    <Label Text="{Binding VehiclwInformation1.Year}"/>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal" IsVisible="{Binding IsVehiclw2}">
+                                                    <Label Text="{Binding VehiclwInformation2.Year}"/>
+                                                </StackLayout>
+                                                <FlexLayout IsVisible="{Binding IsVehiclw3}">
+                                                    <Label Text="ss"/>
+                                                    <Label Text="{Binding CountVehiclw}"/>
+                                                </FlexLayout>
+                                                
+                                            </FlexLayout>
                                             <StackLayout Orientation="Horizontal">
                                                 <Image Source="" WidthRequest="10"/>
                                                 <StackLayout>

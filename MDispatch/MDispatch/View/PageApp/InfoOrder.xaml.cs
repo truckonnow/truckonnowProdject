@@ -21,7 +21,7 @@ namespace MDispatch.View.PageApp
 
         private void StackLayout_SizeChanged(object sender, EventArgs e)
         {
-            listVehic.HeightRequest = 100 + Convert.ToInt32(infoOrderMV.Shipping.VehiclwInformations.Count * 135);
+            listVehic.HeightRequest = 80 + Convert.ToInt32(infoOrderMV.Shipping.VehiclwInformations.Count * 125);
         }
 
         private void Button_Clicked(object sender, EventArgs e)

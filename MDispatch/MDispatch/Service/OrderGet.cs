@@ -15,7 +15,7 @@ namespace MDispatch.Service
             string content = null;
             try
             {
-                RestClient client = new RestClient("http://192.168.0.103:8888");
+                RestClient client = new RestClient("http://192.168.0.101:8888");
                 RestRequest request = new RestRequest("Mobile/ActiveOreder", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
@@ -45,7 +45,7 @@ namespace MDispatch.Service
             string content = null;
             try
             {
-                RestClient client = new RestClient("http://192.168.0.102:8888");
+                RestClient client = new RestClient("http://192.168.0.101:8888");
                 RestRequest request = new RestRequest("Mobile/SaveOrder", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
@@ -84,7 +84,7 @@ namespace MDispatch.Service
             string content = null;
             try
             {
-                RestClient client = new RestClient("http://192.168.0.102:8888");
+                RestClient client = new RestClient("http://192.168.0.101:8888");
                 RestRequest request = new RestRequest("Mobile/SaveOrder1", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();

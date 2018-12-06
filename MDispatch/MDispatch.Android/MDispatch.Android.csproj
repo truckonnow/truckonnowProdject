@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="DLToolkit.Forms.Controls.FlowListView">
+      <Version>2.0.11</Version>
+    </PackageReference>
     <PackageReference Include="LiveXAML">
       <Version>2.1.45</Version>
     </PackageReference>
@@ -72,7 +75,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
-    <Compile Include="NewelemenDroid.cs" />
     <Compile Include="NewrRender\CameraPageRender.cs" />
     <Compile Include="NewrRender\NewElementXamarin.Forms\PaintCodeButton.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

@@ -46,7 +46,7 @@ namespace ApiMobaileServise.Servise
             }
             return lNumber;
         }
-    
+
         public async void SavePhotoInDb(string id, string patch)
         {
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == id);

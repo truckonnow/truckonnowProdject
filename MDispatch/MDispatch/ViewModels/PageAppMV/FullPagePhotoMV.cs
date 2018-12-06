@@ -2,6 +2,9 @@
 using MDispatch.Service;
 using Plugin.Settings;
 using Prism.Mvvm;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -16,7 +19,7 @@ namespace MDispatch.ViewModels.PageAppMV
         {
             this.managerDispatchMob = managerDispatchMob;
             VehiclwInformation = vehiclwInformation;
-            Shipping = shipping;
+            InitPhoto(VehiclwInformation.Photos);
         }
         
         private VehiclwInformation vehiclwInformation = null;
@@ -26,18 +29,44 @@ namespace MDispatch.ViewModels.PageAppMV
             set => SetProperty(ref vehiclwInformation, value);
         }
 
-        private Shipping shipping = null;
-        public Shipping Shipping
-        {
-            get => shipping;
-            set => SetProperty(ref shipping, value);
-        }
-
         private ImageSource sourseImage = null;
         public ImageSource SourseImage
         {
             get => sourseImage;
             set => SetProperty(ref sourseImage, value);
+        }
+
+        private List<ImageSource> allSourseImage = null;
+        public List<ImageSource> AllSourseImage
+        {
+            get => allSourseImage;
+            set => SetProperty(ref allSourseImage, value);
+        }
+
+        private void InitPhoto(List<Models.Photo> photos)
+        {
+            if (photos != null)
+            {
+                List<ImageSource> allSourseImage1 = new List<ImageSource>();
+                AllSourseImage = new List<ImageSource>();
+                foreach (var photo in photos)
+                {
+                    allSourseImage1.Add(ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(photo.Base64))));
+                }
+                AllSourseImage = allSourseImage1;
+                SourseImage = AllSourseImage[0];
+            }
+        }
+
+        public void AddNewFotoSourse(byte[] imageSorseByte)
+        {
+            if(AllSourseImage == null)
+            {
+                AllSourseImage = new List<ImageSource>();
+            }
+            List<ImageSource> imageSources1 = new List<ImageSource>(AllSourseImage);
+            imageSources1.Add(ImageSource.FromStream(() => new MemoryStream(imageSorseByte)));
+            AllSourseImage = imageSources1;
         }
 
         public async void SetPhoto(byte[] PhotoInArrayByte)

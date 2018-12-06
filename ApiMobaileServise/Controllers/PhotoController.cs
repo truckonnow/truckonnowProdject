@@ -1,8 +1,10 @@
 ﻿using ApiMobaileServise.Models;
 using ApiMobaileServise.Servise;
+using DaoModels.DAO.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
@@ -30,9 +32,9 @@ namespace ApiMobaileServise.Controllers
                 if (isToken)
                 {
                     string numberPhoto = ManagerMobileApi.GetNamePhoto(id);
-                    CreatePhotoFolderVehiclw("ForVehiclwInformation");
-                    ManagerMobileApi.SavePhoto(id, $"PhotoCars/ForVehiclwInformation/{id}{numberPhoto}.png");
-                    using (var imageFile = new FileStream($"PhotoCars/ForVehiclwInformation/{id}{numberPhoto}.png", FileMode.Create))
+                    CreatePhotoFolderVehiclw("ForVehiclwInformation", id);
+                    ManagerMobileApi.SavePhoto(id, $"PhotoCars/ForVehiclwInformation/{id}/{id}_{numberPhoto}.png");
+                    using (var imageFile = new FileStream($"PhotoCars/ForVehiclwInformation/{id}/{id}_{numberPhoto}.png", FileMode.Create))
                     {
                         imageFile.Write(photoInArrayByte, 0, photoInArrayByte.Length);
                         imageFile.Flush();
@@ -51,11 +53,14 @@ namespace ApiMobaileServise.Controllers
             return respons;
         }
 
-        private void CreatePhotoFolderVehiclw(string typePhotoCreate)
+        
+
+
+        private void CreatePhotoFolderVehiclw(string typePhotoCreate, string idVehiclw)
         {
-            if (!Directory.Exists($"PhotoCars/{typePhotoCreate}"))
+            if (!Directory.Exists($"PhotoCars/{typePhotoCreate}/{idVehiclw}"))
             {
-                Directory.CreateDirectory($"PhotoCars/{typePhotoCreate}");
+                Directory.CreateDirectory($"PhotoCars/{typePhotoCreate}/{idVehiclw}");
             }
         }
 
