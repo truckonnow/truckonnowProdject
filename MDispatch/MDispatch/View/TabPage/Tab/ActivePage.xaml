@@ -30,15 +30,18 @@
                                             <FlexLayout Direction="Column">
                                                 <StackLayout Orientation="Horizontal" IsVisible="{Binding IsVehiclw1}">
                                                     <Label Text="{Binding VehiclwInformation1.Year}"/>
+                                                    <Label Text="{Binding VehiclwInformation1.Make}"/>
+                                                    <Label Text="{Binding VehiclwInformation1.Model}"/>
                                                 </StackLayout>
                                                 <StackLayout Orientation="Horizontal" IsVisible="{Binding IsVehiclw2}">
                                                     <Label Text="{Binding VehiclwInformation2.Year}"/>
+                                                    <Label Text="{Binding VehiclwInformation2.Make}"/>
+                                                    <Label Text="{Binding VehiclwInformation2.Model}"/>
                                                 </StackLayout>
-                                                <FlexLayout IsVisible="{Binding IsVehiclw3}">
-                                                    <Label Text="ss"/>
+                                                <StackLayout IsVisible="{Binding IsVehiclw3}" Orientation="Horizontal">
+                                                    <Label Text="And further"/>
                                                     <Label Text="{Binding CountVehiclw}"/>
-                                                </FlexLayout>
-                                                
+                                                </StackLayout>
                                             </FlexLayout>
                                             <StackLayout Orientation="Horizontal">
                                                 <Image Source="" WidthRequest="10"/>

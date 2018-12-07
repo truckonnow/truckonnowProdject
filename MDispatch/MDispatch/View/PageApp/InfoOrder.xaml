@@ -29,7 +29,9 @@
                                                 <Label Text="VIN#:" FontSize="18"/>
                                                 <Label Text="{Binding VIN}" FontSize="18"/>
                                             </StackLayout>
-                                            <Button Text="Change"  BackgroundColor="BlueViolet" FontSize="12" TextColor="White" Margin="5" WidthRequest="100"/>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Button Text="Change Vehiclw"  BackgroundColor="BlueViolet" FontSize="12" TextColor="White" Clicked="Button_Clicked_1"/>
+                                            </StackLayout>
                                         </StackLayout>
                                     </ViewCell.View>
                                 </ViewCell>
@@ -111,7 +113,7 @@
                     <Button Text="Tap to instructions" BackgroundColor="BlueViolet" FontSize="12" Margin="5"
                         TextColor="White" Command="{Binding ToInstructionComand}"/>
                     <Button Text="start vehicle inspection" BackgroundColor="BlueViolet" FontSize="12" Margin="5"
-                        TextColor="White"/>
+                        TextColor="White" Clicked="Button_Clicked_2"/>
                 </FlexLayout>
             </StackLayout>
         </ScrollView>

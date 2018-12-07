@@ -12,7 +12,7 @@ namespace MDispatch.Service
             string content = null;
             try
             {
-                RestClient client = new RestClient("http://192.168.0.101:8888/");
+                RestClient client = new RestClient("http://192.168.0.103:8888/");
                 RestRequest request = new RestRequest("Mobile/Avtorization", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();

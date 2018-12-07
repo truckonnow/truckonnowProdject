@@ -30,5 +30,17 @@ namespace MDispatch.View.PageApp
             string id = button.FindByName<Label>("idL").Text;
             infoOrderMV.ToPhotoFull(infoOrderMV.Shipping.VehiclwInformations.Find(v => v.Id == id));
         }
+
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+            Button button = ((Button)sender);
+            string id = button.FindByName<Label>("idL").Text;
+            infoOrderMV.ToVehicleDetails(infoOrderMV.Shipping.VehiclwInformations.Find(v => v.Id == id));
+        }
+
+        private void Button_Clicked_2(object sender, EventArgs e)
+        {
+            infoOrderMV.ToStartInspection();
+        }
     }
 }

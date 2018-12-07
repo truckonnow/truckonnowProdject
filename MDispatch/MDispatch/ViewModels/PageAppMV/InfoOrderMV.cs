@@ -1,5 +1,6 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
+using MDispatch.View.AskPhoto;
 using MDispatch.View.PageApp;
 using MDispatch.View.PageApp.DialogPage;
 using Prism.Commands;
@@ -62,9 +63,19 @@ namespace MDispatch.ViewModels.PageAppMV
             await PopupNavigation.PushAsync(new EditPayment(managerDispatchMob, Shipping), true);
         }
 
+        public async void ToVehicleDetails(VehiclwInformation vehiclwInformation)
+        {
+            await Navigation.PushAsync(new VechicleDetails(vehiclwInformation, managerDispatchMob));
+        }
+
         public async void ToPhotoFull(VehiclwInformation vehiclwInformation)
         {
             await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, vehiclwInformation, Shipping), true);
+        }
+
+        public async void ToStartInspection()
+        {
+            await Navigation.PushAsync(new AskPage(managerDispatchMob), true);
         }
     }
 }
