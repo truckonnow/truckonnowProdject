@@ -16,7 +16,7 @@ namespace DaoModels.DAO.Models
             {
                 string tmpJson = JsonConvert.SerializeObject(File.ReadAllBytes(path));
                 tmpJson = tmpJson.Replace("\"", "");
-                return tmpJson;
+                return "";
             }
         }
     }

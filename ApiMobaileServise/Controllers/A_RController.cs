@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using ApiMobaileServise.Models;
+﻿using ApiMobaileServise.Models;
 using ApiMobaileServise.Servise;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -9,7 +8,7 @@ namespace ApiMobaileServise.Controllers
     [Route("Mobile")]
     public class A_RController : Controller
     {
-        ManagerMobileApi managerMobileApi = null;
+        ManagerMobileApi managerMobileApi = new ManagerMobileApi();
 
         [HttpPost]
         [Route("Avtorization")]
@@ -19,7 +18,6 @@ namespace ApiMobaileServise.Controllers
             string respons = null;
             if ((email != "" || email != null) && (password != "" || password != null))
             {
-                managerMobileApi = new ManagerMobileApi();
                 token = managerMobileApi.Avtorization(email, password);
                 if (token != null && token != "")
                 {

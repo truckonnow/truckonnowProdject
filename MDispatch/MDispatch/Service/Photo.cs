@@ -7,7 +7,7 @@ using System.Text;
 
 namespace MDispatch.Service
 {
-    public  class Photo
+    public class Photo
     {
         public int SaveTakeNewPhoto(string token, string id, byte[] PhotoInArrayByte, ref string description)
         {

@@ -35,18 +35,6 @@ namespace DaoModels.DAO.Models
         public string FaxC { get; set; }
         public string IccmcC { get; set; }
 
-        /////////////////////////VEHICLE INFORMATION
-
-        public string YearV { get; set; }
-        public string MakeV { get; set; }
-        public string ModelV { get; set; }
-        public string TypeV { get; set; }
-        public string ColorV { get; set; }
-        public string PlateV { get; set; }
-        public string VIN_V { get; set; }
-        public string LotV { get; set; }
-        public string AdditionalInfoV { get; set; }
-
         /////////////////////////PICKUP INFORMATION
 
         public string NameP { get; set; }
