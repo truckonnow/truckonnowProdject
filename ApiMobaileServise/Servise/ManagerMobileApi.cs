@@ -1,4 +1,5 @@
 ﻿using DaoModels.DAO.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,7 +22,14 @@ namespace ApiMobaileServise.Servise
         }
 
         
-        
+        public void SaveAsk(string idVe, int type, string jsonStrAsk)
+        {
+            Ask ask = JsonConvert.DeserializeObject<Ask>(jsonStrAsk);
+            if(type == 1)
+            {
+                sqlCommandApiMobile.SaveAskInDb(idVe, ask);
+            }
+        }
 
         public void SavePhoto(string id, string path)
         {

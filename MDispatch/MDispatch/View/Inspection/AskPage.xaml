@@ -91,7 +91,7 @@
                     <StackLayout>
                         <Label Text="Plate #" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <input:Dropdown Placeholder="Select type plate" BorderColor="#65CAE1" SelectedItemChanged="Dropdown_SelectedItemChanged" CornerRadius="6"/>
+                        <input:Dropdown Placeholder="Select type plate" BorderColor="#4fd2c2" SelectedItemChanged="Dropdown_SelectedItemChanged" CornerRadius="6"/>
                     </StackLayout>
                 </Frame>
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock10">
@@ -131,7 +131,7 @@
                     <StackLayout>
                         <Label Text="Type car" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <input:Dropdown CornerRadius="6" BorderColor="#65CAE1" Placeholder="Select type car" SelectedItemChanged="Dropdown_SelectedItemChanged_1"/>
+                        <input:Dropdown CornerRadius="6" BorderColor="#4fd2c2" Placeholder="Select type car" SelectedItemChanged="Dropdown_SelectedItemChanged_1"/>
                     </StackLayout>
                 </Frame>
             </StackLayout>

@@ -23,13 +23,13 @@
                  Margin="5">
         <Frame CornerRadius="1" Padding="15" Margin="4">
             <StackLayout>
-                <Label TextColor="#65CAE1" Text="Payment Information" FontSize="20"/>
+                <Label TextColor="#4fd2c2" Text="Payment Information" FontSize="20"/>
                 <Label x:Name="lAmount" Text="Amount" TextColor="#b8babb" Margin="4,0,0,0" FontSize="16" VerticalTextAlignment="Start"/>
-                <Entry TextColor="#65CAE1" HeightRequest="40" FontSize="16" Text="{Binding Shipping.PriceListed}" TextChanged="Entry_TextChanged"/>
-                <input:Dropdown Title="Payment teams"  ItemsSource="{Binding SorseDropDown}" SelectedItem="{Binding Shipping.OnDeliveryToCarrier}" BorderColor="#65CAE1"/>
+                <Entry TextColor="#4fd2c2" HeightRequest="40" FontSize="16" Text="{Binding Shipping.PriceListed}" TextChanged="Entry_TextChanged"/>
+                <input:Dropdown Title="Payment teams"  ItemsSource="{Binding SorseDropDown}" SelectedItem="{Binding Shipping.OnDeliveryToCarrier}" BorderColor="#4fd2c2"/>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="End">
-                    <Button Text="Close" BackgroundColor="White" TextColor="Blue" WidthRequest="70" Clicked="Button_Clicked"/>
-                    <Button Text="Save" BackgroundColor="White" TextColor="Blue" WidthRequest="60" Command="{Binding SavePaymentUpCommand}"/>
+                    <Button Text="Close" BackgroundColor="White" TextColor="#4fd2c2" WidthRequest="70" Clicked="Button_Clicked"/>
+                    <Button Text="Save" BackgroundColor="White" TextColor="#4fd2c2" WidthRequest="60" Command="{Binding SavePaymentUpCommand}"/>
                 </StackLayout>
             </StackLayout>
         </Frame>

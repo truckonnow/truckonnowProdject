@@ -19,7 +19,7 @@ namespace MDispatch.ViewModels.PageAppMV
         {
             this.managerDispatchMob = managerDispatchMob;
             VehiclwInformation = vehiclwInformation;
-            InitPhoto(VehiclwInformation.Photos);
+            //(VehiclwInformation.Photos);
         }
         
         private VehiclwInformation vehiclwInformation = null;
@@ -43,20 +43,20 @@ namespace MDispatch.ViewModels.PageAppMV
             set => SetProperty(ref allSourseImage, value);
         }
 
-        private void InitPhoto(List<Models.Photo> photos)
-        {
-            if (photos != null)
-            {
-                List<ImageSource> allSourseImage1 = new List<ImageSource>();
-                AllSourseImage = new List<ImageSource>();
-                foreach (var photo in photos)
-                {
-                    allSourseImage1.Add(ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(photo.Base64))));
-                }
-                AllSourseImage = allSourseImage1;
-                SourseImage = AllSourseImage[0];
-            }
-        }
+        //private void InitPhoto(List<Models.Photo> photos)
+        //{
+        //    if (photos != null)
+        //    {
+        //        List<ImageSource> allSourseImage1 = new List<ImageSource>();
+        //        AllSourseImage = new List<ImageSource>();
+        //        foreach (var photo in photos)
+        //        {
+        //            allSourseImage1.Add(ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(photo.Base64))));
+        //        }
+        //        AllSourseImage = allSourseImage1;
+        //        SourseImage = AllSourseImage[0];
+        //    }
+        //}
 
         public void AddNewFotoSourse(byte[] imageSorseByte)
         {
@@ -76,7 +76,7 @@ namespace MDispatch.ViewModels.PageAppMV
             int state = 0;
             await Task.Run(() =>
             {
-                state = managerDispatchMob.PhotoWork("SavePhoto", token, VehiclwInformation.Id, PhotoInArrayByte, ref description);
+                //state = managerDispatchMob.PhotoWork("SavePhoto", token, VehiclwInformation.Id, PhotoInArrayByte, ref description);
             });
             if (state == 1)
             {

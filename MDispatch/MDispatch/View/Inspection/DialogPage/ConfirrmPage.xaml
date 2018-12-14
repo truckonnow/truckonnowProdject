@@ -25,8 +25,8 @@
             <StackLayout>
                 <input:Dropdown x:Name="dropDwnCar" BorderColor="#65CAE1" Placeholder="Select Car" SelectedItemChanged="DropDwnCar_SelectedItemChanged"/>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="End">
-                    <Button Text="Close" BackgroundColor="White" TextColor="Blue" WidthRequest="70" Clicked="Button_Clicked" />
-                    <Button Text="Сonfirm" BackgroundColor="White" TextColor="Blue" WidthRequest="60" Clicked="Button_Clicked_1" />
+                    <Button Text="Close" BackgroundColor="White" TextColor="#4fd2c2" WidthRequest="70" Clicked="Button_Clicked" />
+                    <Button Text="Сonfirm" BackgroundColor="White" TextColor="#4fd2c2" WidthRequest="60" Clicked="Button_Clicked_1" />
                 </StackLayout>
             </StackLayout>
         </Frame>

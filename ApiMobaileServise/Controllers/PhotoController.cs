@@ -21,7 +21,6 @@ namespace ApiMobaileServise.Controllers
         public string SavePhoto(string token, string id, string photoJson)
         {
             string respons = null;
-            byte[] photoInArrayByte = JsonConvert.DeserializeObject<byte[]>(photoJson);
             if (token == null || token == "")
             {
                 return JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
@@ -32,13 +31,6 @@ namespace ApiMobaileServise.Controllers
                 if (isToken)
                 {
                     string numberPhoto = ManagerMobileApi.GetNamePhoto(id);
-                    CreatePhotoFolderVehiclw("ForVehiclwInformation", id);
-                    ManagerMobileApi.SavePhoto(id, $"PhotoCars/ForVehiclwInformation/{id}/{id}_{numberPhoto}.png");
-                    using (var imageFile = new FileStream($"PhotoCars/ForVehiclwInformation/{id}/{id}_{numberPhoto}.png", FileMode.Create))
-                    {
-                        imageFile.Write(photoInArrayByte, 0, photoInArrayByte.Length);
-                        imageFile.Flush();
-                    }
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else

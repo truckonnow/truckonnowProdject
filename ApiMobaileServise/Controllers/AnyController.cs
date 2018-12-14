@@ -1,6 +1,7 @@
 ﻿using System;
 using ApiMobaileServise.Models;
 using ApiMobaileServise.Servise;
+using DaoModels.DAO.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -25,7 +26,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-
+                    managerMobileApi.SaveAsk(idVe, type, jsonStrAsk);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else

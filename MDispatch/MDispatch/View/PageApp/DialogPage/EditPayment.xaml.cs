@@ -32,7 +32,7 @@ namespace MDispatch.View.PageApp.DialogPage
             else
             {
                 await lAmount.TranslateTo(0, 8, 0);
-                lAmount.TextColor = Color.FromHex("#65CAE1");
+                lAmount.TextColor = Color.FromHex("#131313");
             }
         }
 
@@ -44,7 +44,7 @@ namespace MDispatch.View.PageApp.DialogPage
                     lAmount.TranslateTo(0, 8, 150),
                     lAmount.FadeTo(1, 150)
                     );
-                lAmount.TextColor = Color.FromHex("#65CAE1");
+                lAmount.TextColor = Color.FromHex("#131313");
             }
             else
             {

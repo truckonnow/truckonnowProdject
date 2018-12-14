@@ -30,7 +30,7 @@ namespace MDispatch.View.PageApp
             else
             {
                 await lLoadId.TranslateTo(0, 8, 0);
-                lLoadId.TextColor = Color.FromHex("#65CAE1");
+                lLoadId.TextColor = Color.FromHex("#131313");
             }
             if (shipping.NameP == null || shipping.NameP == "")
             {
@@ -40,7 +40,7 @@ namespace MDispatch.View.PageApp
             else
             {
                 await lName.TranslateTo(0, 8, 0);
-                lName.TextColor = Color.FromHex("#65CAE1");
+                lName.TextColor = Color.FromHex("#131313");
             }
             if (shipping.ContactNameP == null || shipping.ContactNameP == "")
             {
@@ -50,7 +50,7 @@ namespace MDispatch.View.PageApp
             else
             {
                 await lCName.TranslateTo(0, 8, 0);
-                lCName.TextColor = Color.FromHex("#65CAE1");
+                lCName.TextColor = Color.FromHex("#131313");
             }
             if (shipping.AddresP == null || shipping.AddresP == "")
             {
@@ -60,7 +60,7 @@ namespace MDispatch.View.PageApp
             else
             {
                 await lAddress.TranslateTo(0, 8, 0);
-                lAddress.TextColor = Color.FromHex("#65CAE1");
+                lAddress.TextColor = Color.FromHex("#131313");
             }
             if (shipping.CityP == null || shipping.CityP == "")
             {
@@ -70,7 +70,7 @@ namespace MDispatch.View.PageApp
             else
             {
                 await lCity.TranslateTo(0, 8, 0);
-                lCity.TextColor = Color.FromHex("#65CAE1");
+                lCity.TextColor = Color.FromHex("#131313");
             }
             if (shipping.StateP == null || shipping.StateP == "")
             {
@@ -80,7 +80,7 @@ namespace MDispatch.View.PageApp
             else
             {
                 await lState.TranslateTo(0, 8, 0);
-                lState.TextColor = Color.FromHex("#65CAE1");
+                lState.TextColor = Color.FromHex("#131313");
             }
             if (shipping.ZipP == null || shipping.ZipP == "")
             {
@@ -90,7 +90,7 @@ namespace MDispatch.View.PageApp
             else
             {
                 await lZip.TranslateTo(0, 8, 0);
-                lZip.TextColor = Color.FromHex("#65CAE1");
+                lZip.TextColor = Color.FromHex("#131313");
             }
             if (shipping.PhoneP == null || shipping.PhoneP == "")
             {
@@ -100,7 +100,7 @@ namespace MDispatch.View.PageApp
             else
             {
                 await lPhone.TranslateTo(0, 8, 0);
-                lPhone.TextColor = Color.FromHex("#65CAE1");
+                lPhone.TextColor = Color.FromHex("#131313");
             }
             if (shipping.EmailP == null || shipping.EmailP == "")
             {
@@ -110,7 +110,7 @@ namespace MDispatch.View.PageApp
             else
             {
                 await lEmail.TranslateTo(0, 8, 0);
-                lEmail.TextColor = Color.FromHex("#65CAE1");
+                lEmail.TextColor = Color.FromHex("#131313");
             }
         }
 
@@ -122,7 +122,7 @@ namespace MDispatch.View.PageApp
                     lLoadId.TranslateTo(0, 8, 150),
                     lLoadId.FadeTo(1, 150)
                     );
-                lLoadId.TextColor = Color.FromHex("#65CAE1");
+                lLoadId.TextColor = Color.FromHex("#131313");
             }
             else
             {
@@ -142,7 +142,7 @@ namespace MDispatch.View.PageApp
                     lName.TranslateTo(0, 8, 150),
                     lName.FadeTo(1, 150)
                     );
-                lName.TextColor = Color.FromHex("#65CAE1");
+                lName.TextColor = Color.FromHex("#131313");
             }
             else
             {
@@ -162,7 +162,7 @@ namespace MDispatch.View.PageApp
                     lCName.TranslateTo(0, 8, 150),
                     lCName.FadeTo(1, 150)
                     );
-                lCName.TextColor = Color.FromHex("#65CAE1");
+                lCName.TextColor = Color.FromHex("#131313");
             }
             else
             {
@@ -182,7 +182,7 @@ namespace MDispatch.View.PageApp
                     lAddress.TranslateTo(0, 8, 150),
                     lAddress.FadeTo(1, 150)
                     );
-                lAddress.TextColor = Color.FromHex("#65CAE1");
+                lAddress.TextColor = Color.FromHex("#131313");
             }
             else
             {
@@ -202,7 +202,7 @@ namespace MDispatch.View.PageApp
                     lCity.TranslateTo(0, 8, 150),
                     lCity.FadeTo(1, 150)
                     );
-                lCity.TextColor = Color.FromHex("#65CAE1");
+                lCity.TextColor = Color.FromHex("#131313");
             }
             else
             {
@@ -222,7 +222,7 @@ namespace MDispatch.View.PageApp
                     lState.TranslateTo(0, 8, 150),
                     lState.FadeTo(1, 150)
                     );
-                lState.TextColor = Color.FromHex("#65CAE1");
+                lState.TextColor = Color.FromHex("#131313");
             }
             else
             {
@@ -242,7 +242,7 @@ namespace MDispatch.View.PageApp
                     lZip.TranslateTo(0, 8, 150),
                     lZip.FadeTo(1, 150)
                     );
-                lZip.TextColor = Color.FromHex("#65CAE1");
+                lZip.TextColor = Color.FromHex("#131313");
             }
             else
             {
@@ -262,7 +262,7 @@ namespace MDispatch.View.PageApp
                     lPhone.TranslateTo(0, 8, 150),
                     lPhone.FadeTo(1, 150)
                     );
-                lPhone.TextColor = Color.FromHex("#65CAE1");
+                lPhone.TextColor = Color.FromHex("#131313");
             }
             else
             {
@@ -282,7 +282,7 @@ namespace MDispatch.View.PageApp
                     lEmail.TranslateTo(0, 8, 150),
                     lEmail.FadeTo(1, 150)
                     );
-                lEmail.TextColor = Color.FromHex("#65CAE1");
+                lEmail.TextColor = Color.FromHex("#131313");
             }
             else
             {

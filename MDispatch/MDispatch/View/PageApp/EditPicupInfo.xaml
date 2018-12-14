@@ -10,31 +10,31 @@
         <ScrollView>
             <StackLayout Padding="10" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, .5, 1, 1">
                 <Label x:Name="lLoadId" Text="Load Id" TextColor="#b8babb" Margin="4,0,0,0" FontSize="16" VerticalTextAlignment="Start"/>
-                <Entry TextColor="#65CAE1" HeightRequest="40" FontSize="16" Text="{Binding Shipping.idOrder}" TextChanged="Entry_TextChanged"/>
+                <Entry TextColor="#4fd2c2" HeightRequest="40" FontSize="16" Text="{Binding Shipping.idOrder}" TextChanged="Entry_TextChanged"/>
 
                 <Label x:Name="lName" Text="Name" TextColor="#b8babb" Margin="4,0,0,0" FontSize="16" VerticalTextAlignment="Start"/>
-                <Entry TextColor="#65CAE1" HeightRequest="40" FontSize="16" Text="{Binding Shipping.NameP}" TextChanged="ELoadId_TextChanged" />
+                <Entry TextColor="#4fd2c2" HeightRequest="40" FontSize="16" Text="{Binding Shipping.NameP}" TextChanged="ELoadId_TextChanged" />
 
                 <Label x:Name="lCName" Text="Contact Name" TextColor="#b8babb" Margin="4,0,0,0" FontSize="16" VerticalTextAlignment="Start"/>
-                <Entry TextColor="#65CAE1" HeightRequest="40" FontSize="16" Text="{Binding Shipping.ContactNameP}" TextChanged="Entry_TextChanged_1"/>
+                <Entry TextColor="#4fd2c2" HeightRequest="40" FontSize="16" Text="{Binding Shipping.ContactNameP}" TextChanged="Entry_TextChanged_1"/>
 
                 <Label x:Name="lAddress" Text="Address" TextColor="#b8babb" Margin="4,0,0,0" FontSize="16" VerticalTextAlignment="Start"/>
-                <Entry TextColor="#65CAE1" HeightRequest="40" FontSize="16" Text="{Binding Shipping.AddresP}" TextChanged="Entry_TextChanged_2"/>
+                <Entry TextColor="#4fd2c2" HeightRequest="40" FontSize="16" Text="{Binding Shipping.AddresP}" TextChanged="Entry_TextChanged_2"/>
 
                 <Label x:Name="lCity" Text="City" TextColor="#b8babb" Margin="4,0,0,0" FontSize="16" VerticalTextAlignment="Start"/>
-                <Entry TextColor="#65CAE1" HeightRequest="40" FontSize="16" Text="{Binding Shipping.CityP}" TextChanged="Entry_TextChanged_3"/>
+                <Entry TextColor="#4fd2c2" HeightRequest="40" FontSize="16" Text="{Binding Shipping.CityP}" TextChanged="Entry_TextChanged_3"/>
 
                 <Label x:Name="lState" Text="State" TextColor="#b8babb" Margin="4,0,0,0" FontSize="16" VerticalTextAlignment="Start"/>
-                <Entry TextColor="#65CAE1" HeightRequest="40" FontSize="16" Text="{Binding Shipping.StateP}" TextChanged="Entry_TextChanged_4"/>
+                <Entry TextColor="#4fd2c2" HeightRequest="40" FontSize="16" Text="{Binding Shipping.StateP}" TextChanged="Entry_TextChanged_4"/>
 
                 <Label x:Name="lZip" Text="Zip" TextColor="#b8babb" Margin="4,0,0,0" FontSize="16" VerticalTextAlignment="Start"/>
-                <Entry TextColor="#65CAE1" HeightRequest="40" FontSize="16" Text="{Binding Shipping.ZipP}" TextChanged="Entry_TextChanged_5"/>
+                <Entry TextColor="#4fd2c2" HeightRequest="40" FontSize="16" Text="{Binding Shipping.ZipP}" TextChanged="Entry_TextChanged_5"/>
 
                 <Label x:Name="lPhone" Text="Phone" TextColor="#b8babb" Margin="4,0,0,0" FontSize="16" VerticalTextAlignment="Start"/>
-                <Entry TextColor="#65CAE1" HeightRequest="40" FontSize="16" Text="{Binding Shipping.PhoneP}" TextChanged="Entry_TextChanged_6"/>
+                <Entry TextColor="#4fd2c2" HeightRequest="40" FontSize="16" Text="{Binding Shipping.PhoneP}" TextChanged="Entry_TextChanged_6"/>
 
                 <Label x:Name="lEmail" Text="Email" TextColor="#b8babb" Margin="4,0,0,0" FontSize="16" VerticalTextAlignment="Start"/>
-                <Entry TextColor="#65CAE1" HeightRequest="40" FontSize="16" Text="{Binding Shipping.EmailP}" TextChanged="Entry_TextChanged_7"/>
+                <Entry TextColor="#4fd2c2" HeightRequest="40" FontSize="16" Text="{Binding Shipping.EmailP}" TextChanged="Entry_TextChanged_7"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

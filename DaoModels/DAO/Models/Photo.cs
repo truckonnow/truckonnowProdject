@@ -12,11 +12,39 @@ namespace DaoModels.DAO.Models
         public string path { get; set; }
         public string Base64
         {
+            set
+            {
+                try
+                {
+                    byte[] photoInArrayByte = JsonConvert.DeserializeObject<byte[]>(value);
+                    if (!Directory.Exists(path))
+                    {
+                        string pathTmp = path.Remove(path.LastIndexOf("/"));
+                        Directory.CreateDirectory(pathTmp);
+                    }
+                    using (var imageFile = new FileStream(path, FileMode.Create))
+                    {
+                        imageFile.Write(photoInArrayByte, 0, photoInArrayByte.Length);
+                        imageFile.Flush();
+                    }
+                }
+                catch(Exception)
+                {
+
+                }
+            }
             get
             {
-                string tmpJson = JsonConvert.SerializeObject(File.ReadAllBytes(path));
-                tmpJson = tmpJson.Replace("\"", "");
-                return "";
+                if (path != null)
+                {
+                    string tmpJson = JsonConvert.SerializeObject(File.ReadAllBytes(path));
+                    tmpJson = tmpJson.Replace("\"", "");
+                    return tmpJson;
+                }
+                else
+                {
+                    return "";
+                }
             }
         }
     }

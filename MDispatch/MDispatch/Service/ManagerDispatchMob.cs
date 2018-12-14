@@ -9,6 +9,7 @@ namespace MDispatch.Service
         private A_R a_R = null;
         private OrderGet orderGet = null;
         private Photo photo = null;
+        private AskM askM = null;
 
         public int A_RWork(string typeR_A, string login, string password, ref string description, ref string token)
         {
@@ -84,6 +85,21 @@ namespace MDispatch.Service
                 }
             }
             photo = null;
+            return statePhoto;
+        }
+
+        public int AskWork(string typeAsk, string token, string id, Models.Ask ask, ref string description)
+        {
+            askM = new AskM();
+            int statePhoto = 1;
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                if (typeAsk == "SaveAsk")
+                {
+                    statePhoto = askM.SaveAsk(token, id, ask, ref description);
+                }
+            }
+            askM = null;
             return statePhoto;
         }
     }

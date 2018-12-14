@@ -22,6 +22,19 @@ namespace ApiMobaileServise.Servise
             context.VehiclwInformation.Load();
             context.Drivers.Load();
             context.Photos.Load();
+            context.Asks.Load();
+        }
+
+        public void SaveAskInDb(string idve, Ask ask)
+        {
+            Init();
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
+            if(vehiclwInformation.Asks == null)
+            {
+                vehiclwInformation.Asks = new List<Ask>();
+            }
+            vehiclwInformation.Asks.Add(ask);
+            context.SaveChangesAsync();
         }
 
         public bool CheckEmailAndPsw(string email, string password)
@@ -29,6 +42,7 @@ namespace ApiMobaileServise.Servise
             Init();
             return context.Drivers.FirstOrDefault(d => d.EmailAddress == email && d.Password == password) != null ? true : false;
         }
+
 
         public string GetNumberPhoto(string id)
         {

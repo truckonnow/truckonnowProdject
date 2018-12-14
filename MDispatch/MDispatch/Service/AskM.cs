@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using MDispatch.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -6,20 +8,23 @@ using System.Text;
 
 namespace MDispatch.Service
 {
-    public class Ask
+    public class AskM
     {
-        public int Save(string token, string id, ref string description, ref List<Photo> photos)
+        public int SaveAsk(string token, string id, Ask ask, ref string description)
         {
             IRestResponse response = null;
             string content = null;
             try
             {
+                string strJsonAsk = JsonConvert.SerializeObject(ask);
                 RestClient client = new RestClient("http://192.168.0.103:8888");
                 RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
                 request.AddParameter("token", token);
-                request.AddParameter("id", id);
+                request.AddParameter("idVe", id);
+                request.AddParameter("jsonStrAsk", strJsonAsk);
+                request.AddParameter("type", 1);
                 response = client.Execute(request);
                 content = response.Content;
             }

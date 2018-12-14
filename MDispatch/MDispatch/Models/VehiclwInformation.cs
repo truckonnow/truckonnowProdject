@@ -15,5 +15,6 @@ namespace MDispatch.Models
         public string Lot { get; set; }
         public string AdditionalInfo { get; set; }
         public List<Photo> Photos { get; set; }
+        public List<Ask> Asks { get; set; }
     }
 }

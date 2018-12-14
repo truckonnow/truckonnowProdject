@@ -23,22 +23,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="View\AskPhoto\AskPage.xaml">
+    <EmbeddedResource Update="View\Inspection\AskPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\AskPhoto\CameraPageFolder\CameraDocument.xaml">
+    <EmbeddedResource Update="View\Inspection\CameraPageFolder\CameraDocument.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\AskPhoto\CameraPageFolder\CameraItems.xaml">
+    <EmbeddedResource Update="View\Inspection\CameraPageFolder\CameraItems.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\AskPhoto\DialogPage\ConfirrmPage.xaml">
+    <EmbeddedResource Update="View\Inspection\DialogPage\ConfirrmPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\A_R\Avtorization.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\PageApp\CameraPagePhoto.xaml">
+    <EmbeddedResource Update="View\Inspection\CameraPageFolder\CameraPagePhoto.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\PageApp\DialogPage\EditPayment.xaml">
@@ -50,7 +50,7 @@
     <EmbeddedResource Update="View\PageApp\EditPicupInfo.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\PageApp\FullPagePhoto.xaml">
+    <EmbeddedResource Update="View\Inspection\FullPagePhoto.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\PageApp\InfoOrder.xaml">
@@ -77,7 +77,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="View\PageApp\CameraPagePhoto.xaml.cs">
+    <Compile Update="View\Inspection\CameraPageFolder\CameraPagePhoto.xaml.cs">
       <DependentUpon>CameraPagePhoto.xaml</DependentUpon>
     </Compile>
     <Compile Update="View\TabPage\Tab\ArchivedPage.xaml.cs">

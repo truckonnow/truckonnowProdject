@@ -7,9 +7,6 @@ using Plugin.InputKit.Shared.Controls;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -20,11 +17,11 @@ namespace MDispatch.View.AskPhoto
 	public partial class AskPage : ContentPage
 	{
         AskPageMV askPageMV = null;
-        private Ask Ask = null;
+        private Models.Ask Ask = null;
         public AskPage (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation)
 		{
             askPageMV = new AskPageMV(managerDispatchMob, vehiclwInformation);
-            Ask = new Ask();
+            Ask = new Models.Ask();
             InitializeComponent ();
             BindingContext = askPageMV;
 		}
@@ -37,7 +34,7 @@ namespace MDispatch.View.AskPhoto
         {
             isAsk1 = true;
             Button button = (Button)sender;
-            button.TextColor = Color.FromHex("#65CAE1");
+            button.TextColor = Color.FromHex("#4fd2c2");
             Ask.Lightbrightness = button.Text;
             if (button1 != null)
             {
@@ -54,7 +51,7 @@ namespace MDispatch.View.AskPhoto
         {
             isAsk2 = true;
             Button button = (Button)sender;
-            button.TextColor = Color.FromHex("#65CAE1");
+            button.TextColor = Color.FromHex("#4fd2c2");
             Ask.Vehicle = button.Text;
             if (button2 != null)
             {
@@ -71,7 +68,7 @@ namespace MDispatch.View.AskPhoto
         {
             isAsk3 = true;
             Button button = (Button)sender;
-            button.TextColor = Color.FromHex("#65CAE1");
+            button.TextColor = Color.FromHex("#4fd2c2");
             Ask.Enough_distance_to_take_pictures_at_least_4ft = button.Text;
             if (button3 != null)
             {
@@ -97,7 +94,7 @@ namespace MDispatch.View.AskPhoto
         {
             isAsk5 = true;
             Button button = (Button)sender;
-            button.TextColor = Color.FromHex("#65CAE1");
+            button.TextColor = Color.FromHex("#4fd2c2");
             Ask.Does_The_vehicle_Starts = button.Text;
             if (button5 != null)
             {
@@ -114,7 +111,7 @@ namespace MDispatch.View.AskPhoto
         {
             isAsk6 = true;
             Button button = (Button)sender;
-            button.TextColor = Color.FromHex("#65CAE1");
+            button.TextColor = Color.FromHex("#4fd2c2");
             Ask.Does_The_vehicle_Drives = button.Text;
             if (button6 != null)
             {
@@ -192,9 +189,10 @@ namespace MDispatch.View.AskPhoto
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-            if(isAsk1 && isAsk2 && isAsk3 && isAsk4 && isAsk5 && isAsk6 && isAsk7 && isAsk8 && isAsk9 && isAsk10 && isAsk11)
+            if(isAsk1 && isAsk2 && isAsk3 && isAsk4 && isAsk5 && isAsk6 && isAsk7 && isAsk8 && !isAsk9 && isAsk10 && !isAsk11)
             {
                 askPageMV.Ask = Ask;
+                askPageMV.SaveAsk();
             }
             else
             {
@@ -268,6 +266,7 @@ namespace MDispatch.View.AskPhoto
             }
             Models.Photo photo = new Models.Photo();
             photo.Base64 = JsonConvert.SerializeObject(photob);
+            photo.path = $"Photo/{askPageMV.VehiclwInformation.Id}/Ask/Document/{ Ask.Any_paperwork_or_documentation.Count + 1}.png";
             Ask.Any_paperwork_or_documentation.Add(photo);
             blockAskPhotoDocument.Children.Add(new Image()
             {
@@ -285,6 +284,7 @@ namespace MDispatch.View.AskPhoto
             }
             Models.Photo photo = new Models.Photo();
             photo.Base64 = JsonConvert.SerializeObject(photob);
+            photo.path = $"Photo/{askPageMV.VehiclwInformation.Id}/Ask/Items/{ Ask.Any_personal_or_additional_items_with_or_in_vehicle.Count + 1}.png";
             Ask.Any_personal_or_additional_items_with_or_in_vehicle.Add(photo);
             blockAskPhotoItem.Children.Add(new Image()
             {

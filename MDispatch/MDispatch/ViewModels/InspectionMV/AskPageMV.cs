@@ -1,4 +1,5 @@
 ﻿using MDispatch.Models;
+using MDispatch.Service;
 using Plugin.Settings;
 using Prism.Mvvm;
 using System.Threading.Tasks;
@@ -15,8 +16,8 @@ namespace MDispatch.ViewModels.AskPhoto
             VehiclwInformation = vehiclwInformation;
         }
 
-        private Ask ask = null;
-        public Ask Ask
+        private Models.Ask ask = null;
+        public Models.Ask Ask
         {
             get => ask;
             set => SetProperty(ref ask, value);
@@ -36,7 +37,7 @@ namespace MDispatch.ViewModels.AskPhoto
             int state = 0;
             await Task.Run(() =>
             {
-               //state = managerDispatchMob.PhotoWork("SavePhoto", token, VehiclwInformation.Id, PhotoInArrayByte, ref description);
+                state = managerDispatchMob.AskWork("SaveAsk", token, VehiclwInformation.Id, Ask, ref description);
             });
             if (state == 1)
             {
