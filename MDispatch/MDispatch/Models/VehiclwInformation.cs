@@ -16,5 +16,6 @@ namespace MDispatch.Models
         public string AdditionalInfo { get; set; }
         public List<Photo> Photos { get; set; }
         public List<Ask> Asks { get; set; }
+        public List<PhotoInspection> PhotoInspections { get; set; }
     }
 }

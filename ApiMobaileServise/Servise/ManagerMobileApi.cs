@@ -20,8 +20,12 @@ namespace ApiMobaileServise.Servise
         {
             return sqlCommandApiMobile.GetNumberPhoto(id);
         }
-
         
+        public void SavePhotoInspection(string idVe, PhotoInspection photoInspection)
+        {
+            sqlCommandApiMobile.SavePhotoInspectionInDb(idVe, photoInspection);
+        }
+
         public void SaveAsk(string idVe, int type, string jsonStrAsk)
         {
             Ask ask = JsonConvert.DeserializeObject<Ask>(jsonStrAsk);

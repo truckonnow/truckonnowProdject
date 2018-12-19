@@ -4,15 +4,12 @@ using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace MDispatch.View.AskPhoto.DialogPage
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ConfirrmPage : PopupPage
     {
         private InfoOrderMV infoOrderMV = null;
@@ -40,7 +37,7 @@ namespace MDispatch.View.AskPhoto.DialogPage
         {
             if(selectedIndexDropDwn != -1)
             {
-                infoOrderMV.ToStartInspection(infoOrderMV.Shipping.VehiclwInformations[selectedIndexDropDwn]);
+                infoOrderMV.ToStartInspection(infoOrderMV.Shipping.VehiclwInformations[selectedIndexDropDwn], infoOrderMV.Shipping);
                 await PopupNavigation.PopAsync(true);
             }
             else

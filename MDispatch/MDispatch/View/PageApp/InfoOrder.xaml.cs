@@ -26,13 +26,6 @@ namespace MDispatch.View.PageApp
             listVehic.HeightRequest = 80 + Convert.ToInt32(infoOrderMV.Shipping.VehiclwInformations.Count * 125);
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            Button button = ((Button)sender);
-            string id = button.FindByName<Label>("idL").Text;
-            infoOrderMV.ToPhotoFull(infoOrderMV.Shipping.VehiclwInformations.Find(v => v.Id == id));
-        }
-
         private void Button_Clicked_1(object sender, EventArgs e)
         {
             Button button = ((Button)sender);
@@ -42,13 +35,13 @@ namespace MDispatch.View.PageApp
 
         private async void Button_Clicked_2(object sender, EventArgs e)
         {
-            if (infoOrderMV.Shipping.VehiclwInformations.Count < 1)
+            if (infoOrderMV.Shipping.VehiclwInformations.Count > 1)
             {
                 await PopupNavigation.PushAsync(new ConfirrmPage(infoOrderMV), true);
             }
             else
             {
-                infoOrderMV.ToStartInspection(infoOrderMV.Shipping.VehiclwInformations[0]);
+                infoOrderMV.ToStartInspection(infoOrderMV.Shipping.VehiclwInformations[0], infoOrderMV.Shipping);
             }
 
         }

@@ -40,5 +40,35 @@ namespace ApiMobaileServise.Controllers
             }
             return respons;
         }
+
+        [HttpPost]
+        [Route("Save/Photo")]
+        public string SavePhoto(string token, string idVe, string jsonStr)
+        {
+            string respons = null;
+            if (token == null || token == "")
+            {
+                return JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
+            }
+            try
+            {
+                bool isToken = managerMobileApi.CheckToken(token);
+                if (isToken)
+                {
+                    PhotoInspection photoInspection = JsonConvert.DeserializeObject<PhotoInspection>(jsonStr);
+                    managerMobileApi.SavePhotoInspection(idVe, photoInspection);
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
+                }
+                else
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "2", null));
+                }
+            }
+            catch (Exception)
+            {
+                respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
+            }
+            return respons;
+        }
     }
 }

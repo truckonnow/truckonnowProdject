@@ -23,6 +23,20 @@ namespace ApiMobaileServise.Servise
             context.Drivers.Load();
             context.Photos.Load();
             context.Asks.Load();
+            context.PhotoInspections.Load();
+            context.User.Load();
+        }
+
+        public async void SavePhotoInspectionInDb(string idVe, PhotoInspection photoInspection)
+        {
+            Init();
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == idVe);
+            if(vehiclwInformation.PhotoInspections == null)
+            {
+                vehiclwInformation.PhotoInspections = new List<PhotoInspection>();
+            }
+            vehiclwInformation.PhotoInspections.Add(photoInspection);
+            await context.SaveChangesAsync();
         }
 
         public void SaveAskInDb(string idve, Ask ask)

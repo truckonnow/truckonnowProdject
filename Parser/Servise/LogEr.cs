@@ -15,7 +15,8 @@ namespace Parser.Servise
         {
             try
             {
-                File.AppendAllText($"Log/AllLog/{DateTime.Now.ToShortDateString()}.txt".Replace(':', ' '), $"|INFO|Name method: {nameMethod}|Date: {date}|Info: {infoText}|{Environment.NewLine}");
+                string curentDate = DateTime.Now.ToShortDateString().Replace('/', '.');
+                File.AppendAllText($"./Log/AllLog/{curentDate}.txt", $"|INFO|Name method: {nameMethod}|Date: {date}|Info: {infoText}|{Environment.NewLine}");
                 Console.Write($"|INFO|Name method: {nameMethod}|Date: {date}|Info: {infoText}|{Environment.NewLine}");
             }
             catch (Exception)
@@ -26,8 +27,9 @@ namespace Parser.Servise
         
         private static void ErrorLog(string infoText, string nameMethod, string date)
         {
-            File.AppendAllText($"./Log/AllLog/{DateTime.Now.ToShortDateString()}.txt".Replace(':', ' '), $"|Error|Name method: {nameMethod}|Date: {date}|Info: {infoText}|{Environment.NewLine}");
-            File.AppendAllText($"./Log/Error/{DateTime.Now.ToShortDateString()}.txt".Replace(':', ' '), $"|Error|Name method: {nameMethod}|Date: {date}|Info: {infoText}|{Environment.NewLine}");
+            string curentDate = DateTime.Now.ToShortDateString().Replace('/', '.');
+            File.AppendAllText($"./Log/AllLog/{curentDate}.txt", $"|Error|Name method: {nameMethod}|Date: {date}|Info: {infoText}|{Environment.NewLine}");
+            File.AppendAllText($"./Log/Error/{curentDate}.txt", $"|Error|Name method: {nameMethod}|Date: {date}|Info: {infoText}|{Environment.NewLine}");
             Console.Write($"|Error|Name method: {nameMethod}|Date: {date}|Info: {infoText}|{Environment.NewLine}");
         }
 

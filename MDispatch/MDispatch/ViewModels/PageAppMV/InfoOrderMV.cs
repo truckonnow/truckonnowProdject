@@ -68,14 +68,9 @@ namespace MDispatch.ViewModels.PageAppMV
             await Navigation.PushAsync(new VechicleDetails(vehiclwInformation, managerDispatchMob));
         }
 
-        public async void ToPhotoFull(VehiclwInformation vehiclwInformation)
+        public async void ToStartInspection(VehiclwInformation vehiclwInformation, Shipping shipping)
         {
-            await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, vehiclwInformation, Shipping), true);
-        }
-
-        public async void ToStartInspection(VehiclwInformation vehiclwInformation)
-        {
-            await Navigation.PushAsync(new AskPage(managerDispatchMob, vehiclwInformation), true);
+            await Navigation.PushAsync(new AskPage(managerDispatchMob, vehiclwInformation, shipping), true);
         }
     }
 }

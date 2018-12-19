@@ -5,8 +5,9 @@
              xmlns:camera="clr-namespace:MDispatch.NewElement"
              OnPhotoResult="CameraPage_OnPhotoResult">
     <ContentPage.Content>
-        <StackLayout>
-            
+        <StackLayout SizeChanged="StackLayout_SizeChanged">
+            <Image x:Name="paternPhoto" AbsoluteLayout.LayoutFlags="All"
+                         AbsoluteLayout.LayoutBounds="1, 1, 1, 1" />
         </StackLayout>
     </ContentPage.Content>
 </camera:CameraPage>

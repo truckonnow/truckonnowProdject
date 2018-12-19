@@ -9,7 +9,7 @@ namespace MDispatch.Service
         private A_R a_R = null;
         private OrderGet orderGet = null;
         private Photo photo = null;
-        private AskM askM = null;
+        private Inspection inspection = null;
 
         public int A_RWork(string typeR_A, string login, string password, ref string description, ref string token)
         {
@@ -73,34 +73,23 @@ namespace MDispatch.Service
             return stateOrder;
         }
 
-        public int PhotoWork(string typePhoto, string token, string id, byte[] PhotoInArrayByte, ref string description)
+        public int AskWork(string typeInspection, string token, string id, object obj, ref string description)
         {
-            photo = new Photo();
-            int statePhoto = 1;
+            inspection = new Inspection();
+            int stateInspection = 1;
             if (CrossConnectivity.Current.IsConnected)
             {
-                if (typePhoto == "SavePhoto")
+                if (typeInspection == "SaveAsk")
                 {
-                    statePhoto = photo.SaveTakeNewPhoto(token, id, PhotoInArrayByte, ref description);
+                    stateInspection = inspection.SaveAsk(token, id, (Models.Ask)obj, ref description);
+                }
+                else if(typeInspection == "SavePhoto")
+                {
+                    stateInspection = inspection.SavePhoto(token, id, (Models.PhotoInspection)obj, ref description);
                 }
             }
-            photo = null;
-            return statePhoto;
-        }
-
-        public int AskWork(string typeAsk, string token, string id, Models.Ask ask, ref string description)
-        {
-            askM = new AskM();
-            int statePhoto = 1;
-            if (CrossConnectivity.Current.IsConnected)
-            {
-                if (typeAsk == "SaveAsk")
-                {
-                    statePhoto = askM.SaveAsk(token, id, ask, ref description);
-                }
-            }
-            askM = null;
-            return statePhoto;
+            inspection = null;
+            return stateInspection;
         }
     }
 }

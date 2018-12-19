@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace DaoModels.DAO.Models
 {
@@ -37,9 +35,16 @@ namespace DaoModels.DAO.Models
             {
                 if (path != null)
                 {
-                    string tmpJson = JsonConvert.SerializeObject(File.ReadAllBytes(path));
-                    tmpJson = tmpJson.Replace("\"", "");
-                    return tmpJson;
+                    try
+                    {
+                        string tmpJson = JsonConvert.SerializeObject(File.ReadAllBytes(path));
+                        tmpJson = tmpJson.Replace("\"", "");
+                        return tmpJson;
+                    }
+                    catch(Exception)
+                    {
+                        return "";
+                    }
                 }
                 else
                 {

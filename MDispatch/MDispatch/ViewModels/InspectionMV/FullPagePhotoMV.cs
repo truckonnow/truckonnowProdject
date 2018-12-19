@@ -1,8 +1,11 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
+using MDispatch.View.PageApp;
+using MDispatch.ViewModels.AskPhoto;
+using MDispatch.ViewModels.InspectionMV.Models;
+using Newtonsoft.Json;
 using Plugin.Settings;
 using Prism.Mvvm;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -13,15 +16,28 @@ namespace MDispatch.ViewModels.PageAppMV
     public class FullPagePhotoMV : BindableBase
     {
         public ManagerDispatchMob managerDispatchMob = null;
-        public INavigation Navigationn { get; set; }
+        public INavigation Navigation { get; set; }
+        public ICar Car = null;
 
-        public FullPagePhotoMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping)
+        public FullPagePhotoMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, string typeCar, int inderxPhotoInspektion, INavigation navigation)
         {
+            Navigation = navigation;
             this.managerDispatchMob = managerDispatchMob;
             VehiclwInformation = vehiclwInformation;
-            //(VehiclwInformation.Photos);
+            InderxPhotoInspektion = inderxPhotoInspektion;
+            if (typeCar != null)
+            {
+                Car = GetTypeCar(typeCar);
+            }
         }
-        
+
+        private int inderxPhotoInspektion = 0;
+        public int InderxPhotoInspektion
+        {
+            get => inderxPhotoInspektion;
+            set => SetProperty(ref inderxPhotoInspektion, value);
+        }
+
         private VehiclwInformation vehiclwInformation = null;
         public VehiclwInformation VehiclwInformation
         {
@@ -43,24 +59,38 @@ namespace MDispatch.ViewModels.PageAppMV
             set => SetProperty(ref allSourseImage, value);
         }
 
-        //private void InitPhoto(List<Models.Photo> photos)
-        //{
-        //    if (photos != null)
-        //    {
-        //        List<ImageSource> allSourseImage1 = new List<ImageSource>();
-        //        AllSourseImage = new List<ImageSource>();
-        //        foreach (var photo in photos)
-        //        {
-        //            allSourseImage1.Add(ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(photo.Base64))));
-        //        }
-        //        AllSourseImage = allSourseImage1;
-        //        SourseImage = AllSourseImage[0];
-        //    }
-        //}
+
+        private PhotoInspection photoInspection = null;
+        public PhotoInspection PhotoInspection
+        {
+            get => photoInspection;
+            set => SetProperty(ref photoInspection, value);
+        }
+
+        private Shipping shipping = null;
+        public Shipping Shipping
+        {
+            get => shipping;
+            set => SetProperty(ref shipping, value);
+        }
+
+        private ICar GetTypeCar(string typeCar)
+        {
+            ICar car = null;
+            switch(typeCar)
+            {
+                case "Sedan":
+                    {
+                        car = new CarSedan();
+                        break;
+                    }
+            }
+            return car;
+        }
 
         public void AddNewFotoSourse(byte[] imageSorseByte)
         {
-            if(AllSourseImage == null)
+            if (AllSourseImage == null)
             {
                 AllSourseImage = new List<ImageSource>();
             }
@@ -71,12 +101,31 @@ namespace MDispatch.ViewModels.PageAppMV
 
         public async void SetPhoto(byte[] PhotoInArrayByte)
         {
+            if (PhotoInspection == null)
+            {
+                PhotoInspection = new PhotoInspection();
+            }
+            if (PhotoInspection.Photos == null)
+            {
+                PhotoInspection.Photos = new List<Models.Photo>();
+            }
+            PhotoInspection.IndexPhoto = InderxPhotoInspektion;
+            Models.Photo photo = new Models.Photo();
+            string photoJson = JsonConvert.SerializeObject(PhotoInArrayByte);
+            string pathIndePhoto = PhotoInspection.Photos.Count == 0 ? 1.ToString() : $"{PhotoInspection.IndexPhoto}.{PhotoInspection.Photos.Count}"; ;
+            photo.Base64 = photoJson;
+            photo.path = $"Photo/{VehiclwInformation.Id}/PhotoInspection/{pathIndePhoto}.png";
+            PhotoInspection.Photos.Add(photo);
+        }
+
+        public async void SavePhoto()
+        {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
             await Task.Run(() =>
             {
-                //state = managerDispatchMob.PhotoWork("SavePhoto", token, VehiclwInformation.Id, PhotoInArrayByte, ref description);
+                state = managerDispatchMob.AskWork("SavePhoto", token, VehiclwInformation.Id, PhotoInspection, ref description);
             });
             if (state == 1)
             {
@@ -88,7 +137,14 @@ namespace MDispatch.ViewModels.PageAppMV
             }
             else if (state == 3)
             {
-                
+                if (InderxPhotoInspektion < 3)
+                {
+                    await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, Shipping, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", "Sedan", InderxPhotoInspektion + 1));
+                }
+                else
+                {
+
+                }
             }
             else if (state == 4)
             {

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace DaoModels.DAO.Models
+namespace MDispatch.Models
 {
     public class PhotoInspection
     {

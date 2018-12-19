@@ -18,9 +18,9 @@ namespace MDispatch.View.AskPhoto
 	{
         AskPageMV askPageMV = null;
         private Models.Ask Ask = null;
-        public AskPage (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation)
+        public AskPage (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping)
 		{
-            askPageMV = new AskPageMV(managerDispatchMob, vehiclwInformation);
+            askPageMV = new AskPageMV(managerDispatchMob, vehiclwInformation, shipping, Navigation);
             Ask = new Models.Ask();
             InitializeComponent ();
             BindingContext = askPageMV;
@@ -192,7 +192,7 @@ namespace MDispatch.View.AskPhoto
             if(isAsk1 && isAsk2 && isAsk3 && isAsk4 && isAsk5 && isAsk6 && isAsk7 && isAsk8 && !isAsk9 && isAsk10 && !isAsk11)
             {
                 askPageMV.Ask = Ask;
-                askPageMV.SaveAsk();
+                askPageMV.SaveAsk("i");
             }
             else
             {

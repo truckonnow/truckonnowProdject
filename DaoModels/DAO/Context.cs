@@ -11,6 +11,7 @@ namespace DaoModels.DAO
         public DbSet<Driver> Drivers { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Ask> Asks { get; set; }
+        public DbSet<PhotoInspection> PhotoInspections { get; set; }
 
         public Context()
         {

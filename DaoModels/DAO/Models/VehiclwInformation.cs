@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace DaoModels.DAO.Models
 {
@@ -18,5 +16,6 @@ namespace DaoModels.DAO.Models
         public string AdditionalInfo { get; set; }
         public List<Photo> Photos { get; set; }
         public List<Ask> Asks { get; set; }
+        public List<PhotoInspection> PhotoInspections { get; set; }
     }
 }
