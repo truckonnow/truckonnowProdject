@@ -7,7 +7,6 @@ using Plugin.InputKit.Shared.Controls;
 using System;
 using System.Collections.Generic;
 using System.IO;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -155,10 +154,17 @@ namespace MDispatch.View.AskPhoto
 
         #region Ask9
         bool isAsk9 = false;
-        private void Dropdown_SelectedItemChanged(object sender, Plugin.InputKit.Shared.Utils.SelectedItemChangedArgs e)
+        private void Entry_TextChanged_3(object sender, TextChangedEventArgs e)
         {
-            isAsk9 = true;
-            Ask.Plate = (string)e.NewItem;
+            if (e.NewTextValue != "")
+            {
+                isAsk9 = true;
+            }
+            else
+            {
+                isAsk9 = false;
+            }
+            Ask.Plate = e.NewTextValue;
         }
         #endregion
 
@@ -189,10 +195,10 @@ namespace MDispatch.View.AskPhoto
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-            if(isAsk1 && isAsk2 && isAsk3 && isAsk4 && isAsk5 && isAsk6 && isAsk7 && isAsk8 && !isAsk9 && isAsk10 && !isAsk11)
+            if(isAsk1 && isAsk2 && isAsk3 && isAsk4 && isAsk5 && isAsk6 && isAsk7 && isAsk8 && isAsk9 && isAsk10 && isAsk11)
             {
                 askPageMV.Ask = Ask;
-                askPageMV.SaveAsk("i");
+                askPageMV.SaveAsk(Ask.TypeVehicle.Replace(" ", ""));
             }
             else
             {

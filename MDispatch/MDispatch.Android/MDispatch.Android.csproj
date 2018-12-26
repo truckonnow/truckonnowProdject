@@ -125,13 +125,13 @@
     <AndroidResource Include="Resources\drawable\Delivered.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\i3.png" />
+    <AndroidResource Include="Resources\drawable\PickUp3.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\i2.png" />
+    <AndroidResource Include="Resources\drawable\PickUp2.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\i1.png" />
+    <AndroidResource Include="Resources\drawable\PickUp1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

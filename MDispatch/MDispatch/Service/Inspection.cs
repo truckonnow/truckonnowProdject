@@ -15,7 +15,7 @@ namespace MDispatch.Service
             try
             {
                 string strJsonAsk = JsonConvert.SerializeObject(ask);
-                RestClient client = new RestClient("http://192.168.0.101:8888");
+                RestClient client = new RestClient("http://192.168.0.100:8888");
                 RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
@@ -40,6 +40,70 @@ namespace MDispatch.Service
             }
         }
 
+        public int SaveAsk(string token, string id, Ask1 ask1, ref string description)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                string strJsonAsk = JsonConvert.SerializeObject(ask1);
+                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
+                request.AddHeader("Accept", "application/json");
+                request.Parameters.Clear();
+                request.AddParameter("token", token);
+                request.AddParameter("idVe", id);
+                request.AddParameter("jsonStrAsk", strJsonAsk);
+                request.AddParameter("type", 2);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description);
+            }
+        }
+
+        public int SaveAsk(string token, string id, AskForUserM askForUserM, ref string description)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                string strJsonAsk = JsonConvert.SerializeObject(askForUserM);
+                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
+                request.AddHeader("Accept", "application/json");
+                request.Parameters.Clear();
+                request.AddParameter("token", token);
+                request.AddParameter("idVe", id);
+                request.AddParameter("jsonStrAsk", strJsonAsk);
+                request.AddParameter("type", 3);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description);
+            }
+        }
+
         public int SavePhoto(string token, string id, PhotoInspection photoInspection, ref string description)
         {
             IRestResponse response = null;
@@ -47,7 +111,7 @@ namespace MDispatch.Service
             try
             {
                 string strPhotoInspection = JsonConvert.SerializeObject(photoInspection);
-                RestClient client = new RestClient("http://192.168.0.101:8888");
+                RestClient client = new RestClient("http://192.168.0.100:8888");
                 RestRequest request = new RestRequest("Mobile/Save/Photo", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();

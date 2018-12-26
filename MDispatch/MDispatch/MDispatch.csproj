@@ -23,13 +23,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="View\Inspection\AskPage.xaml">
+    <EmbeddedResource Update="View\Inspection\PickedUp\Ask1Page.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\Inspection\CameraPageFolder\CameraDocument.xaml">
+    <EmbeddedResource Update="View\Inspection\PickedUp\AskForUser.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\Inspection\CameraPageFolder\CameraItems.xaml">
+    <EmbeddedResource Update="View\Inspection\PickedUp\AskPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\Inspection\DialogPage\ConfirrmPage.xaml">
@@ -38,7 +38,10 @@
     <EmbeddedResource Update="View\A_R\Avtorization.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\Inspection\CameraPageFolder\CameraPagePhoto.xaml">
+    <EmbeddedResource Update="View\Inspection\PickedUp\CameraPageFolder\CameraSeatBelts.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\Inspection\PickedUp\TempPageHint.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\PageApp\DialogPage\EditPayment.xaml">
@@ -77,8 +80,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="View\Inspection\CameraPageFolder\CameraPagePhoto.xaml.cs">
-      <DependentUpon>CameraPagePhoto.xaml</DependentUpon>
+    <Compile Update="View\Inspection\PickedUp\CameraPageFolder\CameraDocument.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="View\Inspection\PickedUp\CameraPageFolder\CameraDocumentations.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="View\Inspection\PickedUp\CameraPageFolder\CameraItems.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="View\Inspection\PickedUp\CameraPageFolder\CameraPagePhoto.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="View\Inspection\PickedUp\CameraPageFolder\CameraSpareParts.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="View\Inspection\PickedUp\TempPageHint1.xaml.cs">
+      <DependentUpon>TempPageHint1.xaml</DependentUpon>
     </Compile>
     <Compile Update="View\TabPage\Tab\ArchivedPage.xaml.cs">
       <DependentUpon>ArchivedPage.xaml</DependentUpon>

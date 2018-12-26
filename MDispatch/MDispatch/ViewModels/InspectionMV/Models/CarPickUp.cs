@@ -2,8 +2,8 @@
 
 namespace MDispatch.ViewModels.InspectionMV.Models
 {
-    public class CarSedan : ICar
+    public class CarPickUp : ICar
     {
-        public string typeIndex { get; set; } = "i";
+        public string typeIndex { get; set; } = "PickUp";
     }
 }

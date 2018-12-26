@@ -16,11 +16,7 @@ namespace ApiMobaileServise.Servise
             CheckAndCreatedFolder();
         }
 
-        public string GetNamePhoto(string id)
-        {
-            return sqlCommandApiMobile.GetNumberPhoto(id);
-        }
-        
+
         public void SavePhotoInspection(string idVe, PhotoInspection photoInspection)
         {
             sqlCommandApiMobile.SavePhotoInspectionInDb(idVe, photoInspection);
@@ -28,16 +24,21 @@ namespace ApiMobaileServise.Servise
 
         public void SaveAsk(string idVe, int type, string jsonStrAsk)
         {
-            Ask ask = JsonConvert.DeserializeObject<Ask>(jsonStrAsk);
             if(type == 1)
             {
+                Ask ask = JsonConvert.DeserializeObject<Ask>(jsonStrAsk);
                 sqlCommandApiMobile.SaveAskInDb(idVe, ask);
             }
-        }
-
-        public void SavePhoto(string id, string path)
-        {
-            sqlCommandApiMobile.SavePhotoInDb(id, path);
+            else if(type == 2)
+            {
+                Ask1 ask1 = JsonConvert.DeserializeObject<Ask1>(jsonStrAsk);
+                sqlCommandApiMobile.SaveAsk1InDb(idVe, ask1);
+            }
+            else if (type == 3)
+            {
+                AskFromUser askFromUser = JsonConvert.DeserializeObject<AskFromUser>(jsonStrAsk);
+                sqlCommandApiMobile.SaveAskFromUserInDb(idVe, askFromUser);
+            }
         }
 
         private void CheckAndCreatedFolder()

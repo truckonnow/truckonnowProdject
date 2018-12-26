@@ -1,26 +1,19 @@
 ﻿using MDispatch.NewElement;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MDispatch.View.AskPhoto.CameraPageFolder
+namespace MDispatch.View.Inspection.CameraPageFolder
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CameraItems : CameraPage
+	public partial class CameraSpareParts : CameraPage
     {
-        AskPage askPage = null;
+        Ask1Page ask1Page = null;
 
-        public CameraItems (AskPage askPage)
+        public CameraSpareParts (Ask1Page ask1Page)
 		{
-            this.askPage = askPage;
-            InitializeComponent ();
+            this.ask1Page = ask1Page;
+			InitializeComponent ();
             NavigationPage.SetHasNavigationBar(this, false);
-
         }
 
         private async void CameraPage_OnPhotoResult(PhotoResultEventArgs result)
@@ -28,7 +21,7 @@ namespace MDispatch.View.AskPhoto.CameraPageFolder
             await Navigation.PopAsync(true);
             if (!result.Success)
                 return;
-            askPage.AddPhotoItems(result.Image);
+            ask1Page.AddPhotoSpareParts(result.Image);
         }
     }
 }

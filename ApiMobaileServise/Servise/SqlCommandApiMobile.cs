@@ -23,8 +23,10 @@ namespace ApiMobaileServise.Servise
             context.Drivers.Load();
             context.Photos.Load();
             context.Asks.Load();
+            context.Ask1s.Load();
             context.PhotoInspections.Load();
             context.User.Load();
+            context.AskFromUsers.Load();
         }
 
         public async void SavePhotoInspectionInDb(string idVe, PhotoInspection photoInspection)
@@ -43,11 +45,35 @@ namespace ApiMobaileServise.Servise
         {
             Init();
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
-            if(vehiclwInformation.Asks == null)
+            if(vehiclwInformation.Ask == null)
             {
-                vehiclwInformation.Asks = new List<Ask>();
+                vehiclwInformation.Ask = new Ask();
             }
-            vehiclwInformation.Asks.Add(ask);
+            vehiclwInformation.Ask = ask;
+            context.SaveChangesAsync();
+        }
+
+        public void SaveAsk1InDb(string idve, Ask1 ask1)
+        {
+            Init();
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
+            if (vehiclwInformation.Ask1 == null)
+            {
+                vehiclwInformation.Ask1 = new Ask1();
+            }
+            vehiclwInformation.Ask1 = ask1;
+            context.SaveChangesAsync();
+        }
+
+        public void SaveAskFromUserInDb(string idve, AskFromUser askFromUser)
+        {
+            Init();
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
+            if (vehiclwInformation.Ask1 == null)
+            {
+                vehiclwInformation.AskFromUser = new AskFromUser();
+            }
+            vehiclwInformation.AskFromUser = askFromUser;
             context.SaveChangesAsync();
         }
 
@@ -55,35 +81,6 @@ namespace ApiMobaileServise.Servise
         {
             Init();
             return context.Drivers.FirstOrDefault(d => d.EmailAddress == email && d.Password == password) != null ? true : false;
-        }
-
-
-        public string GetNumberPhoto(string id)
-        {
-            Init();
-            string lNumber = "";
-            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == id);
-            if(vehiclwInformation.Photos != null)
-            {
-                lNumber = vehiclwInformation.Photos.Count.ToString();
-                lNumber = (Convert.ToInt32(lNumber) + 1).ToString();
-            }
-            else
-            {
-                lNumber = "1";
-            }
-            return lNumber;
-        }
-
-        public async void SavePhotoInDb(string id, string patch)
-        {
-            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == id);
-            if (vehiclwInformation.Photos == null)
-            {
-                vehiclwInformation.Photos = new List<Photo>();
-            }
-            vehiclwInformation.Photos.Add(new Photo() { path = patch });
-            await context.SaveChangesAsync();
         }
 
         public async void SavePikedUpInDb(string id, string idOrder, string name, string contactName, string address, string city, string state, string zip, string phone, string email)

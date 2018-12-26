@@ -21,6 +21,14 @@ namespace MDispatch.View.PageApp
             NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = fullPagePhotoMV;
             paternPhoto.Source = pngPaternPhoto;
+            if(fullPagePhotoMV.Car.typeIndex != null && fullPagePhotoMV.Car.typeIndex != "")
+            {
+                NameSelectPhoto.Text = $"{fullPagePhotoMV.Car.typeIndex} - {photoIndex}";
+            }
+            else
+            {
+                NameSelectPhoto.Text = "--------------------";
+            }
         }
 
         private async void Button_Clicked(object sender, EventArgs e)

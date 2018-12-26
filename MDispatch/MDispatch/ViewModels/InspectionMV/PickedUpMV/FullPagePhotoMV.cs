@@ -1,11 +1,14 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
+using MDispatch.View.Inspection;
+using MDispatch.View.Inspection.PickedUp;
 using MDispatch.View.PageApp;
 using MDispatch.ViewModels.AskPhoto;
 using MDispatch.ViewModels.InspectionMV.Models;
 using Newtonsoft.Json;
 using Plugin.Settings;
 using Prism.Mvvm;
+using Rg.Plugins.Popup.Services;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -79,9 +82,9 @@ namespace MDispatch.ViewModels.PageAppMV
             ICar car = null;
             switch(typeCar)
             {
-                case "Sedan":
+                case "PickUp":
                     {
-                        car = new CarSedan();
+                        car = new CarPickUp();
                         break;
                     }
             }
@@ -112,7 +115,7 @@ namespace MDispatch.ViewModels.PageAppMV
             PhotoInspection.IndexPhoto = InderxPhotoInspektion;
             Models.Photo photo = new Models.Photo();
             string photoJson = JsonConvert.SerializeObject(PhotoInArrayByte);
-            string pathIndePhoto = PhotoInspection.Photos.Count == 0 ? 1.ToString() : $"{PhotoInspection.IndexPhoto}.{PhotoInspection.Photos.Count}"; ;
+            string pathIndePhoto = PhotoInspection.Photos.Count == 0 ? PhotoInspection.IndexPhoto.ToString() : $"{PhotoInspection.IndexPhoto}.{PhotoInspection.Photos.Count}"; ;
             photo.Base64 = photoJson;
             photo.path = $"Photo/{VehiclwInformation.Id}/PhotoInspection/{pathIndePhoto}.png";
             PhotoInspection.Photos.Add(photo);
@@ -139,11 +142,12 @@ namespace MDispatch.ViewModels.PageAppMV
             {
                 if (InderxPhotoInspektion < 3)
                 {
-                    await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, Shipping, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", "Sedan", InderxPhotoInspektion + 1));
+                    await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, Shipping, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", Car.typeIndex, InderxPhotoInspektion + 1));
                 }
                 else
                 {
-
+                    await PopupNavigation.PushAsync(new TempPageHint());
+                    await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, Shipping), true);
                 }
             }
             else if (state == 4)

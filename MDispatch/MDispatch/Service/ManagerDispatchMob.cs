@@ -87,6 +87,14 @@ namespace MDispatch.Service
                 {
                     stateInspection = inspection.SavePhoto(token, id, (Models.PhotoInspection)obj, ref description);
                 }
+                else if (typeInspection == "SaveAsk1")
+                {
+                    stateInspection = inspection.SaveAsk(token, id, (Models.Ask1)obj, ref description);
+                }
+                else if (typeInspection == "AskFromUser")
+                {
+                    stateInspection = inspection.SaveAsk(token, id, (Models.AskForUserM)obj, ref description);
+                }
             }
             inspection = null;
             return stateInspection;

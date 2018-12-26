@@ -1,19 +1,18 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
-using MDispatch.View.PageApp;
 using Plugin.Settings;
 using Prism.Mvvm;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace MDispatch.ViewModels.AskPhoto
+namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
 {
-    public class AskPageMV : BindableBase
+    public class AskForUserMV : BindableBase
     {
         public ManagerDispatchMob managerDispatchMob = null;
-        public INavigation Navigation  { get; set; }
+        public INavigation Navigation { get; set; }
 
-        public AskPageMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, INavigation navigation)
+        public AskForUserMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, INavigation navigation)
         {
             this.managerDispatchMob = managerDispatchMob;
             Navigation = navigation;
@@ -28,11 +27,11 @@ namespace MDispatch.ViewModels.AskPhoto
             set => SetProperty(ref shipping, value);
         }
 
-        private Models.Ask ask = null;
-        public Models.Ask Ask
+        private AskForUserM askForUser = null;
+        public AskForUserM AskForUser
         {
-            get => ask;
-            set => SetProperty(ref ask, value);
+            get => askForUser;
+            set => SetProperty(ref askForUser, value);
         }
 
         private VehiclwInformation vehiclwInformation = null;
@@ -42,14 +41,14 @@ namespace MDispatch.ViewModels.AskPhoto
             set => SetProperty(ref vehiclwInformation, value);
         }
 
-        public async void SaveAsk(string indexTypeCar)
+        public async void SaveAsk()
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
             await Task.Run(() =>
             {
-                state = managerDispatchMob.AskWork("SaveAsk", token, VehiclwInformation.Id, Ask, ref description);
+                state = managerDispatchMob.AskWork("AskFromUser", token, VehiclwInformation.Id, AskForUser, ref description);
             });
             if (state == 1)
             {
@@ -61,7 +60,8 @@ namespace MDispatch.ViewModels.AskPhoto
             }
             else if (state == 3)
             {
-                await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, Shipping, $"{indexTypeCar}1.png", "Sedan", 1));
+
+
             }
             else if (state == 4)
             {
