@@ -1,5 +1,6 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
+using MDispatch.View;
 using MDispatch.View.Inspection;
 using MDispatch.View.Inspection.PickedUp;
 using MDispatch.View.PageApp;
@@ -13,6 +14,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using static MDispatch.Service.ManagerDispatchMob;
 
 namespace MDispatch.ViewModels.PageAppMV
 {
@@ -21,12 +23,15 @@ namespace MDispatch.ViewModels.PageAppMV
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation { get; set; }
         public ICar Car = null;
+        private InitDasbordDelegate initDasbordDelegate = null;
 
-        public FullPagePhotoMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, string typeCar, int inderxPhotoInspektion, INavigation navigation)
+        public FullPagePhotoMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, string typeCar, int inderxPhotoInspektion, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
         {
             Navigation = navigation;
+            this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
             VehiclwInformation = vehiclwInformation;
+            Shipping = shipping;
             InderxPhotoInspektion = inderxPhotoInspektion;
             if (typeCar != null)
             {
@@ -117,19 +122,22 @@ namespace MDispatch.ViewModels.PageAppMV
             string photoJson = JsonConvert.SerializeObject(PhotoInArrayByte);
             string pathIndePhoto = PhotoInspection.Photos.Count == 0 ? PhotoInspection.IndexPhoto.ToString() : $"{PhotoInspection.IndexPhoto}.{PhotoInspection.Photos.Count}"; ;
             photo.Base64 = photoJson;
-            photo.path = $"Photo/{VehiclwInformation.Id}/PhotoInspection/{pathIndePhoto}.png";
+            photo.path = $"Photo/PikedUp/{VehiclwInformation.Id}/PhotoInspection/{pathIndePhoto}.png";
             PhotoInspection.Photos.Add(photo);
         }
 
         public async void SavePhoto()
         {
+            await PopupNavigation.PushAsync(new LoadPage(), true);
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
             await Task.Run(() =>
             {
                 state = managerDispatchMob.AskWork("SavePhoto", token, VehiclwInformation.Id, PhotoInspection, ref description);
+                initDasbordDelegate.Invoke();
             });
+            await PopupNavigation.PopAsync(true);
             if (state == 1)
             {
                 //FeedBack = "Not Network";
@@ -140,14 +148,14 @@ namespace MDispatch.ViewModels.PageAppMV
             }
             else if (state == 3)
             {
-                if (InderxPhotoInspektion < 3)
+                if (InderxPhotoInspektion < 39)
                 {
-                    await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, Shipping, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", Car.typeIndex, InderxPhotoInspektion + 1));
+                    await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, Shipping, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", Car.typeIndex, InderxPhotoInspektion + 1, initDasbordDelegate));
                 }
                 else
                 {
                     await PopupNavigation.PushAsync(new TempPageHint());
-                    await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, Shipping), true);
+                    await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, Shipping, initDasbordDelegate), true);
                 }
             }
             else if (state == 4)

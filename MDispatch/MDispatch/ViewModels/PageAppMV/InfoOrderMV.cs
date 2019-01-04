@@ -1,12 +1,15 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.View.AskPhoto;
+using MDispatch.View.Inspection;
+using MDispatch.View.Inspection.PickedUp;
 using MDispatch.View.PageApp;
 using MDispatch.View.PageApp.DialogPage;
 using Prism.Commands;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
+using static MDispatch.Service.ManagerDispatchMob;
 
 namespace MDispatch.ViewModels.PageAppMV
 {
@@ -18,9 +21,11 @@ namespace MDispatch.ViewModels.PageAppMV
         public DelegateCommand ToEditDeliveryCommand { get; set; }
         public DelegateCommand ToPaymentCommand { get; set; }
         public INavigation Navigation { get; set; }
+        private InitDasbordDelegate initDasbordDelegate = null;
 
-        public InfoOrderMV(ManagerDispatchMob managerDispatchMob, Shipping shipping)
+        public InfoOrderMV(ManagerDispatchMob managerDispatchMob, Shipping shipping, InitDasbordDelegate initDasbordDelegate)
         {
+            this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
             Shipping = shipping;
             ToInstructionComand = new DelegateCommand(ToInstruction);
@@ -70,7 +75,28 @@ namespace MDispatch.ViewModels.PageAppMV
 
         public async void ToStartInspection(VehiclwInformation vehiclwInformation, Shipping shipping)
         {
-            await Navigation.PushAsync(new AskPage(managerDispatchMob, vehiclwInformation, shipping), true);
+            if (vehiclwInformation.Ask == null)
+            {
+                await Navigation.PushAsync(new AskPage(managerDispatchMob, vehiclwInformation, shipping, initDasbordDelegate), true);
+            }
+            else if(vehiclwInformation.PhotoInspections == null)
+            {
+                await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, vehiclwInformation, shipping, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 1, initDasbordDelegate), true);
+            }
+            else if(vehiclwInformation.PhotoInspections.Find(p => p.IndexPhoto == 39) == null)
+            {
+                int lastIndexPhoto = vehiclwInformation.PhotoInspections[vehiclwInformation.PhotoInspections.Count - 1].IndexPhoto + 1;
+                 await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, vehiclwInformation, shipping, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{lastIndexPhoto}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), lastIndexPhoto, initDasbordDelegate), true);
+            }
+            else if(vehiclwInformation.Ask1 == null)
+            {
+                await Navigation.PushAsync(new Ask1Page(managerDispatchMob, vehiclwInformation, shipping, initDasbordDelegate), true);
+            }
+            else if(vehiclwInformation.AskFromUser == null)
+            {
+                await Navigation.PushAsync(new AskForUser(managerDispatchMob, vehiclwInformation, shipping, initDasbordDelegate), true);
+            }
+
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static MDispatch.Service.ManagerDispatchMob;
 
 namespace MDispatch.View.AskPhoto
 {
@@ -17,9 +18,10 @@ namespace MDispatch.View.AskPhoto
 	{
         AskPageMV askPageMV = null;
         private Models.Ask Ask = null;
-        public AskPage (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping)
+
+        public AskPage (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, InitDasbordDelegate initDasbordDelegate)
 		{
-            askPageMV = new AskPageMV(managerDispatchMob, vehiclwInformation, shipping, Navigation);
+            askPageMV = new AskPageMV(managerDispatchMob, vehiclwInformation, shipping, Navigation, initDasbordDelegate);
             Ask = new Models.Ask();
             InitializeComponent ();
             BindingContext = askPageMV;
@@ -272,7 +274,7 @@ namespace MDispatch.View.AskPhoto
             }
             Models.Photo photo = new Models.Photo();
             photo.Base64 = JsonConvert.SerializeObject(photob);
-            photo.path = $"Photo/{askPageMV.VehiclwInformation.Id}/Ask/Document/{ Ask.Any_paperwork_or_documentation.Count + 1}.png";
+            photo.path = $"Photo/PikedUp/{askPageMV.VehiclwInformation.Id}/Ask/Document/{ Ask.Any_paperwork_or_documentation.Count + 1}.png";
             Ask.Any_paperwork_or_documentation.Add(photo);
             blockAskPhotoDocument.Children.Add(new Image()
             {
@@ -290,7 +292,7 @@ namespace MDispatch.View.AskPhoto
             }
             Models.Photo photo = new Models.Photo();
             photo.Base64 = JsonConvert.SerializeObject(photob);
-            photo.path = $"Photo/{askPageMV.VehiclwInformation.Id}/Ask/Items/{ Ask.Any_personal_or_additional_items_with_or_in_vehicle.Count + 1}.png";
+            photo.path = $"Photo/PikedUp/{askPageMV.VehiclwInformation.Id}/Ask/Items/{ Ask.Any_personal_or_additional_items_with_or_in_vehicle.Count + 1}.png";
             Ask.Any_personal_or_additional_items_with_or_in_vehicle.Add(photo);
             blockAskPhotoItem.Children.Add(new Image()
             {

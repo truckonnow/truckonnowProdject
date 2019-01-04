@@ -1,15 +1,13 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
+using MDispatch.View;
 using MDispatch.View.Inspection.PickedUp;
-using MDispatch.View.PageApp;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using static MDispatch.Service.ManagerDispatchMob;
 
 namespace MDispatch.ViewModels.InspectionMV
 {
@@ -17,9 +15,11 @@ namespace MDispatch.ViewModels.InspectionMV
     {
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation { get; set; }
+        private InitDasbordDelegate initDasbordDelegate = null;
 
-        public Ask1PageMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, INavigation navigation)
+        public Ask1PageMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
         {
+            this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
             Navigation = navigation;
             VehiclwInformation = vehiclwInformation;
@@ -49,13 +49,16 @@ namespace MDispatch.ViewModels.InspectionMV
 
         public async void SaveAsk()
         {
+            await PopupNavigation.PushAsync(new LoadPage(), true);
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
             await Task.Run(() =>
             {
                 state = managerDispatchMob.AskWork("SaveAsk1", token, VehiclwInformation.Id, Ask1, ref description);
+                initDasbordDelegate.Invoke();
             });
+            await PopupNavigation.PopAsync(true);
             if (state == 1)
             {
                 //FeedBack = "Not Network";
@@ -66,7 +69,7 @@ namespace MDispatch.ViewModels.InspectionMV
             }
             else if (state == 3)
             {
-                await Navigation.PushAsync(new AskForUser(managerDispatchMob, VehiclwInformation, Shipping));
+                await Navigation.PushAsync(new AskForUser(managerDispatchMob, VehiclwInformation, Shipping, initDasbordDelegate));
                 await PopupNavigation.PushAsync(new TempPageHint1());
 
             }

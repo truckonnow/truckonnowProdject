@@ -8,6 +8,36 @@ namespace MDispatch.Service
 {
     public class Inspection
     {
+        public int ReCurentStatus(string token, string id, ref string description, string status)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestRequest request = new RestRequest("Mobile/ReCurentStatus", Method.POST);
+                request.AddHeader("Accept", "application/json");
+                request.Parameters.Clear();
+                request.AddParameter("token", token);
+                request.AddParameter("idShip", id);
+                request.AddParameter("status", status);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description);
+            }
+        }
+
         public int SaveAsk(string token, string id, Ask ask, ref string description)
         {
             IRestResponse response = null;
@@ -23,6 +53,36 @@ namespace MDispatch.Service
                 request.AddParameter("idVe", id);
                 request.AddParameter("jsonStrAsk", strJsonAsk);
                 request.AddParameter("type", 1);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description);
+            }
+        }
+
+        public int SaveAsk(string token, Feedback feedback, ref string description)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                string strJsonAsk = JsonConvert.SerializeObject(feedback);
+                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestRequest request = new RestRequest("Mobile/Save/FeedBack", Method.POST);
+                request.AddHeader("Accept", "application/json");
+                request.Parameters.Clear();
+                request.AddParameter("token", token);
+                request.AddParameter("jsonStrAsk", strJsonAsk);
                 response = client.Execute(request);
                 content = response.Content;
             }
@@ -72,13 +132,13 @@ namespace MDispatch.Service
             }
         }
 
-        public int SaveAsk(string token, string id, AskForUserM askForUserM, ref string description)
+        public int SaveAsk(string token, string id, AskFromUser askForUser, ref string description)
         {
             IRestResponse response = null;
             string content = null;
             try
             {
-                string strJsonAsk = JsonConvert.SerializeObject(askForUserM);
+                string strJsonAsk = JsonConvert.SerializeObject(askForUser);
                 RestClient client = new RestClient("http://192.168.0.100:8888");
                 RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
                 request.AddHeader("Accept", "application/json");

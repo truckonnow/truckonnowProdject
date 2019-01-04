@@ -4,6 +4,7 @@ using MDispatch.ViewModels.InspectionMV.PickedUpMV;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static MDispatch.Service.ManagerDispatchMob;
 
 namespace MDispatch.View.Inspection.PickedUp
 {
@@ -11,12 +12,12 @@ namespace MDispatch.View.Inspection.PickedUp
 	public partial class AskForUser : ContentPage
 	{
         private AskForUserMV askForUserMV = null;
-        private AskForUserM askForUserM = null;
+        private AskFromUser askForUserM = null;
 
-        public AskForUser (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shippin)
+        public AskForUser (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shippin, InitDasbordDelegate initDasbordDelegate)
 		{
-            askForUserMV = new AskForUserMV(managerDispatchMob, vehiclwInformation, shippin, Navigation);
-            askForUserM = new AskForUserM();
+            askForUserMV = new AskForUserMV(managerDispatchMob, vehiclwInformation, shippin, Navigation, initDasbordDelegate);
+            askForUserM = new AskFromUser();
             InitializeComponent ();
             BindingContext = askForUserM;
 		}

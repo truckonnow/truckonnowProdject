@@ -14,8 +14,9 @@ namespace MDispatch.Models
         public string VIN { get; set; }
         public string Lot { get; set; }
         public string AdditionalInfo { get; set; }
-        public List<Photo> Photos { get; set; }
-        public List<Ask> Asks { get; set; }
+        public Ask Ask { get; set; }
+        public Ask1 Ask1 { get; set; }
         public List<PhotoInspection> PhotoInspections { get; set; }
+        public AskFromUser AskFromUser { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using MDispatch.ViewModels.TAbbMV;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static MDispatch.Service.ManagerDispatchMob;
 
 namespace MDispatch.View.TabPage.Tab
 {
@@ -12,9 +13,11 @@ namespace MDispatch.View.TabPage.Tab
 	{
         public ActiveMV activeMV = null;
         private StackLayout SelectStackLayout = null;
+        private InitDasbordDelegate initDasbordDelegate = null;
 
         public ActivePage (ManagerDispatchMob managerDispatchMob, INavigation navigation)
 		{
+            this.initDasbordDelegate = initDasbordDelegate;
             this.activeMV = new ActiveMV(managerDispatchMob, navigation);
 			InitializeComponent ();
             BindingContext = this.activeMV;
@@ -49,7 +52,7 @@ namespace MDispatch.View.TabPage.Tab
             {
                 idOrder = stackLayout.Parent.Parent.FindByName<Label>("idOrder").Text;
             }
-            await activeMV.Navigation.PushAsync(new InfoOrder(activeMV.managerDispatchMob, activeMV.Shippings.Find(s => s.Id == idOrder)));
+            await activeMV.Navigation.PushAsync(new InfoOrder(activeMV.managerDispatchMob, activeMV.Shippings.Find(s => s.Id == idOrder), activeMV.initDasbordDelegate));
         }
 
         private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)

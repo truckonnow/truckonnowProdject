@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static MDispatch.Service.ManagerDispatchMob;
 
 namespace MDispatch.View.Inspection
 {
@@ -18,9 +19,9 @@ namespace MDispatch.View.Inspection
         public Ask1PageMV ask1PageMV = null;
         private Ask1 Ask1 = null;
 
-        public Ask1Page(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping)
+        public Ask1Page(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, InitDasbordDelegate initDasbordDelegate)
         {
-            ask1PageMV = new Ask1PageMV(managerDispatchMob, vehiclwInformation, shipping, Navigation);
+            ask1PageMV = new Ask1PageMV(managerDispatchMob, vehiclwInformation, shipping, Navigation, initDasbordDelegate);
             Ask1 = new Ask1();
             InitializeComponent();
             BindingContext = ask1PageMV;
@@ -199,17 +200,17 @@ namespace MDispatch.View.Inspection
             await Navigation.PushAsync(new CameraSeatBelts(this));
         }
 
-        public void AddPhotoSeatBelts(List<Photo> photos)
+        public void AddPhotoSeatBelts(List<Photo> photos, List<byte[]> imagesByte)
         {
             if(photos != null && photos.Count == 4)
             {
                 isAsk12 = true;
                 Ask1.App_will_force_driver_to_take_pictures_of_each_strap = new List<Photo>(photos);
-                foreach (var pictures_of_each_strap in Ask1.App_will_force_driver_to_take_pictures_of_each_strap)
+                foreach (var imageByte in imagesByte)
                 {
                     blockAskPhotoSeatBelts.Children.Add(new Image()
                     {
-                        Source = ImageSource.FromStream(() => new MemoryStream(Convert.ToByte(pictures_of_each_strap.Base64))),
+                        Source = ImageSource.FromStream(() => new MemoryStream(imageByte)),
                         HeightRequest = 50,
                         WidthRequest = 50
                     });
@@ -300,7 +301,7 @@ namespace MDispatch.View.Inspection
             }
             Models.Photo photo = new Models.Photo();
             photo.Base64 = JsonConvert.SerializeObject(photob);
-            photo.path = $"Photo/{ask1PageMV.VehiclwInformation.Id}/Ask/SpareParts/{ Ask1.Any_additional_parts_been_given_to_you.Count + 1}.png";
+            photo.path = $"Photo/PikedUp/{ask1PageMV.VehiclwInformation.Id}/Ask/SpareParts/{ Ask1.Any_additional_parts_been_given_to_you.Count + 1}.png";
             Ask1.Any_additional_parts_been_given_to_you.Add(photo);
             blockAskPhotoSpareParts.Children.Add(new Image()
             {
@@ -318,7 +319,7 @@ namespace MDispatch.View.Inspection
             }
             Models.Photo photo = new Models.Photo();
             photo.Base64 = JsonConvert.SerializeObject(photob);
-            photo.path = $"Photo/{ask1PageMV.VehiclwInformation.Id}/Ask/Documentations/{ Ask1.Any_additional_documentation_been_given_after_loading.Count + 1}.png";
+            photo.path = $"Photo/PikedUp/{ask1PageMV.VehiclwInformation.Id}/Ask/Documentations/{ Ask1.Any_additional_documentation_been_given_after_loading.Count + 1}.png";
             Ask1.Any_additional_documentation_been_given_after_loading.Add(photo);
             blockAskPhotoDocumentations.Children.Add(new Image()
             {
@@ -332,6 +333,11 @@ namespace MDispatch.View.Inspection
         {
 
             await Navigation.PushAsync(new CameraDocumentations(this));
+        }
+
+        private void Button_Clicked_4(object sender, EventArgs e)
+        {
+
         }
     }
 }

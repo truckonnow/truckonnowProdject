@@ -6,6 +6,7 @@ namespace MDispatch.Service
 {
     public class ManagerDispatchMob
     {
+        public delegate void InitDasbordDelegate();
         private A_R a_R = null;
         private OrderGet orderGet = null;
         private Photo photo = null;
@@ -26,7 +27,7 @@ namespace MDispatch.Service
             return stateA_R;
         }
 
-        public int OrderWork(string typeOrder, string token, string status, ref string description, ref List<Shipping> shippings)
+        public int OrderWork(string typeOrder, string token, ref string description, ref List<Shipping> shippings)
         {
             orderGet = new OrderGet();
             int stateOrder = 1;
@@ -34,7 +35,7 @@ namespace MDispatch.Service
             {
                 if (typeOrder == "OrderGet")
                 {
-                    stateOrder = orderGet.ActiveOreder(token, status, ref description, ref shippings);
+                    stateOrder = orderGet.ActiveOreder(token, ref description, ref shippings);
                 }
             }
             orderGet = null;
@@ -73,6 +74,18 @@ namespace MDispatch.Service
             return stateOrder;
         }
 
+        public int Recurent(string token, string id, string status, ref string description)
+        {
+            inspection = new Inspection();
+            int stateInspection = 1;
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                stateInspection = inspection.ReCurentStatus(token, id, ref description, status);
+            }
+            inspection = null;
+            return stateInspection;
+        }
+
         public int AskWork(string typeInspection, string token, string id, object obj, ref string description)
         {
             inspection = new Inspection();
@@ -93,7 +106,11 @@ namespace MDispatch.Service
                 }
                 else if (typeInspection == "AskFromUser")
                 {
-                    stateInspection = inspection.SaveAsk(token, id, (Models.AskForUserM)obj, ref description);
+                    stateInspection = inspection.SaveAsk(token, id, (AskFromUser)obj, ref description);
+                }
+                else if(typeInspection == "FeedBack")
+                {
+                    stateInspection = inspection.SaveAsk(token, (Models.Feedback)obj, ref description);
                 }
             }
             inspection = null;

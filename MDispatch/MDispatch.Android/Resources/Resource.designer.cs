@@ -4620,26 +4620,26 @@ namespace MDispatch.Droid
 			// aapt resource value: 0x7f020056
 			public const int avd_hide_password = 2130837590;
 			
-			// aapt resource value: 0x7f020136
-			public const int avd_hide_password_1 = 2130837814;
+			// aapt resource value: 0x7f02015a
+			public const int avd_hide_password_1 = 2130837850;
 			
-			// aapt resource value: 0x7f020137
-			public const int avd_hide_password_2 = 2130837815;
+			// aapt resource value: 0x7f02015b
+			public const int avd_hide_password_2 = 2130837851;
 			
-			// aapt resource value: 0x7f020138
-			public const int avd_hide_password_3 = 2130837816;
+			// aapt resource value: 0x7f02015c
+			public const int avd_hide_password_3 = 2130837852;
 			
 			// aapt resource value: 0x7f020057
 			public const int avd_show_password = 2130837591;
 			
-			// aapt resource value: 0x7f020139
-			public const int avd_show_password_1 = 2130837817;
+			// aapt resource value: 0x7f02015d
+			public const int avd_show_password_1 = 2130837853;
 			
-			// aapt resource value: 0x7f02013a
-			public const int avd_show_password_2 = 2130837818;
+			// aapt resource value: 0x7f02015e
+			public const int avd_show_password_2 = 2130837854;
 			
-			// aapt resource value: 0x7f02013b
-			public const int avd_show_password_3 = 2130837819;
+			// aapt resource value: 0x7f02015f
+			public const int avd_show_password_3 = 2130837855;
 			
 			// aapt resource value: 0x7f020058
 			public const int Delivered = 2130837592;
@@ -5280,11 +5280,11 @@ namespace MDispatch.Droid
 			// aapt resource value: 0x7f02012c
 			public const int notification_icon_background = 2130837804;
 			
-			// aapt resource value: 0x7f020134
-			public const int notification_template_icon_bg = 2130837812;
+			// aapt resource value: 0x7f020158
+			public const int notification_template_icon_bg = 2130837848;
 			
-			// aapt resource value: 0x7f020135
-			public const int notification_template_icon_low_bg = 2130837813;
+			// aapt resource value: 0x7f020159
+			public const int notification_template_icon_low_bg = 2130837849;
 			
 			// aapt resource value: 0x7f02012d
 			public const int notification_tile_bg = 2130837805;
@@ -5296,16 +5296,124 @@ namespace MDispatch.Droid
 			public const int PickUp1 = 2130837807;
 			
 			// aapt resource value: 0x7f020130
-			public const int PickUp2 = 2130837808;
+			public const int PickUp10 = 2130837808;
 			
 			// aapt resource value: 0x7f020131
-			public const int PickUp3 = 2130837809;
+			public const int PickUp11 = 2130837809;
 			
 			// aapt resource value: 0x7f020132
-			public const int tooltip_frame_dark = 2130837810;
+			public const int PickUp12 = 2130837810;
 			
 			// aapt resource value: 0x7f020133
-			public const int tooltip_frame_light = 2130837811;
+			public const int PickUp13 = 2130837811;
+			
+			// aapt resource value: 0x7f020134
+			public const int PickUp14 = 2130837812;
+			
+			// aapt resource value: 0x7f020135
+			public const int PickUp15 = 2130837813;
+			
+			// aapt resource value: 0x7f020136
+			public const int PickUp16 = 2130837814;
+			
+			// aapt resource value: 0x7f020137
+			public const int PickUp17 = 2130837815;
+			
+			// aapt resource value: 0x7f020138
+			public const int PickUp18 = 2130837816;
+			
+			// aapt resource value: 0x7f020139
+			public const int PickUp19 = 2130837817;
+			
+			// aapt resource value: 0x7f02013a
+			public const int PickUp2 = 2130837818;
+			
+			// aapt resource value: 0x7f02013b
+			public const int PickUp20 = 2130837819;
+			
+			// aapt resource value: 0x7f02013c
+			public const int PickUp21 = 2130837820;
+			
+			// aapt resource value: 0x7f02013d
+			public const int PickUp22 = 2130837821;
+			
+			// aapt resource value: 0x7f02013e
+			public const int PickUp23 = 2130837822;
+			
+			// aapt resource value: 0x7f02013f
+			public const int PickUp24 = 2130837823;
+			
+			// aapt resource value: 0x7f020140
+			public const int PickUp25 = 2130837824;
+			
+			// aapt resource value: 0x7f020141
+			public const int PickUp26 = 2130837825;
+			
+			// aapt resource value: 0x7f020142
+			public const int PickUp27 = 2130837826;
+			
+			// aapt resource value: 0x7f020143
+			public const int PickUp28 = 2130837827;
+			
+			// aapt resource value: 0x7f020144
+			public const int PickUp29 = 2130837828;
+			
+			// aapt resource value: 0x7f020145
+			public const int PickUp3 = 2130837829;
+			
+			// aapt resource value: 0x7f020146
+			public const int PickUp30 = 2130837830;
+			
+			// aapt resource value: 0x7f020147
+			public const int PickUp31 = 2130837831;
+			
+			// aapt resource value: 0x7f020148
+			public const int PickUp32 = 2130837832;
+			
+			// aapt resource value: 0x7f020149
+			public const int PickUp33 = 2130837833;
+			
+			// aapt resource value: 0x7f02014a
+			public const int PickUp34 = 2130837834;
+			
+			// aapt resource value: 0x7f02014b
+			public const int PickUp35 = 2130837835;
+			
+			// aapt resource value: 0x7f02014c
+			public const int PickUp36 = 2130837836;
+			
+			// aapt resource value: 0x7f02014d
+			public const int PickUp37 = 2130837837;
+			
+			// aapt resource value: 0x7f02014e
+			public const int PickUp38 = 2130837838;
+			
+			// aapt resource value: 0x7f02014f
+			public const int PickUp39 = 2130837839;
+			
+			// aapt resource value: 0x7f020150
+			public const int PickUp4 = 2130837840;
+			
+			// aapt resource value: 0x7f020151
+			public const int PickUp5 = 2130837841;
+			
+			// aapt resource value: 0x7f020152
+			public const int PickUp6 = 2130837842;
+			
+			// aapt resource value: 0x7f020153
+			public const int PickUp7 = 2130837843;
+			
+			// aapt resource value: 0x7f020154
+			public const int PickUp8 = 2130837844;
+			
+			// aapt resource value: 0x7f020155
+			public const int PickUp9 = 2130837845;
+			
+			// aapt resource value: 0x7f020156
+			public const int tooltip_frame_dark = 2130837846;
+			
+			// aapt resource value: 0x7f020157
+			public const int tooltip_frame_light = 2130837847;
 			
 			static Drawable()
 			{

@@ -12,6 +12,7 @@ namespace MDispatch.View.Inspection.PickUp.CameraPageFolder
     {
         private Ask1Page ask1Page = null;
         private List<Photo> photos = new List<Photo>();
+        List<byte[]> imagesByte = new List<byte[]>();
 
         public CameraSeatBelts (Ask1Page ask1Page)
 		{
@@ -32,13 +33,15 @@ namespace MDispatch.View.Inspection.PickUp.CameraPageFolder
                 photo1.Base64 = JsonConvert.SerializeObject(result.Image);
                 photo1.path = $"Photo/{ask1Page.ask1PageMV.VehiclwInformation.Id}/Ask/CameraSeatBelts/{photos.Count + 1}";
                 photos.Add(photo1);
-                ask1Page.AddPhotoSeatBelts(photos);
+                imagesByte.Add(result.Image);
+                ask1Page.AddPhotoSeatBelts(photos, imagesByte);
                 return;
             }
             Photo photo = new Photo();
             photo.Base64 = JsonConvert.SerializeObject(result.Image);
-            photo.path = $"Photo/{ask1Page.ask1PageMV.VehiclwInformation.Id}/Ask/CameraSeatBelts/{photos.Count + 1}";
+            photo.path = $"Photo/PikedUp/{ask1Page.ask1PageMV.VehiclwInformation.Id}/Ask/CameraSeatBelts/{photos.Count + 1}";
             photos.Add(photo);
+            imagesByte.Add(result.Image);
             titlePhoto.Text = $"{photos.Count + 1}";
         }
     }

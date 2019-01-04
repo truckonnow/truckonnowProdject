@@ -1,8 +1,10 @@
 ﻿using MDispatch.Service;
+using MDispatch.View;
 using MDispatch.View.TabPage;
 using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
+using Rg.Plugins.Popup.Services;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -48,6 +50,7 @@ namespace MDispatch.ViewModels
          
         private async void Avtorization()
         {
+            await PopupNavigation.PushAsync(new LoadPage(), true);
             string token = null;
             string description = null;
             int state = 3;
@@ -55,6 +58,7 @@ namespace MDispatch.ViewModels
             {
                 state = managerDispatchMob.A_RWork("authorisation", Username, Password, ref description, ref token);
             });
+            await PopupNavigation.PopAsync(true);
             if (state == 1)
             {
                 FeedBack = "Not Network";

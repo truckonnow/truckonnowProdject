@@ -39,7 +39,7 @@
                         <p class="stPData">Phone: @ViewBag.Orders[i].PhoneD</p>
                     </div>
                     <div class="blockData" style="margin-left:auto;">
-                        <a class="btnId" style="width:100px" href="/Dashbord/Order/Edit?id=@ViewBag.Orders[i].Id&stasus=NewLoad">Edit</a>
+                        <a class="btnId" style="width:100px" href="/Dashbord/Order/Edit?id=@ViewBag.Orders[i].Id&stasus=Delivered">Edit</a>
                         <select class="btnId" style="width:100px">
                             <option value="">-----------------------</option>
                             @for (int j = 0; j < ViewBag.Drivers.Count; j++)

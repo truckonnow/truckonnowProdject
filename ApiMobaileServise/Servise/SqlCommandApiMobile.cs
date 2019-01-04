@@ -41,7 +41,7 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
-        public void SaveAskInDb(string idve, Ask ask)
+        public async void SaveAskInDb(string idve, Ask ask)
         {
             Init();
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
@@ -50,10 +50,25 @@ namespace ApiMobaileServise.Servise
                 vehiclwInformation.Ask = new Ask();
             }
             vehiclwInformation.Ask = ask;
-            context.SaveChangesAsync();
+            await context.SaveChangesAsync();
         }
 
-        public void SaveAsk1InDb(string idve, Ask1 ask1)
+        public async void SaveFeedBackInDb(Feedback feedback)
+        {
+            Init();
+            context.Feedbacks.Add(feedback);
+            await context.SaveChangesAsync();
+        }
+
+        public async void ReCurentStatus(string idShip, string status)
+        {
+            Init();
+            Shipping shipping = context.Shipping.FirstOrDefault(s => s.Id == idShip);
+            shipping.CurrentStatus = status;
+            await context.SaveChangesAsync();
+        }
+
+        public async void SaveAsk1InDb(string idve, Ask1 ask1)
         {
             Init();
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
@@ -62,7 +77,7 @@ namespace ApiMobaileServise.Servise
                 vehiclwInformation.Ask1 = new Ask1();
             }
             vehiclwInformation.Ask1 = ask1;
-            context.SaveChangesAsync();
+            await context.SaveChangesAsync();
         }
 
         public void SaveAskFromUserInDb(string idve, AskFromUser askFromUser)
@@ -143,16 +158,19 @@ namespace ApiMobaileServise.Servise
             return context.Drivers.FirstOrDefault(d => d.Token == token) != null ? true : false;
         }
 
-        public List<Shipping> GetOrdersForToken(string token, string status)
+        public List<Shipping> GetOrdersForToken(string token)
         {
             Init();
+            List<Shipping> Shipping1 = new List<Shipping>();
             Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
             List<Shipping> shippings = context.Shipping.ToList().FindAll(s => s.Driverr != null && s.Driverr.Id == driver.Id);
             if(shippings == null)
             {
                 return new List<Shipping>();
             }
-            return shippings.FindAll(s => s.CurrentStatus == status);
+            Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Assigned"));
+            Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Picked up"));
+            return shippings;
         }
     }
 }

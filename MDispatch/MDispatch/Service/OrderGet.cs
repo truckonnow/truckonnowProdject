@@ -9,7 +9,7 @@ namespace MDispatch.Service
 {
     public class OrderGet
     {
-        public int ActiveOreder(string token, string status, ref string description, ref List<Shipping> shippings)
+        public int ActiveOreder(string token, ref string description, ref List<Shipping> shippings)
         {
             IRestResponse response = null;
             string content = null;
@@ -20,7 +20,6 @@ namespace MDispatch.Service
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
                 request.AddParameter("token", token);
-                request.AddParameter("status", status);
                 response = client.Execute(request);
                 content = response.Content;
             }

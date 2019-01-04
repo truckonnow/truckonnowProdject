@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 
 namespace MDispatch.Models
 {
@@ -79,6 +78,25 @@ namespace MDispatch.Models
         public Driver Driverr { get; set; }
 
         /////////////////////////////////////////////
+          
+        
+
+        public string ColorCurrentStatus
+        {
+            get
+            {
+                string color = null;
+                if (CurrentStatus == "Assigned")
+                {
+                    color = "#65CAE1";
+                }
+                else if(CurrentStatus == "Picked up")
+                {
+                    color = "#FFBF00";
+                }
+                return color;
+            }
+        }
 
         public VehiclwInformation VehiclwInformation1
         {

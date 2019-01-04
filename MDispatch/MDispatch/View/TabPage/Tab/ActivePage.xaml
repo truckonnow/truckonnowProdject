@@ -20,7 +20,7 @@
                                             <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="2" />
                                             <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1" NumberOfTapsRequired="1"/>
                                         </StackLayout.GestureRecognizers>
-                                        <BoxView BackgroundColor="#65CAE1" WidthRequest="8" />
+                                        <BoxView BackgroundColor="{Binding ColorCurrentStatus}" WidthRequest="8" />
                                         <StackLayout Padding="10">
                                             <StackLayout Orientation="Horizontal">
                                                 <Label Text="Load Id:" FontSize="17"/>

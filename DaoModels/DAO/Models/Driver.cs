@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DaoModels.DAO.Models
+﻿namespace DaoModels.DAO.Models
 {
     public class Driver
     {

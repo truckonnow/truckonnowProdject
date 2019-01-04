@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Android;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Graphics;
-using Android.Hardware;
 using Android.Support.V4.App;
 using Android.Support.V4.Content;
 using Android.Views;
 using Android.Widget;
+using Java.Lang;
 using MDispatch.Droid.NewrRender;
 using MDispatch.Droid.NewrRender.NewElementXamarin.Forms;
 using MDispatch.NewElement;
-using Plugin.CurrentActivity;
 using Xamarin.Forms.Platform.Android;
 using static Android.Hardware.Camera;
 
@@ -27,9 +25,7 @@ namespace MDispatch.Droid.NewrRender
         bool isPermissions = false;
 
         public CameraPageRender(Context context) : base(context)
-        {
-
-        }
+        { }
 
         RelativeLayout mainLayout;
         TextureView liveView;
@@ -82,7 +78,12 @@ namespace MDispatch.Droid.NewrRender
                 {
                     if (camera != null)
                     {
-                        camera.SetDisplayOrientation(90);
+                        try
+                        {
+                            camera.SetDisplayOrientation(90);
+                        }
+                        catch(RuntimeException)
+                        { }
                     }
                     capturePhotoButton.SetX(mainLayout.Width / 2 - 60);
                     capturePhotoButton.SetY(mainLayout.Height - 200);
@@ -98,9 +99,7 @@ namespace MDispatch.Droid.NewrRender
                 }
             }
             catch(NullReferenceException)
-            {
-
-            }
+            { }
         }
 
         public void SetupEventHandlers()
@@ -182,7 +181,7 @@ namespace MDispatch.Droid.NewrRender
                 var parameters = camera.GetParameters();
                 var aspect = ((decimal)height) / ((decimal)width);
                 var previewSize = parameters.SupportedPreviewSizes
-                                            .OrderBy(s => Math.Abs(s.Width / (decimal)s.Height - aspect))
+                                            .OrderBy(s => System.Math.Abs(s.Width / (decimal)s.Height - aspect))
                                             .First();
                 System.Diagnostics.Debug.WriteLine($"Preview sizes: {parameters.SupportedPreviewSizes.Count}");
                 parameters.SetPreviewSize(previewSize.Width, previewSize.Height);
@@ -198,7 +197,7 @@ namespace MDispatch.Droid.NewrRender
             var parameters = camera.GetParameters();
             var aspect = ((decimal)height) / ((decimal)width);
             var previewSize = parameters.SupportedPreviewSizes
-                                        .OrderBy(s => Math.Abs(s.Width / (decimal)s.Height - aspect))
+                                        .OrderBy(s => System.Math.Abs(s.Width / (decimal)s.Height - aspect))
                                         .First();
             System.Diagnostics.Debug.WriteLine($"Preview sizes: {parameters.SupportedPreviewSizes.Count}");
             parameters.SetPreviewSize(previewSize.Width, previewSize.Height);

@@ -1,9 +1,11 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.ViewModels.PageAppMV;
+using Rg.Plugins.Popup.Services;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static MDispatch.Service.ManagerDispatchMob;
 
 namespace MDispatch.View.PageApp
 {
@@ -13,10 +15,10 @@ namespace MDispatch.View.PageApp
         private FullPagePhotoMV fullPagePhotoMV = null;
         private string pngPaternPhoto = null;
 
-        public FullPagePhoto(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, string pngPaternPhoto, string typeCar, int photoIndex)
+        public FullPagePhoto(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, string pngPaternPhoto, string typeCar, int photoIndex, InitDasbordDelegate initDasbordDelegate)
         {
             this.pngPaternPhoto = pngPaternPhoto;
-            fullPagePhotoMV = new FullPagePhotoMV(managerDispatchMob, vehiclwInformation, shipping, typeCar, photoIndex, Navigation);
+            fullPagePhotoMV = new FullPagePhotoMV(managerDispatchMob, vehiclwInformation, shipping, typeCar, photoIndex, Navigation, initDasbordDelegate);
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = fullPagePhotoMV;
@@ -49,7 +51,7 @@ namespace MDispatch.View.PageApp
             }
         }
 
-        private void Button_Clicked_1(object sender, EventArgs e)
+        private async void Button_Clicked_1(object sender, EventArgs e)
         {
             if(fullPagePhotoMV.AllSourseImage != null && fullPagePhotoMV.AllSourseImage.Count != 0)
             {
@@ -57,7 +59,7 @@ namespace MDispatch.View.PageApp
             }
             else
             {
-
+               // await PopupNavigation.
             }
         }
     }

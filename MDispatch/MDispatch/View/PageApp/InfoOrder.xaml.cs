@@ -6,6 +6,7 @@ using Rg.Plugins.Popup.Services;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static MDispatch.Service.ManagerDispatchMob;
 
 namespace MDispatch.View.PageApp
 {
@@ -14,9 +15,9 @@ namespace MDispatch.View.PageApp
     {
         private InfoOrderMV infoOrderMV = null;
 
-        public InfoOrder(ManagerDispatchMob managerDispatchMob, Shipping shipping)
+        public InfoOrder(ManagerDispatchMob managerDispatchMob, Shipping shipping, InitDasbordDelegate initDasbordDelegate)
         {
-            this.infoOrderMV = new InfoOrderMV(managerDispatchMob, shipping) { Navigation = this.Navigation} ;
+            this.infoOrderMV = new InfoOrderMV(managerDispatchMob, shipping, initDasbordDelegate) { Navigation = this.Navigation} ;
             InitializeComponent();
             BindingContext = this.infoOrderMV;
         }
@@ -33,7 +34,7 @@ namespace MDispatch.View.PageApp
             infoOrderMV.ToVehicleDetails(infoOrderMV.Shipping.VehiclwInformations.Find(v => v.Id == id));
         }
 
-        private async void Button_Clicked_2(object sender, EventArgs e)
+        private async void InspectionPickedUp()
         {
             if (infoOrderMV.Shipping.VehiclwInformations.Count > 1)
             {
@@ -43,7 +44,23 @@ namespace MDispatch.View.PageApp
             {
                 infoOrderMV.ToStartInspection(infoOrderMV.Shipping.VehiclwInformations[0], infoOrderMV.Shipping);
             }
+        }
 
+        private async void InspectionDelyvery()
+        {
+            //ToDoo
+        }
+
+        private void Button_Clicked_2(object sender, EventArgs e)
+        {
+            if(infoOrderMV.Shipping.CurrentStatus == "Assigned")
+            {
+                InspectionPickedUp();
+            }
+            else if(infoOrderMV.Shipping.CurrentStatus == "Picked up")
+            {
+                InspectionDelyvery();
+            }
         }
     }
 }

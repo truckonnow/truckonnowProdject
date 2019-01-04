@@ -41,6 +41,17 @@ namespace ApiMobaileServise.Servise
             }
         }
 
+        public void SaveFeedBack(string jsonStrAsk)
+        {
+            Feedback feedback = JsonConvert.DeserializeObject<Feedback>(jsonStrAsk);
+            sqlCommandApiMobile.SaveFeedBackInDb(feedback);
+        }
+
+        public void ReCurentStatus(string idShip, string status)
+        {
+            sqlCommandApiMobile.ReCurentStatus(idShip, status);
+        }
+
         private void CheckAndCreatedFolder()
         {
             if(!Directory.Exists("PhotoCars"))
@@ -86,12 +97,12 @@ namespace ApiMobaileServise.Servise
             return sqlCommandApiMobile.CheckToken(token);
         }
 
-        public bool GetOrdersForToken(string token, string status, ref List<Shipping> shippings)
+        public bool GetOrdersForToken(string token, ref List<Shipping> shippings)
         {
             bool isToken = sqlCommandApiMobile.CheckToken(token);
             if (isToken)
             {
-                shippings = sqlCommandApiMobile.GetOrdersForToken(token, status);
+                shippings = sqlCommandApiMobile.GetOrdersForToken(token);
             }
             return isToken;
         }

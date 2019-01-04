@@ -1,10 +1,13 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
+using MDispatch.View;
 using MDispatch.View.PageApp;
 using Plugin.Settings;
 using Prism.Mvvm;
+using Rg.Plugins.Popup.Services;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using static MDispatch.Service.ManagerDispatchMob;
 
 namespace MDispatch.ViewModels.AskPhoto
 {
@@ -12,9 +15,11 @@ namespace MDispatch.ViewModels.AskPhoto
     {
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation  { get; set; }
+        private InitDasbordDelegate initDasbordDelegate = null;
 
-        public AskPageMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, INavigation navigation)
+        public AskPageMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
         {
+            this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
             Navigation = navigation;
             VehiclwInformation = vehiclwInformation;
@@ -44,13 +49,16 @@ namespace MDispatch.ViewModels.AskPhoto
 
         public async void SaveAsk(string indexTypeCar)
         {
+            await PopupNavigation.PushAsync(new LoadPage(), true);
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
             await Task.Run(() =>
             {
                 state = managerDispatchMob.AskWork("SaveAsk", token, VehiclwInformation.Id, Ask, ref description);
+                initDasbordDelegate.Invoke();
             });
+            await PopupNavigation.PopAsync(true);
             if (state == 1)
             {
                 //FeedBack = "Not Network";
@@ -61,7 +69,7 @@ namespace MDispatch.ViewModels.AskPhoto
             }
             else if (state == 3)
             {
-                await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, Shipping, $"{indexTypeCar}1.png", indexTypeCar, 1));
+                await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, Shipping, $"{indexTypeCar}1.png", indexTypeCar, 1, initDasbordDelegate));
             }
             else if (state == 4)
             {

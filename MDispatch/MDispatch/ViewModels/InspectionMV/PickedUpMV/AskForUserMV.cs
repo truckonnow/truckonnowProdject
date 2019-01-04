@@ -1,9 +1,13 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
+using MDispatch.View;
+using MDispatch.View.Inspection.PickedUp;
 using Plugin.Settings;
 using Prism.Mvvm;
+using Rg.Plugins.Popup.Services;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using static MDispatch.Service.ManagerDispatchMob;
 
 namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
 {
@@ -11,9 +15,11 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
     {
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation { get; set; }
+        private InitDasbordDelegate initDasbordDelegate = null;
 
-        public AskForUserMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, INavigation navigation)
+        public AskForUserMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
         {
+            this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
             Navigation = navigation;
             VehiclwInformation = vehiclwInformation;
@@ -27,8 +33,8 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             set => SetProperty(ref shipping, value);
         }
 
-        private AskForUserM askForUser = null;
-        public AskForUserM AskForUser
+        private AskFromUser askForUser = null;
+        public AskFromUser AskForUser
         {
             get => askForUser;
             set => SetProperty(ref askForUser, value);
@@ -43,13 +49,16 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
 
         public async void SaveAsk()
         {
+            await PopupNavigation.PushAsync(new LoadPage(), true);
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
             await Task.Run(() =>
             {
                 state = managerDispatchMob.AskWork("AskFromUser", token, VehiclwInformation.Id, AskForUser, ref description);
+                initDasbordDelegate.Invoke();
             });
+            await PopupNavigation.PopAsync(true);
             if (state == 1)
             {
                 //FeedBack = "Not Network";
@@ -60,8 +69,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
             else if (state == 3)
             {
-
-
+                await Navigation.PushAsync(new LiabilityAndInsurance(managerDispatchMob, VehiclwInformation, Shipping, initDasbordDelegate), true);
             }
             else if (state == 4)
             {

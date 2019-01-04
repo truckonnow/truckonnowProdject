@@ -15,7 +15,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("ActiveOreder")]
-        public string GetActiveOrder(string token, string status)
+        public string GetActiveOrder(string token)
         {
             string respons = null;
             if(token == null || token == "")
@@ -25,7 +25,7 @@ namespace ApiMobaileServise.Controllers
             try
             {
                 List<Shipping> shippings = null;
-                bool isToken = ManagerMobileApi.GetOrdersForToken(token, status, ref shippings);
+                bool isToken = ManagerMobileApi.GetOrdersForToken(token, ref shippings);
                 if(isToken)
                 {
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", shippings));

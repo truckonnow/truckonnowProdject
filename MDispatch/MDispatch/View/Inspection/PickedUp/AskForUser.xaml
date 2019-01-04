@@ -16,14 +16,14 @@
                     <StackLayout>
                         <Label Text="Your phone" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Entry Placeholder="Enter Your phone" TextChanged="Entry_TextChanged1"/>
+                        <Entry Placeholder="Enter Your phone" TextChanged="Entry_TextChanged1" Keyboard="Telephone"/>
                     </StackLayout>
                 </Frame>
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock3">
                     <StackLayout>
                         <Label Text="How many keys are driver been given" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Entry Placeholder="Enter the number of keys you gave" TextChanged="Entry_TextChanged3"/>
+                        <Entry Placeholder="Enter the number of keys you gave" TextChanged="Entry_TextChanged3" Keyboard="Numeric"/>
                     </StackLayout>
                 </Frame>
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock4">

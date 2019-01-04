@@ -1,8 +1,10 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
+using MDispatch.View;
 using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -33,6 +35,7 @@ namespace MDispatch.ViewModels.PageAppMV
 
         private async void SaveDelivery()
         {
+            await PopupNavigation.PushAsync(new LoadPage(), true);
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
@@ -41,6 +44,7 @@ namespace MDispatch.ViewModels.PageAppMV
                 state = managerDispatchMob.OrderOneWork("Save", Shipping.Id, token, Shipping.idOrder, Shipping.NameD, Shipping.ContactNameD, Shipping.AddresD,
                     Shipping.CityD, Shipping.StateD, Shipping.ZipD, Shipping.PhoneD, Shipping.EmailD, "Delivery", ref description);
             });
+            await PopupNavigation.PopAsync(true);
             await Navigationn.PopAsync(true);
             if (state == 1)
             {

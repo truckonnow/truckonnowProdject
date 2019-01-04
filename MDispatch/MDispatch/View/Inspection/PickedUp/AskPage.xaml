@@ -84,21 +84,21 @@
                     <StackLayout>
                         <Label Text="How far is the vehicle from Trailer? aprox in ft" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Entry Placeholder="Ft" TextChanged="Entry_TextChanged_1"/>
+                        <Entry Placeholder="Ft" TextChanged="Entry_TextChanged_1" Keyboard="Numeric"/>
                     </StackLayout>
                 </Frame>
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock9">
                     <StackLayout>
                         <Label Text="Plate #" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Entry Placeholder="Ft" TextChanged="Entry_TextChanged_3"/>
+                        <Entry Placeholder="#" TextChanged="Entry_TextChanged_3" Keyboard="Numeric"/>
                     </StackLayout>
                 </Frame>
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock10">
                     <StackLayout>
                         <Label Text="Exact Mileage" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Entry Placeholder="Mileage" TextChanged="Entry_TextChanged_2"/>
+                        <Entry Placeholder="Mileage" TextChanged="Entry_TextChanged_2" Keyboard="Numeric"/>
                     </StackLayout>
                 </Frame>
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6">
