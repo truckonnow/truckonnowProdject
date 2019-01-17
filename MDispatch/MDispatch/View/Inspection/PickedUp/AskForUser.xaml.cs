@@ -12,14 +12,13 @@ namespace MDispatch.View.Inspection.PickedUp
 	public partial class AskForUser : ContentPage
 	{
         private AskForUserMV askForUserMV = null;
-        private AskFromUser askForUserM = null;
 
-        public AskForUser (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shippin, InitDasbordDelegate initDasbordDelegate)
+        public AskForUser (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate)
 		{
-            askForUserMV = new AskForUserMV(managerDispatchMob, vehiclwInformation, shippin, Navigation, initDasbordDelegate);
-            askForUserM = new AskFromUser();
+            askForUserMV = new AskForUserMV(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate);
+            askForUserMV.AskForUser = new AskFromUser();
             InitializeComponent ();
-            BindingContext = askForUserM;
+            BindingContext = askForUserMV;
 		}
 
         #region Ask1
@@ -34,7 +33,7 @@ namespace MDispatch.View.Inspection.PickedUp
             {
                 isAsk1 = false;
             }
-            askForUserM.Your_Full_Name = e.NewTextValue;
+            askForUserMV.AskForUser.Your_Full_Name = e.NewTextValue;
         }
         #endregion
 
@@ -50,7 +49,7 @@ namespace MDispatch.View.Inspection.PickedUp
             {
                 isAsk2 = false;
             }
-            askForUserM.Your_phone = e.NewTextValue;
+            askForUserMV.AskForUser.Your_phone = e.NewTextValue;
         }
         #endregion
 
@@ -66,7 +65,7 @@ namespace MDispatch.View.Inspection.PickedUp
             {
                 isAsk3 = false;
             }
-            askForUserM.How_many_keys_are_driver_been_given = e.NewTextValue;
+            askForUserMV.AskForUser.How_many_keys_are_driver_been_given = e.NewTextValue;
         }
 
         #endregion
@@ -79,7 +78,7 @@ namespace MDispatch.View.Inspection.PickedUp
             isAsk4 = true;
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
-            askForUserM.Any_titles_been_given_to_driver = button.Text;
+            askForUserMV.AskForUser.Any_titles_been_given_to_driver = button.Text;
             if (button4 != null)
             {
                 button4.TextColor = Color.Silver;
@@ -92,7 +91,6 @@ namespace MDispatch.View.Inspection.PickedUp
         {
             if (isAsk1 && isAsk2 && isAsk3 && isAsk4)
             {
-                askForUserMV.AskForUser = askForUserM;
                 askForUserMV.SaveAsk();
             }
             else
@@ -107,17 +105,33 @@ namespace MDispatch.View.Inspection.PickedUp
             {
                 askBlock1.BorderColor = Color.Red;
             }
+            else
+            {
+                askBlock1.BorderColor = Color.BlueViolet;
+            }
             if (!isAsk2)
             {
                 askBlock2.BorderColor = Color.Red;
+            }
+            else
+            {
+                askBlock2.BorderColor = Color.BlueViolet;
             }
             if (!isAsk3)
             {
                 askBlock3.BorderColor = Color.Red;
             }
+            else
+            {
+                askBlock3.BorderColor = Color.BlueViolet;
+            }
             if (!isAsk4)
             {
                 askBlock4.BorderColor = Color.Red;
+            }
+            else
+            {
+                askBlock4.BorderColor = Color.BlueViolet;
             }
         }
     }

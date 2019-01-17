@@ -12,6 +12,7 @@
     <PackageReference Include="Rg.Plugins.Popup" Version="1.1.4.168" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
+    <PackageReference Include="Xamarin.Controls.SignaturePad.Forms" Version="3.0.0" />
     <PackageReference Include="Xamarin.Forms" Version="3.1.0.637273" />
     <PackageReference Include="Xamarin.Forms.InputKit" Version="2.3.5" />
   </ItemGroup>
@@ -23,6 +24,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="View\Inspection\Delyvery\AskForUserDelyvery.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\Inspection\Delyvery\AskPageDelyvery.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\Inspection\Delyvery\CameraPage\CameraAdditionalPhoto.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\Inspection\Delyvery\TempDialogPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="View\Inspection\Feedback.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -39,6 +52,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\A_R\Avtorization.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\Inspection\PickedUp\CameraPageFolder\CameraPthotoInTrack.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\Inspection\PickedUp\CameraPageFolder\CameraSeatBelts.xaml">
@@ -95,6 +111,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="View\Inspection\Delyvery\EvaluationAndSurveyDialog1.xaml.cs">
+      <DependentUpon>EvaluationAndSurveyDialog1.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\Inspection\Delyvery\TempDialogPage1.xaml.cs">
+      <DependentUpon>TempDialogPage1.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\Inspection\Delyvery\TempPageHint4.xaml.cs">
+      <DependentUpon>TempPageHint4.xaml</DependentUpon>
+    </Compile>
     <Compile Update="View\Inspection\PickedUp\CameraPageFolder\CameraDocument.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
@@ -110,7 +135,7 @@
     <Compile Update="View\Inspection\PickedUp\CameraPageFolder\CameraSpareParts.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="View\Inspection\PickedUp\TempPageHint3.xaml.cs">
+    <Compile Update="View\Inspection\TempPageHint3.xaml.cs">
       <DependentUpon>TempPageHint3.xaml</DependentUpon>
     </Compile>
     <Compile Update="View\Inspection\PickedUp\TempPageHint1.xaml.cs">

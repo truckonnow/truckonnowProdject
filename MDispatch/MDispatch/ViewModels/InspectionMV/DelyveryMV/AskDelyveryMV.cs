@@ -1,39 +1,51 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.View;
-using MDispatch.View.Inspection.PickedUp;
+using MDispatch.View.Inspection.Delyvery;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using static MDispatch.Service.ManagerDispatchMob;
 
-namespace MDispatch.ViewModels.InspectionMV
+namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
 {
-    public class FeedBackMV : BindableBase
+    public class AskDelyveryMV : BindableBase
     {
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation { get; set; }
+        private InitDasbordDelegate initDasbordDelegate = null;
 
-        public FeedBackMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, INavigation navigation)
+        public AskDelyveryMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
         {
+            this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
             Navigation = navigation;
             VehiclwInformation = vehiclwInformation;
+            IdShip = idShip;
         }
 
-        private Feedback feedback = null;
-        public Feedback Feedback
-        {
-            get => feedback;
-            set => SetProperty(ref feedback, value);
-        }
+        private string IdShip { get; set; }
 
         private VehiclwInformation vehiclwInformation = null;
         public VehiclwInformation VehiclwInformation
         {
             get => vehiclwInformation;
             set => SetProperty(ref vehiclwInformation, value);
+        }
+
+        private AskDelyvery askDelyvery = null;
+        public AskDelyvery AskDelyvery
+        {
+            get => askDelyvery;
+            set => SetProperty(ref askDelyvery, value);
+        }
+        
+        public TimeSpan TimeOfCurren
+        {
+            get => DateTime.Now.TimeOfDay;
         }
 
         public async void SaveAsk()
@@ -44,7 +56,8 @@ namespace MDispatch.ViewModels.InspectionMV
             int state = 0;
             await Task.Run(() =>
             {
-                state = managerDispatchMob.AskWork("FeedBack", token, null, Feedback, ref description);
+                state = managerDispatchMob.AskWork("AskDelyvery", token, VehiclwInformation.Id, askDelyvery, ref description);
+                initDasbordDelegate.Invoke();
             });
             await PopupNavigation.PopAsync(true);
             if (state == 1)
@@ -57,8 +70,9 @@ namespace MDispatch.ViewModels.InspectionMV
             }
             else if (state == 3)
             {
-                await PopupNavigation.PushAsync(new TempPageHint3());
-                await Navigation.PopToRootAsync(true);
+                await PopupNavigation.PushAsync(new TempDialogPage());
+                await Navigation.PushAsync(new AskForUserDelyvery(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate));
+                Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
             else if (state == 4)
             {

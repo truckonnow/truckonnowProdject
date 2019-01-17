@@ -43,6 +43,36 @@ namespace ApiMobaileServise.Controllers
         }
 
         [HttpPost]
+        [Route("GetVechicleInffo")]
+        public string GetVechicleInffo(string token, int idVech)
+        {
+            string respons = null;
+            if (token == null || token == "")
+            {
+                return JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
+            }
+            try
+            {
+                List<Shipping> shippings = null;
+                bool isToken = ManagerMobileApi.CheckToken(token);
+                if (isToken)
+                {
+                    VehiclwInformation vehiclwInformation = ManagerMobileApi.GetVehiclwInformation(idVech);
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", vehiclwInformation));
+                }
+                else
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "2", null));
+                }
+            }
+            catch (Exception)
+            {
+                respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
+            }
+            return respons;
+        }
+
+        [HttpPost]
         [Route("SaveOrder")]
         public string Save(string token, string id, string idOrder, string name, string contactName, 
             string address, string city, string state, string zip, string phone, string email, string typeSave)

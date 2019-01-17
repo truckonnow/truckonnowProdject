@@ -19,5 +19,6 @@ namespace DaoModels.DAO.Models
         public string All_4_wheels_are_correctly_strapped_strapped { get; set; }
         public string Type_of_strap { get; set; }
         public List<Photo> App_will_force_driver_to_take_pictures_of_each_strap { get; set; }
+        public List<Photo> Photo_after_loading_in_the_truck { get; set; }
     }
 }

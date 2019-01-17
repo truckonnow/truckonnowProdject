@@ -1,7 +1,8 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.View;
-using MDispatch.View.Inspection.PickedUp;
+using MDispatch.View.Inspection.Delyvery;
+using MDispatch.View.PageApp;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
@@ -9,15 +10,15 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
 
-namespace MDispatch.ViewModels.InspectionMV
+namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
 {
-    public class Ask1PageMV : BindableBase
+    public class AskForUsersDelyveryMW : BindableBase
     {
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation { get; set; }
         private InitDasbordDelegate initDasbordDelegate = null;
 
-        public Ask1PageMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
+        public AskForUsersDelyveryMW(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
         {
             this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
@@ -26,20 +27,34 @@ namespace MDispatch.ViewModels.InspectionMV
             IdShip = idShip;
         }
 
-        public string IdShip { get; set; }
-
-        private Ask1 ask1 = null;
-        public Ask1 Ask1
-        {
-            get => ask1;
-            set => SetProperty(ref ask1, value);
-        }
+        private string IdShip { get; set; }
 
         private VehiclwInformation vehiclwInformation = null;
         public VehiclwInformation VehiclwInformation
         {
             get => vehiclwInformation;
             set => SetProperty(ref vehiclwInformation, value);
+        }
+
+        private AskForUserDelyveryM askForUserDelyveryM = null;
+        public AskForUserDelyveryM AskForUserDelyveryM
+        {
+            get => askForUserDelyveryM;
+            set => SetProperty(ref askForUserDelyveryM, value);
+        }
+
+        private string email = null;
+        public string Email
+        {
+            get => email;
+            set => SetProperty(ref email, value);
+        }
+
+        private int inderxPhotoInspektion = 0;
+        public int InderxPhotoInspektion
+        {
+            get => inderxPhotoInspektion;
+            set => SetProperty(ref inderxPhotoInspektion, value);
         }
 
         public async void SaveAsk()
@@ -50,7 +65,7 @@ namespace MDispatch.ViewModels.InspectionMV
             int state = 0;
             await Task.Run(() =>
             {
-                state = managerDispatchMob.AskWork("SaveAsk1", token, VehiclwInformation.Id, Ask1, ref description);
+                state = managerDispatchMob.AskWork("AskForUserDelyvery", token, VehiclwInformation.Id, AskForUserDelyveryM, ref description);
                 initDasbordDelegate.Invoke();
             });
             await PopupNavigation.PopAsync(true);
@@ -64,15 +79,23 @@ namespace MDispatch.ViewModels.InspectionMV
             }
             else if (state == 3)
             {
-                await Navigation.PushAsync(new AskForUser(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate));
-                Navigation.RemovePage(Navigation.NavigationStack[2]);
-                await PopupNavigation.PushAsync(new TempPageHint1());
-
+                await PopupNavigation.PushAsync(new TempDialogPage1(this));
             }
             else if (state == 4)
             {
                 //FeedBack = "Technical work on the service";
             }
+        }
+
+        public async void ToContinueInspection()
+        {
+            await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{VehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", VehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 1, initDasbordDelegate));
+            Navigation.RemovePage(Navigation.NavigationStack[2]);
+        }
+
+        public void SendEmailCoupon()
+        {
+            //To Do
         }
     }
 }

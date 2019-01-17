@@ -17,12 +17,11 @@ namespace MDispatch.View.AskPhoto
 	public partial class AskPage : ContentPage
 	{
         AskPageMV askPageMV = null;
-        private Models.Ask Ask = null;
 
-        public AskPage (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, InitDasbordDelegate initDasbordDelegate)
+        public AskPage (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate)
 		{
-            askPageMV = new AskPageMV(managerDispatchMob, vehiclwInformation, shipping, Navigation, initDasbordDelegate);
-            Ask = new Models.Ask();
+            askPageMV = new AskPageMV(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate);
+            askPageMV.Ask = new Ask();
             InitializeComponent ();
             BindingContext = askPageMV;
 		}
@@ -36,7 +35,7 @@ namespace MDispatch.View.AskPhoto
             isAsk1 = true;
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
-            Ask.Lightbrightness = button.Text;
+            askPageMV.Ask.Lightbrightness = button.Text;
             if (button1 != null)
             {
                 button1.TextColor = Color.Silver;
@@ -53,7 +52,7 @@ namespace MDispatch.View.AskPhoto
             isAsk2 = true;
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
-            Ask.Vehicle = button.Text;
+            askPageMV.Ask.Vehicle = button.Text;
             if (button2 != null)
             {
                 button2.TextColor = Color.Silver;
@@ -70,7 +69,7 @@ namespace MDispatch.View.AskPhoto
             isAsk3 = true;
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
-            Ask.Enough_distance_to_take_pictures_at_least_4ft = button.Text;
+            askPageMV.Ask.Enough_distance_to_take_pictures_at_least_4ft = button.Text;
             if (button3 != null)
             {
                 button3.TextColor = Color.Silver;
@@ -83,7 +82,7 @@ namespace MDispatch.View.AskPhoto
         bool isAsk4 = false;
         private void RadioButton_Clicked(object sender, EventArgs e)
         {
-            Ask.Weather_conditions = ((RadioButton)sender).Text;
+            askPageMV.Ask.Weather_conditions = ((RadioButton)sender).Text;
             isAsk4 = true;
         }
         #endregion
@@ -96,7 +95,7 @@ namespace MDispatch.View.AskPhoto
             isAsk5 = true;
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
-            Ask.Does_The_vehicle_Starts = button.Text;
+            askPageMV.Ask.Does_The_vehicle_Starts = button.Text;
             if (button5 != null)
             {
                 button5.TextColor = Color.Silver;
@@ -113,7 +112,7 @@ namespace MDispatch.View.AskPhoto
             isAsk6 = true;
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
-            Ask.Does_The_vehicle_Drives = button.Text;
+            askPageMV.Ask.Does_The_vehicle_Drives = button.Text;
             if (button6 != null)
             {
                 button6.TextColor = Color.Silver;
@@ -134,7 +133,7 @@ namespace MDispatch.View.AskPhoto
             {
                 isAsk7 = false;
             }
-            Ask.Anyone_Rushing_you_to_perform_the_inspection = e.NewTextValue;
+            askPageMV.Ask.Anyone_Rushing_you_to_perform_the_inspection = e.NewTextValue;
         }
         #endregion
 
@@ -150,7 +149,7 @@ namespace MDispatch.View.AskPhoto
             {
                 isAsk8 = false;
             }
-            Ask.How_far_is_the_vehicle_from_Trailer_Aprox_in_ft = e.NewTextValue;
+            askPageMV.Ask.How_far_is_the_vehicle_from_Trailer_Aprox_in_ft = e.NewTextValue;
         }
         #endregion
 
@@ -166,7 +165,7 @@ namespace MDispatch.View.AskPhoto
             {
                 isAsk9 = false;
             }
-            Ask.Plate = e.NewTextValue;
+            askPageMV.Ask.Plate = e.NewTextValue;
         }
         #endregion
 
@@ -182,7 +181,7 @@ namespace MDispatch.View.AskPhoto
             {
                 isAsk10 = false;
             }
-            Ask.Exact_Mileage = e.NewTextValue;
+            askPageMV.Ask.Exact_Mileage = e.NewTextValue;
         }
         #endregion
 
@@ -191,7 +190,7 @@ namespace MDispatch.View.AskPhoto
         private void Dropdown_SelectedItemChanged_1(object sender, Plugin.InputKit.Shared.Utils.SelectedItemChangedArgs e)
         {
             isAsk11 = true;
-            Ask.TypeVehicle = (string)e.NewItem;
+            askPageMV.Ask.TypeVehicle = (string)e.NewItem;
         }
         #endregion
 
@@ -199,8 +198,7 @@ namespace MDispatch.View.AskPhoto
         {
             if(isAsk1 && isAsk2 && isAsk3 && isAsk4 && isAsk5 && isAsk6 && isAsk7 && isAsk8 && isAsk9 && isAsk10 && isAsk11)
             {
-                askPageMV.Ask = Ask;
-                askPageMV.SaveAsk(Ask.TypeVehicle.Replace(" ", ""));
+                askPageMV.SaveAsk(askPageMV.Ask.TypeVehicle.Replace(" ", ""));
             }
             else
             {
@@ -214,45 +212,89 @@ namespace MDispatch.View.AskPhoto
             {
                 askBlock1.BorderColor = Color.Red;
             }
+            else
+            {
+                askBlock1.BorderColor = Color.BlueViolet;
+            }
             if (!isAsk2)
             {
                 askBlock2.BorderColor = Color.Red;
+            }
+            else
+            {
+                askBlock2.BorderColor = Color.BlueViolet;
             }
             if (!isAsk3)
             {
                 askBlock3.BorderColor = Color.Red;
             }
+            else
+            {
+                askBlock3.BorderColor = Color.BlueViolet;
+            }
             if (!isAsk4)
             {
                 askBlock4.BorderColor = Color.Red;
+            }
+            else
+            {
+                askBlock4.BorderColor = Color.BlueViolet;
             }
             if (!isAsk5)
             {
                 askBlock5.BorderColor = Color.Red;
             }
+            else
+            {
+                askBlock5.BorderColor = Color.BlueViolet;
+            }
             if (!isAsk6)
             {
                 askBlock6.BorderColor = Color.Red;
+            }
+            else
+            {
+                askBlock6.BorderColor = Color.BlueViolet;
             }
             if (!isAsk7)
             {
                 askBlock7.BorderColor = Color.Red;
             }
+            else
+            {
+                askBlock7.BorderColor = Color.BlueViolet;
+            }
             if (!isAsk8)
             {
                 askBlock8.BorderColor = Color.Red;
+            }
+            else
+            {
+                askBlock8.BorderColor = Color.BlueViolet;
             }
             if (!isAsk9)
             {
                 askBlock9.BorderColor = Color.Red;
             }
+            else
+            {
+                askBlock9.BorderColor = Color.BlueViolet;
+            }
             if (!isAsk10)
             {
                 askBlock10.BorderColor = Color.Red;
             }
+            else
+            {
+                askBlock10.BorderColor = Color.BlueViolet;
+            }
             if (!isAsk11)
             {
                 askBlock11.BorderColor = Color.Red;
+            }
+            else
+            {
+                askBlock11.BorderColor = Color.BlueViolet;
             }
         }
 
@@ -268,14 +310,14 @@ namespace MDispatch.View.AskPhoto
 
         public void AddPhotoDocumentom(byte[] photob)
         {
-            if(Ask.Any_paperwork_or_documentation == null)
+            if(askPageMV.Ask.Any_paperwork_or_documentation == null)
             {
-                Ask.Any_paperwork_or_documentation = new List<Models.Photo>();
+                askPageMV.Ask.Any_paperwork_or_documentation = new List<Models.Photo>();
             }
             Models.Photo photo = new Models.Photo();
             photo.Base64 = JsonConvert.SerializeObject(photob);
-            photo.path = $"Photo/PikedUp/{askPageMV.VehiclwInformation.Id}/Ask/Document/{ Ask.Any_paperwork_or_documentation.Count + 1}.png";
-            Ask.Any_paperwork_or_documentation.Add(photo);
+            photo.path = $"Photo/{askPageMV.VehiclwInformation.Id}/PikedUp/Document/{ askPageMV.Ask.Any_paperwork_or_documentation.Count + 1}.Jpeg";
+            askPageMV.Ask.Any_paperwork_or_documentation.Add(photo);
             blockAskPhotoDocument.Children.Add(new Image()
             {
                 Source = ImageSource.FromStream(() => new MemoryStream(photob)),
@@ -286,14 +328,14 @@ namespace MDispatch.View.AskPhoto
 
         public void AddPhotoItems(byte[] photob)
         {
-            if (Ask.Any_personal_or_additional_items_with_or_in_vehicle == null)
+            if (askPageMV.Ask.Any_personal_or_additional_items_with_or_in_vehicle == null)
             {
-                Ask.Any_personal_or_additional_items_with_or_in_vehicle = new List<Models.Photo>();
+                askPageMV.Ask.Any_personal_or_additional_items_with_or_in_vehicle = new List<Models.Photo>();
             }
             Models.Photo photo = new Models.Photo();
             photo.Base64 = JsonConvert.SerializeObject(photob);
-            photo.path = $"Photo/PikedUp/{askPageMV.VehiclwInformation.Id}/Ask/Items/{ Ask.Any_personal_or_additional_items_with_or_in_vehicle.Count + 1}.png";
-            Ask.Any_personal_or_additional_items_with_or_in_vehicle.Add(photo);
+            photo.path = $"Photo/{askPageMV.VehiclwInformation.Id}/PikedUp/Items/{askPageMV.Ask.Any_personal_or_additional_items_with_or_in_vehicle.Count + 1}.Jpeg";
+            askPageMV.Ask.Any_personal_or_additional_items_with_or_in_vehicle.Add(photo);
             blockAskPhotoItem.Children.Add(new Image()
             {
                 Source = ImageSource.FromStream(() => new MemoryStream(photob)),

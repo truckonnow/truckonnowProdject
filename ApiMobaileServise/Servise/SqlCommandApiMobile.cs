@@ -16,22 +16,8 @@ namespace ApiMobaileServise.Servise
             context = new Context();
         }
 
-        private void Init()
-        {
-            context.Shipping.Load();
-            context.VehiclwInformation.Load();
-            context.Drivers.Load();
-            context.Photos.Load();
-            context.Asks.Load();
-            context.Ask1s.Load();
-            context.PhotoInspections.Load();
-            context.User.Load();
-            context.AskFromUsers.Load();
-        }
-
         public async void SavePhotoInspectionInDb(string idVe, PhotoInspection photoInspection)
         {
-            Init();
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == idVe);
             if(vehiclwInformation.PhotoInspections == null)
             {
@@ -43,7 +29,6 @@ namespace ApiMobaileServise.Servise
 
         public async void SaveAskInDb(string idve, Ask ask)
         {
-            Init();
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
             if(vehiclwInformation.Ask == null)
             {
@@ -55,14 +40,12 @@ namespace ApiMobaileServise.Servise
 
         public async void SaveFeedBackInDb(Feedback feedback)
         {
-            Init();
             context.Feedbacks.Add(feedback);
             await context.SaveChangesAsync();
         }
 
         public async void ReCurentStatus(string idShip, string status)
         {
-            Init();
             Shipping shipping = context.Shipping.FirstOrDefault(s => s.Id == idShip);
             shipping.CurrentStatus = status;
             await context.SaveChangesAsync();
@@ -70,7 +53,6 @@ namespace ApiMobaileServise.Servise
 
         public async void SaveAsk1InDb(string idve, Ask1 ask1)
         {
-            Init();
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
             if (vehiclwInformation.Ask1 == null)
             {
@@ -82,7 +64,6 @@ namespace ApiMobaileServise.Servise
 
         public void SaveAskFromUserInDb(string idve, AskFromUser askFromUser)
         {
-            Init();
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
             if (vehiclwInformation.Ask1 == null)
             {
@@ -92,9 +73,30 @@ namespace ApiMobaileServise.Servise
             context.SaveChangesAsync();
         }
 
+        public void SaveAskDelyveryInDb(string idve, AskDelyvery askDelyvery)
+        {
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
+            if (vehiclwInformation.Ask1 == null)
+            {
+                vehiclwInformation.AskDelyvery = new AskDelyvery();
+            }
+            vehiclwInformation.AskDelyvery = askDelyvery;
+            context.SaveChangesAsync();
+        }
+
+        public void SaveAskForUserDelyveryInDb(string idve, AskForUserDelyveryM askForUserDelyveryM)
+        {
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
+            if (vehiclwInformation.Ask1 == null)
+            {
+                vehiclwInformation.askForUserDelyveryM = new AskForUserDelyveryM();
+            }
+            vehiclwInformation.askForUserDelyveryM = askForUserDelyveryM;
+            context.SaveChangesAsync();
+        }
+
         public bool CheckEmailAndPsw(string email, string password)
         {
-            Init();
             return context.Drivers.FirstOrDefault(d => d.EmailAddress == email && d.Password == password) != null ? true : false;
         }
 
@@ -147,7 +149,6 @@ namespace ApiMobaileServise.Servise
 
         public async void SaveToken(string email, string password, string token)
         {
-            Init();
             Driver driver = context.Drivers.FirstOrDefault(d => d.EmailAddress == email && d.Password == password);
             driver.Token = token;
             await context.SaveChangesAsync();
@@ -158,9 +159,23 @@ namespace ApiMobaileServise.Servise
             return context.Drivers.FirstOrDefault(d => d.Token == token) != null ? true : false;
         }
 
-        public List<Shipping> GetOrdersForToken(string token)
+        public VehiclwInformation GetVehiclwInformationInDb(int idVech)
         {
-            Init();
+            context.VehiclwInformation.Load();
+            context.Asks.Load();
+            context.Ask1s.Load();
+            context.PhotoInspections.Load();
+            context.Photos.Load();
+            context.AskFromUsers.Load();
+            return context.VehiclwInformation.FirstOrDefault(v => v.Id == idVech);
+        }
+
+        public List<Shipping> GetOrdersForToken(string token, int type)
+        {
+            context.VehiclwInformation.Load();
+            context.Asks.Load();
+            context.Ask1s.Load();
+            context.PhotoInspections.Load();
             List<Shipping> Shipping1 = new List<Shipping>();
             Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
             List<Shipping> shippings = context.Shipping.ToList().FindAll(s => s.Driverr != null && s.Driverr.Id == driver.Id);
@@ -168,9 +183,12 @@ namespace ApiMobaileServise.Servise
             {
                 return new List<Shipping>();
             }
-            Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Assigned"));
             Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Picked up"));
-            return shippings;
+            Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Assigned"));
+            int countFor5 = Shipping1.Count / 5;
+            int ost = Shipping1.Count % 5;
+            int countGet = ost == 0 ? (5 * type) + 5 : (5 * type) + ost;
+            return Shipping1.GetRange(5 * type, countGet);
         }
     }
 }

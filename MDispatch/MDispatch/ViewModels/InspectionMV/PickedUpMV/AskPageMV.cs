@@ -17,21 +17,16 @@ namespace MDispatch.ViewModels.AskPhoto
         public INavigation Navigation  { get; set; }
         private InitDasbordDelegate initDasbordDelegate = null;
 
-        public AskPageMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
+        public AskPageMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
         {
             this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
             Navigation = navigation;
             VehiclwInformation = vehiclwInformation;
-            Shipping = shipping;
+            IdShip = idShip;
         }
 
-        private Shipping shipping = null;
-        public Shipping Shipping
-        {
-            get => shipping;
-            set => SetProperty(ref shipping, value);
-        }
+        public string IdShip { get; set; }
 
         private Models.Ask ask = null;
         public Models.Ask Ask
@@ -69,7 +64,8 @@ namespace MDispatch.ViewModels.AskPhoto
             }
             else if (state == 3)
             {
-                await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, Shipping, $"{indexTypeCar}1.png", indexTypeCar, 1, initDasbordDelegate));
+                await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{indexTypeCar}1.png", indexTypeCar, 1, initDasbordDelegate));
+                Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
             else if (state == 4)
             {

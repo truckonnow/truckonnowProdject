@@ -1,0 +1,34 @@
+﻿using MDispatch.View.Inspection.PickedUp;
+using MDispatch.ViewModels.InspectionMV.DelyveryMV;
+using Rg.Plugins.Popup.Pages;
+using Rg.Plugins.Popup.Services;
+using System;
+using Xamarin.Forms.Xaml;
+
+namespace MDispatch.View.Inspection.Delyvery
+{
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class TempDialogPage1 : PopupPage
+    {
+        private AskForUsersDelyveryMW askForUsersDelyveryMW = null;
+
+        public TempDialogPage1 (AskForUsersDelyveryMW askForUsersDelyveryMW)
+		{
+            this.askForUsersDelyveryMW = askForUsersDelyveryMW;
+			InitializeComponent ();
+		}
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            await PopupNavigation.PopAsync(true);
+            askForUsersDelyveryMW.ToContinueInspection();
+            await PopupNavigation.PushAsync(new TempPageHint4());
+        }
+
+        private async void Button_Clicked_1(object sender, EventArgs e)
+        {
+            await PopupNavigation.PopAsync(true);
+            await PopupNavigation.PushAsync(new EvaluationAndSurveyDialog1(askForUsersDelyveryMW));
+        }
+    }
+}

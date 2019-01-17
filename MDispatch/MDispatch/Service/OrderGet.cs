@@ -37,6 +37,35 @@ namespace MDispatch.Service
             }
         }
 
+        public int GetVehiclwInformation(string token, int idVech, ref string description, ref VehiclwInformation vehiclwInformation)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestRequest request = new RestRequest("Mobile/GetVechicleInffo", Method.POST);
+                request.AddHeader("Accept", "application/json");
+                request.Parameters.Clear();
+                request.AddParameter("token", token);
+                request.AddParameter("idVech", idVech);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description, ref vehiclwInformation);
+            }
+        }
+
         public int Save(string token, string id, string idOrder, string name, string contactName, string address, 
             string city, string state, string zip, string phone, string email, string typeSave, ref string description)
         {
@@ -128,7 +157,27 @@ namespace MDispatch.Service
                     .Value<string>("description");
                 return 2;
             }
+        }
 
+        private int GetData(string respJsonStr, ref string description, ref VehiclwInformation vehiclwInformation)
+        {
+            respJsonStr = respJsonStr.Replace("\\", "");
+            respJsonStr = respJsonStr.Remove(0, 1);
+            respJsonStr = respJsonStr.Remove(respJsonStr.Length - 1);
+            var responseAppS = JObject.Parse(respJsonStr);
+            string status = responseAppS.Value<string>("Status");
+            if (status == "success")
+            {
+                vehiclwInformation = JsonConvert.DeserializeObject<VehiclwInformation>(responseAppS.
+                        SelectToken("ResponseStr").ToString());
+                return 3;
+            }
+            else
+            {
+                description = responseAppS
+                    .Value<string>("description");
+                return 2;
+            }
         }
 
         private int GetData(string respJsonStr, ref string description)

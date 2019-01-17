@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<camera:CameraPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:camera="clr-namespace:MDispatch.NewElement"
+             x:Class="MDispatch.View.Inspection.Delyvery.CameraPage.CameraAdditionalPhoto"
+                   OnPhotoResult="CameraPage_OnPhotoResult">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <Button Text="Back" AbsoluteLayout.LayoutFlags="PositionProportional" 
+                    AbsoluteLayout.LayoutBounds="0, 0, 70, 40" Clicked="Button_Clicked"/>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</camera:CameraPage>

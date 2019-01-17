@@ -31,7 +31,7 @@ namespace MDispatch.View.Inspection.PickUp.CameraPageFolder
                 await Navigation.PopAsync(true);
                 Photo photo1 = new Photo();
                 photo1.Base64 = JsonConvert.SerializeObject(result.Image);
-                photo1.path = $"Photo/{ask1Page.ask1PageMV.VehiclwInformation.Id}/Ask/CameraSeatBelts/{photos.Count + 1}";
+                photo1.path = $"Photo/{ask1Page.ask1PageMV.VehiclwInformation.Id}/PikedUp/CameraSeatBelts/{photos.Count + 1}.Jpeg";
                 photos.Add(photo1);
                 imagesByte.Add(result.Image);
                 ask1Page.AddPhotoSeatBelts(photos, imagesByte);
@@ -39,7 +39,7 @@ namespace MDispatch.View.Inspection.PickUp.CameraPageFolder
             }
             Photo photo = new Photo();
             photo.Base64 = JsonConvert.SerializeObject(result.Image);
-            photo.path = $"Photo/PikedUp/{ask1Page.ask1PageMV.VehiclwInformation.Id}/Ask/CameraSeatBelts/{photos.Count + 1}";
+            photo.path = $"Photo/{ask1Page.ask1PageMV.VehiclwInformation.Id}/PikedUp/CameraSeatBelts/{photos.Count + 1}.Jpeg";
             photos.Add(photo);
             imagesByte.Add(result.Image);
             titlePhoto.Text = $"{photos.Count + 1}";

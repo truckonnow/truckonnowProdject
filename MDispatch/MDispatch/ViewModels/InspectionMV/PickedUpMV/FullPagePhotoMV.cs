@@ -25,19 +25,21 @@ namespace MDispatch.ViewModels.PageAppMV
         public ICar Car = null;
         private InitDasbordDelegate initDasbordDelegate = null;
 
-        public FullPagePhotoMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, string typeCar, int inderxPhotoInspektion, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
+        public FullPagePhotoMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string typeCar, int inderxPhotoInspektion, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
         {
             Navigation = navigation;
             this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
             VehiclwInformation = vehiclwInformation;
-            Shipping = shipping;
             InderxPhotoInspektion = inderxPhotoInspektion;
             if (typeCar != null)
             {
                 Car = GetTypeCar(typeCar);
             }
+            IdShip = idShip;
         }
+
+        public string IdShip { get; set; }
 
         private int inderxPhotoInspektion = 0;
         public int InderxPhotoInspektion
@@ -73,13 +75,6 @@ namespace MDispatch.ViewModels.PageAppMV
         {
             get => photoInspection;
             set => SetProperty(ref photoInspection, value);
-        }
-
-        private Shipping shipping = null;
-        public Shipping Shipping
-        {
-            get => shipping;
-            set => SetProperty(ref shipping, value);
         }
 
         private ICar GetTypeCar(string typeCar)
@@ -122,7 +117,7 @@ namespace MDispatch.ViewModels.PageAppMV
             string photoJson = JsonConvert.SerializeObject(PhotoInArrayByte);
             string pathIndePhoto = PhotoInspection.Photos.Count == 0 ? PhotoInspection.IndexPhoto.ToString() : $"{PhotoInspection.IndexPhoto}.{PhotoInspection.Photos.Count}"; ;
             photo.Base64 = photoJson;
-            photo.path = $"Photo/PikedUp/{VehiclwInformation.Id}/PhotoInspection/{pathIndePhoto}.png";
+            photo.path = $"Photo/{VehiclwInformation.Id}/PikedUp/PhotoInspection/{pathIndePhoto}.Jpeg";
             PhotoInspection.Photos.Add(photo);
         }
 
@@ -150,12 +145,14 @@ namespace MDispatch.ViewModels.PageAppMV
             {
                 if (InderxPhotoInspektion < 39)
                 {
-                    await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, Shipping, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", Car.typeIndex, InderxPhotoInspektion + 1, initDasbordDelegate));
+                    await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", Car.typeIndex, InderxPhotoInspektion + 1, initDasbordDelegate));
+                    Navigation.RemovePage(Navigation.NavigationStack[2]);
                 }
                 else
                 {
                     await PopupNavigation.PushAsync(new TempPageHint());
-                    await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, Shipping, initDasbordDelegate), true);
+                    await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate), true);
+                    Navigation.RemovePage(Navigation.NavigationStack[2]);
                 }
             }
             else if (state == 4)

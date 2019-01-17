@@ -15,10 +15,10 @@ namespace MDispatch.View.PageApp
         private FullPagePhotoMV fullPagePhotoMV = null;
         private string pngPaternPhoto = null;
 
-        public FullPagePhoto(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, string pngPaternPhoto, string typeCar, int photoIndex, InitDasbordDelegate initDasbordDelegate)
+        public FullPagePhoto(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string pngPaternPhoto, string typeCar, int photoIndex, InitDasbordDelegate initDasbordDelegate)
         {
             this.pngPaternPhoto = pngPaternPhoto;
-            fullPagePhotoMV = new FullPagePhotoMV(managerDispatchMob, vehiclwInformation, shipping, typeCar, photoIndex, Navigation, initDasbordDelegate);
+            fullPagePhotoMV = new FullPagePhotoMV(managerDispatchMob, vehiclwInformation, idShip, typeCar, photoIndex, Navigation, initDasbordDelegate);
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = fullPagePhotoMV;

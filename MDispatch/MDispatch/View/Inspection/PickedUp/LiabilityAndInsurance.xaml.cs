@@ -14,9 +14,9 @@ namespace MDispatch.View.Inspection.PickedUp
 	{
         LiabilityAndInsuranceMV liabilityAndInsuranceMV = null;
 
-        public LiabilityAndInsurance (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shippin, InitDasbordDelegate initDasbordDelegate)
+        public LiabilityAndInsurance (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate)
 		{
-            liabilityAndInsuranceMV = new LiabilityAndInsuranceMV(managerDispatchMob, vehiclwInformation, shippin, Navigation, initDasbordDelegate);
+            liabilityAndInsuranceMV = new LiabilityAndInsuranceMV(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate);
             InitializeComponent ();
 		}
 

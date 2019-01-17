@@ -46,9 +46,10 @@ namespace MDispatch.Droid.NewrRender
         {
             mainLayout = new RelativeLayout(Context);
             liveView = new TextureView(Context);
+
             RelativeLayout.LayoutParams liveViewParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MatchParent,
-                LayoutParams.MatchParent);
+                RelativeLayout.LayoutParams.MatchParent);
             liveView.LayoutParameters = liveViewParams;
             mainLayout.AddView(liveView);
 
@@ -60,6 +61,7 @@ namespace MDispatch.Droid.NewrRender
             captureButtonParams.Width = 120;
             capturePhotoButton.LayoutParameters = captureButtonParams;
             mainLayout.AddView(capturePhotoButton);
+
             AddView(mainLayout);
         }
 
@@ -191,21 +193,7 @@ namespace MDispatch.Droid.NewrRender
             }
         }
 
-        private void InitCamera(SurfaceTexture surface, int width, int height)
-        {
-            camera = Open();
-            var parameters = camera.GetParameters();
-            var aspect = ((decimal)height) / ((decimal)width);
-            var previewSize = parameters.SupportedPreviewSizes
-                                        .OrderBy(s => System.Math.Abs(s.Width / (decimal)s.Height - aspect))
-                                        .First();
-            System.Diagnostics.Debug.WriteLine($"Preview sizes: {parameters.SupportedPreviewSizes.Count}");
-            parameters.SetPreviewSize(previewSize.Width, previewSize.Height);
-            camera.SetParameters(parameters);
-            camera.SetPreviewTexture(surface);
-            StartCamera();
-        }
-
+       
         public bool OnSurfaceTextureDestroyed(Android.Graphics.SurfaceTexture surface)
         {
             if (camera != null)

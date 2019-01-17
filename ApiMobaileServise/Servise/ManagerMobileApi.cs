@@ -16,6 +16,10 @@ namespace ApiMobaileServise.Servise
             CheckAndCreatedFolder();
         }
 
+        public VehiclwInformation GetVehiclwInformation(int idVech)
+        {
+            return sqlCommandApiMobile.GetVehiclwInformationInDb(idVech);
+        }
 
         public void SavePhotoInspection(string idVe, PhotoInspection photoInspection)
         {
@@ -38,6 +42,16 @@ namespace ApiMobaileServise.Servise
             {
                 AskFromUser askFromUser = JsonConvert.DeserializeObject<AskFromUser>(jsonStrAsk);
                 sqlCommandApiMobile.SaveAskFromUserInDb(idVe, askFromUser);
+            }
+            else if(type == 4)
+            {
+                AskDelyvery askDelyvery = JsonConvert.DeserializeObject<AskDelyvery>(jsonStrAsk);
+                sqlCommandApiMobile.SaveAskDelyveryInDb(idVe, askDelyvery);
+            }
+            else if (type == 5)
+            {
+                AskForUserDelyveryM askForUserDelyveryM = JsonConvert.DeserializeObject<AskForUserDelyveryM>(jsonStrAsk);
+                sqlCommandApiMobile.SaveAskForUserDelyveryInDb(idVe, askForUserDelyveryM);
             }
         }
 
@@ -102,7 +116,7 @@ namespace ApiMobaileServise.Servise
             bool isToken = sqlCommandApiMobile.CheckToken(token);
             if (isToken)
             {
-                shippings = sqlCommandApiMobile.GetOrdersForToken(token);
+                shippings = sqlCommandApiMobile.GetOrdersForToken(token, 0);
             }
             return isToken;
         }

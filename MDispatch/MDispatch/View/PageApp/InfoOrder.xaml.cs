@@ -48,7 +48,7 @@ namespace MDispatch.View.PageApp
 
         private async void InspectionDelyvery()
         {
-            //ToDoo
+            infoOrderMV.ToStartInspectionDelyvery(infoOrderMV.Shipping.VehiclwInformations[0], infoOrderMV.Shipping);
         }
 
         private void Button_Clicked_2(object sender, EventArgs e)

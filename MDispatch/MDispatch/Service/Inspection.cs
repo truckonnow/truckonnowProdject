@@ -56,7 +56,7 @@ namespace MDispatch.Service
                 response = client.Execute(request);
                 content = response.Content;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return 4;
             }
@@ -147,6 +147,70 @@ namespace MDispatch.Service
                 request.AddParameter("idVe", id);
                 request.AddParameter("jsonStrAsk", strJsonAsk);
                 request.AddParameter("type", 3);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description);
+            }
+        }
+
+        public int SaveAsk(string token, string id, AskDelyvery askDelyvery, ref string description)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                string strJsonAsk = JsonConvert.SerializeObject(askDelyvery);
+                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
+                request.AddHeader("Accept", "application/json");
+                request.Parameters.Clear();
+                request.AddParameter("token", token);
+                request.AddParameter("idVe", id);
+                request.AddParameter("jsonStrAsk", strJsonAsk);
+                request.AddParameter("type", 4);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description);
+            }
+        }
+
+        public int SaveAsk(string token, string id, AskForUserDelyveryM askForUserDelyveryM, ref string description)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                string strJsonAsk = JsonConvert.SerializeObject(askForUserDelyveryM);
+                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
+                request.AddHeader("Accept", "application/json");
+                request.Parameters.Clear();
+                request.AddParameter("token", token);
+                request.AddParameter("idVe", id);
+                request.AddParameter("jsonStrAsk", strJsonAsk);
+                request.AddParameter("type", 5);
                 response = client.Execute(request);
                 content = response.Content;
             }

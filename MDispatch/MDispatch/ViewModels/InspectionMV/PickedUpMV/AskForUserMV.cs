@@ -17,21 +17,16 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         public INavigation Navigation { get; set; }
         private InitDasbordDelegate initDasbordDelegate = null;
 
-        public AskForUserMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
+        public AskForUserMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
         {
             this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
             Navigation = navigation;
             VehiclwInformation = vehiclwInformation;
-            Shipping = shipping;
+            IdShip = idShip;
         }
 
-        private Shipping shipping = null;
-        public Shipping Shipping
-        {
-            get => shipping;
-            set => SetProperty(ref shipping, value);
-        }
+        public string IdShip { get; set; }
 
         private AskFromUser askForUser = null;
         public AskFromUser AskForUser
@@ -69,7 +64,8 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
             else if (state == 3)
             {
-                await Navigation.PushAsync(new LiabilityAndInsurance(managerDispatchMob, VehiclwInformation, Shipping, initDasbordDelegate), true);
+                await Navigation.PushAsync(new LiabilityAndInsurance(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate), true);
+                Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
             else if (state == 4)
             {

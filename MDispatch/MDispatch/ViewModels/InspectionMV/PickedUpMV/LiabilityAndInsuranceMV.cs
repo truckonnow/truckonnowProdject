@@ -20,12 +20,12 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         public DelegateCommand GoToFeedBackCommand { get; set; }
         private InitDasbordDelegate initDasbordDelegate = null;
 
-        public LiabilityAndInsuranceMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, Shipping shipping, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
+        public LiabilityAndInsuranceMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
         {
             this.managerDispatchMob = managerDispatchMob;
             Navigation = navigation;
             VehiclwInformation = vehiclwInformation;
-            Shipping = shipping;
+            IdShip = idShip;
             GoToFeedBackCommand = new DelegateCommand(GoToFeedBack);
             this.initDasbordDelegate = initDasbordDelegate;
             SaveLiabilityAndInsuranceCommand = new DelegateCommand(SendLiabilityAndInsuranceEmaile);
@@ -38,12 +38,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             set => SetProperty(ref email, value);
         }
 
-        private Shipping shipping = null;
-        public Shipping Shipping
-        {
-            get => shipping;
-            set => SetProperty(ref shipping, value);
-        }
+        public string IdShip { get; set; }
 
         private VehiclwInformation vehiclwInformation = null;
         public VehiclwInformation VehiclwInformation
@@ -60,7 +55,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             int state = 0;
             await Task.Run(() =>
             {
-                state = managerDispatchMob.Recurent(token, Shipping.Id, "Picked up", ref description);
+                state = managerDispatchMob.Recurent(token, IdShip, "Picked up", ref description);
                 initDasbordDelegate.Invoke();
             });
             if (state == 1)
@@ -95,7 +90,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         private async void GoToFeedBack()
         {
             await PopupNavigation.PopAllAsync(true);
-            await Navigation.PushAsync(new View.Inspection.Feedback(managerDispatchMob, VehiclwInformation, Shipping));
+            await Navigation.PushAsync(new View.Inspection.Feedback(managerDispatchMob, VehiclwInformation));
         }
     }
 }

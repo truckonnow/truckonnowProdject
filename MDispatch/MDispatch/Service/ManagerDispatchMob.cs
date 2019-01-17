@@ -74,6 +74,21 @@ namespace MDispatch.Service
             return stateOrder;
         }
 
+        public int OrderWork(string typeOrder, int idVech, ref VehiclwInformation vehiclwInformation, string token, ref string description)
+        {
+            orderGet = new OrderGet();
+            int stateOrder = 1;
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                if (typeOrder == "GetVechicleInffo")
+                {
+                    stateOrder = orderGet.GetVehiclwInformation(token, idVech, ref description, ref vehiclwInformation);
+                }
+            }
+            orderGet = null;
+            return stateOrder;
+        }
+
         public int Recurent(string token, string id, string status, ref string description)
         {
             inspection = new Inspection();
@@ -111,6 +126,14 @@ namespace MDispatch.Service
                 else if(typeInspection == "FeedBack")
                 {
                     stateInspection = inspection.SaveAsk(token, (Models.Feedback)obj, ref description);
+                }
+                else if(typeInspection == "AskDelyvery")
+                {
+                    stateInspection = inspection.SaveAsk(token, id, (Models.AskDelyvery)obj, ref description);
+                }
+                else if (typeInspection == "AskForUserDelyvery")
+                {
+                    stateInspection = inspection.SaveAsk(token, id, (Models.AskForUserDelyveryM)obj, ref description);
                 }
             }
             inspection = null;
