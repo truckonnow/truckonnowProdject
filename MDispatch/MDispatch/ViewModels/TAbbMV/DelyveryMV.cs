@@ -1,25 +1,25 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
-using MDispatch.View;
 using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
-using Rg.Plugins.Popup.Services;
+using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
 
 namespace MDispatch.ViewModels.TAbbMV
 {
-    public class ActiveMV : BindableBase
+    public class DelyveryMV : BindableBase
     {
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation { get; set; }
         public DelegateCommand RefreshCommand { get; set; }
         public InitDasbordDelegate initDasbordDelegate;
 
-        public ActiveMV(ManagerDispatchMob managerDispatchMob, INavigation navigation)
+        public DelyveryMV(ManagerDispatchMob managerDispatchMob, INavigation navigation)
         {
             Navigation = navigation;
             Shippings = new List<Shipping>();
@@ -41,8 +41,8 @@ namespace MDispatch.ViewModels.TAbbMV
         {
             get => isRefr;
             set => SetProperty(ref isRefr, value);
-        } 
-        
+        }
+
         public async void Init()
         {
             IsRefr = true;
@@ -52,7 +52,7 @@ namespace MDispatch.ViewModels.TAbbMV
             List<Shipping> shippings = null;
             await Task.Run(() =>
             {
-                state = managerDispatchMob.OrderWork("OrderGet", token, ref description, ref shippings);
+                state = managerDispatchMob.OrderWork("OrderDelyveryGet", token, ref description, ref shippings);
             });
             if (state == 1)
             {

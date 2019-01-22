@@ -5,9 +5,64 @@
              Title="Delivered">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <ListView ItemsSource="{Binding Shippings}" IsRefreshing="{Binding IsRefr}" IsPullToRefreshEnabled="True"
+                      HasUnevenRows="True" SeparatorVisibility="None" RefreshCommand="{Binding RefreshCommand}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Frame Margin="5" Padding="0" BackgroundColor="White" HasShadow="True" CornerRadius="5" OutlineColor="#C3CBCD">
+                                    <StackLayout Orientation="Horizontal" x:Name="st">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="2" />
+                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1" NumberOfTapsRequired="1"/>
+                                        </StackLayout.GestureRecognizers>
+                                        <BoxView BackgroundColor="{Binding ColorCurrentStatus}" WidthRequest="8" />
+                                        <StackLayout Padding="10">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="Load Id:" FontSize="17"/>
+                                                <Label Text="{Binding idOrder}" FontSize="17"/>
+                                                <Label x:Name="idOrder" Text="{Binding Id}" IsVisible="False" FontSize="17"/>
+                                            </StackLayout>
+                                            <FlexLayout Direction="Column">
+                                                <StackLayout Orientation="Horizontal" IsVisible="{Binding IsVehiclw1}">
+                                                    <Label Text="{Binding VehiclwInformation1.Year}"/>
+                                                    <Label Text="{Binding VehiclwInformation1.Make}"/>
+                                                    <Label Text="{Binding VehiclwInformation1.Model}"/>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal" IsVisible="{Binding IsVehiclw2}">
+                                                    <Label Text="{Binding VehiclwInformation2.Year}"/>
+                                                    <Label Text="{Binding VehiclwInformation2.Make}"/>
+                                                    <Label Text="{Binding VehiclwInformation2.Model}"/>
+                                                </StackLayout>
+                                                <StackLayout IsVisible="{Binding IsVehiclw3}" Orientation="Horizontal">
+                                                    <Label Text="And further"/>
+                                                    <Label Text="{Binding CountVehiclw}"/>
+                                                </StackLayout>
+                                            </FlexLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Image Source="" WidthRequest="10"/>
+                                                <StackLayout>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="{Binding CityP}"/>
+                                                        <Label Text="{Binding StateP}"/>
+                                                        <Label Text="{Binding PickupExactly}"/>
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label Text="{Binding CityD}"/>
+                                                        <Label Text="{Binding StateD}"/>
+                                                        <Label Text="{Binding DeliveryEstimated}"/>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

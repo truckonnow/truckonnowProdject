@@ -121,6 +121,16 @@ namespace ApiMobaileServise.Servise
             return isToken;
         }
 
+        public bool GetOrdersDelyveryForToken(string token, ref List<Shipping> shippings)
+        {
+            bool isToken = sqlCommandApiMobile.CheckToken(token);
+            if (isToken)
+            {
+                shippings = sqlCommandApiMobile.GetOrdersDelyveryForToken(token, 0);
+            }
+            return isToken;
+        }
+
         private string CreateToken(string email, string password)
         {
             string token = "";

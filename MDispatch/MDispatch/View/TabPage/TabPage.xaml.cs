@@ -34,7 +34,7 @@ namespace MDispatch.View.TabPage
 
         private void InitDeiveredPage(ManagerDispatchMob managerDispatchMob)
         {
-            NavigationPage navigationPage = new NavigationPage(new DeiveredPage());
+            NavigationPage navigationPage = new NavigationPage(new DeiveredPage(managerDispatchMob, Navigation));
             navigationPage.Title = "Deiveredge";
             Children.Add(navigationPage);
         }

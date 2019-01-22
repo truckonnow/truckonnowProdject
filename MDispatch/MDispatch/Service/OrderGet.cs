@@ -37,6 +37,34 @@ namespace MDispatch.Service
             }
         }
 
+        public int DelyveryOreder(string token, ref string description, ref List<Shipping> shippings)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestRequest request = new RestRequest("Mobile/DelyveryOreder", Method.POST);
+                request.AddHeader("Accept", "application/json");
+                request.Parameters.Clear();
+                request.AddParameter("token", token);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description, ref shippings);
+            }
+        }
+
         public int GetVehiclwInformation(string token, int idVech, ref string description, ref VehiclwInformation vehiclwInformation)
         {
             IRestResponse response = null;

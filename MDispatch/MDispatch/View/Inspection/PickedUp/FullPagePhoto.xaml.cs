@@ -1,7 +1,7 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
-using MDispatch.ViewModels.PageAppMV;
-using Rg.Plugins.Popup.Services;
+using MDispatch.View.Inspection.PickedUp;
+using MDispatch.ViewModels.InspectionMV.PickedUpMV;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -61,6 +61,11 @@ namespace MDispatch.View.PageApp
             {
                // await PopupNavigation.
             }
+        }
+
+        private async void Button_Clicked_2(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new PageAddDamage(fullPagePhotoMV.SourseImage));
         }
     }
 }

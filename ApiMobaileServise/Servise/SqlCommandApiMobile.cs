@@ -190,5 +190,25 @@ namespace ApiMobaileServise.Servise
             int countGet = ost == 0 ? (5 * type) + 5 : (5 * type) + ost;
             return Shipping1.GetRange(5 * type, countGet);
         }
+
+        public List<Shipping> GetOrdersDelyveryForToken(string token, int type)
+        {
+            context.VehiclwInformation.Load();
+            context.Asks.Load();
+            context.Ask1s.Load();
+            context.PhotoInspections.Load();
+            List<Shipping> Shipping1 = new List<Shipping>();
+            Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
+            List<Shipping> shippings = context.Shipping.ToList().FindAll(s => s.Driverr != null && s.Driverr.Id == driver.Id);
+            if (shippings == null)
+            {
+                return new List<Shipping>();
+            }
+            Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Delivered"));
+            int countFor5 = Shipping1.Count / 5;
+            int ost = Shipping1.Count % 5;
+            int countGet = ost == 0 ? (5 * type) + 5 : (5 * type) + ost;
+            return Shipping1.GetRange(5 * type, countGet);
+        }
     }
 }

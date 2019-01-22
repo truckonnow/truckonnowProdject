@@ -89,7 +89,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
 
         public async void ToContinueInspection()
         {
-            await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{VehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", VehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 1, initDasbordDelegate));
+            await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{VehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", VehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 1, initDasbordDelegate));
             Navigation.RemovePage(Navigation.NavigationStack[2]);
         }
 

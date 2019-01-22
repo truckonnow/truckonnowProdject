@@ -94,6 +94,10 @@ namespace MDispatch.Models
                 {
                     color = "#FFBF00";
                 }
+                else if (CurrentStatus == "Delivered")
+                {
+                    color = "#088A08";
+                }
                 return color;
             }
         }

@@ -82,7 +82,8 @@
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="NewrRender\CameraPageRender.cs" />
-    <Compile Include="NewrRender\NewElementXamarin.Forms\PaintCodeButton.cs" />
+    <Compile Include="NewrRender\PaintCodeButton.cs" />
+    <Compile Include="NewrRender\TouchCordinateRender\TouchImageRender.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

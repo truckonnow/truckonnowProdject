@@ -37,6 +37,10 @@ namespace MDispatch.Service
                 {
                     stateOrder = orderGet.ActiveOreder(token, ref description, ref shippings);
                 }
+                else if (typeOrder == "OrderDelyveryGet")
+                {
+                    stateOrder = orderGet.DelyveryOreder(token, ref description, ref shippings);
+                }
             }
             orderGet = null;
             return stateOrder;

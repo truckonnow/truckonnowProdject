@@ -1,5 +1,5 @@
 ﻿using MDispatch.NewElement;
-using MDispatch.ViewModels.InspectionMV.PickedUpMV;
+using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using MDispatch.ViewModels.PageAppMV;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -7,15 +7,15 @@ using Xamarin.Forms.Xaml;
 namespace MDispatch.View.PageApp
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CameraPagePhoto : CameraPage
+	public partial class CameraPagePhoto1 : CameraPage
     {
-        private FullPagePhotoMV fullPagePhotoMV = null;
+        private FullPagePhotoDelyveryMV fullPagePhotoDelyveryMV = null;
         private string pngPaternPhoto = null;
 
-        public CameraPagePhoto(FullPagePhotoMV fullPagePhotoMV, string pngPaternPhoto)
+        public CameraPagePhoto1(FullPagePhotoDelyveryMV fullPagePhotoDelyveryMV, string pngPaternPhoto)
 		{
             this.pngPaternPhoto = pngPaternPhoto;
-            this.fullPagePhotoMV = fullPagePhotoMV;
+            this.fullPagePhotoDelyveryMV = fullPagePhotoDelyveryMV;
             InitializeComponent ();
             NavigationPage.SetHasNavigationBar(this, false);
             paternPhoto.Source = pngPaternPhoto;
@@ -26,8 +26,8 @@ namespace MDispatch.View.PageApp
             await Navigation.PopAsync(true);
             if (!result.Success)
                 return;
-            fullPagePhotoMV.AddNewFotoSourse(result.Image);
-            fullPagePhotoMV.SetPhoto(result.Image);
+            fullPagePhotoDelyveryMV.AddNewFotoSourse(result.Image);
+            fullPagePhotoDelyveryMV.SetPhoto(result.Image);
         }
 
         private void StackLayout_SizeChanged(object sender, System.EventArgs e)

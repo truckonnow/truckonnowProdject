@@ -16,16 +16,16 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
 
-namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
+namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
 {
-    public class FullPagePhotoMV : BindableBase
+    public class FullPagePhotoDelyveryMV : BindableBase
     {
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation { get; set; }
         public ICar Car = null;
         private InitDasbordDelegate initDasbordDelegate = null;
 
-        public FullPagePhotoMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string typeCar, int inderxPhotoInspektion, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
+        public FullPagePhotoDelyveryMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string typeCar, int inderxPhotoInspektion, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
         {
             Navigation = navigation;
             this.initDasbordDelegate = initDasbordDelegate;
@@ -117,7 +117,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             string photoJson = JsonConvert.SerializeObject(PhotoInArrayByte);
             string pathIndePhoto = PhotoInspection.Photos.Count == 0 ? PhotoInspection.IndexPhoto.ToString() : $"{PhotoInspection.IndexPhoto}.{PhotoInspection.Photos.Count}"; ;
             photo.Base64 = photoJson;
-            photo.path = $"Photo/{VehiclwInformation.Id}/PikedUp/PhotoInspection/{pathIndePhoto}.Jpeg";
+            photo.path = $"Photo/{VehiclwInformation.Id}/Delyvery/PhotoInspection/{pathIndePhoto}.Jpeg";
             PhotoInspection.Photos.Add(photo);
         }
 
@@ -145,15 +145,41 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             {
                 if (InderxPhotoInspektion < 39)
                 {
-                    await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", Car.typeIndex, InderxPhotoInspektion + 1, initDasbordDelegate));
+                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", Car.typeIndex, InderxPhotoInspektion + 1, initDasbordDelegate));
                     Navigation.RemovePage(Navigation.NavigationStack[2]);
                 }
                 else
                 {
-                    await PopupNavigation.PushAsync(new TempPageHint());
-                    await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate), true);
-                    Navigation.RemovePage(Navigation.NavigationStack[2]);
+                    await Navigation.PopToRootAsync(true);
+                    Continue();
                 }
+            }
+            else if (state == 4)
+            {
+                //FeedBack = "Technical work on the service";
+            }
+        }
+
+        public async void Continue()
+        {
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            await Task.Run(() =>
+            {
+                state = managerDispatchMob.Recurent(token, IdShip, "Delivered", ref description);
+                initDasbordDelegate.Invoke();
+            });
+            if (state == 1)
+            {
+                //FeedBack = "Not Network";
+            }
+            else if (state == 2)
+            {
+                //FeedBack = description;
+            }
+            else if (state == 3)
+            {
             }
             else if (state == 4)
             {
