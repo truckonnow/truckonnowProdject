@@ -1,8 +1,10 @@
 ﻿using MDispatch.Models;
+using MDispatch.NewElement;
 using MDispatch.Service;
 using MDispatch.View.Inspection.PickedUp;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
 using System;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -23,7 +25,8 @@ namespace MDispatch.View.PageApp
             NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = fullPagePhotoMV;
             paternPhoto.Source = pngPaternPhoto;
-            if(fullPagePhotoMV.Car.typeIndex != null && fullPagePhotoMV.Car.typeIndex != "")
+            dmla.IsVisible = false;
+            if (fullPagePhotoMV.Car.typeIndex != null && fullPagePhotoMV.Car.typeIndex != "")
             {
                 NameSelectPhoto.Text = $"{fullPagePhotoMV.Car.typeIndex} - {photoIndex}";
             }
@@ -31,6 +34,11 @@ namespace MDispatch.View.PageApp
             {
                 NameSelectPhoto.Text = "--------------------";
             }
+        }
+
+        public void AddDamagCurrentLayut(Xamarin.Forms.View view)
+        {
+            dmla.Children.Add(view);
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
@@ -43,14 +51,16 @@ namespace MDispatch.View.PageApp
             fullPagePhotoMV.SourseImage = (ImageSource)e.SelectedItem;
             if((ImageSource)Photos.SelectedItem != fullPagePhotoMV.AllSourseImage[0])
             {
+                dmla.IsVisible = false;
                 paternPhoto.Source = "";
             }
             else
             {
+                dmla.IsVisible = true;
                 paternPhoto.Source = pngPaternPhoto;
             }
         }
-
+        
         private async void Button_Clicked_1(object sender, EventArgs e)
         {
             if(fullPagePhotoMV.AllSourseImage != null && fullPagePhotoMV.AllSourseImage.Count != 0)
@@ -65,7 +75,16 @@ namespace MDispatch.View.PageApp
 
         private async void Button_Clicked_2(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new PageAddDamage(fullPagePhotoMV.SourseImage));
+            if (fullPagePhotoMV.PhotoInspection != null && fullPagePhotoMV.AllSourseImage.FindIndex(a => a == fullPagePhotoMV.SourseImage) == 0)
+            {
+                await Navigation.PushAsync(new PageAddDamage(fullPagePhotoMV, this, dmla.Children.ToList()));
+            }
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            DependencyService.Get<IOrientationHandler>().ForceSensor();
+            return base.OnBackButtonPressed();
         }
     }
 }

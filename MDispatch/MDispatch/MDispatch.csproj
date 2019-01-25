@@ -63,6 +63,9 @@
     <EmbeddedResource Update="View\Inspection\PickedUp\CopyLibaryAndInsurance.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="View\Inspection\PickedUp\DamageSelecter.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="View\Inspection\PickedUp\EvaluationAndSurveyDialog.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -117,11 +120,17 @@
     <Compile Update="View\Inspection\Delyvery\CameraPage\CameraPagePhoto1.xaml.cs">
       <DependentUpon>CameraPagePhoto1.xaml</DependentUpon>
     </Compile>
+    <Compile Update="View\Inspection\Delyvery\DamageSelecter1.xaml.cs">
+      <DependentUpon>DamageSelecter1.xaml</DependentUpon>
+    </Compile>
     <Compile Update="View\Inspection\Delyvery\EvaluationAndSurveyDialog1.xaml.cs">
       <DependentUpon>EvaluationAndSurveyDialog1.xaml</DependentUpon>
     </Compile>
     <Compile Update="View\Inspection\Delyvery\FullPagePhotoDelyvery.xaml.cs">
       <DependentUpon>FullPagePhotoDelyvery.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\Inspection\Delyvery\PageAddDamage1.xaml.cs">
+      <DependentUpon>PageAddDamage1.xaml</DependentUpon>
     </Compile>
     <Compile Update="View\Inspection\Delyvery\TempDialogPage1.xaml.cs">
       <DependentUpon>TempDialogPage1.xaml</DependentUpon>

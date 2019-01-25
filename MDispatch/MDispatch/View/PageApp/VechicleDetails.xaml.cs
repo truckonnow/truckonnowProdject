@@ -2,7 +2,6 @@
 using MDispatch.Service;
 using MDispatch.ViewModels.PageAppMV.VehicleDetals;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -130,20 +129,20 @@ namespace MDispatch.View.PageApp
         {
             foreach (var item in vehiclwInformation.PhotoInspections)
             {
-                foreach (var photo in item.Photos)
+                if (item.CurrentStatusPhoto == "PikedUp")
                 {
-                    blockPhotoInspection.Children.Add(new Image()
+                    foreach (var photo in item.Photos)
                     {
-                        Source = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(photo.Base64))),
-                        HeightRequest = 70,
-                        WidthRequest = 70,
-                        Margin = 3
-                    });
+                        blockPhotoInspection.Children.Add(new Image()
+                        {
+                            Source = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(photo.Base64))),
+                            HeightRequest = 70,
+                            WidthRequest = 70,
+                            Margin = 3
+                        });
+                    }
                 }
             }
         }
-
-
-
     }
 }

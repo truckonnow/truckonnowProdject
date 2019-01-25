@@ -3,17 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDispatch.View.PageApp.FullPagePhotoDelyvery">
     <ContentPage.Content>
-        <AbsoluteLayout>
-            <StackLayout HeightRequest="60" AbsoluteLayout.LayoutFlags="All"
-                         AbsoluteLayout.LayoutBounds="1, 0, 1, 1">
-                <Image x:Name="SelectPhoto" Source="{Binding SourseImage}"/>
-            </StackLayout>
-            <Image x:Name="paternPhoto" AbsoluteLayout.LayoutFlags="All"
-                         AbsoluteLayout.LayoutBounds="1, 1, 1, 1" />
+        <AbsoluteLayout x:Name="laAbsul">
+            <Image x:Name="SelectPhoto" Source="{Binding SourseImage}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"/>
+            <Image x:Name="paternPhoto" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" />
+            <AbsoluteLayout x:Name="dmla" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"/>
             <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" BackgroundColor="#E6E6E6"
                          AbsoluteLayout.LayoutBounds="1, 0, 1, 44" Opacity="0.3" Padding="7">
                 <Label x:Name="NameSelectPhoto" Text="--------------------" TextColor="Black" Margin="5"/>
-                <Button Text="Add Damag" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="81" HorizontalOptions="EndAndExpand"/>
+                <Button Text="Add Damag" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="81" HorizontalOptions="EndAndExpand" Clicked="Button_Clicked_2"/>
                 <Button Text="Add Photo" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="79" HorizontalOptions="End" Clicked="Button_Clicked"/>
                 <Button Text="Next" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="50" Clicked="Button_Clicked_1" />
             </StackLayout>

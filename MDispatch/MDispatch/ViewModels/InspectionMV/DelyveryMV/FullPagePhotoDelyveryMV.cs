@@ -1,8 +1,6 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.View;
-using MDispatch.View.Inspection;
-using MDispatch.View.Inspection.PickedUp;
 using MDispatch.View.PageApp;
 using MDispatch.ViewModels.AskPhoto;
 using MDispatch.ViewModels.InspectionMV.Models;
@@ -12,6 +10,7 @@ using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -62,6 +61,24 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             set => SetProperty(ref sourseImage, value);
         }
 
+        internal void SetDamage(string nameDamage, int indexDamage, string prefNameDamage, double xInterest, double yInterest, Image image)
+        {
+            Damage damage = new Damage();
+            damage.FullNameDamage = $"{prefNameDamage} - {nameDamage}";
+            damage.IndexImageVech = InderxPhotoInspektion.ToString();
+            damage.TypeDamage = nameDamage;
+            damage.TypePrefDamage = prefNameDamage;
+            damage.IndexDamage = indexDamage;
+            damage.XInterest = xInterest;
+            damage.YInterest = yInterest;
+            damage.Image = image;
+            if (PhotoInspection.Damages == null)
+            {
+                PhotoInspection.Damages = new List<Damage>();
+            }
+            PhotoInspection.Damages.Add(damage);
+        }
+
         private List<ImageSource> allSourseImage = null;
         public List<ImageSource> AllSourseImage
         {
@@ -69,6 +86,20 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             set => SetProperty(ref allSourseImage, value);
         }
 
+        internal void RemmoveDamage(Image v)
+        {
+            if (v != null && PhotoInspection.Damages != null && PhotoInspection.Damages.FirstOrDefault(d => d.Image == v) != null)
+            {
+                PhotoInspection.Damages.Remove(PhotoInspection.Damages.FirstOrDefault(d => d.Image == v));
+            }
+        }
+
+        private List<Damage> damages = null;
+        public List<Damage> Damages
+        {
+            get => damages;
+            set => SetProperty(ref damages, value);
+        }
 
         private PhotoInspection photoInspection = null;
         public PhotoInspection PhotoInspection
@@ -113,9 +144,12 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 PhotoInspection.Photos = new List<Photo>();
             }
             PhotoInspection.IndexPhoto = InderxPhotoInspektion;
+            PhotoInspection.CurrentStatusPhoto = "Delyvery";
             Photo photo = new Photo();
             string photoJson = JsonConvert.SerializeObject(PhotoInArrayByte);
-            string pathIndePhoto = PhotoInspection.Photos.Count == 0 ? PhotoInspection.IndexPhoto.ToString() : $"{PhotoInspection.IndexPhoto}.{PhotoInspection.Photos.Count}"; ;
+            string pathIndePhoto = PhotoInspection.Photos.Count == 0 ? PhotoInspection.IndexPhoto.ToString() : $"{PhotoInspection.IndexPhoto}.{PhotoInspection.Photos.Count}";
+            PhotoInspection.CurrentStatusPhoto = "Delyvery";
+            PhotoInspection.CurrentStatusPhoto = "Delyvery";
             photo.Base64 = photoJson;
             photo.path = $"Photo/{VehiclwInformation.Id}/Delyvery/PhotoInspection/{pathIndePhoto}.Jpeg";
             PhotoInspection.Photos.Add(photo);

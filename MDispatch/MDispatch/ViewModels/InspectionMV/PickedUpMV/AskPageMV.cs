@@ -1,4 +1,5 @@
 ﻿using MDispatch.Models;
+using MDispatch.NewElement;
 using MDispatch.Service;
 using MDispatch.View;
 using MDispatch.View.PageApp;
@@ -64,6 +65,7 @@ namespace MDispatch.ViewModels.AskPhoto
             }
             else if (state == 3)
             {
+                DependencyService.Get<IOrientationHandler>().ForceLandscape();
                 await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{indexTypeCar}1.png", indexTypeCar, 1, initDasbordDelegate));
                 Navigation.RemovePage(Navigation.NavigationStack[2]);
             }

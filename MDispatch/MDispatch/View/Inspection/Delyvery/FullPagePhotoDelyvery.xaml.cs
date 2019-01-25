@@ -1,7 +1,9 @@
 ﻿using MDispatch.Models;
+using MDispatch.NewElement;
 using MDispatch.Service;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using System;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -60,6 +62,25 @@ namespace MDispatch.View.PageApp
             {
                // await PopupNavigation.
             }
+        }
+
+        internal void AddDamagCurrentLayut(Xamarin.Forms.View view)
+        {
+            dmla.Children.Add(view);
+        }
+
+        private async void Button_Clicked_2(object sender, EventArgs e)
+        {
+            if (fullPagePhotoDelyveryMV.PhotoInspection != null && fullPagePhotoDelyveryMV.AllSourseImage.FindIndex(a => a == fullPagePhotoDelyveryMV.SourseImage) == 0)
+            {
+                await Navigation.PushAsync(new Inspection.PickedUp.PageAddDamage1(fullPagePhotoDelyveryMV, this, dmla.Children.ToList()));
+            }
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            DependencyService.Get<IOrientationHandler>().ForceSensor();
+            return base.OnBackButtonPressed();
         }
     }
 }

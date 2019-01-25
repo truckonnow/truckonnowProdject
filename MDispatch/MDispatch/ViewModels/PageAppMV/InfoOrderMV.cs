@@ -1,4 +1,5 @@
 ﻿using MDispatch.Models;
+using MDispatch.NewElement;
 using MDispatch.Service;
 using MDispatch.View.AskPhoto;
 using MDispatch.View.Inspection;
@@ -82,12 +83,14 @@ namespace MDispatch.ViewModels.PageAppMV
             }
             else if(vehiclwInformation.PhotoInspections == null)
             {
+                DependencyService.Get<IOrientationHandler>().ForceLandscape();
                 await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, vehiclwInformation, shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 1, initDasbordDelegate), true);
             }
             else if(vehiclwInformation.PhotoInspections.Find(p => p.IndexPhoto == 39) == null)
             {
                 int lastIndexPhoto = vehiclwInformation.PhotoInspections[vehiclwInformation.PhotoInspections.Count - 1].IndexPhoto + 1;
-                 await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, vehiclwInformation, shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{lastIndexPhoto}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), lastIndexPhoto, initDasbordDelegate), true);
+                DependencyService.Get<IOrientationHandler>().ForceLandscape();
+                await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, vehiclwInformation, shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{lastIndexPhoto}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), lastIndexPhoto, initDasbordDelegate), true);
             }
             else if(vehiclwInformation.Ask1 == null)
             {

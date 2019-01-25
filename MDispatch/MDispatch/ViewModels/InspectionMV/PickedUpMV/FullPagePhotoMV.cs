@@ -1,4 +1,5 @@
 ﻿using MDispatch.Models;
+using MDispatch.NewElement;
 using MDispatch.Service;
 using MDispatch.View;
 using MDispatch.View.Inspection;
@@ -12,6 +13,7 @@ using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -68,8 +70,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             get => allSourseImage;
             set => SetProperty(ref allSourseImage, value);
         }
-
-
+        
         private PhotoInspection photoInspection = null;
         public PhotoInspection PhotoInspection
         {
@@ -89,6 +90,32 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                     }
             }
             return car;
+        }
+
+        public async void RemmoveDamage(Image image)
+        {
+            if (image != null && PhotoInspection.Damages != null && PhotoInspection.Damages.FirstOrDefault(d => d.Image == image) != null)
+            {
+                PhotoInspection.Damages.Remove(PhotoInspection.Damages.FirstOrDefault(d => d.Image == image));
+            }
+        }
+
+        public async void SetDamage(string nameDamage, int indexDamage, string prefNameDamage, double xInterest, double yInterest, Image image)
+        {
+            Damage damage = new Damage();
+            damage.FullNameDamage = $"{prefNameDamage} - {nameDamage}";
+            damage.IndexImageVech = InderxPhotoInspektion.ToString();
+            damage.TypeDamage = nameDamage;
+            damage.TypePrefDamage = prefNameDamage;
+            damage.IndexDamage = indexDamage;
+            damage.XInterest = xInterest;
+            damage.YInterest = yInterest;
+            damage.Image = image;
+            if (PhotoInspection.Damages == null)
+            {
+                PhotoInspection.Damages = new List<Damage>();
+            }
+            PhotoInspection.Damages.Add(damage);
         }
 
         public void AddNewFotoSourse(byte[] imageSorseByte)
@@ -113,9 +140,12 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 PhotoInspection.Photos = new List<Photo>();
             }
             PhotoInspection.IndexPhoto = InderxPhotoInspektion;
+            PhotoInspection.CurrentStatusPhoto = "PikedUp";
             Photo photo = new Photo();
             string photoJson = JsonConvert.SerializeObject(PhotoInArrayByte);
-            string pathIndePhoto = PhotoInspection.Photos.Count == 0 ? PhotoInspection.IndexPhoto.ToString() : $"{PhotoInspection.IndexPhoto}.{PhotoInspection.Photos.Count}"; ;
+            string pathIndePhoto = PhotoInspection.Photos.Count == 0 ? PhotoInspection.IndexPhoto.ToString() : $"{PhotoInspection.IndexPhoto}.{PhotoInspection.Photos.Count}";
+            PhotoInspection.CurrentStatusPhoto = "PikedUp";
+            PhotoInspection.CurrentStatusPhoto = "PikedUp";
             photo.Base64 = photoJson;
             photo.path = $"Photo/{VehiclwInformation.Id}/PikedUp/PhotoInspection/{pathIndePhoto}.Jpeg";
             PhotoInspection.Photos.Add(photo);
@@ -150,6 +180,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 }
                 else
                 {
+                    DependencyService.Get<IOrientationHandler>().ForceSensor();
                     await PopupNavigation.PushAsync(new TempPageHint());
                     await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate), true);
                     Navigation.RemovePage(Navigation.NavigationStack[2]);

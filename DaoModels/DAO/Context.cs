@@ -17,6 +17,7 @@ namespace DaoModels.DAO
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<AskDelyvery> AskDelyveries { get; set; }
         public DbSet<AskForUserDelyveryM> askForUserDelyveryMs { get; set; }
+        public DbSet<Damage> Damages { get; set; }
 
         public Context()
         {

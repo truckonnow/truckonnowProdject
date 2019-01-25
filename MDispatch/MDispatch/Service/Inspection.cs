@@ -234,6 +234,13 @@ namespace MDispatch.Service
             string content = null;
             try
             {
+                if (photoInspection.Damages != null)
+                {
+                    photoInspection.Damages.ForEach((dm) =>
+                    {
+                        dm.Image = null;
+                    });
+                }
                 string strPhotoInspection = JsonConvert.SerializeObject(photoInspection);
                 RestClient client = new RestClient("http://192.168.0.100:8888");
                 RestRequest request = new RestRequest("Mobile/Save/Photo", Method.POST);

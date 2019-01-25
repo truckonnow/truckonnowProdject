@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <StackLayout>
             <ListView ItemsSource="{Binding Shippings}" IsRefreshing="{Binding IsRefr}" IsPullToRefreshEnabled="True"
-                      HasUnevenRows="True" SeparatorVisibility="None" RefreshCommand="{Binding RefreshCommand}">
+                      HasUnevenRows="True" SeparatorVisibility="None" RefreshCommand="{Binding RefreshCommand}" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

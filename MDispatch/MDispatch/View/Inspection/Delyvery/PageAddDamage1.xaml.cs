@@ -1,5 +1,5 @@
 ﻿using MDispatch.View.PageApp;
-using MDispatch.ViewModels.InspectionMV.PickedUpMV;
+using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using Rg.Plugins.Popup.Services;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,21 +10,21 @@ using Xamarin.Forms.Xaml;
 namespace MDispatch.View.Inspection.PickedUp
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class PageAddDamage : ContentPage
+	public partial class PageAddDamage1 : ContentPage
 	{
-        private FullPagePhotoMV FullPagePhotoMV = null;
+        private FullPagePhotoDelyveryMV fullPagePhotoDelyveryMV = null;
         public int stateSelect = 0;
         public int indexSelectDamage = 0;
         public string nameDamage = null;
         public string prefNameDamage = null;
-        private FullPagePhoto fullPagePhoto = null;
+        private FullPagePhotoDelyvery fullPagePhotoDelyvery = null;
 
-        public PageAddDamage(FullPagePhotoMV fullPagePhotoMV, FullPagePhoto fullPagePhoto, List<Xamarin.Forms.View> views = null)
+        public PageAddDamage1(FullPagePhotoDelyveryMV fullPagePhotoDelyveryMV, FullPagePhotoDelyvery fullPagePhotoDelyvery, List<Xamarin.Forms.View> views = null)
         {
-            this.fullPagePhoto = fullPagePhoto;
-            FullPagePhotoMV = fullPagePhotoMV;
+            this.fullPagePhotoDelyvery = fullPagePhotoDelyvery;
+            this.fullPagePhotoDelyveryMV = fullPagePhotoDelyveryMV;
             InitializeComponent();
-            touchImage.Source = FullPagePhotoMV.SourseImage;
+            touchImage.Source = this.fullPagePhotoDelyveryMV.SourseImage;
             NavigationPage.SetHasNavigationBar(this, false);
             if (views != null)
             {
@@ -39,7 +39,7 @@ namespace MDispatch.View.Inspection.PickedUp
         private async void TouchImage_TouchAction(object sender, NewElement.TouchCordinate.TouchActionEventArgs e)
         {
             stateSelect = 1;
-            await PopupNavigation.PushAsync(new DamageSelecter(FullPagePhotoMV, this), true);
+            await PopupNavigation.PushAsync(new DamageSelecter1(fullPagePhotoDelyveryMV, this), true);
             await WaiteSelectDamage();
             if (stateSelect == 0)
             {
@@ -56,7 +56,7 @@ namespace MDispatch.View.Inspection.PickedUp
                 await PopupNavigation.PopAsync(true);
                 await Task.Run(() =>
                 {
-                    FullPagePhotoMV.SetDamage(nameDamage, indexSelectDamage, prefNameDamage, e.XInterest * 0.0001, e.YInterest * 0.0001, image);
+                    fullPagePhotoDelyveryMV.SetDamage(nameDamage, indexSelectDamage, prefNameDamage, e.XInterest * 0.0001, e.YInterest * 0.0001, image);
                 });
             }
             else
@@ -68,7 +68,7 @@ namespace MDispatch.View.Inspection.PickedUp
         private async void RemovedDamag(Xamarin.Forms.View v, object s)
         {
             absla.Children.Remove(v);
-            FullPagePhotoMV.RemmoveDamage((Image)v);
+            this.fullPagePhotoDelyveryMV.RemmoveDamage((Image)v);
         }
 
         protected override bool OnBackButtonPressed()
@@ -77,7 +77,7 @@ namespace MDispatch.View.Inspection.PickedUp
             foreach(var view in views)
             {
                 view.GestureRecognizers.Remove(new TapGestureRecognizer(RemovedDamag));
-                fullPagePhoto.AddDamagCurrentLayut(view);
+                fullPagePhotoDelyvery.AddDamagCurrentLayut(view);
             }
             return base.OnBackButtonPressed();
         }
@@ -87,9 +87,7 @@ namespace MDispatch.View.Inspection.PickedUp
             await Task.Run(() =>
             {
                 while(stateSelect == 1)
-                {
-
-                }
+                { }
             });
         }
     }
