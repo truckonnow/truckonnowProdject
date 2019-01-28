@@ -42,6 +42,35 @@ namespace ApiMobaileServise.Controllers
         }
 
         [HttpPost]
+        [Route("Shipping")]
+        public string GetShipping(string token, string idShip)
+        {
+            string respons = null;
+            if (token == null || token == "")
+            {
+                return JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
+            }
+            try
+            {
+                bool isToken = managerMobileApi.CheckToken(token);
+                if (isToken)
+                {
+                    Shipping shipping = managerMobileApi.GetShipping(idShip);
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", shipping));
+                }
+                else
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "2", null));
+                }
+            }
+            catch (Exception)
+            {
+                respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
+            }
+            return respons;
+        }
+
+        [HttpPost]
         [Route("ReCurentStatus")]
         public string ReCurentStatus(string token, string idShip, string status)
         {

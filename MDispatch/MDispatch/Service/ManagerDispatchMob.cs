@@ -143,5 +143,17 @@ namespace MDispatch.Service
             inspection = null;
             return stateInspection;
         }
+
+        public int GetShipping(string token, string id, ref string description, ref Shipping shipping)
+        {
+            inspection = new Inspection();
+            int stateInspection = 1;
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                stateInspection = inspection.GetShipping(token, id, ref description, ref shipping);
+            }
+            inspection = null;
+            return stateInspection;
+        }
     }
 }

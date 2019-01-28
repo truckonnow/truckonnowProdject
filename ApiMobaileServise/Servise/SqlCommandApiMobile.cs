@@ -27,6 +27,15 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
+        public Shipping GetShippingInDb(string idShip)
+        {
+            context.PhotoInspections.Load();
+            context.Shipping.Load();
+            context.VehiclwInformation.Load();
+            context.Damages.Load();
+            return context.Shipping.FirstOrDefault(v => v.Id.ToString() == idShip);
+        }
+
         public async void SaveAskInDb(string idve, Ask ask)
         {
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));

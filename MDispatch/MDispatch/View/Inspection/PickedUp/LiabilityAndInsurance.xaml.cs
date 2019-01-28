@@ -14,10 +14,11 @@ namespace MDispatch.View.Inspection.PickedUp
 	{
         LiabilityAndInsuranceMV liabilityAndInsuranceMV = null;
 
-        public LiabilityAndInsurance (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate)
+        public LiabilityAndInsurance (ManagerDispatchMob managerDispatchMob, string idVech, string idShip, InitDasbordDelegate initDasbordDelegate)
 		{
-            liabilityAndInsuranceMV = new LiabilityAndInsuranceMV(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate);
+            liabilityAndInsuranceMV = new LiabilityAndInsuranceMV(managerDispatchMob, idVech, idShip, Navigation, initDasbordDelegate);
             InitializeComponent ();
+            BindingContext = liabilityAndInsuranceMV;
 		}
 
         private async void Button_Clicked(object sender, EventArgs e)

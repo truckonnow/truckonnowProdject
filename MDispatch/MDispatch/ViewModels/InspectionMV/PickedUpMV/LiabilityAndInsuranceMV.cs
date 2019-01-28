@@ -6,6 +6,7 @@ using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -20,15 +21,16 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         public DelegateCommand GoToFeedBackCommand { get; set; }
         private InitDasbordDelegate initDasbordDelegate = null;
 
-        public LiabilityAndInsuranceMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
+        public LiabilityAndInsuranceMV(ManagerDispatchMob managerDispatchMob, string idVech, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
         {
             this.managerDispatchMob = managerDispatchMob;
             Navigation = navigation;
-            VehiclwInformation = vehiclwInformation;
             IdShip = idShip;
+            IdVech = idVech;
             GoToFeedBackCommand = new DelegateCommand(GoToFeedBack);
             this.initDasbordDelegate = initDasbordDelegate;
             SaveLiabilityAndInsuranceCommand = new DelegateCommand(SendLiabilityAndInsuranceEmaile);
+            InitShipping();
         }
 
         private string email = null;
@@ -40,11 +42,43 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
 
         public string IdShip { get; set; }
 
-        private VehiclwInformation vehiclwInformation = null;
-        public VehiclwInformation VehiclwInformation
+        public string IdVech { get; set; }
+
+        private Shipping shipping = null;
+        public Shipping Shipping
         {
-            get => vehiclwInformation;
-            set => SetProperty(ref vehiclwInformation, value);
+            get => shipping;
+            set => SetProperty(ref shipping, value);
+        }
+
+        private async void InitShipping()
+        {
+            await PopupNavigation.PushAsync(new LoadPage());
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            Shipping shipping1 = null;
+            await Task.Run(() =>
+            {
+                state = managerDispatchMob.GetShipping(token, IdShip, ref description, ref shipping1);
+            });
+            await PopupNavigation.PopAsync();
+            if (state == 1)
+            {
+                //FeedBack = "Not Network";
+            }
+            else if (state == 2)
+            {
+                //FeedBack = description;
+            }
+            else if (state == 3)
+            {
+                Shipping = shipping1;
+            }
+            else if (state == 4)
+            {
+                //FeedBack = "Technical work on the service";
+            }
         }
 
         public async void Continue()
@@ -90,7 +124,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         private async void GoToFeedBack()
         {
             await PopupNavigation.PopAllAsync(true);
-            await Navigation.PushAsync(new View.Inspection.Feedback(managerDispatchMob, VehiclwInformation));
+            await Navigation.PushAsync(new View.Inspection.Feedback(managerDispatchMob, Shipping.VehiclwInformations.FirstOrDefault(v => v.Id == IdVech)));
         }
     }
 }

@@ -64,7 +64,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
             else if (state == 3)
             {
-                await Navigation.PushAsync(new LiabilityAndInsurance(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate), true);
+                await Navigation.PushAsync(new LiabilityAndInsurance(managerDispatchMob, VehiclwInformation.Id, IdShip, initDasbordDelegate), true);
                 Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
             else if (state == 4)

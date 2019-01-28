@@ -21,6 +21,11 @@ namespace ApiMobaileServise.Servise
             return sqlCommandApiMobile.GetVehiclwInformationInDb(idVech);
         }
 
+        public Shipping GetShipping(string idShip)
+        {
+            return sqlCommandApiMobile.GetShippingInDb(idShip);
+        }
+
         public void SavePhotoInspection(string idVe, PhotoInspection photoInspection)
         {
             sqlCommandApiMobile.SavePhotoInspectionInDb(idVe, photoInspection);

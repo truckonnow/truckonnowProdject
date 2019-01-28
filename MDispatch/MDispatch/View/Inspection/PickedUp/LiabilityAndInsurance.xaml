@@ -1,9 +1,85 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MDispatch.View.Inspection.PickedUp.LiabilityAndInsurance">
+             x:Class="MDispatch.View.Inspection.PickedUp.LiabilityAndInsurance"
+             Title="{Binding Shipping.idOrder}">
     <ContentPage.Content>
         <StackLayout>
+            <Frame Padding="5" BorderColor="BlueViolet" Margin="5" CornerRadius="6">
+                <StackLayout>
+                    <Label Text="ORIGIN" FontSize="16" TextColor="Black" HorizontalTextAlignment="Center"/>
+                    <FlexLayout Wrap="Wrap">
+                        <Label Text="{Binding Shipping.AddresP}" TextColor="Black" FontSize="16" Margin="3"/>
+                        <Label Text="{Binding Shipping.CityP}" TextColor="Black" FontSize="16" Margin="0,3,0,3"/>
+                        <Label Text="," TextColor="Black" FontSize="16" Margin="0,3,3,3"/>
+                        <Label Text="{Binding Shipping.StateP}" TextColor="Black" FontSize="16" Margin="3"/>
+                        <Label Text="{Binding Shipping.ZipP }" TextColor="Black" FontSize="16" Margin="3,3,0,3"/>
+                    </FlexLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Contact:" FontSize="16" />
+                        <Label Text="{Binding Shipping.ContactNameP }" TextColor="Black" FontSize="16" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Phone:" FontSize="16" />
+                        <Label Text="{Binding Shipping.PhoneP }" TextColor="Blue" FontSize="16" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+            <Frame Padding="5" BorderColor="BlueViolet" Margin="5" CornerRadius="6">
+                <StackLayout>
+                    <Label Text="DESTINATION" FontSize="16" TextColor="Black" HorizontalTextAlignment="Center"/>
+                    <FlexLayout Wrap="Wrap">
+                        <Label Text="{Binding Shipping.AddresD}" TextColor="Black" FontSize="16" Margin="3"/>
+                        <Label Text="{Binding Shipping.CityD}" TextColor="Black" FontSize="16" Margin="0,3,0,3"/>
+                        <Label Text="," TextColor="Black" FontSize="16" Margin="0,3,3,3"/>
+                        <Label Text="{Binding Shipping.StateD}" TextColor="Black" FontSize="16" Margin="3"/>
+                        <Label Text="{Binding Shipping.ZipD }" TextColor="Black" FontSize="16" Margin="3,3,0,3"/>
+                    </FlexLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Contact:" FontSize="16" />
+                        <Label Text="{Binding Shipping.ContactNameD }" TextColor="Black" FontSize="16" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Phone:" FontSize="16" />
+                        <Label Text="{Binding Shipping.PhoneD }" TextColor="Blue" FontSize="16" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+            <Frame Padding="5" BorderColor="BlueViolet" Margin="5" CornerRadius="6">
+                <ListView x:Name="listVehic" Margin="5, 0, 0, 0" ItemsSource="{Binding Shipping.VehiclwInformations}"
+                                  HasUnevenRows="True" SeparatorVisibility="None" HeightRequest="170">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <Frame Padding="2" BorderColor="#4fd2c2" Margin="2" CornerRadius="6">
+                                        <StackLayout >
+                                            <StackLayout Orientation="Horizontal" >
+                                                <Label Text="{Binding Id}" IsVisible="False" x:Name="idL"/>
+                                                <Label Text="{Binding Year}" FontSize="18" TextColor="Black"/>
+                                                <Label Text="{Binding Make}" FontSize="18" TextColor="Black"/>
+                                                <Label Text="{Binding Model}" FontSize="18" TextColor="Black"/>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="VIN#:" FontSize="18"/>
+                                                <Label Text="{Binding VIN}" FontSize="18" TextColor="Black"/>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="Type:" FontSize="18"/>
+                                                <Label Text="{Binding Type}" FontSize="18" TextColor="Black"/>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="Color:" FontSize="18"/>
+                                                <Label Text="{Binding Color}" FontSize="18" TextColor="Black"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Frame>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
             <Button Text="Continue" BackgroundColor="BlueViolet" TextColor="White" Clicked="Button_Clicked" Margin="10"/>
         </StackLayout>
     </ContentPage.Content>
