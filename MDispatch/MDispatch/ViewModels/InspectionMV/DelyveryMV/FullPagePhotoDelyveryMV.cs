@@ -151,7 +151,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             PhotoInspection.CurrentStatusPhoto = "Delyvery";
             PhotoInspection.CurrentStatusPhoto = "Delyvery";
             photo.Base64 = photoJson;
-            photo.path = $"Photo/{VehiclwInformation.Id}/Delyvery/PhotoInspection/{pathIndePhoto}.Jpeg";
+            photo.path = $"../Photo/{VehiclwInformation.Id}/Delyvery/PhotoInspection/{pathIndePhoto}.Jpeg";
             PhotoInspection.Photos.Add(photo);
         }
 

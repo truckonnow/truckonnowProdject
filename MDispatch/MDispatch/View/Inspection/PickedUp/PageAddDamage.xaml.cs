@@ -45,7 +45,7 @@ namespace MDispatch.View.Inspection.PickedUp
             {
                 Image image = new Image()
                 {
-                    Source = $"Damage{indexSelectDamage}.png",
+                    Source = $"DamageP{indexSelectDamage}.png",
                     WidthRequest = 15,
                     HeightRequest = 15,
                 };

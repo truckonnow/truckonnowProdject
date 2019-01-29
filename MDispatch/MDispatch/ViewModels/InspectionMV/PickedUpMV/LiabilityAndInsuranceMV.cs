@@ -44,6 +44,8 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
 
         public string IdVech { get; set; }
 
+        public int StataLoadShip { get; set; }
+
         private Shipping shipping = null;
         public Shipping Shipping
         {
@@ -79,6 +81,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             {
                 //FeedBack = "Technical work on the service";
             }
+            StataLoadShip = 1;
         }
 
         public async void Continue()

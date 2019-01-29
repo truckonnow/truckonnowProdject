@@ -14,6 +14,11 @@ namespace WebDispacher.Service
             _sqlEntityFramworke = new SqlCommadWebDispatch();
         }
 
+        public Shipping GetShipingCurrentVehiclwIn(string id)
+        {
+            return _sqlEntityFramworke.GetShipingCurrentVehiclwInDb(id);
+        }
+
         public bool Avthorization(string login, string password)
         {
             return _sqlEntityFramworke.ExistsDataUser(login, password);

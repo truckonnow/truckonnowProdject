@@ -23,6 +23,16 @@ namespace WebDispacher.Dao
             context.Drivers.Load();
         }
 
+        public Shipping GetShipingCurrentVehiclwInDb(string id)
+        {
+            context.Shipping.Load();
+            context.VehiclwInformation.Load();
+            context.PhotoInspections.Load();
+            context.Photos.Load();
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == id);
+            return context.Shipping.FirstOrDefault(s => s.VehiclwInformations.FirstOrDefault(v => v == vehiclwInformation) != null);
+        }
+
         public bool ExistsDataUser(string login, string password)
         {
             Init();

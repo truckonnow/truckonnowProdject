@@ -60,7 +60,7 @@ namespace MDispatch.View.Inspection.Delyvery
             }
             Photo photo1 = new Photo();
             photo1.Base64 = JsonConvert.SerializeObject(image);
-            photo1.path = $"Photo/{askForUsersDelyveryMW.VehiclwInformation.Id}/Delyvery/Additional/{askForUsersDelyveryMW.AskForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo.Count + 1}.Jpeg";
+            photo1.path = $"../Photo/{askForUsersDelyveryMW.VehiclwInformation.Id}/Delyvery/Additional/{askForUsersDelyveryMW.AskForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo.Count + 1}.Jpeg";
             askForUsersDelyveryMW.AskForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo.Add(photo1);
             if(!scrolViewAskPhoto.IsVisible)
             {
@@ -109,7 +109,7 @@ namespace MDispatch.View.Inspection.Delyvery
             stream.CopyTo(memoryStream);
             byte[] image = memoryStream.ToArray();
             photo.Base64 = JsonConvert.SerializeObject(image);
-            photo.path = $"Photo/{askForUsersDelyveryMW.VehiclwInformation.Id}/Delyvery/Signature/DelyverySig.Png";
+            photo.path = $"../Photo/{askForUsersDelyveryMW.VehiclwInformation.Id}/Delyvery/Signature/DelyverySig.Png";
             askForUsersDelyveryMW.AskForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature = photo;
         }
 

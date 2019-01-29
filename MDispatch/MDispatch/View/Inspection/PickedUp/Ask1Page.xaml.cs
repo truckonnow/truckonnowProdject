@@ -356,7 +356,7 @@ namespace MDispatch.View.Inspection
             }
             Models.Photo photo = new Models.Photo();
             photo.Base64 = JsonConvert.SerializeObject(photob);
-            photo.path = $"Photo/{ask1PageMV.VehiclwInformation.Id}/PikedUp/SpareParts/{ ask1PageMV.Ask1.Any_additional_parts_been_given_to_you.Count + 1}.Jpeg";
+            photo.path = $"../Photo/{ask1PageMV.VehiclwInformation.Id}/PikedUp/SpareParts/{ ask1PageMV.Ask1.Any_additional_parts_been_given_to_you.Count + 1}.Jpeg";
             ask1PageMV.Ask1.Any_additional_parts_been_given_to_you.Add(photo);
             blockAskPhotoSpareParts.Children.Add(new Image()
             {
@@ -374,7 +374,7 @@ namespace MDispatch.View.Inspection
             }
             Models.Photo photo = new Models.Photo();
             photo.Base64 = JsonConvert.SerializeObject(photob);
-            photo.path = $"Photo/{ask1PageMV.VehiclwInformation.Id}/PikedUp/Documentations/{ ask1PageMV.Ask1.Any_additional_documentation_been_given_after_loading.Count + 1}.Jpeg";
+            photo.path = $"../Photo/{ask1PageMV.VehiclwInformation.Id}/PikedUp/Documentations/{ ask1PageMV.Ask1.Any_additional_documentation_been_given_after_loading.Count + 1}.Jpeg";
             ask1PageMV.Ask1.Any_additional_documentation_been_given_after_loading.Add(photo);
             blockAskPhotoDocumentations.Children.Add(new Image()
             {

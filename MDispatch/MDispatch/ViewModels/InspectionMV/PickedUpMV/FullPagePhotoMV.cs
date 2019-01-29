@@ -147,7 +147,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             PhotoInspection.CurrentStatusPhoto = "PikedUp";
             PhotoInspection.CurrentStatusPhoto = "PikedUp";
             photo.Base64 = photoJson;
-            photo.path = $"Photo/{VehiclwInformation.Id}/PikedUp/PhotoInspection/{pathIndePhoto}.Jpeg";
+            photo.path = $"../Photo/{VehiclwInformation.Id}/PikedUp/PhotoInspection/{pathIndePhoto}.Jpeg";
             PhotoInspection.Photos.Add(photo);
         }
 
