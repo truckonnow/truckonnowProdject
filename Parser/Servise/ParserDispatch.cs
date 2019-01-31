@@ -59,16 +59,16 @@ namespace Parser.Servise
         public void ParseDataInUrl(string sourse, string UrlReqvest)
         {
             Shipping shipping = new Shipping();
-                LogEr.Logerr("Info", $"Parsing of html data", "ParseDataInUrl", DateTime.Now.ToShortTimeString());
-                shipping.UrlReqvest = UrlReqvest;
-                SetHeadInform(sourse, ref shipping);
-                SetOrderInform(sourse, ref shipping);
-                SetContactInform(sourse, ref shipping);
-                SetPickupInform(sourse, ref shipping);
-                SetDeliveryInform(sourse, ref shipping);
-                SetDispatchInform(sourse, ref shipping);
-                SetVehicleInform(sourse, ref shipping);
-                LogEr.Logerr("Info", $"Successful parsing of their html, Load id {shipping.Id}", "ParseDataInUrl", DateTime.Now.ToShortTimeString());
+            LogEr.Logerr("Info", $"Parsing of html data", "ParseDataInUrl", DateTime.Now.ToShortTimeString());
+            shipping.UrlReqvest = UrlReqvest;
+            SetHeadInform(sourse, ref shipping);
+            SetOrderInform(sourse, ref shipping);
+            SetContactInform(sourse, ref shipping);
+            SetPickupInform(sourse, ref shipping);
+            SetDeliveryInform(sourse, ref shipping);
+            SetDispatchInform(sourse, ref shipping);
+            SetVehicleInform(sourse, ref shipping);
+            LogEr.Logerr("Info", $"Successful parsing of their html, Load id {shipping.Id}", "ParseDataInUrl", DateTime.Now.ToShortTimeString());
             Task.Run(async() => await sqlCommandParser.AddOrder(shipping));
         }
 
@@ -104,9 +104,17 @@ namespace Parser.Servise
                 shipping.DispatchDate = el[0].TextContent.Remove(0, el[0].TextContent.IndexOf("Dispatch Date: ") + "Dispatch Date: ".Length);
                 shipping.DispatchDate = shipping.DispatchDate.Remove(shipping.DispatchDate.IndexOf("\n"));
                 shipping.PickupExactly = el[0].TextContent.Remove(0, el[0].TextContent.IndexOf("Pickup Exactly: ") + "Pickup Exactly: ".Length);
-                shipping.PickupExactly = shipping.PickupExactly.Remove(shipping.PickupExactly.IndexOf("\n"));
+                shipping.PickupExactly = shipping.PickupExactly.Remove(shipping.PickupExactly.IndexOf("\n")).Trim();
+                if(shipping.PickupExactly.IndexOf("Dispatch Date: ") != -1)
+                {
+                    shipping.PickupExactly = shipping.PickupExactly.Replace("Dispatch Date: ", "");
+                }
                 shipping.DeliveryEstimated = el[0].TextContent.Remove(0, el[0].TextContent.IndexOf("Delivery Estimated: ") + "Delivery Estimated: ".Length);
-                shipping.DeliveryEstimated = shipping.DeliveryEstimated.Remove(shipping.DeliveryEstimated.IndexOf("\n"));
+                shipping.DeliveryEstimated = shipping.DeliveryEstimated.Remove(shipping.DeliveryEstimated.IndexOf("\n")).Trim();
+                if (shipping.DeliveryEstimated.IndexOf("Dispatch Date: ") != -1)
+                {
+                    shipping.DeliveryEstimated = shipping.DeliveryEstimated.Replace("Dispatch Date: ", "");
+                }
                 shipping.ShipVia = el[1].TextContent.Remove(0, el[1].TextContent.IndexOf(": ") + 2);
                 shipping.Condition = el[2].TextContent.Remove(0, el[2].TextContent.IndexOf(": ") + 2);
                 shipping.PriceListed = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("Price Listed:") + "Price Listed:".Length);
@@ -170,9 +178,13 @@ namespace Parser.Servise
                 shipping.AddresP = shipping.AddresP.Remove(shipping.AddresP.IndexOf("\n")).Trim();
                 shipping.CityP = element[0].TextContent.Remove(0, element[0].TextContent.IndexOf(shipping.AddresP) + shipping.AddresP.Length).Trim();
                 shipping.CityP = shipping.CityP.Remove(shipping.CityP.IndexOf(',')).Trim();
+                if(shipping.CityP.IndexOf(shipping.AddresP) != -1)
+                {
+                    shipping.CityP = shipping.CityP.Replace(shipping.AddresP, "").Trim();
+                }
                 shipping.StateP = element[0].TextContent.Remove(0, element[0].TextContent.IndexOf(shipping.CityP) + shipping.CityP.Length + 2).Trim();
                 shipping.StateP = shipping.StateP.Remove(2);
-                shipping.ZipP = element[0].TextContent.Remove(0, element[0].TextContent.IndexOf(shipping.StateP) + shipping.StateP.Length + 2).Trim();
+                shipping.ZipP = element[0].TextContent.Remove(0, element[0].TextContent.LastIndexOf(shipping.StateP) + 2).Trim();
                 shipping.PhoneP = element[element.Length - 1].TextContent;
             }
             catch (Exception)
@@ -201,12 +213,16 @@ namespace Parser.Servise
                 shipping.AddresD = shipping.AddresD.Remove(shipping.AddresD.IndexOf("\n")).Trim();
                 shipping.CityD = element[0].TextContent.Remove(0, element[0].TextContent.IndexOf(shipping.AddresD) + shipping.AddresD.Length).Trim();
                 shipping.CityD = shipping.CityD.Remove(shipping.CityD.IndexOf(',')).Trim();
+                if (shipping.CityD.IndexOf(shipping.AddresD) != -1)
+                {
+                    shipping.CityD = shipping.CityD.Replace(shipping.AddresD, "").Trim();
+                }
                 shipping.StateD = element[0].TextContent.Remove(0, element[0].TextContent.IndexOf(shipping.CityD) + shipping.CityD.Length + 2).Trim();
                 shipping.StateD = shipping.StateD.Remove(2);
-                shipping.ZipD = element[0].TextContent.Remove(0, element[0].TextContent.IndexOf(shipping.StateD) + shipping.StateD.Length + 2).Trim();
-                shipping.PhoneP = element[element.Length - 1].TextContent;
+                shipping.ZipD = element[0].TextContent.Remove(0, element[0].TextContent.LastIndexOf(shipping.StateD) + 2).Trim();
+                shipping.PhoneD = element[element.Length - 1].TextContent;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 LogEr.Logerr("Error", $"some data is not added, Load id {shipping.Id}, Url: {shipping.UrlReqvest}", "SetDeliveryInform", DateTime.Now.ToShortTimeString());
             }
@@ -253,7 +269,9 @@ namespace Parser.Servise
                 var element = htmlDocument.GetElementById("sheetBottom")
                     .GetElementsByClassName("col-xs-12 col-md-4")[2]
                     .Children[0].Children[1];
-                shipping.Titl1DI = element.TextContent;
+                shipping.Titl1DI = element.TextContent.Trim().Replace("\n", "");
+                shipping.Titl1DI = System.Text.RegularExpressions.Regex.Replace(shipping.Titl1DI, @"\s+", " ");
+
             }
             catch (Exception)
             {
