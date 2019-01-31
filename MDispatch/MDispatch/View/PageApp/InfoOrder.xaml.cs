@@ -42,7 +42,7 @@ namespace MDispatch.View.PageApp
             }
             else
             {
-                infoOrderMV.ToStartInspection(infoOrderMV.Shipping.VehiclwInformations[0], infoOrderMV.Shipping);
+                infoOrderMV.ToStartInspection();
             }
         }
 

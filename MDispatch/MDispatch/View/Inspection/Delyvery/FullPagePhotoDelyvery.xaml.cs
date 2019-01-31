@@ -34,9 +34,17 @@ namespace MDispatch.View.PageApp
             }
         }
 
+        public void SetbtnVisable()
+        {
+            if (fullPagePhotoDelyveryMV.AllSourseImage != null && fullPagePhotoDelyveryMV.AllSourseImage.Count != 0)
+            {
+                btnNext.IsVisible = true;
+            }
+        }
+        
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CameraPagePhoto1(fullPagePhotoDelyveryMV, pngPaternPhoto));
+            await Navigation.PushAsync(new CameraPagePhoto1(fullPagePhotoDelyveryMV, pngPaternPhoto, this));
         }
 
         private async void MessagesListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -45,9 +53,11 @@ namespace MDispatch.View.PageApp
             if((ImageSource)Photos.SelectedItem != fullPagePhotoDelyveryMV.AllSourseImage[0])
             {
                 paternPhoto.Source = "";
+                btnDamage.IsVisible = false;
             }
             else
             {
+                btnDamage.IsVisible = true;
                 paternPhoto.Source = pngPaternPhoto;
             }
         }

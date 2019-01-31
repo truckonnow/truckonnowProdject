@@ -17,9 +17,11 @@ namespace MDispatch.ViewModels.AskPhoto
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation  { get; set; }
         private InitDasbordDelegate initDasbordDelegate = null;
+        private GetVechicleDelegate getVechicleDelegate = null;
 
-        public AskPageMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
+        public AskPageMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate)
         {
+            this.getVechicleDelegate = getVechicleDelegate;
             this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
             Navigation = navigation;
@@ -66,7 +68,7 @@ namespace MDispatch.ViewModels.AskPhoto
             else if (state == 3)
             {
                 DependencyService.Get<IOrientationHandler>().ForceLandscape();
-                await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{indexTypeCar}1.png", indexTypeCar, 1, initDasbordDelegate));
+                await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{indexTypeCar}1.png", indexTypeCar, 1, initDasbordDelegate, getVechicleDelegate));
                 Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
             else if (state == 4)

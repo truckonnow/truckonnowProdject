@@ -11,9 +11,11 @@ namespace MDispatch.View.PageApp
     {
         private FullPagePhotoDelyveryMV fullPagePhotoDelyveryMV = null;
         private string pngPaternPhoto = null;
+        private FullPagePhotoDelyvery fullPagePhotoDelyvery = null;
 
-        public CameraPagePhoto1(FullPagePhotoDelyveryMV fullPagePhotoDelyveryMV, string pngPaternPhoto)
+        public CameraPagePhoto1(FullPagePhotoDelyveryMV fullPagePhotoDelyveryMV, string pngPaternPhoto, FullPagePhotoDelyvery fullPagePhotoDelyvery)
 		{
+            this.fullPagePhotoDelyvery = fullPagePhotoDelyvery;
             this.pngPaternPhoto = pngPaternPhoto;
             this.fullPagePhotoDelyveryMV = fullPagePhotoDelyveryMV;
             InitializeComponent ();
@@ -28,6 +30,7 @@ namespace MDispatch.View.PageApp
                 return;
             fullPagePhotoDelyveryMV.AddNewFotoSourse(result.Image);
             fullPagePhotoDelyveryMV.SetPhoto(result.Image);
+            fullPagePhotoDelyvery.SetbtnVisable();
         }
 
         private void StackLayout_SizeChanged(object sender, System.EventArgs e)

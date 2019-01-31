@@ -1,4 +1,5 @@
 ﻿using MDispatch.Models;
+using MDispatch.NewElement;
 using MDispatch.Service;
 using MDispatch.View;
 using MDispatch.View.PageApp;
@@ -184,6 +185,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 }
                 else
                 {
+                    DependencyService.Get<IOrientationHandler>().ForceSensor();
                     await Navigation.PopToRootAsync(true);
                     Continue();
                 }

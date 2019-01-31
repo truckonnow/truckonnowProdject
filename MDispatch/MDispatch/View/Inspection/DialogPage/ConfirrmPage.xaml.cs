@@ -37,7 +37,7 @@ namespace MDispatch.View.AskPhoto.DialogPage
         {
             if(selectedIndexDropDwn != -1)
             {
-                infoOrderMV.ToStartInspection(infoOrderMV.Shipping.VehiclwInformations[selectedIndexDropDwn], infoOrderMV.Shipping);
+                infoOrderMV.ToStartInspection();
                 await PopupNavigation.PopAsync(true);
             }
             else

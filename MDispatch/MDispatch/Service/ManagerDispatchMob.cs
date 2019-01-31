@@ -7,6 +7,7 @@ namespace MDispatch.Service
     public class ManagerDispatchMob
     {
         public delegate void InitDasbordDelegate();
+        public delegate List<VehiclwInformation> GetVechicleDelegate();
         private A_R a_R = null;
         private OrderGet orderGet = null;
         private Photo photo = null;

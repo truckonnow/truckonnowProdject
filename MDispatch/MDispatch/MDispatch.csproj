@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Service\Settings\**" />
+    <EmbeddedResource Remove="Service\Settings\**" />
+    <None Remove="Service\Settings\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DLToolkit.Forms.Controls.FlowListView" Version="2.0.11" />
     <PackageReference Include="LiveXAML" Version="2.1.45" />
     <PackageReference Include="Prism.Forms" Version="7.0.0.396" />
@@ -37,6 +43,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\Inspection\Feedback.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\Inspection\HintPageVechicle.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\Inspection\PickedUp\Ask1Page.xaml">
@@ -138,6 +147,9 @@
     <Compile Update="View\Inspection\Delyvery\TempPageHint4.xaml.cs">
       <DependentUpon>TempPageHint4.xaml</DependentUpon>
     </Compile>
+    <Compile Update="View\Inspection\hintPageVechicle.xaml.cs">
+      <DependentUpon>HintPageVechicle.xaml</DependentUpon>
+    </Compile>
     <Compile Update="View\Inspection\PickedUp\CameraPageFolder\CameraDocument.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
@@ -165,9 +177,5 @@
     <Compile Update="View\TabPage\Tab\DeiveredPage.xaml.cs">
       <DependentUpon>DeiveredPage.xaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Service\Settings\" />
   </ItemGroup>
 </Project>

@@ -17,10 +17,10 @@ namespace MDispatch.View.PageApp
         private FullPagePhotoMV fullPagePhotoMV = null;
         private string pngPaternPhoto = null;
 
-        public FullPagePhoto(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string pngPaternPhoto, string typeCar, int photoIndex, InitDasbordDelegate initDasbordDelegate)
+        public FullPagePhoto(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string pngPaternPhoto, string typeCar, int photoIndex, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate)
         {
             this.pngPaternPhoto = pngPaternPhoto;
-            fullPagePhotoMV = new FullPagePhotoMV(managerDispatchMob, vehiclwInformation, idShip, typeCar, photoIndex, Navigation, initDasbordDelegate);
+            fullPagePhotoMV = new FullPagePhotoMV(managerDispatchMob, vehiclwInformation, idShip, typeCar, photoIndex, Navigation, initDasbordDelegate, getVechicleDelegate);
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = fullPagePhotoMV;
@@ -36,6 +36,14 @@ namespace MDispatch.View.PageApp
             }
         }
 
+        public void SetbtnVisable()
+        {
+            if(fullPagePhotoMV.AllSourseImage != null && fullPagePhotoMV.AllSourseImage.Count != 0)
+            {
+                btnNext.IsVisible = true;
+            }
+        }
+
         public void AddDamagCurrentLayut(Xamarin.Forms.View view)
         {
             dmla.Children.Add(view);
@@ -43,7 +51,7 @@ namespace MDispatch.View.PageApp
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CameraPagePhoto(fullPagePhotoMV, pngPaternPhoto));
+            await Navigation.PushAsync(new CameraPagePhoto(fullPagePhotoMV, pngPaternPhoto, this));
         }
 
         private async void MessagesListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -53,9 +61,11 @@ namespace MDispatch.View.PageApp
             {
                 dmla.IsVisible = false;
                 paternPhoto.Source = "";
+                btnDamage.IsVisible = false;
             }
             else
             {
+                btnDamage.IsVisible = true;
                 dmla.IsVisible = true;
                 paternPhoto.Source = pngPaternPhoto;
             }

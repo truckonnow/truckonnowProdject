@@ -26,10 +26,12 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         public INavigation Navigation { get; set; }
         public ICar Car = null;
         private InitDasbordDelegate initDasbordDelegate = null;
+        private GetVechicleDelegate getVechicleDelegate = null;
 
-        public FullPagePhotoMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string typeCar, int inderxPhotoInspektion, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
+        public FullPagePhotoMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string typeCar, int inderxPhotoInspektion, INavigation navigation, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate)
         {
             Navigation = navigation;
+            this.getVechicleDelegate = getVechicleDelegate;
             this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
             VehiclwInformation = vehiclwInformation;
@@ -175,14 +177,14 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             {
                 if (InderxPhotoInspektion < 39)
                 {
-                    await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", Car.typeIndex, InderxPhotoInspektion + 1, initDasbordDelegate));
+                    await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", Car.typeIndex, InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate));
                     Navigation.RemovePage(Navigation.NavigationStack[2]);
                 }
                 else
                 {
                     DependencyService.Get<IOrientationHandler>().ForceSensor();
                     await PopupNavigation.PushAsync(new TempPageHint());
-                    await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate), true);
+                    await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate), true);
                     Navigation.RemovePage(Navigation.NavigationStack[2]);
                 }
             }

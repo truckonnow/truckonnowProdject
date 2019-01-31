@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using DaoModels.DAO.Models;
 using Microsoft.AspNetCore.Mvc;
 using WebDispacher.Service;
 
@@ -390,6 +392,35 @@ namespace WebDispacher.Controellers
             return actionResult;
         }
 
+        [Route("Dashbord/Order/Creat")]
+        public async Task<IActionResult> CreatOrderpage()
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                string key = null;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    ViewBag.Order = await managerDispatch.CreateShiping();
+                    actionResult = View("CreateOrder");
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = Redirect("http://localhost:22929");
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult;
+        }
+
         [Route("Dashbord/Order/SavaOrder")]
         public IActionResult SaveOrder(string idOrder, string idLoad, string internalLoadID, string driver, string status, string instructions, string nameP, string contactP,
             string addressP, string cityP, string stateP, string zipP, string phoneP, string emailP, string scheduledPickupDateP, string nameD, string contactD, string addressD,
@@ -403,6 +434,39 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     managerDispatch.Updateorder(idOrder, idLoad, internalLoadID, driver, status, instructions, nameP, contactP, addressP, cityP, stateP, zipP,
+                        phoneP, emailP, scheduledPickupDateP, nameD, contactD, addressD, cityD, stateD, zipD, phoneD, emailD, ScheduledPickupDateD, paymentMethod,
+                        price, paymentTerms, brokerFee);
+                    actionResult = Redirect($"http://localhost:22929/Dashbord/Order/NewLoad");
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = Redirect("http://localhost:22929");
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult;
+        }
+
+        [Route("Dashbord/CreateOrder")]
+        public IActionResult CreateOrder(string idOrder, string idLoad, string internalLoadID, string driver, string status, string instructions, string nameP, string contactP,
+            string addressP, string cityP, string stateP, string zipP, string phoneP, string emailP, string scheduledPickupDateP, string nameD, string contactD, string addressD,
+            string cityD, string stateD, string zipD, string phoneD, string emailD, string ScheduledPickupDateD, string paymentMethod, string price, string paymentTerms, string brokerFee)
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                string key = null;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    managerDispatch.CreateOrder(idOrder, idLoad, internalLoadID, driver, status, instructions, nameP, contactP, addressP, cityP, stateP, zipP,
                         phoneP, emailP, scheduledPickupDateP, nameD, contactD, addressD, cityD, stateD, zipD, phoneD, emailD, ScheduledPickupDateD, paymentMethod,
                         price, paymentTerms, brokerFee);
                     actionResult = Redirect($"http://localhost:22929/Dashbord/Order/Edit?id={idOrder}&stasus={Status}");

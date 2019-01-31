@@ -1,4 +1,5 @@
 ﻿using MDispatch.Models;
+using MDispatch.NewElement;
 using MDispatch.Service;
 using MDispatch.View;
 using MDispatch.View.Inspection.Delyvery;
@@ -89,6 +90,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
 
         public async void ToContinueInspection()
         {
+            DependencyService.Get<IOrientationHandler>().ForceLandscape();
             await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{VehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", VehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 1, initDasbordDelegate));
             Navigation.RemovePage(Navigation.NavigationStack[2]);
         }

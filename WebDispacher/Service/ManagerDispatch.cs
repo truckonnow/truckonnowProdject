@@ -1,6 +1,7 @@
 ﻿using DaoModels.DAO.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using WebDispacher.Dao;
 
 namespace WebDispacher.Service
@@ -12,6 +13,11 @@ namespace WebDispacher.Service
         public ManagerDispatch()
         {
             _sqlEntityFramworke = new SqlCommadWebDispatch();
+        }
+
+        public async Task<Shipping> CreateShiping()
+        {
+            return await _sqlEntityFramworke.CreateShipping();
         }
 
         public Shipping GetShipingCurrentVehiclwIn(string id)
@@ -68,6 +74,15 @@ namespace WebDispacher.Service
         }
         
         public void Updateorder(string idOrder, string idLoad, string internalLoadID, string driver, string status, string instructions, string nameP, string contactP,
+            string addressP, string cityP, string stateP, string zipP, string phoneP, string emailP, string scheduledPickupDateP, string nameD, string contactD, string addressD,
+            string cityD, string stateD, string zipD, string phoneD, string emailD, string ScheduledPickupDateD, string paymentMethod, string price, string paymentTerms, string brokerFee)
+        {
+            _sqlEntityFramworke.UpdateorderInDb(idOrder, idLoad, internalLoadID, driver, status, instructions, nameP, contactP, addressP, cityP, stateP, zipP,
+                        phoneP, emailP, scheduledPickupDateP, nameD, contactD, addressD, cityD, stateD, zipD, phoneD, emailD, ScheduledPickupDateD, paymentMethod,
+                        price, paymentTerms, brokerFee);
+        }
+
+        public void CreateOrder(string idOrder, string idLoad, string internalLoadID, string driver, string status, string instructions, string nameP, string contactP,
             string addressP, string cityP, string stateP, string zipP, string phoneP, string emailP, string scheduledPickupDateP, string nameD, string contactD, string addressD,
             string cityD, string stateD, string zipD, string phoneD, string emailD, string ScheduledPickupDateD, string paymentMethod, string price, string paymentTerms, string brokerFee)
         {

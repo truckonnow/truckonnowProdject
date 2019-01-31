@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace WebDispacher.Dao
 {
@@ -31,6 +32,23 @@ namespace WebDispacher.Dao
             context.Photos.Load();
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == id);
             return context.Shipping.FirstOrDefault(s => s.VehiclwInformations.FirstOrDefault(v => v == vehiclwInformation) != null);
+        }
+
+        public async Task<Shipping> CreateShipping()
+        {
+            Shipping shipping = new Shipping();
+            shipping.Id = CreateIdShipping().ToString();
+            context.Shipping.Add(shipping);
+            await context.SaveChangesAsync();
+            Shipping shipping1 = context.Shipping.FirstOrDefault(s => s.Id == shipping.Id);
+            return shipping;
+        }
+
+        private int CreateIdShipping()
+        {
+            int id = 1;
+            while(context.Shipping.FirstOrDefault(s => s.Id == id.ToString()) != null) { id = new Random().Next(0, 100000000); }
+            return id;
         }
 
         public bool ExistsDataUser(string login, string password)
@@ -182,6 +200,42 @@ namespace WebDispacher.Dao
             shipping.TotalPaymentToCarrier = paymentMethod != null ? paymentMethod : shipping.TotalPaymentToCarrier;
             shipping.PriceListed = price != null ? price : shipping.PriceListed;
             shipping.BrokerFee = brokerFee != null ? brokerFee : shipping.BrokerFee;
+            await context.SaveChangesAsync();
+        }
+
+        public async void CreateOrderInDb(string idOrder, string idLoad, string internalLoadID, string driver, string status, string instructions, string nameP, string contactP,
+            string addressP, string cityP, string stateP, string zipP, string phoneP, string emailP, string scheduledPickupDateP, string nameD, string contactD, string addressD,
+            string cityD, string stateD, string zipD, string phoneD, string emailD, string ScheduledPickupDateD, string paymentMethod, string price, string paymentTerms, string brokerFee)
+        {
+            Init();
+            Shipping shipping = new Shipping();
+            shipping.idOrder = idLoad != null ? idLoad : shipping.Id;
+            shipping.InternalLoadID = internalLoadID != null ? internalLoadID : shipping.InternalLoadID;
+            //shipping.Driverr = internalLoadID != null ? internalLoadID : shipping.InternalLoadID;
+            shipping.CurrentStatus = status != null ? status : shipping.CurrentStatus;
+            shipping.Titl1DI = instructions != null ? instructions : shipping.Titl1DI;
+            shipping.NameP = nameP != null ? nameP : shipping.NameD;
+            shipping.ContactNameP = contactP != null ? contactP : shipping.ContactNameP;
+            shipping.AddresP = addressP != null ? addressP : shipping.AddresP;
+            shipping.CityP = cityP != null ? cityP : shipping.CityP;
+            shipping.StateP = stateP != null ? stateP : shipping.StateP;
+            shipping.ZipP = zipP != null ? zipP : shipping.ZipP;
+            shipping.PhoneP = phoneP != null ? phoneP : shipping.PhoneP;
+            shipping.EmailP = emailP != null ? emailP : shipping.EmailP;
+            shipping.PickupExactly = scheduledPickupDateP != null ? scheduledPickupDateP : shipping.PickupExactly;
+            shipping.NameD = nameD != null ? nameD : shipping.NameD;
+            shipping.ContactNameD = contactD != null ? contactD : shipping.ContactNameD;
+            shipping.AddresD = addressD != null ? addressD : shipping.AddresD;
+            shipping.CityD = cityD != null ? cityD : shipping.CityD;
+            shipping.StateD = stateD != null ? stateD : shipping.StateD;
+            shipping.ZipD = zipD != null ? zipD : shipping.ZipD;
+            shipping.PhoneD = phoneD != null ? phoneD : shipping.PhoneD;
+            shipping.EmailD = emailD != null ? emailD : shipping.EmailD;
+            shipping.DeliveryEstimated = ScheduledPickupDateD != null ? ScheduledPickupDateD : shipping.DeliveryEstimated;
+            shipping.TotalPaymentToCarrier = paymentMethod != null ? paymentMethod : shipping.TotalPaymentToCarrier;
+            shipping.PriceListed = price != null ? price : shipping.PriceListed;
+            shipping.BrokerFee = brokerFee != null ? brokerFee : shipping.BrokerFee;
+            context.Shipping.Add(shipping);
             await context.SaveChangesAsync();
         }
 

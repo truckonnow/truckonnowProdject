@@ -11,9 +11,11 @@ namespace MDispatch.View.PageApp
     {
         private FullPagePhotoMV fullPagePhotoMV = null;
         private string pngPaternPhoto = null;
-
-        public CameraPagePhoto(FullPagePhotoMV fullPagePhotoMV, string pngPaternPhoto)
+        private FullPagePhoto fullPagePhoto = null;
+            
+        public CameraPagePhoto(FullPagePhotoMV fullPagePhotoMV, string pngPaternPhoto, FullPagePhoto fullPagePhoto)
 		{
+            this.fullPagePhoto = fullPagePhoto;
             this.pngPaternPhoto = pngPaternPhoto;
             this.fullPagePhotoMV = fullPagePhotoMV;
             InitializeComponent ();
@@ -28,6 +30,7 @@ namespace MDispatch.View.PageApp
                 return;
             fullPagePhotoMV.AddNewFotoSourse(result.Image);
             fullPagePhotoMV.SetPhoto(result.Image);
+            fullPagePhoto.SetbtnVisable();
         }
     }
 }

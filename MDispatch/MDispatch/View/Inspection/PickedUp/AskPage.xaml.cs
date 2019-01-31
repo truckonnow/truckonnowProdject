@@ -18,9 +18,9 @@ namespace MDispatch.View.AskPhoto
 	{
         AskPageMV askPageMV = null;
 
-        public AskPage (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate)
+        public AskPage (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate)
 		{
-            askPageMV = new AskPageMV(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate);
+            askPageMV = new AskPageMV(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate, getVechicleDelegate);
             askPageMV.Ask = new Ask();
             InitializeComponent ();
             BindingContext = askPageMV;

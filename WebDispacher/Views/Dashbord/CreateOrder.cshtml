@@ -1,13 +1,13 @@
 ﻿<div class="body">
     <input class="backBtn" type="button" value="← Back to Orders" onclick="history.back();" />
-    <form action="SavaOrder" method="post">
-        <input type="text" name="idOrder" style="display:none;" value="@ViewBag.Order.Id"/>
+    <form action="CreateOrder" method="post">
+        <input type="text" name="idOrder"  value="@ViewBag.Order.Id"/>
         <div class="contentBody">
             <div class="content">
                 <p class="inpLabe">Load Id</p>
-                <input name="idLoad" class="inpText" type="text" value="@ViewBag.Order.idOrder" />
+                <input name="idLoad" class="inpText" type="text"/>
                 <p class="inpLabe">Internal Load ID</p>
-                <input name="internalLoadID" class="inpText" type="text" value="@ViewBag.Order.InternalLoadID" />
+                <input name="internalLoadID" class="inpText" type="text"  />
                 <p class="inpLabe">Driver</p>
                 <select name="driver" class="dropDown">
                     <option value="">------------------------------------</option>
@@ -22,51 +22,51 @@
                     <option value="Delivered">Delivered</option>
                 </select>
                 <p class="inpLabe">Instructions</p>
-                <textarea name="instructions" class="inpText" style="height:92px;">@ViewBag.Order.Titl1DI</textarea>
+                <textarea name="instructions" class="inpText" style="height:92px;"></textarea>
             </div>
         </div>
         <div class="contentBody">
             <div class="content">
                 <h2 style="color:#f3a74c;margin-bottom:2px;">Pickup Information</h2>
                 <p class="inpLabe">Name</p>
-                <input name="nameP" class="inpText" type="text" value="@ViewBag.Order.NameP" />
+                <input name="nameP" class="inpText" type="text" value="" />
                 <p class="inpLabe">Contact</p>
-                <input name="contactP" class="inpText" type="text" value="@ViewBag.Order.ContactNameP" />
+                <input name="contactP" class="inpText" type="text" value="" />
                 <p class="inpLabe">Address</p>
-                <input name="addressP" class="inpText" type="text" value="@ViewBag.Order.AddresP" />
+                <input name="addressP" class="inpText" type="text" value="" />
                 <p class="inpLabe">City</p>
-                <input name="cityP" class="inpText" type="text" value="@ViewBag.Order.CityP" />
+                <input name="cityP" class="inpText" type="text" value="" />
                 <p class="inpLabe">State</p>
-                <input name="stateP" class="inpText" type="text" value="@ViewBag.Order.StateP" />
+                <input name="stateP" class="inpText" type="text" value="" />
                 <p class="inpLabe">Zip</p>
-                <input name="zipP" class="inpText" type="text" value="@ViewBag.Order.ZipP" />
+                <input name="zipP" class="inpText" type="text" value="" />
                 <p class="inpLabe">Phone</p>
-                <input name="phoneP" class="inpText" type="text" value="@ViewBag.Order.PhoneP" />
+                <input name="phoneP" class="inpText" type="text" value="" />
                 <p class="inpLabe">Email</p>
-                <input name="emailP" class="inpText" type="text" value="@ViewBag.Order.EmailP" />
+                <input name="emailP" class="inpText" type="text" value="" />
                 <p class="inpLabe">Scheduled Pickup Date</p>
-                <input name="scheduledPickupDateP" class="inpText" type="text" value="@ViewBag.Order.PickupExactly" />
+                <input name="scheduledPickupDateP" class="inpText" type="text" value="" />
             </div>
             <div class="content">
                 <h2 style="color:#f3a74c;margin-bottom:2px;">Delivery Information</h2>
                 <p class="inpLabe">Name</p>
-                <input name="nameD" class="inpText" type="text" value="@ViewBag.Order.NameD" />
+                <input name="nameD" class="inpText" type="text" value="" />
                 <p class="inpLabe">Contact</p>
-                <input name="contactD" class="inpText" type="text" value="@ViewBag.Order.ContactNameD" />
+                <input name="contactD" class="inpText" type="text" value="" />
                 <p class="inpLabe">Address</p>
-                <input name="addressD" class="inpText" type="text" value="@ViewBag.Order.AddresD" />
+                <input name="addressD" class="inpText" type="text" value="" />
                 <p class="inpLabe">City</p>
-                <input name="cityD" class="inpText" type="text" value="@ViewBag.Order.CityD" />
+                <input name="cityD" class="inpText" type="text" value="" />
                 <p class="inpLabe">State</p>
-                <input name="stateD" class="inpText" type="text" value="@ViewBag.Order.StateD" />
+                <input name="stateD" class="inpText" type="text" value="" />
                 <p class="inpLabe">Zip</p>
-                <input name="zipD" class="inpText" type="text" value="@ViewBag.Order.ZipD" />
+                <input name="zipD" class="inpText" type="text" value="" />
                 <p class="inpLabe">Phone</p>
-                <input name="phoneD" class="inpText" type="text" value="@ViewBag.Order.PhoneD" />
+                <input name="phoneD" class="inpText" type="text" value="" />
                 <p class="inpLabe">Email</p>
-                <input name="emailD" class="inpText" type="text" value="@ViewBag.Order.EmailD" />
+                <input name="emailD" class="inpText" type="text" value="" />
                 <p class="inpLabe">Scheduled Pickup Date</p>
-                <input name="scheduledPickupDateD" class="inpText" type="text" value="@ViewBag.Order.DeliveryEstimated" />
+                <input name="scheduledPickupDateD" class="inpText" type="text" value="" />
             </div>
         </div>
         <div class="bodyTable">
@@ -85,23 +85,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (int i = 0; i < ViewBag.Order.VehiclwInformations.Count; i++)
-                    {
-                        <tr id="@ViewBag.Order.VehiclwInformations[i].Id">
-                            <td>@i</td>
-                            <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].VIN" /></td>
-                            <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Year" /></td>
-                            <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Make" /></td>
-                            <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Model" /></td>
-                            <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Type" /></td>
-                            <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Color" /></td>
-                            <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Lot" /></td>
-                            <td><input class="inpTextTr btnD" type="button" value="D" /></td>
-                            <td><input class="inpTextTr btnD" type="button" value="+" /></td>
-                        </tr>
-                    }
+                    <tr></tr>
                 </tbody>
             </table>
+            <input class="btnAddandRevoveVech btnD" type="button" value="-" />
+            <input class="btnAddandRevoveVech btnD" type="button" value="+" />
         </div>
         <hr style="border-color:rgba(243, 167, 76, 0.29);margin:10px;" />
         <div class="contentBody">
@@ -113,15 +101,15 @@
                     <option value="NewLoad">NewLoad</option>
                 </select>
                 <p class="inpLabe">Price</p>
-                <input name="price" class="inpText" type="text" value="@ViewBag.Order.PriceListed" />
+                <input name="price" class="inpText" type="text" value="" />
                 <p class="inpLabe">Broker Fee</p>
-                <input name="brokerFee" class="inpText" type="text" value="@ViewBag.Order.BrokerFee" />
+                <input name="brokerFee" class="inpText" type="text" value="" />
             </div>
             <div class="content">
                 <p class="inpLabe">Payment terms</p>
                 <textarea name="paymentTerms" class="inpText" style="height:92px;">IT ADD</textarea>
                 <div style="display:flex;">
-                    <input class="btnSave" value="Save" type="submit" />
+                    <input class="btnSave" value="Creat Oreder" type="submit" />
                 </div>
             </div>
         </div>
@@ -130,6 +118,13 @@
         <style>
             * {
                 margin: 0px;
+            }
+
+            .btnAddandRevoveVech {
+                border: none;
+                width: 30px;
+                background-color: #f9a038;
+                color: #000000;
             }
 
             .btnSave {
