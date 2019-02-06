@@ -98,11 +98,15 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         {
             if (image != null && PhotoInspection.Damages != null && PhotoInspection.Damages.FirstOrDefault(d => d.Image == image) != null)
             {
-                PhotoInspection.Damages.Remove(PhotoInspection.Damages.FirstOrDefault(d => d.Image == image));
+                List<ImageSource> imageSources2 = new List<ImageSource>(AllSourseImage); 
+                Damage damage = PhotoInspection.Damages.FirstOrDefault(d => d.Image == image);
+                imageSources2.Remove(imageSources2.FirstOrDefault(i => i == damage.ImageSource));
+                AllSourseImage = imageSources2;
+                PhotoInspection.Damages.Remove(damage);
             }
         }
 
-        public async void SetDamage(string nameDamage, int indexDamage, string prefNameDamage, double xInterest, double yInterest, Image image)
+        public async void SetDamage(string nameDamage, int indexDamage, string prefNameDamage, double xInterest, double yInterest, Image image, ImageSource imageSource1)
         {
             Damage damage = new Damage();
             damage.FullNameDamage = $"{prefNameDamage} - {nameDamage}";
@@ -113,11 +117,23 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             damage.XInterest = xInterest;
             damage.YInterest = yInterest;
             damage.Image = image;
+            damage.ImageSource = imageSource1;
             if (PhotoInspection.Damages == null)
             {
                 PhotoInspection.Damages = new List<Damage>();
             }
             PhotoInspection.Damages.Add(damage);
+        }
+
+        public ImageSource SelectPhotoForDamage(Image image)
+        {
+            if (PhotoInspection != null && PhotoInspection.Damages != null)
+            {
+                Damage damage1 = PhotoInspection.Damages.FirstOrDefault(d => d.Image == image);
+                SourseImage = damage1.ImageSource;
+                return damage1.ImageSource;
+            }
+            return null;
         }
 
         public void AddNewFotoSourse(byte[] imageSorseByte)
@@ -146,7 +162,6 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             Photo photo = new Photo();
             string photoJson = JsonConvert.SerializeObject(PhotoInArrayByte);
             string pathIndePhoto = PhotoInspection.Photos.Count == 0 ? PhotoInspection.IndexPhoto.ToString() : $"{PhotoInspection.IndexPhoto}.{PhotoInspection.Photos.Count}";
-            PhotoInspection.CurrentStatusPhoto = "PikedUp";
             PhotoInspection.CurrentStatusPhoto = "PikedUp";
             photo.Base64 = photoJson;
             photo.path = $"../Photo/{VehiclwInformation.Id}/PikedUp/PhotoInspection/{pathIndePhoto}.Jpeg";

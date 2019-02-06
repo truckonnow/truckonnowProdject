@@ -21,7 +21,7 @@ namespace MDispatch.View.Inspection.Delyvery
         private async void Button_Clicked(object sender, EventArgs e)
         {
             await PopupNavigation.PopAsync(true);
-            askForUsersDelyveryMW.ToContinueInspection();
+            askForUsersDelyveryMW.Continue();
             await PopupNavigation.PushAsync(new TempPageHint4());
         }
 

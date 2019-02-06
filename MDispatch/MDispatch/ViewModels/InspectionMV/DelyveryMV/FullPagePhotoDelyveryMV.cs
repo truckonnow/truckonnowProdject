@@ -2,6 +2,8 @@
 using MDispatch.NewElement;
 using MDispatch.Service;
 using MDispatch.View;
+using MDispatch.View.Inspection;
+using MDispatch.View.Inspection.Delyvery;
 using MDispatch.View.PageApp;
 using MDispatch.ViewModels.AskPhoto;
 using MDispatch.ViewModels.InspectionMV.Models;
@@ -24,9 +26,12 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         public INavigation Navigation { get; set; }
         public ICar Car = null;
         private InitDasbordDelegate initDasbordDelegate = null;
+        private GetVechicleDelegate getVechicleDelegate = null;
 
-        public FullPagePhotoDelyveryMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string typeCar, int inderxPhotoInspektion, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
+        public FullPagePhotoDelyveryMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string typeCar, 
+            int inderxPhotoInspektion, INavigation navigation, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate)
         {
+            this.getVechicleDelegate = getVechicleDelegate;
             Navigation = navigation;
             this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
@@ -180,14 +185,12 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             {
                 if (InderxPhotoInspektion < 39)
                 {
-                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", Car.typeIndex, InderxPhotoInspektion + 1, initDasbordDelegate));
+                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", Car.typeIndex, InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate));
                     Navigation.RemovePage(Navigation.NavigationStack[2]);
                 }
                 else
                 {
-                    DependencyService.Get<IOrientationHandler>().ForceSensor();
-                    await Navigation.PopToRootAsync(true);
-                    Continue();
+                    CheckVechicleAndGoToResultPage();
                 }
             }
             else if (state == 4)
@@ -196,30 +199,21 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
         }
 
-        public async void Continue()
+        private async void CheckVechicleAndGoToResultPage()
         {
-            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
-            string description = null;
-            int state = 0;
-            await Task.Run(() =>
+            List<VehiclwInformation> vehiclwInformation1s = getVechicleDelegate.Invoke();
+            int indexCurrentVechecle = vehiclwInformation1s.FindIndex(v => v == VehiclwInformation);
+            if (vehiclwInformation1s.Count - 1 == indexCurrentVechecle)
             {
-                state = managerDispatchMob.Recurent(token, IdShip, "Delivered", ref description);
-                initDasbordDelegate.Invoke();
-            });
-            if (state == 1)
-            {
-                //FeedBack = "Not Network";
+                DependencyService.Get<IOrientationHandler>().ForceSensor();
+                await PopupNavigation.PushAsync(new TempDialogPage());
+                await Navigation.PushAsync(new AskForUserDelyvery(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate));
             }
-            else if (state == 2)
+            else
             {
-                //FeedBack = description;
-            }
-            else if (state == 3)
-            {
-            }
-            else if (state == 4)
-            {
-                //FeedBack = "Technical work on the service";
+                await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", vehiclwInformation1s[indexCurrentVechecle + 1]));
+                await Navigation.PushAsync(new AskPageDelyvery(managerDispatchMob, vehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate), true);
+                Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
         }
     }

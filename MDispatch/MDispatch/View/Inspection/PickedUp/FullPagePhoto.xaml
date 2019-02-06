@@ -11,11 +11,11 @@
                          AbsoluteLayout.LayoutBounds="1, 0, 1, 44" Opacity="0.3" Padding="7">
                 <Label x:Name="NameSelectPhoto" Text="--------------------" TextColor="Black" Margin="5"/>
                 <Button x:Name="btnDamage" IsVisible="False" Text="Add Damag" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="81" HorizontalOptions="EndAndExpand" Clicked="Button_Clicked_2"/>
-                <Button Text="Add Photo" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="79" HorizontalOptions="End" Clicked="Button_Clicked"/>
-                <Button x:Name="btnNext" IsVisible="False" Text="Next" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="50" Clicked="Button_Clicked_1" />
+                <Button x:Name="btnAddPhoto" Text="Add Photo" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="79"  Clicked="Button_Clicked" HorizontalOptions="EndAndExpand"/>
+                <Button x:Name="btnNext" IsVisible="False" Text="Next" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="50" Clicked="Button_Clicked_1"  HorizontalOptions="EndAndExpand"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HeightRequest="70" AbsoluteLayout.LayoutFlags="PositionProportional,HeightProportional"
-                         AbsoluteLayout.LayoutBounds="0, 1, 55, 0.9" Padding="7" Opacity="0.8">
+                          AbsoluteLayout.LayoutBounds="0, 1, 55, 0.9" Padding="7" Opacity="0.8">
                 <ListView x:Name="Photos" ItemsSource="{Binding AllSourseImage}" SeparatorVisibility="None"
                           HasUnevenRows="True" ItemSelected="MessagesListView_ItemSelected">
                     <ListView.ItemTemplate>

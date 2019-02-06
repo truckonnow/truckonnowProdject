@@ -38,15 +38,26 @@ namespace MDispatch.View.PageApp
 
         public void SetbtnVisable()
         {
-            if(fullPagePhotoMV.AllSourseImage != null && fullPagePhotoMV.AllSourseImage.Count != 0)
+            if (fullPagePhotoMV.AllSourseImage != null && fullPagePhotoMV.AllSourseImage.Count != 0)
             {
                 btnNext.IsVisible = true;
+                btnAddPhoto.IsVisible = false;
             }
         }
 
         public void AddDamagCurrentLayut(Xamarin.Forms.View view)
         {
+            view.GestureRecognizers.Add(new TapGestureRecognizer(SelectImageSourse));
             dmla.Children.Add(view);
+        }
+
+        public void SelectImageSourse(Xamarin.Forms.View v, object e)
+        {
+            ImageSource imageSource = fullPagePhotoMV.SelectPhotoForDamage((Image)v);
+            if(imageSource != null)
+            {
+                Photos.SelectedItem = imageSource;
+            }
         }
 
         private async void Button_Clicked(object sender, EventArgs e)

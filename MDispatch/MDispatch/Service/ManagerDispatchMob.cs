@@ -140,6 +140,10 @@ namespace MDispatch.Service
                 {
                     stateInspection = inspection.SaveAsk(token, id, (Models.AskForUserDelyveryM)obj, ref description);
                 }
+                else if(typeInspection == "AskPikedUpSig")
+                {
+                    stateInspection = inspection.SaveSigPikedUp(token, (Photo)obj, id, ref description);
+                }
             }
             inspection = null;
             return stateInspection;

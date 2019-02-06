@@ -60,6 +60,20 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
+        public async void SaveSigPikedUpInDb(string idve, Photo sig)
+        {
+            context.Shipping.Load();
+            context.VehiclwInformation.Load();
+            context.askForUserDelyveryMs.Load();
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
+            if (vehiclwInformation.askForUserDelyveryM == null)
+            {
+                vehiclwInformation.askForUserDelyveryM = new AskForUserDelyveryM();
+            }
+            vehiclwInformation.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature = sig;
+            await context.SaveChangesAsync();
+        }
+
         public async void SaveAsk1InDb(string idve, Ask1 ask1)
         {
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
@@ -74,7 +88,7 @@ namespace ApiMobaileServise.Servise
         public void SaveAskFromUserInDb(string idve, AskFromUser askFromUser)
         {
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
-            if (vehiclwInformation.Ask1 == null)
+            if (vehiclwInformation.AskFromUser == null)
             {
                 vehiclwInformation.AskFromUser = new AskFromUser();
             }
@@ -181,12 +195,14 @@ namespace ApiMobaileServise.Servise
 
         public List<Shipping> GetOrdersForToken(string token, int type)
         {
+            context.Shipping.Load();
             context.VehiclwInformation.Load();
             context.Asks.Load();
+            context.PhotoInspections.Load();
             context.Ask1s.Load();
+            context.AskFromUsers.Load();
             context.AskDelyveries.Load();
             context.askForUserDelyveryMs.Load();
-            context.PhotoInspections.Load();
             context.Damages.Load();
             List<Shipping> Shipping1 = new List<Shipping>();
             Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);

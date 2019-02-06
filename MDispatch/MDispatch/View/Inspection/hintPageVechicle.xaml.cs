@@ -12,9 +12,12 @@ namespace MDispatch.View.Inspection
         {
             InitializeComponent();
             lHint.Text = hintText;
-            lMake.Text = vehiclwInformation.Make;
-            lModel.Text = vehiclwInformation.Model;
-            lYear.Text = vehiclwInformation.Year;
+            if (vehiclwInformation != null)
+            {
+                lMake.Text = vehiclwInformation.Make;
+                lModel.Text = vehiclwInformation.Model;
+                lYear.Text = vehiclwInformation.Year;
+            }
         }
 
         private async void Button_Clicked(object sender, System.EventArgs e)

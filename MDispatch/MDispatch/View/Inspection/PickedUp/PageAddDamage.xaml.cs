@@ -30,6 +30,7 @@ namespace MDispatch.View.Inspection.PickedUp
             {
                 foreach (var view in views)
                 {
+                    view.GestureRecognizers.Clear();
                     absla.Children.Add(view);
                     view.GestureRecognizers.Add(new TapGestureRecognizer(RemovedDamag));
                 }
@@ -40,6 +41,10 @@ namespace MDispatch.View.Inspection.PickedUp
         {
             stateSelect = 1;
             await PopupNavigation.PushAsync(new DamageSelecter(FullPagePhotoMV, this), true);
+            await WaiteSelectDamage();
+            await PopupNavigation.PopAsync(true);
+            stateSelect = 1;
+            await Navigation.PushAsync(new CameraPagePhoto(FullPagePhotoMV, null, fullPagePhoto, this));
             await WaiteSelectDamage();
             if (stateSelect == 0)
             {
@@ -53,10 +58,9 @@ namespace MDispatch.View.Inspection.PickedUp
                 AbsoluteLayout.SetLayoutBounds(image, new Rectangle(e.XInterest * 0.0001, e.YInterest * 0.0001, 15, 15));
                 AbsoluteLayout.SetLayoutFlags(image, AbsoluteLayoutFlags.PositionProportional);
                 absla.Children.Add(image);
-                await PopupNavigation.PopAsync(true);
                 await Task.Run(() =>
                 {
-                    FullPagePhotoMV.SetDamage(nameDamage, indexSelectDamage, prefNameDamage, e.XInterest * 0.0001, e.YInterest * 0.0001, image);
+                    FullPagePhotoMV.SetDamage(nameDamage, indexSelectDamage, prefNameDamage, e.XInterest * 0.0001, e.YInterest * 0.0001, image, FullPagePhotoMV.AllSourseImage.Last());
                 });
             }
             else
@@ -76,7 +80,7 @@ namespace MDispatch.View.Inspection.PickedUp
             List<Xamarin.Forms.View> views = absla.Children.ToList().GetRange(1, absla.Children.ToList().Count - 1);
             foreach(var view in views)
             {
-                view.GestureRecognizers.Remove(new TapGestureRecognizer(RemovedDamag));
+                view.GestureRecognizers.Clear();
                 fullPagePhoto.AddDamagCurrentLayut(view);
             }
             return base.OnBackButtonPressed();
@@ -84,13 +88,7 @@ namespace MDispatch.View.Inspection.PickedUp
 
         private async Task WaiteSelectDamage()
         {
-            await Task.Run(() =>
-            {
-                while(stateSelect == 1)
-                {
-
-                }
-            });
+            await Task.Run(() => { while(stateSelect == 1) { } });
         }
     }
 }

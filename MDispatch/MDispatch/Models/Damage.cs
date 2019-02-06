@@ -13,5 +13,6 @@ namespace MDispatch.Models
         public double XInterest { get; set; }
         public double YInterest { get; set; }
         public Image Image { get; set; }
+        public ImageSource ImageSource { get; set; }
     }
 }

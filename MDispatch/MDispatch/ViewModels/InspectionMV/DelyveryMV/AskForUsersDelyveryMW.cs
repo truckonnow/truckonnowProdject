@@ -1,9 +1,7 @@
 ﻿using MDispatch.Models;
-using MDispatch.NewElement;
 using MDispatch.Service;
 using MDispatch.View;
 using MDispatch.View.Inspection.Delyvery;
-using MDispatch.View.PageApp;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
@@ -80,19 +78,41 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
             else if (state == 3)
             {
+                await Navigation.PopToRootAsync(true);
                 await PopupNavigation.PushAsync(new TempDialogPage1(this));
+                Continue();
             }
             else if (state == 4)
             {
                 //FeedBack = "Technical work on the service";
             }
         }
-
-        public async void ToContinueInspection()
+        
+        public async void Continue()
         {
-            DependencyService.Get<IOrientationHandler>().ForceLandscape();
-            await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{VehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", VehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 1, initDasbordDelegate));
-            Navigation.RemovePage(Navigation.NavigationStack[2]);
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            await Task.Run(() =>
+            {
+                state = managerDispatchMob.Recurent(token, IdShip, "Delivered", ref description);
+                initDasbordDelegate.Invoke();
+            });
+            if (state == 1)
+            {
+                //FeedBack = "Not Network";
+            }
+            else if (state == 2)
+            {
+                //FeedBack = description;
+            }
+            else if (state == 3)
+            {
+            }
+            else if (state == 4)
+            {
+                //FeedBack = "Technical work on the service";
+            }
         }
 
         public void SendEmailCoupon()

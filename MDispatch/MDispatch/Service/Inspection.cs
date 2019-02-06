@@ -38,6 +38,37 @@ namespace MDispatch.Service
             }
         }
 
+        public int SaveSigPikedUp(string token, Photo photoSig, string id, ref string description)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                string sigPhoto = JsonConvert.SerializeObject(photoSig);
+                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestRequest request = new RestRequest("Mobile/SaveSigPikedUp", Method.POST);
+                request.AddHeader("Accept", "application/json");
+                request.Parameters.Clear();
+                request.AddParameter("token", token);
+                request.AddParameter("idVech", id);
+                request.AddParameter("jsonSigPhoto", sigPhoto);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description);
+            }
+        }
+
         public int GetShipping(string token, string id, ref string description, ref Shipping shipping)
         {
             IRestResponse response = null;
@@ -268,6 +299,7 @@ namespace MDispatch.Service
                     photoInspection.Damages.ForEach((dm) =>
                     {
                         dm.Image = null;
+                        dm.ImageSource = null;
                     });
                 }
                 string strPhotoInspection = JsonConvert.SerializeObject(photoInspection);

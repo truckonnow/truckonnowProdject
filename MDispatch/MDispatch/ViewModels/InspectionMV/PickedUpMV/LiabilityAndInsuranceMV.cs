@@ -53,6 +53,13 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             set => SetProperty(ref shipping, value);
         }
 
+        private Photo sigPhoto = null;
+        public Photo SigPhoto
+        {
+            get => sigPhoto;
+            set => SetProperty(ref sigPhoto, value);
+        }
+
         private async void InitShipping()
         {
             await PopupNavigation.PushAsync(new LoadPage());
@@ -82,6 +89,39 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 //FeedBack = "Technical work on the service";
             }
             StataLoadShip = 1;
+        }
+
+        public async void SaveSig()
+        {
+            await PopupNavigation.PushAsync(new LoadPage());
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            await Task.Run(() =>
+            {
+                state = managerDispatchMob.AskWork("AskPikedUpSig", token, IdVech, SigPhoto, ref description);
+                initDasbordDelegate.Invoke();
+            });
+            await PopupNavigation.PopAsync();
+            if (state == 1)
+            {
+                //FeedBack = "Not Network";
+            }
+            else if (state == 2)
+            {
+                //FeedBack = description;
+            }
+            else if (state == 3)
+            {
+                Task.Run(() =>
+                {
+                    Continue();
+                });
+            }
+            else if (state == 4)
+            {
+                //FeedBack = "Technical work on the service";
+            }
         }
 
         public async void Continue()

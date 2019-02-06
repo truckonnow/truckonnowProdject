@@ -1,6 +1,10 @@
-﻿using MDispatch.Service;
+﻿using MDispatch.Models;
+using MDispatch.Service;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -23,14 +27,21 @@ namespace MDispatch.View.Inspection.PickedUp
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            liabilityAndInsuranceMV.Continue();
+            if (isSignatureAsk)
+            {
+                liabilityAndInsuranceMV.SaveSig();
+            }
+            else
+            {
+                CheckAsk();
+            }
         }
 
         public async void InitElemnt()
         {
             await Task.Run(() =>
             {
-                while(liabilityAndInsuranceMV.StataLoadShip == 0)
+                while (liabilityAndInsuranceMV.StataLoadShip == 0)
                 {
 
                 }
@@ -45,43 +56,37 @@ namespace MDispatch.View.Inspection.PickedUp
                     };
                     AbsoluteLayout.SetLayoutFlags(image, AbsoluteLayoutFlags.All);
                     AbsoluteLayout.SetLayoutBounds(image, new Rectangle(0.5, 0.5, 1, 1));
-                    stVech.Children.Add(new StackLayout()
+                    VechInfoSt.Children.Add(new StackLayout()
                     {
-                        Padding = 2,
-                        Margin = 2,
+                        Orientation = StackOrientation.Horizontal,
                         Children =
                         {
-                            new StackLayout()
+                            new Label()
                             {
-                                Orientation = StackOrientation.Horizontal,
-                                Children =
-                                {
-                                    new Label()
-                                    {
-                                        Text = VehiclwInformation.Year,
-                                        FontSize = 18,
-                                        TextColor = Color.Black
-                                    },
-                                    new Label()
-                                    {
-                                        Text = VehiclwInformation.Make,
-                                        FontSize = 18,
-                                        TextColor = Color.Black
-                                    },
-                                    new Label()
-                                    {
-                                        Text = VehiclwInformation.Model,
-                                        FontSize = 18,
-                                        TextColor = Color.Black
-                                    },
-                                }
+                                Text = VehiclwInformation.Year,
+                                FontSize = 18,
+                                TextColor = Color.Black
                             },
-                            new StackLayout()
+                            new Label()
                             {
-                                Orientation = StackOrientation.Horizontal,
-                                Children =
-                                {
-                                    new Label()
+                                Text = VehiclwInformation.Make,
+                                FontSize = 18,
+                                TextColor = Color.Black
+                            },
+                            new Label()
+                            {
+                                Text = VehiclwInformation.Model,
+                                FontSize = 18,
+                                TextColor = Color.Black
+                            },
+                        }
+                    });
+                    VechInfoSt.Children.Add(new StackLayout()
+                    {
+                        Orientation = StackOrientation.Horizontal,
+                        Children =
+                        {
+                            new Label()
                                     {
                                         Text = "VIN#",
                                         FontSize = 18,
@@ -92,14 +97,14 @@ namespace MDispatch.View.Inspection.PickedUp
                                         FontSize = 18,
                                         TextColor = Color.Black
                                     }
-                                }
-                            },
-                            new StackLayout()
-                            {
-                                Orientation = StackOrientation.Horizontal,
-                                Children =
-                                {
-                                    new Label()
+                        }
+                    });
+                    VechInfoSt.Children.Add(new StackLayout()
+                    {
+                        Orientation = StackOrientation.Horizontal,
+                        Children =
+                        {
+                            new Label()
                                     {
                                         Text = "Type:",
                                         FontSize = 18,
@@ -110,38 +115,32 @@ namespace MDispatch.View.Inspection.PickedUp
                                         FontSize = 18,
                                         TextColor = Color.Black
                                     }
-                                },
-                            },
-                            new StackLayout()
+                        }
+                    });
+                    VechInfoSt.Children.Add(new StackLayout()
+                    {
+                        Orientation = StackOrientation.Horizontal,
+                        Children =
+                        {
+                            new Label()
                             {
-                                Orientation = StackOrientation.Horizontal,
-                                Children =
-                                {
-                                    new Label()
-                                    {
-                                        Text = "Color:",
-                                        FontSize = 18,
-                                    },
-                                    new Label()
-                                    {
-                                        Text = VehiclwInformation.Color,
-                                        FontSize = 18,
-                                        TextColor = Color.Black
-                                    }
-                                },
+                                Text = "Color:",
+                                FontSize = 18,
                             },
-                            new AbsoluteLayout()
+                            new Label()
                             {
-                                Children =
-                                {
-                                    image
-                                }
-                            },
-                            new StackLayout()
-                            {
-                                Orientation = StackOrientation.Horizontal,
-                                Children =
-                                {
+                                Text = VehiclwInformation.Color,
+                                FontSize = 18,
+                                TextColor = Color.Black
+                            }
+                        }
+                    });
+                    VechInfoAbs.Children.Add(image);
+                    VechInfoSt1.Children.Add(new StackLayout()
+                    {
+                        Orientation = StackOrientation.Horizontal,
+                        Children =
+                        {
                                     new Image()
                                     {
                                         Source = "DamageP1.png",
@@ -166,40 +165,74 @@ namespace MDispatch.View.Inspection.PickedUp
                                         Text = "Circles Green — delivery damages;",
                                         FontSize = 13
                                     },
-                                }
-                            },
-                            new FlexLayout()
-                            {
-                                Wrap = FlexWrap.Wrap,
-                                Opacity = 0.7,
-                                BackgroundColor = Color.FromHex("#F3F781"),
-                                Children =
-                                {
-                                    new Label()
-                                    {
-                                        HorizontalTextAlignment = TextAlignment.Center,
-                                        Text = "See inspection photo:",
-                                        FontSize = 16
-                                    },
-                                    new Label()
-                                    {
-                                        HorizontalTextAlignment = TextAlignment.Center,
-                                        TextColor = Color.Blue,
-                                        Text = $"http://localhost:22929/Photo/BOL/{VehiclwInformation.Id}",
-                                        FontSize = 16
-                                    }
-                                }
-                            },
-                            new BoxView()
-                            {
-                                HeightRequest = 1,
-                                BackgroundColor = Color.Silver
-                            }
                         }
                     });
+
+                    FlexLayout flexLayout = new FlexLayout()
+                    {
+                        Wrap = FlexWrap.Wrap,
+                        Opacity = 0.7,
+                        BackgroundColor = Color.FromHex("#F3F781"),
+                        Children =
+                        {
+                            new Label()
+                            {
+                                HorizontalTextAlignment = TextAlignment.Center,
+                                Text = "See inspection photo:",
+                                FontSize = 16
+                            },
+                            new Label()
+                            {
+                                HorizontalTextAlignment = TextAlignment.Center,
+                                TextColor = Color.Blue,
+                                Text = $"http://192.168.0.100:22929/Photo/BOL/{VehiclwInformation.Id}",
+                                FontSize = 16
+                            }
+                        }
+                    };
+                    flexLayout.GestureRecognizers.Add(new TapGestureRecognizer(GetPagePhotoInspection));
+                    VechInfoSt1.Children.Add(flexLayout);
                 }
             }
             liabilityAndInsuranceMV.StataLoadShip = 0;
+        }
+
+        private async void GetPagePhotoInspection(Xamarin.Forms.View v, object s)
+        {
+            Label label = (Label)((FlexLayout)v).Children[1];
+            await Navigation.PushAsync(new PhotoInspectionWeb(label.Text));
+        }
+
+        bool isSignatureAsk = false;
+        private async void Sign_StrokeCompleted(object sender, EventArgs e)
+        {
+            Photo photo = new Photo();
+            isSignatureAsk = true;
+            Stream stream = await sign.GetImageStreamAsync(SignaturePad.Forms.SignatureImageFormat.Png);
+            MemoryStream memoryStream = new MemoryStream();
+            stream.CopyTo(memoryStream);
+            byte[] image = memoryStream.ToArray();
+            photo.Base64 = JsonConvert.SerializeObject(image);
+            photo.path = $"../Photo/{liabilityAndInsuranceMV.Shipping.VehiclwInformations.Find(v => v.Id == liabilityAndInsuranceMV.IdVech)}/PikedUp/Signature/PikedUp.Png";
+            liabilityAndInsuranceMV.SigPhoto = photo;
+        }
+
+        private void Sign_Cleared(object sender, EventArgs e)
+        {
+            isSignatureAsk = false;
+            liabilityAndInsuranceMV.SigPhoto = null;
+        }
+
+        private void CheckAsk()
+        {
+            if (!isSignatureAsk)
+            {
+                askBlock3.BorderColor = Color.Red;
+            }
+            else
+            {
+                askBlock3.BorderColor = Color.BlueViolet;
+            }
         }
     }
 }

@@ -87,20 +87,25 @@ namespace MDispatch.ViewModels.PageAppMV
         {
             foreach (var vehiclwInformation in Shipping.VehiclwInformations)
             {
+                List<PhotoInspection> photoInspections = null;
+                if (vehiclwInformation.PhotoInspections != null)
+                {
+                    photoInspections = vehiclwInformation.PhotoInspections.FindAll(p => p.CurrentStatusPhoto == "PikedUp");
+                }
                 if (vehiclwInformation.Ask == null)
                 {
                     await PopupNavigation.PushAsync(new HintPageVechicle("Start Inspection Picked up", vehiclwInformation));
                     await Navigation.PushAsync(new AskPage(managerDispatchMob, vehiclwInformation, Shipping.Id, initDasbordDelegate, getVechicleDelegate), true);
                     return;
                 }
-                else if (vehiclwInformation.PhotoInspections == null)
+                else if (photoInspections == null)
                 {
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", vehiclwInformation));
                     DependencyService.Get<IOrientationHandler>().ForceLandscape();
                     await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 1, initDasbordDelegate, getVechicleDelegate), true);
                     return;
                 }
-                else if (vehiclwInformation.PhotoInspections.Find(p => p.IndexPhoto == 39) == null)
+                else if (photoInspections.Find(p => p.IndexPhoto == 39) == null)
                 {
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", vehiclwInformation));
                     int lastIndexPhoto = vehiclwInformation.PhotoInspections[vehiclwInformation.PhotoInspections.Count - 1].IndexPhoto + 1;
@@ -114,19 +119,58 @@ namespace MDispatch.ViewModels.PageAppMV
                     await Navigation.PushAsync(new Ask1Page(managerDispatchMob, vehiclwInformation, Shipping.Id, initDasbordDelegate, getVechicleDelegate), true);
                     return;
                 }
-                else if (vehiclwInformation.AskFromUser == null)
-                {
-                    await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", vehiclwInformation));
-                    await Navigation.PushAsync(new AskForUser(managerDispatchMob, vehiclwInformation, Shipping.Id, initDasbordDelegate), true);
-                    return;
-                }
+            }
+            if (Shipping.VehiclwInformations[0].AskFromUser == null)
+            {
+                await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", null));
+                await Navigation.PushAsync(new AskForUser(managerDispatchMob, Shipping.VehiclwInformations[0], Shipping.Id, initDasbordDelegate), true);
+                return;
+            }
+            else if (Shipping.VehiclwInformations[0].AskFromUser.App_will_ask_for_signature_of_the_client_signature == null)
+            {
+                await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", null));
+                await Navigation.PushAsync(new LiabilityAndInsurance(managerDispatchMob, Shipping.VehiclwInformations[0].Id, Shipping.Id, initDasbordDelegate), true);
+                return;
             }
         }
 
-        public async void ToStartInspectionDelyvery(VehiclwInformation vehiclwInformation, Shipping shipping)
+        public async void ToStartInspectionDelyvery()
         {
-            await PopupNavigation.PushAsync(new HintPageVechicle("Start Inspection Delyvered", vehiclwInformation));
-            await Navigation.PushAsync(new AskPageDelyvery(managerDispatchMob, vehiclwInformation, shipping.Id, initDasbordDelegate), true);
+            foreach (var vehiclwInformation in Shipping.VehiclwInformations)
+            {
+                List<PhotoInspection> photoInspections = null;
+                if (vehiclwInformation.PhotoInspections != null)
+                {
+                    photoInspections = vehiclwInformation.PhotoInspections.FindAll(p => p.CurrentStatusPhoto == "Delyvery");
+                }
+                if (vehiclwInformation.AskDelyvery == null)
+                {
+                    await PopupNavigation.PushAsync(new HintPageVechicle("Start Inspection Delyvered", vehiclwInformation));
+                    await Navigation.PushAsync(new AskPageDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, initDasbordDelegate, getVechicleDelegate), true);
+                    return;
+                }
+                else if (photoInspections == null)
+                {
+                    await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Delyvered", vehiclwInformation));
+                    DependencyService.Get<IOrientationHandler>().ForceLandscape();
+                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 1, initDasbordDelegate, getVechicleDelegate), true);
+                    return;
+                }
+                else if (photoInspections.Find(p => p.IndexPhoto == 39) == null)
+                {
+                    await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Delyvered", vehiclwInformation));
+                    int lastIndexPhoto = vehiclwInformation.PhotoInspections[vehiclwInformation.PhotoInspections.Count - 1].IndexPhoto + 1;
+                    DependencyService.Get<IOrientationHandler>().ForceLandscape();
+                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{lastIndexPhoto}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), lastIndexPhoto, initDasbordDelegate, getVechicleDelegate), true);
+                    return;
+                }
+            }
+            if (Shipping.VehiclwInformations[0].askForUserDelyveryM == null)
+            {
+                await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Delyvered", null));
+                await Navigation.PushAsync(new AskForUserDelyvery(managerDispatchMob, Shipping.VehiclwInformations[0], Shipping.Id, initDasbordDelegate), true);
+                return;
+            }
         }
     }
 }

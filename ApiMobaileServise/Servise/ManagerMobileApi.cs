@@ -16,6 +16,11 @@ namespace ApiMobaileServise.Servise
             CheckAndCreatedFolder();
         }
 
+        public void SaveSigPhoto(string idVech, Photo sig)
+        {
+            sqlCommandApiMobile.SaveSigPikedUpInDb(idVech, sig);
+        }
+
         public VehiclwInformation GetVehiclwInformation(int idVech)
         {
             return sqlCommandApiMobile.GetVehiclwInformationInDb(idVech);

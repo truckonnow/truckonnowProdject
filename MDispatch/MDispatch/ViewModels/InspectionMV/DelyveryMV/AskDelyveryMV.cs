@@ -1,7 +1,9 @@
 ﻿using MDispatch.Models;
+using MDispatch.NewElement;
 using MDispatch.Service;
 using MDispatch.View;
 using MDispatch.View.Inspection.Delyvery;
+using MDispatch.View.PageApp;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
@@ -17,9 +19,12 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation { get; set; }
         private InitDasbordDelegate initDasbordDelegate = null;
+        private GetVechicleDelegate getVechicleDelegate = null;
 
-        public AskDelyveryMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
+        public AskDelyveryMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, 
+            InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate)
         {
+            this.getVechicleDelegate = getVechicleDelegate;
             this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
             Navigation = navigation;
@@ -70,8 +75,8 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
             else if (state == 3)
             {
-                await PopupNavigation.PushAsync(new TempDialogPage());
-                await Navigation.PushAsync(new AskForUserDelyvery(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate));
+                DependencyService.Get<IOrientationHandler>().ForceLandscape();
+                await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{VehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", VehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 1, initDasbordDelegate, getVechicleDelegate));
                 Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
             else if (state == 4)

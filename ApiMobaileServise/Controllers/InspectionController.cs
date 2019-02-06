@@ -41,6 +41,37 @@ namespace ApiMobaileServise.Controllers
             return respons;
         }
 
+
+        [HttpPost]
+        [Route("SaveSigPikedUp")]
+        public string SaveSigPikedUp(string token, string idVech, string jsonSigPhoto)
+        {
+            string respons = null;
+            if (token == null || token == "")
+            {
+                return JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
+            }
+            try
+            {
+                bool isToken = managerMobileApi.CheckToken(token);
+                if (isToken)
+                {
+                    Photo photoSig = JsonConvert.DeserializeObject<Photo>(jsonSigPhoto);
+                    managerMobileApi.SaveSigPhoto(idVech, photoSig);
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
+                }
+                else
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "2", null));
+                }
+            }
+            catch (Exception)
+            {
+                respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
+            }
+            return respons;
+        }
+
         [HttpPost]
         [Route("Shipping")]
         public string GetShipping(string token, string idShip)
@@ -69,7 +100,7 @@ namespace ApiMobaileServise.Controllers
             }
             return respons;
         }
-
+        
         [HttpPost]
         [Route("ReCurentStatus")]
         public string ReCurentStatus(string token, string idShip, string status)

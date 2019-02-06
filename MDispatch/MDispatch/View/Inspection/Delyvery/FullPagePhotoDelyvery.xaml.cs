@@ -16,10 +16,11 @@ namespace MDispatch.View.PageApp
         private FullPagePhotoDelyveryMV fullPagePhotoDelyveryMV = null;
         private string pngPaternPhoto = null;
 
-        public FullPagePhotoDelyvery(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string pngPaternPhoto, string typeCar, int photoIndex, InitDasbordDelegate initDasbordDelegate)
+        public FullPagePhotoDelyvery(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string pngPaternPhoto,
+            string typeCar, int photoIndex, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate)
         {
             this.pngPaternPhoto = pngPaternPhoto;
-            fullPagePhotoDelyveryMV = new FullPagePhotoDelyveryMV(managerDispatchMob, vehiclwInformation, idShip, typeCar, photoIndex, Navigation, initDasbordDelegate);
+            fullPagePhotoDelyveryMV = new FullPagePhotoDelyveryMV(managerDispatchMob, vehiclwInformation, idShip, typeCar, photoIndex, Navigation, initDasbordDelegate, getVechicleDelegate);
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = fullPagePhotoDelyveryMV;

@@ -23,14 +23,14 @@ namespace MDispatch.View.Inspection.PickedUp
         private async void Button_Clicked_1(object sender, System.EventArgs e)
         {
             await PopupNavigation.PopAsync(true);
-            askForUsersDelyveryMW.ToContinueInspection();
+            askForUsersDelyveryMW.Continue();
             await PopupNavigation.PushAsync(new TempPageHint4());
         }
 
         private async void Button_Clicked(object sender, System.EventArgs e)
         {
             await PopupNavigation.PopAsync(true);
-            askForUsersDelyveryMW.ToContinueInspection();
+            askForUsersDelyveryMW.Continue();
             askForUsersDelyveryMW.SendEmailCoupon();
             await PopupNavigation.PushAsync(new TempPageHint3());
         }
