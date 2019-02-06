@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="NewrRender\CameraPageRender.cs" />
+    <Compile Include="NewrRender\ImageRender\ImageSizeRender.cs" />
     <Compile Include="NewrRender\Orientation\OrientationHandler.cs" />
     <Compile Include="NewrRender\PaintCodeButton.cs" />
     <Compile Include="NewrRender\TouchCordinateRender\TouchImageRender.cs" />

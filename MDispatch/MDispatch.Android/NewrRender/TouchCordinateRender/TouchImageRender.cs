@@ -1,4 +1,5 @@
-﻿using Android.Views;
+﻿using Android.Content;
+using Android.Views;
 using Android.Widget;
 using MDispatch.Droid.NewrRender.TouchCordinateRender;
 using MDispatch.NewElement.TouchCordinate;
@@ -10,13 +11,17 @@ namespace MDispatch.Droid.NewrRender.TouchCordinateRender
 {
     public class TouchImageRender : ImageRenderer
     {
+        public TouchImageRender(Context context) : base(context)
+        {
+
+        }
+
 
         protected override void OnElementChanged(ElementChangedEventArgs<Image> e)
         {
             base.OnElementChanged(e);
             if (this.Control == null)
             {
-
                 var imageView = new ImageButton(Context);
                 this.SetNativeControl(imageView);
             }

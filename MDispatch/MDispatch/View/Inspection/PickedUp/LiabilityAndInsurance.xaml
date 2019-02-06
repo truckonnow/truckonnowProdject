@@ -52,9 +52,9 @@
                             <StackLayout x:Name="VechInfoSt">
                                 
                             </StackLayout>
-                            <AbsoluteLayout x:Name="VechInfoAbs">
+                            <StackLayout x:Name="VechInfoSt3">
                                 
-                            </AbsoluteLayout>
+                            </StackLayout>
                             <StackLayout x:Name="VechInfoSt1">
                                 
                             </StackLayout>

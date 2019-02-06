@@ -1,6 +1,8 @@
 ﻿using MDispatch.Models;
+using MDispatch.NewElement.ImageSize;
 using MDispatch.Service;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
+using MDispatch.ViewModels.InspectionMV.PickedUpMV.TypeVe;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,7 +17,7 @@ namespace MDispatch.View.Inspection.PickedUp
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class LiabilityAndInsurance : ContentPage
 	{
-        LiabilityAndInsuranceMV liabilityAndInsuranceMV = null;
+        private LiabilityAndInsuranceMV liabilityAndInsuranceMV = null;
 
         public LiabilityAndInsurance (ManagerDispatchMob managerDispatchMob, string idVech, string idShip, InitDasbordDelegate initDasbordDelegate)
 		{
@@ -39,23 +41,11 @@ namespace MDispatch.View.Inspection.PickedUp
 
         public async void InitElemnt()
         {
-            await Task.Run(() =>
-            {
-                while (liabilityAndInsuranceMV.StataLoadShip == 0)
-                {
-
-                }
-            });
+            await Wait();
             if (liabilityAndInsuranceMV.Shipping != null && liabilityAndInsuranceMV.Shipping.VehiclwInformations != null)
             {
                 foreach (var VehiclwInformation in liabilityAndInsuranceMV.Shipping.VehiclwInformations)
                 {
-                    Image image = new Image()
-                    {
-                        Source = "scan.png",
-                    };
-                    AbsoluteLayout.SetLayoutFlags(image, AbsoluteLayoutFlags.All);
-                    AbsoluteLayout.SetLayoutBounds(image, new Rectangle(0.5, 0.5, 1, 1));
                     VechInfoSt.Children.Add(new StackLayout()
                     {
                         Orientation = StackOrientation.Horizontal,
@@ -135,7 +125,7 @@ namespace MDispatch.View.Inspection.PickedUp
                             }
                         }
                     });
-                    VechInfoAbs.Children.Add(image);
+                    await InitDamage();
                     VechInfoSt1.Children.Add(new StackLayout()
                     {
                         Orientation = StackOrientation.Horizontal,
@@ -196,6 +186,7 @@ namespace MDispatch.View.Inspection.PickedUp
             }
             liabilityAndInsuranceMV.StataLoadShip = 0;
         }
+        
 
         private async void GetPagePhotoInspection(Xamarin.Forms.View v, object s)
         {
@@ -221,6 +212,41 @@ namespace MDispatch.View.Inspection.PickedUp
         {
             isSignatureAsk = false;
             liabilityAndInsuranceMV.SigPhoto = null;
+        }
+
+        private async Task InitDamage()
+        {
+            AbsoluteLayout absoluteLayout = new AbsoluteLayout();
+            Image image = new Image()
+            {
+                Source = "scan.png",
+            };
+            AbsoluteLayout.SetLayoutFlags(image, AbsoluteLayoutFlags.All);
+            AbsoluteLayout.SetLayoutBounds(image, new Rectangle(0.5, 0.5, 1, 1));
+            VechInfoSt3.Children.Add(absoluteLayout);
+            absoluteLayout.Children.Add(image);
+            liabilityAndInsuranceMV.StataLoadShip = 0;
+            Image image1 = new Image()
+            {
+                Source = "DamageP11.png"
+            };
+            ITypeScan typeScan = new TestCar();
+            double x = typeScan.GetCordinatX(liabilityAndInsuranceMV.Shipping.VehiclwInformations[0].PhotoInspections[0].IndexPhoto.ToString(), liabilityAndInsuranceMV.Shipping.VehiclwInformations[0].PhotoInspections[0].Damages[0].XInterest);
+            double y = typeScan.GetCordinatY(liabilityAndInsuranceMV.Shipping.VehiclwInformations[0].PhotoInspections[0].IndexPhoto.ToString(), liabilityAndInsuranceMV.Shipping.VehiclwInformations[0].PhotoInspections[0].Damages[0].YInterest);
+            AbsoluteLayout.SetLayoutFlags(image1, AbsoluteLayoutFlags.PositionProportional);
+            AbsoluteLayout.SetLayoutBounds(image1, new Rectangle(x, y, 10, 10));
+            absoluteLayout.Children.Add(image1);
+        }
+
+        private async Task Wait()
+        {
+            await Task.Run(() =>
+            {
+                while (liabilityAndInsuranceMV.StataLoadShip == 0)
+                {
+
+                }
+            });
         }
 
         private void CheckAsk()
