@@ -454,10 +454,8 @@ namespace WebDispacher.Controellers
             return actionResult;
         }
 
-        [Route("Dashbord/CreateOrder")]
-        public IActionResult CreateOrder(string idOrder, string idLoad, string internalLoadID, string driver, string status, string instructions, string nameP, string contactP,
-            string addressP, string cityP, string stateP, string zipP, string phoneP, string emailP, string scheduledPickupDateP, string nameD, string contactD, string addressD,
-            string cityD, string stateD, string zipD, string phoneD, string emailD, string ScheduledPickupDateD, string paymentMethod, string price, string paymentTerms, string brokerFee)
+        [Route("Dashbord/Order/SavaVech")]
+        public IActionResult SavaVech()
         {
             IActionResult actionResult = null;
             try
@@ -466,10 +464,6 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    managerDispatch.CreateOrder(idOrder, idLoad, internalLoadID, driver, status, instructions, nameP, contactP, addressP, cityP, stateP, zipP,
-                        phoneP, emailP, scheduledPickupDateP, nameD, contactD, addressD, cityD, stateD, zipD, phoneD, emailD, ScheduledPickupDateD, paymentMethod,
-                        price, paymentTerms, brokerFee);
-                    actionResult = Redirect($"http://localhost:22929/Dashbord/Order/Edit?id={idOrder}&stasus={Status}");
                 }
                 else
                 {

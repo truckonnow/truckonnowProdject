@@ -84,7 +84,7 @@
                         <th>Lot Number</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbVecl">
                     @for (int i = 0; i < ViewBag.Order.VehiclwInformations.Count; i++)
                     {
                         <tr id="@ViewBag.Order.VehiclwInformations[i].Id">
@@ -96,12 +96,13 @@
                             <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Type" /></td>
                             <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Color" /></td>
                             <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Lot" /></td>
-                            <td><input class="inpTextTr btnD" type="button" value="D" /></td>
-                            <td><input class="inpTextTr btnD" type="button" value="+" /></td>
+                            <td><input class="inpTextTr btnD" type="button" value="-" /></td>
+                            <td><input class="inpTextTr btnD" type="button" value="S" onclick="SaveVech(this)" /></td>
                         </tr>
                     }
                 </tbody>
             </table>
+            <input class="btnAddandRevoveVech btnD" type="button" value="+" />
         </div>
         <hr style="border-color:rgba(243, 167, 76, 0.29);margin:10px;" />
         <div class="contentBody">
@@ -127,9 +128,32 @@
         </div>
     </form>
 </div>
+<script>
+    function SaveVech(btnE) {
+        let idVech = btnE.parentElement.parentElement.id;
+        let VIN = btnE.parentElement.parentElement.children[1].children[0].value;
+        let Year = btnE.parentElement.parentElement.children[2].children[0].value;
+        let Make = btnE.parentElement.parentElement.children[3].children[0].value;
+        let Model = btnE.parentElement.parentElement.children[4].children[0].value;
+        let Type = btnE.parentElement.parentElement.children[5].children[0].value;
+        let Color = btnE.parentElement.parentElement.children[6].children[0].value;
+        let LotNumber = btnE.parentElement.parentElement.children[7].children[0].value;
+        //var xhttp = new XMLHttpRequest();
+        //xhttp.open("POST", "", true);
+        //xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        //xhttp.send("fname=Henry&lname=Ford");
+    }
+</script>
         <style>
             * {
                 margin: 0px;
+            }
+
+            .btnAddandRevoveVech {
+                border: none;
+                width: 30px;
+                background-color: #f9a038;
+                color: #000000;
             }
 
             .btnSave {
