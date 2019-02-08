@@ -117,6 +117,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             damage.XInterest = xInterest;
             damage.YInterest = yInterest;
             damage.Image = image;
+            damage.TypeCurrentStatus = "P";
             damage.ImageSource = imageSource1;
             if (PhotoInspection.Damages == null)
             {

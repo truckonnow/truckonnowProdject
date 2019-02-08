@@ -122,13 +122,11 @@ namespace MDispatch.ViewModels.PageAppMV
             }
             if (Shipping.VehiclwInformations[0].AskFromUser == null)
             {
-                await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", null));
                 await Navigation.PushAsync(new AskForUser(managerDispatchMob, Shipping.VehiclwInformations[0], Shipping.Id, initDasbordDelegate), true);
                 return;
             }
             else if (Shipping.VehiclwInformations[0].AskFromUser.App_will_ask_for_signature_of_the_client_signature == null)
             {
-                await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", null));
                 await Navigation.PushAsync(new LiabilityAndInsurance(managerDispatchMob, Shipping.VehiclwInformations[0].Id, Shipping.Id, initDasbordDelegate), true);
                 return;
             }
@@ -167,7 +165,6 @@ namespace MDispatch.ViewModels.PageAppMV
             }
             if (Shipping.VehiclwInformations[0].askForUserDelyveryM == null)
             {
-                await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Delyvered", null));
                 await Navigation.PushAsync(new AskForUserDelyvery(managerDispatchMob, Shipping.VehiclwInformations[0], Shipping.Id, initDasbordDelegate), true);
                 return;
             }
