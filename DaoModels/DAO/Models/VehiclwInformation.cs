@@ -20,5 +20,6 @@ namespace DaoModels.DAO.Models
         public AskFromUser AskFromUser { get; set; }
         public AskDelyvery AskDelyvery { get; set; }
         public AskForUserDelyveryM askForUserDelyveryM { get; set; }
+        public Photo Scan { get; set; }
     }
 }

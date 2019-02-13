@@ -127,6 +127,8 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
+                    ViewBag.Orders = managerDispatch.GetOrders("Archived", page);
+                    ViewBag.Drivers = managerDispatch.GetDrivers(-1);
                     actionResult = View("Archived");
                 }
                 else
@@ -213,6 +215,8 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
+                    ViewBag.Orders = managerDispatch.GetOrders("Deleted", page);
+                    ViewBag.Drivers = managerDispatch.GetDrivers(-1);
                     actionResult = View("Deleted");
                 }
                 else
@@ -319,6 +323,64 @@ namespace WebDispacher.Controellers
             return actionResult;
         }
 
+        [Route("Dashbord/Order/ArchivedOrder")]
+        public IActionResult DeletedOrder(string id)
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                string key = null;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    managerDispatch.ArchvedOrder(id);
+                    actionResult = Redirect($"http://localhost:22929/Dashbord/Order/NewLoad");
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = Redirect("http://localhost:22929");
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult;
+        }
+
+        [Route("Dashbord/Order/DeletedOrder")]
+        public IActionResult DeletedOrder(string id, string status)
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                string key = null;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    managerDispatch.DeletedOrder(id);
+                    actionResult = Redirect($"http://localhost:22929/Dashbord/Order/{status}");
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = Redirect("http://localhost:22929");
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult;
+        }
+
         [Route("Dashbord/Order/FullInfoOrder")]
         public IActionResult FullInfoOrder(string id, string stasus)
         {
@@ -402,8 +464,8 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    ViewBag.Order = await managerDispatch.CreateShiping();
-                    actionResult = View("CreateOrder");
+                    Shipping shipping = await managerDispatch.CreateShiping();
+                    actionResult = Redirect($"http://localhost:22929/Dashbord/Order/Edit?id={shipping.Id}&stasus=NewLoad");
                 }
                 else
                 {
@@ -455,15 +517,17 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/SavaVech")]
-        public IActionResult SavaVech()
+        public string SavaVech(string idVech, string VIN, string Year, string Make, string Model, string Type, string Color, string LotNumber)
         {
-            IActionResult actionResult = null;
+            string actionResult = null;
             try
             {
                 string key = null;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
+                    managerDispatch.SaveVechi(idVech, VIN, Year, Make, Model, Type,  Color, LotNumber);
+                    actionResult = "Vehicle information saved successfully";
                 }
                 else
                 {
@@ -471,12 +535,71 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = "Unauthorized user cannot change order";
                 }
             }
             catch (Exception)
             {
+                actionResult = "Vehicle information not saved (ERROR)";
+            }
+            return actionResult;
+        }
 
+        [Route("Dashbord/Order/RemoveVech")]
+        public string RemoveVech(string idVech)
+        {
+            string actionResult = null;
+            try
+            {
+                string key = null;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    managerDispatch.RemoveVechi(idVech);
+                    actionResult = "Vehicle information removed successfully";
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = "Unauthorized user cannot change order";
+                }
+            }
+            catch (Exception)
+            {
+                actionResult = "Vehicle information not removed (ERROR)";
+            }
+            return actionResult;
+        }
+
+        [Route("Dashbord/Order/AddVech")]
+        public async Task<string> AddVech(string idOrder)
+        {
+            string actionResult = null;
+            try
+            {
+                string key = null;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    VehiclwInformation vehiclwInformation = await managerDispatch.AddVechi(idOrder);
+                    ViewBag.Vech = vehiclwInformation;
+                    actionResult = "Vehicle information Added successfully";
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = "Unauthorized user cannot change order";
+                }
+            }
+            catch (Exception)
+            {
+                actionResult = "Vehicle information not Added (ERROR)";
             }
             return actionResult;
         }

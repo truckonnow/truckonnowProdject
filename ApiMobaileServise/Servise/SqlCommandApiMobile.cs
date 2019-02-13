@@ -1,9 +1,12 @@
 ﻿using DaoModels.DAO;
 using DaoModels.DAO.Models;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ApiMobaileServise.Servise
 {
@@ -16,15 +19,27 @@ namespace ApiMobaileServise.Servise
             context = new Context();
         }
 
-        public async void SavePhotoInspectionInDb(string idVe, PhotoInspection photoInspection)
+        public async Task<VehiclwInformation> SavePhotoInspectionInDb(string idVe, PhotoInspection photoInspection)
         {
+            context.VehiclwInformation.Load();
+            context.PhotoInspections.Load();
+            context.Damages.Load();
+            context.Photos.Load();
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == idVe);
             if(vehiclwInformation.PhotoInspections == null)
             {
                 vehiclwInformation.PhotoInspections = new List<PhotoInspection>();
             }
+            if(photoInspection.IndexPhoto == 1 && photoInspection.CurrentStatusPhoto == "Picked up")
+            {
+                Photo photo = new Photo();
+                photo.path = $"../Photo/{vehiclwInformation.Id}/scan.png";
+                photo.Base64 = JsonConvert.SerializeObject(File.ReadAllBytes($"../Scans/scan{vehiclwInformation.Type}.png"));
+                vehiclwInformation.Scan = photo;
+            }
             vehiclwInformation.PhotoInspections.Add(photoInspection);
             await context.SaveChangesAsync();
+            return vehiclwInformation;
         }
 
         public Shipping GetShippingInDb(string idShip)

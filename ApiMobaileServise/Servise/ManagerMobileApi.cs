@@ -1,4 +1,5 @@
-﻿using DaoModels.DAO.Models;
+﻿using ApiMobaileServise.Servise.AddDamage;
+using DaoModels.DAO.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -31,9 +32,25 @@ namespace ApiMobaileServise.Servise
             return sqlCommandApiMobile.GetShippingInDb(idShip);
         }
 
-        public void SavePhotoInspection(string idVe, PhotoInspection photoInspection)
+        public async void SavePhotoInspection(string idVe, PhotoInspection photoInspection)
         {
-            sqlCommandApiMobile.SavePhotoInspectionInDb(idVe, photoInspection);
+            VehiclwInformation vehiclwInformation = await sqlCommandApiMobile.SavePhotoInspectionInDb(idVe, photoInspection);
+            ITypeScan typeScan = GetTypeScan(vehiclwInformation.Type);
+            typeScan.SetDamage(photoInspection, vehiclwInformation.Type, vehiclwInformation.Scan.path);
+        }
+
+        private ITypeScan GetTypeScan(string type)
+        {
+            ITypeScan typeScan = null;
+            switch(type)
+            {
+                case "Coupe":
+                    {
+                        typeScan = new CoupeCar();
+                        break;
+                    }
+            }
+            return typeScan;
         }
 
         public void SaveAsk(string idVe, int type, string jsonStrAsk)

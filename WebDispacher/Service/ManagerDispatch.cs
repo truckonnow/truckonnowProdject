@@ -15,6 +15,39 @@ namespace WebDispacher.Service
             _sqlEntityFramworke = new SqlCommadWebDispatch();
         }
 
+        public void DeletedOrder(string id)
+        {
+            _sqlEntityFramworke.RecurentOnDeleted(id);
+        }
+
+        public void ArchvedOrder(string id)
+        {
+            _sqlEntityFramworke.RecurentOnArchived(id);
+        }
+
+        public async void SaveVechi(string idVech, string VIN, string Year, string Make, string Model, string Type, string Color, string LotNumber)
+        {
+            VehiclwInformation vehiclwInformation = new VehiclwInformation();
+            vehiclwInformation.VIN = VIN;
+            vehiclwInformation.Year = Year;
+            vehiclwInformation.Make = Make;
+            vehiclwInformation.Model = Model;
+            vehiclwInformation.Type = Type;
+            vehiclwInformation.Color = Color;
+            vehiclwInformation.Lot = LotNumber;
+            _sqlEntityFramworke.SavevechInDb(idVech, vehiclwInformation);
+        }
+
+        public async void RemoveVechi(string idVech)
+        {
+            _sqlEntityFramworke.RemoveVechInDb(idVech);
+        }
+
+        public async Task<VehiclwInformation> AddVechi(string idOrder)
+        {
+            return await _sqlEntityFramworke.AddVechInDb(idOrder);
+        }
+
         public async Task<Shipping> CreateShiping()
         {
             return await _sqlEntityFramworke.CreateShipping();

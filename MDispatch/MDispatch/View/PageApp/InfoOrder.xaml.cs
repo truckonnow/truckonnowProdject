@@ -1,8 +1,6 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
-using MDispatch.View.AskPhoto.DialogPage;
 using MDispatch.ViewModels.PageAppMV;
-using Rg.Plugins.Popup.Services;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -34,32 +32,15 @@ namespace MDispatch.View.PageApp
             infoOrderMV.ToVehicleDetails(infoOrderMV.Shipping.VehiclwInformations.Find(v => v.Id == id));
         }
 
-        private async void InspectionPickedUp()
-        {
-            if (infoOrderMV.Shipping.VehiclwInformations.Count > 1)
-            {
-                await PopupNavigation.PushAsync(new ConfirrmPage(infoOrderMV), true);
-            }
-            else
-            {
-                infoOrderMV.ToStartInspection();
-            }
-        }
-
-        private async void InspectionDelyvery()
-        {
-            infoOrderMV.ToStartInspectionDelyvery();
-        }
-
         private void Button_Clicked_2(object sender, EventArgs e)
         {
             if(infoOrderMV.Shipping.CurrentStatus == "Assigned")
             {
-                InspectionPickedUp();
+                infoOrderMV.ToStartInspection();
             }
             else if(infoOrderMV.Shipping.CurrentStatus == "Picked up")
             {
-                InspectionDelyvery();
+                infoOrderMV.ToStartInspectionDelyvery();
             }
         }
     }

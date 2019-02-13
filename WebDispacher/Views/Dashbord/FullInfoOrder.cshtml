@@ -21,6 +21,8 @@
                 </tr>
             </thead>
             <tbody>
+                @if (ViewBag.Order.VehiclwInformations != null)
+                {
                 @for (int i = 0; i < ViewBag.Order.VehiclwInformations.Count; i++)
                 {
                     <tr>
@@ -33,6 +35,7 @@
                         <td>@ViewBag.Order.VehiclwInformations[i].Color</td>
                         <td>@ViewBag.Order.VehiclwInformations[i].Lot</td>
                     </tr>
+                }
                 }
             </tbody>
         </table>

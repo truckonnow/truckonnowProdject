@@ -24,6 +24,28 @@ namespace WebDispacher.Dao
             context.Drivers.Load();
         }
 
+        public async void RecurentOnDeleted(string id)
+        {
+            context.Shipping.Load();
+            Shipping shipping = await context.Shipping.FirstOrDefaultAsync(s => s.Id == id);
+            if(shipping != null)
+            {
+                shipping.CurrentStatus = "Deleted";
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public async void RecurentOnArchived(string id)
+        {
+            context.Shipping.Load();
+            Shipping shipping = await context.Shipping.FirstOrDefaultAsync(s => s.Id == id);
+            if (shipping != null)
+            {
+                shipping.CurrentStatus = "Archived";
+                await context.SaveChangesAsync();
+            }
+        }
+
         public Shipping GetShipingCurrentVehiclwInDb(string id)
         {
             context.Shipping.Load();
@@ -34,10 +56,45 @@ namespace WebDispacher.Dao
             return context.Shipping.FirstOrDefault(s => s.VehiclwInformations.FirstOrDefault(v => v == vehiclwInformation) != null);
         }
 
+        public async void SavevechInDb(string idVech, VehiclwInformation vehiclwInformation)
+        {
+            VehiclwInformation vehiclwInformationDb = await context.VehiclwInformation.FirstOrDefaultAsync(v => v.Id.ToString() == idVech);
+            vehiclwInformationDb.VIN = vehiclwInformation.VIN;
+            vehiclwInformationDb.Year = vehiclwInformation.Year;
+            vehiclwInformationDb.Make = vehiclwInformation.Make;
+            vehiclwInformationDb.Model = vehiclwInformation.Model;
+            vehiclwInformationDb.Type = vehiclwInformation.Type;
+            vehiclwInformationDb.Color = vehiclwInformation.Color;
+            vehiclwInformationDb.Lot = vehiclwInformation.Lot;
+            await context.SaveChangesAsync();
+        }
+
+        public async void RemoveVechInDb(string idVech)
+        {
+            context.VehiclwInformation.Remove(await context.VehiclwInformation.FirstOrDefaultAsync(v => v.Id.ToString() == idVech));
+            await context.SaveChangesAsync();
+        }
+
+        public async Task<VehiclwInformation> AddVechInDb(string idOrder)
+        {
+            context.Shipping.Load();
+            context.VehiclwInformation.Load();
+            Shipping shipping = await context.Shipping.FirstOrDefaultAsync(s => s.Id.ToString() == idOrder);
+            VehiclwInformation vehiclwInformation = new VehiclwInformation();
+            if(shipping.VehiclwInformations == null)
+            {
+                shipping.VehiclwInformations = new List<VehiclwInformation>();
+            }
+            shipping.VehiclwInformations.Add(vehiclwInformation);
+            await context.SaveChangesAsync();
+            return vehiclwInformation;
+        }
+
         public async Task<Shipping> CreateShipping()
         {
             Shipping shipping = new Shipping();
             shipping.Id = CreateIdShipping().ToString();
+            shipping.CurrentStatus = "NewLoad";
             context.Shipping.Add(shipping);
             await context.SaveChangesAsync();
             Shipping shipping1 = context.Shipping.FirstOrDefault(s => s.Id == shipping.Id);

@@ -12,13 +12,17 @@
     <div class="filling">
         @for (int i = 0; i < ViewBag.Orders.Count; i++)
         {
-            <div class="orders">
-                <input class="btnId" type="button" value="Load Id: @ViewBag.Orders[i].Id" onClick='location.href="/Dashbord/Order/FullInfoOrder?id=@ViewBag.Orders[i].Id&stasus=Delivered"'>
-                <span class="stPData">@ViewBag.Orders[i].TotalPaymentToCarrier</span>
+        <div class="orders">
+            <input class="btnId" type="button" value="Load Id: @ViewBag.Orders[i].Id" onClick='location.href="/Dashbord/Order/FullInfoOrder?id=@ViewBag.Orders[i].Id&stasus=Delivered"'>
+            <span class="stPData">@ViewBag.Orders[i].TotalPaymentToCarrier</span>
+
+            @if (ViewBag.Orders[i].VehiclwInformations != null)
+            {
                 @for (int j = 0; j < ViewBag.Orders[i].VehiclwInformations.Count; j++)
                 {
                     <p class="stPData"> @ViewBag.Orders[i].VehiclwInformations[j].Year @ViewBag.Orders[i].VehiclwInformations[j].Make @ViewBag.Orders[i].VehiclwInformations[j].Model, Type: @ViewBag.Orders[i].VehiclwInformations[j].Type</p>
                 }
+            }
                 <div class="bodyBlock">
                     <div class="blockData">
                         <h5 class="headPH4">ORIGIN</h5>
@@ -39,7 +43,7 @@
                         <p class="stPData">Phone: @ViewBag.Orders[i].PhoneD</p>
                     </div>
                     <div class="blockData" style="margin-left:auto;">
-                        <a class="btnId" style="width:100px" href="/Dashbord/Order/Edit?id=@ViewBag.Orders[i].Id&stasus=Delivered">Edit</a>
+                        <a class="btnId" style="width:60px" href="/Dashbord/Order/Edit?id=@ViewBag.Orders[i].Id&stasus=Delivered">Edit</a>
                         <select class="btnId" style="width:100px">
                             <option value="">-----------------------</option>
                             @for (int j = 0; j < ViewBag.Drivers.Count; j++)
@@ -47,6 +51,11 @@
                                 <option value="@ViewBag.Drivers[j].FullName">@ViewBag.Drivers[j].FullName</option>
                             }
                         </select>
+                        <a class="btnId" style="width:60px" href="DeletedOrder?id=@ViewBag.Orders[i].Id&status=Delivered">Deleted</a>
+                        <div style="display:flex">
+                            <p class="stPData">Assigned to @ViewBag.Orders[i].Driverr.FullName</p>
+                            <p class="stPData">Phone: @ViewBag.Orders[i].Driverr.PhoneNumber</p>
+                        </div>
                     </div>
                 </div>
             </div>
