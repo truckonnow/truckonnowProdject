@@ -22,6 +22,7 @@ namespace ApiMobaileServise.Servise
         public async Task<VehiclwInformation> SavePhotoInspectionInDb(string idVe, PhotoInspection photoInspection)
         {
             context.VehiclwInformation.Load();
+            context.Asks.Load();
             context.PhotoInspections.Load();
             context.Damages.Load();
             context.Photos.Load();
@@ -30,11 +31,11 @@ namespace ApiMobaileServise.Servise
             {
                 vehiclwInformation.PhotoInspections = new List<PhotoInspection>();
             }
-            if(photoInspection.IndexPhoto == 1 && photoInspection.CurrentStatusPhoto == "Picked up")
+            if(photoInspection.IndexPhoto == 1 && photoInspection.CurrentStatusPhoto == "PikedUp")
             {
                 Photo photo = new Photo();
                 photo.path = $"../Photo/{vehiclwInformation.Id}/scan.png";
-                photo.Base64 = JsonConvert.SerializeObject(File.ReadAllBytes($"../Scans/scan{vehiclwInformation.Type}.png"));
+                photo.Base64 = JsonConvert.SerializeObject(File.ReadAllBytes($"../Scans/scan{vehiclwInformation.Ask.TypeVehicle}.png"));
                 vehiclwInformation.Scan = photo;
             }
             vehiclwInformation.PhotoInspections.Add(photoInspection);

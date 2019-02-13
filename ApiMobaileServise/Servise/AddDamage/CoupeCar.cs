@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using DaoModels.DAO.Models;
 
 namespace ApiMobaileServise.Servise.AddDamage
@@ -42,17 +43,28 @@ namespace ApiMobaileServise.Servise.AddDamage
 
         public void SetDamage(PhotoInspection photoInspection, string typrCar, string pathScan)
         {
-            foreach (var damage in photoInspection.Damages)
+            if (photoInspection.Damages != null)
             {
-                Image img1 = Bitmap.FromFile(pathScan);
-                Image img2 = Bitmap.FromFile($"Damage{damage.TypeCurrentStatus}{damage.IndexDamage}.png");
-                img2 = img2.GetThumbnailImage(15, 15, null, IntPtr.Zero);
-                Bitmap res = new Bitmap(img1.Width, img1.Height);
-                Graphics g = Graphics.FromImage(res);
-                int x = GetCordinatX(photoInspection.IndexPhoto.ToString(), damage.XInterest);
-                int y = GetCordinatX(photoInspection.IndexPhoto.ToString(), damage.YInterest);
-                g.DrawImage(img1, 0, 0);
-                g.DrawImage(img2, x, y);
+                foreach (var damage in photoInspection.Damages)
+                {
+                    Image img1 = Bitmap.FromFile(pathScan);
+                    Image img2 = Bitmap.FromFile($"../Damages/Damage{damage.TypeCurrentStatus}{damage.IndexDamage}.png");
+                    img2 = img2.GetThumbnailImage(15, 15, null, IntPtr.Zero);
+                    Bitmap res = new Bitmap(img1.Width, img1.Height);
+                    Graphics g = Graphics.FromImage(res);
+                    int x = GetCordinatX(photoInspection.IndexPhoto.ToString(), damage.XInterest);
+                    int y = GetCordinatY(photoInspection.IndexPhoto.ToString(), damage.YInterest);
+                    g.DrawImage(img1, 0, 0);
+                    g.DrawImage(img2, 200, 200);
+                    string tempPath = pathScan + "1";
+                    res.Save($"{pathScan.Replace(".png", "")}1.png");
+                    img1.Dispose();
+                    res.Dispose();
+                    g.Dispose();
+                    img1 = null;
+                    res = null;
+                    g = null;
+                }
             }
         }
     }

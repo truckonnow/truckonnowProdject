@@ -191,6 +191,7 @@ namespace MDispatch.View.AskPhoto
         {
             isAsk11 = true;
             askPageMV.Ask.TypeVehicle = (string)e.NewItem;
+            askPageMV.VehiclwInformation.Type = askPageMV.Ask.TypeVehicle;
         }
         #endregion
 

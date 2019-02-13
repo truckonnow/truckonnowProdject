@@ -35,8 +35,10 @@ namespace ApiMobaileServise.Servise
         public async void SavePhotoInspection(string idVe, PhotoInspection photoInspection)
         {
             VehiclwInformation vehiclwInformation = await sqlCommandApiMobile.SavePhotoInspectionInDb(idVe, photoInspection);
-            ITypeScan typeScan = GetTypeScan(vehiclwInformation.Type);
+            ITypeScan typeScan = GetTypeScan(vehiclwInformation.Ask.TypeVehicle);
             typeScan.SetDamage(photoInspection, vehiclwInformation.Type, vehiclwInformation.Scan.path);
+            File.Delete(vehiclwInformation.Scan.path);
+            File.Move($"{vehiclwInformation.Scan.path.Replace(".png", "")}1.png", vehiclwInformation.Scan.path);
         }
 
         private ITypeScan GetTypeScan(string type)
