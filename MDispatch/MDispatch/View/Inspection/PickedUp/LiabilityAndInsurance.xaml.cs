@@ -1,12 +1,9 @@
 ﻿using MDispatch.Models;
-using MDispatch.NewElement.ImageSize;
 using MDispatch.NewElement.TouchCordinate;
 using MDispatch.Service;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
-using MDispatch.ViewModels.InspectionMV.PickedUpMV.TypeVe;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -15,7 +12,7 @@ using static MDispatch.Service.ManagerDispatchMob;
 
 namespace MDispatch.View.Inspection.PickedUp
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class LiabilityAndInsurance : ContentPage
 	{
         private LiabilityAndInsuranceMV liabilityAndInsuranceMV = null;
@@ -126,7 +123,7 @@ namespace MDispatch.View.Inspection.PickedUp
                             }
                         }
                     });
-                    await InitDamage();
+                    //await InitDamage();
                     VechInfoSt1.Children.Add(new StackLayout()
                     {
                         Orientation = StackOrientation.Horizontal,
@@ -213,45 +210,6 @@ namespace MDispatch.View.Inspection.PickedUp
         {
             isSignatureAsk = false;
             liabilityAndInsuranceMV.SigPhoto = null;
-        }
-
-        private async Task InitDamage()
-        {
-            foreach(var vehiclwInformation in liabilityAndInsuranceMV.Shipping.VehiclwInformations)
-            {
-                AbsoluteLayout absoluteLayout = new AbsoluteLayout();
-                TouchImage image = new TouchImage()
-                {
-                    Source = "scan.png",
-                };
-                image.TouchAction += Touch;
-                AbsoluteLayout.SetLayoutFlags(image, AbsoluteLayoutFlags.All);
-                AbsoluteLayout.SetLayoutBounds(image, new Rectangle(0.5, 0.5, 1, 1));
-                absoluteLayout.Children.Add(image);
-                VechInfoSt3.Children.Add(absoluteLayout);
-                //foreach (var photoInspection in vehiclwInformation.PhotoInspections)
-                //{
-                //    if (photoInspection.Damages != null)
-                //    {
-                //        foreach (var damage in photoInspection.Damages)
-                //        {
-                //            ITypeScan typeScan = new TestCar();
-                //            double x = typeScan.GetCordinatX(photoInspection.IndexPhoto.ToString(), damage.XInterest);
-                //            double y = typeScan.GetCordinatY(photoInspection.IndexPhoto.ToString(), damage.YInterest);
-                //            if (x != 0 && y != 0 )
-                //            {
-                //                Image image1 = new Image()
-                //                {
-                //                    Source = $"Damage{damage.TypeCurrentStatus}{damage.IndexDamage}.png"
-                //                };
-                //                AbsoluteLayout.SetLayoutFlags(image1, AbsoluteLayoutFlags.PositionProportional);
-                //                AbsoluteLayout.SetLayoutBounds(image1, new Rectangle(x, y, 10, 10));
-                //                absoluteLayout.Children.Add(image1);
-                //            }
-                //        }
-                //    }
-                //}
-            }
         }
 
         private void Touch(object sender, TouchActionEventArgs args)

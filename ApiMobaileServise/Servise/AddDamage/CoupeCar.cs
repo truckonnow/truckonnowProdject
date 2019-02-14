@@ -14,7 +14,7 @@ namespace ApiMobaileServise.Servise.AddDamage
             if (maxMinForYAndX != null)
             {
                 int differenceX = maxMinForYAndX[2] - maxMinForYAndX[0];
-                x1 = Convert.ToInt32(Math.Round((differenceX * x) + maxMinForYAndX[1], 0)); ;
+                x1 = Convert.ToInt32(Math.Round((differenceX * x) + maxMinForYAndX[0], 0));
             }
             return x1;
         }
@@ -34,9 +34,25 @@ namespace ApiMobaileServise.Servise.AddDamage
         public int[] GetMaxMinForYAndX(string indexPhoto)
         {
             int[] maxMinForYAndX = null;
-            if (indexPhoto == "1")
+            if (indexPhoto == "2")
             {
-                maxMinForYAndX = new int[] { 78, 23, 237, 39 };
+                maxMinForYAndX = new int[] { 900, 200, 150, 1 };
+            }
+            else if(indexPhoto == "3")
+            {
+                maxMinForYAndX = new int[] { 800, 147, 580, 14 };
+            }
+            else if (indexPhoto == "4")
+            {
+                maxMinForYAndX = new int[] { 900, 140, 750, 14 };
+            }
+            else if (indexPhoto == "5")
+            {
+                maxMinForYAndX = new int[] { 635, 200, 330, 14 };
+            }
+            else if (indexPhoto == "6")
+            {
+                maxMinForYAndX = new int[] { 400, 205, 140, 17 };
             }
             return maxMinForYAndX;
         }
@@ -52,10 +68,10 @@ namespace ApiMobaileServise.Servise.AddDamage
                     img2 = img2.GetThumbnailImage(15, 15, null, IntPtr.Zero);
                     Bitmap res = new Bitmap(img1.Width, img1.Height);
                     Graphics g = Graphics.FromImage(res);
-                    int x = GetCordinatX(photoInspection.IndexPhoto.ToString(), damage.XInterest);
-                    int y = GetCordinatY(photoInspection.IndexPhoto.ToString(), damage.YInterest);
+                    int x = GetCordinatX(photoInspection.IndexPhoto.ToString(), damage.XInterest, img1.Width, img1.Height);
+                    int y = GetCordinatY(photoInspection.IndexPhoto.ToString(), damage.YInterest, img1.Width, img1.Height);
                     g.DrawImage(img1, 0, 0);
-                    g.DrawImage(img2, 200, 200);
+                    g.DrawImage(img2, x, y);
                     string tempPath = pathScan + "1";
                     res.Save($"{pathScan.Replace(".png", "")}1.png");
                     img1.Dispose();

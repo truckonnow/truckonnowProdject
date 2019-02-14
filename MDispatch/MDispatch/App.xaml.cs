@@ -2,9 +2,7 @@ using MDispatch.View.A_R;
 using MDispatch.View.TabPage;
 using Plugin.Settings;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
-[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MDispatch
 {
     public partial class App : Application
