@@ -39,8 +39,6 @@ namespace ApiMobaileServise.Servise
             typeScan.SetDamage(photoInspection, vehiclwInformation.Type, vehiclwInformation.Scan.path);
             try
             {
-                File.Delete(vehiclwInformation.Scan.path);
-                File.Move($"{vehiclwInformation.Scan.path.Replace(".png", "")}1.png", vehiclwInformation.Scan.path);
             }
             catch
             { }

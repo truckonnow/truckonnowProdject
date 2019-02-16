@@ -54,6 +54,34 @@ namespace ApiMobaileServise.Servise.AddDamage
             {
                 maxMinForYAndX = new int[] { 400, 205, 140, 17 };
             }
+            else if (indexPhoto == "7")
+            {
+                maxMinForYAndX = new int[] { 150, 370, 900, 610 };
+            }
+            else if (indexPhoto == "8")
+            {
+                maxMinForYAndX = new int[] { 750, 460, 900, 580 };
+            }
+            else if (indexPhoto == "9")
+            {
+                maxMinForYAndX = new int[] { 580, 470, 800, 580 };
+            }
+            else if (indexPhoto == "10")
+            {
+                maxMinForYAndX = new int[] { 330, 370, 635, 580 };
+            }
+            else if (indexPhoto == "11")
+            {
+                maxMinForYAndX = new int[] { 140, 405, 400, 580 };
+            }
+            else if (indexPhoto == "12")
+            {
+                maxMinForYAndX = new int[] { 335, 120, 205, 1 };
+            }
+            else if (indexPhoto == "13")
+            {
+                maxMinForYAndX = new int[] { 335, 120, 205, 490 };
+            }
             return maxMinForYAndX;
         }
 
@@ -68,8 +96,8 @@ namespace ApiMobaileServise.Servise.AddDamage
                     img2 = img2.GetThumbnailImage(15, 15, null, IntPtr.Zero);
                     Bitmap res = new Bitmap(img1.Width, img1.Height);
                     Graphics g = Graphics.FromImage(res);
-                    int x = GetCordinatX(photoInspection.IndexPhoto.ToString(), damage.XInterest, img1.Width, img1.Height);
-                    int y = GetCordinatY(photoInspection.IndexPhoto.ToString(), damage.YInterest, img1.Width, img1.Height);
+                    int x = GetCordinatX(photoInspection.IndexPhoto.ToString(), damage.XInterest);
+                    int y = GetCordinatY(photoInspection.IndexPhoto.ToString(), damage.YInterest);
                     g.DrawImage(img1, 0, 0);
                     g.DrawImage(img2, x, y);
                     string tempPath = pathScan + "1";
@@ -80,6 +108,8 @@ namespace ApiMobaileServise.Servise.AddDamage
                     img1 = null;
                     res = null;
                     g = null;
+                    File.Delete(pathScan);
+                    File.Move($"{pathScan.Replace(".png", "")}1.png", pathScan);
                 }
             }
         }
