@@ -1,8 +1,10 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
+using MDispatch.View.ServiceView.ResizeImage;
 using MDispatch.ViewModels.PageAppMV.VehicleDetals;
 using System;
 using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,6 +14,7 @@ namespace MDispatch.View.PageApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class VechicleDetails : ContentPage
     {
+
         VehicleDetailsMV vehicleDetailsMV = null;
 
         public VechicleDetails(VehiclwInformation vehiclwInformation, ManagerDispatchMob managerDispatchMob)
@@ -43,106 +46,139 @@ namespace MDispatch.View.PageApp
 
         private void AddBlocDocumentPhoto(VehiclwInformation vehiclwInformation)
         {
-            foreach (var document in vehiclwInformation.Ask.Any_paperwork_or_documentation)
+            if (vehiclwInformation.Ask.Any_paperwork_or_documentation != null)
             {
-                blockDocument.Children.Add(new Image()
+                foreach (var document in vehiclwInformation.Ask.Any_paperwork_or_documentation)
                 {
-                    Source = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(document.Base64))),
-                    HeightRequest = 100,
-                    WidthRequest = 100,
-                    Margin = 3
-                });
+                    blockDocument.Children.Add(new Image()
+                    {
+                        Source = ImageSource.FromStream(() => new MemoryStream(ResizeImage(document.Base64))),
+                        HeightRequest = 100,
+                        WidthRequest = 100,
+                        Margin = 3
+                    });
+                }
             }
         }
 
         private void AddBlocItemPhoto(VehiclwInformation vehiclwInformation)
         {
-            foreach (var item in vehiclwInformation.Ask.Any_personal_or_additional_items_with_or_in_vehicle)
+            if (vehiclwInformation.Ask.Any_personal_or_additional_items_with_or_in_vehicle != null)
             {
-                blockItems.Children.Add(new Image()
+                foreach (var item in vehiclwInformation.Ask.Any_personal_or_additional_items_with_or_in_vehicle)
                 {
-                    Source = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(item.Base64))),
-                    HeightRequest = 100,
-                    WidthRequest = 100,
-                    Margin = 3
-                });
+                    blockItems.Children.Add(new Image()
+                    {
+                        Source = ImageSource.FromStream(() => new MemoryStream(ResizeImage(item.Base64))),
+                        HeightRequest = 100,
+                        WidthRequest = 100,
+                        Margin = 3
+                    });
+                }
             }
         }
 
         private void AddBlocBeen(VehiclwInformation vehiclwInformation)
         {
-            foreach (var item in vehiclwInformation.Ask1.Any_additional_parts_been_given_to_you)
+            if (vehiclwInformation.Ask1.Any_additional_parts_been_given_to_you != null)
             {
-                blockBeen.Children.Add(new Image()
+                foreach (var item in vehiclwInformation.Ask1.Any_additional_parts_been_given_to_you)
                 {
-                    Source = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(item.Base64))),
-                    HeightRequest = 100,
-                    WidthRequest = 100,
-                    Margin = 3
-                });
+                    blockBeen.Children.Add(new Image()
+                    {
+                        Source = ImageSource.FromStream(() => new MemoryStream(ResizeImage(item.Base64))),
+                        HeightRequest = 100,
+                        WidthRequest = 100,
+                        Margin = 3
+                    });
+                }
             }
         }
 
         private void AddBlocDocumentationBeen(VehiclwInformation vehiclwInformation)
         {
-            foreach (var item in vehiclwInformation.Ask1.Any_additional_documentation_been_given_after_loading)
+            if (vehiclwInformation.Ask1.Any_additional_documentation_been_given_after_loading != null)
             {
-                blockDocumentationBeen.Children.Add(new Image()
+                foreach (var item in vehiclwInformation.Ask1.Any_additional_documentation_been_given_after_loading)
                 {
-                    Source = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(item.Base64))),
-                    HeightRequest = 100,
-                    WidthRequest = 100,
-                    Margin = 3
-                });
+                    blockDocumentationBeen.Children.Add(new Image()
+                    {
+                        Source = ImageSource.FromStream(() => new MemoryStream(ResizeImage(item.Base64))),
+                        HeightRequest = 100,
+                        WidthRequest = 100,
+                        Margin = 3
+                    });
+                }
             }
         }
 
         private void AddBlocSeatBelts(VehiclwInformation vehiclwInformation)
         {
-            foreach (var item in vehiclwInformation.Ask1.App_will_force_driver_to_take_pictures_of_each_strap)
+            if (vehiclwInformation.Ask1.App_will_force_driver_to_take_pictures_of_each_strap != null)
             {
-                blockSeatBelts.Children.Add(new Image()
+                foreach (var item in vehiclwInformation.Ask1.App_will_force_driver_to_take_pictures_of_each_strap)
                 {
-                    Source = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(item.Base64))),
-                    HeightRequest = 100,
-                    WidthRequest = 100,
-                    Margin = 3
-                });
+                    blockSeatBelts.Children.Add(new Image()
+                    {
+                        Source = ImageSource.FromStream(() => new MemoryStream(ResizeImage(item.Base64))),
+                        HeightRequest = 100,
+                        WidthRequest = 100,
+                        Margin = 3
+                    });
+                }
             }
         }
 
         private void AddBlocTakePictures(VehiclwInformation vehiclwInformation)
         {
-            foreach (var item in vehiclwInformation.Ask1.Photo_after_loading_in_the_truck)
+            if (vehiclwInformation.Ask1.Photo_after_loading_in_the_truck != null)
             {
-                blockTakePictures.Children.Add(new Image()
+                foreach (var item in vehiclwInformation.Ask1.Photo_after_loading_in_the_truck)
                 {
-                    Source = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(item.Base64))),
-                    HeightRequest = 100,
-                    WidthRequest = 100,
-                    Margin = 3
-                });
+                    blockTakePictures.Children.Add(new Image()
+                    {
+                        Source = ImageSource.FromStream(() => new MemoryStream(ResizeImage(item.Base64))),
+                        HeightRequest = 100,
+                        WidthRequest = 100,
+                        Margin = 3
+                    });
+                }
             }
         }
 
         private void AddBlocInspectionPhoto(VehiclwInformation vehiclwInformation)
         {
-            foreach (var item in vehiclwInformation.PhotoInspections)
+            if (vehiclwInformation.PhotoInspections != null)
             {
-                if (item.CurrentStatusPhoto == "PikedUp")
+                foreach (var item in vehiclwInformation.PhotoInspections)
                 {
-                    foreach (var photo in item.Photos)
+                    if (item.CurrentStatusPhoto == "PikedUp")
                     {
-                        blockPhotoInspection.Children.Add(new Image()
+                        foreach (var photo in item.Photos)
                         {
-                            Source = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(photo.Base64))),
-                            HeightRequest = 70,
-                            WidthRequest = 70,
-                            Margin = 3
-                        });
+                            blockPhotoInspection.Children.Add(new Image()
+                            {
+                                Source = ImageSource.FromStream(() => new MemoryStream(ResizeImage(photo.Base64))),
+                                HeightRequest = 70,
+                                WidthRequest = 70,
+                                Margin = 3
+                            });
+                        }
                     }
                 }
             }
+        }
+
+        protected byte[] ResizeImage(string base64)
+        {
+            var assembly = typeof(VechicleDetails).GetTypeInfo().Assembly;
+            byte[] imageData;
+
+            using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(base64)))
+            {
+                imageData = ms.ToArray();
+            }
+            return DependencyService.Get<IResizeImage>().ResizeImage(imageData, 400, 400);
         }
     }
 }

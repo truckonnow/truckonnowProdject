@@ -49,6 +49,7 @@ namespace ApiMobaileServise.Servise
             context.Shipping.Load();
             context.VehiclwInformation.Load();
             context.Damages.Load();
+            context.Photos.Load();
             return context.Shipping.FirstOrDefault(v => v.Id.ToString() == idShip);
         }
 

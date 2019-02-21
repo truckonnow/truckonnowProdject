@@ -16,7 +16,12 @@ namespace MDispatch.Droid.NewrRender.Orientation
 
         public void ForceSensor()
         {
-            ((Activity)Forms.Context).RequestedOrientation = ScreenOrientation.Sensor;
+            ((Activity)Forms.Context).RequestedOrientation = ScreenOrientation.FullSensor;
+        }
+
+        public void ForcePortrait()
+        {
+            ((Activity)Forms.Context).RequestedOrientation = ScreenOrientation.Portrait;
         }
     }
 }

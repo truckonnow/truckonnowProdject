@@ -40,6 +40,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             {
                 Car = GetTypeCar(typeCar);
             }
+            Car.OrintableScreen(InderxPhotoInspektion);
             IdShip = idShip;
         }
 
@@ -198,6 +199,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             {
                 if (InderxPhotoInspektion < 39)
                 {
+                    Car.OrintableScreen(InderxPhotoInspektion);
                     await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", Car.typeIndex, InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate));
                     Navigation.RemovePage(Navigation.NavigationStack[2]);
                 }

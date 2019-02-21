@@ -2,7 +2,6 @@
 using MDispatch.View.TabPage.Tab;
 using MDispatch.ViewModels.TAbbPage;
 using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;
 
@@ -18,7 +17,7 @@ namespace MDispatch.View.TabPage
             tablePageMV = new TablePageMV(managerDispatchMob);
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-            On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
+            On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
             BindingContext = this.tablePageMV;
             InitActivePage(managerDispatchMob);
             InitDeiveredPage(managerDispatchMob);

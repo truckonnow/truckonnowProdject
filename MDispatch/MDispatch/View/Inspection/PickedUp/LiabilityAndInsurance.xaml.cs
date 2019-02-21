@@ -123,7 +123,12 @@ namespace MDispatch.View.Inspection.PickedUp
                             }
                         }
                     });
-                    //await InitDamage();
+
+                    VechInfoSt3.Children.Add(new Image()
+                    {
+                        Source = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(VehiclwInformation.Scan.Base64)))
+                    });
+
                     VechInfoSt1.Children.Add(new StackLayout()
                     {
                         Orientation = StackOrientation.Horizontal,

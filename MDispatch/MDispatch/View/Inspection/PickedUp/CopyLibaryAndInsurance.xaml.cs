@@ -16,6 +16,7 @@ namespace MDispatch.View.Inspection.PickedUp
 			InitializeComponent ();
             BindingContext = this.liabilityAndInsuranceMV;
 		}
+
         private void Button_Clicked(object sender, EventArgs e)
         {
             blockEmaile.IsVisible = true;

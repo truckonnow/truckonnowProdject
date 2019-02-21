@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace ApiMobaileServise.Servise
 {
@@ -32,16 +33,14 @@ namespace ApiMobaileServise.Servise
             return sqlCommandApiMobile.GetShippingInDb(idShip);
         }
 
-        public async void SavePhotoInspection(string idVe, PhotoInspection photoInspection)
+        public void SavePhotoInspection(string idVe, PhotoInspection photoInspection)
         {
-            VehiclwInformation vehiclwInformation = await sqlCommandApiMobile.SavePhotoInspectionInDb(idVe, photoInspection);
-            ITypeScan typeScan = GetTypeScan(vehiclwInformation.Ask.TypeVehicle);
-            typeScan.SetDamage(photoInspection, vehiclwInformation.Type, vehiclwInformation.Scan.path);
-            try
+            Task.Run( async() =>
             {
-            }
-            catch
-            { }
+                VehiclwInformation vehiclwInformation = await sqlCommandApiMobile.SavePhotoInspectionInDb(idVe, photoInspection);
+                ITypeScan typeScan = GetTypeScan(vehiclwInformation.Ask.TypeVehicle);
+                typeScan.SetDamage(photoInspection, vehiclwInformation.Type, vehiclwInformation.Scan.path);
+            });
         }
 
         private ITypeScan GetTypeScan(string type)

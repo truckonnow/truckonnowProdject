@@ -4,5 +4,6 @@
     {
         void ForceLandscape();
         void ForceSensor();
+        void ForcePortrait();
     }
 }

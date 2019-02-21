@@ -113,10 +113,8 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
             else if (state == 3)
             {
-                Task.Run(() =>
-                {
+               
                     Continue();
-                });
             }
             else if (state == 4)
             {

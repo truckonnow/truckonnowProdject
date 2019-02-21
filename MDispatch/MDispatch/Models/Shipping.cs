@@ -167,5 +167,46 @@ namespace MDispatch.Models
             }
         }
 
+        public string IcoStatus
+        {
+            get
+            {
+                string ico = "";
+                if(CurrentStatus == "Assigned")
+                {
+                    ico = "newOrder.png";
+                }
+                else if(CurrentStatus == "Picked up")
+                {
+                    ico = "pickedUpOrder1.png";
+                }
+                else if(CurrentStatus == "Delyvery")
+                {
+                    ico = "deliveredOrder.png";
+                }
+                return ico;
+            }
+        }
+
+        public string IcoViewStatus
+        {
+            get
+            {
+                string ico = "";
+                if (CurrentStatus == "Assigned")
+                {
+                    ico = "newViewOrder.png";
+                }
+                else if (CurrentStatus == "Picked up")
+                {
+                    ico = "pickedUpViewOrder.png";
+                }
+                else if (CurrentStatus == "Delyvery")
+                {
+                    ico = "deliveredViewOrder.png";
+                }
+                return ico;
+            }
+        }
     }
 }

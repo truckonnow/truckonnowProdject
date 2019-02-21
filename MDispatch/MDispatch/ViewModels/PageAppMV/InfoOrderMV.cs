@@ -101,7 +101,6 @@ namespace MDispatch.ViewModels.PageAppMV
                 else if (photoInspections == null)
                 {
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", vehiclwInformation));
-                    DependencyService.Get<IOrientationHandler>().ForceLandscape();
                     await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 1, initDasbordDelegate, getVechicleDelegate), true);
                     return;
                 }
@@ -109,7 +108,6 @@ namespace MDispatch.ViewModels.PageAppMV
                 {
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", vehiclwInformation));
                     int lastIndexPhoto = vehiclwInformation.PhotoInspections[vehiclwInformation.PhotoInspections.Count - 1].IndexPhoto + 1;
-                    DependencyService.Get<IOrientationHandler>().ForceLandscape();
                     await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{lastIndexPhoto}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), lastIndexPhoto, initDasbordDelegate, getVechicleDelegate), true);
                     return;
                 }
