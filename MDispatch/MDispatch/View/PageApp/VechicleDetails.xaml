@@ -15,67 +15,48 @@
                     <Label Text="VIN:" FontSize="18" />
                     <Label Text="{Binding VehiclwInformation.VIN}" FontSize="18" TextColor="Black" />
                 </StackLayout>
-                <BoxView HeightRequest="1" BackgroundColor="#D8D8D8" Margin="1"/>
                 <StackLayout Margin="10">
                     <Label Text="Picked Up Information" FontSize="20" TextColor="Black" />
                     <BoxView HeightRequest="1" BackgroundColor="#D8D8D8" Margin="2"/>
                     <StackLayout>
-                        <FlexLayout Wrap="Wrap">
-                            <StackLayout  Orientation="Horizontal" Margin="2" >
-                                <Label Text="Light Brightness: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Lightbrightness}" />
-                            </StackLayout>
-                            <StackLayout  Orientation="Horizontal" Margin="2">
-                                <Label Text="Vehicle: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Vehicle}" />
-                            </StackLayout>
+                        <FlexLayout  Margin="1" >
+                            <Label Text="Light Brightness: " FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Lightbrightness}" FlexLayout.Grow="1" />
+                            <Label Text="Vehicle: " FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Vehicle}" FlexLayout.Grow="1"/>
                         </FlexLayout>
-
-                        <FlexLayout JustifyContent="SpaceBetween" Wrap="Wrap">
-                            <StackLayout  Orientation="Horizontal" Margin="2">
-                                <Label Text="Weather Conditions: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Weather_conditions}" />
-                            </StackLayout>
-                            <StackLayout  Orientation="Horizontal" Margin="2">
-                                <Label Text="Exact Mileage: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Exact_Mileage}" />
-                            </StackLayout>
+                        <BoxView BackgroundColor="Silver" HeightRequest="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Weather Conditions: " FontSize="16" FlexLayout.Grow="3" />
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Weather_conditions}" FlexLayout.Grow="1" />
+                            <Label Text="Exact Mileage: " FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Exact_Mileage}" FlexLayout.Grow="1" />
                         </FlexLayout>
-
-                        <FlexLayout JustifyContent="SpaceBetween" Wrap="Wrap">
-                            <StackLayout  Orientation="Horizontal" Margin="2" >
-                                <Label Text="Does The vehicle Starts: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Does_The_vehicle_Starts}" />
-                            </StackLayout>
-                            <StackLayout  Orientation="Horizontal" Margin="2">
-                                <Label Text="Does The vehicle Drives: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Does_The_vehicle_Drives}" />
-                            </StackLayout>
+                        <BoxView BackgroundColor="Silver" HeightRequest="1"/>
+                        <FlexLayout   Margin="1" >
+                            <Label Text="Does The vehicle Starts: " FontSize="16" FlexLayout.Grow="4"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Does_The_vehicle_Starts}" FlexLayout.Grow="1" />
+                            <Label Text="Plate# " FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Plate}" FlexLayout.Grow="1"/>
                         </FlexLayout>
-
-                        <FlexLayout JustifyContent="SpaceBetween" Wrap="Wrap">
-                            <StackLayout  Orientation="Horizontal" Margin="2" >
-                                <Label Text="Anyone Rushing you to perform the inspection: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Anyone_Rushing_you_to_perform_the_inspection}" />
-                            </StackLayout>
-                            <StackLayout  Orientation="Horizontal" Margin="2">
-                                <Label Text="How far is the vehicle from Trailer Approx in ft: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.How_far_is_the_vehicle_from_Trailer_Aprox_in_ft}" />
-                            </StackLayout>
+                        <BoxView BackgroundColor="Silver" HeightRequest="1"/>
+                        <FlexLayout  Margin="1">
+                            <Label Text="Does The vehicle Drives: " FontSize="16" FlexLayout.Grow="4"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Does_The_vehicle_Drives}" FlexLayout.Grow="1" />
+                            <Label Text="Type Vehicle: " FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.TypeVehicle}" FlexLayout.Grow="1" />
                         </FlexLayout>
-
-                        <FlexLayout JustifyContent="SpaceBetween" Wrap="Wrap">
-                            <StackLayout  Orientation="Horizontal" Margin="2" >
-                                <Label Text="Plate# " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Plate}" />
-                            </StackLayout>
-                            <StackLayout  Orientation="Horizontal" Margin="2">
-                                <Label Text="Type Vehicle: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.TypeVehicle}" />
-                            </StackLayout>
+                        <BoxView BackgroundColor="Silver" HeightRequest="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="How far is the vehicle from Trailer Approx in ft: " FontSize="16" FlexLayout.Grow="4"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.How_far_is_the_vehicle_from_Trailer_Aprox_in_ft}" FlexLayout.Grow="1" />
                         </FlexLayout>
-
-                        <BoxView HeightRequest="1" BackgroundColor="#D8D8D8" Margin="5"/>
+                        <BoxView BackgroundColor="Silver" HeightRequest="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Anyone Rushing you to perform the inspection: " FontSize="16" FlexLayout.Grow="4"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Anyone_Rushing_you_to_perform_the_inspection}" FlexLayout.Grow="1"/>
+                        </FlexLayout>
+                        <BoxView BackgroundColor="Silver" HeightRequest="1"/>
                         <FlexLayout Direction="Column">
                             <Label Text="Any paperwork or documentation" FontSize="17" />
                             <ScrollView Orientation="Horizontal">
@@ -93,74 +74,57 @@
                                 </StackLayout>
                             </ScrollView>
                         </FlexLayout>
-
-                        <BoxView HeightRequest="1" BackgroundColor="#D8D8D8" Margin="5"/>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
                         <Label Text="In the truck" FontSize="18" TextColor="Black" />
-                        <FlexLayout JustifyContent="SpaceBetween" Wrap="Wrap">
-                            <StackLayout  Orientation="Horizontal" Margin="2" >
-                                <Label Text="Exact_Mileage: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.Exact_Mileage}" />
-                            </StackLayout>
-                            <StackLayout  Orientation="Horizontal" Margin="2">
-                                <Label Text="Did you notice any mechanical imperfections while loading: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.Did_you_notice_any_mechanical_imperfections_wile_loading}" />
-                            </StackLayout>
+                        <FlexLayout Margin="1">
+                            <Label Text="Exact_Mileage:" FontSize="16" FlexLayout.Grow="2"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.Exact_Mileage}" />
+                            <Label Text=" Have you used winch:" FontSize="16" FlexLayout.Grow="3" />
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.Have_you_used_winch}" FlexLayout.Grow="1" />
                         </FlexLayout>
-
-                        <FlexLayout JustifyContent="SpaceBetween" Wrap="Wrap">
-                            <StackLayout  Orientation="Horizontal" Margin="2" >
-                                <Label Text="Did Someone Help You Load It: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.Did_someone_help_you_load_it}" />
-                            </StackLayout>
-                            <StackLayout  Orientation="Horizontal" Margin="2">
-                                <Label Text="Did someone load the vehicle for you: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.Did_someone_load_the_vehicle_for_you}" />
-                            </StackLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Mechanical defects when loading: " FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.Did_you_notice_any_mechanical_imperfections_wile_loading}" FlexLayout.Grow="1"/>
                         </FlexLayout>
-
-                        <FlexLayout JustifyContent="SpaceBetween" Wrap="Wrap">
-                            <StackLayout  Orientation="Horizontal" Margin="2" >
-                                <Label Text="Did you Damage anything at the pick up: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.Did_you_Damage_anything_at_the_pick_up}" />
-                            </StackLayout>
-                            <StackLayout  Orientation="Horizontal" Margin="2">
-                                <Label Text="What method of exit did you use: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.What_method_of_exit_did_you_use}" />
-                            </StackLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Did Someone Help You Load It: " FontSize="16" FlexLayout.Grow="3" />
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.Did_someone_help_you_load_it}" FlexLayout.Grow="1" />
+                            <Label Text="Type of strap: " FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.Type_of_strap}"  FlexLayout.Grow="1" />
                         </FlexLayout>
-
-                        <FlexLayout JustifyContent="SpaceBetween" Wrap="Wrap">
-                            <StackLayout  Orientation="Horizontal" Margin="2" >
-                                <Label Text="Did you jumped the vehicle to start: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.Did_you_jumped_the_vehicle_to_start}" />
-                            </StackLayout>
-                            <StackLayout  Orientation="Horizontal" Margin="2">
-                                <Label Text="Have you used winch: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.Have_you_used_winch}" />
-                            </StackLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Did someone load the vehicle for you: " FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.Did_someone_load_the_vehicle_for_you}" FlexLayout.Grow="1"/>
                         </FlexLayout>
-
-                        <FlexLayout JustifyContent="SpaceBetween" Wrap="Wrap">
-                            <StackLayout  Orientation="Horizontal" Margin="2" >
-                                <Label Text="All 4 wheels are correctly strapped strapped: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.All_4_wheels_are_correctly_strapped_strapped}" />
-                            </StackLayout>
-                            <StackLayout  Orientation="Horizontal" Margin="2">
-                                <Label Text="How many keys total you been given: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.How_many_keys_total_you_been_given}" />
-                            </StackLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Did you Damage anything at the pick up: " FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.Did_you_Damage_anything_at_the_pick_up}" FlexLayout.Grow="1"/>
                         </FlexLayout>
-
-                        <FlexLayout JustifyContent="SpaceBetween" Wrap="Wrap">
-                            <StackLayout  Orientation="Horizontal" Margin="2" >
-                                <Label Text="Type of strap: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.Type_of_strap}" />
-                            </StackLayout>
-                            <StackLayout  Orientation="Horizontal" Margin="2">
-                            </StackLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="What method of exit did you use: " FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.What_method_of_exit_did_you_use}" FlexLayout.Grow="1"/>
                         </FlexLayout>
-
-                        <BoxView HeightRequest="1" BackgroundColor="#D8D8D8" Margin="5"/>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Did you jumped the vehicle to start: " FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.Did_you_jumped_the_vehicle_to_start}" FlexLayout.Grow="1"/>
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="All 4 wheels are correctly strapped... " FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.All_4_wheels_are_correctly_strapped_strapped}"  FlexLayout.Grow="1" />
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="How many keys total you been given: " FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask1.How_many_keys_total_you_been_given}" FlexLayout.Grow="1"/>
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
                         <FlexLayout Direction="Column">
                             <Label Text="Any additional parts been given to you" FontSize="17" />
                             <ScrollView Orientation="Horizontal">
@@ -198,36 +162,32 @@
                         </FlexLayout>
 
                         <BoxView HeightRequest="1" BackgroundColor="#D8D8D8" Margin="5"/>
-                        <Label Text="Customer answers" FontSize="18" />
-                        <FlexLayout JustifyContent="SpaceBetween" Wrap="Wrap">
-                            <StackLayout  Orientation="Horizontal" Margin="2" >
-                                <Label Text="Customer name: " FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskFromUser.Your_Full_Name}" />
-                            </StackLayout>
-                            <StackLayout Orientation="Horizontal" Margin="2">
-                                <Label Text="Customer phone number:" FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskFromUser.Your_phone}" />
-                            </StackLayout>
+                        <Label Text="Inspection of photographs en route" FontSize="18" />
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Customer name: " FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskFromUser.Your_Full_Name}" FlexLayout.Grow="1" />
                         </FlexLayout>
-
-                        <FlexLayout JustifyContent="SpaceBetween" Wrap="Wrap">
-                            <StackLayout  Orientation="Horizontal" Margin="2" >
-                                <Label Text="How many keys are driver been given:" FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskFromUser.How_many_keys_are_driver_been_given}" />
-                            </StackLayout>
-                            <StackLayout Orientation="Horizontal" Margin="2">
-                                <Label Text="Any titles been given to driver:" FontSize="16"/>
-                                <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskFromUser.Any_titles_been_given_to_driver}" />
-                            </StackLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Customer phone number:" FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskFromUser.Your_phone}" FlexLayout.Grow="1"/>
                         </FlexLayout>
-
-                        <BoxView HeightRequest="1" BackgroundColor="#D8D8D8" Margin="5"/>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="How many keys are driver been given:" FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskFromUser.How_many_keys_are_driver_been_given}"  FlexLayout.Grow="1"/>
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Any titles been given to driver:" FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskFromUser.Any_titles_been_given_to_driver}" FlexLayout.Grow="1"/>
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
                         <Label Text="Customer answers" FontSize="18" />
                         <FlexLayout x:Name="blockPhotoInspection" Wrap="Wrap" Padding="3">
-                            
-                        </FlexLayout>
 
-                        <BoxView HeightRequest="1" BackgroundColor="#D8D8D8" Margin="1"/>
+                        </FlexLayout>
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
