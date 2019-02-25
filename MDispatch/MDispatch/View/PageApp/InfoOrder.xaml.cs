@@ -22,7 +22,7 @@ namespace MDispatch.View.PageApp
 
         private void StackLayout_SizeChanged(object sender, EventArgs e)
         {
-            listVehic.HeightRequest = 80 + Convert.ToInt32(infoOrderMV.Shipping.VehiclwInformations.Count * 125);
+            listVehic.HeightRequest = Convert.ToInt32(infoOrderMV.Shipping.VehiclwInformations.Count * 120);
         }
 
         private void Button_Clicked_1(object sender, EventArgs e)

@@ -13,13 +13,13 @@
                         <Label Text="vehicle" FontSize="18" VerticalTextAlignment="Center"/>
                     </StackLayout>
                     <ListView x:Name="listVehic" Margin="5, 0, 0, 0" ItemsSource="{Binding Shipping.VehiclwInformations}"
-                                  HasUnevenRows="True" SeparatorVisibility="None" HeightRequest="170">
+                                  HasUnevenRows="True" SeparatorVisibility="None">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
                                     <ViewCell.View>
                                         <StackLayout Orientation="Vertical">
-                                            <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 20">
+                                            <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 5">
                                                 <Label Text="{Binding Id}" IsVisible="False" x:Name="idL"/>
                                                 <Label Text="{Binding Year}" FontSize="18" TextColor="Black"/>
                                                 <Label Text="{Binding Make}" FontSize="18" TextColor="Black"/>

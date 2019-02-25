@@ -30,6 +30,7 @@ namespace MDispatch.View.Inspection.PickedUp
             {
                 foreach (var view in views)
                 {
+                    view.GestureRecognizers.Clear();
                     absla.Children.Add(view);
                     view.GestureRecognizers.Add(new TapGestureRecognizer(RemovedDamag));
                 }
@@ -40,6 +41,10 @@ namespace MDispatch.View.Inspection.PickedUp
         {
             stateSelect = 1;
             await PopupNavigation.PushAsync(new DamageSelecter1(fullPagePhotoDelyveryMV, this), true);
+            await WaiteSelectDamage();
+            await PopupNavigation.PopAsync(true);
+            stateSelect = 1;
+            await Navigation.PushAsync(new CameraPagePhoto1(fullPagePhotoDelyveryMV, null, fullPagePhotoDelyvery, this));
             await WaiteSelectDamage();
             if (stateSelect == 0)
             {
@@ -53,10 +58,9 @@ namespace MDispatch.View.Inspection.PickedUp
                 AbsoluteLayout.SetLayoutBounds(image, new Rectangle(e.XInterest * 0.0001, e.YInterest * 0.0001, 15, 15));
                 AbsoluteLayout.SetLayoutFlags(image, AbsoluteLayoutFlags.PositionProportional);
                 absla.Children.Add(image);
-                await PopupNavigation.PopAsync(true);
                 await Task.Run(() =>
                 {
-                    fullPagePhotoDelyveryMV.SetDamage(nameDamage, indexSelectDamage, prefNameDamage, e.XInterest * 0.0001, e.YInterest * 0.0001, image);
+                    fullPagePhotoDelyveryMV.SetDamage(nameDamage, indexSelectDamage, prefNameDamage, e.XInterest * 0.0001, e.YInterest * 0.0001, image, fullPagePhotoDelyveryMV.AllSourseImage.Last());
                 });
             }
             else
@@ -74,9 +78,9 @@ namespace MDispatch.View.Inspection.PickedUp
         protected override bool OnBackButtonPressed()
         {
             List<Xamarin.Forms.View> views = absla.Children.ToList().GetRange(1, absla.Children.ToList().Count - 1);
-            foreach(var view in views)
+            foreach (var view in views)
             {
-                view.GestureRecognizers.Remove(new TapGestureRecognizer(RemovedDamag));
+                view.GestureRecognizers.Clear();
                 fullPagePhotoDelyvery.AddDamagCurrentLayut(view);
             }
             return base.OnBackButtonPressed();

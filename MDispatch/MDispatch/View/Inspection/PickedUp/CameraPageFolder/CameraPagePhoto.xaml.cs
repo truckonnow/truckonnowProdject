@@ -35,10 +35,6 @@ namespace MDispatch.View.PageApp
             fullPagePhotoMV.AddNewFotoSourse(result.Image);
             fullPagePhotoMV.SetPhoto(result.Image);
             fullPagePhoto.SetbtnVisable();
-            if(pageAddDamage != null)
-            {
-                pageAddDamage.stateSelect = 0;
-            }
         }
     }
 }

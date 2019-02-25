@@ -1,4 +1,5 @@
 ﻿using MDispatch.NewElement;
+using MDispatch.View.Inspection.PickedUp;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using MDispatch.ViewModels.PageAppMV;
 using Xamarin.Forms;
@@ -12,9 +13,11 @@ namespace MDispatch.View.PageApp
         private FullPagePhotoDelyveryMV fullPagePhotoDelyveryMV = null;
         private string pngPaternPhoto = null;
         private FullPagePhotoDelyvery fullPagePhotoDelyvery = null;
+        private PageAddDamage1 pageAddDamage1 = null;
 
-        public CameraPagePhoto1(FullPagePhotoDelyveryMV fullPagePhotoDelyveryMV, string pngPaternPhoto, FullPagePhotoDelyvery fullPagePhotoDelyvery)
+        public CameraPagePhoto1(FullPagePhotoDelyveryMV fullPagePhotoDelyveryMV, string pngPaternPhoto, FullPagePhotoDelyvery fullPagePhotoDelyvery, PageAddDamage1 pageAddDamage1 = null)
 		{
+            this.pageAddDamage1 = pageAddDamage1;
             this.fullPagePhotoDelyvery = fullPagePhotoDelyvery;
             this.pngPaternPhoto = pngPaternPhoto;
             this.fullPagePhotoDelyveryMV = fullPagePhotoDelyveryMV;
@@ -31,6 +34,10 @@ namespace MDispatch.View.PageApp
             fullPagePhotoDelyveryMV.AddNewFotoSourse(result.Image);
             fullPagePhotoDelyveryMV.SetPhoto(result.Image);
             fullPagePhotoDelyvery.SetbtnVisable();
+            if (pageAddDamage1 != null)
+            {
+                pageAddDamage1.stateSelect = 0;
+            }
         }
 
         private void StackLayout_SizeChanged(object sender, System.EventArgs e)

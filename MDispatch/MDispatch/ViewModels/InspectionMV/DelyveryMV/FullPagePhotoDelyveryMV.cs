@@ -40,6 +40,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             if (typeCar != null)
             {
                 Car = GetTypeCar(typeCar);
+                Car.OrintableScreen(inderxPhotoInspektion);
             }
             IdShip = idShip;
         }
@@ -67,7 +68,14 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             set => SetProperty(ref sourseImage, value);
         }
 
-        internal void SetDamage(string nameDamage, int indexDamage, string prefNameDamage, double xInterest, double yInterest, Image image)
+        private List<ImageSource> allSourseImage = null;
+        public List<ImageSource> AllSourseImage
+        {
+            get => allSourseImage;
+            set => SetProperty(ref allSourseImage, value);
+        }
+
+        internal void SetDamage(string nameDamage, int indexDamage, string prefNameDamage, double xInterest, double yInterest, Image image, ImageSource imageSource1)
         {
             Damage damage = new Damage();
             damage.FullNameDamage = $"{prefNameDamage} - {nameDamage}";
@@ -78,6 +86,8 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             damage.XInterest = xInterest;
             damage.YInterest = yInterest;
             damage.Image = image;
+            damage.TypeCurrentStatus = "D";
+            damage.ImageSource = imageSource1;
             if (PhotoInspection.Damages == null)
             {
                 PhotoInspection.Damages = new List<Damage>();
@@ -85,19 +95,27 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             PhotoInspection.Damages.Add(damage);
         }
 
-        private List<ImageSource> allSourseImage = null;
-        public List<ImageSource> AllSourseImage
+        public void RemmoveDamage(Image image)
         {
-            get => allSourseImage;
-            set => SetProperty(ref allSourseImage, value);
+            if (image != null && PhotoInspection.Damages != null && PhotoInspection.Damages.FirstOrDefault(d => d.Image == image) != null)
+            {
+                List<ImageSource> imageSources2 = new List<ImageSource>(AllSourseImage);
+                Damage damage = PhotoInspection.Damages.FirstOrDefault(d => d.Image == image);
+                imageSources2.Remove(imageSources2.FirstOrDefault(i => i == damage.ImageSource));
+                AllSourseImage = imageSources2;
+                PhotoInspection.Damages.Remove(damage);
+            }
         }
 
-        internal void RemmoveDamage(Image v)
+        public ImageSource SelectPhotoForDamage(Image image)
         {
-            if (v != null && PhotoInspection.Damages != null && PhotoInspection.Damages.FirstOrDefault(d => d.Image == v) != null)
+            if (PhotoInspection != null && PhotoInspection.Damages != null)
             {
-                PhotoInspection.Damages.Remove(PhotoInspection.Damages.FirstOrDefault(d => d.Image == v));
+                Damage damage1 = PhotoInspection.Damages.FirstOrDefault(d => d.Image == image);
+                SourseImage = damage1.ImageSource;
+                return damage1.ImageSource;
             }
+            return null;
         }
 
         private List<Damage> damages = null;
@@ -122,6 +140,11 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 case "PickUp":
                     {
                         car = new CarPickUp();
+                        break;
+                    }
+                case "Coupe":
+                    {
+                        car = new CarCoupe();
                         break;
                     }
             }
@@ -155,7 +178,6 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             string photoJson = JsonConvert.SerializeObject(PhotoInArrayByte);
             string pathIndePhoto = PhotoInspection.Photos.Count == 0 ? PhotoInspection.IndexPhoto.ToString() : $"{PhotoInspection.IndexPhoto}.{PhotoInspection.Photos.Count}";
             PhotoInspection.CurrentStatusPhoto = "Delyvery";
-            PhotoInspection.CurrentStatusPhoto = "Delyvery";
             photo.Base64 = photoJson;
             photo.path = $"../Photo/{VehiclwInformation.Id}/Delyvery/PhotoInspection/{pathIndePhoto}.Jpeg";
             PhotoInspection.Photos.Add(photo);
@@ -183,11 +205,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
             else if (state == 3)
             {
-                if(InderxPhotoInspektion == 1)
-                {
-                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{7}.png", Car.typeIndex, 7, initDasbordDelegate, getVechicleDelegate));
-                }
-                else if(InderxPhotoInspektion == 7)
+                if(InderxPhotoInspektion == 7)
                 {
                     await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{19}.png", Car.typeIndex, 19, initDasbordDelegate, getVechicleDelegate));
                 }

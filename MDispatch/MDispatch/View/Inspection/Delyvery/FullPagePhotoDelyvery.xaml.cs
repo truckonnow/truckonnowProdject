@@ -25,7 +25,8 @@ namespace MDispatch.View.PageApp
             NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = fullPagePhotoDelyveryMV;
             paternPhoto.Source = pngPaternPhoto;
-            if(fullPagePhotoDelyveryMV.Car.typeIndex != null && fullPagePhotoDelyveryMV.Car.typeIndex != "")
+            dmla.IsVisible = false;
+            if (fullPagePhotoDelyveryMV.Car.typeIndex != null && fullPagePhotoDelyveryMV.Car.typeIndex != "")
             {
                 NameSelectPhoto.Text = $"{fullPagePhotoDelyveryMV.Car.typeIndex} - {photoIndex}";
             }
@@ -40,6 +41,7 @@ namespace MDispatch.View.PageApp
             if (fullPagePhotoDelyveryMV.AllSourseImage != null && fullPagePhotoDelyveryMV.AllSourseImage.Count != 0)
             {
                 btnNext.IsVisible = true;
+                btnAddPhoto.IsVisible = false;
             }
         }
         
@@ -53,12 +55,14 @@ namespace MDispatch.View.PageApp
             fullPagePhotoDelyveryMV.SourseImage = (ImageSource)e.SelectedItem;
             if((ImageSource)Photos.SelectedItem != fullPagePhotoDelyveryMV.AllSourseImage[0])
             {
+                dmla.IsVisible = false;
                 paternPhoto.Source = "";
                 btnDamage.IsVisible = false;
             }
             else
             {
                 btnDamage.IsVisible = true;
+                dmla.IsVisible = true;
                 paternPhoto.Source = pngPaternPhoto;
             }
         }
@@ -77,7 +81,17 @@ namespace MDispatch.View.PageApp
 
         internal void AddDamagCurrentLayut(Xamarin.Forms.View view)
         {
+            view.GestureRecognizers.Add(new TapGestureRecognizer(SelectImageSourse));
             dmla.Children.Add(view);
+        }
+
+        public void SelectImageSourse(Xamarin.Forms.View v, object e)
+        {
+            ImageSource imageSource = fullPagePhotoDelyveryMV.SelectPhotoForDamage((Image)v);
+            if (imageSource != null)
+            {
+                Photos.SelectedItem = imageSource;
+            }
         }
 
         private async void Button_Clicked_2(object sender, EventArgs e)
