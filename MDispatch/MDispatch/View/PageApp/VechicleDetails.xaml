@@ -48,12 +48,12 @@
                         </FlexLayout>
                         <BoxView BackgroundColor="Silver" HeightRequest="1"/>
                         <FlexLayout Margin="1">
-                            <Label Text="How far is the vehicle from Trailer Approx in ft: " FontSize="16" FlexLayout.Grow="4"/>
+                            <Label Text="How far is the vehicle from Trailer Approx in ft:" FontSize="16" FlexLayout.Grow="6"/>
                             <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.How_far_is_the_vehicle_from_Trailer_Aprox_in_ft}" FlexLayout.Grow="1" />
                         </FlexLayout>
                         <BoxView BackgroundColor="Silver" HeightRequest="1"/>
                         <FlexLayout Margin="1">
-                            <Label Text="Anyone Rushing you to perform the inspection: " FontSize="16" FlexLayout.Grow="4"/>
+                            <Label Text="Anyone Rushing you to perform the inspection:" FontSize="16" FlexLayout.Grow="6"/>
                             <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Anyone_Rushing_you_to_perform_the_inspection}" FlexLayout.Grow="1"/>
                         </FlexLayout>
                         <BoxView BackgroundColor="Silver" HeightRequest="1"/>
