@@ -27,6 +27,7 @@ namespace MDispatch.View.PageApp
 
         public async Task InitPhoto(VehiclwInformation vehiclwInformation)
         {
+            AddScan(vehiclwInformation);
             if (vehiclwInformation.Ask != null)
             {
                 AddBlocDocumentPhoto(vehiclwInformation);
@@ -42,6 +43,54 @@ namespace MDispatch.View.PageApp
             if(vehiclwInformation.PhotoInspections != null)
             {
                 AddBlocInspectionPhoto(vehiclwInformation);
+            }
+        }
+
+        private void AddScan(VehiclwInformation vehiclwInformation)
+        {
+            if(vehiclwInformation.Scan != null)
+            {
+                VechInfoSt3.Children.Add(new Image()
+                {
+                    Source = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(vehiclwInformation.Scan.Base64)))
+                });
+                VechInfoSt1.Children.Add(new StackLayout()
+                {
+                    Orientation = StackOrientation.Horizontal,
+                    Children =
+                        {
+                                    new Image()
+                                    {
+                                        Source = "DamageP1.png",
+                                        HeightRequest = 18,
+                                        WidthRequest = 18
+                                    },
+                                    new Label()
+                                    {
+                                        HorizontalTextAlignment = TextAlignment.Center,
+                                        Text = "Circles Yellow — pickup damages;",
+                                        FontSize = 13
+                                    },
+                                    new Image()
+                                    {
+                                        Source = "DamageD1.png",
+                                        HeightRequest = 18,
+                                        WidthRequest = 18
+                                    },
+                                    new Label()
+                                    {
+                                        HorizontalTextAlignment = TextAlignment.Center,
+                                        Text = "Circles Green — delivery damages;",
+                                        FontSize = 13
+                                    },
+                        }
+                });
+            }
+            else
+            {
+                VechInfoSt3.IsVisible = false;
+                VechInfoSt1.IsVisible = false;
+                VechInfoSt2.IsVisible = true;
             }
         }
 
