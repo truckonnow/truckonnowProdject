@@ -4,6 +4,7 @@ using MDispatch.View.ServiceView.ResizeImage;
 using MDispatch.ViewModels.PageAppMV.VehicleDetals;
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -59,6 +60,11 @@ namespace MDispatch.View.PageApp
                     });
                 }
             }
+            else
+            {
+                blockDocument.IsVisible = false;
+                documentNotContent.IsVisible = true;
+            }
         }
 
         private void AddBlocItemPhoto(VehiclwInformation vehiclwInformation)
@@ -75,6 +81,11 @@ namespace MDispatch.View.PageApp
                         Margin = 3
                     });
                 }
+            }
+            else
+            {
+                blockItems.IsVisible = false;
+                itemsNotContent.IsVisible = true;
             }
         }
 
@@ -93,6 +104,11 @@ namespace MDispatch.View.PageApp
                     });
                 }
             }
+            else
+            {
+                blockBeen.IsVisible = false;
+                beenNotContent.IsVisible = true;
+            }
         }
 
         private void AddBlocDocumentationBeen(VehiclwInformation vehiclwInformation)
@@ -109,6 +125,11 @@ namespace MDispatch.View.PageApp
                         Margin = 3
                     });
                 }
+            }
+            else
+            {
+                blockDocumentationBeen.IsVisible = false;
+                documentationBeenNotContent.IsVisible = true;
             }
         }
 
@@ -127,6 +148,11 @@ namespace MDispatch.View.PageApp
                     });
                 }
             }
+            else
+            {
+                blockSeatBelts.IsVisible = false;
+                strapNotContent.IsVisible = true;
+            }
         }
 
         private void AddBlocTakePictures(VehiclwInformation vehiclwInformation)
@@ -144,11 +170,16 @@ namespace MDispatch.View.PageApp
                     });
                 }
             }
+            else
+            {
+                blockTakePictures.IsVisible = false;
+                TakePicturesNotContent.IsVisible = true;
+            }
         }
 
         private void AddBlocInspectionPhoto(VehiclwInformation vehiclwInformation)
         {
-            if (vehiclwInformation.PhotoInspections != null)
+            if (vehiclwInformation.PhotoInspections != null && vehiclwInformation.PhotoInspections.FirstOrDefault(p => p.CurrentStatusPhoto == "PikedUp") != null)
             {
                 foreach (var item in vehiclwInformation.PhotoInspections)
                 {
@@ -166,6 +197,11 @@ namespace MDispatch.View.PageApp
                         }
                     }
                 }
+            }
+            else
+            {
+                blockPhotoInspection.IsVisible = false;
+                photoInspectionNotContent.IsVisible = true;
             }
         }
 

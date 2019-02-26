@@ -23,7 +23,7 @@
                             <Label Text="Light Brightness: " FontSize="16" FlexLayout.Grow="3"/>
                             <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Lightbrightness}" FlexLayout.Grow="1" />
                             <Label Text="Vehicle: " FontSize="16" FlexLayout.Grow="3"/>
-                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Vehicle}" FlexLayout.Grow="1"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.Ask.Vehicle}" FlexLayout.Grow="1" />
                         </FlexLayout>
                         <BoxView BackgroundColor="Silver" HeightRequest="1"/>
                         <FlexLayout Margin="1">
@@ -64,6 +64,9 @@
                                     
                                 </StackLayout>
                             </ScrollView>
+                            <StackLayout x:Name="documentNotContent" Padding="10" IsVisible="False">
+                                <Label FontSize="16" Text="Photo documents are missing" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                            </StackLayout>
                         </FlexLayout>
 
                         <FlexLayout Direction="Column">
@@ -73,6 +76,9 @@
 
                                 </StackLayout>
                             </ScrollView>
+                            <StackLayout x:Name="itemsNotContent" Padding="10" IsVisible="False">
+                                <Label FontSize="16" Text="Personal or additional documents are missing" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                            </StackLayout>
                         </FlexLayout>
                         <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
                         <Label Text="In the truck" FontSize="18" TextColor="Black" />
@@ -132,6 +138,9 @@
 
                                 </StackLayout>
                             </ScrollView>
+                            <StackLayout x:Name="beenNotContent" Padding="10" IsVisible="False">
+                                <Label FontSize="16" Text="No additional details" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                            </StackLayout>
                         </FlexLayout>
 
                         <FlexLayout Direction="Column">
@@ -141,6 +150,9 @@
 
                                 </StackLayout>
                             </ScrollView>
+                            <StackLayout x:Name="documentationBeenNotContent" Padding="10" IsVisible="False">
+                                <Label FontSize="16" Text="No additional details" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                            </StackLayout>
                         </FlexLayout>
 
                         <FlexLayout Direction="Column">
@@ -150,6 +162,9 @@
 
                                 </StackLayout>
                             </ScrollView>
+                            <StackLayout x:Name="strapNotContent" Padding="10" IsVisible="False">
+                                <Label FontSize="16" Text="The strap has not yet been photographed" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                            </StackLayout>
                         </FlexLayout>
                         
                         <FlexLayout Direction="Column">
@@ -159,6 +174,9 @@
 
                                 </StackLayout>
                             </ScrollView>
+                            <StackLayout x:Name="TakePicturesNotContent" Padding="10" IsVisible="False">
+                                <Label FontSize="16" Text="Photo after loading in the wagon yet" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                            </StackLayout>
                         </FlexLayout>
 
                         <BoxView HeightRequest="1" BackgroundColor="#D8D8D8" Margin="5"/>
@@ -184,10 +202,13 @@
                             <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskFromUser.Any_titles_been_given_to_driver}" FlexLayout.Grow="1"/>
                         </FlexLayout>
                         <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
-                        <Label Text="Customer answers" FontSize="18" />
+                        <Label Text="Photo inspection Picked Up" FontSize="18" />
                         <FlexLayout x:Name="blockPhotoInspection" Wrap="Wrap" Padding="3">
 
                         </FlexLayout>
+                        <StackLayout x:Name="photoInspectionNotContent" Padding="10" IsVisible="False">
+                            <Label FontSize="16" Text="Picked Up video inspection missing" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                        </StackLayout>
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
