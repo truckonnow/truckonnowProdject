@@ -227,8 +227,9 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 }
                 else if (InderxPhotoInspektion == 20)
                 {
-                    CheckVechicleAndGoToResultPage();
+                    await CheckVechicleAndGoToResultPage();
                 }
+                Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
             else if (state == 4)
             {
@@ -236,7 +237,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
         }
 
-        private async void CheckVechicleAndGoToResultPage()
+        private async Task CheckVechicleAndGoToResultPage()
         {
             List<VehiclwInformation> vehiclwInformation1s = getVechicleDelegate.Invoke();
             int indexCurrentVechecle = vehiclwInformation1s.FindIndex(v => v == VehiclwInformation);
