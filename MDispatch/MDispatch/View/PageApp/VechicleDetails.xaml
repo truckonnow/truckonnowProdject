@@ -223,6 +223,91 @@
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
+                <StackLayout Margin="10">
+                    <Label Text="Delivered Information" FontSize="20" TextColor="Black" />
+                    <BoxView HeightRequest="1" BackgroundColor="#D8D8D8" Margin="2"/>
+                    <StackLayout>
+                        <FlexLayout Margin="1">
+                            <Label Text="Time of delivery:" FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskDelyvery.Time_Of_Delivery}" FlexLayout.Grow="2" HorizontalTextAlignment="Center" />
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Light brightness:" FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskDelyvery.Lightbrightness}" FlexLayout.Grow="2" HorizontalTextAlignment="Center" />
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Vehicle condition on delivery:" FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskDelyvery.Vehicle_Condition_on_delivery}" FlexLayout.Grow="2" HorizontalTextAlignment="Center" />
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Weather conditons:" FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskDelyvery.Weather_Conditions}" FlexLayout.Grow="2" HorizontalTextAlignment="Center" />
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="How did you get inside of the vehicle:" FontSize="16" FlexLayout.Grow="5"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskDelyvery.How_did_you_get_inside_of_the_vehicle}" FlexLayout.Grow="2" HorizontalTextAlignment="Center" />
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Does the vehicle Drivers:" FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskDelyvery.Does_the_vehicle_Drives}" FlexLayout.Grow="2" HorizontalTextAlignment="Center" />
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Did the vehicle starts:" FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskDelyvery.Did_the_vehicle_starts}" FlexLayout.Grow="2" HorizontalTextAlignment="Center" />
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Anyone Rushing you to perform the delivery:" FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskDelyvery.Anyone_Rushing_you_to_perform_the_delivery}" FlexLayout.Grow="2" HorizontalTextAlignment="Center" />
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="How Far is the trailer from Delivery destination:" FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskDelyvery.How_Far_is_the_Trailer_from_Delivery_destination}" FlexLayout.Grow="2" HorizontalTextAlignment="Center" />
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Exact mileage after unloading:" FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskDelyvery.Exact_mileage_after_unloading}" FlexLayout.Grow="2" HorizontalTextAlignment="Center" />
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Anyone helping yuo unload:" FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskDelyvery.Anyone_helping_you_unload}" FlexLayout.Grow="2" HorizontalTextAlignment="Center" />
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Did someone else unloaded the vehicle for you:" FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskDelyvery.Did_someone_else_unloaded_the_vehicle_for_you}" FlexLayout.Grow="2" HorizontalTextAlignment="Center" />
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="How many keys are you giving to client:" FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskDelyvery.How_many_keys_are_you_giving_to_client}" FlexLayout.Grow="2" HorizontalTextAlignment="Center" />
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Body defects during transport:" FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskDelyvery.Did_you_notice_any_imperfections_on_body_wile_vehicle_been_transported}" FlexLayout.Grow="2" HorizontalTextAlignment="Center" />
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Are you given any paperwork to a client:" FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskDelyvery.Are_you_giving_any_paperwork_to_a_client}" FlexLayout.Grow="2" HorizontalTextAlignment="Center" />
+                        </FlexLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="Silver" Margin="1"/>
+                        <FlexLayout Margin="1">
+                            <Label Text="Did client inspected thevehicle:" FontSize="16" FlexLayout.Grow="3"/>
+                            <Label FontSize="16" TextColor="Black" Text="{Binding VehiclwInformation.AskDelyvery.Did_client_inspected_the_vehicle}" FlexLayout.Grow="2" HorizontalTextAlignment="Center" />
+                        </FlexLayout>
+                    </StackLayout>
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

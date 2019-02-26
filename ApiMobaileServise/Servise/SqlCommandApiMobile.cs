@@ -207,6 +207,8 @@ namespace ApiMobaileServise.Servise
             context.PhotoInspections.Load();
             context.Photos.Load();
             context.AskFromUsers.Load();
+            context.AskDelyveries.Load();
+            context.askForUserDelyveryMs.Load();
             return context.VehiclwInformation.FirstOrDefault(v => v.Id == idVech);
         }
 
