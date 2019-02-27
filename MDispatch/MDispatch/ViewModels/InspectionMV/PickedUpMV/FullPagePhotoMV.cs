@@ -40,8 +40,8 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             {
                 Car = GetTypeCar(typeCar);
             }
-            Car.OrintableScreen(InderxPhotoInspektion);
             IdShip = idShip;
+            Car.OrintableScreen(InderxPhotoInspektion);
         }
 
         public string IdShip { get; set; }
@@ -205,7 +205,6 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 }
                 else
                 {
-                    DependencyService.Get<IOrientationHandler>().ForceSensor();
                     await PopupNavigation.PushAsync(new TempPageHint());
                     await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate), true);
                     Navigation.RemovePage(Navigation.NavigationStack[2]);

@@ -102,12 +102,6 @@ namespace MDispatch.View.PageApp
             }
         }
 
-        protected override void OnDisappearing()
-        {
-            DependencyService.Get<IOrientationHandler>().ForceSensor();
-            base.OnDisappearing();
-        }
-
         protected override bool OnBackButtonPressed()
         {
             DependencyService.Get<IOrientationHandler>().ForceSensor();

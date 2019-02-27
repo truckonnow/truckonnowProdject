@@ -30,7 +30,7 @@
                                                 <Label Text="{Binding VIN}" FontSize="18"/>
                                             </StackLayout>
                                             <StackLayout Orientation="Horizontal">
-                                                <Button Text="Change Vehiclw"  BackgroundColor="#4fd2c2" FontSize="12" TextColor="White" Clicked="Button_Clicked_1"/>
+                                                <Button Text="Details Vehiclw"  BackgroundColor="#4fd2c2" FontSize="12" TextColor="White" Clicked="Button_Clicked_1"/>
                                             </StackLayout>
                                         </StackLayout>
                                     </ViewCell.View>

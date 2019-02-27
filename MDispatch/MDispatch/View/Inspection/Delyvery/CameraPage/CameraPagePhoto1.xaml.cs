@@ -28,7 +28,6 @@ namespace MDispatch.View.PageApp
 
         private async void CameraPage_OnPhotoResult(PhotoResultEventArgs result)
         {
-            await Navigation.PopAsync(true);
             if (!result.Success)
                 return;
             fullPagePhotoDelyveryMV.AddNewFotoSourse(result.Image);
@@ -38,6 +37,17 @@ namespace MDispatch.View.PageApp
             {
                 pageAddDamage1.stateSelect = 0;
             }
+            await Navigation.PopAsync(true);
+        }
+
+
+        protected override void OnDisappearing()
+        {
+            if (pageAddDamage1 != null)
+            {
+                pageAddDamage1.stateSelect = 0;
+            }
+            base.OnDisappearing();
         }
 
         private void StackLayout_SizeChanged(object sender, System.EventArgs e)

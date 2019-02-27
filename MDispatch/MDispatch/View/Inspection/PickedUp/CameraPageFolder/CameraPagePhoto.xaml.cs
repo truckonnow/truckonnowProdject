@@ -1,7 +1,6 @@
 ﻿using MDispatch.NewElement;
 using MDispatch.View.Inspection.PickedUp;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
-using MDispatch.ViewModels.PageAppMV;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -29,12 +28,27 @@ namespace MDispatch.View.PageApp
 
         private async void CameraPage_OnPhotoResult(PhotoResultEventArgs result)
         {
-            await Navigation.PopAsync(true);
             if (!result.Success)
+            {
                 return;
+            }
             fullPagePhotoMV.AddNewFotoSourse(result.Image);
             fullPagePhotoMV.SetPhoto(result.Image);
             fullPagePhoto.SetbtnVisable();
+            if (pageAddDamage != null)
+            {
+                pageAddDamage.stateSelect = 0;
+            }
+            await Navigation.PopAsync(true);
+        }
+
+        protected override void OnDisappearing()
+        {
+            if (pageAddDamage != null)
+            {
+                pageAddDamage.stateSelect = 0;
+            }
+            base.OnDisappearing();
         }
     }
 }
