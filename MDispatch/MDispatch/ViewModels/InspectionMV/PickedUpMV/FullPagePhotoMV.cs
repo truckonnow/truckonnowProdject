@@ -206,6 +206,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 else
                 {
                     await PopupNavigation.PushAsync(new TempPageHint());
+
                     await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate), true);
                     Navigation.RemovePage(Navigation.NavigationStack[2]);
                 }

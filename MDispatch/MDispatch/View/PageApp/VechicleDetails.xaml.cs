@@ -28,22 +28,15 @@ namespace MDispatch.View.PageApp
         public async Task InitPhoto(VehiclwInformation vehiclwInformation)
         {
             AddScan(vehiclwInformation);
-            if (vehiclwInformation.Ask != null)
-            {
-                AddBlocDocumentPhoto(vehiclwInformation);
-                AddBlocItemPhoto(vehiclwInformation);
-            }
-            if (vehiclwInformation.Ask1 != null)
-            {
-                AddBlocBeen(vehiclwInformation);
-                AddBlocDocumentationBeen(vehiclwInformation);
-                AddBlocSeatBelts(vehiclwInformation);
-                AddBlocTakePictures(vehiclwInformation);
-            }
-            if(vehiclwInformation.PhotoInspections != null)
-            {
-                AddBlocInspectionPhoto(vehiclwInformation);
-            }
+            AddBlocDocumentPhoto(vehiclwInformation);
+            AddBlocItemPhoto(vehiclwInformation);
+            AddBlocBeen(vehiclwInformation);
+            AddBlocDocumentationBeen(vehiclwInformation);
+            AddBlocSeatBelts(vehiclwInformation);
+            AddBlocTakePictures(vehiclwInformation);
+            AddBlocInspectionPhoto(vehiclwInformation);
+            AddBlocInspectionPhoto1(vehiclwInformation);
+            AddBlocPhotoClient(vehiclwInformation);
         }
 
         private void AddScan(VehiclwInformation vehiclwInformation)
@@ -226,6 +219,33 @@ namespace MDispatch.View.PageApp
             }
         }
 
+        private void AddBlocPhotoClient(VehiclwInformation vehiclwInformation)
+        {
+            if (vehiclwInformation.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo != null)
+            {
+                foreach (var item in vehiclwInformation.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo)
+                {
+                    blockPhotoInspectedClient.Children.Add(new Image()
+                    {
+                        Source = ImageSource.FromStream(() => new MemoryStream(ResizeImage(item.Base64))),
+                        HeightRequest = 100,
+                        WidthRequest = 100,
+                        Margin = 3
+                    });
+                }
+            }
+            else if(vehiclwInformation.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up != null)
+            {
+                blockPhotoInspectedClient.IsVisible = false;
+                answerClient.IsVisible = true;
+            }
+            else
+            {
+                blockPhotoInspectedClient.IsVisible = false;
+                photoClientNotContent.IsVisible = true;
+            }
+        }
+
         private void AddBlocInspectionPhoto(VehiclwInformation vehiclwInformation)
         {
             if (vehiclwInformation.PhotoInspections != null && vehiclwInformation.PhotoInspections.FirstOrDefault(p => p.CurrentStatusPhoto == "PikedUp") != null)
@@ -251,6 +271,34 @@ namespace MDispatch.View.PageApp
             {
                 blockPhotoInspection.IsVisible = false;
                 photoInspectionNotContent.IsVisible = true;
+            }
+        }
+
+        private void AddBlocInspectionPhoto1(VehiclwInformation vehiclwInformation)
+        {
+            if (vehiclwInformation.PhotoInspections != null && vehiclwInformation.PhotoInspections.FirstOrDefault(p => p.CurrentStatusPhoto == "Delyvery") != null)
+            {
+                foreach (var item in vehiclwInformation.PhotoInspections)
+                {
+                    if (item.CurrentStatusPhoto == "Delyvery")
+                    {
+                        foreach (var photo in item.Photos)
+                        {
+                            blockPhotoInspection1.Children.Add(new Image()
+                            {
+                                Source = ImageSource.FromStream(() => new MemoryStream(ResizeImage(photo.Base64))),
+                                HeightRequest = 70,
+                                WidthRequest = 70,
+                                Margin = 3
+                            });
+                        }
+                    }
+                }
+            }
+            else
+            {
+                blockPhotoInspection1.IsVisible = false;
+                photoInspectionNotContent1.IsVisible = true;
             }
         }
 

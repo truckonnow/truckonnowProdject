@@ -178,7 +178,7 @@ namespace MDispatch.ViewModels.PageAppMV
                     return;
                 }
             }
-            if (Shipping.VehiclwInformations[0].askForUserDelyveryM == null)
+            if (Shipping.VehiclwInformations[0].askForUserDelyveryM == null || Shipping.VehiclwInformations[0].askForUserDelyveryM.App_will_ask_for_name_of_the_client_signature == null)
             {
                 await Navigation.PushAsync(new AskForUserDelyvery(managerDispatchMob, Shipping.VehiclwInformations[0], Shipping.Id, initDasbordDelegate), true);
                 return;

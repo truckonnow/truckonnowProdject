@@ -229,7 +229,6 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 {
                     await CheckVechicleAndGoToResultPage();
                 }
-                Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
             else if (state == 4)
             {
@@ -243,7 +242,6 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             int indexCurrentVechecle = vehiclwInformation1s.FindIndex(v => v == VehiclwInformation);
             if (vehiclwInformation1s.Count - 1 == indexCurrentVechecle)
             {
-                DependencyService.Get<IOrientationHandler>().ForceSensor();
                 await PopupNavigation.PushAsync(new TempDialogPage());
                 await Navigation.PushAsync(new AskForUserDelyvery(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate));
             }
@@ -251,8 +249,9 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             {
                 await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", vehiclwInformation1s[indexCurrentVechecle + 1]));
                 await Navigation.PushAsync(new AskPageDelyvery(managerDispatchMob, vehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate), true);
-                Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
+            Navigation.RemovePage(Navigation.NavigationStack[2]);
+            DependencyService.Get<IOrientationHandler>().ForceSensor();
         }
     }
 }
