@@ -100,7 +100,7 @@
     <EmbeddedResource Update="View\LoadPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\PageApp\DialogPage\EditPayment.xaml">
+    <EmbeddedResource Update="View\PageApp\DialogPage\ViewPhoto.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\PageApp\EditDeliveryInformation.xaml">
