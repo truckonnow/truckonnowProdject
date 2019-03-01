@@ -200,13 +200,13 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 if (InderxPhotoInspektion < 39)
                 {
                     Car.OrintableScreen(InderxPhotoInspektion);
-                    await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", Car.typeIndex, InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate));
+                    await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", Car.typeIndex, InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1)));
                     Navigation.RemovePage(Navigation.NavigationStack[2]);
                 }
                 else
                 {
                     await PopupNavigation.PushAsync(new TempPageHint());
-
+                    DependencyService.Get<IOrientationHandler>().ForceSensor();
                     await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate), true);
                     Navigation.RemovePage(Navigation.NavigationStack[2]);
                 }

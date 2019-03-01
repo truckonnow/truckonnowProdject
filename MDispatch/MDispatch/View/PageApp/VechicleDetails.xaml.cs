@@ -91,7 +91,7 @@ namespace MDispatch.View.PageApp
 
         private void AddBlocDocumentPhoto(VehiclwInformation vehiclwInformation)
         {
-            if (vehiclwInformation.Ask.Any_paperwork_or_documentation != null)
+            if (vehiclwInformation.Ask != null && vehiclwInformation.Ask.Any_paperwork_or_documentation != null)
             {
                 foreach (var document in vehiclwInformation.Ask.Any_paperwork_or_documentation)
                 {
@@ -126,7 +126,7 @@ namespace MDispatch.View.PageApp
 
         private void AddBlocItemPhoto(VehiclwInformation vehiclwInformation)
         {
-            if (vehiclwInformation.Ask.Any_personal_or_additional_items_with_or_in_vehicle != null)
+            if (vehiclwInformation.Ask != null && vehiclwInformation.Ask.Any_personal_or_additional_items_with_or_in_vehicle != null)
             {
                 foreach (var item in vehiclwInformation.Ask.Any_personal_or_additional_items_with_or_in_vehicle)
                 {
@@ -150,7 +150,7 @@ namespace MDispatch.View.PageApp
 
         private void AddBlocBeen(VehiclwInformation vehiclwInformation)
         {
-            if (vehiclwInformation.Ask1.Any_additional_parts_been_given_to_you != null)
+            if (vehiclwInformation.Ask1 != null && vehiclwInformation.Ask1.Any_additional_parts_been_given_to_you != null)
             {
                 foreach (var item in vehiclwInformation.Ask1.Any_additional_parts_been_given_to_you)
                 {
@@ -174,7 +174,7 @@ namespace MDispatch.View.PageApp
 
         private void AddBlocDocumentationBeen(VehiclwInformation vehiclwInformation)
         {
-            if (vehiclwInformation.Ask1.Any_additional_documentation_been_given_after_loading != null)
+            if (vehiclwInformation.Ask1 != null && vehiclwInformation.Ask1.Any_additional_documentation_been_given_after_loading != null)
             {
                 foreach (var item in vehiclwInformation.Ask1.Any_additional_documentation_been_given_after_loading)
                 {
@@ -198,7 +198,7 @@ namespace MDispatch.View.PageApp
 
         private void AddBlocSeatBelts(VehiclwInformation vehiclwInformation)
         {
-            if (vehiclwInformation.Ask1.App_will_force_driver_to_take_pictures_of_each_strap != null)
+            if (vehiclwInformation.Ask1 != null && vehiclwInformation.Ask1.App_will_force_driver_to_take_pictures_of_each_strap != null)
             {
                 foreach (var item in vehiclwInformation.Ask1.App_will_force_driver_to_take_pictures_of_each_strap)
                 {
@@ -222,7 +222,7 @@ namespace MDispatch.View.PageApp
 
         private void AddBlocTakePictures(VehiclwInformation vehiclwInformation)
         {
-            if (vehiclwInformation.Ask1.Photo_after_loading_in_the_truck != null)
+            if (vehiclwInformation.Ask1 != null && vehiclwInformation.Ask1.Photo_after_loading_in_the_truck != null)
             {
                 foreach (var item in vehiclwInformation.Ask1.Photo_after_loading_in_the_truck)
                 {
@@ -246,7 +246,7 @@ namespace MDispatch.View.PageApp
 
         private void AddBlocPhotoClient(VehiclwInformation vehiclwInformation)
         {
-            if (vehiclwInformation.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo != null)
+            if (vehiclwInformation.askForUserDelyveryM != null && vehiclwInformation.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo != null)
             {
                 foreach (var item in vehiclwInformation.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo)
                 {
@@ -261,7 +261,7 @@ namespace MDispatch.View.PageApp
                     blockPhotoInspectedClient.Children.Add(image);
                 }
             }
-            else if(vehiclwInformation.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up != null)
+            else if(vehiclwInformation.askForUserDelyveryM != null && vehiclwInformation.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up != null)
             {
                 blockPhotoInspectedClient.IsVisible = false;
                 answerClient.IsVisible = true;

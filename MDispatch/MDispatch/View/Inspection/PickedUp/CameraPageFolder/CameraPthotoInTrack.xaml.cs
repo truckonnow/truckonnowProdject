@@ -30,7 +30,9 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
         {
             if (!result.Success)
                 return;
-            if(indexPhoto == 28)
+
+            SetTitle();
+            if (indexPhoto == 28)
             {
                 await Navigation.PopAsync(true);
                 Photo photo1 = new Photo();
@@ -45,25 +47,35 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
             {
                 indexPhoto = 24;
                 paternPhoto.Source = $"{nameVech}{indexPhoto}.png";
-                titlePhoto.Text = indexPhoto.ToString();
+                titlePhoto.Text = $"Left rear view mirror (Front part) - {indexPhoto.ToString()}";
             }
             else if(indexPhoto == 25)
             {
                 indexPhoto = 28;
                 paternPhoto.Source = $"{nameVech}{indexPhoto}.png";
-                titlePhoto.Text = indexPhoto.ToString();
+                titlePhoto.Text = $"Vehicle hood - {indexPhoto.ToString()}";
             }
             else
             {
                 indexPhoto++;
                 paternPhoto.Source = $"{nameVech}{indexPhoto}.png";
-                titlePhoto.Text = indexPhoto.ToString();
+                titlePhoto.Text = $"Vehicle hood - {indexPhoto.ToString()}";
             }
+
             Photo photo = new Photo();
             photo.Base64 = JsonConvert.SerializeObject(result.Image);
             photo.path = $"../Photo/{ask1Page.ask1PageMV.VehiclwInformation.Id}/PikedUp/CameraTrack/{photos.Count + 1}.Jpeg";
             photos.Add(photo);
             imagesByte.Add(result.Image);
+        }
+
+
+        private void SetTitle()
+        {
+            if (indexPhoto == 29)
+            {
+
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ namespace MDispatch.View.PageApp
         private FullPagePhotoMV fullPagePhotoMV = null;
         private string pngPaternPhoto = null;
 
-        public FullPagePhoto(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string pngPaternPhoto, string typeCar, int photoIndex, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate)
+        public FullPagePhoto(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string pngPaternPhoto, string typeCar, int photoIndex, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate, string nameLayoute)
         {
             this.pngPaternPhoto = pngPaternPhoto;
             fullPagePhotoMV = new FullPagePhotoMV(managerDispatchMob, vehiclwInformation, idShip, typeCar, photoIndex, Navigation, initDasbordDelegate, getVechicleDelegate);
@@ -28,7 +28,7 @@ namespace MDispatch.View.PageApp
             dmla.IsVisible = false;
             if (fullPagePhotoMV.Car.typeIndex != null && fullPagePhotoMV.Car.typeIndex != "")
             {
-                NameSelectPhoto.Text = $"{fullPagePhotoMV.Car.typeIndex} - {photoIndex}";
+                NameSelectPhoto.Text = $"{nameLayoute} - {photoIndex}";
             }
             else
             {

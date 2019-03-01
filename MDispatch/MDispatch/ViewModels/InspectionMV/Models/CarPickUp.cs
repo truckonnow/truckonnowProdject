@@ -6,6 +6,11 @@ namespace MDispatch.ViewModels.InspectionMV.Models
     {
         public string typeIndex { get; set; } = "PickUp";
 
+        public string GetNameLayout(int inderxPhotoInspektion)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public async void OrintableScreen(int inderxPhotoInspektion)
         {
             throw new System.NotImplementedException();
