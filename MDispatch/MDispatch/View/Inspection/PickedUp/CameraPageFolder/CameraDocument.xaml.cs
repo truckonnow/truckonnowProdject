@@ -14,7 +14,6 @@ namespace MDispatch.View.AskPhoto.CameraPageFolder
             this.askPage = askPage;
 			InitializeComponent ();
             NavigationPage.SetHasNavigationBar(this, false);
-
         }
 
         private async void CameraPage_OnPhotoResult(PhotoResultEventArgs result)

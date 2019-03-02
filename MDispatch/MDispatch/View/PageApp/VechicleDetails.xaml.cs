@@ -121,7 +121,7 @@ namespace MDispatch.View.PageApp
             System.Threading.CancellationToken cancellationToken = System.Threading.CancellationToken.None;
             Stream stream = await streamImageSource.Stream(cancellationToken);
             stream.CopyTo(memoryStream);
-            await PopupNavigation.PushAsync(new ViewPhoto(memoryStream.ToArray()));
+            await Navigation.PushAsync(new ViewPhoto(memoryStream.ToArray()));
         }
 
         private void AddBlocItemPhoto(VehiclwInformation vehiclwInformation)
@@ -336,12 +336,13 @@ namespace MDispatch.View.PageApp
         {
             var assembly = typeof(VechicleDetails).GetTypeInfo().Assembly;
             byte[] imageData;
-
             using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(base64)))
             {
-                imageData = ms.ToArray();
+                imageData = ms.ToArray();;
             }
-            return DependencyService.Get<IResizeImage>().ResizeImage(imageData, 400, 400);
+            int width = DependencyService.Get<IResizeImage>().GetWidthImage(imageData);
+            int heigth = DependencyService.Get<IResizeImage>().GetHeigthImage(imageData);
+            return DependencyService.Get<IResizeImage>().ResizeImage(imageData, (width / 100) * 44, (heigth / 100) * 44);
         }
     }
 }

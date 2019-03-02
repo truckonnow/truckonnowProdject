@@ -14,6 +14,8 @@ namespace MDispatch.Droid
             base.OnCreate(bundle);
             Rg.Plugins.Popup.Popup.Init(this, bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            typeof(System.ComponentModel.INotifyPropertyChanging).GetHashCode();
+            typeof(System.ComponentModel.INotifyPropertyChanged).GetHashCode();
             LoadApplication(new App());
         }
     }

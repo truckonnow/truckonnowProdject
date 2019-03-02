@@ -45,5 +45,17 @@ namespace MDispatch.iOS.NewRender
             }
             return image;
         }
+
+        public int GetHeigthImage(byte[] imageData)
+        {
+            UIImage originalImage = ImageFromByteArray(imageData);
+            return (int)originalImage.Size.Height;
+        }
+
+        public int GetWidthImage(byte[] imageData)
+        {
+            UIImage originalImage = ImageFromByteArray(imageData);
+            return (int)originalImage.Size.Width;
+        }
     }
 }

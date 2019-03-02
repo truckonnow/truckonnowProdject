@@ -10,6 +10,18 @@ namespace MDispatch.Droid.NewrRender.ResizerImage
 {
     public class ResizeImgDroid : IResizeImage
     {
+        public int GetHeigthImage(byte[] imageData)
+        {
+            Bitmap originalImage = BitmapFactory.DecodeByteArray(imageData, 0, imageData.Length);
+            return originalImage.Height;
+        }
+
+        public int GetWidthImage(byte[] imageData)
+        {
+            Bitmap originalImage = BitmapFactory.DecodeByteArray(imageData, 0, imageData.Length);
+            return originalImage.Width;
+        }
+
         public byte[] ResizeImage(byte[] imageData, float width, float height)
         {
 
