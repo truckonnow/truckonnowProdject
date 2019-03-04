@@ -389,5 +389,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\pickedUpViewOrder.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\BackIconpage.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

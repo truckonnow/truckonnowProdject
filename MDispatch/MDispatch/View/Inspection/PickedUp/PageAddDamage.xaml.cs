@@ -77,11 +77,14 @@ namespace MDispatch.View.Inspection.PickedUp
 
         protected override bool OnBackButtonPressed()
         {
-            List<Xamarin.Forms.View> views = absla.Children.ToList().GetRange(1, absla.Children.ToList().Count - 1);
-            foreach(var view in views)
+            if (absla.Children.ToList().Count - 1 > 2)
             {
-                view.GestureRecognizers.Clear();
-                fullPagePhoto.AddDamagCurrentLayut(view);
+                List<Xamarin.Forms.View> views = absla.Children.ToList().GetRange(2, absla.Children.ToList().Count - 2);
+                foreach (var view in views)
+                {
+                    view.GestureRecognizers.Clear();
+                    fullPagePhoto.AddDamagCurrentLayut(view);
+                }
             }
             return base.OnBackButtonPressed();
         }
@@ -89,6 +92,20 @@ namespace MDispatch.View.Inspection.PickedUp
         private async Task WaiteSelectDamage()
         {
             await Task.Run(() => { while(stateSelect == 1) { } });
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            if (absla.Children.ToList().Count - 1 > 2)
+            {
+                List<Xamarin.Forms.View> views = absla.Children.ToList().GetRange(2, absla.Children.ToList().Count - 2);
+                foreach (var view in views)
+                {
+                    view.GestureRecognizers.Clear();
+                    fullPagePhoto.AddDamagCurrentLayut(view);
+                }
+            }
+            await Navigation.PopAsync();
         }
     }
 }

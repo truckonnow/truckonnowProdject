@@ -18,7 +18,7 @@ namespace MDispatch.View.Inspection.PickUp.CameraPageFolder
 		{
             this.ask1Page = ask1Page;
 			InitializeComponent ();
-            titlePhoto.Text = $"{photos.Count+1}";
+            titlePhoto.Text = $"safety belt {photos.Count + 1}";
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
@@ -42,7 +42,12 @@ namespace MDispatch.View.Inspection.PickUp.CameraPageFolder
             photo.path = $"../Photo/{ask1Page.ask1PageMV.VehiclwInformation.Id}/PikedUp/CameraSeatBelts/{photos.Count + 1}.Jpeg";
             photos.Add(photo);
             imagesByte.Add(result.Image);
-            titlePhoto.Text = $"{photos.Count + 1}";
+            titlePhoto.Text = $"safety belt {photos.Count + 1}";
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            await Navigation.PopAsync();
         }
     }
 }

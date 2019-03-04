@@ -23,5 +23,10 @@ namespace MDispatch.View.Inspection.CameraPageFolder
                 return;
             ask1Page.AddPhotoSpareParts(result.Image);
         }
+
+        private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
     }
 }

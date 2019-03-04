@@ -6,6 +6,12 @@
     <ContentPage.Content>
         <AbsoluteLayout x:Name="absla">
             <TouchImage:TouchImage AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" x:Name="touchImage" TouchAction="TouchImage_TouchAction" />
+            <Image Source="BackIconpage.png"  HorizontalOptions="Start" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".02, .02, 20, 20">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Label TextColor="#4fd2c2" Text="Tap on the place with the damage to add damage, that would remove touch on the damage" FontSize="15" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .98, Autosize, Autosize"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

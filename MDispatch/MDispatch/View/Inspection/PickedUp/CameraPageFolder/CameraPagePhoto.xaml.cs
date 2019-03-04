@@ -42,13 +42,13 @@ namespace MDispatch.View.PageApp
             await Navigation.PopAsync(true);
         }
 
-        protected override void OnDisappearing()
+        private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
         {
             if (pageAddDamage != null)
             {
                 pageAddDamage.stateSelect = 0;
             }
-            base.OnDisappearing();
+            await Navigation.PopAsync();
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MDispatch.View.PageApp.FullPagePhoto"
-                   NavigationPage.HasBackButton ="True">
+             x:Class="MDispatch.View.PageApp.FullPagePhoto">
     <ContentPage.Content>
         <AbsoluteLayout x:Name="laAbsul">
             <Image x:Name="SelectPhoto" Source="{Binding SourseImage}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"/>
@@ -10,6 +9,11 @@
             <AbsoluteLayout x:Name="dmla" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"/>
             <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" BackgroundColor="#E6E6E6"
                          AbsoluteLayout.LayoutBounds="1, 0, 1, 44" Opacity="0.3" Padding="7">
+                <Image Source="BackIconpage.png" HeightRequest="20" WidthRequest="20">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image> 
                 <Label x:Name="NameSelectPhoto" Text="--------------------" TextColor="Black" Margin="5"/>
                 <Button x:Name="btnDamage" IsVisible="False" Text="Add Damag" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="81" HorizontalOptions="EndAndExpand" Clicked="Button_Clicked_2"/>
                 <Button x:Name="btnAddPhoto" Text="Add Photo" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="79"  Clicked="Button_Clicked" HorizontalOptions="EndAndExpand"/>

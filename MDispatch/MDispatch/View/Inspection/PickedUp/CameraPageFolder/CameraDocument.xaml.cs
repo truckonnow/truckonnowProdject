@@ -23,5 +23,10 @@ namespace MDispatch.View.AskPhoto.CameraPageFolder
                 return;
             askPage.AddPhotoDocumentom(result.Image);
         }
+
+        private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
     }
 }

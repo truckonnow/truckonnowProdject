@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sig="clr-namespace:SignaturePad.Forms;assembly=SignaturePad.Forms"
-             x:Class="MDispatch.View.Inspection.PickedUp.LiabilityAndInsurance">
+             x:Class="MDispatch.View.Inspection.PickedUp.LiabilityAndInsurance"
+             Title="BILL OF LADING">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>

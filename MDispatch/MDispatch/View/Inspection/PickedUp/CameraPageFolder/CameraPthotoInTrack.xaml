@@ -3,13 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDispatch.View.Inspection.PickedUp.CameraPageFolder.CameraPthotoInTrack"
              xmlns:camera="clr-namespace:MDispatch.NewElement"
-             OnPhotoResult="CameraPage_OnPhotoResult"
-                   NavigationPage.HasBackButton ="True">
+             OnPhotoResult="CameraPage_OnPhotoResult">
     <ContentPage.Content>
         <AbsoluteLayout >
             <Label x:Name="titlePhoto" HorizontalTextAlignment="Center" TextColor="Black" BackgroundColor="Silver" Opacity="0.7" FontSize="18" 
                    AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" AbsoluteLayout.LayoutBounds="0, 0, 1, AutoSize"/>
             <Image x:Name="paternPhoto" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" />
+            <Image Source="BackIconpage.png"  HorizontalOptions="Start" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".02, .02, 20, 20">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Label TextColor="#4fd2c2" Text="Try to photograph the item exactly on the layout" FontSize="15" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .98, Autosize, Autosize"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </camera:CameraPage>

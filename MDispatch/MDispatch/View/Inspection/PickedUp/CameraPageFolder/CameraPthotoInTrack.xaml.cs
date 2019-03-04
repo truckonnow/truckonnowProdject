@@ -22,8 +22,8 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
             this.ask1Page = ask1Page;
             this.nameVech = nameVech;
             NavigationPage.SetHasNavigationBar(this, false);
-            titlePhoto.Text = indexPhoto.ToString();
             paternPhoto.Source = $"{nameVech}{indexPhoto}.png";
+            SetTitle();
         }
 
         private async void CameraPage_OnPhotoResult(PhotoResultEventArgs result)
@@ -46,22 +46,18 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
             else if(indexPhoto == 31)
             {
                 indexPhoto = 24;
-                paternPhoto.Source = $"{nameVech}{indexPhoto}.png";
-                titlePhoto.Text = $"Left rear view mirror (Front part) - {indexPhoto.ToString()}";
             }
             else if(indexPhoto == 25)
             {
                 indexPhoto = 28;
                 paternPhoto.Source = $"{nameVech}{indexPhoto}.png";
-                titlePhoto.Text = $"Vehicle hood - {indexPhoto.ToString()}";
             }
             else
             {
                 indexPhoto++;
                 paternPhoto.Source = $"{nameVech}{indexPhoto}.png";
-                titlePhoto.Text = $"Vehicle hood - {indexPhoto.ToString()}";
             }
-
+            SetTitle();
             Photo photo = new Photo();
             photo.Base64 = JsonConvert.SerializeObject(result.Image);
             photo.path = $"../Photo/{ask1Page.ask1PageMV.VehiclwInformation.Id}/PikedUp/CameraTrack/{photos.Count + 1}.Jpeg";
@@ -69,13 +65,37 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
             imagesByte.Add(result.Image);
         }
 
-
         private void SetTitle()
         {
             if (indexPhoto == 29)
             {
-
+                titlePhoto.Text = $"Right rear view mirror (Front part) - {indexPhoto.ToString()}";
             }
+            else if (indexPhoto == 30)
+            {
+                titlePhoto.Text = $"Vehicle hood - {indexPhoto.ToString()}";
+            }
+            else if (indexPhoto == 31)
+            {
+                titlePhoto.Text = $"Windshield with vehicle top - {indexPhoto.ToString()}";
+            }
+            else if (indexPhoto == 24)
+            {
+                titlePhoto.Text = $"Front left vehicle headlight - {indexPhoto.ToString()}";
+            }
+            else if (indexPhoto == 25)
+            {
+                titlePhoto.Text = $"Front right vehicle headlight - {indexPhoto.ToString()}";
+            }
+            else if (indexPhoto == 28)
+            {
+                titlePhoto.Text = $"Left rear view mirror (Front part) - {indexPhoto.ToString()}";
+            }
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            await Navigation.PopAsync();
         }
     }
 }

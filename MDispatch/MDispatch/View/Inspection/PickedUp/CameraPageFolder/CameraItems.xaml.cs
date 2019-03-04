@@ -1,4 +1,5 @@
-﻿using MDispatch.NewElement;using Xamarin.Forms;
+﻿using MDispatch.NewElement;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace MDispatch.View.AskPhoto.CameraPageFolder
@@ -22,6 +23,11 @@ namespace MDispatch.View.AskPhoto.CameraPageFolder
             if (!result.Success)
                 return;
             askPage.AddPhotoItems(result.Image);
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            await Navigation.PopAsync();
         }
     }
 }
