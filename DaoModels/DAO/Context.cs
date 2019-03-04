@@ -18,6 +18,7 @@ namespace DaoModels.DAO
         public DbSet<AskDelyvery> AskDelyveries { get; set; }
         public DbSet<AskForUserDelyveryM> askForUserDelyveryMs { get; set; }
         public DbSet<Damage> Damages { get; set; }
+        public DbSet<Geolocations> geolocations { get; set; }
 
         public Context()
         {

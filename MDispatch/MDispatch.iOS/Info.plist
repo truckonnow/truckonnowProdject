@@ -34,5 +34,9 @@
 	<string>MDispatch</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>CustomProperty</key>
+	<string>NSCalendarsUsageDescription</string>
+	<key>CustomProperty1</key>
+	<string>Needs Calendar Permission</string>
 </dict>
 </plist>

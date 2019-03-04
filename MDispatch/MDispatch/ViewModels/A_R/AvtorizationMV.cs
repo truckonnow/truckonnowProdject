@@ -1,4 +1,5 @@
 ﻿using MDispatch.Service;
+using MDispatch.Service.GeloctionGPS;
 using MDispatch.View;
 using MDispatch.View.TabPage;
 using Plugin.Settings;
@@ -71,6 +72,7 @@ namespace MDispatch.ViewModels
             {
                 CrossSettings.Current.AddOrUpdateValue("Token", token);
                 Application.Current.MainPage = new NavigationPage(new TabPage(managerDispatchMob));
+                await Utils.StartListening();
             }
             else if(state == 4)
             {
