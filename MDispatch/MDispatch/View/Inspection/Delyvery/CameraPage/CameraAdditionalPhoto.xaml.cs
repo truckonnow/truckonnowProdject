@@ -29,7 +29,7 @@ namespace MDispatch.View.Inspection.Delyvery.CameraPage
             countPhoto++;
         }
 
-        private async void Button_Clicked(object sender, System.EventArgs e)
+        private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
         {
             await Navigation.PopAsync(true);
         }

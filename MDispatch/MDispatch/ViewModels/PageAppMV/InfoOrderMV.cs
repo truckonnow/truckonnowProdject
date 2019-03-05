@@ -151,35 +151,35 @@ namespace MDispatch.ViewModels.PageAppMV
                 }
                 else if (photoInspections == null || photoInspections.Count == 0)
                 {
-                    ICar car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+                    ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Delyvered", vehiclwInformation));
-                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}7.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 7, initDasbordDelegate, getVechicleDelegate), true);
+                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}7.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 7, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(7)), true);
                     return;
                 }
                 else if (photoInspections.Count < 7 && photoInspections[photoInspections.Count - 1].IndexPhoto != 20)
                 {
-                    ICar car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+                    ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Delyvered", vehiclwInformation));
                     PhotoInspection photoInspection = photoInspections[photoInspections.Count - 1];
                     if (photoInspection.IndexPhoto == 7)
                     {
-                        await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}19.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 19, initDasbordDelegate, getVechicleDelegate));
+                        await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}19.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 19, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(19)));
                     }
                     else if (photoInspection.IndexPhoto == 19)
                     {
-                        await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}2.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 2, initDasbordDelegate, getVechicleDelegate));
+                        await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}2.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 2, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(2)));
                     }
                     else if (photoInspection.IndexPhoto == 2)
                     {
-                        await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}16.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 16, initDasbordDelegate, getVechicleDelegate));
+                        await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}16.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 16, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(16)));
                     }
                     else if (photoInspection.IndexPhoto == 16)
                     {
-                        await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}23.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 23, initDasbordDelegate, getVechicleDelegate));
+                        await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}23.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 23, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(23)));
                     }
                     else if (photoInspection.IndexPhoto == 23)
                     {
-                        await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}20.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 20, initDasbordDelegate, getVechicleDelegate));
+                        await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}20.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 20, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(20)));
                     }
                     return;
                 }

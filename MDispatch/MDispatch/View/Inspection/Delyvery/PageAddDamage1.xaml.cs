@@ -94,5 +94,19 @@ namespace MDispatch.View.Inspection.PickedUp
                 { }
             });
         }
+
+        private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            if (absla.Children.ToList().Count - 1 > 2)
+            {
+                List<Xamarin.Forms.View> views = absla.Children.ToList().GetRange(2, absla.Children.ToList().Count - 2);
+                foreach (var view in views)
+                {
+                    view.GestureRecognizers.Clear();
+                    fullPagePhotoDelyvery.AddDamagCurrentLayut(view);
+                }
+            }
+            await Navigation.PopAsync();
+        }
     }
 }

@@ -29,24 +29,10 @@ namespace MDispatch.View.Inspection.Delyvery
 
         private void InitAsk()
         {
-            curentTime = askDelyveryMV.TimeOfCurren.ToString("hh':'mm");
+            curentTime = DateTime.Now.TimeOfDay.ToString("hh':'mm");
             currentDate = DateTime.Now.ToShortDateString();
             askDelyveryMV.AskDelyvery.Time_Of_Delivery = $"{currentDate} {curentTime}";
-        }
-
-        private void DatePicker_DateSelected(object sender, DateChangedEventArgs e)
-        {
-            currentDate = e.NewDate.ToShortDateString();
-            askDelyveryMV.AskDelyvery.Time_Of_Delivery = $"{currentDate} {curentTime}";
-        }
-
-        private void TimePicker_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "Time")
-            {
-                curentTime = time.Time.ToString("hh':'mm");
-                askDelyveryMV.AskDelyvery.Time_Of_Delivery = $"{currentDate} {curentTime}";
-            }
+            time.Text = $"{currentDate} {curentTime}";
         }
         #endregion
 

@@ -17,7 +17,7 @@ namespace MDispatch.View.PageApp
         private string pngPaternPhoto = null;
 
         public FullPagePhotoDelyvery(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string pngPaternPhoto,
-            string typeCar, int photoIndex, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate)
+            string typeCar, int photoIndex, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate, string nameLayoute)
         {
             this.pngPaternPhoto = pngPaternPhoto;
             fullPagePhotoDelyveryMV = new FullPagePhotoDelyveryMV(managerDispatchMob, vehiclwInformation, idShip, typeCar, photoIndex, Navigation, initDasbordDelegate, getVechicleDelegate);
@@ -28,7 +28,7 @@ namespace MDispatch.View.PageApp
             dmla.IsVisible = false;
             if (fullPagePhotoDelyveryMV.Car.typeIndex != null && fullPagePhotoDelyveryMV.Car.typeIndex != "")
             {
-                NameSelectPhoto.Text = $"{fullPagePhotoDelyveryMV.Car.typeIndex} - {photoIndex}";
+                NameSelectPhoto.Text = $"{nameLayoute} - {photoIndex}";
             }
             else
             {
@@ -106,6 +106,11 @@ namespace MDispatch.View.PageApp
         {
             DependencyService.Get<IOrientationHandler>().ForceSensor();
             return base.OnBackButtonPressed();
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
         }
     }
 }

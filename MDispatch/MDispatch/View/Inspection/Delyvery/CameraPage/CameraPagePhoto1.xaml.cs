@@ -57,5 +57,10 @@ namespace MDispatch.View.PageApp
             paternPhoto.HeightRequest = onePercentheigth * 100;
             paternPhoto.WidthRequest = onePercentwidth * 100;
         }
+
+        private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
     }
 }

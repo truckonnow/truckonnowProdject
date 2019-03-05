@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
-             x:Class="MDispatch.View.Inspection.Delyvery.AskPageDelyvery">
+             x:Class="MDispatch.View.Inspection.Delyvery.AskPageDelyvery"
+             Title="Question inspection">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Next" Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
@@ -14,8 +15,7 @@
                         <Label Text="Time Of Delivery" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
                         <StackLayout Orientation="Horizontal">
-                            <DatePicker Format="dd/MM/yyyy" DateSelected="DatePicker_DateSelected"/>
-                            <TimePicker x:Name="time" Time="{Binding TimeOfCurren}" PropertyChanged="TimePicker_PropertyChanged"  Format="HH:mm"/>
+                            <Label x:Name="time" Text="" />
                         </StackLayout>
                     </StackLayout>
                 </Frame>

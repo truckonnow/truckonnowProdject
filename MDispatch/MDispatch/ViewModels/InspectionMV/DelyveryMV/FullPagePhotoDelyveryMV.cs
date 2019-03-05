@@ -207,23 +207,23 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             {
                 if(InderxPhotoInspektion == 7)
                 {
-                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{19}.png", Car.typeIndex, 19, initDasbordDelegate, getVechicleDelegate));
+                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{19}.png", Car.typeIndex, 19, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1)));
                 }
                 else if (InderxPhotoInspektion == 19)
                 {
-                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{2}.png", Car.typeIndex, 2, initDasbordDelegate, getVechicleDelegate));
+                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{2}.png", Car.typeIndex, 2, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1)));
                 }
                 else if (InderxPhotoInspektion == 2)
                 {
-                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{16}.png", Car.typeIndex, 16, initDasbordDelegate, getVechicleDelegate));
+                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{16}.png", Car.typeIndex, 16, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1)));
                 }
                 else if (InderxPhotoInspektion == 16)
                 {
-                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{23}.png", Car.typeIndex, 23, initDasbordDelegate, getVechicleDelegate));
+                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{23}.png", Car.typeIndex, 23, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1)));
                 }
                 else if (InderxPhotoInspektion == 23)
                 {
-                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{20}.png", Car.typeIndex, 20, initDasbordDelegate, getVechicleDelegate));
+                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{20}.png", Car.typeIndex, 20, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1)));
                 }
                 else if (InderxPhotoInspektion == 20)
                 {

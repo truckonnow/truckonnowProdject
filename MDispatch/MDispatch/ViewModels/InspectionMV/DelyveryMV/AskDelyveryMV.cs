@@ -47,11 +47,6 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             get => askDelyvery;
             set => SetProperty(ref askDelyvery, value);
         }
-        
-        public TimeSpan TimeOfCurren
-        {
-            get => DateTime.Now.TimeOfDay;
-        }
 
         public async void SaveAsk()
         {
@@ -76,7 +71,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             else if (state == 3)
             {
                 DependencyService.Get<IOrientationHandler>().ForceLandscape();
-                await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{VehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", VehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 1, initDasbordDelegate, getVechicleDelegate));
+                await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{VehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}7.png", VehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 7, initDasbordDelegate, getVechicleDelegate, ""));
                 Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
             else if (state == 4)
