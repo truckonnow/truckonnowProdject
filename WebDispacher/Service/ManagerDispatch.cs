@@ -14,6 +14,11 @@ namespace WebDispacher.Service
         {
             _sqlEntityFramworke = new SqlCommadWebDispatch();
         }
+        
+        public List<Driver> GetDrivers()
+        {
+            return _sqlEntityFramworke.GetDriversInDb();
+        }
 
         public void DeletedOrder(string id)
         {

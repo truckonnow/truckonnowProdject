@@ -18,6 +18,14 @@ namespace ApiMobaileServise.Servise
             CheckAndCreatedFolder();
         }
 
+        public void SaveGPSLocationData(string token, string longitude, string latitude)
+        {
+            Geolocations geolocations = new Geolocations();
+            geolocations.Latitude = latitude;
+            geolocations.Longitude = longitude;
+            sqlCommandApiMobile.SaveGPSLocationData(token, geolocations);
+        }
+
         public void SaveSigPhoto(string idVech, Photo sig)
         {
             sqlCommandApiMobile.SaveSigPikedUpInDb(idVech, sig);

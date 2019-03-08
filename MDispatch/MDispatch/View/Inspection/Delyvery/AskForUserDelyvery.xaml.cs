@@ -40,7 +40,7 @@ namespace MDispatch.View.Inspection.Delyvery
             button.TextColor = Color.FromHex("#4fd2c2");
             askForUsersDelyveryMW.AskForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up = button.Text;
             button1 = button;
-            if (button1.Text == "No")
+            if (button1.Text == "No, found an issue")
             {
                 await Navigation.PushAsync(new CameraAdditionalPhoto(this));
             }

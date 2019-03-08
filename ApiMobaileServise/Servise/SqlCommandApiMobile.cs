@@ -18,6 +18,15 @@ namespace ApiMobaileServise.Servise
         {
             context = new Context();
         }
+ 
+        public async void SaveGPSLocationData(string token, Geolocations geolocations)
+        {
+            context.Drivers.Load();
+            context.geolocations.Load();
+            Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
+            driver.geolocations = geolocations;
+            await context.SaveChangesAsync();
+        }
 
         public async Task<VehiclwInformation> SavePhotoInspectionInDb(string idVe, PhotoInspection photoInspection)
         {

@@ -3,6 +3,8 @@ using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using Plugin.Settings;
+using RestSharp;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Threading.Tasks;
@@ -42,9 +44,30 @@ namespace MDispatch.Service.GeloctionGPS
 
         private static void PositionChanged(object sender, PositionEventArgs e)
         {
-
+            ReqvestGPS(e.Position.Longitude.ToString(), e.Position.Latitude.ToString());
         }
 
+        public static void ReqvestGPS(string longitude, string latitude)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestRequest request = new RestRequest("Mobile/GPS/Save", Method.POST);
+                request.AddHeader("Accept", "application/json");
+                request.Parameters.Clear();
+                request.AddParameter("token", token);
+                request.AddParameter("longitude", longitude);
+                request.AddParameter("latitude", latitude);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+            }
+        }
 
         public static async Task StopListening()
         {

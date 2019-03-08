@@ -23,6 +23,12 @@ namespace WebDispacher.Dao
             context.VehiclwInformation.Load();
             context.Drivers.Load();
         }
+        
+        public List<Driver> GetDriversInDb()
+        {
+            context.geolocations.Load();
+            return context.Drivers.ToList();
+        }
 
         public async void RecurentOnDeleted(string id)
         {

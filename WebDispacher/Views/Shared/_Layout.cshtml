@@ -9,7 +9,7 @@
     <nav class="navst">
         <span style="margin-right:10px"><a class="linkASt" href="">Dispacher</a></span>
         <input class="btn" type="button" value="Order" @ViewData["hidden"] onclick="window.location.href='@Url.Action("NewLoad", "Dashbord")';"/>
-        <input class="btn" type="button" value="GPS Traking" @ViewData["hidden"] />
+        <input class="btn" type="button" value="GPS Traking" @ViewData["hidden"] onclick="window.location.href='@Url.Action("Map", "Geolcation")';"/>
         <input class="btn" type="button" value="Contacts" @ViewData["hidden"] />
         <input class="btn" type="button" value="Drivers" @ViewData["hidden"] onclick="window.location.href='@Url.Action("Drivers", "Driver")';"/>
         <input class="btn" type="button" value="Report" @ViewData["hidden"] />
