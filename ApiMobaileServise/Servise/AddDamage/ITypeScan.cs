@@ -1,4 +1,5 @@
 ﻿using DaoModels.DAO.Models;
+using System.Collections.Generic;
 
 namespace ApiMobaileServise.Servise.AddDamage
 {
@@ -8,5 +9,6 @@ namespace ApiMobaileServise.Servise.AddDamage
         int GetCordinatX(string indexPhoto, double X);
         int[] GetMaxMinForYAndX(string indexPhoto);
         void SetDamage(PhotoInspection photoInspection, string typrCar, string pathScan);
+        void SetDamage(List<DamageForUser> damageForUsers, string typrCar, string pathScan);
     }
 }

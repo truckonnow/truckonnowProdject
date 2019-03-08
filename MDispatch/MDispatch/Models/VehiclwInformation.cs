@@ -21,5 +21,6 @@ namespace MDispatch.Models
         public AskDelyvery AskDelyvery { get; set; }
         public AskForUserDelyveryM askForUserDelyveryM { get; set; }
         public Photo Scan { get; set; }
+        public List<DamageForUser> DamageForUsers { get; set; }
     }
 }

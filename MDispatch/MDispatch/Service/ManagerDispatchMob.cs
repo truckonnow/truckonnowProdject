@@ -144,6 +144,10 @@ namespace MDispatch.Service
                 {
                     stateInspection = inspection.SaveSigPikedUp(token, (Photo)obj, id, ref description);
                 }
+                else if (typeInspection == "DamageForUser")
+                {
+                    stateInspection = inspection.SaveDamageForuser(token, id, (List<DamageForUser>)obj, ref description);
+                }
             }
             inspection = null;
             return stateInspection;

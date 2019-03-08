@@ -26,6 +26,17 @@ namespace ApiMobaileServise.Servise
             sqlCommandApiMobile.SaveGPSLocationData(token, geolocations);
         }
 
+        public void SaveDamageForUser(string idVech, string damageForUserJson)
+        {
+            List<DamageForUser> damageForUsers = JsonConvert.DeserializeObject<List<DamageForUser>>(damageForUserJson);
+            Task.Run(async() =>
+            {
+                VehiclwInformation vehiclwInformation = await sqlCommandApiMobile.GetVehiclwInformationAndSaveDamageForUser(idVech, damageForUsers);
+                ITypeScan typeScan = GetTypeScan(vehiclwInformation.Ask.TypeVehicle);
+                typeScan.SetDamage(damageForUsers, vehiclwInformation.Type, vehiclwInformation.Scan.path);
+            });
+        }
+
         public void SaveSigPhoto(string idVech, Photo sig)
         {
             sqlCommandApiMobile.SaveSigPikedUpInDb(idVech, sig);

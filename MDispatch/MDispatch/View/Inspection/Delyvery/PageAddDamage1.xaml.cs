@@ -40,7 +40,7 @@ namespace MDispatch.View.Inspection.PickedUp
         private async void TouchImage_TouchAction(object sender, NewElement.TouchCordinate.TouchActionEventArgs e)
         {
             stateSelect = 1;
-            await PopupNavigation.PushAsync(new DamageSelecter1(fullPagePhotoDelyveryMV, this), true);
+            await PopupNavigation.PushAsync(new DamageSelecter1(null, this), true);
             await WaiteSelectDamage();
             await PopupNavigation.PopAsync(true);
             stateSelect = 1;

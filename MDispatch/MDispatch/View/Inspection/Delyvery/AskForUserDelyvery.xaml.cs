@@ -1,6 +1,7 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.View.Inspection.Delyvery.CameraPage;
+using MDispatch.View.Inspection.PickedUp;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using Newtonsoft.Json;
 using System;
@@ -72,6 +73,7 @@ namespace MDispatch.View.Inspection.Delyvery
                 HeightRequest = 50,
                 WidthRequest = 50
             });
+            await Navigation.PushAsync(new PageAddDamageFoUser(askForUsersDelyveryMW, ImageSource.FromStream(() => new MemoryStream(image)), blockAskPhoto));
         }
         #endregion
 

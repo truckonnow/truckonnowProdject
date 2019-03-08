@@ -245,5 +245,34 @@ namespace ApiMobaileServise.Controllers
             }
             return respons;
         }
+
+        [HttpPost]
+        [Route("Damages/User")]
+        public string AddDamageForUser(string token, string idVech, string damageForUserJson)
+        {
+            string respons = null;
+            if (token == null || token == "")
+            {
+                return JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
+            }
+            try
+            {
+                bool isToken = managerMobileApi.CheckToken(token);
+                if (isToken)
+                {
+                    managerMobileApi.SaveDamageForUser(idVech, damageForUserJson);
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
+                }
+                else
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "2", null));
+                }
+            }
+            catch (Exception)
+            {
+                respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
+            }
+            return respons;
+        }
     }
 }

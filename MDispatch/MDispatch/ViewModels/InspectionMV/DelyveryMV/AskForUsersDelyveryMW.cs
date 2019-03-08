@@ -5,6 +5,8 @@ using MDispatch.View.Inspection.Delyvery;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -56,6 +58,8 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             set => SetProperty(ref inderxPhotoInspektion, value);
         }
 
+        public List<DamageForUser> damageForUsers { get; set; }
+
         public async void SaveAsk()
         {
             await PopupNavigation.PushAsync(new LoadPage(), true);
@@ -64,6 +68,10 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             int state = 0;
             await Task.Run(() =>
             {
+                Task.Run(() =>
+                {
+                    managerDispatchMob.AskWork("DamageForUser", token, vehiclwInformation.Id, damageForUsers, ref description);
+                });
                 state = managerDispatchMob.AskWork("AskForUserDelyvery", token, VehiclwInformation.Id, AskForUserDelyveryM, ref description);
                 initDasbordDelegate.Invoke();
             });
@@ -87,7 +95,43 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 //FeedBack = "Technical work on the service";
             }
         }
-        
+
+        public void RemmoveDamage(Image image, StackLayout stackLayout)
+        {
+            if (image != null && damageForUsers != null && damageForUsers.FirstOrDefault(d => d.Image == image) != null)
+            {
+                List<ImageSource> AllSourseImage = new List<ImageSource>();
+                stackLayout.Children.ToList().ForEach((imageV) => 
+                {
+                    Image tempImage = (Image)imageV;
+                    AllSourseImage.Add(tempImage.Source);
+                });
+                List<ImageSource> imageSources2 = new List<ImageSource>(AllSourseImage);
+                DamageForUser damageForUser = damageForUsers.FirstOrDefault(d => d.Image == image);
+                imageSources2.Remove(imageSources2.FirstOrDefault(i => i == damageForUser.ImageSource));
+                AllSourseImage = imageSources2;
+                damageForUsers.Remove(damageForUser);
+            }
+        }
+
+        internal void SetDamage(string nameDamage, int indexDamage, string prefNameDamage, double xInterest, double yInterest, Image image, ImageSource imageSource1)
+        {
+            DamageForUser damageForUser = new DamageForUser();
+            damageForUser.FullNameDamage = $"{prefNameDamage} - {nameDamage}";
+            damageForUser.TypePrefDamage = prefNameDamage;
+            damageForUser.IndexDamage = indexDamage;
+            damageForUser.XInterest = xInterest;
+            damageForUser.YInterest = yInterest;
+            damageForUser.Image = image;
+            damageForUser.TypeCurrentStatus = "D";
+            damageForUser.ImageSource = imageSource1;
+            if (damageForUsers == null)
+            {
+                damageForUsers = new List<DamageForUser>();
+            }
+            damageForUsers.Add(damageForUser);
+        }
+
         public async void Continue()
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");

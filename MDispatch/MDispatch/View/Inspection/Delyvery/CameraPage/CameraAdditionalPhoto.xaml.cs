@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using MDispatch.NewElement;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace MDispatch.View.Inspection.Delyvery.CameraPage
@@ -14,6 +15,7 @@ namespace MDispatch.View.Inspection.Delyvery.CameraPage
             this.askForUserDelyvery = askForUserDelyvery;
 			InitializeComponent ();
             NavigationPage.SetHasNavigationBar(this, false);
+            DependencyService.Get<IOrientationHandler>().ForceLandscape();
         }
 
         private async void CameraPage_OnPhotoResult(NewElement.PhotoResultEventArgs result)
@@ -23,6 +25,7 @@ namespace MDispatch.View.Inspection.Delyvery.CameraPage
             askForUserDelyvery.AddPhotoAdditional(result.Image);
             if(countPhoto == 10)
             {
+                DependencyService.Get<IOrientationHandler>().ForceSensor();
                 await Navigation.PopAsync();
                 return;
             }
@@ -30,6 +33,18 @@ namespace MDispatch.View.Inspection.Delyvery.CameraPage
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            DependencyService.Get<IOrientationHandler>().ForceSensor();
+            await Navigation.PopAsync(true);
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            OnBackButtonPressedAsync();
+            return base.OnBackButtonPressed();
+        }
+
+        private async void OnBackButtonPressedAsync()
         {
             await Navigation.PopAsync(true);
         }

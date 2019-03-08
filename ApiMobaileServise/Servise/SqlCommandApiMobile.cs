@@ -28,6 +28,16 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
+        public async Task<VehiclwInformation> GetVehiclwInformationAndSaveDamageForUser(string idVech, List<DamageForUser> damageForUsers)
+        {
+            context.VehiclwInformation.Load();
+            context.DamageForUsers.Load();
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idVech));
+            vehiclwInformation.DamageForUsers.AddRange(damageForUsers);
+            await context.SaveChangesAsync();
+            return vehiclwInformation;
+        }
+
         public async Task<VehiclwInformation> SavePhotoInspectionInDb(string idVe, PhotoInspection photoInspection)
         {
             context.VehiclwInformation.Load();

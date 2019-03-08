@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
+using System.Collections.Generic;
 
 namespace MDispatch.Service
 {
@@ -310,6 +311,45 @@ namespace MDispatch.Service
                 request.AddParameter("token", token);
                 request.AddParameter("idVe", id);
                 request.AddParameter("jsonStr", strPhotoInspection);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description);
+            }
+        }
+
+        public int SaveDamageForuser(string token, string idVech, List<DamageForUser> damageForUsers, ref string description)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                if (damageForUsers != null)
+                {
+                    damageForUsers.ForEach((dm) =>
+                    {
+                        dm.Image = null;
+                        dm.ImageSource = null;
+                    });
+                }
+                string strDamageForUsers = JsonConvert.SerializeObject(damageForUsers);
+                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestRequest request = new RestRequest("Mobile/Damages/User", Method.POST);
+                request.AddHeader("Accept", "application/json");
+                request.Parameters.Clear();
+                request.AddParameter("token", token);
+                request.AddParameter("idVech", idVech);
+                request.AddParameter("damageForUserJson", strDamageForUsers);
                 response = client.Execute(request);
                 content = response.Content;
             }

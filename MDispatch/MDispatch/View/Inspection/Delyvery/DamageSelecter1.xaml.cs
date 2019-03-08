@@ -1,4 +1,5 @@
-﻿using MDispatch.ViewModels.InspectionMV.DelyveryMV;
+﻿using MDispatch.View.PageApp;
+using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using Rg.Plugins.Popup.Pages;
 using System.Collections.Generic;
 using Xamarin.Forms;
@@ -9,28 +10,38 @@ namespace MDispatch.View.Inspection.PickedUp
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DamageSelecter1 : PopupPage
     {
-        private FullPagePhotoDelyveryMV fullPagePhotoDelyveryMV = null;
-        private PageAddDamage1 pageAddDamage1 = null;
+        private PageAddDamageFoUser pageAddDamageFoUser = null;
+        private PageAddDamage1 pageAddDamage = null;
 
-        public DamageSelecter1(FullPagePhotoDelyveryMV fullPagePhotoDelyveryMV, PageAddDamage1 pageAddDamage1)
+        public DamageSelecter1(PageAddDamageFoUser pageAddDamageFoUser, PageAddDamage1 pageAddDamage)
         {
-            this.pageAddDamage1 = pageAddDamage1;
-            fullPagePhotoDelyveryMV = fullPagePhotoDelyveryMV;
+            this.pageAddDamageFoUser = pageAddDamageFoUser;
+            this.pageAddDamage = pageAddDamage;
             InitializeComponent();
             damageCollection.ItemsSource = collectionDamadge;
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            pageAddDamage1.indexSelectDamage = collectionDamadge.IndexOf((string)e.SelectedItem);
-            pageAddDamage1.prefNameDamage = e.SelectedItem.ToString().Remove(e.SelectedItem.ToString().IndexOf('-')-1);
-            pageAddDamage1.nameDamage = e.SelectedItem.ToString().Remove(0, e.SelectedItem.ToString().IndexOf('-')+2);
-            pageAddDamage1.stateSelect = 0;
+            if (pageAddDamageFoUser != null)
+            {
+                pageAddDamageFoUser.indexSelectDamage = collectionDamadge.IndexOf((string)e.SelectedItem);
+                pageAddDamageFoUser.prefNameDamage = e.SelectedItem.ToString().Remove(e.SelectedItem.ToString().IndexOf('-') - 1);
+                pageAddDamageFoUser.nameDamage = e.SelectedItem.ToString().Remove(0, e.SelectedItem.ToString().IndexOf('-') + 2);
+                pageAddDamageFoUser.stateSelect = 0;
+            }
+            else
+            {
+                pageAddDamage.indexSelectDamage = collectionDamadge.IndexOf((string)e.SelectedItem);
+                pageAddDamage.prefNameDamage = e.SelectedItem.ToString().Remove(e.SelectedItem.ToString().IndexOf('-') - 1);
+                pageAddDamage.nameDamage = e.SelectedItem.ToString().Remove(0, e.SelectedItem.ToString().IndexOf('-') + 2);
+                pageAddDamage.stateSelect = 0;
+            }
         }
 
         protected override bool OnBackgroundClicked()
         {
-            pageAddDamage1.stateSelect = 2;
+            pageAddDamageFoUser.stateSelect = 2;
             return true;
         }
 
