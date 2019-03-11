@@ -1,5 +1,6 @@
 ﻿using MDispatch.Models;
 using MDispatch.NewElement;
+using MDispatch.NewElement.ResIzeImage;
 using MDispatch.Service;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using System;
@@ -81,13 +82,13 @@ namespace MDispatch.View.PageApp
 
         internal void AddDamagCurrentLayut(Xamarin.Forms.View view)
         {
-            view.GestureRecognizers.Add(new TapGestureRecognizer(SelectImageSourse));
+            ((ImgResize)view).OneTabAction += SelectImageSourse;
             dmla.Children.Add(view);
         }
 
-        public void SelectImageSourse(Xamarin.Forms.View v, object e)
+        private void SelectImageSourse(object sender)
         {
-            ImageSource imageSource = fullPagePhotoDelyveryMV.SelectPhotoForDamage((Image)v);
+            ImageSource imageSource = fullPagePhotoDelyveryMV.SelectPhotoForDamage((Image)sender);
             if (imageSource != null)
             {
                 Photos.SelectedItem = imageSource;

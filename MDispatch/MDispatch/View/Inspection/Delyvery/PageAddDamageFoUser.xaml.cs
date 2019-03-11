@@ -1,7 +1,9 @@
 ﻿using MDispatch.NewElement;
+using MDispatch.NewElement.ResIzeImage;
 using MDispatch.View.PageApp;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using Rg.Plugins.Popup.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,13 +41,14 @@ namespace MDispatch.View.Inspection.PickedUp
             await PopupNavigation.PopAsync(true);
             if (stateSelect == 0)
             {
-                Image image = new Image()
+                ImgResize image = new ImgResize()
                 {
                     Source = $"DamageD{indexSelectDamage}.png",
                     WidthRequest = 15,
                     HeightRequest = 15,
                 };
-                image.GestureRecognizers.Add(new TapGestureRecognizer(RemovedDamag));
+                image.TouchAction += moveTouch;
+                image.OneTabAction += RemovedDamag;
                 AbsoluteLayout.SetLayoutBounds(image, new Rectangle(e.XInterest * 0.0001, e.YInterest * 0.0001, 15, 15));
                 AbsoluteLayout.SetLayoutFlags(image, AbsoluteLayoutFlags.PositionProportional);
                 absla.Children.Add(image);
@@ -61,10 +64,22 @@ namespace MDispatch.View.Inspection.PickedUp
             }
         }
 
-        private async void RemovedDamag(Xamarin.Forms.View v, object s)
+        private void moveTouch(object sender, TouchActionEventArgs e)
         {
-            absla.Children.Remove(v);
-            askForUsersDelyveryMW.RemmoveDamage((Image)v, stackLayout);
+            ImgResize rezizeImgnew = (ImgResize)sender;
+            Rectangle rectangle = AbsoluteLayout.GetLayoutBounds(rezizeImgnew);
+            rectangle.Height += e.IncreasePerUnit;
+            rectangle.Width += e.IncreasePerUnit;
+            if (rectangle.Height > 15 && rectangle.Height < 100)
+            {
+                AbsoluteLayout.SetLayoutBounds(rezizeImgnew, rectangle);
+            }
+        }
+
+        private async void RemovedDamag(object sender)
+        {
+            absla.Children.Remove((ImgResize)sender);
+            askForUsersDelyveryMW.RemmoveDamage((ImgResize)sender, stackLayout);
         }
 
         private async Task WaiteSelectDamage()
