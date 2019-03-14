@@ -3,6 +3,7 @@
     public interface ICar
     {
         string typeIndex { get; set; }
+        int CountCarImg { get; set; }
         void OrintableScreen(int inderxPhotoInspektion);
         string GetNameLayout(int inderxPhotoInspektion);
     }

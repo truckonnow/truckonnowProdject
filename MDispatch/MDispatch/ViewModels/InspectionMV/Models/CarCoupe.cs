@@ -7,6 +7,7 @@ namespace MDispatch.ViewModels.InspectionMV.Models
     public class CarCoupe : ICar
     {
         public string typeIndex { get; set; } = "Coupe";
+        public int CountCarImg { get; set; } = 39;
 
         public string GetNameLayout(int inderxPhotoInspektion)
         {

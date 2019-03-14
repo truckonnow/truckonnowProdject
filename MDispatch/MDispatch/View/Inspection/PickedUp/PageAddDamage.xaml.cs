@@ -33,7 +33,7 @@ namespace MDispatch.View.Inspection.PickedUp
                 foreach (var view in views)
                 {
                     absla.Children.Add(view);
-                    ((ImgResize)view).TouchAction += moveTouch;
+                    ((ImgResize)view).TouchAction += MoveTouch;
                     ((ImgResize)view).OneTabAction += RemovedDamag;
                 }
             }
@@ -56,14 +56,14 @@ namespace MDispatch.View.Inspection.PickedUp
                     WidthRequest = 15,
                     HeightRequest = 15,
                 };
-                image.TouchAction += moveTouch;
+                image.TouchAction += MoveTouch;
                 image.OneTabAction += RemovedDamag;
                 AbsoluteLayout.SetLayoutBounds(image, new Rectangle(e.XInterest * 0.0001, e.YInterest * 0.0001, 15, 15));
                 AbsoluteLayout.SetLayoutFlags(image, AbsoluteLayoutFlags.PositionProportional);
                 absla.Children.Add(image);
                 await Task.Run(() =>
                 {
-                    FullPagePhotoMV.SetDamage(nameDamage, indexSelectDamage, prefNameDamage, e.XInterest * 0.0001, e.YInterest * 0.0001, image, FullPagePhotoMV.AllSourseImage.Last());
+                    FullPagePhotoMV.SetDamage(nameDamage, indexSelectDamage, prefNameDamage, e.XInterest * 0.0001, e.YInterest * 0.0001, 20, 20, image, FullPagePhotoMV.AllSourseImage.Last());
                 });
             }
             else
@@ -75,11 +75,11 @@ namespace MDispatch.View.Inspection.PickedUp
         private void RemovedDamag(object sender)
         {
             absla.Children.Remove((Image)sender);
-            ((ImgResize)sender).TouchAction -= moveTouch;
+            ((ImgResize)sender).TouchAction -= MoveTouch;
             FullPagePhotoMV.RemmoveDamage((Image)sender);
         }
 
-        private void moveTouch(object sender, TouchActionEventArgs e)
+        private void MoveTouch(object sender, TouchActionEventArgs e)
         {
             ImgResize rezizeImgnew = (ImgResize)sender;
             Rectangle rectangle = AbsoluteLayout.GetLayoutBounds(rezizeImgnew);
@@ -88,6 +88,10 @@ namespace MDispatch.View.Inspection.PickedUp
             if (rectangle.Height > 15 && rectangle.Height < 100)
             {
                 AbsoluteLayout.SetLayoutBounds(rezizeImgnew, rectangle);
+                Task.Run(() =>
+                {
+                    FullPagePhotoMV.ReSetDamage((Image)sender, (int)rectangle.Width, (int)rectangle.Height);
+                });
             }
         }
 
@@ -100,7 +104,7 @@ namespace MDispatch.View.Inspection.PickedUp
                 {
                     try
                     {
-                        ((ImgResize)view).TouchAction -= moveTouch;
+                        ((ImgResize)view).TouchAction -= MoveTouch;
                         ((ImgResize)view).OneTabAction -= RemovedDamag;
                     }
                     catch
@@ -125,7 +129,7 @@ namespace MDispatch.View.Inspection.PickedUp
                 {
                     try
                     {
-                        ((ImgResize)view).TouchAction -= moveTouch;
+                        ((ImgResize)view).TouchAction -= MoveTouch;
                         ((ImgResize)view).OneTabAction -= RemovedDamag;
                     }
                     catch

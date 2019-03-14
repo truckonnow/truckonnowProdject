@@ -4726,26 +4726,26 @@ namespace MDispatch.Droid
 			// aapt resource value: 0x7f020056
 			public const int avd_hide_password = 2130837590;
 			
-			// aapt resource value: 0x7f020187
-			public const int avd_hide_password_1 = 2130837895;
+			// aapt resource value: 0x7f0201ab
+			public const int avd_hide_password_1 = 2130837931;
 			
-			// aapt resource value: 0x7f020188
-			public const int avd_hide_password_2 = 2130837896;
+			// aapt resource value: 0x7f0201ac
+			public const int avd_hide_password_2 = 2130837932;
 			
-			// aapt resource value: 0x7f020189
-			public const int avd_hide_password_3 = 2130837897;
+			// aapt resource value: 0x7f0201ad
+			public const int avd_hide_password_3 = 2130837933;
 			
 			// aapt resource value: 0x7f020057
 			public const int avd_show_password = 2130837591;
 			
-			// aapt resource value: 0x7f02018a
-			public const int avd_show_password_1 = 2130837898;
+			// aapt resource value: 0x7f0201ae
+			public const int avd_show_password_1 = 2130837934;
 			
-			// aapt resource value: 0x7f02018b
-			public const int avd_show_password_2 = 2130837899;
+			// aapt resource value: 0x7f0201af
+			public const int avd_show_password_2 = 2130837935;
 			
-			// aapt resource value: 0x7f02018c
-			public const int avd_show_password_3 = 2130837900;
+			// aapt resource value: 0x7f0201b0
+			public const int avd_show_password_3 = 2130837936;
 			
 			// aapt resource value: 0x7f020058
 			public const int BackIconpage = 2130837592;
@@ -5626,11 +5626,11 @@ namespace MDispatch.Droid
 			// aapt resource value: 0x7f02017c
 			public const int notification_icon_background = 2130837884;
 			
-			// aapt resource value: 0x7f020185
-			public const int notification_template_icon_bg = 2130837893;
+			// aapt resource value: 0x7f0201a9
+			public const int notification_template_icon_bg = 2130837929;
 			
-			// aapt resource value: 0x7f020186
-			public const int notification_template_icon_low_bg = 2130837894;
+			// aapt resource value: 0x7f0201aa
+			public const int notification_template_icon_low_bg = 2130837930;
 			
 			// aapt resource value: 0x7f02017d
 			public const int notification_tile_bg = 2130837885;
@@ -5651,10 +5651,118 @@ namespace MDispatch.Droid
 			public const int signature_pad_background = 2130837890;
 			
 			// aapt resource value: 0x7f020183
-			public const int tooltip_frame_dark = 2130837891;
+			public const int Suv1 = 2130837891;
 			
 			// aapt resource value: 0x7f020184
-			public const int tooltip_frame_light = 2130837892;
+			public const int Suv10 = 2130837892;
+			
+			// aapt resource value: 0x7f020185
+			public const int Suv11 = 2130837893;
+			
+			// aapt resource value: 0x7f020186
+			public const int Suv12 = 2130837894;
+			
+			// aapt resource value: 0x7f020187
+			public const int Suv13 = 2130837895;
+			
+			// aapt resource value: 0x7f020188
+			public const int Suv14 = 2130837896;
+			
+			// aapt resource value: 0x7f020189
+			public const int Suv15 = 2130837897;
+			
+			// aapt resource value: 0x7f02018a
+			public const int Suv16 = 2130837898;
+			
+			// aapt resource value: 0x7f02018b
+			public const int Suv17 = 2130837899;
+			
+			// aapt resource value: 0x7f02018c
+			public const int Suv18 = 2130837900;
+			
+			// aapt resource value: 0x7f02018d
+			public const int Suv19 = 2130837901;
+			
+			// aapt resource value: 0x7f02018e
+			public const int Suv2 = 2130837902;
+			
+			// aapt resource value: 0x7f02018f
+			public const int Suv20 = 2130837903;
+			
+			// aapt resource value: 0x7f020190
+			public const int Suv21 = 2130837904;
+			
+			// aapt resource value: 0x7f020191
+			public const int Suv22 = 2130837905;
+			
+			// aapt resource value: 0x7f020192
+			public const int Suv23 = 2130837906;
+			
+			// aapt resource value: 0x7f020193
+			public const int Suv24 = 2130837907;
+			
+			// aapt resource value: 0x7f020194
+			public const int Suv25 = 2130837908;
+			
+			// aapt resource value: 0x7f020195
+			public const int Suv26 = 2130837909;
+			
+			// aapt resource value: 0x7f020196
+			public const int Suv27 = 2130837910;
+			
+			// aapt resource value: 0x7f020197
+			public const int Suv28 = 2130837911;
+			
+			// aapt resource value: 0x7f020198
+			public const int Suv29 = 2130837912;
+			
+			// aapt resource value: 0x7f020199
+			public const int Suv3 = 2130837913;
+			
+			// aapt resource value: 0x7f02019a
+			public const int Suv30 = 2130837914;
+			
+			// aapt resource value: 0x7f02019b
+			public const int Suv31 = 2130837915;
+			
+			// aapt resource value: 0x7f02019c
+			public const int Suv32 = 2130837916;
+			
+			// aapt resource value: 0x7f02019d
+			public const int Suv33 = 2130837917;
+			
+			// aapt resource value: 0x7f02019e
+			public const int Suv34 = 2130837918;
+			
+			// aapt resource value: 0x7f02019f
+			public const int Suv35 = 2130837919;
+			
+			// aapt resource value: 0x7f0201a0
+			public const int Suv36 = 2130837920;
+			
+			// aapt resource value: 0x7f0201a1
+			public const int Suv4 = 2130837921;
+			
+			// aapt resource value: 0x7f0201a2
+			public const int Suv5 = 2130837922;
+			
+			// aapt resource value: 0x7f0201a3
+			public const int Suv6 = 2130837923;
+			
+			// aapt resource value: 0x7f0201a4
+			public const int Suv7 = 2130837924;
+			
+			// aapt resource value: 0x7f0201a5
+			public const int Suv8 = 2130837925;
+			
+			// aapt resource value: 0x7f0201a6
+			public const int Suv9 = 2130837926;
+			
+			// aapt resource value: 0x7f0201a7
+			public const int tooltip_frame_dark = 2130837927;
+			
+			// aapt resource value: 0x7f0201a8
+			public const int tooltip_frame_light = 2130837928;
 			
 			static Drawable()
 			{

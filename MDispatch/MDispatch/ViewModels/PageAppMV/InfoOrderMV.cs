@@ -89,6 +89,11 @@ namespace MDispatch.ViewModels.PageAppMV
         {
             foreach (var vehiclwInformation in Shipping.VehiclwInformations)
             {
+                ICar car = null;
+                if (vehiclwInformation.Ask != null && vehiclwInformation.Ask.TypeVehicle != null)
+                {
+                    car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+                }
                 List <PhotoInspection> photoInspections = null;
                 if (vehiclwInformation.PhotoInspections != null)
                 {
@@ -102,14 +107,12 @@ namespace MDispatch.ViewModels.PageAppMV
                 }
                 else if (photoInspections == null)
                 {
-                    ICar car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", vehiclwInformation));
                     await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 1, initDasbordDelegate, getVechicleDelegate, car.GetNameLayout(1)), true);
                     return;
                 }
-                else if (photoInspections.Find(p => p.IndexPhoto == 39) == null)
+                else if (photoInspections.Find(p => p.IndexPhoto == car.CountCarImg) == null)
                 {
-                    ICar car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", vehiclwInformation));
                     int lastIndexPhoto = photoInspections[vehiclwInformation.PhotoInspections.Count - 1].IndexPhoto + 1;
                     await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{lastIndexPhoto}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), lastIndexPhoto, initDasbordDelegate, getVechicleDelegate, car.GetNameLayout(lastIndexPhoto)), true);
@@ -138,6 +141,7 @@ namespace MDispatch.ViewModels.PageAppMV
         {
             foreach (var vehiclwInformation in Shipping.VehiclwInformations)
             {
+                ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
                 List<PhotoInspection> photoInspections = null;
                 if (vehiclwInformation.PhotoInspections != null)
                 {
@@ -151,14 +155,12 @@ namespace MDispatch.ViewModels.PageAppMV
                 }
                 else if (photoInspections == null || photoInspections.Count == 0)
                 {
-                    ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Delyvered", vehiclwInformation));
                     await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}7.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 7, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(7)), true);
                     return;
                 }
                 else if (photoInspections.Count < 7 && photoInspections[photoInspections.Count - 1].IndexPhoto != 20)
                 {
-                    ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Delyvered", vehiclwInformation));
                     PhotoInspection photoInspection = photoInspections[photoInspections.Count - 1];
                     if (photoInspection.IndexPhoto == 7)
@@ -204,6 +206,11 @@ namespace MDispatch.ViewModels.PageAppMV
                 case "Coupe":
                     {
                         car = new CarCoupe();
+                        break;
+                    }
+                case "Suv":
+                    {
+                        car = new CarSuv();
                         break;
                     }
             }

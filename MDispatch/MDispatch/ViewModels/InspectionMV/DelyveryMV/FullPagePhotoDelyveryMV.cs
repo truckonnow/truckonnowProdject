@@ -75,7 +75,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             set => SetProperty(ref allSourseImage, value);
         }
 
-        internal void SetDamage(string nameDamage, int indexDamage, string prefNameDamage, double xInterest, double yInterest, Image image, ImageSource imageSource1)
+        internal void SetDamage(string nameDamage, int indexDamage, string prefNameDamage, double xInterest, double yInterest, int widthDamage, int heightDamage, Image image, ImageSource imageSource1)
         {
             Damage damage = new Damage();
             damage.FullNameDamage = $"{prefNameDamage} - {nameDamage}";
@@ -85,6 +85,8 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             damage.IndexDamage = indexDamage;
             damage.XInterest = xInterest;
             damage.YInterest = yInterest;
+            damage.WidthDamage = widthDamage;
+            damage.HeightDamage = heightDamage;
             damage.Image = image;
             damage.TypeCurrentStatus = "D";
             damage.ImageSource = imageSource1;
@@ -93,6 +95,16 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 PhotoInspection.Damages = new List<Damage>();
             }
             PhotoInspection.Damages.Add(damage);
+        }
+        
+        public void ReSetDamage(Image image, int widthDamage, int heightDamage)
+        {
+            if (image != null && PhotoInspection.Damages != null && PhotoInspection.Damages.FirstOrDefault(d => d.Image == image) != null)
+            {
+                int damageIndex = PhotoInspection.Damages.FindIndex(d => d.Image == image);
+                PhotoInspection.Damages[damageIndex].WidthDamage = widthDamage;
+                PhotoInspection.Damages[damageIndex].HeightDamage = heightDamage;
+            }
         }
 
         public void RemmoveDamage(Image image)
@@ -145,6 +157,11 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 case "Coupe":
                     {
                         car = new CarCoupe();
+                        break;
+                    }
+                case "Suv":
+                    {
+                        car = new CarSuv();
                         break;
                     }
             }
@@ -247,8 +264,8 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
             else
             {
-                await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", vehiclwInformation1s[indexCurrentVechecle + 1]));
-                await Navigation.PushAsync(new AskPageDelyvery(managerDispatchMob, vehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate), true);
+                await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Deliveri", vehiclwInformation1s[indexCurrentVechecle + 1]));
+                await Navigation.PushAsync(new AskPageDelyvery(managerDispatchMob, vehiclwInformation1s[indexCurrentVechecle + 1], IdShip, initDasbordDelegate, getVechicleDelegate), true);
             }
             Navigation.RemovePage(Navigation.NavigationStack[2]);
             DependencyService.Get<IOrientationHandler>().ForceSensor();

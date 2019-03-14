@@ -96,6 +96,11 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                         car = new CarCoupe();
                         break;
                     }
+                case "Suv":
+                    {
+                        car = new CarSuv();
+                        break;
+                    }
             }
             return car;
         }
@@ -112,7 +117,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
         }
 
-        public async void SetDamage(string nameDamage, int indexDamage, string prefNameDamage, double xInterest, double yInterest, Image image, ImageSource imageSource1)
+        public async void SetDamage(string nameDamage, int indexDamage, string prefNameDamage, double xInterest, double yInterest, int widthDamage, int heightDamage,  Image image, ImageSource imageSource1)
         {
             Damage damage = new Damage();
             damage.FullNameDamage = $"{prefNameDamage} - {nameDamage}";
@@ -123,6 +128,8 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             damage.XInterest = xInterest;
             damage.YInterest = yInterest;
             damage.Image = image;
+            damage.WidthDamage = widthDamage;
+            damage.HeightDamage = heightDamage;
             damage.TypeCurrentStatus = "P";
             damage.ImageSource = imageSource1;
             if (PhotoInspection.Damages == null)
@@ -130,6 +137,16 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 PhotoInspection.Damages = new List<Damage>();
             }
             PhotoInspection.Damages.Add(damage);
+        }
+
+        public void ReSetDamage(Image image, int widthDamage, int heightDamage)
+        {
+            if (image != null && PhotoInspection.Damages != null && PhotoInspection.Damages.FirstOrDefault(d => d.Image == image) != null)
+            {
+                int damageIndex = PhotoInspection.Damages.FindIndex(d => d.Image == image);
+                PhotoInspection.Damages[damageIndex].WidthDamage = widthDamage;
+                PhotoInspection.Damages[damageIndex].HeightDamage = heightDamage;
+            }
         }
 
         public ImageSource SelectPhotoForDamage(Image image)
@@ -197,7 +214,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
             else if (state == 3)
             {
-                if (InderxPhotoInspektion < 39)
+                if (InderxPhotoInspektion < Car.CountCarImg)
                 {
                     Car.OrintableScreen(InderxPhotoInspektion);
                     await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", Car.typeIndex, InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1)));

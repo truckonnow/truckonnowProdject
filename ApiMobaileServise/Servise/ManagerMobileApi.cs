@@ -33,7 +33,7 @@ namespace ApiMobaileServise.Servise
             {
                 VehiclwInformation vehiclwInformation = await sqlCommandApiMobile.GetVehiclwInformationAndSaveDamageForUser(idVech, damageForUsers);
                 ITypeScan typeScan = GetTypeScan(vehiclwInformation.Ask.TypeVehicle);
-                typeScan.SetDamage(damageForUsers, vehiclwInformation.Type, vehiclwInformation.Scan.path);
+                typeScan.SetDamage(damageForUsers, vehiclwInformation.Ask.TypeVehicle, vehiclwInformation.Scan.path);
             });
         }
 
@@ -58,7 +58,7 @@ namespace ApiMobaileServise.Servise
             {
                 VehiclwInformation vehiclwInformation = await sqlCommandApiMobile.SavePhotoInspectionInDb(idVe, photoInspection);
                 ITypeScan typeScan = GetTypeScan(vehiclwInformation.Ask.TypeVehicle);
-                typeScan.SetDamage(photoInspection, vehiclwInformation.Type, vehiclwInformation.Scan.path);
+                typeScan.SetDamage(photoInspection, vehiclwInformation.Ask.TypeVehicle, vehiclwInformation.Scan.path);
             });
         }
 
@@ -70,6 +70,11 @@ namespace ApiMobaileServise.Servise
                 case "Coupe":
                     {
                         typeScan = new CoupeCar();
+                        break;
+                    }
+                case "Suv":
+                    {
+                        typeScan = new SuvCar();
                         break;
                     }
             }

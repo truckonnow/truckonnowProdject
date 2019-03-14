@@ -11,5 +11,7 @@ namespace DaoModels.DAO.Models
         public string FullNameDamage { get; set; }
         public double XInterest { get; set; }
         public double YInterest { get; set; }
+        public int HeightDamage { get; set; }
+        public int WidthDamage { get; set; }
     }
 }
