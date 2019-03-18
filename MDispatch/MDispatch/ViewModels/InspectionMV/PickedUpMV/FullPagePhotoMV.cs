@@ -224,7 +224,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 {
                     await PopupNavigation.PushAsync(new TempPageHint());
                     DependencyService.Get<IOrientationHandler>().ForceSensor();
-                    await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate), true);
+                    await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate, Car.typeIndex), true);
                     Navigation.RemovePage(Navigation.NavigationStack[2]);
                 }
             }

@@ -1,5 +1,4 @@
 ﻿using MDispatch.ViewModels.InspectionMV.DelyveryMV;
-using MDispatch.ViewModels.InspectionMV.PickedUpMV;
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
@@ -23,14 +22,14 @@ namespace MDispatch.View.Inspection.PickedUp
         private async void Button_Clicked_1(object sender, System.EventArgs e)
         {
             await PopupNavigation.PopAsync(true);
-            askForUsersDelyveryMW.Continue();
+            await askForUsersDelyveryMW.Navigation.PopToRootAsync();
             await PopupNavigation.PushAsync(new TempPageHint4());
         }
 
         private async void Button_Clicked(object sender, System.EventArgs e)
         {
             await PopupNavigation.PopAsync(true);
-            askForUsersDelyveryMW.Continue();
+            askForUsersDelyveryMW.GoToFeedBack();
             askForUsersDelyveryMW.SendEmailCoupon();
             await PopupNavigation.PushAsync(new TempPageHint3());
         }

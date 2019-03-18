@@ -18,9 +18,11 @@ namespace MDispatch.View.Inspection
 	public partial class Ask1Page : ContentPage
 	{
         public Ask1PageMV ask1PageMV = null;
+        private string typeCar = null;
 
-        public Ask1Page(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate)
+        public Ask1Page(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate, string typeCar)
         {
+            this.typeCar = typeCar;
             ask1PageMV = new Ask1PageMV(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate, getVechicleDelegate);
             ask1PageMV.Ask1 = new Ask1();
             InitializeComponent();
@@ -393,7 +395,7 @@ namespace MDispatch.View.Inspection
         bool isAsk13 = false;
         private async void Button_Clicked_4(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CameraPthotoInTrack(this, ask1PageMV.VehiclwInformation.Ask.TypeVehicle.Replace(" ", "")));
+            await Navigation.PushAsync(new CameraPthotoInTrack(this, typeCar.Replace(" ", "")));
         }
 
         public void AddPhotoInTrack(List<Photo> photos, List<byte[]> imagesByte)

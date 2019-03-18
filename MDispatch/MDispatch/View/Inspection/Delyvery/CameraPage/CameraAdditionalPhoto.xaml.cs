@@ -1,4 +1,5 @@
 ﻿using MDispatch.NewElement;
+using MDispatch.View.Inspection.PickedUp;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -8,10 +9,11 @@ namespace MDispatch.View.Inspection.Delyvery.CameraPage
 	public partial class CameraAdditionalPhoto : NewElement.CameraPage
     {
         private AskForUserDelyvery askForUserDelyvery = null;
-        private int countPhoto = 0;
+        private PageAddDamageFoUser pageAddDamageFoUser = null;
 
-        public CameraAdditionalPhoto (AskForUserDelyvery askForUserDelyvery)
+        public CameraAdditionalPhoto (AskForUserDelyvery askForUserDelyvery, PageAddDamageFoUser pageAddDamageFoUser)
 		{
+            this.pageAddDamageFoUser = pageAddDamageFoUser;
             this.askForUserDelyvery = askForUserDelyvery;
 			InitializeComponent ();
             NavigationPage.SetHasNavigationBar(this, false);
@@ -20,16 +22,11 @@ namespace MDispatch.View.Inspection.Delyvery.CameraPage
 
         private async void CameraPage_OnPhotoResult(NewElement.PhotoResultEventArgs result)
         {
+            await Navigation.PopAsync();
             if (!result.Success)
                 return;
             askForUserDelyvery.AddPhotoAdditional(result.Image);
-            if(countPhoto == 10)
-            {
-                DependencyService.Get<IOrientationHandler>().ForceSensor();
-                await Navigation.PopAsync();
-                return;
-            }
-            countPhoto++;
+            pageAddDamageFoUser.stateSelect = 0;
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
@@ -40,6 +37,7 @@ namespace MDispatch.View.Inspection.Delyvery.CameraPage
 
         protected override bool OnBackButtonPressed()
         {
+            pageAddDamageFoUser.stateSelect = 0;
             OnBackButtonPressedAsync();
             return base.OnBackButtonPressed();
         }

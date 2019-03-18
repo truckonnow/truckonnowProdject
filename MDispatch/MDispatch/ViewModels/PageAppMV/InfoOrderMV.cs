@@ -1,5 +1,4 @@
 ﻿using MDispatch.Models;
-using MDispatch.NewElement;
 using MDispatch.Service;
 using MDispatch.View.AskPhoto;
 using MDispatch.View.Inspection;
@@ -121,7 +120,7 @@ namespace MDispatch.ViewModels.PageAppMV
                 else if (vehiclwInformation.Ask1 == null)
                 {
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", vehiclwInformation));
-                    await Navigation.PushAsync(new Ask1Page(managerDispatchMob, vehiclwInformation, Shipping.Id, initDasbordDelegate, getVechicleDelegate), true);
+                    await Navigation.PushAsync(new Ask1Page(managerDispatchMob, vehiclwInformation, Shipping.Id, initDasbordDelegate, getVechicleDelegate, vehiclwInformation.Ask.TypeVehicle), true);
                     return;
                 }
             }

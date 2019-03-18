@@ -31,11 +31,10 @@
                             <input:Dropdown.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Cash</x:String>
-                                    <x:String>Personal Check</x:String>
-                                    <x:String>Business Check</x:String>
-                                    <x:String>Credit card</x:String>
-                                    <x:String>Paid to the broker</x:String>
-                                    <x:String>Paid at the pick up</x:String>
+                                    <x:String>Check on Delivery</x:String>
+                                    <x:String>Cash on Delivery</x:String>
+                                    <x:String>Billing</x:String>
+                                    <x:String>Pay-Pal</x:String>
                                 </x:Array>
                             </input:Dropdown.ItemsSource>
                         </input:Dropdown>

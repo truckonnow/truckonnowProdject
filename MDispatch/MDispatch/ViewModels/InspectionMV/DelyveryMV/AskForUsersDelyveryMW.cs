@@ -86,7 +86,6 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
             else if (state == 3)
             {
-                await Navigation.PopToRootAsync(true);
                 await PopupNavigation.PushAsync(new TempDialogPage1(this));
                 Continue();
             }
@@ -111,6 +110,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 imageSources2.Remove(imageSources2.FirstOrDefault(i => i == damageForUser.ImageSource));
                 AllSourseImage = imageSources2;
                 damageForUsers.Remove(damageForUser);
+                stackLayout.Children.Remove(image);
             }
         }
 
@@ -130,6 +130,16 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 damageForUsers = new List<DamageForUser>();
             }
             damageForUsers.Add(damageForUser);
+        }
+
+        public void ReSetDamage(Image image, int widthDamage, int heightDamage)
+        {
+            if (image != null && damageForUsers != null && damageForUsers.FirstOrDefault(d => d.Image == image) != null)
+            {
+                int damageIndex = damageForUsers.FindIndex(d => d.Image == image);
+                damageForUsers[damageIndex].WidthDamage = widthDamage;
+                damageForUsers[damageIndex].HeightDamage = heightDamage;
+            }
         }
 
         public async void Continue()
@@ -157,6 +167,12 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             {
                 //FeedBack = "Technical work on the service";
             }
+        }
+
+        public async void GoToFeedBack()
+        {
+            await PopupNavigation.PopAllAsync(true);
+            await Navigation.PushAsync(new View.Inspection.Feedback(managerDispatchMob, VehiclwInformation));
         }
 
         public void SendEmailCoupon()

@@ -39,7 +39,14 @@
                     <StackLayout>
                         <Label Text="How did the driver perform" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <input:AdvancedSlider MaxValue="10" MinValue="0" StepValue="0" ValuePrefix="Driver behaved on " />
+                        <input:AdvancedSlider MaxValue="10" MinValue="0" StepValue="1" ValuePrefix="Driver behaved on " />
+                    </StackLayout>
+                </Frame>
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock5">
+                    <StackLayout>
+                        <Label Text="Yuo Email" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                        <Entry Placeholder="Email" />
                     </StackLayout>
                 </Frame>
                 <Button Text="Continue" BackgroundColor="BlueViolet" TextColor="White" Margin="10" Clicked="ToolbarItem_Clicked"/>

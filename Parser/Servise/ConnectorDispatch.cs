@@ -13,6 +13,7 @@ namespace Parser.Servise
 {
     class ConnectorDispatch
     {
+        private List<string> proxyCloction = null;
         private ParserDispatch parserDispatch = null;
         private List<string> pages = null;
         public string Tokene { get; set; }
@@ -30,14 +31,26 @@ namespace Parser.Servise
                 "Archived"
             };
             parserDispatch = new ParserDispatch();
+            proxyCloction = new List<string>()
+            {
+                "118.99.113.14:3128",
+                "62.109.27.110:3128",
+                "51.255.132.59:3128",
+                "51.75.75.193:3128",
+                "176.9.192.215:3128",
+                "46.4.115.48:3128",
+                "84.16.227.128:3128",
+                "207.180.253.113:3128",
+                "209.97.191.169:3128",
+            };
         }
 
-        private void Avthorization()
+        private void Avthorization(bool isProxt)
         {
             try
             {
                 LogEr.Logerr("Info", "Login start", "Avthorization", DateTime.Now.ToShortTimeString());
-                Init();
+                Init(isProxt);
                 var htm = httpRequest.Get("https://www.centraldispatch.com/login?uri=%2Fprotected%2F").ToString();
                 Tokene = Regex.Match(htm, @"CSRFToken.{4}lue\W\W(\w+)").Groups[1].Value;
                 httpRequest.AddParam("Username", "Gts2012");
@@ -46,7 +59,7 @@ namespace Parser.Servise
                 httpRequest.AddParam("CSRFToken", Tokene);
                 var res = httpRequest.Post("https://www.centraldispatch.com/login?uri=/protected/");
                 cooks = httpRequest.Cookies;
-                if (res.Cookies.Count > 6)
+                if (res.Cookies.Count >= 5)
                 {
                     LogEr.Logerr("Info", "Login successful", "Avthorization", DateTime.Now.ToShortTimeString());
                 }
@@ -55,30 +68,53 @@ namespace Parser.Servise
                     LogEr.Logerr("Error", "Not successful authorization 'wrong password or login'", "Avthorization", DateTime.Now.ToShortTimeString());
                 }
             }
-            catch (Exception)
+            catch (HttpException e)
+            {
+                string ipProxy = httpRequest.Proxy != null ? httpRequest.Proxy.Host : "CurrentIp";
+                LogEr.Logerr("Error", $"Authorization error, IP: {ipProxy}", "Avthorization", DateTime.Now.ToShortTimeString());
+                Avthorization(true);
+            }
+            catch
             {
                 LogEr.Logerr("Error", "Critical authorization error'", "Avthorization", DateTime.Now.ToShortTimeString());
             }
         }
 
-        private void Init()
+        //proxyCloction[new Random().Next(0, proxyCloction.Count)]
+        private void Init(bool isProxt)
         {
+            if(httpRequest != null)
+            {
+                httpRequest.Close();
+                httpRequest.ClearAllHeaders();
+            }
             httpRequest = new HttpRequest()
             {
                 Cookies = new CookieDictionary(),
-                AllowAutoRedirect = true
+                AllowAutoRedirect = true,
             };
+            if (isProxt)
+            {
+                ProxyClient proxyClient = ProxyClient.Parse(ProxyType.Http, proxyCloction[new Random().Next(0, proxyCloction.Count)]);
+                httpRequest.Proxy = proxyClient;
+            }
         }
 
-        public void Worker()
+        public async void Worker()
         {
-            Avthorization();
+            if (new Random().Next(1, 10) == 5)
+            {
+                Avthorization(false);
+            }
+            else
+            {
+                Avthorization(false);
+            }
             string url = "https://www.centraldispatch.com";
             string pref1 = "/protected/cargo/dispatched-to-me?group=Dispatched%20To%20Me&folder=";
             string pref2 = "&sort=V&dir=1&page=";
-            Task.Run(async () =>
+            await Task.Run(async () =>
             {
-                Init();
                 httpRequest.Cookies = cooks;
                 bool isNextParsePage = false;
                 int countLnck2 = 0;

@@ -1,6 +1,5 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
-using MDispatch.View.Inspection.Delyvery.CameraPage;
 using MDispatch.View.Inspection.PickedUp;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using Newtonsoft.Json;
@@ -43,7 +42,7 @@ namespace MDispatch.View.Inspection.Delyvery
             button1 = button;
             if (button1.Text == "No, found an issue")
             {
-                await Navigation.PushAsync(new CameraAdditionalPhoto(this));
+                await Navigation.PushAsync(new PageAddDamageFoUser(askForUsersDelyveryMW, blockAskPhoto, this));
             }
             else if(button1.Text == "Yes")
             {
@@ -53,7 +52,7 @@ namespace MDispatch.View.Inspection.Delyvery
             }
         }
 
-        public async void AddPhotoAdditional(byte[] image)
+        public void AddPhotoAdditional(byte[] image)
         {
             if(askForUsersDelyveryMW.AskForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo == null)
             {
@@ -63,17 +62,11 @@ namespace MDispatch.View.Inspection.Delyvery
             photo1.Base64 = JsonConvert.SerializeObject(image);
             photo1.path = $"../Photo/{askForUsersDelyveryMW.VehiclwInformation.Id}/Delyvery/Additional/{askForUsersDelyveryMW.AskForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo.Count + 1}.Jpeg";
             askForUsersDelyveryMW.AskForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo.Add(photo1);
-            if(!scrolViewAskPhoto.IsVisible)
+            blockAskPhoto.Children.Add(new Image() { Source = ImageSource.FromStream(() => new MemoryStream(image)), HeightRequest = 40, WidthRequest = 40 });
+            if (!scrolViewAskPhoto.IsVisible)
             {
                 scrolViewAskPhoto.IsVisible = true;
             }
-            blockAskPhoto.Children.Add(new Image()
-            {
-                Source = ImageSource.FromStream(() => new MemoryStream(image)),
-                HeightRequest = 50,
-                WidthRequest = 50
-            });
-            await Navigation.PushAsync(new PageAddDamageFoUser(askForUsersDelyveryMW, ImageSource.FromStream(() => new MemoryStream(image)), blockAskPhoto));
         }
         #endregion
 

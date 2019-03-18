@@ -32,7 +32,13 @@ namespace ApiMobaileServise.Servise
         {
             context.VehiclwInformation.Load();
             context.DamageForUsers.Load();
+            context.Asks.Load();
+            context.Photos.Load();
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idVech));
+            if(vehiclwInformation.DamageForUsers == null)
+            {
+                vehiclwInformation.DamageForUsers = new List<DamageForUser>();
+            }
             vehiclwInformation.DamageForUsers.AddRange(damageForUsers);
             await context.SaveChangesAsync();
             return vehiclwInformation;

@@ -1,10 +1,8 @@
 ﻿using MDispatch.NewElement;
 using MDispatch.NewElement.ResIzeImage;
-using MDispatch.View.PageApp;
+using MDispatch.View.Inspection.Delyvery.CameraPage;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using Rg.Plugins.Popup.Services;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -12,7 +10,7 @@ using Xamarin.Forms.Xaml;
 
 namespace MDispatch.View.Inspection.PickedUp
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class PageAddDamageFoUser : ContentPage
 	{
         private AskForUsersDelyveryMW askForUsersDelyveryMW = null;
@@ -20,14 +18,15 @@ namespace MDispatch.View.Inspection.PickedUp
         public int indexSelectDamage = 0;
         public string nameDamage = null;
         public string prefNameDamage = null;
-        private ImageSource imageSource = null;
         private StackLayout stackLayout = null;
+        private Delyvery.AskForUserDelyvery askForUserDelyvery = null;
 
-        public PageAddDamageFoUser(AskForUsersDelyveryMW askForUsersDelyveryMW, ImageSource imageSource, StackLayout stackLayout)
+        public PageAddDamageFoUser(AskForUsersDelyveryMW askForUsersDelyveryMW, StackLayout stackLayout, Delyvery.AskForUserDelyvery askForUserDelyvery)
         {
+            DependencyService.Get<IOrientationHandler>().ForceLandscape();
+            this.askForUserDelyvery = askForUserDelyvery;
             this.stackLayout = stackLayout;
             this.askForUsersDelyveryMW = askForUsersDelyveryMW;
-            this.imageSource = imageSource;
             InitializeComponent();
             touchImage.Source = $"scan{askForUsersDelyveryMW.VehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}";
             NavigationPage.SetHasNavigationBar(this, false);
@@ -39,6 +38,9 @@ namespace MDispatch.View.Inspection.PickedUp
             await PopupNavigation.PushAsync(new DamageSelecter1(this, null), true);
             await WaiteSelectDamage();
             await PopupNavigation.PopAsync(true);
+            stateSelect = 1;
+            await Navigation.PushAsync(new CameraAdditionalPhoto(askForUserDelyvery, this));
+            await WaiteSelectDamage();
             if (stateSelect == 0)
             {
                 ImgResize image = new ImgResize()
@@ -54,9 +56,8 @@ namespace MDispatch.View.Inspection.PickedUp
                 absla.Children.Add(image);
                 await Task.Run(() =>
                 {
-                    askForUsersDelyveryMW.SetDamage(nameDamage, indexSelectDamage, prefNameDamage, e.XInterest * 0.0001, e.YInterest * 0.0001, image, imageSource);
+                    askForUsersDelyveryMW.SetDamage(nameDamage, indexSelectDamage, prefNameDamage, e.XInterest * 0.0001, e.YInterest * 0.0001, image, askForUsersDelyveryMW.AskForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo.Last().Base64);
                 });
-                await Navigation.PopAsync();
             }
             else
             {
@@ -73,6 +74,10 @@ namespace MDispatch.View.Inspection.PickedUp
             if (rectangle.Height > 15 && rectangle.Height < 100)
             {
                 AbsoluteLayout.SetLayoutBounds(rezizeImgnew, rectangle);
+                Task.Run(() =>
+                {
+                    askForUsersDelyveryMW.ReSetDamage((Image)sender, (int)rectangle.Width, (int)rectangle.Height);
+                });
             }
         }
 
@@ -93,7 +98,14 @@ namespace MDispatch.View.Inspection.PickedUp
 
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
         {
+            DependencyService.Get<IOrientationHandler>().ForceSensor();
             await Navigation.PopAsync();
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            TapGestureRecognizer_Tapped(null, null);
+            return base.OnBackButtonPressed();
         }
     }
 }
