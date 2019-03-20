@@ -2,6 +2,7 @@
 using MDispatch.Service;
 using MDispatch.View.Inspection.PickedUp;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
+using MDispatch.ViewModels.InspectionMV.Servise.Paymmant;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,8 @@ namespace MDispatch.View.Inspection.Delyvery
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AskForUserDelyvery : ContentPage
 	{
-        private AskForUsersDelyveryMW askForUsersDelyveryMW = null;
-
+        public AskForUsersDelyveryMW askForUsersDelyveryMW = null;
+        private IPaymmant Paymmant = null;
 
         public AskForUserDelyvery (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate)
 		{
@@ -74,8 +75,25 @@ namespace MDispatch.View.Inspection.Delyvery
         bool isAsk2 = false;
         private void Dropdown_SelectedItemChanged(object sender, Plugin.InputKit.Shared.Utils.SelectedItemChangedArgs e)
         {
-            isAsk2 = true;
             askForUsersDelyveryMW.AskForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation = (string)e.NewItem;
+            Paymmant = GetPaymmant((string)e.NewItem);
+            if(payBlock.Children.Count == 4)
+            {
+                payBlock.Children.RemoveAt(3);
+            }
+            payBlock.Children.Add(Paymmant.GetStackLayout());
+        }
+
+        private IPaymmant GetPaymmant(string paymmantName)
+        {
+            IPaymmant paymmant = null;
+            switch(paymmantName)
+            {
+                case "Cash":
+                    paymmant = new CashPaymmant(this);
+                    break;
+            }
+            return paymmant;
         }
         #endregion
 

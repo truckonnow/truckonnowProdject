@@ -1,7 +1,9 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
+using Newtonsoft.Json;
 using System;
+using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -87,6 +89,55 @@ namespace MDispatch.View.Inspection.PickedUp
         }
         #endregion
 
+        //#region Ask5
+        //bool isAsk5 = false;
+        //private void Dropdown_SelectedItemChanged(object sender, Plugin.InputKit.Shared.Utils.SelectedItemChangedArgs e)
+        //{
+        //    isAsk5 = true;
+        //    //askForUsersDelyveryMW.AskForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation = (string)e.NewItem;
+        //}
+        //#endregion
+
+        //#region Ask6
+        //bool isSignatureAsk = false;
+        //bool isNameAsk = false;
+        //private void Entry_TextChanged8(object sender, TextChangedEventArgs e)
+        //{
+        //    if (e.NewTextValue != "")
+        //    {
+        //        isNameAsk = true;
+        //    }
+        //    else
+        //    {
+        //        isNameAsk = false;
+        //    }
+        //    //askForUsersDelyveryMW.AskForUserDelyveryM.App_will_ask_for_name_of_the_client_signature = e.NewTextValue;
+        //}
+
+        //private async void Sign_StrokeCompleted(object sender, EventArgs e)
+        //{
+        //    Photo photo = new Photo();
+        //    isSignatureAsk = true;
+        //    Stream stream = await sign.GetImageStreamAsync(SignaturePad.Forms.SignatureImageFormat.Png);
+        //    MemoryStream memoryStream = new MemoryStream();
+        //    stream.CopyTo(memoryStream);
+        //    byte[] image = memoryStream.ToArray();
+        //    photo.Base64 = JsonConvert.SerializeObject(image);
+        //    //photo.path = $"../Photo/{askForUsersDelyveryMW.VehiclwInformation.Id}/Delyvery/Signature/DelyverySig.Png";
+        //    //askForUsersDelyveryMW.AskForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature = photo;
+        //}
+
+        //private void Sign_Cleared(object sender, EventArgs e)
+        //{
+        //    isSignatureAsk = false;
+        //    //askForUsersDelyveryMW.AskForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature = null;
+        //}
+
+        //private bool GetIsAsk3()
+        //{
+        //    return isNameAsk == true && isSignatureAsk == true;
+        //}
+        //#endregion
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             if (isAsk1 && isAsk2 && isAsk3 && isAsk4)

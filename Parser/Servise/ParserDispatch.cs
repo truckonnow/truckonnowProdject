@@ -117,10 +117,11 @@ namespace Parser.Servise
                 }
                 shipping.ShipVia = el[1].TextContent.Remove(0, el[1].TextContent.IndexOf(": ") + 2);
                 shipping.Condition = el[2].TextContent.Remove(0, el[2].TextContent.IndexOf(": ") + 2);
-                shipping.PriceListed = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("Price Listed:") + "Price Listed:".Length);
+                shipping.PriceListed = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("Total Payment to Carrier:") + "Total Payment to Carrier: ".Length);
                 shipping.PriceListed = shipping.PriceListed.Remove(shipping.PriceListed.IndexOf("\n"));
-                shipping.TotalPaymentToCarrier = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("Total Payment to Carrier: ") + "Total Payment to Carrier: ".Length);
-                shipping.TotalPaymentToCarrier = shipping.TotalPaymentToCarrier.Remove(shipping.TotalPaymentToCarrier.IndexOf(" \n"));
+                shipping.TotalPaymentToCarrier = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("On Delivery") + "On Delivery".Length).Trim();
+                shipping.TotalPaymentToCarrier = shipping.TotalPaymentToCarrier.Remove(0, shipping.TotalPaymentToCarrier.IndexOf("to Carrier:") + "to Carrier:".Length).Trim();
+                shipping.TotalPaymentToCarrier = shipping.TotalPaymentToCarrier.Remove(shipping.TotalPaymentToCarrier.IndexOf("\n"));
                 shipping.OnDeliveryToCarrier = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("to Carrier:\n") + "to Carrier:\n".Length);
                 shipping.OnDeliveryToCarrier = shipping.OnDeliveryToCarrier.Remove(0, shipping.OnDeliveryToCarrier.IndexOf("\n") + 2).TrimStart();
                 shipping.OnDeliveryToCarrier = shipping.OnDeliveryToCarrier.Remove(shipping.OnDeliveryToCarrier.IndexOf("\n"));

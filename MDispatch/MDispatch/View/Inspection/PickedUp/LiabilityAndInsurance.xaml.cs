@@ -15,7 +15,7 @@ namespace MDispatch.View.Inspection.PickedUp
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class LiabilityAndInsurance : ContentPage
 	{
-        private LiabilityAndInsuranceMV liabilityAndInsuranceMV = null;
+        public LiabilityAndInsuranceMV liabilityAndInsuranceMV = null;
 
         public LiabilityAndInsurance (ManagerDispatchMob managerDispatchMob, string idVech, string idShip, InitDasbordDelegate initDasbordDelegate)
 		{

@@ -39,23 +39,23 @@ namespace MDispatch.ViewModels.InspectionMV.Models
             }
             else if (inderxPhotoInspektion == 7)
             {
-                nameLayout = "Front right side of the vehicle";
+                nameLayout = "Front left side of the vehicle";
             }
             else if (inderxPhotoInspektion == 8)
             {
-                nameLayout = "Front right side of the vehicle";
+                nameLayout = "Front left side of the vehicle";
             }
             else if (inderxPhotoInspektion == 9)
             {
-                nameLayout = "Front right door of the vehicle";
+                nameLayout = "Front left door of the vehicle";
             }
             else if (inderxPhotoInspektion == 10)
             {
-                nameLayout = "Rear right door of the vehicle";
+                nameLayout = "Rear left door of the vehicle";
             }
             else if (inderxPhotoInspektion == 11)
             {
-                nameLayout = "Rear right side of the vehicle";
+                nameLayout = "Rear left side of the vehicle";
             }
             else if (inderxPhotoInspektion == 12)
             {
@@ -71,19 +71,19 @@ namespace MDispatch.ViewModels.InspectionMV.Models
             }
             else if (inderxPhotoInspektion == 15)
             {
-                nameLayout = "Rear left side of the vehicle";
+                nameLayout = "Rear right side of the vehicle";
             }
             else if (inderxPhotoInspektion == 16)
             {
-                nameLayout = "Rear left door of the vehicle";
+                nameLayout = "Rear right door of the vehicle";
             }
             else if (inderxPhotoInspektion == 17)
             {
-                nameLayout = "Front left door of the vehicle";
+                nameLayout = "Front right door of the vehicle";
             }
             else if (inderxPhotoInspektion == 18)
             {
-                nameLayout = "Front left side of the vehicle";
+                nameLayout = "Front right side of the vehicle";
             }
             else if (inderxPhotoInspektion == 19)
             {

@@ -24,7 +24,7 @@
                     </StackLayout>
                 </Frame>
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock2">
-                    <StackLayout>
+                    <StackLayout x:Name="payBlock">
                         <Label Text="What form of payment are you using to pay for transportation?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
                         <input:Dropdown CornerRadius="6" BorderColor="#4fd2c2" Placeholder="Select type pay" SelectedItemChanged="Dropdown_SelectedItemChanged">
@@ -35,9 +35,11 @@
                                     <x:String>Cash on Delivery</x:String>
                                     <x:String>Billing</x:String>
                                     <x:String>Pay-Pal</x:String>
+                                    <x:String>Other</x:String>
                                 </x:Array>
                             </input:Dropdown.ItemsSource>
                         </input:Dropdown>
+                        
                     </StackLayout>
                 </Frame>
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock3">

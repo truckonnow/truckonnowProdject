@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDispatch.View.Inspection.PickedUp.AskForUser"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             xmlns:sig="clr-namespace:SignaturePad.Forms;assembly=SignaturePad.Forms"
              Title="Question inspection">
     <ContentPage.Content>
         <ScrollView>
@@ -37,6 +39,37 @@
                         </StackLayout>
                     </StackLayout>
                 </Frame>
+                <!--<Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock5">
+                    <StackLayout>
+                        <Label Text="What form of payment are you using to pay for transportation?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                        <input:Dropdown CornerRadius="6" BorderColor="#4fd2c2" Placeholder="Select type pay" SelectedItemChanged="Dropdown_SelectedItemChanged">
+                            <input:Dropdown.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Cash</x:String>
+                                    <x:String>Check on Delivery</x:String>
+                                    <x:String>Cash on Delivery</x:String>
+                                    <x:String>Billing</x:String>
+                                    <x:String>Pay-Pal</x:String>
+                                </x:Array>
+                            </input:Dropdown.ItemsSource>
+                        </input:Dropdown>
+                    </StackLayout>
+                </Frame>
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock6">
+                    <StackLayout>
+                        <Label Text="App will ask for name and signature of the client signature " TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                        <StackLayout>
+                            <Label Text="Customer name" TextColor="Black" FontSize="18"/>
+                            <Entry Placeholder="Name" TextChanged="Entry_TextChange6"/>
+                        </StackLayout>
+                        <StackLayout>
+                            <Label Text="Customer signature" TextColor="Black" FontSize="18"/>
+                            <sig:SignaturePadView x:Name="sign" StrokeColor="Black" StrokeWidth="3" BackgroundColor="White" HeightRequest="100" StrokeCompleted="Sign_StrokeCompleted" Cleared="Sign_Cleared" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>-->
                 <Button Text="Continue" BackgroundColor="BlueViolet" TextColor="White" Clicked="ToolbarItem_Clicked" Margin="10"/>
             </StackLayout>
         </ScrollView>
