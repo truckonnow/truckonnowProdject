@@ -91,7 +91,7 @@ namespace MDispatch.ViewModels.InspectionMV.Models
             }
             else if (inderxPhotoInspektion == 20)
             {
-                nameLayout = "The right side of the front bumper of the vehicle";
+                nameLayout = "The left side of the front bumper of the vehicle";
             }
             else if (inderxPhotoInspektion == 21)
             {
@@ -99,7 +99,7 @@ namespace MDispatch.ViewModels.InspectionMV.Models
             }
             else if (inderxPhotoInspektion == 22)
             {
-                nameLayout = "The left side of the front bumper of the vehicle";
+                nameLayout = "The right side of the front bumper of the vehicle";
             }
             else if (inderxPhotoInspektion == 23)
             {

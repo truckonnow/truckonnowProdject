@@ -412,10 +412,10 @@
     <AndroidResource Include="Resources\drawable\Suv23.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Suv24.png" />
+    <AndroidResource Include="Resources\drawable\Suv25.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Suv25.png" />
+    <AndroidResource Include="Resources\drawable\Suv24.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Suv26.png" />
