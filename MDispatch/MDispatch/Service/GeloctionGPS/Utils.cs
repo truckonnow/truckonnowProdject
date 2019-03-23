@@ -54,7 +54,7 @@ namespace MDispatch.Service.GeloctionGPS
             try
             {
                 string token = CrossSettings.Current.GetValueOrDefault("Token", "");
-                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/GPS/Save", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();

@@ -15,7 +15,7 @@ namespace MDispatch.Service
             string content = null;
             try
             {
-                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/ReCurentStatus", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
@@ -46,7 +46,7 @@ namespace MDispatch.Service
             try
             {
                 string sigPhoto = JsonConvert.SerializeObject(photoSig);
-                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/SaveSigPikedUp", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
@@ -76,7 +76,7 @@ namespace MDispatch.Service
             string content = null;
             try
             {
-                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Shipping", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
@@ -106,7 +106,7 @@ namespace MDispatch.Service
             try
             {
                 string strJsonAsk = JsonConvert.SerializeObject(ask);
-                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
@@ -138,7 +138,7 @@ namespace MDispatch.Service
             try
             {
                 string strJsonAsk = JsonConvert.SerializeObject(feedback);
-                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/FeedBack", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
@@ -168,7 +168,7 @@ namespace MDispatch.Service
             try
             {
                 string strJsonAsk = JsonConvert.SerializeObject(ask1);
-                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
@@ -200,7 +200,7 @@ namespace MDispatch.Service
             try
             {
                 string strJsonAsk = JsonConvert.SerializeObject(askForUser);
-                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
@@ -232,7 +232,7 @@ namespace MDispatch.Service
             try
             {
                 string strJsonAsk = JsonConvert.SerializeObject(askDelyvery);
-                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
@@ -264,7 +264,7 @@ namespace MDispatch.Service
             try
             {
                 string strJsonAsk = JsonConvert.SerializeObject(askForUserDelyveryM);
-                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
@@ -304,7 +304,7 @@ namespace MDispatch.Service
                     });
                 }
                 string strPhotoInspection = JsonConvert.SerializeObject(photoInspection);
-                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Photo", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
@@ -343,7 +343,7 @@ namespace MDispatch.Service
                     });
                 }
                 string strDamageForUsers = JsonConvert.SerializeObject(damageForUsers);
-                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Damages/User", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();

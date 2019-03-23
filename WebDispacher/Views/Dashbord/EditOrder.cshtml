@@ -151,7 +151,7 @@
                 alert(this.responseText);
             }
         };
-        xhttp.open("POST", "http://localhost:22929/Dashbord/Order/SavaVech", true);
+        xhttp.open("POST", "@ViewBag.BaseUrl/Dashbord/Order/SavaVech", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(Req);
     }
@@ -166,7 +166,7 @@
                 alert(this.responseText);
             }
         };
-        xhttp.open("POST", "http://localhost:22929/Dashbord/Order/RemoveVech", true);
+        xhttp.open("POST", "@ViewBag.BaseUrl/Dashbord/Order/RemoveVech", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(Req);
         tdElms.removeChild(FindId(tdElms.children, idVech));
@@ -194,7 +194,7 @@
                 location.reload(true);
             }
         };
-        xhttp.open("POST", "http://localhost:22929/Dashbord/Order/AddVech", true);
+        xhttp.open("POST", "@ViewBag.BaseUrl/Dashbord/Order/AddVech", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(Req);
     }

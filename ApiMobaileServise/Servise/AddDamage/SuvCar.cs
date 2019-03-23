@@ -39,11 +39,11 @@ namespace ApiMobaileServise.Servise.AddDamage
             {
                 maxMinForYAndX = new int[] { 280, 680, 630, 880 };
             }
-            else if (indexPhoto == "2")
+            else if (indexPhoto == "3")
             {
                 maxMinForYAndX = new int[] { 320, 915, 355, 880 };
             }
-            else if (indexPhoto == "3")
+            else if (indexPhoto == "2")
             {
                 maxMinForYAndX = new int[] { 555, 915, 590, 880 };
             }

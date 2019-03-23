@@ -18,6 +18,7 @@ namespace WebDispacher.Controellers
             try
             {
                 string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
@@ -48,6 +49,7 @@ namespace WebDispacher.Controellers
             bool actionResult = false;
             try
             {
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 string key = null;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
@@ -87,6 +89,7 @@ namespace WebDispacher.Controellers
             try
             {
                 string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
@@ -124,6 +127,7 @@ namespace WebDispacher.Controellers
             try
             {
                 string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
@@ -154,6 +158,7 @@ namespace WebDispacher.Controellers
             try
             {
                 string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
@@ -184,6 +189,7 @@ namespace WebDispacher.Controellers
             try
             {
                 string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
@@ -212,6 +218,7 @@ namespace WebDispacher.Controellers
             try
             {
                 string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
@@ -242,6 +249,7 @@ namespace WebDispacher.Controellers
             try
             {
                 string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
@@ -272,6 +280,7 @@ namespace WebDispacher.Controellers
             try
             {
                 string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
@@ -300,6 +309,7 @@ namespace WebDispacher.Controellers
             try
             {
                 string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
@@ -330,6 +340,7 @@ namespace WebDispacher.Controellers
             try
             {
                 string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
@@ -359,6 +370,7 @@ namespace WebDispacher.Controellers
             try
             {
                 string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
@@ -388,6 +400,7 @@ namespace WebDispacher.Controellers
             try
             {
                 string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
@@ -424,6 +437,7 @@ namespace WebDispacher.Controellers
             try
             {
                 string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
@@ -461,6 +475,7 @@ namespace WebDispacher.Controellers
             try
             {
                 string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
@@ -492,6 +507,7 @@ namespace WebDispacher.Controellers
             try
             {
                 string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
@@ -523,6 +539,7 @@ namespace WebDispacher.Controellers
             try
             {
                 string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
@@ -552,6 +569,7 @@ namespace WebDispacher.Controellers
             try
             {
                 string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
@@ -581,6 +599,7 @@ namespace WebDispacher.Controellers
             try
             {
                 string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {

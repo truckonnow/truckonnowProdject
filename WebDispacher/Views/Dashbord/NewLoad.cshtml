@@ -62,7 +62,7 @@
         if (idOrderAndIdDriver != "") {
             let idOrder = idOrderAndIdDriver.split(',')[0];
             let idDriver = idOrderAndIdDriver.split(',')[1];
-            let url = "http://localhost:22929/Dashbord/Assign";
+            let url = "@ViewBag.BaseUrl/Dashbord/Assign";
             let xmlHttp = new XMLHttpRequest();
             var body = 'idOrder=' + encodeURIComponent(idOrder) +
                 '&idDriver=' + encodeURIComponent(idDriver);

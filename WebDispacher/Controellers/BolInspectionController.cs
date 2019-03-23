@@ -16,6 +16,7 @@ namespace WebDispacher.Controellers
             Shipping shipping = managerDispatch.GetShipingCurrentVehiclwIn(idVech.ToString());
             if(shipping != null)
             {
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 ViewBag.Shipp = shipping;
                 actionResult = View("InspectionVech");
             }

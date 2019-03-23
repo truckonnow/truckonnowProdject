@@ -66,7 +66,7 @@
     function SelectAssining(idOrderAndIdDriver) {
         var statusResponse;
         if (idOrderAndIdDriver.split(',')[1] == "Unassign") {
-            let url = "http://localhost:22929/Dashbord/Unassign";
+            let url = "@ViewBag.BaseUrl/Dashbord/Unassign";
             let xmlHttp = new XMLHttpRequest();
             let idOrder = idOrderAndIdDriver.split(',')[0];
             var body = 'idOrder=' + encodeURIComponent(idOrder);
@@ -78,7 +78,7 @@
         else if (idOrderAndIdDriver != "") {
             let idOrder = idOrderAndIdDriver.split(',')[0];
             let idDriver = idOrderAndIdDriver.split(',')[1];
-            let url = "http://localhost:22929/Dashbord/Assign";
+            let url = "@ViewBag.BaseUrl/Dashbord/Assign";
             let xmlHttp = new XMLHttpRequest();
             var body = 'idOrder=' + encodeURIComponent(idOrder) +
                 '&idDriver=' + encodeURIComponent(idDriver);

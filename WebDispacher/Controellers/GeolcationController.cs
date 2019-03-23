@@ -16,6 +16,7 @@ namespace WebDispacher.Controellers
             try
             {
                 string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {

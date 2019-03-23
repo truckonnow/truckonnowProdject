@@ -16,7 +16,8 @@ namespace WebDispacher.Controellers
             IActionResult actionResult = null;
             ViewData["hidden"] = "hidden";
             ViewData["TextError"] = "";
-            if(Request.Cookies.ContainsKey("KeyAvtho"))
+            ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+            if (Request.Cookies.ContainsKey("KeyAvtho"))
             {
                 actionResult = Redirect("/Dashbord/Order/NewLoad");
             }
@@ -35,6 +36,7 @@ namespace WebDispacher.Controellers
             {
                 if (Email == null || Password == null)
                     throw new Exception();
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 if (managerDispatch.Avthorization(Email, Password))
                 {
                     ViewData["hidden"] = "";

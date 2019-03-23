@@ -15,7 +15,7 @@ namespace MDispatch.Service
             string content = null;
             try
             {
-                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/ActiveOreder", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
@@ -43,7 +43,7 @@ namespace MDispatch.Service
             string content = null;
             try
             {
-                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/DelyveryOreder", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
@@ -71,7 +71,7 @@ namespace MDispatch.Service
             string content = null;
             try
             {
-                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/GetVechicleInffo", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
@@ -101,7 +101,7 @@ namespace MDispatch.Service
             string content = null;
             try
             {
-                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/SaveOrder", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
@@ -140,7 +140,7 @@ namespace MDispatch.Service
             string content = null;
             try
             {
-                RestClient client = new RestClient("http://192.168.0.100:8888");
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/SaveOrder1", Method.POST);
                 request.AddHeader("Accept", "application/json");
                 request.Parameters.Clear();
