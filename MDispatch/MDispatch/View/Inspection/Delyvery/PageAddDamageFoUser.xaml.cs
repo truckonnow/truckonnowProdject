@@ -46,12 +46,11 @@ namespace MDispatch.View.Inspection.PickedUp
                 ImgResize image = new ImgResize()
                 {
                     Source = $"DamageD{indexSelectDamage}.png",
-                    WidthRequest = 15,
-                    HeightRequest = 15,
+                    WidthRequest = 25,
+                    HeightRequest = 25,
                 };
-                image.TouchAction += moveTouch;
                 image.OneTabAction += RemovedDamag;
-                AbsoluteLayout.SetLayoutBounds(image, new Rectangle(e.XInterest * 0.0001, e.YInterest * 0.0001, 15, 15));
+                AbsoluteLayout.SetLayoutBounds(image, new Rectangle(e.XInterest * 0.0001, e.YInterest * 0.0001, 25, 25));
                 AbsoluteLayout.SetLayoutFlags(image, AbsoluteLayoutFlags.PositionProportional);
                 absla.Children.Add(image);
                 await Task.Run(() =>
@@ -62,22 +61,6 @@ namespace MDispatch.View.Inspection.PickedUp
             else
             {
                 stateSelect = 0;
-            }
-        }
-
-        private void moveTouch(object sender, TouchActionEventArgs e)
-        {
-            ImgResize rezizeImgnew = (ImgResize)sender;
-            Rectangle rectangle = AbsoluteLayout.GetLayoutBounds(rezizeImgnew);
-            rectangle.Height += e.IncreasePerUnit;
-            rectangle.Width += e.IncreasePerUnit;
-            if (rectangle.Height > 15 && rectangle.Height < 100)
-            {
-                AbsoluteLayout.SetLayoutBounds(rezizeImgnew, rectangle);
-                Task.Run(() =>
-                {
-                    askForUsersDelyveryMW.ReSetDamage((Image)sender, (int)rectangle.Width, (int)rectangle.Height);
-                });
             }
         }
 

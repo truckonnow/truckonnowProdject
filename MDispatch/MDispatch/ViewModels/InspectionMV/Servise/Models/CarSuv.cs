@@ -175,8 +175,8 @@ namespace MDispatch.ViewModels.InspectionMV.Models
                 DependencyService.Get<IOrientationHandler>().ForcePortrait();
             }
             else if (inderxPhotoInspektion == 1 || inderxPhotoInspektion == 4 || inderxPhotoInspektion == 5 || inderxPhotoInspektion == 6 || inderxPhotoInspektion == 21
-                || inderxPhotoInspektion == 24 || inderxPhotoInspektion == 25 || inderxPhotoInspektion == 25 || inderxPhotoInspektion == 29 || inderxPhotoInspektion == 30 
-                || inderxPhotoInspektion == 31 || inderxPhotoInspektion == 32 || inderxPhotoInspektion == 34 || inderxPhotoInspektion == 36)
+                || inderxPhotoInspektion == 24 || inderxPhotoInspektion == 25 || inderxPhotoInspektion == 25 || inderxPhotoInspektion == 29 || inderxPhotoInspektion == 29 
+                || inderxPhotoInspektion == 30 || inderxPhotoInspektion == 31 || inderxPhotoInspektion == 32 || inderxPhotoInspektion == 34 || inderxPhotoInspektion == 36)
             {
                 DependencyService.Get<IOrientationHandler>().ForceLandscape();
             }

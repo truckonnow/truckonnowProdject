@@ -29,7 +29,7 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
                 }
             }
             catch (Exception)

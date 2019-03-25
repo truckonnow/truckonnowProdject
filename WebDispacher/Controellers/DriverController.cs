@@ -28,7 +28,7 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
                 }
             }
             catch (Exception)
@@ -58,7 +58,7 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
                 }
             }
             catch (Exception)
@@ -84,7 +84,7 @@ namespace WebDispacher.Controellers
                         && (password != null && password != "") && (fullName != null && fullName != ""))
                     {
                         managerDispatch.CreateDriver(fullName, emailAddress, password, phoneNumbe, trailerCapacity, driversLicenseNumber);
-                        actionResult = Redirect("http://localhost:22929/Driver/Drivers");
+                        actionResult = Redirect("Config.BaseReqvesteUrl/Driver/Drivers");
                     }
                     else
                     {
@@ -97,7 +97,7 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
                 }
             }
             catch (Exception)
@@ -120,7 +120,7 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     managerDispatch.RemoveDrive(id);
-                    actionResult = Redirect("http://localhost:22929/Driver/Drivers");
+                    actionResult = Redirect("Config.BaseReqvesteUrl/Driver/Drivers");
                 }
                 else
                 {
@@ -128,7 +128,7 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
                 }
             }
             catch (Exception)

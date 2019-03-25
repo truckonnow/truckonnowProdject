@@ -53,17 +53,17 @@ namespace MDispatch.View.Inspection.PickedUp
                 ImgResize image = new ImgResize()
                 {
                     Source = $"DamageP{indexSelectDamage}.png",
-                    WidthRequest = 15,
-                    HeightRequest = 15,
+                    WidthRequest = 30,
+                    HeightRequest = 30,
                 };
                 image.TouchAction += MoveTouch;
                 image.OneTabAction += RemovedDamag;
-                AbsoluteLayout.SetLayoutBounds(image, new Rectangle(e.XInterest * 0.0001, e.YInterest * 0.0001, 15, 15));
+                AbsoluteLayout.SetLayoutBounds(image, new Rectangle(e.XInterest * 0.0001, e.YInterest * 0.0001, 30, 30));
                 AbsoluteLayout.SetLayoutFlags(image, AbsoluteLayoutFlags.PositionProportional);
                 absla.Children.Add(image);
                 await Task.Run(() =>
                 {
-                    FullPagePhotoMV.SetDamage(nameDamage, indexSelectDamage, prefNameDamage, e.XInterest * 0.0001, e.YInterest * 0.0001, 20, 20, image, FullPagePhotoMV.AllSourseImage.Last());
+                    FullPagePhotoMV.SetDamage(nameDamage, indexSelectDamage, prefNameDamage, e.XInterest * 0.0001, e.YInterest * 0.0001, 30, 30, image, FullPagePhotoMV.AllSourseImage.Last());
                 });
             }
             else
@@ -85,7 +85,7 @@ namespace MDispatch.View.Inspection.PickedUp
             Rectangle rectangle = AbsoluteLayout.GetLayoutBounds(rezizeImgnew);
             rectangle.Height += e.IncreasePerUnit;
             rectangle.Width += e.IncreasePerUnit;
-            if (rectangle.Height > 15 && rectangle.Height < 100)
+            if (rectangle.Height > 20 && rectangle.Height < 200)
             {
                 AbsoluteLayout.SetLayoutBounds(rezizeImgnew, rectangle);
                 Task.Run(() =>

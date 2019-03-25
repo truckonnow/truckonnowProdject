@@ -131,17 +131,6 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
             damageForUsers.Add(damageForUser);
         }
-
-        public void ReSetDamage(Image image, int widthDamage, int heightDamage)
-        {
-            if (image != null && damageForUsers != null && damageForUsers.FirstOrDefault(d => d.Image == image) != null)
-            {
-                int damageIndex = damageForUsers.FindIndex(d => d.Image == image);
-                damageForUsers[damageIndex].WidthDamage = widthDamage;
-                damageForUsers[damageIndex].HeightDamage = heightDamage;
-            }
-        }
-
         public async void Continue()
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");

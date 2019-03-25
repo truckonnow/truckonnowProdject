@@ -32,7 +32,7 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
                 }
             }
             catch (Exception)
@@ -141,7 +141,7 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
                 }
             }
             catch (Exception)
@@ -172,7 +172,7 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
                 }
             }
             catch (Exception)
@@ -201,7 +201,7 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
                 }
             }
             catch (Exception)
@@ -232,7 +232,7 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
                 }
             }
             catch (Exception)
@@ -263,7 +263,7 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
                 }
             }
             catch (Exception)
@@ -292,7 +292,7 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
                 }
             }
             catch (Exception)
@@ -323,7 +323,7 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
                 }
             }
             catch (Exception)
@@ -345,7 +345,7 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     managerDispatch.ArchvedOrder(id);
-                    actionResult = Redirect($"http://localhost:22929/Dashbord/Order/NewLoad");
+                    actionResult = Redirect($"{Config.BaseReqvesteUrl}/Dashbord/Order/NewLoad");
                 }
                 else
                 {
@@ -353,7 +353,7 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
                 }
             }
             catch (Exception)
@@ -375,7 +375,7 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     managerDispatch.DeletedOrder(id);
-                    actionResult = Redirect($"http://localhost:22929/Dashbord/Order/{status}");
+                    actionResult = Redirect($"{Config.BaseReqvesteUrl}/Dashbord/Order/{status}");
                 }
                 else
                 {
@@ -383,7 +383,7 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
                 }
             }
             catch (Exception)
@@ -411,7 +411,7 @@ namespace WebDispacher.Controellers
                     }
                     else
                     {
-                        actionResult = Redirect($"http://localhost:22929/Dashbord/Order/{stasus}");
+                        actionResult = Redirect($"{Config.BaseReqvesteUrl}/Dashbord/Order/{stasus}");
                     }
                 }
                 else
@@ -420,7 +420,7 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
                 }
             }
             catch (Exception)
@@ -449,7 +449,7 @@ namespace WebDispacher.Controellers
                     }
                     else
                     {
-                        actionResult = Redirect($"http://localhost:22929/Dashbord/Order/{stasus}");
+                        actionResult = Redirect($"{Config.BaseReqvesteUrl}/Dashbord/Order/{stasus}");
                     }
                 }
                 else
@@ -458,7 +458,7 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
                 }
             }
             catch (Exception)
@@ -480,7 +480,7 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     Shipping shipping = await managerDispatch.CreateShiping();
-                    actionResult = Redirect($"http://localhost:22929/Dashbord/Order/Edit?id={shipping.Id}&stasus=NewLoad");
+                    actionResult = Redirect($"{Config.BaseReqvesteUrl}/Dashbord/Order/Edit?id={shipping.Id}&stasus=NewLoad");
                 }
                 else
                 {
@@ -488,7 +488,7 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
                 }
             }
             catch (Exception)
@@ -514,7 +514,7 @@ namespace WebDispacher.Controellers
                     managerDispatch.Updateorder(idOrder, idLoad, internalLoadID, driver, status, instructions, nameP, contactP, addressP, cityP, stateP, zipP,
                         phoneP, emailP, scheduledPickupDateP, nameD, contactD, addressD, cityD, stateD, zipD, phoneD, emailD, ScheduledPickupDateD, paymentMethod,
                         price, paymentTerms, brokerFee);
-                    actionResult = Redirect($"http://localhost:22929/Dashbord/Order/NewLoad");
+                    actionResult = Redirect($"{Config.BaseReqvesteUrl}/Dashbord/Order/NewLoad");
                 }
                 else
                 {
@@ -522,7 +522,7 @@ namespace WebDispacher.Controellers
                     {
                         Response.Cookies.Delete("KeyAvtho");
                     }
-                    actionResult = Redirect("http://localhost:22929");
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
                 }
             }
             catch (Exception)

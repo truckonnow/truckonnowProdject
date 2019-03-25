@@ -12,8 +12,6 @@ namespace MDispatch.Models
         public string FullNameDamage { get; set; }
         public double XInterest { get; set; }
         public double YInterest { get; set; }
-        public int HeightDamage { get; set; }
-        public int WidthDamage { get; set; }
         public Image Image { get; set; }
         public ImageSource ImageSource { get; set; }
     }
