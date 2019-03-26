@@ -1,8 +1,10 @@
 ﻿using MDispatch.Models;
 using MDispatch.NewElement.TouchCordinate;
 using MDispatch.Service;
+using MDispatch.View.GlobalDialogView;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
 using Newtonsoft.Json;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -33,6 +35,7 @@ namespace MDispatch.View.Inspection.PickedUp
             }
             else
             {
+                await PopupNavigation.PushAsync(new Errror("You did not fill in all the required fields, you can continue the inspection only when filling in the required fields !!"));
                 CheckAsk();
             }
         }

@@ -2,6 +2,7 @@
 using MDispatch.NewElement;
 using MDispatch.Service;
 using MDispatch.View;
+using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection.Delyvery;
 using MDispatch.View.PageApp;
 using Plugin.Settings;
@@ -62,11 +63,11 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             await PopupNavigation.PopAsync(true);
             if (state == 1)
             {
-                //FeedBack = "Not Network";
+                await PopupNavigation.PushAsync(new Errror("Not Network"));
             }
             else if (state == 2)
             {
-                //FeedBack = description;
+                await PopupNavigation.PushAsync(new Errror(description));
             }
             else if (state == 3)
             {
@@ -76,7 +77,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
             else if (state == 4)
             {
-                //FeedBack = "Technical work on the service";
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
             }
         }
     }

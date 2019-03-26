@@ -1,7 +1,9 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
+using MDispatch.View.GlobalDialogView;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using Plugin.InputKit.Shared.Controls;
+using Rg.Plugins.Popup.Services;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -268,7 +270,7 @@ namespace MDispatch.View.Inspection.Delyvery
         #endregion
 
 
-        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             if (isAsk2 && isAsk3 && isAsk4 && isAsk5 && isAsk6 && isAsk7 && isAsk8 && isAsk9 && isAsk10 && isAsk11 && isAsk12 && isAsk13 && isAsk14 && isAsk15 && isAsk16)
             {
@@ -276,6 +278,7 @@ namespace MDispatch.View.Inspection.Delyvery
             }
             else
             {
+                await PopupNavigation.PushAsync(new Errror("You did not fill in all the required fields, you can continue the inspection only when filling in the required fields !!"));
                 CheckAsk();
             }
         }

@@ -1,6 +1,7 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.View;
+using MDispatch.View.GlobalDialogView;
 using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -45,20 +46,19 @@ namespace MDispatch.ViewModels.PageAppMV
             await Navigationn.PopAsync(true);
             if (state == 1)
             {
-                //FeedBack = "Not Network";
+                await PopupNavigation.PushAsync(new Errror("Not Network"));
             }
             else if (state == 2)
             {
-                //FeedBack = description;
+                await PopupNavigation.PushAsync(new Errror(description));
             }
             else if (state == 3)
             {
-                
                 //Feedback = "";
             }
             else if (state == 4)
             {
-                //FeedBack = "Technical work on the service";
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using MDispatch.Service;
 using MDispatch.Service.GeloctionGPS;
 using MDispatch.View;
+using MDispatch.View.GlobalDialogView;
 using MDispatch.View.TabPage;
 using Plugin.Settings;
 using Prism.Commands;
@@ -62,10 +63,12 @@ namespace MDispatch.ViewModels
             await PopupNavigation.PopAsync(true);
             if (state == 1)
             {
+                await PopupNavigation.PushAsync(new Errror(FeedBack));
                 FeedBack = "Not Network";
             }
             else if(state == 2)
             {
+                await PopupNavigation.PushAsync(new Errror(FeedBack));
                 FeedBack = description;
             }
             else if(state == 3)
@@ -76,6 +79,7 @@ namespace MDispatch.ViewModels
             }
             else if(state == 4)
             {
+                await PopupNavigation.PushAsync(new Errror(FeedBack));
                 FeedBack = "Technical work on the service";
             }
         }

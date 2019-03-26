@@ -1,6 +1,7 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.View;
+using MDispatch.View.GlobalDialogView;
 using MDispatch.View.PageApp;
 using Plugin.Settings;
 using Prism.Mvvm;
@@ -46,12 +47,12 @@ namespace MDispatch.ViewModels.PageAppMV.VehicleDetals
             if (state == 1)
             {
                 await Navigationn.PopAsync(true);
-                //FeedBack = "Not Network";
+                await PopupNavigation.PushAsync(new Errror("Not Network"));
             }
             else if (state == 2)
             {
                 await Navigationn.PopAsync(true);
-                //FeedBack = description;
+                await PopupNavigation.PushAsync(new Errror(description));
             }
             else if (state == 3)
             {
@@ -61,7 +62,7 @@ namespace MDispatch.ViewModels.PageAppMV.VehicleDetals
             else if (state == 4)
             {
                 await Navigationn.PopAsync(true);
-                //FeedBack = "Technical work on the service";
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
             }
         }
     }

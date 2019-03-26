@@ -1,9 +1,11 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.View.AskPhoto.CameraPageFolder;
+using MDispatch.View.GlobalDialogView;
 using MDispatch.ViewModels.AskPhoto;
 using Newtonsoft.Json;
 using Plugin.InputKit.Shared.Controls;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -195,7 +197,7 @@ namespace MDispatch.View.AskPhoto
         }
         #endregion
 
-        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             if(isAsk1 && isAsk2 && isAsk3 && isAsk4 && isAsk5 && isAsk6 && isAsk7 && isAsk8 && isAsk9 && isAsk10 && isAsk11)
             {
@@ -203,6 +205,7 @@ namespace MDispatch.View.AskPhoto
             }
             else
             {
+                await PopupNavigation.PushAsync(new Errror("You did not fill in all the required fields, you can continue the inspection only when filling in the required fields !!"));
                 CheckAsk();
             }
         }

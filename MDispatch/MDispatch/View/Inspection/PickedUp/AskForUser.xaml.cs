@@ -1,16 +1,16 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
+using MDispatch.View.GlobalDialogView;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
-using Newtonsoft.Json;
+using Rg.Plugins.Popup.Services;
 using System;
-using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static MDispatch.Service.ManagerDispatchMob;
 
 namespace MDispatch.View.Inspection.PickedUp
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AskForUser : ContentPage
 	{
         private AskForUserMV askForUserMV = null;
@@ -138,7 +138,7 @@ namespace MDispatch.View.Inspection.PickedUp
         //    return isNameAsk == true && isSignatureAsk == true;
         //}
         //#endregion
-        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             if (isAsk1 && isAsk2 && isAsk3 && isAsk4)
             {
@@ -146,6 +146,7 @@ namespace MDispatch.View.Inspection.PickedUp
             }
             else
             {
+                await PopupNavigation.PushAsync(new Errror("You did not fill in all the required fields, you can continue the inspection only when filling in the required fields !!"));
                 CheckAsk();
             }
         }

@@ -1,9 +1,11 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
+using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection.PickedUp;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using MDispatch.ViewModels.InspectionMV.Servise.Paymmant;
 using Newtonsoft.Json;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -138,7 +140,7 @@ namespace MDispatch.View.Inspection.Delyvery
         }
         #endregion
 
-        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             if (isAsk1 && isAsk2 && GetIsAsk3())
             {
@@ -146,6 +148,7 @@ namespace MDispatch.View.Inspection.Delyvery
             }
             else
             {
+                await PopupNavigation.PushAsync(new Errror("You did not fill in all the required fields, you can continue the inspection only when filling in the required fields !!"));
                 CheckAsk();
             }
         }
