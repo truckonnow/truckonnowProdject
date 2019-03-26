@@ -29,7 +29,7 @@ namespace MDispatch.View.PageApp
             dmla.IsVisible = false;
             if (fullPagePhotoDelyveryMV.Car.typeIndex != null && fullPagePhotoDelyveryMV.Car.typeIndex != "")
             {
-                NameSelectPhoto.Text = $"{nameLayoute} - {photoIndex}";
+                NameSelectPhoto.Text = nameLayoute;
             }
             else
             {

@@ -36,23 +36,18 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
             VehiclwInformation = vehiclwInformation;
-            InderxPhotoInspektion = inderxPhotoInspektion;
+            this.inderxPhotoInspektion = inderxPhotoInspektion;
             if (typeCar != null)
             {
                 Car = GetTypeCar(typeCar);
-                Car.OrintableScreen(inderxPhotoInspektion);
+                Car.OrintableScreen(Car.GetIndexCarFullPhoto(inderxPhotoInspektion));
             }
             IdShip = idShip;
         }
 
         public string IdShip { get; set; }
 
-        private int inderxPhotoInspektion = 0;
-        public int InderxPhotoInspektion
-        {
-            get => inderxPhotoInspektion;
-            set => SetProperty(ref inderxPhotoInspektion, value);
-        }
+        private int inderxPhotoInspektion = 1;
 
         private VehiclwInformation vehiclwInformation = null;
         public VehiclwInformation VehiclwInformation
@@ -79,7 +74,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         {
             Damage damage = new Damage();
             damage.FullNameDamage = $"{prefNameDamage} - {nameDamage}";
-            damage.IndexImageVech = InderxPhotoInspektion.ToString();
+            damage.IndexImageVech = Car.GetIndexCarFullPhoto(inderxPhotoInspektion).ToString();
             damage.TypeDamage = nameDamage;
             damage.TypePrefDamage = prefNameDamage;
             damage.IndexDamage = indexDamage;
@@ -189,7 +184,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             {
                 PhotoInspection.Photos = new List<Photo>();
             }
-            PhotoInspection.IndexPhoto = InderxPhotoInspektion;
+            PhotoInspection.IndexPhoto = Car.GetIndexCarFullPhoto(inderxPhotoInspektion);
             PhotoInspection.CurrentStatusPhoto = "Delyvery";
             Photo photo = new Photo();
             string photoJson = JsonConvert.SerializeObject(PhotoInArrayByte);
@@ -222,30 +217,16 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
             else if (state == 3)
             {
-                if(InderxPhotoInspektion == 7)
+                if(Car.GetIndexCarFullPhoto(inderxPhotoInspektion+1) == 0)
                 {
-                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{19}.png", Car.typeIndex, 19, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1)));
-                }
-                else if (InderxPhotoInspektion == 19)
-                {
-                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{2}.png", Car.typeIndex, 2, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1)));
-                }
-                else if (InderxPhotoInspektion == 2)
-                {
-                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{16}.png", Car.typeIndex, 16, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1)));
-                }
-                else if (InderxPhotoInspektion == 16)
-                {
-                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{23}.png", Car.typeIndex, 23, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1)));
-                }
-                else if (InderxPhotoInspektion == 23)
-                {
-                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{20}.png", Car.typeIndex, 20, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1)));
-                }
-                else if (InderxPhotoInspektion == 20)
-                {
+                    DependencyService.Get<IOrientationHandler>().ForceSensor();
                     await CheckVechicleAndGoToResultPage();
                 }
+                else
+                {
+                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion+1)}.png", Car.typeIndex, inderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion) + 1)));
+                }
+                Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
             else if (state == 4)
             {
@@ -267,8 +248,6 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Deliveri", vehiclwInformation1s[indexCurrentVechecle + 1]));
                 await Navigation.PushAsync(new AskPageDelyvery(managerDispatchMob, vehiclwInformation1s[indexCurrentVechecle + 1], IdShip, initDasbordDelegate, getVechicleDelegate), true);
             }
-            Navigation.RemovePage(Navigation.NavigationStack[2]);
-            DependencyService.Get<IOrientationHandler>().ForceSensor();
         }
     }
 }
