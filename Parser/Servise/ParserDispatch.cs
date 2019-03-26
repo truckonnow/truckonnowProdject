@@ -122,6 +122,10 @@ namespace Parser.Servise
                 shipping.TotalPaymentToCarrier = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("On Delivery") + "On Delivery".Length).Trim();
                 shipping.TotalPaymentToCarrier = shipping.TotalPaymentToCarrier.Remove(0, shipping.TotalPaymentToCarrier.IndexOf("to Carrier:") + "to Carrier:".Length).Trim();
                 shipping.TotalPaymentToCarrier = shipping.TotalPaymentToCarrier.Remove(shipping.TotalPaymentToCarrier.IndexOf("\n"));
+                if(shipping.TotalPaymentToCarrier != "None")
+                {
+                    shipping.TotalPaymentToCarrier = shipping.TotalPaymentToCarrier.Remove(0, shipping.TotalPaymentToCarrier.IndexOf('*')+1);
+                }
                 shipping.OnDeliveryToCarrier = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("to Carrier:\n") + "to Carrier:\n".Length);
                 shipping.OnDeliveryToCarrier = shipping.OnDeliveryToCarrier.Remove(0, shipping.OnDeliveryToCarrier.IndexOf("\n") + 2).TrimStart();
                 shipping.OnDeliveryToCarrier = shipping.OnDeliveryToCarrier.Remove(shipping.OnDeliveryToCarrier.IndexOf("\n"));
