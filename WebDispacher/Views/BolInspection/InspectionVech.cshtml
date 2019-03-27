@@ -1,14 +1,60 @@
 ﻿<div class="body">
-    
+    <div class="filling">
+        <div>
+            <p class="idStlP">Load ID: @ViewBag.Shipp.Id</p>
+            <div class="routeBlock">
+                <p class="routeInfP">@ViewBag.Shipp.AddresP, @ViewBag.Shipp.CityP, @ViewBag.Shipp.StateP, @ViewBag.Shipp.ZipP </p>
+                <p class="routeInfP">@ViewBag.Shipp.AddresD, @ViewBag.Shipp.CityD, @ViewBag.Shipp.StateD, @ViewBag.Shipp.ZipD </p>
+            </div>
+            <p class="nameVehStlP">@ViewBag.Vehiclw.Year @ViewBag.Vehiclw.Make @ViewBag.Vehiclw.Model</p>
+            @if (ViewBag.Vehiclw.Ask != null)
+            {
+        <p class="typeVehStlP">Type: @ViewBag.Vehiclw.Ask.TypeVehicle</p>
+            }
+        </div>
+    </div>
 </div>
 <style>
     * {
         margin: 0px;
     }
 
+
+    .routeBlock {
+        margin:5px;
+    }
+
+    .idStlP {
+        color: #421f0e;
+        font-size:20px;
+        margin:20px;
+    }
+
+    .nameVehStlP {
+        color: #e29334;
+        font-size:25px;
+        margin:20px, 20px, 20px, 0px;
+    }
+
+    .typeVehStlP {
+        color: #e29334;
+        font-size:22px;
+        margin:20px;
+    }
+
+    .routeInfP {
+        margin:10px;
+        font-size: 17px;
+        color: #f3a74c;
+    }
+
     .body {
         margin-top: 30px;
         margin-left: 5px;
         margin-right: 5px;
+    }
+
+    .filling {
+        width: 100%;
     }
 </style>
