@@ -84,7 +84,7 @@ namespace WebDispacher.Controellers
                         && (password != null && password != "") && (fullName != null && fullName != ""))
                     {
                         managerDispatch.CreateDriver(fullName, emailAddress, password, phoneNumbe, trailerCapacity, driversLicenseNumber);
-                        actionResult = Redirect("Config.BaseReqvesteUrl/Driver/Drivers");
+                        actionResult = Redirect($"{Config.BaseReqvesteUrl}/Driver/Drivers");
                     }
                     else
                     {
@@ -120,7 +120,7 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     managerDispatch.RemoveDrive(id);
-                    actionResult = Redirect("Config.BaseReqvesteUrl/Driver/Drivers");
+                    actionResult = Redirect($"{Config.BaseReqvesteUrl}/Driver/Drivers");
                 }
                 else
                 {
