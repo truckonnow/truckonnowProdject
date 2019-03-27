@@ -20,6 +20,8 @@ namespace WebDispacher.Service
             return _sqlEntityFramworke.GetDriversInDb();
         }
 
+        
+
         public void DeletedOrder(string id)
         {
             _sqlEntityFramworke.RecurentOnDeleted(id);
@@ -75,7 +77,7 @@ namespace WebDispacher.Service
 
         public List<Driver> GetDrivers(int pag)
         {
-            return _sqlEntityFramworke.GetDrivers( pag);
+            return _sqlEntityFramworke.GetDrivers(pag);
         }
 
         public void Assign(string idOrder, string idDriver)
@@ -99,6 +101,11 @@ namespace WebDispacher.Service
             int key = random.Next(1000, 1000000000);
             _sqlEntityFramworke.SaveKeyDatabays(login, password, key);
             return key;
+        }
+
+        public int GetCountPage(string status)
+        {
+            return _sqlEntityFramworke.GetCountPageInDb(status);
         }
 
         public List<Shipping> GetOrders(string status, int page)

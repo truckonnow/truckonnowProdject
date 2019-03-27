@@ -172,6 +172,17 @@ namespace WebDispacher.Dao
             return shipping;
         }
 
+        public int GetCountPageInDb(string status)
+        {
+            Init();
+            int countPage = 0;
+            List<Shipping> shipping = context.Shipping.ToList().FindAll(s => s.CurrentStatus == status);
+            countPage = shipping.Count / 20;
+            int remainderPage = shipping.Count % 20;
+            countPage = remainderPage > 0 ? countPage + 1 : countPage;
+            return countPage;
+        }
+
         public List<Driver> GetDrivers(int page)
         {
             Init();

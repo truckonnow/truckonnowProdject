@@ -23,7 +23,8 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     ViewBag.Orders = managerDispatch.GetOrders("NewLoad", page);
-                    ViewBag.Drivers = managerDispatch.GetDrivers(-1);
+                    ViewBag.Drivers = managerDispatch.GetDrivers();
+                    ViewBag.count = managerDispatch.GetCountPage("NewLoad");
                     actionResult = View("NewLoad");
                 }
                 else
@@ -132,7 +133,8 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     ViewBag.Orders = managerDispatch.GetOrders("Archived", page);
-                    ViewBag.Drivers = managerDispatch.GetDrivers(-1);
+                    ViewBag.Drivers = managerDispatch.GetDrivers();
+                    ViewBag.count = managerDispatch.GetCountPage("Archived");
                     actionResult = View("Archived");
                 }
                 else
@@ -163,7 +165,8 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     ViewBag.Orders = managerDispatch.GetOrders("Assigned", page);
-                    ViewBag.Drivers = managerDispatch.GetDrivers(-1);
+                    ViewBag.Drivers = managerDispatch.GetDrivers();
+                    ViewBag.count = managerDispatch.GetCountPage("Assigned");
                     actionResult = View("Assigned");
                 }
                 else
@@ -223,7 +226,8 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     ViewBag.Orders = managerDispatch.GetOrders("Deleted", page);
-                    ViewBag.Drivers = managerDispatch.GetDrivers(-1);
+                    ViewBag.Drivers = managerDispatch.GetDrivers();
+                    ViewBag.count = managerDispatch.GetCountPage("Deleted");
                     actionResult = View("Deleted");
                 }
                 else
@@ -254,7 +258,8 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     ViewBag.Orders = managerDispatch.GetOrders("Delivered", page);
-                    ViewBag.Drivers = managerDispatch.GetDrivers(-1);
+                    ViewBag.Drivers = managerDispatch.GetDrivers();
+                    ViewBag.count = managerDispatch.GetCountPage("Delivered");
                     actionResult = View("Delivered");
                 }
                 else
@@ -314,7 +319,8 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     ViewBag.Orders = managerDispatch.GetOrders("Picked up", page);
-                    ViewBag.Drivers = managerDispatch.GetDrivers(-1);
+                    ViewBag.Drivers = managerDispatch.GetDrivers();
+                    ViewBag.count = managerDispatch.GetCountPage("Pickedup");
                     actionResult = View("Pickedup");
                 }
                 else

@@ -257,10 +257,10 @@ namespace ApiMobaileServise.Servise
             }
             Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Picked up"));
             Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Assigned"));
-            int countFor5 = Shipping1.Count / 5;
-            int ost = Shipping1.Count % 5;
-            int countGet = ost == 0 ? (5 * type) + 5 : (5 * type) + ost;
-            return Shipping1.GetRange(5 * type, countGet);
+            //int countFor5 = Shipping1.Count / 5;
+            //int ost = Shipping1.Count % 5;
+            //int countGet = ost == 0 ? (5 * type) + 5 : (5 * type) + ost;
+            return Shipping1; //.GetRange(5 * type, countGet);
         }
 
         public List<Shipping> GetOrdersDelyveryForToken(string token, int type)
@@ -280,10 +280,10 @@ namespace ApiMobaileServise.Servise
                 return new List<Shipping>();
             }
             Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Delivered"));
-            int countFor5 = Shipping1.Count / 5;
-            int ost = Shipping1.Count % 5;
-            int countGet = ost == 0 ? (5 * type) + 5 : (5 * type) + ost;
-            return Shipping1.GetRange(5 * type, countGet);
+            //int countFor5 = Shipping1.Count / 5;
+            //int ost = Shipping1.Count % 5;
+            //int countGet = ost == 0 ? (5 * type) + 5 : (5 * type) + ost;
+            return Shipping1; //.GetRange(5 * type, countGet);
         }
     }
 }
