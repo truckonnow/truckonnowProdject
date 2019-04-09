@@ -11,6 +11,5 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Paymmant
         LiabilityAndInsurance LiabilityAndInsurance { get; set; }
         bool IsAskPaymmant { get; set; }
         StackLayout GetStackLayout();
-        void AddPhoto(byte[] photo);
     }
 }

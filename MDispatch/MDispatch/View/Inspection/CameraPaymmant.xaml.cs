@@ -23,7 +23,7 @@ namespace MDispatch.View.Inspection
             await Navigation.PopAsync();
             if (!result.Success)
                 return;
-            paymmant.AddPhoto(result.Image);
+            //paymmant.AddPhoto(result.Image);
         }
     }
 }

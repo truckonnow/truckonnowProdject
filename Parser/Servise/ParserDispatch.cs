@@ -134,9 +134,9 @@ namespace Parser.Servise
                     shipping.TotalPaymentToCarrier = shipping.OnDeliveryToCarrier.Remove(0, shipping.OnDeliveryToCarrier.IndexOf("within") + "within".Length).Trim();
                     shipping.TotalPaymentToCarrier = shipping.TotalPaymentToCarrier.Remove(shipping.TotalPaymentToCarrier.IndexOf(" ")) + " days";
                 }
-                shipping.CompanyOwesCarrier = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("Company") + "Company** owes Carrier:\n".Length);
-                shipping.CompanyOwesCarrier = shipping.CompanyOwesCarrier.Remove(0, shipping.CompanyOwesCarrier.IndexOf("\n")).TrimStart();
-                shipping.CompanyOwesCarrier = shipping.CompanyOwesCarrier.Remove(shipping.CompanyOwesCarrier.IndexOf("\n"));
+                //shipping.CompanyOwesCarrier = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("Company") + "Company** owes Carrier:\n".Length);
+                //shipping.CompanyOwesCarrier = shipping.CompanyOwesCarrier.Remove(0, shipping.CompanyOwesCarrier.IndexOf("\n")).TrimStart();
+                //shipping.CompanyOwesCarrier = shipping.CompanyOwesCarrier.Remove(shipping.CompanyOwesCarrier.IndexOf("\n"));
             }
             catch (Exception)
             {

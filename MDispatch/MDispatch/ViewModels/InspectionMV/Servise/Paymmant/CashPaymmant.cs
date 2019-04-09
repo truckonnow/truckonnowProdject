@@ -1,11 +1,8 @@
-﻿using Android.Provider;
-using MDispatch.Models;
-using MDispatch.View.Inspection;
+﻿using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection.Delyvery;
 using MDispatch.View.Inspection.PickedUp;
-using Newtonsoft.Json;
+using Rg.Plugins.Popup.Services;
 using System;
-using System.IO;
 using Xamarin.Forms;
 
 namespace MDispatch.ViewModels.InspectionMV.Servise.Paymmant
@@ -17,19 +14,21 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Paymmant
         public LiabilityAndInsurance LiabilityAndInsurance { get; set; }
 
         private StackLayout block = null;
+        StackLayout stackLayout = null;
 
         public StackLayout GetStackLayout()
         {
             Entry entry = new Entry();
+            entry.Keyboard = Keyboard.Numeric;
             entry.Placeholder = "$";
             entry.TextChanged += EntryTextChange;
             block = new StackLayout();
             Button button = new Button();
-            button.Text = "Take";
+            button.Text = "I am paid";
             button.BackgroundColor = Color.BlueViolet;
             button.TextColor = Color.White;
             button.Clicked += ClickBtn;
-            StackLayout stackLayout = new StackLayout();
+            stackLayout = new StackLayout();
             stackLayout.Children.Add(entry);
             stackLayout.Children.Add(button);
             stackLayout.Children.Add(block);
@@ -38,74 +37,23 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Paymmant
 
         private async void ClickBtn(object sender, EventArgs e)
         {
-            if(AskForUserDelyvery != null)
+            if(((Entry)stackLayout.Children[0]).Text != null && ((Entry)stackLayout.Children[0]).Text.Length > 0)
             {
-                await AskForUserDelyvery.Navigation.PushAsync(new CameraPaymmant(this, "Take a picture of what you pay"));
+                IsAskPaymmant = true;
+                await PopupNavigation.PushAsync(new Errror($"Give money for delivery to the driver {((Entry)stackLayout.Children[0]).Text}"));
             }
             else
             {
-                await LiabilityAndInsurance.Navigation.PushAsync(new CameraPaymmant(this, "Take a picture of what you pay"));
+                IsAskPaymmant = false;
+                await PopupNavigation.PushAsync(new Errror("You must enter the amount of payment for delivery"));
             }
         }
 
-        private bool isEntrt = false;
         private void EntryTextChange(object sender, TextChangedEventArgs e)
         {
-            if (e.NewTextValue != "")
-            {
-                isEntrt = true;
-            }
-            else
-            {
-                isEntrt = false;
-            }
             if (AskForUserDelyvery != null)
             {
                 AskForUserDelyvery.askForUsersDelyveryMW.AskForUserDelyveryM.CountPay = e.NewTextValue;
-            }
-            else
-            {
-
-            }
-            if (isEntrt && isPhoto)
-            {
-                IsAskPaymmant = true;
-            }
-            else
-            {
-                IsAskPaymmant = false;
-            }
-        }
-
-        private bool isPhoto = false;
-        public void AddPhoto(byte[] photo)
-        {
-            if(block.Children.Count == 1)
-            {
-                block.Children.RemoveAt(0);
-            }
-            block.Children.Add(new Image()
-            {
-                Source = ImageSource.FromStream(() => new MemoryStream(photo)),
-                HeightRequest = 40,
-                WidthRequest = 40
-            });
-            AskForUserDelyvery.askForUsersDelyveryMW.AskForUserDelyveryM.PhotoPay = new Photo();
-            if (AskForUserDelyvery != null)
-            {
-                AskForUserDelyvery.askForUsersDelyveryMW.AskForUserDelyveryM.PhotoPay.Base64 = JsonConvert.SerializeObject(photo);
-            }
-            else
-            {
-
-            }
-            if (isEntrt && isPhoto)
-            {
-                IsAskPaymmant = true;
-            }
-            else
-            {
-                IsAskPaymmant = false;
             }
         }
 

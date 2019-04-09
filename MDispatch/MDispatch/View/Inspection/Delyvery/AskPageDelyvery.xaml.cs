@@ -16,9 +16,10 @@ namespace MDispatch.View.Inspection.Delyvery
 	{
         AskDelyveryMV askDelyveryMV = null;
 
-        public AskPageDelyvery (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate)
+        public AskPageDelyvery (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate,
+             string onDeliveryToCarrier, string totalPaymentToCarrier)
 		{
-            askDelyveryMV = new AskDelyveryMV(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate, getVechicleDelegate);
+            askDelyveryMV = new AskDelyveryMV(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate, getVechicleDelegate, onDeliveryToCarrier, totalPaymentToCarrier);
             askDelyveryMV.AskDelyvery = new AskDelyvery();
             InitializeComponent ();
             BindingContext = askDelyveryMV;

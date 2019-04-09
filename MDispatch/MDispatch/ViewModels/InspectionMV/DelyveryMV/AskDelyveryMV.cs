@@ -3,12 +3,10 @@ using MDispatch.NewElement;
 using MDispatch.Service;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
-using MDispatch.View.Inspection.Delyvery;
 using MDispatch.View.PageApp;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
-using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -23,7 +21,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         private GetVechicleDelegate getVechicleDelegate = null;
 
         public AskDelyveryMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, 
-            InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate)
+            InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate, string onDeliveryToCarrier, string totalPaymentToCarrier)
         {
             this.getVechicleDelegate = getVechicleDelegate;
             this.initDasbordDelegate = initDasbordDelegate;
@@ -31,9 +29,13 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             Navigation = navigation;
             VehiclwInformation = vehiclwInformation;
             IdShip = idShip;
+            OnDeliveryToCarrier = onDeliveryToCarrier;
+            TotalPaymentToCarrier = totalPaymentToCarrier;
         }
 
         private string IdShip { get; set; }
+        private string OnDeliveryToCarrier { get; set; }
+        private string TotalPaymentToCarrier { get; set; }
 
         private VehiclwInformation vehiclwInformation = null;
         public VehiclwInformation VehiclwInformation
@@ -72,7 +74,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             else if (state == 3)
             {
                 DependencyService.Get<IOrientationHandler>().ForceLandscape();
-                await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{VehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}7.png", VehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 7, initDasbordDelegate, getVechicleDelegate, ""));
+                await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{VehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}7.png", VehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 7, initDasbordDelegate, getVechicleDelegate, "", OnDeliveryToCarrier, TotalPaymentToCarrier));
                 Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
             else if (state == 4)

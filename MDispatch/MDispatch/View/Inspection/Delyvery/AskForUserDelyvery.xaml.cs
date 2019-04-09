@@ -21,13 +21,33 @@ namespace MDispatch.View.Inspection.Delyvery
         public AskForUsersDelyveryMW askForUsersDelyveryMW = null;
         private IPaymmant Paymmant = null;
 
-        public AskForUserDelyvery (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate)
+        public AskForUserDelyvery (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate, string OnDeliveryToCarrier, string totalPaymentToCarrier)
 		{
             askForUsersDelyveryMW = new AskForUsersDelyveryMW(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate);
             askForUsersDelyveryMW.AskForUserDelyveryM = new AskForUserDelyveryM();
             InitializeComponent ();
-            BindingContext = askForUsersDelyveryMW;
-		}
+            BindingContext = askForUsersDelyveryMW; 
+            InitPayment(OnDeliveryToCarrier, totalPaymentToCarrier);
+        }
+
+        private void InitPayment(string OnDeliveryToCarrier, string totalPaymentToCarrier)
+        {
+            if(totalPaymentToCarrier == "COD")
+            {
+                payBlockSelectPatment.IsVisible = true;
+            }
+            else if (totalPaymentToCarrier == "COP")
+            {
+                isAsk2 = true;
+                askBlock2.IsVisible = false;
+            }
+            else
+            {
+                isAsk2 = true;
+                instructionL.Text = OnDeliveryToCarrier;
+                bilingPay.IsVisible = true;
+            }
+        }
 
         #region Ask1
         Button button1 = null;
@@ -79,11 +99,11 @@ namespace MDispatch.View.Inspection.Delyvery
         {
             askForUsersDelyveryMW.AskForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation = (string)e.NewItem;
             Paymmant = GetPaymmant((string)e.NewItem);
-            if(payBlock.Children.Count == 4)
+            if(payBlockSelectPatment.Children.Count == 4)
             {
-                payBlock.Children.RemoveAt(3);
+                payBlockSelectPatment.Children.RemoveAt(3);
             }
-            payBlock.Children.Add(Paymmant.GetStackLayout());
+            payBlockSelectPatment.Children.Add(Paymmant.GetStackLayout());
         }
 
         private IPaymmant GetPaymmant(string paymmantName)
