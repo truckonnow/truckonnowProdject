@@ -58,6 +58,7 @@ namespace WebDispacher.Dao
             context.VehiclwInformation.Load();
             context.PhotoInspections.Load();
             context.Photos.Load();
+            context.Asks.Load();
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == id);
             return context.Shipping.FirstOrDefault(s => s.VehiclwInformations.FirstOrDefault(v => v == vehiclwInformation) != null);
         }

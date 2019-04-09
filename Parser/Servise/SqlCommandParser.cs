@@ -22,6 +22,10 @@ namespace Parser.DAO
             bool isCheckOrder = CheckOrder(shipping);
             if (!isCheckOrder)
             {
+                isCheckOrder = CheckUrlOrder(shipping);
+            }
+            if (!isCheckOrder)
+            {
                 LogEr.Logerr("Info", $"Order added to database, Load Id {shipping.Id}", "ParseDataInUrl", DateTime.Now.ToShortTimeString());
                 await context.Shipping.AddAsync(shipping);
                 await context.SaveChangesAsync();
@@ -34,12 +38,12 @@ namespace Parser.DAO
 
         public bool CheckUrlOrder(Shipping shipping)
         {
-            return context.Shipping.FirstOrDefault(s => s.UrlReqvest == shipping.UrlReqvest) != null; ;
+            return context.Shipping.FirstOrDefault(s => s.UrlReqvest == shipping.UrlReqvest) != null;
         }
 
         private bool CheckOrder(Shipping shipping)
         { 
-            return context.Shipping.FirstOrDefault(s => s.Id == shipping.Id) != null; ;
+            return context.Shipping.FirstOrDefault(s => s.Id == shipping.Id) != null; 
         }
     }
 }

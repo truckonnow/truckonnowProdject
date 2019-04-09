@@ -74,10 +74,10 @@
                 <h3 class="panel-title">Payment Information</h3>
             </div>
             <div>
-                <span class="list-group-item">Price: @ViewBag.Order.TotalPaymentToCarrier</span>
-                <span class="list-group-item">Payment Method: @ViewBag.Order.OnDeliveryToCarrier</span>
+                <span class="list-group-item">Price: @ViewBag.Order.PriceListed</span>
+                <span class="list-group-item">Payment Method: @ViewBag.Order.TotalPaymentToCarrier</span>
                 <hr />
-                <span class="list-group-item">it Add</span>
+                <span class="list-group-item">@ViewBag.Order.OnDeliveryToCarrier</span>
             </div>
         </div>
     </div>

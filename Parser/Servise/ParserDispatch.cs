@@ -96,10 +96,10 @@ namespace Parser.Servise
             try
             {
                 IHtmlDocument htmlDocument = htmlParser.Parse(sourse);
-                var element = htmlDocument.GetElementById("sheetDetails")
+                var element1 = htmlDocument.GetElementById("sheetDetails")
                     .GetElementsByClassName("panel panel-default")[1]
-                    .GetElementsByClassName("panel-body")[0]
-                    .GetElementsByClassName("col-xs-12 col-sm-6");
+                    .GetElementsByClassName("panel-body")[0];
+                var element = element1.GetElementsByClassName("col-xs-12 col-sm-6");
                 var el = element[0].GetElementsByTagName("p");
                 shipping.DispatchDate = el[0].TextContent.Remove(0, el[0].TextContent.IndexOf("Dispatch Date: ") + "Dispatch Date: ".Length);
                 shipping.DispatchDate = shipping.DispatchDate.Remove(shipping.DispatchDate.IndexOf("\n"));
@@ -122,13 +122,18 @@ namespace Parser.Servise
                 shipping.TotalPaymentToCarrier = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("On Delivery") + "On Delivery".Length).Trim();
                 shipping.TotalPaymentToCarrier = shipping.TotalPaymentToCarrier.Remove(0, shipping.TotalPaymentToCarrier.IndexOf("to Carrier:") + "to Carrier:".Length).Trim();
                 shipping.TotalPaymentToCarrier = shipping.TotalPaymentToCarrier.Remove(shipping.TotalPaymentToCarrier.IndexOf("\n"));
-                if(shipping.TotalPaymentToCarrier != "None")
+                shipping.OnDeliveryToCarrier = element1.TextContent.Remove(0, element1.TextContent.IndexOf("Company* owes Carrier:") + "Company* owes Carrier:".Length);
+                shipping.OnDeliveryToCarrier = shipping.OnDeliveryToCarrier.Remove(0, shipping.OnDeliveryToCarrier.IndexOf(shipping.PriceListed) + shipping.PriceListed.Length).Trim().Replace("\n", "");
+                while (shipping.OnDeliveryToCarrier.Contains("  ")) { shipping.OnDeliveryToCarrier = shipping.OnDeliveryToCarrier.Replace("  ", " "); }
+                if (shipping.TotalPaymentToCarrier != "None")
                 {
                     shipping.TotalPaymentToCarrier = shipping.TotalPaymentToCarrier.Remove(0, shipping.TotalPaymentToCarrier.IndexOf('*')+1);
                 }
-                shipping.OnDeliveryToCarrier = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("to Carrier:\n") + "to Carrier:\n".Length);
-                shipping.OnDeliveryToCarrier = shipping.OnDeliveryToCarrier.Remove(0, shipping.OnDeliveryToCarrier.IndexOf("\n") + 2).TrimStart();
-                shipping.OnDeliveryToCarrier = shipping.OnDeliveryToCarrier.Remove(shipping.OnDeliveryToCarrier.IndexOf("\n"));
+                else
+                {
+                    shipping.TotalPaymentToCarrier = shipping.OnDeliveryToCarrier.Remove(0, shipping.OnDeliveryToCarrier.IndexOf("within") + "within".Length).Trim();
+                    shipping.TotalPaymentToCarrier = shipping.TotalPaymentToCarrier.Remove(shipping.TotalPaymentToCarrier.IndexOf(" ")) + " days";
+                }
                 shipping.CompanyOwesCarrier = element[1].TextContent.Remove(0, element[1].TextContent.IndexOf("Company") + "Company** owes Carrier:\n".Length);
                 shipping.CompanyOwesCarrier = shipping.CompanyOwesCarrier.Remove(0, shipping.CompanyOwesCarrier.IndexOf("\n")).TrimStart();
                 shipping.CompanyOwesCarrier = shipping.CompanyOwesCarrier.Remove(shipping.CompanyOwesCarrier.IndexOf("\n"));

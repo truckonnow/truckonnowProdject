@@ -181,7 +181,7 @@ namespace MDispatch.View.Inspection.PickedUp
                             {
                                 HorizontalTextAlignment = TextAlignment.Center,
                                 TextColor = Color.Blue,
-                                Text = $"http://192.168.0.100:22929/Photo/BOL/{VehiclwInformation.Id}",
+                                Text = $"{Config.BaseReqvesteUrl}/Photo/BOL/{VehiclwInformation.Id}",
                                 FontSize = 16
                             }
                         }
