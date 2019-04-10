@@ -175,6 +175,10 @@ namespace MDispatch.View.Inspection.Delyvery
 
         private void CheckAsk()
         {
+            if(Paymmant != null)
+            {
+                isAsk2 = Paymmant.IsAskPaymmant;
+            }
             if (!isAsk1)
             {
                 askBlock2.BorderColor = Color.Red;

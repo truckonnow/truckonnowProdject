@@ -45,10 +45,10 @@
             <div class="panel-heading">
                 <h3 class="panel-title">Origin</h3>
             </div>
-            <div>
+            <div class="outer">
                 <p class="list-group-item">@ViewBag.Order.AddresP, @ViewBag.Order.CityP, 
                     <br/> @ViewBag.Order.StateP, @ViewBag.Order.ZipP</p>
-                <hr />
+                <hr  style="border-color:rgba(243, 167, 76, 0.41);"/>
                 <span class="list-group-item">Contact: @ViewBag.Order.ContactNameP</span>
                 <span class="list-group-item">Phone: @ViewBag.Order.PhoneP</span>
                 <span class="list-group-item">Pickup date: @ViewBag.Order.PickupExactly</span>
@@ -58,12 +58,12 @@
             <div class="panel-heading">
                 <h3 class="panel-title">Destination</h3>
             </div>
-            <div>
+            <div class="outer">
                 <p class="list-group-item">
                     @ViewBag.Order.AddresD, @ViewBag.Order.CityD,
                     <br /> @ViewBag.Order.StateD, @ViewBag.Order.ZipD
                 </p>
-                <hr />
+                <hr style="border-color:rgba(243, 167, 76, 0.41);"/>
                 <span class="list-group-item">Contact: @ViewBag.Order.ContactNameD</span>
                 <span class="list-group-item">Phone: @ViewBag.Order.PhoneD</span>
                 <span class="list-group-item">Delivery date: @ViewBag.Order.DeliveryEstimated</span>
@@ -73,10 +73,10 @@
             <div class="panel-heading">
                 <h3 class="panel-title">Payment Information</h3>
             </div>
-            <div>
+            <div class="outer">
                 <span class="list-group-item">Price: @ViewBag.Order.PriceListed</span>
                 <span class="list-group-item">Payment Method: @ViewBag.Order.TotalPaymentToCarrier</span>
-                <hr />
+                <hr style="border-color:rgba(243, 167, 76, 0.41);"/>
                 <span class="list-group-item">@ViewBag.Order.OnDeliveryToCarrier</span>
             </div>
         </div>
@@ -86,7 +86,7 @@
             <div class="panel-heading">
                 <h3 class="panel-title">Customer</h3>
             </div>
-            <div>
+            <div class="outer">
                 <span class="list-group-item">Contact: @ViewBag.Order.ContactC</span>
                 <span class="list-group-item">Phone: @ViewBag.Order.PhoneC</span>
                 <span class="list-group-item">Fax: @ViewBag.Order.FaxC</span>
@@ -98,12 +98,7 @@
                 <h3 class="panel-title">Instructions</h3>
             </div>
             <div class="outer">
-                <span class="list-group-item inner">@ViewBag.Order.Titl1DI</span>
-            </div>
-        </div>
-        <div>
-            <div>
-                <span></span>
+                <span class="list-group-item">@ViewBag.Order.Titl1DI</span>
             </div>
         </div>
     </div>
@@ -114,34 +109,36 @@
                 margin: 0px;
             }
 
+            .outer {
+                border-style: solid;
+                border-width: 1px;
+                border-color: rgba(243, 167, 76, 0.41);
+            }
 
             .panel-title {
-                font-size: 22px;
+                font-size: 20px;
+                color:#363636;
             }
 
             .panel-heading {
                 padding: 10px 15px;
-                border-bottom: 1px solid transparent;
                 border-top-left-radius: 3px;
                 border-top-right-radius: 3px;
                 background: rgba(243, 167, 76, 0.18);
-                border-color: #f3a74c;
             }
 
             .list-group-item {
                 display: block;
                 padding: 8px 20px;
                 width: 100%;
-                font-size: 18px;
+                font-family: Arial;
+                font-size: 16px;
+                line-height: 22px;
                 width: 95%;
             }
 
-
             .panel {
                 border-radius: 4px;
-                -webkit-box-shadow: 3px 5px 24px 2px rgba(243,167,76,0.28);
-                -moz-box-shadow: 3px 5px 24px 2px rgba(243,167,76,0.28);
-                box-shadow: 3px 5px 24px 2px rgba(243,167,76,0.28);
                 margin:5px;
                 max-width: 70%;
             }
@@ -153,7 +150,7 @@
             .headTabe {
                 font-size: 21px;
                 margin-left: 10px;
-                color: #f3a74c;
+                color: #363636;
             }
 
             tr {
@@ -172,7 +169,9 @@
             td, th {
                 text-align: center;
                 border-radius: 5px;
+                height: 27px;
                 color: #f3a74c;
+                color:#363636;
             }
 
             td {
@@ -194,18 +193,18 @@
                 padding: 10px;
                 border-bottom: solid;
                 border-width: 1px;
-                border-color: #f3a74c;
+                border-color: #eebc80;
                 border-radius: 6px;
-                -webkit-box-shadow: inset 1px 14px 103px -41px rgba(255,132,0,1);
-                -moz-box-shadow: inset 1px 14px 103px -41px rgba(255,132,0,1);
-                box-shadow: inset 1px 14px 103px -41px rgba(255,132,0,1);
+                -webkit-box-shadow: inset 1px 14px 103px -41px rgb(248, 178, 103);
+                -moz-box-shadow: inset 1px 14px 103px -41px rgb(248, 178, 103);
+                box-shadow: inset 1px 14px 103px -41px rgb(248, 178, 103);
                 display: flex;
                 justify-content: space-around;
             }
 
             .inpHead {
                 font-size: 19px;
-                color: #f3a74c;
+                color: #363636;
             }
 
             .body {

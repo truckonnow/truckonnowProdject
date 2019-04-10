@@ -26,7 +26,7 @@
                 <Label TextColor="#4fd2c2" Text="Payment Information" FontSize="20"/>
                 <Label x:Name="lAmount" Text="Amount" TextColor="#b8babb" Margin="4,0,0,0" FontSize="16" VerticalTextAlignment="Start"/>
                 <Entry TextColor="#4fd2c2" HeightRequest="40" FontSize="16" Text="{Binding Shipping.PriceListed}" TextChanged="Entry_TextChanged"/>
-                <input:Dropdown Title="Payment teams"  ItemsSource="{Binding SorseDropDown}" SelectedItem="{Binding Shipping.OnDeliveryToCarrier}" BorderColor="#4fd2c2"/>
+                <input:Dropdown Title="Payment teams"  ItemsSource="{Binding SorseDropDown}" SelectedItem="{Binding Shipping.TotalPaymentToCarrier}" BorderColor="#4fd2c2"/>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="End">
                     <Button Text="Close" BackgroundColor="White" TextColor="#4fd2c2" WidthRequest="70" Clicked="Button_Clicked"/>
                     <Button Text="Save" BackgroundColor="White" TextColor="#4fd2c2" WidthRequest="60" Command="{Binding SavePaymentUpCommand}"/>
