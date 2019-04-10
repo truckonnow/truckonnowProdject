@@ -165,7 +165,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         private async void GoToFeedBack()
         {
             await PopupNavigation.PopAllAsync(true);
-            await Navigation.PushAsync(new View.Inspection.Feedback(managerDispatchMob, Shipping.VehiclwInformations.FirstOrDefault(v => v.Id == IdVech)));
+            await Navigation.PushAsync(new View.Inspection.Feedback(managerDispatchMob, Shipping.VehiclwInformations.FirstOrDefault(v => v.Id == IdVech), this));
         }
     }
 }
