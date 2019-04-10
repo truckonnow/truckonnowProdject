@@ -207,7 +207,7 @@ namespace ApiMobaileServise.Servise
             if (shipping != null)
             {
                 shipping.PriceListed = payment;
-                shipping.OnDeliveryToCarrier = paymentTeams;
+                shipping.TotalPaymentToCarrier = paymentTeams;
                 await context.SaveChangesAsync();
             }
         }

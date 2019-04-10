@@ -23,7 +23,7 @@ namespace MDispatch.View.Inspection.Delyvery
 
         public AskForUserDelyvery (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate, string OnDeliveryToCarrier, string totalPaymentToCarrier)
 		{
-            askForUsersDelyveryMW = new AskForUsersDelyveryMW(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate);
+            askForUsersDelyveryMW = new AskForUsersDelyveryMW(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate, totalPaymentToCarrier);
             askForUsersDelyveryMW.AskForUserDelyveryM = new AskForUserDelyveryM();
             InitializeComponent ();
             BindingContext = askForUsersDelyveryMW; 
@@ -104,6 +104,7 @@ namespace MDispatch.View.Inspection.Delyvery
                 payBlockSelectPatment.Children.RemoveAt(3);
             }
             payBlockSelectPatment.Children.Add(Paymmant.GetStackLayout());
+            isAsk2 = false;
         }
 
         private IPaymmant GetPaymmant(string paymmantName)
@@ -113,6 +114,9 @@ namespace MDispatch.View.Inspection.Delyvery
             {
                 case "Cash":
                     paymmant = new CashPaymmant(this);
+                    break;
+                case "Check":
+                    paymmant = new CheckPaymmant(this);
                     break;
             }
             return paymmant;
@@ -181,11 +185,11 @@ namespace MDispatch.View.Inspection.Delyvery
             }
             if (!isAsk1)
             {
-                askBlock2.BorderColor = Color.Red;
+                askBlock1.BorderColor = Color.Red;
             }
             else
             {
-                askBlock2.BorderColor = Color.BlueViolet;
+                askBlock1.BorderColor = Color.BlueViolet;
             }
             if (!isAsk2)
             {

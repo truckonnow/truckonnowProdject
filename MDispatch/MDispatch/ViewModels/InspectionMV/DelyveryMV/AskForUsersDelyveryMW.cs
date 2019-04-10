@@ -20,16 +20,19 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         public INavigation Navigation { get; set; }
         private InitDasbordDelegate initDasbordDelegate = null;
 
-        public AskForUsersDelyveryMW(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
+        public AskForUsersDelyveryMW(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate, 
+            string totalPaymentToCarrier)
         {
             this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
             Navigation = navigation;
             VehiclwInformation = vehiclwInformation;
             IdShip = idShip;
+            TotalPaymentToCarrier = totalPaymentToCarrier;
         }
 
         private string IdShip { get; set; }
+        private string TotalPaymentToCarrier { get; set; }
 
         private VehiclwInformation vehiclwInformation = null;
         public VehiclwInformation VehiclwInformation
@@ -139,7 +142,16 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             int state = 0;
             await Task.Run(() =>
             {
-                state = managerDispatchMob.Recurent(token, IdShip, "Delivered", ref description);
+                string status = null;
+                if(TotalPaymentToCarrier == "COD" && TotalPaymentToCarrier == "COP")
+                {
+                    status = "Delivered";
+                }
+                else
+                {
+                    status = "Biling";
+                }
+                state = managerDispatchMob.Recurent(token, IdShip, status, ref description);
                 initDasbordDelegate.Invoke();
             });
             if (state == 1)

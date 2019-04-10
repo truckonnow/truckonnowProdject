@@ -27,11 +27,9 @@ namespace MDispatch.ViewModels.PageAppMV
             SavePaymentUpCommand = new DelegateCommand(SavePayments);
             SorseDropDown = new string[]
             {
-                "Other",
                 "COD",
                 "COP",
-                "QuickPay",
-                "Comcheck",
+                "2 days",
                 "5 days",
                 "7 days",
                 "10 days",
@@ -39,8 +37,6 @@ namespace MDispatch.ViewModels.PageAppMV
                 "20 days",
                 "30 days",
                 "45 days",
-                "CKOD",
-                "ACH"
             };
         }
 
@@ -66,7 +62,7 @@ namespace MDispatch.ViewModels.PageAppMV
             int state = 0;
             await Task.Run(() =>
             {
-                state = managerDispatchMob.OrderOneWork("Save", Shipping.Id, token, "Payment", Shipping.PriceListed, Shipping.OnDeliveryToCarrier, ref description);
+                state = managerDispatchMob.OrderOneWork("Save", Shipping.Id, token, "Payment", Shipping.PriceListed, Shipping.TotalPaymentToCarrier, ref description);
             });
             await PopupNavigation.PopAsync(true);
             await Navigationn.PopAsync(true);

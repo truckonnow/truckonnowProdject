@@ -7,11 +7,11 @@ using Xamarin.Forms;
 
 namespace MDispatch.ViewModels.InspectionMV.Servise.Paymmant
 {
-    public class CashPaymmant : IPaymmant
+    public class CheckPaymmant : IPaymmant
     {
-        public bool IsAskPaymmant { get; set; }
         public AskForUserDelyvery AskForUserDelyvery { get; set; }
         public LiabilityAndInsurance LiabilityAndInsurance { get; set; }
+        public bool IsAskPaymmant { get; set; }
 
         StackLayout stackLayout = null;
 
@@ -34,7 +34,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Paymmant
 
         private async void ClickBtn(object sender, EventArgs e)
         {
-            if(((Entry)stackLayout.Children[0]).Text != null && ((Entry)stackLayout.Children[0]).Text.Length > 0)
+            if (((Entry)stackLayout.Children[0]).Text != null && ((Entry)stackLayout.Children[0]).Text.Length > 0)
             {
                 IsAskPaymmant = true;
                 stackLayout.IsEnabled = false;
@@ -55,10 +55,10 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Paymmant
             }
         }
 
-        public CashPaymmant(object page)
+        public CheckPaymmant(object page)
         {
             AskForUserDelyvery = (page as AskForUserDelyvery);
-            if(AskForUserDelyvery == null)
+            if (AskForUserDelyvery == null)
             {
                 LiabilityAndInsurance = (LiabilityAndInsurance)page;
             }
