@@ -7,22 +7,29 @@ using Xamarin.Forms.Xaml;
 
 namespace MDispatch.View.Inspection.Delyvery
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class TempDialogPage1 : PopupPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class TempDialogPage1 : PopupPage
     {
         private AskForUsersDelyveryMW askForUsersDelyveryMW = null;
 
-        public TempDialogPage1 (AskForUsersDelyveryMW askForUsersDelyveryMW)
-		{
+        public TempDialogPage1(AskForUsersDelyveryMW askForUsersDelyveryMW)
+        {
             this.askForUsersDelyveryMW = askForUsersDelyveryMW;
-			InitializeComponent ();
-		}
+            InitializeComponent();
+        }
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
             await PopupNavigation.PopAsync(true);
             await PopupNavigation.PushAsync(new TempPageHint4());
-            await askForUsersDelyveryMW.Navigation.PopToRootAsync();
+            if (askForUsersDelyveryMW.Payment == "COD" || askForUsersDelyveryMW.Payment == "COP" || askForUsersDelyveryMW.Payment == "Biling")
+            {
+                await askForUsersDelyveryMW.Navigation.PopToRootAsync();
+            }
+            else
+            {
+                //Camera
+            }
         }
 
         private async void Button_Clicked_1(object sender, EventArgs e)

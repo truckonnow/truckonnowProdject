@@ -22,8 +22,15 @@ namespace MDispatch.View.Inspection.PickedUp
         private async void Button_Clicked_1(object sender, System.EventArgs e)
         {
             await PopupNavigation.PopAsync(true);
-            await askForUsersDelyveryMW.Navigation.PopToRootAsync();
             await PopupNavigation.PushAsync(new TempPageHint4());
+            if (askForUsersDelyveryMW.Payment == "COD" || askForUsersDelyveryMW.Payment == "COP" || askForUsersDelyveryMW.Payment == "Biling")
+            {
+                await Navigation.PopToRootAsync(true);
+            }
+            else
+            {
+                //Camera
+            }
         }
 
         private async void Button_Clicked(object sender, System.EventArgs e)
@@ -31,7 +38,6 @@ namespace MDispatch.View.Inspection.PickedUp
             await PopupNavigation.PopAsync(true);
             askForUsersDelyveryMW.GoToFeedBack();
             askForUsersDelyveryMW.SendEmailCoupon();
-            await PopupNavigation.PushAsync(new TempPageHint3());
         }
     }
 }

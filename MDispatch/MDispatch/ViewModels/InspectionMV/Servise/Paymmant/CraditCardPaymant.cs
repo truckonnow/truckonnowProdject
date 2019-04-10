@@ -21,7 +21,6 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Paymmant
             entry.Keyboard = Keyboard.Numeric;
             entry.Placeholder = "$";
             entry.TextChanged += EntryTextChange;
-            block = new StackLayout();
             Button button = new Button();
             button.Text = "I am paid";
             button.BackgroundColor = Color.BlueViolet;

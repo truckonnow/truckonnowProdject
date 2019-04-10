@@ -13,9 +13,9 @@ namespace MDispatch.View.Inspection
 	{
         FeedBackMV feedBackMV = null;
 
-        public Feedback (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation)
+        public Feedback (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, object payMVInspaction)
 		{
-            feedBackMV = new FeedBackMV(managerDispatchMob, vehiclwInformation, Navigation);
+            feedBackMV = new FeedBackMV(managerDispatchMob, vehiclwInformation, Navigation, payMVInspaction);
 			InitializeComponent ();
             BindingContext = feedBackMV;
             Init();

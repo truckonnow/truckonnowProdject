@@ -27,10 +27,10 @@ namespace MDispatch.View.Inspection.Delyvery
             askForUsersDelyveryMW.AskForUserDelyveryM = new AskForUserDelyveryM();
             InitializeComponent ();
             BindingContext = askForUsersDelyveryMW; 
-            InitPayment(OnDeliveryToCarrier, totalPaymentToCarrier);
+            InitPayment(OnDeliveryToCarrier, totalPaymentToCarrier, vehiclwInformation);
         }
 
-        private void InitPayment(string OnDeliveryToCarrier, string totalPaymentToCarrier)
+        private void InitPayment(string OnDeliveryToCarrier, string totalPaymentToCarrier, VehiclwInformation vehiclwInformation)
         {
             if(totalPaymentToCarrier == "COD")
             {
@@ -40,9 +40,11 @@ namespace MDispatch.View.Inspection.Delyvery
             {
                 isAsk2 = true;
                 askBlock2.IsVisible = false;
+                askForUsersDelyveryMW.AskForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation = "COP";
             }
             else
             {
+                askForUsersDelyveryMW.AskForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation = "Biling";
                 isAsk2 = true;
                 instructionL.Text = OnDeliveryToCarrier;
                 bilingPay.IsVisible = true;
@@ -168,7 +170,7 @@ namespace MDispatch.View.Inspection.Delyvery
         {
             if (isAsk1 && isAsk2 && GetIsAsk3())
             {
-                askForUsersDelyveryMW.SaveAsk();
+                askForUsersDelyveryMW.SaveAsk(askForUsersDelyveryMW.AskForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation);
             }
             else
             {

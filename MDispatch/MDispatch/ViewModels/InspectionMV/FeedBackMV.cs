@@ -3,6 +3,7 @@ using MDispatch.Service;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection.PickedUp;
+using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
@@ -15,9 +16,11 @@ namespace MDispatch.ViewModels.InspectionMV
     {
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation { get; set; }
+        private object paymmpayMVInspactionant = null;
 
-        public FeedBackMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, INavigation navigation)
+        public FeedBackMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, INavigation navigation, object paymmpayMVInspactionant)
         {
+            this.paymmpayMVInspactionant = paymmpayMVInspactionant;
             this.managerDispatchMob = managerDispatchMob;
             Navigation = navigation;
             VehiclwInformation = vehiclwInformation;
@@ -58,8 +61,19 @@ namespace MDispatch.ViewModels.InspectionMV
             }
             else if (state == 3)
             {
+                await PopupNavigation.PopAsync(true);
                 await PopupNavigation.PushAsync(new TempPageHint3());
-                await Navigation.PopToRootAsync(true);
+                if(paymmpayMVInspactionant is AskForUsersDelyveryMW)
+                {
+                    if (((AskForUsersDelyveryMW)paymmpayMVInspactionant).Payment == "COD" || ((AskForUsersDelyveryMW)paymmpayMVInspactionant).Payment == "COP" || ((AskForUsersDelyveryMW)paymmpayMVInspactionant).Payment == "Biling")
+                    {
+                        await Navigation.PopToRootAsync(true);
+                    }
+                    else
+                    {
+                        //Camera
+                    }
+                }
             }
             else if (state == 4)
             {

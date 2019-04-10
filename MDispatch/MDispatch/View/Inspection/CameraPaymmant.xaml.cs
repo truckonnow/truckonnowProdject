@@ -1,4 +1,5 @@
 ﻿using MDispatch.NewElement;
+using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using MDispatch.ViewModels.InspectionMV.Servise.Paymmant;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -8,9 +9,9 @@ namespace MDispatch.View.Inspection
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CameraPaymmant : CameraPage
     {
-        private IPaymmant paymmant = null;
+        private object paymmant = null;
 
-        public CameraPaymmant(IPaymmant paymmant, string instructionAndNamePaymmant)
+        public CameraPaymmant(object paymmant, string instructionAndNamePaymmant)
         {
             this.paymmant = paymmant;
             InitializeComponent();
@@ -23,7 +24,10 @@ namespace MDispatch.View.Inspection
             await Navigation.PopAsync();
             if (!result.Success)
                 return;
-            //paymmant.AddPhoto(result.Image);
+            if(paymmant is AskForUsersDelyveryMW)
+            {
+                ((AskForUsersDelyveryMW)paymmant).AddPhoto(result.Image);
+            }
         }
     }
 }

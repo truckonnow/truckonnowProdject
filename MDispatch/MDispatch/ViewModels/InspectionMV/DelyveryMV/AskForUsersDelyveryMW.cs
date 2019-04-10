@@ -3,6 +3,7 @@ using MDispatch.Service;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection.Delyvery;
+using Newtonsoft.Json;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
@@ -21,7 +22,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         private InitDasbordDelegate initDasbordDelegate = null;
 
         public AskForUsersDelyveryMW(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate, 
-            string totalPaymentToCarrier)
+            string totalPaymentToCarrier, string paymmant = null)
         {
             this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
@@ -29,10 +30,15 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             VehiclwInformation = vehiclwInformation;
             IdShip = idShip;
             TotalPaymentToCarrier = totalPaymentToCarrier;
+            if(paymmant != null)
+            {
+                Payment = paymmant;
+            }
         }
 
         private string IdShip { get; set; }
         private string TotalPaymentToCarrier { get; set; }
+        public string Payment { get; set; }
 
         private VehiclwInformation vehiclwInformation = null;
         public VehiclwInformation VehiclwInformation
@@ -64,8 +70,9 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
 
         public List<DamageForUser> damageForUsers { get; set; }
 
-        public async void SaveAsk()
+        public async void SaveAsk(string paymmant)
         {
+            Payment = paymmant;
             await PopupNavigation.PushAsync(new LoadPage(), true);
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
@@ -91,12 +98,22 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             else if (state == 3)
             {
                 await PopupNavigation.PushAsync(new TempDialogPage1(this));
-                Continue();
             }
             else if (state == 4)
             {
                 await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
             }
+        }
+
+        public async void AddPhoto(byte[] photoResult)
+        {
+            Photo photo = new Photo();
+            photo.Base64 = JsonConvert.SerializeObject(photoResult);
+            await Navigation.PopToRootAsync();
+            await Task.Run(() =>
+            {
+                //Continue();
+            });
         }
 
         public void RemmoveDamage(Image image, StackLayout stackLayout)
@@ -135,6 +152,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
             damageForUsers.Add(damageForUser);
         }
+
         public async void Continue()
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
@@ -164,7 +182,6 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
             else if (state == 3)
             {
-
             }
             else if (state == 4)
             {
@@ -175,7 +192,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         public async void GoToFeedBack()
         {
             await PopupNavigation.PopAllAsync(true);
-            await Navigation.PushAsync(new View.Inspection.Feedback(managerDispatchMob, VehiclwInformation));
+            await Navigation.PushAsync(new View.Inspection.Feedback(managerDispatchMob, VehiclwInformation, this));
         }
 
         public void SendEmailCoupon()

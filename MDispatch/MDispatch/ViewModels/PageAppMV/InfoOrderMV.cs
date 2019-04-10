@@ -172,6 +172,7 @@ namespace MDispatch.ViewModels.PageAppMV
                 await Navigation.PushAsync(new AskForUserDelyvery(managerDispatchMob, Shipping.VehiclwInformations[0], Shipping.Id, initDasbordDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier), true);
                 return;
             }
+            //AskForUsersDelyveryMW askForUsersDelyveryMW = new AskForUsersDelyveryMW(managerDispatchMob, Shipping.VehiclwInformations[0], Shipping.Id, Navigation, initDasbordDelegate, Shipping.TotalPaymentToCarrier, Shipping.VehiclwInformations[0].askForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation);
         }
 
         private ICar GetTypeCar(string typeCar)
