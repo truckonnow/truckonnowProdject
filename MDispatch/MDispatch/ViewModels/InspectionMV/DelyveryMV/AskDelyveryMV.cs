@@ -1,9 +1,10 @@
 ﻿using MDispatch.Models;
-using MDispatch.NewElement;
 using MDispatch.Service;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.PageApp;
+using MDispatch.ViewModels.AskPhoto;
+using MDispatch.ViewModels.InspectionMV.Models;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
@@ -53,6 +54,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
 
         public async void SaveAsk()
         {
+            ICar car = GetTypeCar(VehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
             await PopupNavigation.PushAsync(new LoadPage(), true);
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
@@ -73,14 +75,37 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
             else if (state == 3)
             {
-                DependencyService.Get<IOrientationHandler>().ForceLandscape();
-                await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{VehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}7.png", VehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 7, initDasbordDelegate, getVechicleDelegate, "", OnDeliveryToCarrier, TotalPaymentToCarrier));
+                await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{car.typeIndex}{car.GetIndexCarFullPhoto(1)}.png", car.typeIndex, 1, initDasbordDelegate, getVechicleDelegate, car.GetNameLayout(car.GetIndexCarFullPhoto(1)), OnDeliveryToCarrier, TotalPaymentToCarrier));
                 Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
             else if (state == 4)
             {
                 await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
             }
+        }
+
+        private ICar GetTypeCar(string typeCar)
+        {
+            ICar car = null;
+            switch (typeCar)
+            {
+                case "PickUp":
+                    {
+                        car = new CarPickUp();
+                        break;
+                    }
+                case "Coupe":
+                    {
+                        car = new CarCoupe();
+                        break;
+                    }
+                case "Suv":
+                    {
+                        car = new CarSuv();
+                        break;
+                    }
+            }
+            return car;
         }
     }
 }

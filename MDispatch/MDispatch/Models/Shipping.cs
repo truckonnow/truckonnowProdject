@@ -90,11 +90,11 @@ namespace MDispatch.Models
                 {
                     color = "#65CAE1";
                 }
-                else if(CurrentStatus == "Picked up")
+                else if (CurrentStatus == "Picked up")
                 {
                     color = "#FFBF00";
                 }
-                else if (CurrentStatus == "Delivered")
+                else if (CurrentStatus == "Delivered" || CurrentStatus == "Biling" || CurrentStatus == "Paid")
                 {
                     color = "#088A08";
                 }
@@ -180,7 +180,7 @@ namespace MDispatch.Models
                 {
                     ico = "pickedUpOrder1.png";
                 }
-                else if(CurrentStatus == "Delyvery")
+                else if(CurrentStatus == "Delyvery" || CurrentStatus == "Biling" || CurrentStatus == "Paid")
                 {
                     ico = "deliveredOrder.png";
                 }
@@ -201,7 +201,7 @@ namespace MDispatch.Models
                 {
                     ico = "pickedUpViewOrder.png";
                 }
-                else if (CurrentStatus == "Delyvery")
+                else if (CurrentStatus == "Delyvery" || CurrentStatus == "Biling" || CurrentStatus == "Paid")
                 {
                     ico = "deliveredViewOrder.png";
                 }

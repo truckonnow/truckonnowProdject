@@ -164,5 +164,17 @@ namespace MDispatch.Service
             inspection = null;
             return stateInspection;
         }
+
+        public int SavePay(string token, string id, int type, Photo photo, ref string description)
+        {
+            inspection = new Inspection();
+            int statePay = 1;
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                statePay = inspection.SavePhotPay(token, id, type, photo, ref description);
+            }
+            inspection = null;
+            return statePay;
+        }
     }
 }

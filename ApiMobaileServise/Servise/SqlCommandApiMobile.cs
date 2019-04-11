@@ -89,6 +89,24 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
+        public async void SavePayInDb(string idVech, int type, Photo photo)
+        {
+            context.VehiclwInformation.Load();
+            context.askForUserDelyveryMs.Load();
+            context.AskFromUsers.Load();
+            context.Photos.Load();
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idVech));
+            if(type == 1 && vehiclwInformation.AskFromUser != null)
+            {
+
+            }
+            else if(type == 2 && vehiclwInformation != null && vehiclwInformation.askForUserDelyveryM != null)
+            {
+                vehiclwInformation.askForUserDelyveryM.PhotoPay = photo;
+            }
+            await context.SaveChangesAsync();
+        }
+
         public async void SaveFeedBackInDb(Feedback feedback)
         {
             context.Feedbacks.Add(feedback);
@@ -279,7 +297,7 @@ namespace ApiMobaileServise.Servise
             {
                 return new List<Shipping>();
             }
-            Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Delivered"));
+            Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Delivered" || s.CurrentStatus == "Paid" && s.CurrentStatus == "Biling"));
             //int countFor5 = Shipping1.Count / 5;
             //int ost = Shipping1.Count % 5;
             //int countGet = ost == 0 ? (5 * type) + 5 : (5 * type) + ost;

@@ -367,6 +367,38 @@ namespace MDispatch.Service
             }
         }
 
+        public int SavePhotPay(string token, string idVech, int type, Photo photo, ref string description)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                string photojson = JsonConvert.SerializeObject(photo);
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
+                RestRequest request = new RestRequest("Mobile/Save/Pay", Method.POST);
+                request.AddHeader("Accept", "application/json");
+                request.Parameters.Clear();
+                request.AddParameter("token", token);
+                request.AddParameter("idVech", idVech);
+                request.AddParameter("type", type);
+                request.AddParameter("Photo", photojson);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description);
+            }
+        }
+
         private int GetData(string respJsonStr, ref string description)
         {
             respJsonStr = respJsonStr.Replace("\\", "");

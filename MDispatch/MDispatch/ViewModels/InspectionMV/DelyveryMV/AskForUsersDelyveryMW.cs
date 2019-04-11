@@ -107,13 +107,38 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
 
         public async void AddPhoto(byte[] photoResult)
         {
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
             Photo photo = new Photo();
             photo.Base64 = JsonConvert.SerializeObject(photoResult);
+            photo.path = $"../Photo/{VehiclwInformation.Id}/Pay/DelyverySig.Png";
             await Navigation.PopToRootAsync();
             await Task.Run(() =>
             {
-                //Continue();
+                state = managerDispatchMob.SavePay(token, VehiclwInformation.Id, 2, photo, ref description);
+                initDasbordDelegate.Invoke();
             });
+            if (state == 1)
+            {
+                await PopupNavigation.PushAsync(new Errror("Not Network"));
+            }
+            else if (state == 2)
+            {
+                await PopupNavigation.PushAsync(new Errror(description));
+            }
+            else if (state == 3)
+            {
+                await Task.Run(() =>
+                {
+                    Continue();
+                });
+            }
+            else if (state == 4)
+            {
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
+            }
+
         }
 
         public void RemmoveDamage(Image image, StackLayout stackLayout)
@@ -163,7 +188,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 string status = null;
                 if(TotalPaymentToCarrier == "COD" && TotalPaymentToCarrier == "COP")
                 {
-                    status = "Delivered";
+                    status = "Paid";
                 }
                 else
                 {

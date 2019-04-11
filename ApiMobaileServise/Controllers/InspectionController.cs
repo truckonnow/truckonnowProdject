@@ -274,5 +274,35 @@ namespace ApiMobaileServise.Controllers
             }
             return respons;
         }
+
+        [HttpPost]
+        [Route("Save/Pay")]
+        public string SavePay(string token, string idVech, int type, string Photo)
+        {
+            string respons = null;
+            if (token == null || token == "")
+            {
+                return JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
+            }
+            try
+            {
+                bool isToken = managerMobileApi.CheckToken(token);
+                Photo photo1 = JsonConvert.DeserializeObject<Photo>(Photo);
+                if (isToken)
+                {
+                    managerMobileApi.SavePay(idVech, type, photo1);
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
+                }
+                else
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "2", null));
+                }
+            }
+            catch (Exception)
+            {
+                respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
+            }
+            return respons;
+        }
     }
 }

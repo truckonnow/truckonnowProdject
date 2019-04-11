@@ -230,7 +230,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 }
                 else
                 {
-                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion+1)}.png", Car.typeIndex, inderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion) + 1), OnDeliveryToCarrier, TotalPaymentToCarrier));
+                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion+1)}.png", Car.typeIndex, inderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)), OnDeliveryToCarrier, TotalPaymentToCarrier));
                 }
                 Navigation.RemovePage(Navigation.NavigationStack[2]);
             }

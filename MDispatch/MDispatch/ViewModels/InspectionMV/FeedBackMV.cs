@@ -2,6 +2,7 @@
 using MDispatch.Service;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
+using MDispatch.View.Inspection;
 using MDispatch.View.Inspection.PickedUp;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using Plugin.Settings;
@@ -26,8 +27,8 @@ namespace MDispatch.ViewModels.InspectionMV
             VehiclwInformation = vehiclwInformation;
         }
 
-        private Feedback feedback = null;
-        public Feedback Feedback
+        private MDispatch.Models.Feedback feedback = null;
+        public MDispatch.Models.Feedback Feedback
         {
             get => feedback;
             set => SetProperty(ref feedback, value);
@@ -67,11 +68,12 @@ namespace MDispatch.ViewModels.InspectionMV
                 {
                     if (((AskForUsersDelyveryMW)paymmpayMVInspactionant).Payment == "COD" || ((AskForUsersDelyveryMW)paymmpayMVInspactionant).Payment == "COP" || ((AskForUsersDelyveryMW)paymmpayMVInspactionant).Payment == "Biling")
                     {
+                        ((AskForUsersDelyveryMW)paymmpayMVInspactionant).Continue();
                         await Navigation.PopToRootAsync(true);
                     }
                     else
                     {
-                        //Camera
+                        await ((AskForUsersDelyveryMW)paymmpayMVInspactionant).Navigation.PushAsync(new CameraPaymmant(((AskForUsersDelyveryMW)paymmpayMVInspactionant), ""));
                     }
                 }
             }

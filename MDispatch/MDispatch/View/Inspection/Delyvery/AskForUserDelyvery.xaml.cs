@@ -120,6 +120,9 @@ namespace MDispatch.View.Inspection.Delyvery
                 case "Check":
                     paymmant = new CheckPaymmant(this);
                     break;
+                case "Cradit card":
+                    paymmant = new CraditCardPaymant(this);
+                    break;
             }
             return paymmant;
         }
@@ -168,6 +171,10 @@ namespace MDispatch.View.Inspection.Delyvery
 
         private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
+            if (Paymmant != null)
+            {
+                isAsk2 = Paymmant.IsAskPaymmant;
+            }
             if (isAsk1 && isAsk2 && GetIsAsk3())
             {
                 askForUsersDelyveryMW.SaveAsk(askForUsersDelyveryMW.AskForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation);
@@ -181,10 +188,6 @@ namespace MDispatch.View.Inspection.Delyvery
 
         private void CheckAsk()
         {
-            if(Paymmant != null)
-            {
-                isAsk2 = Paymmant.IsAskPaymmant;
-            }
             if (!isAsk1)
             {
                 askBlock1.BorderColor = Color.Red;

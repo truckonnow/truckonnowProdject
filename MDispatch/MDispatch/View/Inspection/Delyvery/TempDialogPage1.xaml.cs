@@ -24,11 +24,12 @@ namespace MDispatch.View.Inspection.Delyvery
             await PopupNavigation.PushAsync(new TempPageHint4());
             if (askForUsersDelyveryMW.Payment == "COD" || askForUsersDelyveryMW.Payment == "COP" || askForUsersDelyveryMW.Payment == "Biling")
             {
+                askForUsersDelyveryMW.Continue();
                 await askForUsersDelyveryMW.Navigation.PopToRootAsync();
             }
             else
             {
-                //Camera
+                await askForUsersDelyveryMW.Navigation.PushAsync(new CameraPaymmant(askForUsersDelyveryMW, ""));
             }
         }
 

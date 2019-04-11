@@ -186,6 +186,11 @@ namespace ApiMobaileServise.Servise
             return isToken;
         }
 
+        public void SavePay(string idVech, int type, Photo photo)
+        {
+            sqlCommandApiMobile.SavePayInDb(idVech, type, photo);
+        }
+
         private string CreateToken(string email, string password)
         {
             string token = "";

@@ -7,14 +7,15 @@ using MDispatch.View.Inspection.PickedUp;
 using MDispatch.View.PageApp;
 using MDispatch.View.PageApp.DialogPage;
 using MDispatch.ViewModels.AskPhoto;
-using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using MDispatch.ViewModels.InspectionMV.Models;
 using Prism.Commands;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
 using System.Collections.Generic;
 using Xamarin.Forms;
+using System.Linq;
 using static MDispatch.Service.ManagerDispatchMob;
+using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 
 namespace MDispatch.ViewModels.PageAppMV
 {
@@ -87,6 +88,7 @@ namespace MDispatch.ViewModels.PageAppMV
 
         public async void ToStartInspection()
         {
+            VehiclwInformation vehiclwInformation1 = null;
             foreach (var vehiclwInformation in Shipping.VehiclwInformations)
             {
                 ICar car = null;
@@ -125,12 +127,13 @@ namespace MDispatch.ViewModels.PageAppMV
                     return;
                 }
             }
-            if (Shipping.VehiclwInformations[0].AskFromUser == null)
+            vehiclwInformation1 = Shipping.VehiclwInformations.FirstOrDefault(v => v.AskFromUser != null);
+            if (vehiclwInformation1 == null)
             {
                 await Navigation.PushAsync(new AskForUser(managerDispatchMob, Shipping.VehiclwInformations[0], Shipping.Id, initDasbordDelegate), true);
                 return;
             }
-            else if (Shipping.VehiclwInformations[0].AskFromUser.App_will_ask_for_signature_of_the_client_signature == null)
+            else if (vehiclwInformation1.AskFromUser.App_will_ask_for_signature_of_the_client_signature == null)
             {
                 await Navigation.PushAsync(new LiabilityAndInsurance(managerDispatchMob, Shipping.VehiclwInformations[0].Id, Shipping.Id, initDasbordDelegate), true);
                 return;
@@ -139,6 +142,7 @@ namespace MDispatch.ViewModels.PageAppMV
 
         public async void ToStartInspectionDelyvery()
         {
+            VehiclwInformation vehiclwInformation1 = null;
             foreach (var vehiclwInformation in Shipping.VehiclwInformations)
             {
                 ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
@@ -167,12 +171,17 @@ namespace MDispatch.ViewModels.PageAppMV
                     return;
                 }
             }
-            if (Shipping.VehiclwInformations[0].askForUserDelyveryM == null || Shipping.VehiclwInformations[0].askForUserDelyveryM.App_will_ask_for_name_of_the_client_signature == null)
+            vehiclwInformation1 = Shipping.VehiclwInformations.FirstOrDefault(v => v.askForUserDelyveryM != null);
+            if (vehiclwInformation1 == null || vehiclwInformation1.askForUserDelyveryM.App_will_ask_for_name_of_the_client_signature == null)
             {
-                await Navigation.PushAsync(new AskForUserDelyvery(managerDispatchMob, Shipping.VehiclwInformations[0], Shipping.Id, initDasbordDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier), true);
+                await Navigation.PushAsync(new AskForUserDelyvery(managerDispatchMob, vehiclwInformation1, Shipping.Id, initDasbordDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier), true);
                 return;
             }
-            //AskForUsersDelyveryMW askForUsersDelyveryMW = new AskForUsersDelyveryMW(managerDispatchMob, Shipping.VehiclwInformations[0], Shipping.Id, Navigation, initDasbordDelegate, Shipping.TotalPaymentToCarrier, Shipping.VehiclwInformations[0].askForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation);
+            else if (vehiclwInformation1 != null && vehiclwInformation1.askForUserDelyveryM.PhotoPay == null)
+            {
+                AskForUsersDelyveryMW askForUsersDelyveryMW = new AskForUsersDelyveryMW(managerDispatchMob, vehiclwInformation1, Shipping.Id, Navigation, initDasbordDelegate, Shipping.TotalPaymentToCarrier, vehiclwInformation1.askForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation);
+                await Navigation.PushAsync(new CameraPaymmant(askForUsersDelyveryMW, ""));
+            }
         }
 
         private ICar GetTypeCar(string typeCar)
