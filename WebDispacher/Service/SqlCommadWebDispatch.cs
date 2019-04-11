@@ -15,6 +15,19 @@ namespace WebDispacher.Dao
         public SqlCommadWebDispatch()
         {
             context = new Context();
+            InitUserOne();
+        }
+
+        private async void InitUserOne()
+        {
+            if (context.User.Count() == 0)
+            {
+                Users users = new Users();
+                users.Login = "Admin";
+                users.Password = "Admin";
+                context.User.AddAsync(users);
+                await context.SaveChangesAsync();
+            }
         }
 
         private void Init()

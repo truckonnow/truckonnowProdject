@@ -297,7 +297,7 @@ namespace ApiMobaileServise.Servise
             {
                 return new List<Shipping>();
             }
-            Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Delivered" || s.CurrentStatus == "Paid" && s.CurrentStatus == "Biling"));
+            Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Delivered" || s.CurrentStatus == "Paid" || s.CurrentStatus == "Biling"));
             //int countFor5 = Shipping1.Count / 5;
             //int ost = Shipping1.Count % 5;
             //int countGet = ost == 0 ? (5 * type) + 5 : (5 * type) + ost;
