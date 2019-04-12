@@ -20,9 +20,10 @@ namespace MDispatch.View.AskPhoto
 	{
         AskPageMV askPageMV = null;
 
-        public AskPage (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate)
+        public AskPage (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate, 
+            string onDeliveryToCarrier, string totalPaymentToCarrier)
 		{
-            askPageMV = new AskPageMV(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate, getVechicleDelegate);
+            askPageMV = new AskPageMV(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate, getVechicleDelegate, onDeliveryToCarrier, totalPaymentToCarrier);
             askPageMV.Ask = new Ask();
             InitializeComponent ();
             BindingContext = askPageMV;

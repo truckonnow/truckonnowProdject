@@ -1,6 +1,6 @@
 ﻿using MDispatch.NewElement;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
-using MDispatch.ViewModels.InspectionMV.Servise.Paymmant;
+using MDispatch.ViewModels.InspectionMV.PickedUpMV;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -27,6 +27,10 @@ namespace MDispatch.View.Inspection
             if(paymmant is AskForUsersDelyveryMW)
             {
                 ((AskForUsersDelyveryMW)paymmant).AddPhoto(result.Image);
+            }
+            else
+            {
+                ((LiabilityAndInsuranceMV)paymmant).AddPhoto(result.Image);
             }
         }
     }

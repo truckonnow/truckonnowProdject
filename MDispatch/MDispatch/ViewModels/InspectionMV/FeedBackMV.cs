@@ -5,6 +5,7 @@ using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection;
 using MDispatch.View.Inspection.PickedUp;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
+using MDispatch.ViewModels.InspectionMV.PickedUpMV;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
@@ -74,6 +75,18 @@ namespace MDispatch.ViewModels.InspectionMV
                     else
                     {
                         await ((AskForUsersDelyveryMW)paymmpayMVInspactionant).Navigation.PushAsync(new CameraPaymmant(((AskForUsersDelyveryMW)paymmpayMVInspactionant), ""));
+                    }
+                }
+                else
+                {
+                    if (((LiabilityAndInsuranceMV)paymmpayMVInspactionant).What_form_of_payment_are_you_using_to_pay_for_transportation == "COD" || ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).What_form_of_payment_are_you_using_to_pay_for_transportation == "COP" || ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).What_form_of_payment_are_you_using_to_pay_for_transportation == "Biling")
+                    {
+                        ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).Continue();
+                        await Navigation.PopToRootAsync(true);
+                    }
+                    else
+                    {
+                        await ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).Navigation.PushAsync(new CameraPaymmant(((LiabilityAndInsuranceMV)paymmpayMVInspactionant), ""));
                     }
                 }
             }

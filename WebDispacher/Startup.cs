@@ -10,6 +10,10 @@ namespace WebDispacher
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.Configure<IISOptions>(options =>
+            {
+                options.ForwardClientCertificate = false;
+            });
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

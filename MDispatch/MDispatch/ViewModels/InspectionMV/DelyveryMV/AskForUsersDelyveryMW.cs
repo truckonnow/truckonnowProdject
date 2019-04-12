@@ -138,7 +138,6 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             {
                 await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
             }
-
         }
 
         public void RemmoveDamage(Image image, StackLayout stackLayout)

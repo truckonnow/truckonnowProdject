@@ -22,7 +22,8 @@ namespace MDispatch.ViewModels.InspectionMV
         private InitDasbordDelegate initDasbordDelegate = null;
         private GetVechicleDelegate getVechicleDelegate = null;
 
-        public Ask1PageMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate)
+        public Ask1PageMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate, 
+            string onDeliveryToCarrier, string totalPaymentToCarrier)
         {
             this.getVechicleDelegate = getVechicleDelegate;
             this.initDasbordDelegate = initDasbordDelegate;
@@ -30,9 +31,13 @@ namespace MDispatch.ViewModels.InspectionMV
             Navigation = navigation;
             VehiclwInformation = vehiclwInformation;
             IdShip = idShip;
+            OnDeliveryToCarrier = onDeliveryToCarrier;
+            TotalPaymentToCarrier = totalPaymentToCarrier;
         }
 
         public string IdShip { get; set; }
+        public string OnDeliveryToCarrier { get; set; }
+        public string TotalPaymentToCarrier { get; set; }
 
         private Ask1 ask1 = null;
         public Ask1 Ask1
@@ -84,14 +89,14 @@ namespace MDispatch.ViewModels.InspectionMV
             int indexCurrentVechecle = vehiclwInformation1s.FindIndex(v => v == VehiclwInformation);
             if(vehiclwInformation1s.Count-1 == indexCurrentVechecle)
             {
-                await Navigation.PushAsync(new AskForUser(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate));
+                await Navigation.PushAsync(new AskForUser(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, OnDeliveryToCarrier, TotalPaymentToCarrier));
                 Navigation.RemovePage(Navigation.NavigationStack[2]);
                 await PopupNavigation.PushAsync(new TempPageHint1());
             }
             else
             {
                 await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", vehiclwInformation1s[indexCurrentVechecle + 1]));
-                await Navigation.PushAsync(new AskPage(managerDispatchMob, vehiclwInformation1s[indexCurrentVechecle+1], IdShip, initDasbordDelegate, getVechicleDelegate), true);
+                await Navigation.PushAsync(new AskPage(managerDispatchMob, vehiclwInformation1s[indexCurrentVechecle+1], IdShip, initDasbordDelegate, getVechicleDelegate, OnDeliveryToCarrier, TotalPaymentToCarrier), true);
                 Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
         }

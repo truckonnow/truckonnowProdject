@@ -399,6 +399,37 @@ namespace MDispatch.Service
             }
         }
 
+        public int SaveMethodPay(string token, string idVech, string payMethod, string countPay, ref string description)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
+                RestRequest request = new RestRequest("Mobile/Save/PickedUp/PayMethod", Method.POST);
+                request.AddHeader("Accept", "application/json");
+                request.Parameters.Clear();
+                request.AddParameter("token", token);
+                request.AddParameter("idVech", idVech);
+                request.AddParameter("payMethod", payMethod);
+                request.AddParameter("countPay", countPay);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description);
+            }
+        }
+
         private int GetData(string respJsonStr, ref string description)
         {
             respJsonStr = respJsonStr.Replace("\\", "");

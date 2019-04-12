@@ -22,10 +22,11 @@ namespace MDispatch.View.Inspection
         public Ask1PageMV ask1PageMV = null;
         private string typeCar = null;
 
-        public Ask1Page(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate, string typeCar)
+        public Ask1Page(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate, string typeCar,
+            string onDeliveryToCarrier, string totalPaymentToCarrier)
         {
             this.typeCar = typeCar;
-            ask1PageMV = new Ask1PageMV(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate, getVechicleDelegate);
+            ask1PageMV = new Ask1PageMV(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate, getVechicleDelegate, onDeliveryToCarrier, totalPaymentToCarrier);
             ask1PageMV.Ask1 = new Ask1();
             InitializeComponent();
             BindingContext = ask1PageMV;

@@ -3,6 +3,7 @@ using MDispatch.Service;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection.PickedUp;
+using Newtonsoft.Json;
 using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -33,7 +34,6 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             SaveLiabilityAndInsuranceCommand = new DelegateCommand(SendLiabilityAndInsuranceEmaile);
             InitShipping();
         }
-
         private string email = null;
         public string Email
         {
@@ -60,6 +60,9 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             get => sigPhoto;
             set => SetProperty(ref sigPhoto, value);
         }
+
+        public string What_form_of_payment_are_you_using_to_pay_for_transportation { set; get; }
+        public string CountPay { set; get; }
 
         private async void InitShipping()
         {
@@ -92,7 +95,42 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             StataLoadShip = 1;
         }
 
-        public async void SaveSig()
+        public async void AddPhoto(byte[] photoResult)
+        {
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            Photo photo = new Photo();
+            photo.Base64 = JsonConvert.SerializeObject(photoResult);
+            photo.path = $"../Photo/{IdVech}/Pay/DelyverySig.Png";
+            await Navigation.PopToRootAsync();
+            await Task.Run(() =>
+            {
+                state = managerDispatchMob.SavePay(token, IdVech, 1, photo, ref description);
+                initDasbordDelegate.Invoke();
+            });
+            if (state == 1)
+            {
+                await PopupNavigation.PushAsync(new Errror("Not Network"));
+            }
+            else if (state == 2)
+            {
+                await PopupNavigation.PushAsync(new Errror(description));
+            }
+            else if (state == 3)
+            {
+                await Task.Run(() =>
+                {
+                    Continue();
+                });
+            }
+            else if (state == 4)
+            {
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
+            }
+        }
+
+        public async void SaveSigAndMethodPay()
         {
             await PopupNavigation.PushAsync(new LoadPage());
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
@@ -101,6 +139,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             await Task.Run(() =>
             {
                 state = managerDispatchMob.AskWork("AskPikedUpSig", token, IdVech, SigPhoto, ref description);
+                state = managerDispatchMob.SaveMethodPay(token, IdVech, What_form_of_payment_are_you_using_to_pay_for_transportation, CountPay, ref description);
                 initDasbordDelegate.Invoke();
             });
             await PopupNavigation.PopAsync();
@@ -114,7 +153,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
             else if (state == 3)
             {
-                Continue();
+                await PopupNavigation.PushAsync(new CopyLibaryAndInsurance(this));
             }
             else if (state == 4)
             {
@@ -124,7 +163,6 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
 
         public async void Continue()
         {
-            await PopupNavigation.PushAsync(new CopyLibaryAndInsurance(this));
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;

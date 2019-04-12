@@ -53,6 +53,10 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Paymmant
             {
                 AskForUserDelyvery.askForUsersDelyveryMW.AskForUserDelyveryM.CountPay = e.NewTextValue;
             }
+            else
+            {
+                LiabilityAndInsurance.liabilityAndInsuranceMV.CountPay = e.NewTextValue;
+            }
         }
 
         public CraditCardPaymant(object page)

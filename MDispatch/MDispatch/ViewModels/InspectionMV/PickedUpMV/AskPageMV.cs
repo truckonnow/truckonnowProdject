@@ -20,7 +20,8 @@ namespace MDispatch.ViewModels.AskPhoto
         private InitDasbordDelegate initDasbordDelegate = null;
         private GetVechicleDelegate getVechicleDelegate = null;
 
-        public AskPageMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate)
+        public AskPageMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate,
+             string onDeliveryToCarrier, string totalPaymentToCarrier)
         {
             this.getVechicleDelegate = getVechicleDelegate;
             this.initDasbordDelegate = initDasbordDelegate;
@@ -28,9 +29,14 @@ namespace MDispatch.ViewModels.AskPhoto
             Navigation = navigation;
             VehiclwInformation = vehiclwInformation;
             IdShip = idShip;
+            OnDeliveryToCarrier = onDeliveryToCarrier;
+            TotalPaymentToCarrier = totalPaymentToCarrier;
+            IdShip = idShip;
         }
 
         public string IdShip { get; set; }
+        public string OnDeliveryToCarrier { get; set; }
+        public string TotalPaymentToCarrier { get; set; }
 
         private Models.Ask ask = null;
         public Models.Ask Ask
@@ -69,7 +75,7 @@ namespace MDispatch.ViewModels.AskPhoto
             else if (state == 3)
             {
                 DependencyService.Get<IOrientationHandler>().ForceLandscape();
-                await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{indexTypeCar}1.png", indexTypeCar, 1, initDasbordDelegate, getVechicleDelegate, "Coupe"));
+                await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{indexTypeCar}1.png", indexTypeCar, 1, initDasbordDelegate, getVechicleDelegate, "Coupe", OnDeliveryToCarrier, TotalPaymentToCarrier));
                 Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
             else if (state == 4)

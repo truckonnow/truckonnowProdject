@@ -89,6 +89,20 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
+        public async void SavePayMethotInDb(string idVech, string payMethod, string countPay)
+        {
+            context.VehiclwInformation.Load();
+            context.AskFromUsers.Load();
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idVech));
+            if (vehiclwInformation.AskFromUser == null)
+            {
+                vehiclwInformation.AskFromUser = new AskFromUser();
+            }
+            vehiclwInformation.AskFromUser.What_form_of_payment_are_you_using_to_pay_for_transportation = payMethod;
+            vehiclwInformation.AskFromUser.CountPay = countPay;
+            await context.SaveChangesAsync();
+        }
+
         public async void SavePayInDb(string idVech, int type, Photo photo)
         {
             context.VehiclwInformation.Load();
@@ -98,7 +112,7 @@ namespace ApiMobaileServise.Servise
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idVech));
             if(type == 1 && vehiclwInformation.AskFromUser != null)
             {
-
+                vehiclwInformation.AskFromUser.PhotoPay = photo;
             }
             else if(type == 2 && vehiclwInformation != null && vehiclwInformation.askForUserDelyveryM != null)
             {
