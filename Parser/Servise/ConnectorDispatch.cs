@@ -100,7 +100,7 @@ namespace Parser.Servise
             }
         }
 
-        public async void Worker()
+        public void Worker()
         {
             if (new Random().Next(1, 10) == 5)
             {
@@ -113,8 +113,8 @@ namespace Parser.Servise
             string url = "https://www.centraldispatch.com";
             string pref1 = "/protected/cargo/dispatched-to-me?group=Dispatched%20To%20Me&folder=";
             string pref2 = "&sort=V&dir=1&page=";
-            await Task.Run(async () =>
-            {
+            //await Task.Run(async () =>
+            //{
                 httpRequest.Cookies = cooks;
                 bool isNextParsePage = false;
                 int countLnck2 = 0;
@@ -127,7 +127,7 @@ namespace Parser.Servise
                     {
                         List<string> urlsPages = null;
                         string fullPageHtml = httpRequest.Get($"{url}{pref1}{page}{pref2}{coutnPage}").ToString();
-                        await Task.Run(() => urlsPages = parserDispatch.ParseInManyUrl(fullPageHtml));
+                       urlsPages = parserDispatch.ParseInManyUrl(fullPageHtml);
                         if (urlsPages.Count != 0)
                         {
                             LogEr.Logerr("Info", $"Count Page : {urlsPages.Count}", "Worker", DateTime.Now.ToShortTimeString());
@@ -137,7 +137,7 @@ namespace Parser.Servise
                                 try
                                 {
                                     string sourseUrl = httpRequest.Get(urlpage).ToString();
-                                    await Task.Run(() => parserDispatch.ParseDataInUrl(sourseUrl, urlpage));
+                                    parserDispatch.ParseDataInUrl(sourseUrl, urlpage);
                                     countLick++;
                                 }
                                 catch (Exception)
@@ -161,7 +161,7 @@ namespace Parser.Servise
 
                 }
                 LogEr.Logerr("Info", $"The number of total elongated html links: {countLnck2}", "Worker", DateTime.Now.ToShortTimeString());
-            });
+            //});
         }
     }
 }

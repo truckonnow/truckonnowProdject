@@ -20,8 +20,6 @@ namespace WebDispacher.Service
             return _sqlEntityFramworke.GetDriversInDb();
         }
 
-        
-
         public void DeletedOrder(string id)
         {
             _sqlEntityFramworke.RecurentOnDeleted(id);

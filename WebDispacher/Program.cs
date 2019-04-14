@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace WebDispacher
 {
@@ -8,7 +9,14 @@ namespace WebDispacher
         public static void Main(string[] args)
         {
             WebHost.CreateDefaultBuilder(args).UseIISIntegration();
-            BuildWebHost(args).Run(); 
+            BuildWebHost(args).Run();
+            //var host = new WebHostBuilder()
+            //    .UseKestrel()
+            //    .UseContentRoot(Directory.GetCurrentDirectory())
+            //    .UseUrls("http://172.246.126.197:22929/")
+            //    .UseStartup<Startup>()
+            //    .Build();
+            //host.Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

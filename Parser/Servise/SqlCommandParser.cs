@@ -17,22 +17,29 @@ namespace Parser.DAO
             context = new Context();
         }
 
-        public async Task AddOrder(Shipping shipping)
+        public async void AddOrder(Shipping shipping)
         {
-            bool isCheckOrder = CheckOrder(shipping);
-            if (!isCheckOrder)
+            bool isCheckOrder = CheckUrlOrder(shipping);
+            if(CheckOrder(shipping) && !isCheckOrder)
             {
-                isCheckOrder = CheckUrlOrder(shipping);
+                shipping.Id += new Random().Next(0, 1000);
             }
-            if (!isCheckOrder)
+            try
             {
-                LogEr.Logerr("Info", $"Order added to database, Load Id {shipping.Id}", "ParseDataInUrl", DateTime.Now.ToShortTimeString());
-                await context.Shipping.AddAsync(shipping);
-                await context.SaveChangesAsync();
+                if (!isCheckOrder)
+                {
+                    LogEr.Logerr("Info", $"Order added to database, Load Id {shipping.Id}", "ParseDataInUrl", DateTime.Now.ToShortTimeString());
+                    await context.Shipping.AddAsync(shipping);
+                    await context.SaveChangesAsync();
+                }
+                else
+                {
+                    LogEr.Logerr("Info", $"Order already exists in the database, Load Id {shipping.Id}", "AddOrder", DateTime.Now.ToShortTimeString());
+                }
             }
-            else
+            catch(Exception e)
             {
-                LogEr.Logerr("Info", $"Order already exists in the database, Load Id {shipping.Id}", "AddOrder", DateTime.Now.ToShortTimeString());
+                LogEr.Logerr("Info", $"{e.Message}, Load Id {shipping.Id}", "AddOrder", DateTime.Now.ToShortTimeString());
             }
         }
 

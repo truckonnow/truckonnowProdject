@@ -69,7 +69,7 @@ namespace Parser.Servise
             SetDispatchInform(sourse, ref shipping);
             SetVehicleInform(sourse, ref shipping);
             LogEr.Logerr("Info", $"Successful parsing of their html, Load id {shipping.Id}", "ParseDataInUrl", DateTime.Now.ToShortTimeString());
-            Task.Run(async() => await sqlCommandParser.AddOrder(shipping));
+            sqlCommandParser.AddOrder(shipping);
         }
 
         private void SetHeadInform(string sourse, ref Shipping shipping)
@@ -156,7 +156,7 @@ namespace Parser.Servise
                 shipping.ContactC = element.TextContent.Remove(0, element.TextContent.IndexOf("Contact: ") + "Contact: ".Length);
                 shipping.ContactC = shipping.ContactC.Remove(shipping.ContactC.IndexOf("\n")).Trim();
                 shipping.PhoneC = element.TextContent.Remove(0, element.TextContent.IndexOf("Phone: ") + "Phone: ".Length);
-                shipping.PhoneC = shipping.PhoneC.Remove(shipping.PhoneC.IndexOf("F")).Trim();
+                shipping.PhoneC = shipping.PhoneC.Remove(shipping.PhoneC.IndexOf(" ")).Trim();
                 shipping.FaxC = element.TextContent.Remove(0, element.TextContent.IndexOf("Fax: ") + "Fax: ".Length);
                 shipping.FaxC = shipping.FaxC.Remove(shipping.FaxC.IndexOf("I")).Trim();
                 shipping.IccmcC = element.TextContent.Remove(0, element.TextContent.IndexOf("ICCMC: ") + "ICCMC: ".Length);

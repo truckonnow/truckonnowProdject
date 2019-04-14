@@ -14,12 +14,12 @@ namespace Parser.Servise
             WorkParser();
         }
 
-        private async void WorkParser()
+        private void WorkParser()
         {
             LogEr.Logerr("Info", "Start Parser", "WorkParser", DateTime.Now.ToShortTimeString());
             int horseInmMiliSeconds = 60000 * 60;
-            Task.Run(() =>
-            {
+            //Task.Run(() =>
+            //{
                 while (true)
                 {
                     LogEr.Logerr("Info", "Start pulling data from the site", "WorkParser", DateTime.Now.ToShortTimeString());
@@ -27,7 +27,7 @@ namespace Parser.Servise
                     LogEr.Logerr("Info", "Pulling data from the site successfully, The following data will be drawn from the site after 1 hour", "WorkParser", DateTime.Now.ToShortTimeString());
                     Thread.Sleep(horseInmMiliSeconds);
                 }
-            }).GetAwaiter().GetResult(); ;
+            //}).GetAwaiter().GetResult(); ;
 
         }
     }
