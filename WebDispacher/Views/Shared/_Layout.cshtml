@@ -3,11 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="~/css/sharedStyle.css" rel="stylesheet">
 </head>
 <body>
     <nav class="navst">
-        <span style="margin-right:10px"><a class="linkASt" href="">Dispacher</a></span>
+        <span style="margin-right:10px"><a class="linkASt" href="http://truckonnow.com">Truckonnow</a></span>
         <input class="btn" type="button" value="Order" @ViewData["hidden"] onclick="window.location.href='@Url.Action("NewLoad", "Dashbord")';"/>
         <input class="btn" type="button" value="GPS Traking" @ViewData["hidden"] onclick="window.location.href='@Url.Action("Map", "Geolcation")';"/>
         <input class="btn" type="button" value="Contacts" @ViewData["hidden"] />
