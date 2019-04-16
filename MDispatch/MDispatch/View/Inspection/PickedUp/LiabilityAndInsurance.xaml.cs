@@ -238,7 +238,7 @@ namespace MDispatch.View.Inspection.PickedUp
             stream.CopyTo(memoryStream);
             byte[] image = memoryStream.ToArray();
             photo.Base64 = JsonConvert.SerializeObject(image);
-            photo.path = $"../Photo/{liabilityAndInsuranceMV.Shipping.VehiclwInformations.Find(v => v.Id == liabilityAndInsuranceMV.IdVech)}/PikedUp/Signature/PikedUp.Png";
+            photo.path = $"../Photo/{liabilityAndInsuranceMV.Shipping.VehiclwInformations.Find(v => v.Id == liabilityAndInsuranceMV.IdVech)}/PikedUp/Signature/PikedUp.jpg";
             liabilityAndInsuranceMV.SigPhoto = photo;
         }
 

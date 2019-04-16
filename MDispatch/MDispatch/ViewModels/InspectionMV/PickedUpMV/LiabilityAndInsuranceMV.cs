@@ -102,7 +102,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             int state = 0;
             Photo photo = new Photo();
             photo.Base64 = JsonConvert.SerializeObject(photoResult);
-            photo.path = $"../Photo/{IdVech}/Pay/DelyverySig.Png";
+            photo.path = $"../Photo/{IdVech}/Pay/DelyverySig.jpg";
             await Navigation.PopToRootAsync();
             await Task.Run(() =>
             {

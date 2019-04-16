@@ -139,7 +139,7 @@ namespace MDispatch.Droid.NewrRender
             byte[] imageBytes = null;
             using (var imageStream = new System.IO.MemoryStream())
             {
-                await image.CompressAsync(Bitmap.CompressFormat.Png, 100, imageStream);
+                await image.CompressAsync(Bitmap.CompressFormat.Jpeg, 70, imageStream);
                 image.Recycle();
                 imageBytes = imageStream.ToArray();
             }

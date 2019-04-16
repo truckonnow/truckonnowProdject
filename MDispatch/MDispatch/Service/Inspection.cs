@@ -472,5 +472,20 @@ namespace MDispatch.Service
             }
         }
 
+        //void SaveBitmapWithQuality(Bitmap bitmap, int quality, Stream outputStream)
+        //{
+        //    if (quality < 0 || quality > 100)
+        //    {
+        //        throw new ArgumentOutOfRangeException(
+        //           "quality", "quality must be in [0..100].");
+        //    }
+
+        //    ImageCodecInfo jpgEncoder = ImageCodecInfo.GetImageDecoders()
+        //        .Where(codec => codec.FormatID == ImageFormat.Jpeg.Guid).Single();
+        //    var qualityEncoder = System.Drawing.Imaging.Encoder.Quality;
+        //    var encoderParams = new EncoderParameters(1);
+        //    encoderParams.Param[0] = new EncoderParameter(qualityEncoder, quality);
+        //    bitmap.Save(outputStream, jpgEncoder, encoderParams);
+        //}
     }
 }

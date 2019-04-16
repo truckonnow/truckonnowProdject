@@ -321,7 +321,7 @@ namespace MDispatch.View.AskPhoto
             }
             Models.Photo photo = new Models.Photo();
             photo.Base64 = JsonConvert.SerializeObject(photob);
-            photo.path = $"../Photo/{askPageMV.VehiclwInformation.Id}/PikedUp/Document/{ askPageMV.Ask.Any_paperwork_or_documentation.Count + 1}.Png";
+            photo.path = $"../Photo/{askPageMV.VehiclwInformation.Id}/PikedUp/Document/{ askPageMV.Ask.Any_paperwork_or_documentation.Count + 1}.jpg";
             askPageMV.Ask.Any_paperwork_or_documentation.Add(photo);
             blockAskPhotoDocument.Children.Add(new Image()
             {
@@ -339,7 +339,7 @@ namespace MDispatch.View.AskPhoto
             }
             Models.Photo photo = new Models.Photo();
             photo.Base64 = JsonConvert.SerializeObject(photob);
-            photo.path = $"../Photo/{askPageMV.VehiclwInformation.Id}/PikedUp/Items/{askPageMV.Ask.Any_personal_or_additional_items_with_or_in_vehicle.Count + 1}.Png";
+            photo.path = $"../Photo/{askPageMV.VehiclwInformation.Id}/PikedUp/Items/{askPageMV.Ask.Any_personal_or_additional_items_with_or_in_vehicle.Count + 1}.jpg";
             askPageMV.Ask.Any_personal_or_additional_items_with_or_in_vehicle.Add(photo);
             blockAskPhotoItem.Children.Add(new Image()
             {
