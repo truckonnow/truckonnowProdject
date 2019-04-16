@@ -78,11 +78,11 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             await PopupNavigation.PopAsync();
             if (state == 1)
             {
-                await PopupNavigation.PushAsync(new Errror("Not Network"));
+                await PopupNavigation.PushAsync(new Errror("Not Network", null));
             }
             else if (state == 2)
             {
-                await PopupNavigation.PushAsync(new Errror(description));
+                await PopupNavigation.PushAsync(new Errror(description, null));
             }
             else if (state == 3)
             {
@@ -90,7 +90,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
             else if (state == 4)
             {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
             }
             StataLoadShip = 1;
         }
@@ -106,27 +106,27 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             await Navigation.PopToRootAsync();
             await Task.Run(() =>
             {
+                Continue();
+            });
+            await Task.Run(() =>
+            {
                 state = managerDispatchMob.SavePay(token, IdVech, 1, photo, ref description);
                 initDasbordDelegate.Invoke();
             });
             if (state == 1)
             {
-                await PopupNavigation.PushAsync(new Errror("Not Network"));
+                await PopupNavigation.PushAsync(new Errror("Not Network", Navigation));
             }
             else if (state == 2)
             {
-                await PopupNavigation.PushAsync(new Errror(description));
+                await PopupNavigation.PushAsync(new Errror(description, Navigation));
             }
             else if (state == 3)
             {
-                await Task.Run(() =>
-                {
-                    Continue();
-                });
             }
             else if (state == 4)
             {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
             }
         }
 
@@ -145,11 +145,11 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             await PopupNavigation.PopAsync();
             if (state == 1)
             {
-                await PopupNavigation.PushAsync(new Errror("Not Network"));
+                await PopupNavigation.PushAsync(new Errror("Not Network", Navigation));
             }
             else if (state == 2)
             {
-                await PopupNavigation.PushAsync(new Errror(description));
+                await PopupNavigation.PushAsync(new Errror(description, Navigation));
             }
             else if (state == 3)
             {
@@ -157,7 +157,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
             else if (state == 4)
             {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
             }
         }
 
@@ -173,18 +173,18 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             });
             if (state == 1)
             {
-                await PopupNavigation.PushAsync(new Errror("Not Network"));
+                await PopupNavigation.PushAsync(new Errror("Not Network", null));
             }
             else if (state == 2)
             {
-                await PopupNavigation.PushAsync(new Errror(description));
+                await PopupNavigation.PushAsync(new Errror(description, null));
             }
             else if (state == 3)
             {
             }
             else if (state == 4)
             {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
             }
         }
 

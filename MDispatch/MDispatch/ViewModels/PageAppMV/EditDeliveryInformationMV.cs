@@ -46,11 +46,11 @@ namespace MDispatch.ViewModels.PageAppMV
             await Navigationn.PopAsync(true);
             if (state == 1)
             {
-                await PopupNavigation.PushAsync(new Errror("Not Network"));
+                await PopupNavigation.PushAsync(new Errror("Not Network", null));
             }
             else if (state == 2)
             {
-                await PopupNavigation.PushAsync(new Errror(description));
+                await PopupNavigation.PushAsync(new Errror(description, null));
             }
             else if (state == 3)
             {
@@ -59,7 +59,7 @@ namespace MDispatch.ViewModels.PageAppMV
             }
             else if (state == 4)
             {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
             }
         }
     }

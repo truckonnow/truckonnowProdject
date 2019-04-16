@@ -63,7 +63,7 @@ namespace MDispatch.View.Inspection.PickedUp
             }
             else
             {
-                await PopupNavigation.PushAsync(new Errror("You did not fill in all the required fields, you can continue the inspection only when filling in the required fields !!"));
+                await PopupNavigation.PushAsync(new Errror("You did not fill in all the required fields, you can continue the inspection only when filling in the required fields !!", null));
                 CheckAsk();
             }
         }

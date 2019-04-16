@@ -73,10 +73,10 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         public async void SaveAsk(string paymmant)
         {
             Payment = paymmant;
-            await PopupNavigation.PushAsync(new LoadPage(), true);
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
+            await PopupNavigation.PushAsync(new TempDialogPage1(this));
             await Task.Run(() =>
             {
                 Task.Run(() =>
@@ -86,22 +86,20 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 state = managerDispatchMob.AskWork("AskForUserDelyvery", token, VehiclwInformation.Id, AskForUserDelyveryM, ref description);
                 initDasbordDelegate.Invoke();
             });
-            await PopupNavigation.PopAsync(true);
             if (state == 1)
             {
-                await PopupNavigation.PushAsync(new Errror("Not Network"));
+                await PopupNavigation.PushAsync(new Errror("Not Network", Navigation));
             }
             else if (state == 2)
             {
-                await PopupNavigation.PushAsync(new Errror(description));
+                await PopupNavigation.PushAsync(new Errror(description, Navigation));
             }
             else if (state == 3)
             {
-                await PopupNavigation.PushAsync(new TempDialogPage1(this));
             }
             else if (state == 4)
             {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
             }
         }
 
@@ -116,27 +114,27 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             await Navigation.PopToRootAsync();
             await Task.Run(() =>
             {
+                Continue();
+            });
+            await Task.Run(() =>
+            {
                 state = managerDispatchMob.SavePay(token, VehiclwInformation.Id, 2, photo, ref description);
                 initDasbordDelegate.Invoke();
             });
             if (state == 1)
             {
-                await PopupNavigation.PushAsync(new Errror("Not Network"));
+                await PopupNavigation.PushAsync(new Errror("Not Network", Navigation));
             }
             else if (state == 2)
             {
-                await PopupNavigation.PushAsync(new Errror(description));
+                await PopupNavigation.PushAsync(new Errror(description, Navigation));
             }
             else if (state == 3)
             {
-                await Task.Run(() =>
-                {
-                    Continue();
-                });
             }
             else if (state == 4)
             {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
             }
         }
 
@@ -198,18 +196,18 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             });
             if (state == 1)
             {
-                await PopupNavigation.PushAsync(new Errror("Not Network"));
+                await PopupNavigation.PushAsync(new Errror("Not Network", null));
             }
             else if (state == 2)
             {
-                await PopupNavigation.PushAsync(new Errror(description));
+                await PopupNavigation.PushAsync(new Errror(description, null));
             }
             else if (state == 3)
             {
             }
             else if (state == 4)
             {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
             }
         }
 

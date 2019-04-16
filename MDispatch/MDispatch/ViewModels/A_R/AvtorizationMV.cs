@@ -63,12 +63,12 @@ namespace MDispatch.ViewModels
             await PopupNavigation.PopAsync(true);
             if (state == 1)
             {
-                await PopupNavigation.PushAsync(new Errror(FeedBack));
+                await PopupNavigation.PushAsync(new Errror(FeedBack, null));
                 FeedBack = "Not Network";
             }
             else if(state == 2)
             {
-                await PopupNavigation.PushAsync(new Errror(FeedBack));
+                await PopupNavigation.PushAsync(new Errror(FeedBack, null));
                 FeedBack = description;
             }
             else if(state == 3)
@@ -79,7 +79,7 @@ namespace MDispatch.ViewModels
             }
             else if(state == 4)
             {
-                await PopupNavigation.PushAsync(new Errror(FeedBack));
+                await PopupNavigation.PushAsync(new Errror(FeedBack, null));
                 FeedBack = "Technical work on the service";
             }
         }

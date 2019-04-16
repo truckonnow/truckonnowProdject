@@ -203,40 +203,38 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
 
         public async void SavePhoto()
         {
-            await PopupNavigation.PushAsync(new LoadPage(), true);
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
+            if (Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1) == 0)
+            {
+                DependencyService.Get<IOrientationHandler>().ForceSensor();
+                await CheckVechicleAndGoToResultPage();
+            }
+            else
+            {
+                await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)}.png", Car.typeIndex, inderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)), OnDeliveryToCarrier, TotalPaymentToCarrier));
+            }
+            Navigation.RemovePage(Navigation.NavigationStack[2]);
             await Task.Run(() =>
             {
                 state = managerDispatchMob.AskWork("SavePhoto", token, VehiclwInformation.Id, PhotoInspection, ref description);
                 initDasbordDelegate.Invoke();
             });
-            await PopupNavigation.PopAsync(true);
             if (state == 1)
             {
-                await PopupNavigation.PushAsync(new Errror("Not Network"));
+                await PopupNavigation.PushAsync(new Errror("Not Network", Navigation));
             }
             else if (state == 2)
             {
-                await PopupNavigation.PushAsync(new Errror(description));
+                await PopupNavigation.PushAsync(new Errror(description, Navigation));
             }
             else if (state == 3)
             {
-                if(Car.GetIndexCarFullPhoto(inderxPhotoInspektion+1) == 0)
-                {
-                    DependencyService.Get<IOrientationHandler>().ForceSensor();
-                    await CheckVechicleAndGoToResultPage();
-                }
-                else
-                {
-                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion+1)}.png", Car.typeIndex, inderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)), OnDeliveryToCarrier, TotalPaymentToCarrier));
-                }
-                Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
             else if (state == 4)
             {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
             }
         }
 

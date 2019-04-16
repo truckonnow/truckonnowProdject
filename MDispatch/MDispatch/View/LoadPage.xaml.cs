@@ -10,5 +10,10 @@ namespace MDispatch.View
 		{
 			InitializeComponent ();
 		}
-	}
+
+        protected override bool OnBackgroundClicked()
+        {
+            return false;
+        }
+    }
 }

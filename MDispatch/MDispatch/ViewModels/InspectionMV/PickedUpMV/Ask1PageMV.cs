@@ -55,31 +55,29 @@ namespace MDispatch.ViewModels.InspectionMV
 
         public async void SaveAsk()
         {
-            await PopupNavigation.PushAsync(new LoadPage(), true);
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
+            CheckVechicleAndGoToResultPage();
             await Task.Run(() =>
             {
                 state = managerDispatchMob.AskWork("SaveAsk1", token, VehiclwInformation.Id, Ask1, ref description);
                 initDasbordDelegate.Invoke();
             });
-            await PopupNavigation.PopAsync(true);
             if (state == 1)
             {
-                await PopupNavigation.PushAsync(new Errror("Not Network"));
+                await PopupNavigation.PushAsync(new Errror("Not Network", Navigation));
             }
             else if (state == 2)
             {
-                await PopupNavigation.PushAsync(new Errror(description));
+                await PopupNavigation.PushAsync(new Errror(description, Navigation));
             }
             else if (state == 3)
             {
-                CheckVechicleAndGoToResultPage();
             }
             else if (state == 4)
             {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
             }
         }
 

@@ -200,43 +200,41 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
 
         public async void SavePhoto()
         {
-            await PopupNavigation.PushAsync(new LoadPage(), true);
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
+            if (InderxPhotoInspektion < Car.CountCarImg)
+            {
+                Car.OrintableScreen(InderxPhotoInspektion);
+                await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", Car.typeIndex, InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1), OnDeliveryToCarrier, TotalPaymentToCarrier));
+                Navigation.RemovePage(Navigation.NavigationStack[2]);
+            }
+            else
+            {
+                await PopupNavigation.PushAsync(new TempPageHint());
+                DependencyService.Get<IOrientationHandler>().ForceSensor();
+                await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate, Car.typeIndex, OnDeliveryToCarrier, TotalPaymentToCarrier), true);
+                Navigation.RemovePage(Navigation.NavigationStack[2]);
+            }
             await Task.Run(() =>
             {
                 state = managerDispatchMob.AskWork("SavePhoto", token, VehiclwInformation.Id, PhotoInspection, ref description);
                 initDasbordDelegate.Invoke();
             });
-            await PopupNavigation.PopAsync(true);
             if (state == 1)
             {
-                await PopupNavigation.PushAsync(new Errror("Not Network"));
+                await PopupNavigation.PushAsync(new Errror("Not Network", Navigation));
             }
             else if (state == 2)
             {
-                await PopupNavigation.PushAsync(new Errror(description));
+                await PopupNavigation.PushAsync(new Errror(description, Navigation));
             }
             else if (state == 3)
             {
-                if (InderxPhotoInspektion < Car.CountCarImg)
-                {
-                    Car.OrintableScreen(InderxPhotoInspektion);
-                    await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", Car.typeIndex, InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1), OnDeliveryToCarrier, TotalPaymentToCarrier));
-                    Navigation.RemovePage(Navigation.NavigationStack[2]);
-                }
-                else
-                {
-                    await PopupNavigation.PushAsync(new TempPageHint());
-                    DependencyService.Get<IOrientationHandler>().ForceSensor();
-                    await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate, Car.typeIndex, OnDeliveryToCarrier, TotalPaymentToCarrier), true);
-                    Navigation.RemovePage(Navigation.NavigationStack[2]);
-                }
             }
             else if (state == 4)
             {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
             }
         }
     }

@@ -47,12 +47,12 @@ namespace MDispatch.ViewModels.PageAppMV.VehicleDetals
             if (state == 1)
             {
                 await Navigationn.PopAsync(true);
-                await PopupNavigation.PushAsync(new Errror("Not Network"));
+                await PopupNavigation.PushAsync(new Errror("Not Network", null));
             }
             else if (state == 2)
             {
                 await Navigationn.PopAsync(true);
-                await PopupNavigation.PushAsync(new Errror(description));
+                await PopupNavigation.PushAsync(new Errror(description, null));
             }
             else if (state == 3)
             {
@@ -62,7 +62,7 @@ namespace MDispatch.ViewModels.PageAppMV.VehicleDetals
             else if (state == 4)
             {
                 await Navigationn.PopAsync(true);
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
             }
         }
     }

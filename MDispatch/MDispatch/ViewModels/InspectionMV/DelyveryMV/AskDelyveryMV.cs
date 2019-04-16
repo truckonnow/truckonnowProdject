@@ -55,32 +55,30 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         public async void SaveAsk()
         {
             ICar car = GetTypeCar(VehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
-            await PopupNavigation.PushAsync(new LoadPage(), true);
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
+            await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{car.typeIndex}{car.GetIndexCarFullPhoto(1)}.png", car.typeIndex, 1, initDasbordDelegate, getVechicleDelegate, car.GetNameLayout(car.GetIndexCarFullPhoto(1)), OnDeliveryToCarrier, TotalPaymentToCarrier));
+            Navigation.RemovePage(Navigation.NavigationStack[2]);
             await Task.Run(() =>
             {
                 state = managerDispatchMob.AskWork("AskDelyvery", token, VehiclwInformation.Id, askDelyvery, ref description);
                 initDasbordDelegate.Invoke();
             });
-            await PopupNavigation.PopAsync(true);
             if (state == 1)
             {
-                await PopupNavigation.PushAsync(new Errror("Not Network"));
+                await PopupNavigation.PushAsync(new Errror("Not Network", Navigation));
             }
             else if (state == 2)
             {
-                await PopupNavigation.PushAsync(new Errror(description));
+                await PopupNavigation.PushAsync(new Errror(description, Navigation));
             }
             else if (state == 3)
             {
-                await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{car.typeIndex}{car.GetIndexCarFullPhoto(1)}.png", car.typeIndex, 1, initDasbordDelegate, getVechicleDelegate, car.GetNameLayout(car.GetIndexCarFullPhoto(1)), OnDeliveryToCarrier, TotalPaymentToCarrier));
-                Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
             else if (state == 4)
             {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
             }
         }
 

@@ -54,33 +54,31 @@ namespace MDispatch.ViewModels.AskPhoto
 
         public async void SaveAsk(string indexTypeCar)
         {
-            await PopupNavigation.PushAsync(new LoadPage(), true);
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
+            DependencyService.Get<IOrientationHandler>().ForceLandscape();
+            await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{indexTypeCar}1.png", indexTypeCar, 1, initDasbordDelegate, getVechicleDelegate, "Coupe", OnDeliveryToCarrier, TotalPaymentToCarrier));
+            Navigation.RemovePage(Navigation.NavigationStack[2]);
             await Task.Run(() =>
             {
                 state = managerDispatchMob.AskWork("SaveAsk", token, VehiclwInformation.Id, Ask, ref description);
                 initDasbordDelegate.Invoke();
             });
-            await PopupNavigation.PopAsync(true);
             if (state == 1)
             {
-                await PopupNavigation.PushAsync(new Errror("Not Network"));
+                await PopupNavigation.PushAsync(new Errror("Not Network", Navigation));
             }
             else if (state == 2)
             {
-                await PopupNavigation.PushAsync(new Errror(description));
+                await PopupNavigation.PushAsync(new Errror(description, Navigation));
             }
             else if (state == 3)
             {
-                DependencyService.Get<IOrientationHandler>().ForceLandscape();
-                await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{indexTypeCar}1.png", indexTypeCar, 1, initDasbordDelegate, getVechicleDelegate, "Coupe", OnDeliveryToCarrier, TotalPaymentToCarrier));
-                Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
             else if (state == 4)
             {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service"));
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
             }
         }
     }

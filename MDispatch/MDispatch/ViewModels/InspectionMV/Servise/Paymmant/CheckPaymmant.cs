@@ -38,12 +38,12 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Paymmant
             {
                 IsAskPaymmant = true;
                 stackLayout.IsEnabled = false;
-                await PopupNavigation.PushAsync(new Errror($"Give money for delivery to the driver {((Entry)stackLayout.Children[0]).Text}"));
+                await PopupNavigation.PushAsync(new Errror($"Give money for delivery to the driver {((Entry)stackLayout.Children[0]).Text}", null));
             }
             else
             {
                 IsAskPaymmant = false;
-                await PopupNavigation.PushAsync(new Errror("You must enter the amount of payment for delivery"));
+                await PopupNavigation.PushAsync(new Errror("You must enter the amount of payment for delivery", null));
             }
         }
 
