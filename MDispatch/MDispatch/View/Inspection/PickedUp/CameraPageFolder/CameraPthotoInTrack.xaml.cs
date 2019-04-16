@@ -37,7 +37,7 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
                 return;
             Photo photo1 = new Photo();
             photo1.Base64 = JsonConvert.SerializeObject(result.Image);
-            photo1.path = $"../Photo/{ask1Page.ask1PageMV.VehiclwInformation.Id}/PikedUp/CameraTrack/{photos.Count + 1}.Jpeg";
+            photo1.path = $"../Photo/{ask1Page.ask1PageMV.VehiclwInformation.Id}/PikedUp/CameraTrack/{photos.Count + 1}.Png";
             photos.Add(photo1);
             imagesByte.Add(result.Image);
             ask1Page.AddPhotoInTrack(photos, imagesByte);

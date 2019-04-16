@@ -197,7 +197,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             string pathIndePhoto = PhotoInspection.Photos.Count == 0 ? PhotoInspection.IndexPhoto.ToString() : $"{PhotoInspection.IndexPhoto}.{PhotoInspection.Photos.Count}";
             PhotoInspection.CurrentStatusPhoto = "Delyvery";
             photo.Base64 = photoJson;
-            photo.path = $"../Photo/{VehiclwInformation.Id}/Delyvery/PhotoInspection/{pathIndePhoto}.Jpeg";
+            photo.path = $"../Photo/{VehiclwInformation.Id}/Delyvery/PhotoInspection/{pathIndePhoto}.Png";
             PhotoInspection.Photos.Add(photo);
         }
 

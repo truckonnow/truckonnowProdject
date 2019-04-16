@@ -194,7 +194,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             string pathIndePhoto = PhotoInspection.Photos.Count == 0 ? PhotoInspection.IndexPhoto.ToString() : $"{PhotoInspection.IndexPhoto}.{PhotoInspection.Photos.Count}";
             PhotoInspection.CurrentStatusPhoto = "PikedUp";
             photo.Base64 = photoJson;
-            photo.path = $"../Photo/{VehiclwInformation.Id}/PikedUp/PhotoInspection/{pathIndePhoto}.Jpeg";
+            photo.path = $"../Photo/{VehiclwInformation.Id}/PikedUp/PhotoInspection/{pathIndePhoto}.Png";
             PhotoInspection.Photos.Add(photo);
         }
 
