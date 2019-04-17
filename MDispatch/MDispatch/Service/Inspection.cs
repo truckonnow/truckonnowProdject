@@ -17,8 +17,8 @@ namespace MDispatch.Service
             {
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/ReCurentStatus", Method.POST);
+                client.Timeout = 10000;
                 request.AddHeader("Accept", "application/json");
-                request.Parameters.Clear();
                 request.AddParameter("token", token);
                 request.AddParameter("idShip", id);
                 request.AddParameter("status", status);
@@ -48,8 +48,8 @@ namespace MDispatch.Service
                 string sigPhoto = JsonConvert.SerializeObject(photoSig);
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/SaveSigPikedUp", Method.POST);
+                client.Timeout = 10000;
                 request.AddHeader("Accept", "application/json");
-                request.Parameters.Clear();
                 request.AddParameter("token", token);
                 request.AddParameter("idVech", id);
                 request.AddParameter("jsonSigPhoto", sigPhoto);
@@ -78,8 +78,8 @@ namespace MDispatch.Service
             {
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Shipping", Method.POST);
+                client.Timeout = 10000;
                 request.AddHeader("Accept", "application/json");
-                request.Parameters.Clear();
                 request.AddParameter("token", token);
                 request.AddParameter("idShip", id);
                 response = client.Execute(request);
@@ -108,8 +108,8 @@ namespace MDispatch.Service
                 string strJsonAsk = JsonConvert.SerializeObject(ask);
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
+                client.Timeout = 10000;
                 request.AddHeader("Accept", "application/json");
-                request.Parameters.Clear();
                 request.AddParameter("token", token);
                 request.AddParameter("idVe", id);
                 request.AddParameter("jsonStrAsk", strJsonAsk);
@@ -140,8 +140,8 @@ namespace MDispatch.Service
                 string strJsonAsk = JsonConvert.SerializeObject(feedback);
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/FeedBack", Method.POST);
+                client.Timeout = 10000;
                 request.AddHeader("Accept", "application/json");
-                request.Parameters.Clear();
                 request.AddParameter("token", token);
                 request.AddParameter("jsonStrAsk", strJsonAsk);
                 response = client.Execute(request);
@@ -171,7 +171,7 @@ namespace MDispatch.Service
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
                 request.AddHeader("Accept", "application/json");
-                request.Parameters.Clear();
+                client.Timeout = 10000;
                 request.AddParameter("token", token);
                 request.AddParameter("idVe", id);
                 request.AddParameter("jsonStrAsk", strJsonAsk);
@@ -202,8 +202,8 @@ namespace MDispatch.Service
                 string strJsonAsk = JsonConvert.SerializeObject(askForUser);
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
+                client.Timeout = 10000;
                 request.AddHeader("Accept", "application/json");
-                request.Parameters.Clear();
                 request.AddParameter("token", token);
                 request.AddParameter("idVe", id);
                 request.AddParameter("jsonStrAsk", strJsonAsk);
@@ -235,7 +235,7 @@ namespace MDispatch.Service
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
                 request.AddHeader("Accept", "application/json");
-                request.Parameters.Clear();
+                client.Timeout = 10000;
                 request.AddParameter("token", token);
                 request.AddParameter("idVe", id);
                 request.AddParameter("jsonStrAsk", strJsonAsk);
@@ -267,7 +267,7 @@ namespace MDispatch.Service
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
                 request.AddHeader("Accept", "application/json");
-                request.Parameters.Clear();
+                client.Timeout = 10000;
                 request.AddParameter("token", token);
                 request.AddParameter("idVe", id);
                 request.AddParameter("jsonStrAsk", strJsonAsk);
@@ -306,8 +306,8 @@ namespace MDispatch.Service
                 string strPhotoInspection = JsonConvert.SerializeObject(photoInspection);
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Photo", Method.POST);
+                client.Timeout = 10000;
                 request.AddHeader("Accept", "application/json");
-                request.Parameters.Clear();
                 request.AddParameter("token", token);
                 request.AddParameter("idVe", id);
                 request.AddParameter("jsonStr", strPhotoInspection);
@@ -345,8 +345,8 @@ namespace MDispatch.Service
                 string strDamageForUsers = JsonConvert.SerializeObject(damageForUsers);
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Damages/User", Method.POST);
+                client.Timeout = 10000;
                 request.AddHeader("Accept", "application/json");
-                request.Parameters.Clear();
                 request.AddParameter("token", token);
                 request.AddParameter("idVech", idVech);
                 request.AddParameter("damageForUserJson", strDamageForUsers);
@@ -376,8 +376,8 @@ namespace MDispatch.Service
                 string photojson = JsonConvert.SerializeObject(photo);
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Pay", Method.POST);
+                client.Timeout = 10000;
                 request.AddHeader("Accept", "application/json");
-                request.Parameters.Clear();
                 request.AddParameter("token", token);
                 request.AddParameter("idVech", idVech);
                 request.AddParameter("type", type);
@@ -407,8 +407,8 @@ namespace MDispatch.Service
             {
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/PickedUp/PayMethod", Method.POST);
+                client.Timeout = 10000;
                 request.AddHeader("Accept", "application/json");
-                request.Parameters.Clear();
                 request.AddParameter("token", token);
                 request.AddParameter("idVech", idVech);
                 request.AddParameter("payMethod", payMethod);

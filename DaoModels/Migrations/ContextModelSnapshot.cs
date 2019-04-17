@@ -495,8 +495,6 @@ namespace DaoModels.Migrations
 
                     b.Property<string>("Password");
 
-                    b.Property<string>("Roma");
-
                     b.HasKey("Id");
 
                     b.ToTable("User");

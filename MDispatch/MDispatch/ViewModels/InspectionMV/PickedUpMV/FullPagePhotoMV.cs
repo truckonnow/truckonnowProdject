@@ -2,7 +2,6 @@
 using MDispatch.NewElement;
 using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
-using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection;
 using MDispatch.View.Inspection.PickedUp;

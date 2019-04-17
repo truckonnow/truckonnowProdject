@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DaoModels.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190415140320_InitMigration")]
-    partial class InitMigration
+    [Migration("20190417120851_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -496,8 +496,6 @@ namespace DaoModels.Migrations
                     b.Property<string>("Login");
 
                     b.Property<string>("Password");
-
-                    b.Property<string>("Roma");
 
                     b.HasKey("Id");
 

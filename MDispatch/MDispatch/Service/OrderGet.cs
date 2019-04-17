@@ -17,8 +17,8 @@ namespace MDispatch.Service
             {
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/ActiveOreder", Method.POST);
+                client.Timeout = 10000;
                 request.AddHeader("Accept", "application/json");
-                request.Parameters.Clear();
                 request.AddParameter("token", token);
                 response = client.Execute(request);
                 content = response.Content;
@@ -45,8 +45,8 @@ namespace MDispatch.Service
             {
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/DelyveryOreder", Method.POST);
+                client.Timeout = 10000;
                 request.AddHeader("Accept", "application/json");
-                request.Parameters.Clear();
                 request.AddParameter("token", token);
                 response = client.Execute(request);
                 content = response.Content;
@@ -73,8 +73,8 @@ namespace MDispatch.Service
             {
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/GetVechicleInffo", Method.POST);
+                client.Timeout = 10000;
                 request.AddHeader("Accept", "application/json");
-                request.Parameters.Clear();
                 request.AddParameter("token", token);
                 request.AddParameter("idVech", idVech);
                 response = client.Execute(request);
@@ -103,8 +103,8 @@ namespace MDispatch.Service
             {
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/SaveOrder", Method.POST);
+                client.Timeout = 10000;
                 request.AddHeader("Accept", "application/json");
-                request.Parameters.Clear();
                 request.AddParameter("token", token);
                 request.AddParameter("id", id);
                 request.AddParameter("idOrder", idOrder);
@@ -142,8 +142,8 @@ namespace MDispatch.Service
             {
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/SaveOrder1", Method.POST);
+                client.Timeout = 10000;
                 request.AddHeader("Accept", "application/json");
-                request.Parameters.Clear();
                 request.AddParameter("token", token);
                 request.AddParameter("id", id);
                 request.AddParameter("payment", payment);

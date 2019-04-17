@@ -139,7 +139,7 @@
                                     <x:String>Suv</x:String>
                                     <!--<x:String>Convertible</x:String>-->
                                     <x:String>Coupe</x:String>
-                                    <!--<x:String>Pick Up</x:String>-->
+                                    <x:String>Pick Up</x:String>
                                     <!--<x:String>Trike</x:String>
                                     <x:String>Van</x:String>-->
                                 </x:Array>

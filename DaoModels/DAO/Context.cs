@@ -23,6 +23,7 @@ namespace DaoModels.DAO
 
         public Context()
         {
+            //Database.EnsureCreated();
             Database.Migrate();
         }
 
