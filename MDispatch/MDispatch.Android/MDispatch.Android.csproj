@@ -99,6 +99,7 @@
     <Compile Include="NewrRender\Orientation\OrientationHandler.cs" />
     <Compile Include="NewrRender\PaintCodeButton.cs" />
     <Compile Include="NewrRender\ResizerImage\ResizeImgDroid.cs" />
+    <Compile Include="NewrRender\ToastNotify\ToastDroid.cs" />
     <Compile Include="NewrRender\TouchCordinateRender\TouchImageRender.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

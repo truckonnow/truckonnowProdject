@@ -1,4 +1,5 @@
 ﻿using MDispatch.Models;
+using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
@@ -43,23 +44,21 @@ namespace MDispatch.ViewModels.PageAppMV
                     Shipping.CityD, Shipping.StateD, Shipping.ZipD, Shipping.PhoneD, Shipping.EmailD, "Delivery", ref description);
             });
             await PopupNavigation.PopAsync(true);
-            await Navigationn.PopAsync(true);
             if (state == 1)
             {
-                await PopupNavigation.PushAsync(new Errror("Not Network", null));
+                await PopupNavigation.PushAsync(new Errror("Not Network", Navigationn));
             }
             else if (state == 2)
             {
-                await PopupNavigation.PushAsync(new Errror(description, null));
+                await PopupNavigation.PushAsync(new Errror(description, Navigationn));
             }
             else if (state == 3)
             {
-
-                //Feedback = "";
+                DependencyService.Get<IToast>().ShowMessage("Information about delivery saved");
             }
             else if (state == 4)
             {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigationn));
             }
         }
     }

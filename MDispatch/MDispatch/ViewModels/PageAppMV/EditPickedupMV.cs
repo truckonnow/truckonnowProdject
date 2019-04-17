@@ -1,4 +1,5 @@
 ﻿using MDispatch.Models;
+using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
@@ -54,7 +55,7 @@ namespace MDispatch.ViewModels.PageAppMV
             }
             else if (state == 3)
             {
-                //Feedback = "";
+                DependencyService.Get<IToast>().ShowMessage("Information about Picked Up saved");
             }
             else if (state == 4)
             {

@@ -1,4 +1,5 @@
 ﻿using MDispatch.Models;
+using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
@@ -181,6 +182,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
             else if (state == 3)
             {
+                DependencyService.Get<IToast>().ShowMessage("Answers to questions saved");
             }
             else if (state == 4)
             {

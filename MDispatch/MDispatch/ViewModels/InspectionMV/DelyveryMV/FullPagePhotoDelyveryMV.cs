@@ -1,5 +1,6 @@
 ﻿using MDispatch.Models;
 using MDispatch.NewElement;
+using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
@@ -231,6 +232,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
             else if (state == 3)
             {
+                DependencyService.Get<IToast>().ShowMessage($"Photo {Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion))} saved");
             }
             else if (state == 4)
             {
