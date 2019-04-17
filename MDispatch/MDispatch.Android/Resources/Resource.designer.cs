@@ -5645,109 +5645,109 @@ namespace MDispatch.Droid
 			public const int pickedUpViewOrder = 2130837888;
 			
 			// aapt resource value: 0x7f020181
-			public const int Pickup1 = 2130837889;
+			public const int PickUp1 = 2130837889;
 			
 			// aapt resource value: 0x7f020182
-			public const int Pickup10 = 2130837890;
+			public const int PickUp10 = 2130837890;
 			
 			// aapt resource value: 0x7f020183
-			public const int Pickup11 = 2130837891;
+			public const int PickUp11 = 2130837891;
 			
 			// aapt resource value: 0x7f020184
-			public const int Pickup12 = 2130837892;
+			public const int PickUp12 = 2130837892;
 			
 			// aapt resource value: 0x7f020185
-			public const int Pickup13 = 2130837893;
+			public const int PickUp13 = 2130837893;
 			
 			// aapt resource value: 0x7f020186
-			public const int Pickup14 = 2130837894;
+			public const int PickUp14 = 2130837894;
 			
 			// aapt resource value: 0x7f020187
-			public const int Pickup15 = 2130837895;
+			public const int PickUp15 = 2130837895;
 			
 			// aapt resource value: 0x7f020188
-			public const int Pickup16 = 2130837896;
+			public const int PickUp16 = 2130837896;
 			
 			// aapt resource value: 0x7f020189
-			public const int Pickup17 = 2130837897;
+			public const int PickUp17 = 2130837897;
 			
 			// aapt resource value: 0x7f02018a
-			public const int Pickup18 = 2130837898;
+			public const int PickUp18 = 2130837898;
 			
 			// aapt resource value: 0x7f02018b
-			public const int Pickup19 = 2130837899;
+			public const int PickUp19 = 2130837899;
 			
 			// aapt resource value: 0x7f02018c
-			public const int Pickup2 = 2130837900;
+			public const int PickUp2 = 2130837900;
 			
 			// aapt resource value: 0x7f02018d
-			public const int Pickup20 = 2130837901;
+			public const int PickUp20 = 2130837901;
 			
 			// aapt resource value: 0x7f02018e
-			public const int Pickup21 = 2130837902;
+			public const int PickUp21 = 2130837902;
 			
 			// aapt resource value: 0x7f02018f
-			public const int Pickup22 = 2130837903;
+			public const int PickUp22 = 2130837903;
 			
 			// aapt resource value: 0x7f020190
-			public const int Pickup23 = 2130837904;
+			public const int PickUp23 = 2130837904;
 			
 			// aapt resource value: 0x7f020191
-			public const int Pickup24 = 2130837905;
+			public const int PickUp24 = 2130837905;
 			
 			// aapt resource value: 0x7f020192
-			public const int Pickup25 = 2130837906;
+			public const int PickUp25 = 2130837906;
 			
 			// aapt resource value: 0x7f020193
-			public const int Pickup26 = 2130837907;
+			public const int PickUp26 = 2130837907;
 			
 			// aapt resource value: 0x7f020194
-			public const int Pickup27 = 2130837908;
+			public const int PickUp27 = 2130837908;
 			
 			// aapt resource value: 0x7f020195
-			public const int Pickup28 = 2130837909;
+			public const int PickUp28 = 2130837909;
 			
 			// aapt resource value: 0x7f020196
-			public const int Pickup29 = 2130837910;
+			public const int PickUp29 = 2130837910;
 			
 			// aapt resource value: 0x7f020197
-			public const int Pickup3 = 2130837911;
+			public const int PickUp3 = 2130837911;
 			
 			// aapt resource value: 0x7f020198
-			public const int Pickup30 = 2130837912;
+			public const int PickUp30 = 2130837912;
 			
 			// aapt resource value: 0x7f020199
-			public const int Pickup31 = 2130837913;
+			public const int PickUp31 = 2130837913;
 			
 			// aapt resource value: 0x7f02019a
-			public const int Pickup32 = 2130837914;
+			public const int PickUp32 = 2130837914;
 			
 			// aapt resource value: 0x7f02019b
-			public const int Pickup33 = 2130837915;
+			public const int PickUp33 = 2130837915;
 			
 			// aapt resource value: 0x7f02019c
-			public const int Pickup34 = 2130837916;
+			public const int PickUp34 = 2130837916;
 			
 			// aapt resource value: 0x7f02019d
-			public const int Pickup35 = 2130837917;
+			public const int PickUp35 = 2130837917;
 			
 			// aapt resource value: 0x7f02019e
-			public const int Pickup4 = 2130837918;
+			public const int PickUp4 = 2130837918;
 			
 			// aapt resource value: 0x7f02019f
-			public const int Pickup5 = 2130837919;
+			public const int PickUp5 = 2130837919;
 			
 			// aapt resource value: 0x7f0201a0
-			public const int Pickup6 = 2130837920;
+			public const int PickUp6 = 2130837920;
 			
 			// aapt resource value: 0x7f0201a1
-			public const int Pickup7 = 2130837921;
+			public const int PickUp7 = 2130837921;
 			
 			// aapt resource value: 0x7f0201a2
-			public const int Pickup8 = 2130837922;
+			public const int PickUp8 = 2130837922;
 			
 			// aapt resource value: 0x7f0201a3
-			public const int Pickup9 = 2130837923;
+			public const int PickUp9 = 2130837923;
 			
 			// aapt resource value: 0x7f0201a4
 			public const int scanCoupe = 2130837924;
