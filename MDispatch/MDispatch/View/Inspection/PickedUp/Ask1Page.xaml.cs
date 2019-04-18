@@ -341,7 +341,7 @@ namespace MDispatch.View.Inspection
             }
             if (!isAsk13)
             {
-                askBlock12.BorderColor = Color.Red;
+                askBlock13.BorderColor = Color.Red;
             }
             else
             {
@@ -404,7 +404,7 @@ namespace MDispatch.View.Inspection
 
         public void AddPhotoInTrack(List<Photo> photos, List<byte[]> imagesByte)
         {
-            if (photos != null && photos.Count == 6)
+            if (photos != null)
             {
                 isAsk13 = true;
                 ask1PageMV.Ask1.Photo_after_loading_in_the_truck = new List<Photo>(photos);

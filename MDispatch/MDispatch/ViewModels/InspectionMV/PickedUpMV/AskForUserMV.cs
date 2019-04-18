@@ -54,7 +54,6 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             string description = null;
             int state = 0;
             await Navigation.PushAsync(new LiabilityAndInsurance(managerDispatchMob, VehiclwInformation.Id, IdShip, initDasbordDelegate, OnDeliveryToCarrier, TotalPaymentToCarrier), true);
-            Navigation.RemovePage(Navigation.NavigationStack[2]);
             await Task.Run(() =>
             {
                 state = managerDispatchMob.AskWork("AskFromUser", token, VehiclwInformation.Id, AskForUser, ref description);
@@ -70,6 +69,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
             else if (state == 3)
             {
+                Navigation.RemovePage(Navigation.NavigationStack[2]);
                 DependencyService.Get<IToast>().ShowMessage("Answers to questions saved");
             }
             else if (state == 4)

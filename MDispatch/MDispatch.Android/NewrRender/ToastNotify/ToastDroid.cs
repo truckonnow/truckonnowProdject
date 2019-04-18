@@ -2,6 +2,7 @@
 using MDispatch.Droid.NewrRender.ToastNotify;
 using MDispatch.NewElement.ToastNotify;
 using Xamarin.Forms;
+
 [assembly: Dependency(typeof(ToastDroid))]
 namespace MDispatch.Droid.NewrRender.ToastNotify
 {

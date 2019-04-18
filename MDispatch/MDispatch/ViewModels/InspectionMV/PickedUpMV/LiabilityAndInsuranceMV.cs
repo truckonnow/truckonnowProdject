@@ -124,6 +124,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
             else if (state == 3)
             {
+                DependencyService.Get<IToast>().ShowMessage("Paymmant photo saved");
             }
             else if (state == 4)
             {
@@ -155,6 +156,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             else if (state == 3)
             {
                 await PopupNavigation.PushAsync(new CopyLibaryAndInsurance(this));
+                DependencyService.Get<IToast>().ShowMessage("Paymmant method saved");
             }
             else if (state == 4)
             {

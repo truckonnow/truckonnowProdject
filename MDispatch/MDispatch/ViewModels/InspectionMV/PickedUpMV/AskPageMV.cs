@@ -58,9 +58,8 @@ namespace MDispatch.ViewModels.AskPhoto
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-            DependencyService.Get<IOrientationHandler>().ForceLandscape();
-            await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{indexTypeCar}1.png", indexTypeCar, 1, initDasbordDelegate, getVechicleDelegate, "Coupe", OnDeliveryToCarrier, TotalPaymentToCarrier));
-            Navigation.RemovePage(Navigation.NavigationStack[2]);
+            DependencyService.Get<IOrientationHandler>().ForceSensor();
+            await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{indexTypeCar}1.png", indexTypeCar, 1, initDasbordDelegate, getVechicleDelegate, "", OnDeliveryToCarrier, TotalPaymentToCarrier));
             await Task.Run(() =>
             {
                 state = managerDispatchMob.AskWork("SaveAsk", token, VehiclwInformation.Id, Ask, ref description);
@@ -76,6 +75,7 @@ namespace MDispatch.ViewModels.AskPhoto
             }
             else if (state == 3)
             {
+                Navigation.RemovePage(Navigation.NavigationStack[2]);
                 DependencyService.Get<IToast>().ShowMessage("Answers to questions saved");
             }
             else if (state == 4)

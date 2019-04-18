@@ -59,8 +59,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-            await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{car.typeIndex}{car.GetIndexCarFullPhoto(1)}.png", car.typeIndex, 1, initDasbordDelegate, getVechicleDelegate, car.GetNameLayout(car.GetIndexCarFullPhoto(1)), OnDeliveryToCarrier, TotalPaymentToCarrier));
-            Navigation.RemovePage(Navigation.NavigationStack[2]);
+            await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{car.typeIndex.Replace(" ", "")}{car.GetIndexCarFullPhoto(1)}.png", car.typeIndex.Replace(" ", ""), 1, initDasbordDelegate, getVechicleDelegate, car.GetNameLayout(car.GetIndexCarFullPhoto(1)), OnDeliveryToCarrier, TotalPaymentToCarrier));
             await Task.Run(() =>
             {
                 state = managerDispatchMob.AskWork("AskDelyvery", token, VehiclwInformation.Id, askDelyvery, ref description);
@@ -76,6 +75,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
             else if (state == 3)
             {
+                Navigation.RemovePage(Navigation.NavigationStack[2]);
                 DependencyService.Get<IToast>().ShowMessage("Answers to questions saved");
             }
             else if (state == 4)

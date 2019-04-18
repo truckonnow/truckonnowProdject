@@ -21,13 +21,13 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
 
         public CameraPthotoInTrack (Ask1Page ask1Page, string nameVech)
 		{
-            car = GetTypeCar(nameVech);
+            car = GetTypeCar(nameVech.Replace(" ", ""));
             InitializeComponent ();
             this.ask1Page = ask1Page;
             this.nameVech = nameVech;
             NavigationPage.SetHasNavigationBar(this, false);
             car.OrintableScreen(car.GetIndexCar(countPhoto));
-            paternPhoto.Source = $"{car.typeIndex}{car.GetIndexCar(countPhoto)}.png";
+            paternPhoto.Source = $"{car.typeIndex.Replace(" ", "")}{car.GetIndexCar(countPhoto)}.png";
             titlePhoto.Text = car.GetNameLayout(car.GetIndexCar(countPhoto));
         }
 
@@ -40,18 +40,18 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
             photo1.path = $"../Photo/{ask1Page.ask1PageMV.VehiclwInformation.Id}/PikedUp/CameraTrack/{photos.Count + 1}.jpg";
             photos.Add(photo1);
             imagesByte.Add(result.Image);
-            ask1Page.AddPhotoInTrack(photos, imagesByte);
             countPhoto++;
             if (car.GetIndexCar(countPhoto) == 0)
             {
                 await Navigation.PopAsync(true);
+                ask1Page.AddPhotoInTrack(photos, imagesByte);
                 DependencyService.Get<IOrientationHandler>().ForceSensor();
                 return;
             }
             else
             {
                 car.OrintableScreen(car.GetIndexCar(countPhoto));
-                paternPhoto.Source = $"{car.typeIndex}{car.GetIndexCar(countPhoto)}.png";
+                paternPhoto.Source = $"{car.typeIndex.Replace(" ", "")}{car.GetIndexCar(countPhoto)}.png";
                 titlePhoto.Text = car.GetNameLayout(car.GetIndexCar(countPhoto));
             }
         }

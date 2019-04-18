@@ -1,4 +1,5 @@
 ﻿using MDispatch.Models;
+using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
@@ -63,7 +64,7 @@ namespace MDispatch.ViewModels.InspectionMV
             }
             else if (state == 3)
             {
-                await PopupNavigation.PopAsync(true);
+                DependencyService.Get<IToast>().ShowMessage("Feedback saved");
                 await PopupNavigation.PushAsync(new TempPageHint3());
                 if(paymmpayMVInspactionant is AskForUsersDelyveryMW)
                 {

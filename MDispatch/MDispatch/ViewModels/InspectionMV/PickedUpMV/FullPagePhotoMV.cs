@@ -2,6 +2,7 @@
 using MDispatch.NewElement;
 using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
+using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection;
 using MDispatch.View.Inspection.PickedUp;
@@ -40,7 +41,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             InderxPhotoInspektion = inderxPhotoInspektion;
             if (typeCar != null)
             {
-                Car = GetTypeCar(typeCar);
+                Car = GetTypeCar(typeCar.Replace(" ", ""));
             }
             IdShip = idShip;
             OnDeliveryToCarrier = onDeliveryToCarrier;
@@ -200,27 +201,27 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
 
         public async void SavePhoto()
         {
+            await PopupNavigation.PushAsync(new LoadPage());
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
             if (InderxPhotoInspektion < Car.CountCarImg)
             {
                 Car.OrintableScreen(InderxPhotoInspektion);
-                await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex}{InderxPhotoInspektion + 1}.png", Car.typeIndex, InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1), OnDeliveryToCarrier, TotalPaymentToCarrier));
-                Navigation.RemovePage(Navigation.NavigationStack[2]);
+                await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", Car.typeIndex.Replace(" ", ""), InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1), OnDeliveryToCarrier, TotalPaymentToCarrier));
             }
             else
             {
                 await PopupNavigation.PushAsync(new TempPageHint());
                 DependencyService.Get<IOrientationHandler>().ForceSensor();
-                await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate, Car.typeIndex, OnDeliveryToCarrier, TotalPaymentToCarrier), true);
-                Navigation.RemovePage(Navigation.NavigationStack[2]);
+                await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate, Car.typeIndex.Replace(" ", ""), OnDeliveryToCarrier, TotalPaymentToCarrier), true);
             }
             await Task.Run(() =>
             {
                 state = managerDispatchMob.AskWork("SavePhoto", token, VehiclwInformation.Id, PhotoInspection, ref description);
                 initDasbordDelegate.Invoke();
             });
+            await PopupNavigation.PopAsync();
             if (state == 1)
             {
                 await PopupNavigation.PushAsync(new Errror("Not Network", Navigation));
@@ -231,6 +232,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
             else if (state == 3)
             {
+                Navigation.RemovePage(Navigation.NavigationStack[2]);
                 DependencyService.Get<IToast>().ShowMessage($"Photo {Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion))} saved");
             }
             else if (state == 4)

@@ -77,6 +77,11 @@ namespace ApiMobaileServise.Servise
                         typeScan = new SuvCar();
                         break;
                     }
+                case "PickedUp":
+                    {
+                        typeScan = new SuvCar();
+                        break;
+                    }
             }
             return typeScan;
         }
