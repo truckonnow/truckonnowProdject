@@ -33,14 +33,14 @@ namespace MDispatch.View.Inspection.PickedUp
                 foreach (var view in views)
                 {
                     absla.Children.Add(view);
-                    ((ImgResize)view).TouchAction += MoveTouch;
-                    ((ImgResize)view).OneTabAction += RemovedDamag;
+                    ((ImgResize)view).OneTabAction += AddControlPanelDmg;
                 }
             }
         }
 
         private async void TouchImage_TouchAction(object sender, NewElement.TouchCordinate.TouchActionEventArgs e)
         {
+            RemoveSelectedDmg();
             stateSelect = 1;
             await PopupNavigation.PushAsync(new DamageSelecter(FullPagePhotoMV, this), true);
             await WaiteSelectDamage();
@@ -56,8 +56,7 @@ namespace MDispatch.View.Inspection.PickedUp
                     WidthRequest = 30,
                     HeightRequest = 30,
                 };
-                image.TouchAction += MoveTouch;
-                image.OneTabAction += RemovedDamag;
+                image.OneTabAction += AddControlPanelDmg;
                 AbsoluteLayout.SetLayoutBounds(image, new Rectangle(e.XInterest * 0.0001, e.YInterest * 0.0001, 30, 30));
                 AbsoluteLayout.SetLayoutFlags(image, AbsoluteLayoutFlags.PositionProportional);
                 absla.Children.Add(image);
@@ -72,25 +71,58 @@ namespace MDispatch.View.Inspection.PickedUp
             }
         }
 
-        private void RemovedDamag(object sender)
+        Image dmgSelected = null;
+        private void AddControlPanelDmg(object sender)
         {
-            absla.Children.Remove((Image)sender);
-            ((ImgResize)sender).TouchAction -= MoveTouch;
-            FullPagePhotoMV.RemmoveDamage((Image)sender);
+            controlDmg.IsEnabled = true;
+            controlDmg.IsVisible = true;
+            dmgSelected = (Image)sender;
+            addSizeBtnDmg.Clicked += AddSizeDamage;
+            removeSizeBtnDmg.Clicked += RemoveSizeDamage;
+            deletBtnDmg.Clicked += DeleteDamage;
         }
 
-        private void MoveTouch(object sender, TouchActionEventArgs e)
+        private void DeleteDamage(object sender, EventArgs e)
         {
-            ImgResize rezizeImgnew = (ImgResize)sender;
+            ((ImgResize)dmgSelected).OneTabAction -= AddControlPanelDmg;
+            controlDmg.IsEnabled = false;
+            controlDmg.IsVisible = false;
+            absla.Children.Remove(dmgSelected);
+            FullPagePhotoMV.RemmoveDamage(dmgSelected);
+        }
+
+        private void RemoveSizeDamage(object sender, EventArgs e)
+        {
+            ResizeDmg(-2);
+        }
+
+        private void AddSizeDamage(object sender, EventArgs e)
+        {
+            ResizeDmg(2);
+        }
+
+        private void RemoveSelectedDmg()
+        {
+            addSizeBtnDmg.Clicked -= AddSizeDamage;
+            removeSizeBtnDmg.Clicked -= RemoveSizeDamage;
+            deletBtnDmg.Clicked -= DeleteDamage;
+            controlDmg.IsEnabled = false;
+            controlDmg.IsVisible = false;
+            dmgSelected = null;
+        }
+
+        private void ResizeDmg(int increasePerUnit)
+        {
+            ImgResize rezizeImgnew = (ImgResize)dmgSelected;
             Rectangle rectangle = AbsoluteLayout.GetLayoutBounds(rezizeImgnew);
-            rectangle.Height += e.IncreasePerUnit;
-            rectangle.Width += e.IncreasePerUnit;
-            if (rectangle.Height > 20 && rectangle.Height < 200)
+            rectangle.Height += increasePerUnit;
+            rectangle.Width += increasePerUnit;
+            if (rectangle.Height > 20)
             {
                 AbsoluteLayout.SetLayoutBounds(rezizeImgnew, rectangle);
                 Task.Run(() =>
                 {
-                    FullPagePhotoMV.ReSetDamage((Image)sender, (int)rectangle.Width, (int)rectangle.Height);
+                    FullPagePhotoMV.ReSetDamage(dmgSelected, (int)rectangle.Width, (int)rectangle.Height);
                 });
             }
         }
@@ -104,12 +136,11 @@ namespace MDispatch.View.Inspection.PickedUp
                 {
                     try
                     {
-                        ((ImgResize)view).TouchAction -= MoveTouch;
-                        ((ImgResize)view).OneTabAction -= RemovedDamag;
+                        ((ImgResize)view).OneTabAction -= AddControlPanelDmg;
+                        fullPagePhoto.AddDamagCurrentLayut(view);
                     }
                     catch
                     { }
-                    fullPagePhoto.AddDamagCurrentLayut(view);
                 }
             }
             return base.OnBackButtonPressed();
@@ -129,12 +160,11 @@ namespace MDispatch.View.Inspection.PickedUp
                 {
                     try
                     {
-                        ((ImgResize)view).TouchAction -= MoveTouch;
-                        ((ImgResize)view).OneTabAction -= RemovedDamag;
+                        ((ImgResize)view).OneTabAction -= AddControlPanelDmg;
+                        fullPagePhoto.AddDamagCurrentLayut(view);
                     }
                     catch
                     { }
-                    fullPagePhoto.AddDamagCurrentLayut(view);
                 }
             }
             await Navigation.PopAsync();

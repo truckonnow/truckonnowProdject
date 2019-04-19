@@ -12,7 +12,7 @@
                     <Entry x:Name="eUsName" TextColor="#4fd2c2" HeightRequest="40" FontSize="14" TextChanged="Entry_TextChanged_1" Text="{Binding Username}"/>
                     <Label x:Name="lPassword" Text="PASSWORD" TextColor="#b8babb" Margin="4,0,0,0" FontSize="14" VerticalTextAlignment="Start"/>
                     <Entry TextColor="#4fd2c2" HeightRequest="40" FontSize="14" TextChanged="Entry_TextChanged" IsPassword="True" Text="{Binding Password}"/>
-                    <Button Text="Sig In" TextColor="White" BackgroundColor="#4fd2c2" Command="{Binding AvtorizationCommand}"/>
+                    <Button Text="Log in" TextColor="White" BackgroundColor="#4fd2c2" Command="{Binding AvtorizationCommand}"/>
                     <Label Text="Forgot password?" HorizontalTextAlignment="End" FontSize="12"/>
                     <Label Text="{Binding FeedBack}" TextColor="Red" FontSize="11" HorizontalTextAlignment="Center"/>
                 </StackLayout>
