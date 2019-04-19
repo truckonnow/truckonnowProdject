@@ -101,7 +101,7 @@ namespace MDispatch.View.Inspection.PickedUp
             await WaiteSelectDamage();
             await PopupNavigation.PopAsync(true);
             stateSelect = 1;
-            await Navigation.PushAsync(new CameraPagePhoto1(fullPagePhotoDelyveryMV, null, fullPagePhotoDelyvery, this));
+            await Navigation.PushAsync(new CameraPagePhoto1(null, fullPagePhotoDelyvery, this));
             await WaiteSelectDamage();
             if (stateSelect == 0)
             {

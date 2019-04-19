@@ -9,15 +9,13 @@ namespace MDispatch.View.PageApp
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CameraPagePhoto : CameraPage
     {
-        private FullPagePhotoMV fullPagePhotoMV = null;
         private FullPagePhoto fullPagePhoto = null;
         private PageAddDamage pageAddDamage = null;
 
-        public CameraPagePhoto(FullPagePhotoMV fullPagePhotoMV, string pngPaternPhoto, FullPagePhoto fullPagePhoto, PageAddDamage pageAddDamage = null)
+        public CameraPagePhoto(string pngPaternPhoto, FullPagePhoto fullPagePhoto, PageAddDamage pageAddDamage = null)
 		{
             this.pageAddDamage = pageAddDamage;
             this.fullPagePhoto = fullPagePhoto;
-            this.fullPagePhotoMV = fullPagePhotoMV;
             InitializeComponent ();
             NavigationPage.SetHasNavigationBar(this, false);
             if (pngPaternPhoto != null)
@@ -32,8 +30,8 @@ namespace MDispatch.View.PageApp
             {
                 return;
             }
-            fullPagePhotoMV.AddNewFotoSourse(result.Image);
-            fullPagePhotoMV.SetPhoto(result.Image);
+            fullPagePhoto.fullPagePhotoMV.AddNewFotoSourse(result.Image);
+            fullPagePhoto.fullPagePhotoMV.SetPhoto(result.Image);
             fullPagePhoto.SetbtnVisable();
             if (pageAddDamage != null)
             {

@@ -14,7 +14,7 @@ namespace MDispatch.View.PageApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FullPagePhotoDelyvery : ContentPage
     {
-        private FullPagePhotoDelyveryMV fullPagePhotoDelyveryMV = null;
+        public FullPagePhotoDelyveryMV fullPagePhotoDelyveryMV = null;
         private string pngPaternPhoto = null;
 
         public FullPagePhotoDelyvery(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string pngPaternPhoto,
@@ -42,6 +42,7 @@ namespace MDispatch.View.PageApp
         {
             if (fullPagePhotoDelyveryMV.AllSourseImage != null && fullPagePhotoDelyveryMV.AllSourseImage.Count != 0)
             {
+                btnNext.HorizontalOptions = LayoutOptions.EndAndExpand;
                 btnNext.IsVisible = true;
                 btnAddPhoto.IsVisible = false;
             }
@@ -49,7 +50,7 @@ namespace MDispatch.View.PageApp
         
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CameraPagePhoto1(fullPagePhotoDelyveryMV, pngPaternPhoto, this));
+            await Navigation.PushAsync(new CameraPagePhoto1(pngPaternPhoto, this));
         }
 
         private async void MessagesListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -59,10 +60,12 @@ namespace MDispatch.View.PageApp
             {
                 dmla.IsVisible = false;
                 paternPhoto.Source = "";
+                btnNext.HorizontalOptions = LayoutOptions.EndAndExpand;
                 btnDamage.IsVisible = false;
             }
             else
             {
+                btnNext.HorizontalOptions = LayoutOptions.EndAndExpand;
                 btnDamage.IsVisible = true;
                 dmla.IsVisible = true;
                 paternPhoto.Source = pngPaternPhoto;

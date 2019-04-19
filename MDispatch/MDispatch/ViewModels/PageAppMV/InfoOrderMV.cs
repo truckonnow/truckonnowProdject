@@ -111,14 +111,18 @@ namespace MDispatch.ViewModels.PageAppMV
                 else if (photoInspections == null)
                 {
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", vehiclwInformation));
-                    await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 1, initDasbordDelegate, getVechicleDelegate, car.GetNameLayout(1), Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier), true);
+                    FullPagePhoto fullPagePhoto = new FullPagePhoto(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 1, initDasbordDelegate, getVechicleDelegate, car.GetNameLayout(1), Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier);
+                    await Navigation.PushAsync(fullPagePhoto, true);
+                    await Navigation.PushAsync(new CameraPagePhoto($"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", fullPagePhoto));
                     return;
                 }
                 else if (photoInspections.Find(p => p.IndexPhoto == car.CountCarImg) == null)
                 {
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", vehiclwInformation));
                     int lastIndexPhoto = photoInspections[vehiclwInformation.PhotoInspections.Count - 1].IndexPhoto + 1;
-                    await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{lastIndexPhoto}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), lastIndexPhoto, initDasbordDelegate, getVechicleDelegate, car.GetNameLayout(lastIndexPhoto), Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier), true);
+                    FullPagePhoto fullPagePhoto = new FullPagePhoto(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{lastIndexPhoto}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), lastIndexPhoto, initDasbordDelegate, getVechicleDelegate, car.GetNameLayout(lastIndexPhoto), Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier);
+                    await Navigation.PushAsync(fullPagePhoto, true);
+                    await Navigation.PushAsync(new CameraPagePhoto($"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{lastIndexPhoto}.png", fullPagePhoto));
                     return;
                 }
                 else if (vehiclwInformation.Ask1 == null)
@@ -166,14 +170,18 @@ namespace MDispatch.ViewModels.PageAppMV
                 else if (photoInspections != null && photoInspections.Count + 1 == 1)
                 {
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Delyvered", vehiclwInformation));
-                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{Car.GetIndexCarFullPhoto(photoInspections.Count + 1)}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), photoInspections.Count + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(photoInspections.Count + 1)), Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier), true);
+                    FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{Car.GetIndexCarFullPhoto(photoInspections.Count + 1)}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), photoInspections.Count + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(photoInspections.Count + 1)), Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier);
+                    await Navigation.PushAsync(fullPagePhotoDelyvery, true);
+                    await Navigation.PushAsync(new CameraPagePhoto1($"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{Car.GetIndexCarFullPhoto(photoInspections.Count + 1)}.png", fullPagePhotoDelyvery));
                     return;
                 }
                 else if (Car.GetIndexCarFullPhoto(photoInspections.Count+1) != 0)
                 {
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Delyvered", vehiclwInformation));
                     int photoInspection = Car.GetIndexCarFullPhoto(photoInspections.Count + 1);
-                    await Navigation.PushAsync(new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{Car.GetIndexCarFullPhoto(photoInspections.Count + 1)}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), photoInspections.Count + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(photoInspections.Count + 1)), Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier));
+                    FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{Car.GetIndexCarFullPhoto(photoInspections.Count + 1)}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), photoInspections.Count + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(photoInspections.Count + 1)), Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier);
+                    await Navigation.PushAsync(fullPagePhotoDelyvery);
+                    await Navigation.PushAsync(new CameraPagePhoto1($"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{Car.GetIndexCarFullPhoto(photoInspections.Count + 1)}.png", fullPagePhotoDelyvery));
                     return;
                 }
             }

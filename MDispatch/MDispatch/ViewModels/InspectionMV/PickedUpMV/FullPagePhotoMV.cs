@@ -201,14 +201,15 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
 
         public async void SavePhoto()
         {
-            await PopupNavigation.PushAsync(new LoadPage());
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
             if (InderxPhotoInspektion < Car.CountCarImg)
             {
                 Car.OrintableScreen(InderxPhotoInspektion);
-                await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", Car.typeIndex.Replace(" ", ""), InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1), OnDeliveryToCarrier, TotalPaymentToCarrier));
+                FullPagePhoto fullPagePhoto = new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", Car.typeIndex.Replace(" ", ""), InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1), OnDeliveryToCarrier, TotalPaymentToCarrier);
+                await Navigation.PushAsync(fullPagePhoto);
+                await Navigation.PushAsync(new CameraPagePhoto($"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", fullPagePhoto));
             }
             else
             {
@@ -221,7 +222,6 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 state = managerDispatchMob.AskWork("SavePhoto", token, VehiclwInformation.Id, PhotoInspection, ref description);
                 initDasbordDelegate.Invoke();
             });
-            await PopupNavigation.PopAsync();
             if (state == 1)
             {
                 await PopupNavigation.PushAsync(new Errror("Not Network", Navigation));

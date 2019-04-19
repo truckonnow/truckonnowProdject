@@ -10,17 +10,15 @@ namespace MDispatch.View.PageApp
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CameraPagePhoto1 : CameraPage
     {
-        private FullPagePhotoDelyveryMV fullPagePhotoDelyveryMV = null;
         private string pngPaternPhoto = null;
         private FullPagePhotoDelyvery fullPagePhotoDelyvery = null;
         private PageAddDamage1 pageAddDamage1 = null;
 
-        public CameraPagePhoto1(FullPagePhotoDelyveryMV fullPagePhotoDelyveryMV, string pngPaternPhoto, FullPagePhotoDelyvery fullPagePhotoDelyvery, PageAddDamage1 pageAddDamage1 = null)
+        public CameraPagePhoto1(string pngPaternPhoto, FullPagePhotoDelyvery fullPagePhotoDelyvery, PageAddDamage1 pageAddDamage1 = null)
 		{
             this.pageAddDamage1 = pageAddDamage1;
             this.fullPagePhotoDelyvery = fullPagePhotoDelyvery;
             this.pngPaternPhoto = pngPaternPhoto;
-            this.fullPagePhotoDelyveryMV = fullPagePhotoDelyveryMV;
             InitializeComponent ();
             NavigationPage.SetHasNavigationBar(this, false);
             paternPhoto.Source = pngPaternPhoto;
@@ -30,8 +28,8 @@ namespace MDispatch.View.PageApp
         {
             if (!result.Success)
                 return;
-            fullPagePhotoDelyveryMV.AddNewFotoSourse(result.Image);
-            fullPagePhotoDelyveryMV.SetPhoto(result.Image);
+            fullPagePhotoDelyvery.fullPagePhotoDelyveryMV.AddNewFotoSourse(result.Image);
+            fullPagePhotoDelyvery.fullPagePhotoDelyveryMV.SetPhoto(result.Image);
             fullPagePhotoDelyvery.SetbtnVisable();
             if (pageAddDamage1 != null)
             {

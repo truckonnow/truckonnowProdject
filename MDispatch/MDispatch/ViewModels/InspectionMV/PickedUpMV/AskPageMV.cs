@@ -59,7 +59,9 @@ namespace MDispatch.ViewModels.AskPhoto
             string description = null;
             int state = 0;
             DependencyService.Get<IOrientationHandler>().ForceSensor();
-            await Navigation.PushAsync(new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{indexTypeCar}1.png", indexTypeCar, 1, initDasbordDelegate, getVechicleDelegate, "", OnDeliveryToCarrier, TotalPaymentToCarrier));
+            FullPagePhoto fullPagePhoto = new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{indexTypeCar}1.png", indexTypeCar, 1, initDasbordDelegate, getVechicleDelegate, "", OnDeliveryToCarrier, TotalPaymentToCarrier);
+            await Navigation.PushAsync(fullPagePhoto);
+            await Navigation.PushAsync(new CameraPagePhoto($"{indexTypeCar}1.png", fullPagePhoto));
             await Task.Run(() =>
             {
                 state = managerDispatchMob.AskWork("SaveAsk", token, VehiclwInformation.Id, Ask, ref description);

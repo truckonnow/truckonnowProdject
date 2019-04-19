@@ -5,7 +5,7 @@
              x:Class="MDispatch.View.Inspection.PickedUp.PageAddDamage">
     <ContentPage.Content>
         <AbsoluteLayout x:Name="absla">
-            <TouchImage:TouchImage AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" x:Name="touchImage" TouchAction="TouchImage_TouchAction" />
+            <TouchImage:TouchImage AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" x:Name="touchImage" TouchAction="TouchImage_TouchAction"  />
             <Image Source="BackIconpage.png"  HorizontalOptions="Start" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".02, .02, 30, 30">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped"/>

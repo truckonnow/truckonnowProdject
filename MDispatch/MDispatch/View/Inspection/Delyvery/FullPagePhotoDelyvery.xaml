@@ -7,18 +7,18 @@
         <AbsoluteLayout x:Name="laAbsul">
             <Image x:Name="SelectPhoto" Source="{Binding SourseImage}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"/>
             <Image x:Name="paternPhoto" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" />
-            <AbsoluteLayout x:Name="dmla" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"/>
+            <AbsoluteLayout x:Name="dmla" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" Opacity="0.5"/>
             <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" BackgroundColor="#E6E6E6"
-                         AbsoluteLayout.LayoutBounds="1, 0, 1, 44" Opacity="0.3" Padding="7">
+                         AbsoluteLayout.LayoutBounds="1, 0, 1, 44" Opacity="0.7" Padding="7">
                 <Image Source="BackIconpage.png" HeightRequest="20" WidthRequest="20">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
                     </Image.GestureRecognizers>
                 </Image>
                 <Label x:Name="NameSelectPhoto" Text="--------------------" TextColor="Black" Margin="5"/>
-                <Button x:Name="btnDamage" IsVisible="False" Text="Add Damag" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="81" HorizontalOptions="EndAndExpand" Clicked="Button_Clicked_2"/>
-                <Button x:Name="btnAddPhoto" Text="Add Photo" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="79" HorizontalOptions="EndAndExpand" Clicked="Button_Clicked"/>
-                <Button x:Name="btnNext" IsVisible="False" Text="Next" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="50" Clicked="Button_Clicked_1" HorizontalOptions="EndAndExpand" />
+                <Button x:Name="btnDamage" IsVisible="False" Text="Add Damag" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="81" HorizontalOptions="End" Clicked="Button_Clicked_2"/>
+                <Button x:Name="btnAddPhoto" Text="Add Photo" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="79" HorizontalOptions="End" Clicked="Button_Clicked"/>
+                <Button x:Name="btnNext" IsVisible="False" Text="Next" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="50" Clicked="Button_Clicked_1" HorizontalOptions="End" />
             </StackLayout>
             <StackLayout Orientation="Horizontal" HeightRequest="70" AbsoluteLayout.LayoutFlags="PositionProportional,HeightProportional"
                          AbsoluteLayout.LayoutBounds="0, 1, 55, 0.9" Padding="7" Opacity="0.8">
