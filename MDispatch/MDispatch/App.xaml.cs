@@ -1,4 +1,3 @@
-using MDispatch.NewElement.StoreTocken;
 using MDispatch.Service.GeloctionGPS;
 using MDispatch.View.A_R;
 using MDispatch.View.TabPage;
@@ -9,7 +8,7 @@ namespace MDispatch
 {
     public partial class App : Application
 	{
-        public static bool isAvtorization;
+        bool isAvtorization;
             
         public App ()
 		{
@@ -17,13 +16,13 @@ namespace MDispatch
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             if (token == "")
             {
-                isAvtorization = false;
                 MainPage = new NavigationPage(new Avtorization());
+                isAvtorization = false;
             }
             else
             {
-                isAvtorization = true;
                 MainPage = new NavigationPage(new TabPage(new Service.ManagerDispatchMob()));
+                isAvtorization = true;
             }
         }
 
@@ -32,8 +31,6 @@ namespace MDispatch
             if (isAvtorization)
             {
                 await Utils.StartListening();
-                //DependencyService.Get<IStore>().TokenRefresh();
-                //Utils.TokenRefresh();
             }
         }
 

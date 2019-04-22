@@ -1,5 +1,4 @@
-﻿using MDispatch.NewElement.StoreTocken;
-using MDispatch.View.Inspection.PickedUp;
+﻿using MDispatch.View.Inspection.PickedUp;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using Plugin.Permissions;
@@ -78,10 +77,6 @@ namespace MDispatch.Service.GeloctionGPS
             }
             await CrossGeolocator.Current.StopListeningAsync();
             CrossGeolocator.Current.PositionChanged -= PositionChanged;
-        }
-
-        public static void TokenRefresh()
-        {
         }
     }
 }

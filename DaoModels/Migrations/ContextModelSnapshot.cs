@@ -280,8 +280,6 @@ namespace DaoModels.Migrations
 
                     b.Property<string>("Token");
 
-                    b.Property<string>("TokenShope");
-
                     b.Property<string>("TrailerCapacity");
 
                     b.Property<int?>("geolocationsID");

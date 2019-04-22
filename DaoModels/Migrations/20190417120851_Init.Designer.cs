@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DaoModels.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190422160109_Update_220419")]
-    partial class Update_220419
+    [Migration("20190417120851_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -281,8 +281,6 @@ namespace DaoModels.Migrations
                     b.Property<string>("PhoneNumber");
 
                     b.Property<string>("Token");
-
-                    b.Property<string>("TokenShope");
 
                     b.Property<string>("TrailerCapacity");
 
