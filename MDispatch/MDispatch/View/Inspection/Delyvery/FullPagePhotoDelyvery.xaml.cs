@@ -115,7 +115,6 @@ namespace MDispatch.View.PageApp
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            DependencyService.Get<IOrientationHandler>().ForceSensor();
             await Navigation.PopAsync();
         }
     }

@@ -628,8 +628,5 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\PickUp20.png" />
   </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Close.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

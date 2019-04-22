@@ -1,6 +1,5 @@
 ﻿using MDispatch.ViewModels.InspectionMV.PickedUpMV;
 using Rg.Plugins.Popup.Pages;
-using Rg.Plugins.Popup.Services;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -56,11 +55,5 @@ namespace MDispatch.View.Inspection.PickedUp
             "RU - Rust",
             "O - Other"
         };
-
-        private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
-        {
-            pageAddDamage.stateSelect = 2;
-            await PopupNavigation.PopAsync(true);
-        }
     }
 }
