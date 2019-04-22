@@ -22,6 +22,11 @@
                  Margin="5">
         <Frame CornerRadius="6" Padding="15" Margin="4" BorderColor="BlueViolet">
             <StackLayout>
+                <Image Source="Close.png" HorizontalOptions="End" WidthRequest="20" HeightRequest="20">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                    </Image.GestureRecognizers>
+                </Image>
                 <ListView x:Name="damageCollection" SeparatorVisibility="None" ItemSelected="ListView_ItemSelected"/>
             </StackLayout>
         </Frame>
