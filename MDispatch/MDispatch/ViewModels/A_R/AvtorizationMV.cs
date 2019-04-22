@@ -1,4 +1,5 @@
-﻿using MDispatch.Service;
+﻿using MDispatch.NewElement.StoreTocken;
+using MDispatch.Service;
 using MDispatch.Service.GeloctionGPS;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
@@ -75,7 +76,12 @@ namespace MDispatch.ViewModels
             {
                 CrossSettings.Current.AddOrUpdateValue("Token", token);
                 Application.Current.MainPage = new NavigationPage(new TabPage(managerDispatchMob));
-                await Utils.StartListening();
+                App.isAvtorization = true;
+                Task.Run(async() =>
+                {
+                    await Utils.StartListening();
+                    DependencyService.Get<IStore>().OnTokenRefresh();
+                });
             }
             else if(state == 4)
             {

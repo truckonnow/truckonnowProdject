@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2047
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebDispacher", "WebDispacher\WebDispacher.csproj", "{DFF19FF4-82AB-4261-8CFB-D08070FAC1DE}"
 EndProject
@@ -13,9 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDispatch.Android", "MDispa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDispatch.iOS", "MDispatch\MDispatch.iOS\MDispatch.iOS.csproj", "{FFE941D5-E279-4090-AEEA-9A32BE01D3D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDispatch", "MDispatch\MDispatch\MDispatch.csproj", "{D6CD94AD-B4AF-4C31-B29D-789E2FBD7D48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDispatch", "MDispatch\MDispatch\MDispatch.csproj", "{D6CD94AD-B4AF-4C31-B29D-789E2FBD7D48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiMobaileServise", "ApiMobaileServise\ApiMobaileServise.csproj", "{47877A91-114A-4EE8-9B13-477B79E8ABB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiMobaileServise", "ApiMobaileServise\ApiMobaileServise.csproj", "{47877A91-114A-4EE8-9B13-477B79E8ABB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

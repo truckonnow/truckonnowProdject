@@ -2,6 +2,7 @@
 using DaoModels.DAO.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -255,14 +256,18 @@ namespace WebDispacher.Dao
             return drivers;
         }
 
-        public async void AddDriversInOrder(string idOrder, string idDriver)
+        public async Task<ArrayList> AddDriversInOrder(string idOrder, string idDriver)
         {
-            Init();
+            context.VehiclwInformation.Load();
+            ArrayList shippingAndDriver = new ArrayList();
             Shipping shipping = context.Shipping.FirstOrDefault<Shipping>(s => s.Id == idOrder);
             Driver driver = context.Drivers.FirstOrDefault<Driver>(d => d.Id == Convert.ToInt32(idDriver));
+            shippingAndDriver.Add(shipping);
+            shippingAndDriver.Add(driver);
             shipping.Driverr = driver;
             shipping.CurrentStatus = "Assigned";
             await context.SaveChangesAsync();
+            return shippingAndDriver;
         }
 
         public async void RemoveDriversInOrder(string idOrder)

@@ -1,14 +1,17 @@
 ﻿using DaoModels.DAO.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebDispacher.Dao;
+using WebDispacher.Notyfy;
 
 namespace WebDispacher.Service
 {
     public class ManagerDispatch
     {
         public SqlCommadWebDispatch _sqlEntityFramworke = null;
+        private ManagerNotify managerNotify = null;
 
         public ManagerDispatch()
         {
@@ -78,9 +81,14 @@ namespace WebDispacher.Service
             return _sqlEntityFramworke.GetDrivers(pag);
         }
 
-        public void Assign(string idOrder, string idDriver)
+        public async void Assign(string idOrder, string idDriver)
         {
-            _sqlEntityFramworke.AddDriversInOrder(idOrder, idDriver);
+            managerNotify = new ManagerNotify();
+            ArrayList shippingAndDriver = await _sqlEntityFramworke.AddDriversInOrder(idOrder, idDriver);
+            Task.Run(() =>
+            {
+                managerNotify.SendNotyfy((Driver)shippingAndDriver[1], (Shipping)shippingAndDriver[0]);
+            });
         }
 
         public void Unassign(string idOrder)
