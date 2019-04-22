@@ -26,6 +26,11 @@ namespace ApiMobaileServise.Servise
             sqlCommandApiMobile.SaveGPSLocationData(token, geolocations);
         }
 
+        public void SaveTokenStore(string token, string tokenStore)
+        {
+            sqlCommandApiMobile.SaveTokenStoreinDb(token, tokenStore);
+        }   
+
         public void SaveDamageForUser(string idVech, string damageForUserJson)
         {
             List<DamageForUser> damageForUsers = JsonConvert.DeserializeObject<List<DamageForUser>>(damageForUserJson);

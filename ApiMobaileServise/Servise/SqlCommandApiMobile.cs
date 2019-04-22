@@ -28,6 +28,13 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
+        public async void SaveTokenStoreinDb(string token, string tokenStore)
+        {
+            Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
+            driver.TokenShope = tokenStore;
+            await context.SaveChangesAsync();
+        }
+
         public async Task<VehiclwInformation> GetVehiclwInformationAndSaveDamageForUser(string idVech, List<DamageForUser> damageForUsers)
         {
             context.VehiclwInformation.Load();
