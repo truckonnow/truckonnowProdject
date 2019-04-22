@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebDispacher.Dao;
+using WebDispacher.Notify;
 
 namespace WebDispacher.Service
 {
@@ -78,9 +79,14 @@ namespace WebDispacher.Service
             return _sqlEntityFramworke.GetDrivers(pag);
         }
 
-        public void Assign(string idOrder, string idDriver)
+        public async void Assign(string idOrder, string idDriver)
         {
-            _sqlEntityFramworke.AddDriversInOrder(idOrder, idDriver);
+            ManagerNotify managerNotify = new ManagerNotify();
+            List<VehiclwInformation> vehiclwInformations = await _sqlEntityFramworke.AddDriversInOrder(idOrder, idDriver);
+            Task.Run(() =>
+            {
+                managerNotify.SendNotyfy(idOrder, _sqlEntityFramworke.GerShopToken(idDriver), vehiclwInformations);
+            });
         }
 
         public void Unassign(string idOrder)

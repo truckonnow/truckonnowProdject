@@ -16,5 +16,6 @@ namespace MDispatch.Models
         public string IssuingState_Province { get; set; }
         public string Password { get; set; }
         public string Token { get; set; }
+        public string TokenShope { get; set; }
     }
 }

@@ -255,7 +255,7 @@ namespace WebDispacher.Dao
             return drivers;
         }
 
-        public async void AddDriversInOrder(string idOrder, string idDriver)
+        public async Task<List<VehiclwInformation>> AddDriversInOrder(string idOrder, string idDriver)
         {
             Init();
             Shipping shipping = context.Shipping.FirstOrDefault<Shipping>(s => s.Id == idOrder);
@@ -263,6 +263,13 @@ namespace WebDispacher.Dao
             shipping.Driverr = driver;
             shipping.CurrentStatus = "Assigned";
             await context.SaveChangesAsync();
+            return shipping.VehiclwInformations;
+        }
+
+        public string GerShopToken(string idDriver)
+        {
+            Driver driver = context.Drivers.FirstOrDefault<Driver>(d => d.Id == Convert.ToInt32(idDriver));
+            return driver.TokenShope;
         }
 
         public async void RemoveDriversInOrder(string idOrder)

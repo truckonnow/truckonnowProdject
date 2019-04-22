@@ -24,8 +24,8 @@ namespace MDispatch.Droid
             FirebaseApp.InitializeApp(Android.App.Application.Context);
             FirebasePushNotificationManager.ProcessIntent(this, Intent);
             LoadApplication(new App());
-            FirebaseIIDService firebaseIIDService = new FirebaseIIDService();
-            firebaseIIDService.OnTokenRefresh();
+            //FirebaseIIDService firebaseIIDService = new FirebaseIIDService();
+            //firebaseIIDService.OnTokenRefresh();
             //IsPlayServiceAvailable();
         }
 

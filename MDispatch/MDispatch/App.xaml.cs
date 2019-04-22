@@ -1,14 +1,16 @@
 using MDispatch.Service.GeloctionGPS;
+using MDispatch.StoreNotify;
 using MDispatch.View.A_R;
 using MDispatch.View.TabPage;
 using Plugin.Settings;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MDispatch
 {
     public partial class App : Application
 	{
-        bool isAvtorization;
+        public static bool isAvtorization;
             
         public App ()
 		{
@@ -16,13 +18,13 @@ namespace MDispatch
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             if (token == "")
             {
-                MainPage = new NavigationPage(new Avtorization());
                 isAvtorization = false;
+                MainPage = new NavigationPage(new Avtorization());
             }
             else
             {
-                MainPage = new NavigationPage(new TabPage(new Service.ManagerDispatchMob()));
                 isAvtorization = true;
+                MainPage = new NavigationPage(new TabPage(new Service.ManagerDispatchMob()));
             }
         }
 
@@ -30,7 +32,11 @@ namespace MDispatch
         {
             if (isAvtorization)
             {
-                await Utils.StartListening();
+                Task.Run(async() =>
+                {
+                    await Utils.StartListening();
+                    DependencyService.Get<IStore>().OnTokenRefresh();
+                });
             }
         }
 
