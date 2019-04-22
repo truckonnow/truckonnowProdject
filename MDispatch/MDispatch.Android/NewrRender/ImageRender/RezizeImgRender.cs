@@ -27,8 +27,7 @@ namespace MDispatch.Droid.NewrRender.ImageRender
             }
             Control.Touch += OnTouch;
         }
-        
-        private double x = 0;
+
         private void OnTouch(object sender, TouchEventArgs e)
         {
             if(e.Event.Action == MotionEventActions.Up)

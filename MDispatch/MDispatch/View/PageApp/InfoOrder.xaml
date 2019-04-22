@@ -95,6 +95,7 @@
                         <Label Text="{Binding Shipping.PriceListed }" TextColor="Black" FontSize="16" />
                         <Label Text="{Binding Shipping.TotalPaymentToCarrier }" TextColor="Black" FontSize="16" />
                     </StackLayout>
+                    <Label Text="{Binding Shipping.OnDeliveryToCarrier }" TextColor="Black" FontSize="16" />
                     <Label Text="Edit Payment Information" TextColor="Blue" FontSize="17" >
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ToPaymentCommand}"/>
