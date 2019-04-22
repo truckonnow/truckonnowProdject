@@ -45,11 +45,11 @@ namespace MDispatch.View.Inspection.PickedUp
             await PopupNavigation.PushAsync(new DamageSelecter(FullPagePhotoMV, this), true);
             await WaiteSelectDamage();
             await PopupNavigation.PopAsync(true);
-            stateSelect = 1;
-            await Navigation.PushAsync(new CameraPagePhoto(null, fullPagePhoto, this));
-            await WaiteSelectDamage();
             if (stateSelect == 0)
             {
+                stateSelect = 1;
+                await Navigation.PushAsync(new CameraPagePhoto(null, fullPagePhoto, this));
+                await WaiteSelectDamage();
                 ImgResize image = new ImgResize()
                 {
                     Source = $"DamageP{indexSelectDamage}.png",
