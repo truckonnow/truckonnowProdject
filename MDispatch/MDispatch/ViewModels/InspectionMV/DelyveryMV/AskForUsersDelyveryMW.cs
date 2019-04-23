@@ -188,11 +188,11 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 string status = null;
                 if(TotalPaymentToCarrier == "COD" && TotalPaymentToCarrier == "COP")
                 {
-                    status = "Paid";
+                    status = "Delivered,Paid";
                 }
                 else
                 {
-                    status = "Biling";
+                    status = "Delivered,Billed";
                 }
                 state = managerDispatchMob.Recurent(token, IdShip, status, ref description);
                 initDasbordDelegate.Invoke();

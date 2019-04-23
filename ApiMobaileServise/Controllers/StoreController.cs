@@ -16,7 +16,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("tokenStore/Save")]
-        public string GPSSave(string token, string tokenStore)
+        public string TokenStoreSave(string token, string tokenStore)
         {
             string respons = null;
             if (token == null || token == "")

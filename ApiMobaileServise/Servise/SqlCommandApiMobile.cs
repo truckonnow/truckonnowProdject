@@ -18,7 +18,7 @@ namespace ApiMobaileServise.Servise
         {
             context = new Context();
         }
- 
+
         public async void SaveGPSLocationData(string token, Geolocations geolocations)
         {
             context.Drivers.Load();
@@ -42,7 +42,7 @@ namespace ApiMobaileServise.Servise
             context.Asks.Load();
             context.Photos.Load();
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idVech));
-            if(vehiclwInformation.DamageForUsers == null)
+            if (vehiclwInformation.DamageForUsers == null)
             {
                 vehiclwInformation.DamageForUsers = new List<DamageForUser>();
             }
@@ -59,11 +59,11 @@ namespace ApiMobaileServise.Servise
             context.Damages.Load();
             context.Photos.Load();
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == idVe);
-            if(vehiclwInformation.PhotoInspections == null)
+            if (vehiclwInformation.PhotoInspections == null)
             {
                 vehiclwInformation.PhotoInspections = new List<PhotoInspection>();
             }
-            if(photoInspection.IndexPhoto == 1 && photoInspection.CurrentStatusPhoto == "PikedUp")
+            if (photoInspection.IndexPhoto == 1 && photoInspection.CurrentStatusPhoto == "PikedUp")
             {
                 Photo photo = new Photo();
                 photo.path = $"../Photo/{vehiclwInformation.Id}/scan.png";
@@ -88,7 +88,7 @@ namespace ApiMobaileServise.Servise
         public async void SaveAskInDb(string idve, Ask ask)
         {
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
-            if(vehiclwInformation.Ask == null)
+            if (vehiclwInformation.Ask == null)
             {
                 vehiclwInformation.Ask = new Ask();
             }
@@ -117,11 +117,11 @@ namespace ApiMobaileServise.Servise
             context.AskFromUsers.Load();
             context.Photos.Load();
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idVech));
-            if(type == 1 && vehiclwInformation.AskFromUser != null)
+            if (type == 1 && vehiclwInformation.AskFromUser != null)
             {
                 vehiclwInformation.AskFromUser.PhotoPay = photo;
             }
-            else if(type == 2 && vehiclwInformation != null && vehiclwInformation.askForUserDelyveryM != null)
+            else if (type == 2 && vehiclwInformation != null && vehiclwInformation.askForUserDelyveryM != null)
             {
                 vehiclwInformation.askForUserDelyveryM.PhotoPay = photo;
             }
@@ -138,6 +138,10 @@ namespace ApiMobaileServise.Servise
         {
             Shipping shipping = context.Shipping.FirstOrDefault(s => s.Id == idShip);
             shipping.CurrentStatus = status;
+            if (status == "Delivered,Billed")
+            {
+                shipping.DataPaid = DateTime.Now.AddDays(Convert.ToInt32(shipping.TotalPaymentToCarrier.Replace(" days", ""))).ToString();
+            }
             await context.SaveChangesAsync();
         }
 

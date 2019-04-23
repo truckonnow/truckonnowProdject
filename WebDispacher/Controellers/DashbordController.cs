@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DaoModels.DAO.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -196,6 +197,9 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
+                    ViewBag.Orders = managerDispatch.GetOrders("Delivered,Billed", page);
+                    ViewBag.Drivers = managerDispatch.GetDrivers();
+                    ViewBag.count = managerDispatch.GetCountPage("Delivered,Billed");
                     actionResult = View("Billed");
                 }
                 else
@@ -257,9 +261,19 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    ViewBag.Orders = managerDispatch.GetOrders("Delivered", page);
+                    List<Shipping> shippings = managerDispatch.GetOrders("Delivered", page);
+                    if (shippings.Count < 20)
+                    {
+                        shippings.AddRange(managerDispatch.GetOrders("Delivered,Paid", page));
+                    }
+                    if (shippings.Count < 20)
+                    {
+                        ViewBag.Orders = managerDispatch.GetOrders("Delivered,Billed,", page);
+                    }
                     ViewBag.Drivers = managerDispatch.GetDrivers();
                     ViewBag.count = managerDispatch.GetCountPage("Delivered");
+                    ViewBag.count += managerDispatch.GetCountPage("Delivered,Paid");
+                    ViewBag.count += managerDispatch.GetCountPage("Delivered,Billed");
                     actionResult = View("Delivered");
                 }
                 else
@@ -289,6 +303,9 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
+                    ViewBag.Orders = managerDispatch.GetOrders("Delivered,Paid", page);
+                    ViewBag.Drivers = managerDispatch.GetDrivers();
+                    ViewBag.count = managerDispatch.GetCountPage("Delivered,Paid");
                     actionResult = View("Paid");
                 }
                 else

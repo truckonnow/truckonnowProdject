@@ -65,5 +65,7 @@ namespace DaoModels.DAO.Models
         ////////////////////////////////////////////////
         
         public Driver Driverr { get; set; }
+
+        public string DataPaid { get; set; }
     }
 }
