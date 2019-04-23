@@ -266,19 +266,39 @@ namespace WebDispacher.Dao
             return shipping.VehiclwInformations;
         }
 
+        public bool CheckDriverOnShipping(string idShipping)
+        {
+            bool isDriverAssign = false;
+            context.Drivers.Load();
+            Shipping shipping = context.Shipping.FirstOrDefault<Shipping>(s => s.Id == idShipping);
+            if(shipping.Driverr != null)
+            {
+                isDriverAssign = true;
+            }
+            return isDriverAssign;
+        }
+
         public string GerShopToken(string idDriver)
         {
             Driver driver = context.Drivers.FirstOrDefault<Driver>(d => d.Id == Convert.ToInt32(idDriver));
             return driver.TokenShope;
         }
 
-        public async void RemoveDriversInOrder(string idOrder)
+        public string GerShopTokenForShipping(string idOrder)
+        {
+            context.Drivers.Load();
+            Shipping shipping = context.Shipping.FirstOrDefault<Shipping>(d => d.Id == idOrder);
+            return shipping.Driverr.TokenShope;
+        }
+
+        public async Task<List<VehiclwInformation>> RemoveDriversInOrder(string idOrder)
         {
             Init();
             Shipping shipping = context.Shipping.FirstOrDefault<Shipping>(s => s.Id == idOrder);
             shipping.Driverr = null;
             shipping.CurrentStatus = "NewLoad";
             await context.SaveChangesAsync();
+            return shipping.VehiclwInformations;
         }
 
         public Shipping GetShipping(string id)

@@ -82,16 +82,33 @@ namespace WebDispacher.Service
         public async void Assign(string idOrder, string idDriver)
         {
             ManagerNotify managerNotify = new ManagerNotify();
+            bool isDriverAssign = _sqlEntityFramworke.CheckDriverOnShipping(idOrder);
+            string tokenShope = _sqlEntityFramworke.GerShopTokenForShipping(idOrder);
             List<VehiclwInformation> vehiclwInformations = await _sqlEntityFramworke.AddDriversInOrder(idOrder, idDriver);
             Task.Run(() =>
             {
-                managerNotify.SendNotyfy(idOrder, _sqlEntityFramworke.GerShopToken(idDriver), vehiclwInformations);
+                string tokenShope1 = _sqlEntityFramworke.GerShopTokenForShipping(idOrder);
+                if (!isDriverAssign)
+                {
+                    managerNotify.SendNotyfyAssign(idOrder, tokenShope1, vehiclwInformations);
+                }
+                else
+                {
+                    managerNotify.SendNotyfyAssign(idOrder, tokenShope1, vehiclwInformations);
+                    managerNotify.SendNotyfyUnassign(idOrder, tokenShope, vehiclwInformations);
+                }
             });
         }
 
-        public void Unassign(string idOrder)
+        public async void Unassign(string idOrder)
         {
-            _sqlEntityFramworke.RemoveDriversInOrder(idOrder);
+            ManagerNotify managerNotify = new ManagerNotify();
+            string tokenShope = _sqlEntityFramworke.GerShopTokenForShipping(idOrder);
+            List<VehiclwInformation> vehiclwInformations = await _sqlEntityFramworke.RemoveDriversInOrder(idOrder);
+            Task.Run(() =>
+            {
+                managerNotify.SendNotyfyUnassign(idOrder, tokenShope, vehiclwInformations);
+            });
         }
 
         //public Shipping GetDriver()
