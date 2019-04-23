@@ -1,4 +1,5 @@
-﻿using ApiMobaileServise.Servise.AddDamage;
+﻿using ApiMobaileServise.Notify;
+using ApiMobaileServise.Servise.AddDamage;
 using DaoModels.DAO.Models;
 using Newtonsoft.Json;
 using System;
@@ -129,6 +130,23 @@ namespace ApiMobaileServise.Servise
         public void ReCurentStatus(string idShip, string status)
         {
             sqlCommandApiMobile.ReCurentStatus(idShip, status);
+            Task.Run(() =>
+            {
+                string tokenShope = sqlCommandApiMobile.GerShopTokenForShipping(idShip);
+                ManagerNotifyMobileApi managerNotifyMobileApi = new ManagerNotifyMobileApi();
+                if (status == "Picked up")
+                {
+                    managerNotifyMobileApi.SendNotyfyStatusPickup(idShip, tokenShope);
+                }
+                else if (status == "Delivered,Paid")
+                {
+                    managerNotifyMobileApi.SendNotyfyStatusDelyvery(idShip, tokenShope, "Cars passed inspection, the order is paid");
+                }
+                else if (status == "Delivered,Billed")
+                {
+                    managerNotifyMobileApi.SendNotyfyStatusDelyvery(idShip, tokenShope, "Cars passed inspection, waiting for payment (Billing)");
+                }
+            });
         }
 
         private void CheckAndCreatedFolder()

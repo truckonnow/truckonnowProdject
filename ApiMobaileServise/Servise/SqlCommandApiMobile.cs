@@ -145,6 +145,13 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
+        public string GerShopTokenForShipping(string idOrder)
+        {
+            context.Drivers.Load();
+            Shipping shipping = context.Shipping.FirstOrDefault<Shipping>(d => d.Id == idOrder);
+            return shipping.Driverr.TokenShope;
+        }
+
         public async void SaveSigPikedUpInDb(string idve, Photo sig)
         {
             context.Shipping.Load();

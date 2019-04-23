@@ -8,8 +8,19 @@ using System.Text;
 
 namespace WebDispacher.Notify
 {
-    public class ManagerNotify
+    public class ManagerNotifyWeb
     {
+        private WebRequest tRequest = null;
+
+        public ManagerNotifyWeb()
+        {
+            tRequest = WebRequest.Create("https://fcm.googleapis.com/fcm/send");
+            tRequest.Method = "post";
+            tRequest.Headers.Add(string.Format("Authorization: key={0}", "AAAACa2vxR0:APA91bGTTHJgDmirQgd92-snbn5eixwi-sEPufe8fpl6EojstTcNNMjRnod7nAdUOw0C6InZvWOvom1xlRiWbojN7ObxGTeEPhjBtZ53ac2RLzIVuZc9_AdEkuix-vlul_ylJV7_ctEK"));
+            tRequest.Headers.Add(string.Format("Sender: id={0}", "41568683293"));
+            tRequest.ContentType = "application/json";
+        }
+
         public void SendNotyfyAssign(string idShip, string tokenShope, List<VehiclwInformation> vehiclwInformations)
         {
             string body = null;
@@ -19,11 +30,6 @@ namespace WebDispacher.Notify
                 {
                     body += $"{vech.Year} {vech.Make} {vech.Model}\n";
                 }
-                WebRequest tRequest = WebRequest.Create("https://fcm.googleapis.com/fcm/send");
-                tRequest.Method = "post";
-                tRequest.Headers.Add(string.Format("Authorization: key={0}", "AAAACa2vxR0:APA91bGTTHJgDmirQgd92-snbn5eixwi-sEPufe8fpl6EojstTcNNMjRnod7nAdUOw0C6InZvWOvom1xlRiWbojN7ObxGTeEPhjBtZ53ac2RLzIVuZc9_AdEkuix-vlul_ylJV7_ctEK"));
-                tRequest.Headers.Add(string.Format("Sender: id={0}", "41568683293"));
-                tRequest.ContentType = "application/json";
                 var payload = new
                 {
                     to = tokenShope,
@@ -35,7 +41,6 @@ namespace WebDispacher.Notify
                         title = $"New Load Order Id: {idShip} Assign",
                     },
                 };
-
                 string postbody = JsonConvert.SerializeObject(payload).ToString();
                 Byte[] byteArray = Encoding.UTF8.GetBytes(postbody);
                 tRequest.ContentLength = byteArray.Length;
@@ -65,11 +70,6 @@ namespace WebDispacher.Notify
                 {
                     body += $"{vech.Year} {vech.Make} {vech.Model}\n";
                 }
-                WebRequest tRequest = WebRequest.Create("https://fcm.googleapis.com/fcm/send");
-                tRequest.Method = "post";
-                tRequest.Headers.Add(string.Format("Authorization: key={0}", "AAAACa2vxR0:APA91bGTTHJgDmirQgd92-snbn5eixwi-sEPufe8fpl6EojstTcNNMjRnod7nAdUOw0C6InZvWOvom1xlRiWbojN7ObxGTeEPhjBtZ53ac2RLzIVuZc9_AdEkuix-vlul_ylJV7_ctEK"));
-                tRequest.Headers.Add(string.Format("Sender: id={0}", "41568683293"));
-                tRequest.ContentType = "application/json";
                 var payload = new
                 {
                     to = tokenShope,
@@ -81,7 +81,6 @@ namespace WebDispacher.Notify
                         title = $"Unassign Load Order Id: {idShip}",
                     },
                 };
-
                 string postbody = JsonConvert.SerializeObject(payload).ToString();
                 Byte[] byteArray = Encoding.UTF8.GetBytes(postbody);
                 tRequest.ContentLength = byteArray.Length;

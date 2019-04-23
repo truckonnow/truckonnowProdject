@@ -81,7 +81,7 @@ namespace WebDispacher.Service
 
         public async void Assign(string idOrder, string idDriver)
         {
-            ManagerNotify managerNotify = new ManagerNotify();
+            ManagerNotifyWeb managerNotify = new ManagerNotifyWeb();
             bool isDriverAssign = _sqlEntityFramworke.CheckDriverOnShipping(idOrder);
             string tokenShope = _sqlEntityFramworke.GerShopTokenForShipping(idOrder);
             List<VehiclwInformation> vehiclwInformations = await _sqlEntityFramworke.AddDriversInOrder(idOrder, idDriver);
@@ -102,7 +102,7 @@ namespace WebDispacher.Service
 
         public async void Unassign(string idOrder)
         {
-            ManagerNotify managerNotify = new ManagerNotify();
+            ManagerNotifyWeb managerNotify = new ManagerNotifyWeb();
             string tokenShope = _sqlEntityFramworke.GerShopTokenForShipping(idOrder);
             List<VehiclwInformation> vehiclwInformations = await _sqlEntityFramworke.RemoveDriversInOrder(idOrder);
             Task.Run(() =>
