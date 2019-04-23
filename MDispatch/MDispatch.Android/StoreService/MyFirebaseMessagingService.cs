@@ -11,23 +11,19 @@ namespace MDispatch.Droid.StoreService
     [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
     public class MyFirebaseMessagingService : FirebaseMessagingService
     {
-        internal static readonly int NOTIFICATION_ID = 100;
 
         public override void OnMessageReceived(RemoteMessage message)
         {
             var body = message.GetNotification();
-            SendNotification(body.Body ,body.Title, message.Data);
+            SendNotification(body.Body ,body.Title, body.ClickAction);
         }
 
-        void SendNotification(string messageBody, string title, IDictionary<string, string> data)
+        void SendNotification(string messageBody, string title, string actionClick)
         {
-            var intent = new Intent(this, typeof(MainActivity));
-            intent.AddFlags(ActivityFlags.ClearTop);
-            foreach (var key in data.Keys)
-            {
-                intent.PutExtra(key, data[key]);
-            }
-            var pendingIntent = PendingIntent.GetActivity(this, NOTIFICATION_ID, intent, PendingIntentFlags.OneShot);
+            Intent intent = new Intent(this, typeof(MainActivity));
+            const int pendingIntentId = 0;
+            PendingIntent.GetActivity(this, pendingIntentId, intent, PendingIntentFlags.OneShot);
+            PendingIntent pendingIntent = GetIntentOrder(actionClick);
             var notificationBuilder = new NotificationCompat.Builder(this)
                                       .SetSmallIcon(Resource.Drawable.newOrder)
                                       .SetContentTitle(title)
@@ -40,7 +36,24 @@ namespace MDispatch.Droid.StoreService
                                       .SetPriority((int)NotificationPriority.High)
                                       .SetVisibility((int)NotificationVisibility.Public); 
             var notificationManager = NotificationManagerCompat.From(this);
-            notificationManager.Notify(1, notificationBuilder.Build());
+            notificationManager.Notify(100, notificationBuilder.Build());
+        }
+
+        private PendingIntent GetIntentOrder(string actionClick)
+        {
+            PendingIntent pendingIntent = null;
+            if (actionClick == "No Action")
+            {
+                pendingIntent = null;
+            }
+            else if (actionClick == "Oreder")
+            {
+                Intent intent = new Intent(this, typeof(MainActivity));
+                const int pendingIntentId = 0;
+                PendingIntent.GetActivity(this, pendingIntentId, intent, PendingIntentFlags.OneShot);
+                pendingIntent = PendingIntent.GetActivity(this, 100, intent, PendingIntentFlags.OneShot);
+            }
+            return pendingIntent;
         }
     }
 }
