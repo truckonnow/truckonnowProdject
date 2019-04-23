@@ -32,11 +32,7 @@ namespace MDispatch
         {
             if (isAvtorization)
             {
-                Task.Run(async() =>
-                {
-                    await Utils.StartListening();
-                    DependencyService.Get<IStore>().OnTokenRefresh();
-                });
+                await Utils.StartListening();
             }
         }
 

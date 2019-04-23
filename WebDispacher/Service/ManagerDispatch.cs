@@ -83,7 +83,11 @@ namespace WebDispacher.Service
         {
             ManagerNotifyWeb managerNotify = new ManagerNotifyWeb();
             bool isDriverAssign = _sqlEntityFramworke.CheckDriverOnShipping(idOrder);
-            string tokenShope = _sqlEntityFramworke.GerShopTokenForShipping(idOrder);
+            string tokenShope = null;
+            if (isDriverAssign)
+            {
+                tokenShope = _sqlEntityFramworke.GerShopTokenForShipping(idOrder);
+            }
             List<VehiclwInformation> vehiclwInformations = await _sqlEntityFramworke.AddDriversInOrder(idOrder, idDriver);
             Task.Run(() =>
             {

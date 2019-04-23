@@ -36,7 +36,7 @@ namespace WebDispacher.Notify
                     content_available = true,
                     notification = new
                     {
-                        click_action = "No Action",
+                        click_action = "Oreder",
                         body = $"{body}",
                         title = $"New Load Order Id: {idShip} Assign",
                     },
@@ -52,9 +52,9 @@ namespace WebDispacher.Notify
                         using (Stream dataStreamResponse = tResponse.GetResponseStream())
                         {
                             if (dataStreamResponse != null) using (StreamReader tReader = new StreamReader(dataStreamResponse))
-                                {
-                                    String sResponseFromServer = tReader.ReadToEnd();
-                                }
+                            {
+                                String sResponseFromServer = tReader.ReadToEnd();
+                            }
                         }
                     }
                 }
@@ -76,7 +76,7 @@ namespace WebDispacher.Notify
                     content_available = true,
                     notification = new
                     {
-                        click_action = "No Action",
+                        click_action = "Oreder",
                         body = $"{body}",
                         title = $"Unassign Load Order Id: {idShip}",
                     },

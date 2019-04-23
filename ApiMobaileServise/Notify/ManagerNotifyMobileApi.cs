@@ -31,7 +31,7 @@ namespace ApiMobaileServise.Notify
                     content_available = true,
                     notification = new
                     {
-                        click_action = "Oreder",
+                        click_action = "No Action",
                         body = "After delivery, write down the time of arrival, then to indicate this in the inspection",
                         title = $"Orede Id: {idShip} on my way",
                     },
@@ -66,7 +66,7 @@ namespace ApiMobaileServise.Notify
                     content_available = true,
                     notification = new
                     {
-                        click_action = "Oreder",
+                        click_action = "No Action",
                         body = body,
                         title = $"Orede Id: {idShip} вelivered",
                     },
