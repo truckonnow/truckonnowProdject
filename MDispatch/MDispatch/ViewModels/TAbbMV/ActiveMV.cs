@@ -5,6 +5,7 @@ using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -65,6 +66,7 @@ namespace MDispatch.ViewModels.TAbbMV
             else if (state == 3)
             {
                 Shippings = shippings;
+                App.isInspection = Convert.ToBoolean(description);
             }
             else if (state == 4)
             {

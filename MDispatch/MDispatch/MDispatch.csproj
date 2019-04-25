@@ -43,6 +43,9 @@
     <EmbeddedResource Update="Service\GeloctionGPS\WarningModalPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="VidgetFolder\View\FullPhotoTruck.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="View\GlobalDialogView\Comlete.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -208,5 +211,9 @@
     <Compile Update="View\TabPage\Tab\DeiveredPage.xaml.cs">
       <DependentUpon>DeiveredPage.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="VidgetFolder\VM\" />
   </ItemGroup>
 </Project>

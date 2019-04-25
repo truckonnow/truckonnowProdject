@@ -194,12 +194,12 @@ namespace ApiMobaileServise.Servise
             return sqlCommandApiMobile.CheckToken(token);
         }
 
-        public bool GetOrdersForToken(string token, ref List<Shipping> shippings)
+        public bool GetOrdersForToken(string token, ref List<Shipping> shippings, ref bool isInspectionDriver)
         {
             bool isToken = sqlCommandApiMobile.CheckToken(token);
             if (isToken)
             {
-                shippings = sqlCommandApiMobile.GetOrdersForToken(token, 0);
+                shippings = sqlCommandApiMobile.GetOrdersForToken(token, ref isInspectionDriver);
             }
             return isToken;
         }

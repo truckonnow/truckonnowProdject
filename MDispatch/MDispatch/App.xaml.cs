@@ -1,9 +1,7 @@
 using MDispatch.Service.GeloctionGPS;
-using MDispatch.StoreNotify;
 using MDispatch.View.A_R;
 using MDispatch.View.TabPage;
 using Plugin.Settings;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MDispatch
@@ -11,6 +9,7 @@ namespace MDispatch
     public partial class App : Application
 	{
         public static bool isAvtorization;
+        public static bool isInspection;
             
         public App ()
 		{

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MDispatch.Models
+﻿namespace MDispatch.Models
 {
     public class Driver
     {
@@ -16,6 +12,9 @@ namespace MDispatch.Models
         public string IssuingState_Province { get; set; }
         public string Password { get; set; }
         public string Token { get; set; }
+        public bool IsInspectionDriver { get; set; }
+        public bool IsInspectionToDayDriver { get; set; }
         public string TokenShope { get; set; }
+        public InspectionDriver InspectionDriver { get; set; }
     }
 }

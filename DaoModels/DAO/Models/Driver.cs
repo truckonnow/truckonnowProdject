@@ -13,6 +13,9 @@
         public string Password { get; set; }
         public string Token { get; set; }
         public string TokenShope { get; set; }
+        public bool IsInspectionDriver { get; set; }
+        public bool IsInspectionToDayDriver { get; set; }
         public Geolocations geolocations { get; set; }
+        public InspectionDriver InspectionDriver { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace DaoModels.DAO
         public DbSet<Damage> Damages { get; set; }
         public DbSet<Geolocations> geolocations { get; set; }
         public DbSet<DamageForUser> DamageForUsers { get; set; }
+        public DbSet<InspectionDriver> InspectionDrivers { get; set; }
 
         public Context()
         {

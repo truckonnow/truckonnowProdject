@@ -2,6 +2,7 @@
 using DaoModels.DAO.Models;
 using Parser.Servise;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -51,6 +52,31 @@ namespace Parser.DAO
         private bool CheckOrder(Shipping shipping)
         { 
             return context.Shipping.FirstOrDefault(s => s.Id == shipping.Id) != null; 
+        }
+
+        public List<Driver> GetDriverInDb()
+        {
+            return context.Drivers.ToList();
+        }
+
+        public async void RefreshInspectionToDayDriverInDb(int idDriver)
+        {
+            Driver driver = context.Drivers.FirstOrDefault(d => d.Id == idDriver);
+            if(driver != null)
+            {
+                driver.IsInspectionToDayDriver = false;
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public async void RefreshInspectionDriverInDb(int idDriver)
+        {
+            Driver driver = context.Drivers.FirstOrDefault(d => d.Id == idDriver);
+            if (driver != null)
+            {
+                driver.IsInspectionDriver = false;
+                await context.SaveChangesAsync();
+            }
         }
     }
 }

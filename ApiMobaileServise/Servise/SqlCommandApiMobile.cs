@@ -287,7 +287,7 @@ namespace ApiMobaileServise.Servise
             return context.VehiclwInformation.FirstOrDefault(v => v.Id == idVech);
         }
 
-        public List<Shipping> GetOrdersForToken(string token, int type)
+        public List<Shipping> GetOrdersForToken(string token, ref bool isInspectionDriver)
         {
             context.Shipping.Load();
             context.VehiclwInformation.Load();
@@ -301,7 +301,8 @@ namespace ApiMobaileServise.Servise
             List<Shipping> Shipping1 = new List<Shipping>();
             Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
             List<Shipping> shippings = context.Shipping.ToList().FindAll(s => s.Driverr != null && s.Driverr.Id == driver.Id);
-            if(shippings == null)
+            isInspectionDriver = driver.IsInspectionDriver;
+            if (shippings == null)
             {
                 return new List<Shipping>();
             }
