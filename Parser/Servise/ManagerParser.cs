@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Parser.Servise1;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,6 +21,7 @@ namespace Parser.Servise
             int horseInmMiliSeconds = 60000 * 60;
             Task.Run(() =>
             {
+                Task.Run(() => new ManagerInspactionDriver());
                 while (true)
                 {
                     LogEr.Logerr("Info", "Start pulling data from the site", "WorkParser", DateTime.Now.ToShortTimeString());
