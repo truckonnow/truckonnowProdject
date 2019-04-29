@@ -63,8 +63,8 @@ namespace ApiMobaileServise.Servise
             Task.Run( async() =>
             {
                 VehiclwInformation vehiclwInformation = await sqlCommandApiMobile.SavePhotoInspectionInDb(idVe, photoInspection);
-                ITypeScan typeScan = GetTypeScan(vehiclwInformation.Ask.TypeVehicle);
-                typeScan.SetDamage(photoInspection, vehiclwInformation.Ask.TypeVehicle, vehiclwInformation.Scan.path);
+                ITypeScan typeScan = GetTypeScan(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+                typeScan.SetDamage(photoInspection, vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), vehiclwInformation.Scan.path);
             });
         }
 
@@ -83,9 +83,9 @@ namespace ApiMobaileServise.Servise
                         typeScan = new SuvCar();
                         break;
                     }
-                case "PickedUp":
+                case "PickUp":
                     {
-                        typeScan = new SuvCar();
+                        typeScan = new PickedUpCar();
                         break;
                     }
             }
