@@ -173,11 +173,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Servise1\ManagerInspactionDriver.cs" />
-    <Compile Include="Servise\SqlCommandParser.cs" />
+    <Compile Include="SqlCommandParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servise\ConnectorDispatch.cs" />
-    <Compile Include="Servise\LogEr.cs" />
+    <Compile Include="LogEr.cs" />
     <Compile Include="Servise\ManagerParser.cs" />
     <Compile Include="Servise\ParserDispatch.cs" />
   </ItemGroup>
