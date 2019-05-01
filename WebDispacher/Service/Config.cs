@@ -1,5 +1,4 @@
-﻿
-namespace WebDispacher.Service
+﻿namespace WebDispacher.Service
 {
     public static class Config
     {
