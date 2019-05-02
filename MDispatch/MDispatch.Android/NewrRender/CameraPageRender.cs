@@ -20,6 +20,7 @@ using static Android.Hardware.Camera;
 [assembly: Xamarin.Forms.ExportRenderer(typeof(CameraPage), typeof(CameraPageRender))]
 namespace MDispatch.Droid.NewrRender
 {
+    [Obsolete]
     class CameraPageRender : PageRenderer, TextureView.ISurfaceTextureListener, IAutoFocusCallback
     {
         bool isPermissions = false;
@@ -30,7 +31,7 @@ namespace MDispatch.Droid.NewrRender
         RelativeLayout mainLayout;
         TextureView liveView;
         PaintCodeButton capturePhotoButton;
-
+        [Obsolete]
         Android.Hardware.Camera camera;
 
         Activity Activity => this.Context as Activity;
@@ -170,6 +171,7 @@ namespace MDispatch.Droid.NewrRender
 
         #region TextureView.ISurfaceTextureListener implementations
 
+        [Obsolete]
         public void OnSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)
         {
             if (ContextCompat.CheckSelfPermission(Activity, Manifest.Permission.Camera) != Permission.Granted)
@@ -212,6 +214,7 @@ namespace MDispatch.Droid.NewrRender
 
         }
 
+        [Obsolete]
         public async void OnAutoFocus(bool success, Android.Hardware.Camera camera)
         {
             var bytes = await TakePhoto();

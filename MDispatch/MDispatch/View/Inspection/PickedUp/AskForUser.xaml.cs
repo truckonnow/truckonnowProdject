@@ -89,6 +89,7 @@ namespace MDispatch.View.Inspection.PickedUp
         }
         #endregion
 
+        [Obsolete]
         private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             if (isAsk1 && isAsk2 && isAsk3 && isAsk4)

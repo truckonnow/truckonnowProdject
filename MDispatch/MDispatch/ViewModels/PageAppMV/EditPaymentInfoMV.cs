@@ -1,6 +1,7 @@
 ﻿using MDispatch.Models;
 using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
+using MDispatch.Service.Net;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using Plugin.Settings;
@@ -10,6 +11,7 @@ using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -55,33 +57,38 @@ namespace MDispatch.ViewModels.PageAppMV
             set => SetProperty(ref shipping, value);
         }
 
+        [Obsolete]
         private async void SavePayments()
         {
             await PopupNavigation.PushAsync(new LoadPage(), true);
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-            await Task.Run(() =>
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
             {
-                state = managerDispatchMob.OrderOneWork("Save", Shipping.Id, token, "Payment", Shipping.PriceListed, Shipping.TotalPaymentToCarrier, ref description);
-            });
-            await PopupNavigation.PopAsync(true);
-            await Navigationn.PopAsync(true);
-            if (state == 1)
-            {
-                await PopupNavigation.PushAsync(new Errror("Not Network", Navigationn));
-            }
-            else if (state == 2)
-            {
-                await PopupNavigation.PushAsync(new Errror(description, Navigationn));
-            }
-            else if (state == 3)
-            {
-                DependencyService.Get<IToast>().ShowMessage("Information about Paymmant saved");
-            }
-            else if (state == 4)
-            {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigationn));
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.OrderOneWork("Save", Shipping.Id, token, "Payment", Shipping.PriceListed, Shipping.TotalPaymentToCarrier, ref description);
+                });
+                await PopupNavigation.PopAsync(true);
+                await Navigationn.PopAsync(true);
+                if (state == 1)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Not Network", Navigationn));
+                }
+                else if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, Navigationn));
+                }
+                else if (state == 3)
+                {
+                    DependencyService.Get<IToast>().ShowMessage("Information about Paymmant saved");
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigationn));
+                }
             }
         }
     }

@@ -57,6 +57,7 @@ namespace MDispatch.View.Inspection.PickedUp
             "O - Other"
         };
 
+        [System.Obsolete]
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
         {
             pageAddDamage.stateSelect = 2;

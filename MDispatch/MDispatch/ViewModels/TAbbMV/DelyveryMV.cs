@@ -1,11 +1,13 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
+using MDispatch.Service.Net;
 using MDispatch.View.GlobalDialogView;
 using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -43,6 +45,7 @@ namespace MDispatch.ViewModels.TAbbMV
             set => SetProperty(ref isRefr, value);
         }
 
+        [System.Obsolete]
         public async void Init()
         {
             IsRefr = true;
@@ -50,25 +53,29 @@ namespace MDispatch.ViewModels.TAbbMV
             string description = null;
             int state = 0;
             List<Shipping> shippings = null;
-            await Task.Run(() =>
+            await Task.Run(() =>  Utils.CheckNet());
+            if (App.isNetwork)
             {
-                state = managerDispatchMob.OrderWork("OrderDelyveryGet", token, ref description, ref shippings);
-            });
-            if (state == 1)
-            {
-                await PopupNavigation.PushAsync(new Errror("Not Network", null));
-            }
-            else if (state == 2)
-            {
-                await PopupNavigation.PushAsync(new Errror(description, null));
-            }
-            else if (state == 3)
-            {
-                Shippings = shippings;
-            }
-            else if (state == 4)
-            {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.OrderWork("OrderDelyveryGet", token, ref description, ref shippings);
+                });
+                if (state == 1)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Not Network", null));
+                }
+                else if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, null));
+                }
+                else if (state == 3)
+                {
+                    Shippings = shippings;
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
             }
             IsRefr = false;
         }

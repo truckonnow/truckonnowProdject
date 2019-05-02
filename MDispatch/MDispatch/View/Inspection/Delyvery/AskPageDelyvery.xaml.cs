@@ -271,6 +271,7 @@ namespace MDispatch.View.Inspection.Delyvery
         #endregion
 
 
+        [Obsolete]
         private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             if (isAsk2 && isAsk3 && isAsk4 && isAsk5 && isAsk6 && isAsk7 && isAsk8 && isAsk9 && isAsk10 && isAsk11 && isAsk12 && isAsk13 && isAsk14 && isAsk15 && isAsk16)

@@ -51,6 +51,7 @@ namespace MDispatch.View.Inspection.PickedUp
             }
         }
 
+        [Obsolete]
         private async void Button_Clicked(object sender, EventArgs e)
         {
             if (Paymmant != null)
@@ -68,6 +69,7 @@ namespace MDispatch.View.Inspection.PickedUp
             }
         }
 
+        [Obsolete]
         public async void InitElemnt()
         {
             await Wait();

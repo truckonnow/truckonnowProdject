@@ -1,6 +1,7 @@
 ﻿using MDispatch.Models;
 using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
+using MDispatch.Service.Net;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection.PickedUp;
@@ -10,6 +11,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -65,6 +67,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         public string What_form_of_payment_are_you_using_to_pay_for_transportation { set; get; }
         public string CountPay { set; get; }
 
+        [System.Obsolete]
         private async void InitShipping()
         {
             await PopupNavigation.PushAsync(new LoadPage());
@@ -72,123 +75,126 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             string description = null;
             int state = 0;
             Shipping shipping1 = null;
-            await Task.Run(() =>
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
             {
-                state = managerDispatchMob.GetShipping(token, IdShip, ref description, ref shipping1);
-            });
-            await PopupNavigation.PopAsync();
-            if (state == 1)
-            {
-                await PopupNavigation.PushAsync(new Errror("Not Network", null));
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.GetShipping(token, IdShip, ref description, ref shipping1);
+                });
+                await PopupNavigation.PopAsync();
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, null));
+                }
+                else if (state == 3)
+                {
+                    Shipping = shipping1;
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
+                StataLoadShip = 1;
             }
-            else if (state == 2)
-            {
-                await PopupNavigation.PushAsync(new Errror(description, null));
-            }
-            else if (state == 3)
-            {
-                Shipping = shipping1;
-            }
-            else if (state == 4)
-            {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
-            }
-            StataLoadShip = 1;
         }
 
+        [System.Obsolete]
         public async void AddPhoto(byte[] photoResult)
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-            Photo photo = new Photo();
-            photo.Base64 = JsonConvert.SerializeObject(photoResult);
-            photo.path = $"../Photo/{IdVech}/Pay/DelyverySig.jpg";
-            await Navigation.PopToRootAsync();
-            await Task.Run(() =>
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
             {
-                Continue();
-            });
-            await Task.Run(() =>
-            {
-                state = managerDispatchMob.SavePay(token, IdVech, 1, photo, ref description);
-                initDasbordDelegate.Invoke();
-            });
-            if (state == 1)
-            {
-                await PopupNavigation.PushAsync(new Errror("Not Network", Navigation));
-            }
-            else if (state == 2)
-            {
-                await PopupNavigation.PushAsync(new Errror(description, Navigation));
-            }
-            else if (state == 3)
-            {
-                DependencyService.Get<IToast>().ShowMessage("Paymmant photo saved");
-            }
-            else if (state == 4)
-            {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                Photo photo = new Photo();
+                photo.Base64 = JsonConvert.SerializeObject(photoResult);
+                photo.path = $"../Photo/{IdVech}/Pay/DelyverySig.jpg";
+                await Navigation.PopToRootAsync();
+                await Task.Run(() =>
+                {
+                    Continue();
+                });
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.SavePay(token, IdVech, 1, photo, ref description);
+                    initDasbordDelegate.Invoke();
+                });
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, Navigation));
+                }
+                else if (state == 3)
+                {
+                    DependencyService.Get<IToast>().ShowMessage("Paymmant photo saved");
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                }
             }
         }
 
+        [System.Obsolete]
         public async void SaveSigAndMethodPay()
         {
             await PopupNavigation.PushAsync(new LoadPage());
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-            await Task.Run(() =>
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
             {
-                state = managerDispatchMob.AskWork("AskPikedUpSig", token, IdVech, SigPhoto, ref description);
-                state = managerDispatchMob.SaveMethodPay(token, IdVech, What_form_of_payment_are_you_using_to_pay_for_transportation, CountPay, ref description);
-                initDasbordDelegate.Invoke();
-            });
-            await PopupNavigation.PopAsync();
-            if (state == 1)
-            {
-                await PopupNavigation.PushAsync(new Errror("Not Network", Navigation));
-            }
-            else if (state == 2)
-            {
-                await PopupNavigation.PushAsync(new Errror(description, Navigation));
-            }
-            else if (state == 3)
-            {
-                await PopupNavigation.PushAsync(new CopyLibaryAndInsurance(this));
-                DependencyService.Get<IToast>().ShowMessage("Paymmant method saved");
-            }
-            else if (state == 4)
-            {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.AskWork("AskPikedUpSig", token, IdVech, SigPhoto, ref description);
+                    state = managerDispatchMob.SaveMethodPay(token, IdVech, What_form_of_payment_are_you_using_to_pay_for_transportation, CountPay, ref description);
+                    initDasbordDelegate.Invoke();
+                });
+                await PopupNavigation.PopAsync();
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, Navigation));
+                }
+                else if (state == 3)
+                {
+                    await PopupNavigation.PushAsync(new CopyLibaryAndInsurance(this));
+                    DependencyService.Get<IToast>().ShowMessage("Paymmant method saved");
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                }
             }
         }
 
+        [System.Obsolete]
         public async void Continue()
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-            await Task.Run(() =>
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
             {
-                state = managerDispatchMob.Recurent(token, IdShip, "Picked up", ref description);
-                initDasbordDelegate.Invoke();
-            });
-            if (state == 1)
-            {
-                await PopupNavigation.PushAsync(new Errror("Not Network", null));
-            }
-            else if (state == 2)
-            {
-                await PopupNavigation.PushAsync(new Errror(description, null));
-            }
-            else if (state == 3)
-            {
-                DependencyService.Get<IToast>().ShowMessage("Answers to questions saved");
-            }
-            else if (state == 4)
-            {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.Recurent(token, IdShip, "Picked up", ref description);
+                    initDasbordDelegate.Invoke();
+                });
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, null));
+                }
+                else if (state == 3)
+                {
+                    DependencyService.Get<IToast>().ShowMessage("Answers to questions saved");
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
             }
         }
 
@@ -198,12 +204,14 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             //SendOnEmail
         }
 
+        [System.Obsolete]
         public async void GoEvaluationAndSurvey()
         {
             await PopupNavigation.PopAsync(true);
             await PopupNavigation.PushAsync(new EvaluationAndSurveyDialog(this, Navigation));
         }
 
+        [System.Obsolete]
         private async void GoToFeedBack()
         {
             await PopupNavigation.PopAllAsync(true);

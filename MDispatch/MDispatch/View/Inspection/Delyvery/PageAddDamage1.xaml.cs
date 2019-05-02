@@ -94,6 +94,7 @@ namespace MDispatch.View.Inspection.PickedUp
             }
         }
 
+        [Obsolete]
         private async void TouchImage_TouchAction(object sender, NewElement.TouchCordinate.TouchActionEventArgs e)
         {
             stateSelect = 1;

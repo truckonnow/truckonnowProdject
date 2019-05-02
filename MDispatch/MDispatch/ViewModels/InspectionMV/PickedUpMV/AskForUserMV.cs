@@ -1,7 +1,7 @@
 ﻿using MDispatch.Models;
 using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
-using MDispatch.View;
+using MDispatch.Service.Net;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection.PickedUp;
 using Plugin.Settings;
@@ -10,6 +10,7 @@ using Rg.Plugins.Popup.Services;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
+using System.Threading;
 
 namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
 {
@@ -48,33 +49,34 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             set => SetProperty(ref vehiclwInformation, value);
         }
 
+        [System.Obsolete]
         public async void SaveAsk()
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-            await Navigation.PushAsync(new LiabilityAndInsurance(managerDispatchMob, VehiclwInformation.Id, IdShip, initDasbordDelegate, OnDeliveryToCarrier, TotalPaymentToCarrier), true);
-            await Task.Run(() =>
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
             {
-                state = managerDispatchMob.AskWork("AskFromUser", token, VehiclwInformation.Id, AskForUser, ref description);
-                initDasbordDelegate.Invoke();
-            });
-            if (state == 1)
-            {
-                await PopupNavigation.PushAsync(new Errror("Not Network", Navigation));
-            }
-            else if (state == 2)
-            {
-                await PopupNavigation.PushAsync(new Errror(description, Navigation));
-            }
-            else if (state == 3)
-            {
-                Navigation.RemovePage(Navigation.NavigationStack[2]);
-                DependencyService.Get<IToast>().ShowMessage("Answers to questions saved");
-            }
-            else if (state == 4)
-            {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                await Navigation.PushAsync(new LiabilityAndInsurance(managerDispatchMob, VehiclwInformation.Id, IdShip, initDasbordDelegate, OnDeliveryToCarrier, TotalPaymentToCarrier), true);
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.AskWork("AskFromUser", token, VehiclwInformation.Id, AskForUser, ref description);
+                    initDasbordDelegate.Invoke();
+                });
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, Navigation));
+                }
+                else if (state == 3)
+                {
+                    Navigation.RemovePage(Navigation.NavigationStack[2]);
+                    DependencyService.Get<IToast>().ShowMessage("Answers to questions saved");
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                }
             }
         }
     }

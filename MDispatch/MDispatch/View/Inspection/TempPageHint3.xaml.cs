@@ -12,6 +12,7 @@ namespace MDispatch.View.Inspection.PickedUp
 			InitializeComponent ();
 		}
 
+        [System.Obsolete]
         private async void Button_Clicked(object sender, System.EventArgs e)
         {
             await PopupNavigation.PopAsync(true);

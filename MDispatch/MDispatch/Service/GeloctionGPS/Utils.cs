@@ -1,4 +1,4 @@
-﻿using MDispatch.View.Inspection.PickedUp;
+﻿using Android.App;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using Plugin.Permissions;
@@ -8,12 +8,13 @@ using RestSharp;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace MDispatch.Service.GeloctionGPS
 {
+    [Service]
     public static class Utils
     {
+        [Obsolete]
         public static async Task StartListening(bool isTwoConection = false)
         {
             if (CrossGeolocator.Current.IsListening)
@@ -44,7 +45,10 @@ namespace MDispatch.Service.GeloctionGPS
 
         private static void PositionChanged(object sender, PositionEventArgs e)
         {
-            ReqvestGPS(e.Position.Longitude.ToString(), e.Position.Latitude.ToString());
+            if (App.isNetwork)
+            {
+                ReqvestGPS(e.Position.Longitude.ToString(), e.Position.Latitude.ToString());
+            }
         }
 
         public static void ReqvestGPS(string longitude, string latitude)
@@ -57,7 +61,7 @@ namespace MDispatch.Service.GeloctionGPS
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/GPS/Save", Method.POST);
                 request.AddHeader("Accept", "application/json");
-                request.Parameters.Clear();
+                client.Timeout = 10000;
                 request.AddParameter("token", token);
                 request.AddParameter("longitude", longitude);
                 request.AddParameter("latitude", latitude);

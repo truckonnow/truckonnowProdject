@@ -56,6 +56,7 @@ namespace MDispatch.View.PageApp.DialogPage
             }
         }
 
+        [System.Obsolete]
         private async void Button_Clicked(object sender, System.EventArgs e)
         {
             await PopupNavigation.PopAllAsync(true);

@@ -169,6 +169,7 @@ namespace MDispatch.View.Inspection.Delyvery
         }
         #endregion
 
+        [Obsolete]
         private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             if (Paymmant != null)

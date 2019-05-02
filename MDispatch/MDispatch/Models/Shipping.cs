@@ -94,7 +94,7 @@ namespace MDispatch.Models
                 {
                     color = "#FFBF00";
                 }
-                else if (CurrentStatus == "Delivered" || CurrentStatus == "Biling" || CurrentStatus == "Paid")
+                else if (CurrentStatus == "Delivered,Billed" || CurrentStatus == "Delivered,Paid")
                 {
                     color = "#088A08";
                 }
@@ -180,7 +180,7 @@ namespace MDispatch.Models
                 {
                     ico = "pickedUpOrder1.png";
                 }
-                else if(CurrentStatus == "Delyvery" || CurrentStatus == "Biling" || CurrentStatus == "Paid")
+                else if(CurrentStatus == "Delivered,Billed" || CurrentStatus == "Delivered,Paid")
                 {
                     ico = "deliveredOrder.png";
                 }
@@ -201,7 +201,7 @@ namespace MDispatch.Models
                 {
                     ico = "pickedUpViewOrder.png";
                 }
-                else if (CurrentStatus == "Delyvery" || CurrentStatus == "Biling" || CurrentStatus == "Paid")
+                else if (CurrentStatus == "Delivered,Billed" || CurrentStatus == "Delivered,Paid")
                 {
                     ico = "deliveredViewOrder.png";
                 }

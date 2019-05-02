@@ -19,6 +19,7 @@ namespace MDispatch.View.Inspection.PickedUp
             BindingContext = this.askForUsersDelyveryMW;
 		}
 
+        [System.Obsolete]
         private async void Button_Clicked_1(object sender, System.EventArgs e)
         {
             await PopupNavigation.PopAsync(true);
@@ -34,6 +35,7 @@ namespace MDispatch.View.Inspection.PickedUp
             }
         }
 
+        [System.Obsolete]
         private async void Button_Clicked(object sender, System.EventArgs e)
         {
             await PopupNavigation.PopAsync(true);

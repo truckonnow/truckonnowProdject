@@ -32,6 +32,7 @@ namespace MDispatch.View.Inspection.PickedUp
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
+        [System.Obsolete]
         private async void TouchImage_TouchAction(object sender, NewElement.TouchCordinate.TouchActionEventArgs e)
         {
             stateSelect = 1;

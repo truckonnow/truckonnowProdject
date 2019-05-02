@@ -147,7 +147,7 @@ namespace ApiMobaileServise.Servise
 
         public string GerShopTokenForShipping(string idOrder)
         {
-            context.Drivers.Load();
+           // context.Drivers.Load();
             Shipping shipping = context.Shipping.FirstOrDefault<Shipping>(d => d.Id == idOrder);
             return shipping.Driverr.TokenShope;
         }
@@ -330,7 +330,7 @@ namespace ApiMobaileServise.Servise
             {
                 return new List<Shipping>();
             }
-            Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Delivered" || s.CurrentStatus == "Paid" || s.CurrentStatus == "Biling"));
+            Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Delivered,Paid" || s.CurrentStatus == "Delivered,Billed"));
             //int countFor5 = Shipping1.Count / 5;
             //int ost = Shipping1.Count % 5;
             //int countGet = ost == 0 ? (5 * type) + 5 : (5 * type) + ost;

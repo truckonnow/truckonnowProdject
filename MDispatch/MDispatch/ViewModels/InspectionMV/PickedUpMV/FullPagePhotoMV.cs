@@ -2,6 +2,7 @@
 using MDispatch.NewElement;
 using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
+using MDispatch.Service.Net;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection;
@@ -16,6 +17,7 @@ using Rg.Plugins.Popup.Services;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -199,45 +201,46 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             PhotoInspection.Photos.Add(photo);
         }
 
+        [System.Obsolete]
         public async void SavePhoto()
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-            if (InderxPhotoInspektion < Car.CountCarImg)
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
             {
-                Car.OrintableScreen(InderxPhotoInspektion);
-                FullPagePhoto fullPagePhoto = new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", Car.typeIndex.Replace(" ", ""), InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1), OnDeliveryToCarrier, TotalPaymentToCarrier);
-                await Navigation.PushAsync(fullPagePhoto);
-                await Navigation.PushAsync(new CameraPagePhoto($"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", fullPagePhoto));
-            }
-            else
-            {
-                await PopupNavigation.PushAsync(new TempPageHint());
-                DependencyService.Get<IOrientationHandler>().ForceSensor();
-                await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate, Car.typeIndex.Replace(" ", ""), OnDeliveryToCarrier, TotalPaymentToCarrier), true);
-            }
-            await Task.Run(() =>
-            {
-                state = managerDispatchMob.AskWork("SavePhoto", token, VehiclwInformation.Id, PhotoInspection, ref description);
-                initDasbordDelegate.Invoke();
-            });
-            if (state == 1)
-            {
-                await PopupNavigation.PushAsync(new Errror("Not Network", Navigation));
-            }
-            else if (state == 2)
-            {
-                await PopupNavigation.PushAsync(new Errror(description, Navigation));
-            }
-            else if (state == 3)
-            {
-                Navigation.RemovePage(Navigation.NavigationStack[2]);
-                DependencyService.Get<IToast>().ShowMessage($"Photo {Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion))} saved");
-            }
-            else if (state == 4)
-            {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                if (InderxPhotoInspektion < Car.CountCarImg)
+                {
+                    Car.OrintableScreen(InderxPhotoInspektion);
+                    FullPagePhoto fullPagePhoto = new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", Car.typeIndex.Replace(" ", ""), InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1), OnDeliveryToCarrier, TotalPaymentToCarrier);
+                    await Navigation.PushAsync(fullPagePhoto);
+                    await Navigation.PushAsync(new CameraPagePhoto($"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", fullPagePhoto));
+                }
+                else
+                {
+                    await PopupNavigation.PushAsync(new TempPageHint());
+                    DependencyService.Get<IOrientationHandler>().ForceSensor();
+                    await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate, Car.typeIndex.Replace(" ", ""), OnDeliveryToCarrier, TotalPaymentToCarrier), true);
+                }
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.AskWork("SavePhoto", token, VehiclwInformation.Id, PhotoInspection, ref description);
+                    initDasbordDelegate.Invoke();
+                });
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, Navigation));
+                }
+                else if (state == 3)
+                {
+                    Navigation.RemovePage(Navigation.NavigationStack[2]);
+                    DependencyService.Get<IToast>().ShowMessage($"Photo {Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion))} saved");
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                }
             }
         }
     }

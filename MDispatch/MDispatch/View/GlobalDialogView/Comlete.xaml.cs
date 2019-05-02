@@ -14,6 +14,7 @@ namespace MDispatch.View.GlobalDialogView
             infoL.Text = info;
         }
 
+        [Obsolete]
         private async void Button_Clicked(object sender, EventArgs e)
         {
             await PopupNavigation.PopAsync(true);

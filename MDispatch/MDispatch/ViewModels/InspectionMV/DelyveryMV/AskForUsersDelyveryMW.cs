@@ -1,6 +1,7 @@
 ﻿using MDispatch.Models;
 using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
+using MDispatch.Service.Net;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection.Delyvery;
@@ -10,6 +11,7 @@ using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -71,6 +73,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
 
         public List<DamageForUser> damageForUsers { get; set; }
 
+        [System.Obsolete]
         public async void SaveAsk(string paymmant)
         {
             Payment = paymmant;
@@ -78,66 +81,67 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             string description = null;
             int state = 0;
             await PopupNavigation.PushAsync(new TempDialogPage1(this));
-            await Task.Run(() =>
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
             {
-                Task.Run(() =>
+                await Task.Run(() =>
                 {
-                    managerDispatchMob.AskWork("DamageForUser", token, vehiclwInformation.Id, damageForUsers, ref description);
+                    Task.Run(() =>
+                    {
+                        managerDispatchMob.AskWork("DamageForUser", token, vehiclwInformation.Id, damageForUsers, ref description);
+                    });
+                    state = managerDispatchMob.AskWork("AskForUserDelyvery", token, VehiclwInformation.Id, AskForUserDelyveryM, ref description);
+                    initDasbordDelegate.Invoke();
                 });
-                state = managerDispatchMob.AskWork("AskForUserDelyvery", token, VehiclwInformation.Id, AskForUserDelyveryM, ref description);
-                initDasbordDelegate.Invoke();
-            });
-            if (state == 1)
-            {
-                await PopupNavigation.PushAsync(new Errror("Not Network", Navigation));
-            }
-            else if (state == 2)
-            {
-                await PopupNavigation.PushAsync(new Errror(description, Navigation));
-            }
-            else if (state == 3)
-            {
-                DependencyService.Get<IToast>().ShowMessage("Answers to questions saved");
-            }
-            else if (state == 4)
-            {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, Navigation));
+                }
+                else if (state == 3)
+                {
+                    DependencyService.Get<IToast>().ShowMessage("Answers to questions saved");
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                }
             }
         }
 
+        [System.Obsolete]
         public async void AddPhoto(byte[] photoResult)
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-            Photo photo = new Photo();
-            photo.Base64 = JsonConvert.SerializeObject(photoResult);
-            photo.path = $"../Photo/{VehiclwInformation.Id}/Pay/DelyverySig.jpg";
-            await Navigation.PopToRootAsync();
-            await Task.Run(() =>
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
             {
-                Continue();
-            });
-            await Task.Run(() =>
-            {
-                state = managerDispatchMob.SavePay(token, VehiclwInformation.Id, 2, photo, ref description);
-                initDasbordDelegate.Invoke();
-            });
-            if (state == 1)
-            {
-                await PopupNavigation.PushAsync(new Errror("Not Network", Navigation));
-            }
-            else if (state == 2)
-            {
-                await PopupNavigation.PushAsync(new Errror(description, Navigation));
-            }
-            else if (state == 3)
-            {
-                DependencyService.Get<IToast>().ShowMessage("Payment method photo saved");
-            }
-            else if (state == 4)
-            {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                Photo photo = new Photo();
+                photo.Base64 = JsonConvert.SerializeObject(photoResult);
+                photo.path = $"../Photo/{VehiclwInformation.Id}/Pay/DelyverySig.jpg";
+                await Navigation.PopToRootAsync();
+                await Task.Run(() =>
+                {
+                    Continue();
+                });
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.SavePay(token, VehiclwInformation.Id, 2, photo, ref description);
+                    initDasbordDelegate.Invoke();
+                });
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, Navigation));
+                }
+                else if (state == 3)
+                {
+                    DependencyService.Get<IToast>().ShowMessage("Payment method photo saved");
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                }
             }
         }
 
@@ -178,42 +182,44 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             damageForUsers.Add(damageForUser);
         }
 
+        [System.Obsolete]
         public async void Continue()
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-            await Task.Run(() =>
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
             {
-                string status = null;
-                if(TotalPaymentToCarrier == "COD" && TotalPaymentToCarrier == "COP")
+                await Task.Run(() =>
                 {
-                    status = "Delivered,Paid";
-                }
-                else
+                    string status = null;
+                    if (TotalPaymentToCarrier == "COD" && TotalPaymentToCarrier == "COP")
+                    {
+                        status = "Delivered,Paid";
+                    }
+                    else
+                    {
+                        status = "Delivered,Billed";
+                    }
+                    state = managerDispatchMob.Recurent(token, IdShip, status, ref description);
+                    initDasbordDelegate.Invoke();
+                });
+                if (state == 2)
                 {
-                    status = "Delivered,Billed";
+                    await PopupNavigation.PushAsync(new Errror(description, null));
                 }
-                state = managerDispatchMob.Recurent(token, IdShip, status, ref description);
-                initDasbordDelegate.Invoke();
-            });
-            if (state == 1)
-            {
-                await PopupNavigation.PushAsync(new Errror("Not Network", null));
-            }
-            else if (state == 2)
-            {
-                await PopupNavigation.PushAsync(new Errror(description, null));
-            }
-            else if (state == 3)
-            {
-            }
-            else if (state == 4)
-            {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                else if (state == 3)
+                {
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
             }
         }
 
+        [System.Obsolete]
         public async void GoToFeedBack()
         {
             await PopupNavigation.PopAllAsync(true);

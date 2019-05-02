@@ -26,6 +26,7 @@ namespace MDispatch.Vidget.VM
 
         public InspectionDriver InspectionDriver { get; set; }
 
+        [System.Obsolete]
         private async void Init()
         {
             await PopupNavigation.PushAsync(new LoadPage(), true);

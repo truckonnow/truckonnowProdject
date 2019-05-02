@@ -1,6 +1,7 @@
 ﻿using MDispatch.Models;
 using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
+using MDispatch.Service.Net;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.PageApp;
@@ -9,6 +10,7 @@ using MDispatch.ViewModels.InspectionMV.Models;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -53,36 +55,37 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             set => SetProperty(ref askDelyvery, value);
         }
 
+        [System.Obsolete]
         public async void SaveAsk()
         {
             ICar car = GetTypeCar(VehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-            FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{car.typeIndex.Replace(" ", "")}{car.GetIndexCarFullPhoto(1)}.png", car.typeIndex.Replace(" ", ""), 1, initDasbordDelegate, getVechicleDelegate, car.GetNameLayout(car.GetIndexCarFullPhoto(1)), OnDeliveryToCarrier, TotalPaymentToCarrier);
-            await Navigation.PushAsync(fullPagePhotoDelyvery);
-            await Navigation.PushAsync(new CameraPagePhoto1($"{car.typeIndex.Replace(" ", "")}{car.GetIndexCarFullPhoto(1)}.png", fullPagePhotoDelyvery));
-            await Task.Run(() =>
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
             {
-                state = managerDispatchMob.AskWork("AskDelyvery", token, VehiclwInformation.Id, askDelyvery, ref description);
-                initDasbordDelegate.Invoke();
-            });
-            if (state == 1)
-            {
-                await PopupNavigation.PushAsync(new Errror("Not Network", Navigation));
-            }
-            else if (state == 2)
-            {
-                await PopupNavigation.PushAsync(new Errror(description, Navigation));
-            }
-            else if (state == 3)
-            {
-                Navigation.RemovePage(Navigation.NavigationStack[2]);
-                DependencyService.Get<IToast>().ShowMessage("Answers to questions saved");
-            }
-            else if (state == 4)
-            {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{car.typeIndex.Replace(" ", "")}{car.GetIndexCarFullPhoto(1)}.png", car.typeIndex.Replace(" ", ""), 1, initDasbordDelegate, getVechicleDelegate, car.GetNameLayout(car.GetIndexCarFullPhoto(1)), OnDeliveryToCarrier, TotalPaymentToCarrier);
+                await Navigation.PushAsync(fullPagePhotoDelyvery);
+                await Navigation.PushAsync(new CameraPagePhoto1($"{car.typeIndex.Replace(" ", "")}{car.GetIndexCarFullPhoto(1)}.png", fullPagePhotoDelyvery));
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.AskWork("AskDelyvery", token, VehiclwInformation.Id, askDelyvery, ref description);
+                    initDasbordDelegate.Invoke();
+                });
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, Navigation));
+                }
+                else if (state == 3)
+                {
+                    Navigation.RemovePage(Navigation.NavigationStack[2]);
+                    DependencyService.Get<IToast>().ShowMessage("Answers to questions saved");
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                }
             }
         }
 

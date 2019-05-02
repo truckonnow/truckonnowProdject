@@ -20,6 +20,7 @@ namespace MDispatch.View.Inspection.PickedUp
             BindingContext = this.liabilityAndInsuranceMV;
 		}
 
+        [System.Obsolete]
         private async void Button_Clicked_1(object sender, System.EventArgs e)
         {
             await PopupNavigation.PopAllAsync(true);

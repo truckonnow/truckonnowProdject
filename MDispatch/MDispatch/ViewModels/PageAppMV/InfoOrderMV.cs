@@ -77,6 +77,7 @@ namespace MDispatch.ViewModels.PageAppMV
             await Navigation.PushAsync(new EditDeliveryInformation(managerDispatchMob, Shipping), true);
         }
 
+        [System.Obsolete]
         private async void ToEditPayment()
         {
             await PopupNavigation.PushAsync(new EditPayment(managerDispatchMob, Shipping), true);
@@ -87,6 +88,7 @@ namespace MDispatch.ViewModels.PageAppMV
             await Navigation.PushAsync(new VechicleDetails(vehiclwInformation, managerDispatchMob));
         }
 
+        [System.Obsolete]
         public async void ToStartInspection()
         {
             VehiclwInformation vehiclwInformation1 = null;
@@ -150,6 +152,7 @@ namespace MDispatch.ViewModels.PageAppMV
             }
         }
 
+        [System.Obsolete]
         public async void ToStartInspectionDelyvery()
         {
             VehiclwInformation vehiclwInformation1 = null;

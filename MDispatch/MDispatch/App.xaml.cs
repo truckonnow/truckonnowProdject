@@ -1,7 +1,9 @@
 using MDispatch.Service.GeloctionGPS;
+using MDispatch.StoreNotify;
 using MDispatch.View.A_R;
 using MDispatch.View.TabPage;
 using Plugin.Settings;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MDispatch
@@ -10,10 +12,16 @@ namespace MDispatch
 	{
         public static bool isAvtorization;
         public static bool isInspection;
+        public static bool isNetwork;
+        public static bool isStart;
             
         public App ()
 		{
 			InitializeComponent();
+        }
+
+		protected override async void OnStart ()
+        {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             if (token == "")
             {
@@ -25,12 +33,13 @@ namespace MDispatch
                 isAvtorization = true;
                 MainPage = new NavigationPage(new TabPage(new Service.ManagerDispatchMob()));
             }
-        }
-
-		protected override async void OnStart ()
-        {
             if (isAvtorization)
             {
+                Task.Run(async () =>
+                {
+                    DependencyService.Get<IStore>().OnTokenRefresh();
+                });
+                isStart = true;
                 await Utils.StartListening();
             }
         }
@@ -39,7 +48,8 @@ namespace MDispatch
         {
             if (isAvtorization)
             {
-                await Utils.StopListening();
+                isStart = false;
+                   await Utils.StopListening();
             }
         }
 
@@ -47,6 +57,7 @@ namespace MDispatch
         {
             if (isAvtorization)
             {
+                isStart = true;
                 await Utils.StartListening();
             }
         }

@@ -89,6 +89,7 @@ namespace MDispatch.View.PageApp
             }
         }
 
+        [Obsolete]
         private void AddBlocDocumentPhoto(VehiclwInformation vehiclwInformation)
         {
             if (vehiclwInformation.Ask != null && vehiclwInformation.Ask.Any_paperwork_or_documentation != null)
@@ -124,6 +125,7 @@ namespace MDispatch.View.PageApp
             await Navigation.PushAsync(new ViewPhoto(memoryStream.ToArray()));
         }
 
+        [Obsolete]
         private void AddBlocItemPhoto(VehiclwInformation vehiclwInformation)
         {
             if (vehiclwInformation.Ask != null && vehiclwInformation.Ask.Any_personal_or_additional_items_with_or_in_vehicle != null)
@@ -148,6 +150,7 @@ namespace MDispatch.View.PageApp
             }
         }
 
+        [Obsolete]
         private void AddBlocBeen(VehiclwInformation vehiclwInformation)
         {
             if (vehiclwInformation.Ask1 != null && vehiclwInformation.Ask1.Any_additional_parts_been_given_to_you != null)
@@ -172,6 +175,7 @@ namespace MDispatch.View.PageApp
             }
         }
 
+        [Obsolete]
         private void AddBlocDocumentationBeen(VehiclwInformation vehiclwInformation)
         {
             if (vehiclwInformation.Ask1 != null && vehiclwInformation.Ask1.Any_additional_documentation_been_given_after_loading != null)
@@ -196,6 +200,7 @@ namespace MDispatch.View.PageApp
             }
         }
 
+        [Obsolete]
         private void AddBlocSeatBelts(VehiclwInformation vehiclwInformation)
         {
             if (vehiclwInformation.Ask1 != null && vehiclwInformation.Ask1.App_will_force_driver_to_take_pictures_of_each_strap != null)
@@ -220,6 +225,7 @@ namespace MDispatch.View.PageApp
             }
         }
 
+        [Obsolete]
         private void AddBlocTakePictures(VehiclwInformation vehiclwInformation)
         {
             if (vehiclwInformation.Ask1 != null && vehiclwInformation.Ask1.Photo_after_loading_in_the_truck != null)
@@ -244,6 +250,7 @@ namespace MDispatch.View.PageApp
             }
         }
 
+        [Obsolete]
         private void AddBlocPhotoClient(VehiclwInformation vehiclwInformation)
         {
             if (vehiclwInformation.askForUserDelyveryM != null && vehiclwInformation.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo != null)
@@ -273,6 +280,7 @@ namespace MDispatch.View.PageApp
             }
         }
 
+        [Obsolete]
         private void AddBlocInspectionPhoto(VehiclwInformation vehiclwInformation)
         {
             if (vehiclwInformation.PhotoInspections != null && vehiclwInformation.PhotoInspections.FirstOrDefault(p => p.CurrentStatusPhoto == "PikedUp") != null)

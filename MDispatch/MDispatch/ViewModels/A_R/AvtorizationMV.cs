@@ -50,7 +50,8 @@ namespace MDispatch.ViewModels
                 SetProperty(ref feedBack, value);
             }
         }
-         
+
+        [System.Obsolete]
         private async void Avtorization()
         {
             await PopupNavigation.PushAsync(new LoadPage(), true);
