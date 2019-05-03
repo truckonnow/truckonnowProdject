@@ -177,12 +177,14 @@ namespace MDispatch.Service
             {
                 shippings = JsonConvert.DeserializeObject<List<Shipping>>(responseAppS.
                         SelectToken("ResponseStr").ToString());
+                description = responseAppS
+                    .Value<string>("Description");
                 return 3;
             }
             else
             {
                 description = responseAppS
-                    .Value<string>("description");
+                    .Value<string>("Description");
                 return 2;
             }
         }

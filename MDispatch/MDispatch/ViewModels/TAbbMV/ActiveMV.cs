@@ -68,7 +68,6 @@ namespace MDispatch.ViewModels.TAbbMV
                 else if (state == 3)
                 {
                     Shippings = shippings;
-                    App.isInspection = Convert.ToBoolean(description);
                 }
                 else if (state == 4)
                 {

@@ -5,6 +5,24 @@
              Title="Active">
     <ContentPage.Content>
         <StackLayout>
+            <Frame Margin="0, 5, 0, 5" Padding="0" BackgroundColor="White" HasShadow="True" CornerRadius="2" OutlineColor="#C3CBCD">
+                <StackLayout Orientation="Horizontal" >
+                    <BoxView BackgroundColor="Red" WidthRequest="8" />
+                    <StackLayout Padding="10">
+                        <Label Text="Inspection Driver" FontSize="17"/>
+                        <FlexLayout JustifyContent="SpaceBetween">
+                            <StackLayout FlexLayout.AlignSelf="Center" Margin="5" Orientation="Horizontal">
+                                <Label Text="Time to inspection:"/>
+                                <Label Text="5 hours" TextColor="Black"/>
+                            </StackLayout>
+                            <StackLayout FlexLayout.AlignSelf="Center" Margin="5" Orientation="Horizontal">
+                                <Label Text="Need for inspection:"/>
+                                <Label Text="Maybe later" TextColor="Black"/>
+                            </StackLayout>
+                        </FlexLayout>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
             <ListView ItemsSource="{Binding Shippings}" IsRefreshing="{Binding IsRefr}" IsPullToRefreshEnabled="True"
                       HasUnevenRows="True" SeparatorVisibility="None" RefreshCommand="{Binding RefreshCommand}" >
                 <ListView.ItemTemplate>

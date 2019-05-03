@@ -11,7 +11,6 @@ namespace MDispatch
     public partial class App : Application
 	{
         public static bool isAvtorization;
-        public static bool isInspection;
         public static bool isNetwork;
         public static bool isStart;
             

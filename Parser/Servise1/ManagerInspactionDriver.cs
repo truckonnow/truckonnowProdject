@@ -31,7 +31,7 @@ namespace Parser.Servise1
 
         private void WorkerInspactionDriver()
         {
-            LogEr.Logerr("Info", "Start Servse WorkParser Inspaction", "WorkerInspactionDriver", DateTime.Now.ToShortTimeString());
+            LogEr.Logerr("Info1", "Start Servse WorkParser Inspaction", "WorkerInspactionDriver", DateTime.Now.ToShortTimeString());
             int horseInmMiliSeconds = 60000 * 60;
             Task.Run(() =>
             {
@@ -57,8 +57,8 @@ namespace Parser.Servise1
             {
                 if (!driver.IsInspectionToDayDriver)
                 {
-                    LogEr.Logerr("Info", $"check on the driver \"{driver.Id}\" to pass inspection", "RefreshInspectionTimeDriver", DateTime.Now.ToShortTimeString());
-                    sqlCommandParser.RefreshInspectionToDayDriverInDb(driver.Id);
+                    LogEr.Logerr("Info1", $"check on the driver \"{driver.Id}\" to pass inspection", "RefreshInspectionTimeDriver", DateTime.Now.ToShortTimeString());
+                    sqlCommandParser.RefreshInspectionDriverInDb(driver.Id);
                     SendNotyfyInspactionDrive(driver.TokenShope, "Truck Inspection", "Immediately go truck inspection or else you will not be able to continue working");
                 }
             }
@@ -68,7 +68,7 @@ namespace Parser.Servise1
         {
             foreach(var driver in drivers)
             {
-                LogEr.Logerr("Info", $"driver status change \"{driver.Id}\"", "RefreshInspectionTimeDriver", DateTime.Now.ToShortTimeString());
+                LogEr.Logerr("Info1", $"driver status change \"{driver.Id}\"", "RefreshInspectionTimeDriver", DateTime.Now.ToShortTimeString());
                 sqlCommandParser.RefreshInspectionToDayDriverInDb(driver.Id);
                 SendNotyfyInspactionDrive(driver.TokenShope, "Truck Inspection", "You can pass the truck inspection now");
             }
@@ -77,7 +77,7 @@ namespace Parser.Servise1
         private bool CheckTime()
         {
             bool isTime = false;
-            if(12 < DateTime.Now.Hour && 14 > DateTime.Now.Hour)
+            if(11 < DateTime.Now.Hour && 13 > DateTime.Now.Hour)
             {
                 isTime = true;
             }
@@ -87,7 +87,7 @@ namespace Parser.Servise1
         private bool CheckTimeZeroTime()
         {
             bool isTime = false;
-            if (0 < DateTime.Now.Hour && 2 > DateTime.Now.Hour)
+            if (5 < DateTime.Now.Hour && 7 > DateTime.Now.Hour)
             {
                 isTime = true;
             }

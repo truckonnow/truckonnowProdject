@@ -41,6 +41,10 @@ namespace Parser.Servise
             {
                 InfoLog(infoText, nameMethod, date);
             }
+            else if (typeData == "Info1")
+            {
+                InfoLog(infoText, nameMethod, date);
+            }
             else if(typeData == "Error")
             {
                 ErrorLog(infoText, nameMethod, date);

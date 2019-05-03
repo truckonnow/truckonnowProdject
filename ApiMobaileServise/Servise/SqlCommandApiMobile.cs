@@ -274,6 +274,36 @@ namespace ApiMobaileServise.Servise
             return context.Drivers.FirstOrDefault(d => d.Token == token) != null ? true : false;
         }
 
+        public string GetInspectionDriverIndb(string token)
+        {
+            string statusAndTimeInInspection = null;
+            Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
+            if(driver.IsInspectionDriver)
+            {
+                if(driver.IsInspectionToDayDriver)
+                {
+                    statusAndTimeInInspection = "true,true,0";
+                }
+                else
+                {
+                    string TimOfInsection = (12 - DateTime.Now.Hour).ToString(); 
+                    statusAndTimeInInspection = "true,false,"+ TimOfInsection;
+                }
+            }
+            else
+            {
+                if (driver.IsInspectionToDayDriver)
+                {
+                    statusAndTimeInInspection = "false,true,0";
+                }
+                else
+                {
+                    statusAndTimeInInspection = "false,false,0";
+                }
+            }
+            return statusAndTimeInInspection;
+        }
+
         public VehiclwInformation GetVehiclwInformationInDb(int idVech)
         {
             context.VehiclwInformation.Load();
