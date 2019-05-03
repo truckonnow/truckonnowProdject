@@ -139,6 +139,26 @@ namespace ApiMobaileServise.Servise.AddDamage
             {
                 maxMinForYAndX = new int[] { 655, 400, 630, 440 };
             }
+            else if (indexPhoto == "27")
+            {
+                maxMinForYAndX = new int[] { 190, 590, 370, 430 };
+            }
+            else if (indexPhoto == "28")
+            {
+                maxMinForYAndX = new int[] { 685, 0, 770, 90 };
+            }
+            else if (indexPhoto == "29")
+            {
+                maxMinForYAndX = new int[] { 220, 0, 310, 90 };
+            }
+            else if (indexPhoto == "31")
+            {
+                maxMinForYAndX = new int[] { 685, 480, 770, 570 };
+            }
+            else if (indexPhoto == "30")
+            {
+                maxMinForYAndX = new int[] { 220, 480, 310, 570 };
+            }
             return maxMinForYAndX;
         }
 
@@ -158,12 +178,12 @@ namespace ApiMobaileServise.Servise.AddDamage
                     g.DrawImage(img1, 0, 0);
                     if (photoInspection.IndexPhoto == 5 || photoInspection.IndexPhoto == 6 || photoInspection.IndexPhoto == 7 || photoInspection.IndexPhoto == 8 || photoInspection.IndexPhoto == 9 || photoInspection.IndexPhoto == 10 || photoInspection.IndexPhoto == 14 
                         || photoInspection.IndexPhoto == 15 || photoInspection.IndexPhoto == 16 || photoInspection.IndexPhoto == 17 || photoInspection.IndexPhoto == 18 || photoInspection.IndexPhoto == 19 || photoInspection.IndexPhoto == 23 || photoInspection.IndexPhoto == 24
-                        || photoInspection.IndexPhoto == 25 || photoInspection.IndexPhoto == 26)
+                        || photoInspection.IndexPhoto == 25 || photoInspection.IndexPhoto == 26 || photoInspection.IndexPhoto == 28 || photoInspection.IndexPhoto == 29 || photoInspection.IndexPhoto == 30 || photoInspection.IndexPhoto == 31)
                     {
                         g.DrawImage(img2, x, y);
                     }
                     else if (photoInspection.IndexPhoto == 1 || photoInspection.IndexPhoto == 2 || photoInspection.IndexPhoto == 3 || photoInspection.IndexPhoto == 4 || photoInspection.IndexPhoto == 11 || photoInspection.IndexPhoto == 12 || photoInspection.IndexPhoto == 13
-                        || photoInspection.IndexPhoto == 20 || photoInspection.IndexPhoto == 21 || photoInspection.IndexPhoto == 22)
+                        || photoInspection.IndexPhoto == 20 || photoInspection.IndexPhoto == 21 || photoInspection.IndexPhoto == 22 || photoInspection.IndexPhoto == 27)
                     {
                         g.DrawImage(img2, y, x);
                     }
