@@ -5,19 +5,27 @@
              Title="Active">
     <ContentPage.Content>
         <StackLayout>
-            <Frame Margin="0, 5, 0, 5" Padding="0" BackgroundColor="White" HasShadow="True" CornerRadius="2" OutlineColor="#C3CBCD">
-                <StackLayout Orientation="Horizontal" >
-                    <BoxView BackgroundColor="Red" WidthRequest="8" />
+            <Frame Margin="0, 5, 0, 5" Padding="0" BackgroundColor="White" HasShadow="True" CornerRadius="2" OutlineColor="#C3CBCD" IsVisible="{Binding UnTimeOfInspection.IsInspection}">
+                <StackLayout Orientation="Horizontal" HeightRequest="100">
+                    <FlexLayout Direction="Column">
+                        <BoxView WidthRequest="8" BackgroundColor="#74DF00" Color="{Binding UnTimeOfInspection.BoxColor6}"/>
+                        <BoxView WidthRequest="8" BackgroundColor="#74DF00" Color="{Binding UnTimeOfInspection.BoxColor5}"/>
+                        <BoxView WidthRequest="8" BackgroundColor="#ff5a00" Color="{Binding UnTimeOfInspection.BoxColor4}"/>
+                        <BoxView WidthRequest="8" BackgroundColor="#fb2e2e" Color="{Binding UnTimeOfInspection.BoxColor3}"/>
+                        <BoxView WidthRequest="8" BackgroundColor="#fb2e2e" Color="{Binding UnTimeOfInspection.BoxColor2}"/>
+                        <BoxView WidthRequest="8" BackgroundColor="#fb2e2e" Color="{Binding UnTimeOfInspection.BoxColor1}"/>
+                        <BoxView WidthRequest="8" BackgroundColor="#fb2e2e" Color="{Binding UnTimeOfInspection.BoxColor}"/>
+                    </FlexLayout>
                     <StackLayout Padding="10">
                         <Label Text="Inspection Driver" FontSize="17"/>
-                        <FlexLayout JustifyContent="SpaceBetween">
-                            <StackLayout FlexLayout.AlignSelf="Center" Margin="5" Orientation="Horizontal">
+                        <FlexLayout JustifyContent="SpaceBetween" Wrap="Wrap">
+                            <StackLayout FlexLayout.AlignSelf="Center" Margin="3" Orientation="Horizontal">
                                 <Label Text="Time to inspection:"/>
-                                <Label Text="5 hours" TextColor="Black"/>
+                                <Label Text="{Binding UnTimeOfInspection.TimeOfInspection}" TextColor="Black"/>
                             </StackLayout>
                             <StackLayout FlexLayout.AlignSelf="Center" Margin="5" Orientation="Horizontal">
                                 <Label Text="Need for inspection:"/>
-                                <Label Text="Maybe later" TextColor="Black"/>
+                                <Label Text="{Binding UnTimeOfInspection.TimeOfStatus}" TextColor="Black"/>
                             </StackLayout>
                         </FlexLayout>
                     </StackLayout>

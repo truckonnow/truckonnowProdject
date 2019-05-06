@@ -17,11 +17,10 @@ namespace MDispatch.View.TabPage.Tab
 
         public ActivePage (ManagerDispatchMob managerDispatchMob, INavigation navigation)
 		{
-            this.initDasbordDelegate = initDasbordDelegate;
             this.activeMV = new ActiveMV(managerDispatchMob, navigation);
 			InitializeComponent ();
             BindingContext = this.activeMV;
-		}
+        }
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {

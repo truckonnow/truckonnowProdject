@@ -46,6 +46,13 @@ namespace MDispatch.ViewModels.TAbbMV
             set => SetProperty(ref isRefr, value);
         }
 
+        private UnTimeOfInspection unTimeOfInspection = null;
+        public UnTimeOfInspection UnTimeOfInspection
+        {
+            get => unTimeOfInspection;
+            set => SetProperty(ref unTimeOfInspection, value);
+        }
+
         [Obsolete]
         public async void Init()
         {
@@ -68,6 +75,7 @@ namespace MDispatch.ViewModels.TAbbMV
                 else if (state == 3)
                 {
                     Shippings = shippings;
+                    UnTimeOfInspection = new UnTimeOfInspection(description);
                 }
                 else if (state == 4)
                 {

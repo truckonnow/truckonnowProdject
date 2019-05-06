@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Ansuria.XFGloss">
+      <Version>1.1.3</Version>
+    </PackageReference>
     <PackageReference Include="DLToolkit.Forms.Controls.FlowListView">
       <Version>2.0.11</Version>
     </PackageReference>
@@ -103,6 +106,7 @@
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="NewrRender\CameraPageRender.cs" />
+    <Compile Include="NewrRender\Gradient\GradientViewRenderer.cs" />
     <Compile Include="NewrRender\ImageRender\ImageSizeRender.cs" />
     <Compile Include="NewrRender\ImageRender\RezizeImgRender.cs" />
     <Compile Include="NewrRender\Orientation\OrientationHandler.cs" />
