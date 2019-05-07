@@ -1,4 +1,6 @@
-﻿namespace DaoModels.DAO.Models
+﻿using System.Collections.Generic;
+
+namespace DaoModels.DAO.Models
 {
     public class Driver
     {
@@ -16,6 +18,6 @@
         public bool IsInspectionDriver { get; set; }
         public bool IsInspectionToDayDriver { get; set; }
         public Geolocations geolocations { get; set; }
-        public InspectionDriver InspectionDriver { get; set; }
+        public List<InspectionDriver> InspectionDrivers { get; set; }
     }
 }

@@ -19,6 +19,35 @@ namespace ApiMobaileServise.Servise
             context = new Context();
         }
 
+        private async Task<bool> ChechToDayInspactionInDb(string token)
+        {
+            bool isToDayInspaction = false;
+            context.Drivers.Load();
+            context.InspectionDrivers.Load();
+            Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
+            if (driver.InspectionDrivers != null && driver.InspectionDrivers.Count != 0)
+            {
+                DateTime dateTime = Convert.ToDateTime(driver.InspectionDrivers.Last().Date);
+                if(dateTime.Day < DateTime.Now.Day)
+                {
+                    isToDayInspaction = false;
+                    driver.IsInspectionToDayDriver = false;
+                }
+                else
+                {
+                    isToDayInspaction = true;
+                    driver.IsInspectionToDayDriver = true;
+                }
+            }
+            else
+            {
+                isToDayInspaction = false; 
+                driver.IsInspectionToDayDriver = false;
+            }
+            await context.SaveChangesAsync();
+            return isToDayInspaction;
+        }
+
         public async void SaveGPSLocationData(string token, Geolocations geolocations)
         {
             context.Drivers.Load();
@@ -30,6 +59,7 @@ namespace ApiMobaileServise.Servise
 
         public async void SaveTokenStoreinDb(string token, string tokenStore)
         {
+            context.Drivers.Load();
             Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
             driver.TokenShope = tokenStore;
             await context.SaveChangesAsync();

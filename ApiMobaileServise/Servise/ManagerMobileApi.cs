@@ -19,6 +19,11 @@ namespace ApiMobaileServise.Servise
             CheckAndCreatedFolder();
         }
 
+        private bool ChechToDayInspaction(string token)
+        {
+
+        }
+
         public void SaveGPSLocationData(string token, string longitude, string latitude)
         {
             Geolocations geolocations = new Geolocations();
