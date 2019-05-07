@@ -3,8 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDispatch.VidgetFolder.View.FullPhotoTruck">
     <ContentPage.Content>
-        <StackLayout>
-            
-        </StackLayout>
+        <AbsoluteLayout x:Name="laAbsul">
+            <Image x:Name="SelectPhoto" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"/>
+            <Image x:Name="paternPhoto" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" />
+            <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" BackgroundColor="#E6E6E6"
+                         AbsoluteLayout.LayoutBounds="1, 0, 1, 44" Opacity="0.7" Padding="7">
+                <Image Source="BackIconpage.png" HeightRequest="20" WidthRequest="20">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label x:Name="NameSelectPhoto" Text="{Binding NameLayute}" TextColor="Black" Margin="5"/>
+                <Button x:Name="btnAddPhoto" Text="Add Photo" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="79"  HorizontalOptions="EndAndExpand" />
+                <Button x:Name="btnNext" IsVisible="False" Text="Next" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="50"  />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HeightRequest="70" AbsoluteLayout.LayoutFlags="PositionProportional,HeightProportional"
+                          AbsoluteLayout.LayoutBounds="0, 1, 55, 0.9" Padding="7" Opacity="0.8">
+                <StackLayout Margin="2">
+                    <Frame Padding="2" BorderColor="Black">
+                        <Image Source="{Binding ImageSource}" HeightRequest="40" WidthRequest="40" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout Margin="2">
+                    <Frame Padding="2" BorderColor="Black">
+                        <Image Source="{Binding ImageSourceTake}" HeightRequest="40" WidthRequest="40" />
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,6 +1,7 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.Service.Net;
+using MDispatch.VidgetFolder.View;
 using MDispatch.View.GlobalDialogView;
 using Plugin.Settings;
 using Prism.Commands;
@@ -20,6 +21,7 @@ namespace MDispatch.ViewModels.TAbbMV
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation { get; set; }
         public DelegateCommand RefreshCommand { get; set; }
+        public DelegateCommand GoToInspectionDriveCommand { get; set; }
         public InitDasbordDelegate initDasbordDelegate;
 
         public ActiveMV(ManagerDispatchMob managerDispatchMob, INavigation navigation)
@@ -29,6 +31,7 @@ namespace MDispatch.ViewModels.TAbbMV
             initDasbordDelegate = Init;
             this.managerDispatchMob = managerDispatchMob;
             RefreshCommand = new DelegateCommand(Init);
+            GoToInspectionDriveCommand = new DelegateCommand(GoToInspectionDrive);
             Init();
         }
 
@@ -83,6 +86,11 @@ namespace MDispatch.ViewModels.TAbbMV
                 }
             }
             IsRefr = false;
+        }
+
+        private async void GoToInspectionDrive()
+        {
+            await Navigation.PushAsync(new FullPhotoTruck(managerDispatchMob, UnTimeOfInspection.IdDriver));
         }
     }
 }

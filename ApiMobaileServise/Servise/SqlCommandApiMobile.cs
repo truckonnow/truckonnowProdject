@@ -301,6 +301,7 @@ namespace ApiMobaileServise.Servise
                     statusAndTimeInInspection = "false,false,0";
                 }
             }
+            statusAndTimeInInspection += $",{driver.Id}";
             return statusAndTimeInInspection;
         }
 

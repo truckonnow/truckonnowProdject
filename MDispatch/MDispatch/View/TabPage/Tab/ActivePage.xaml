@@ -7,6 +7,9 @@
         <StackLayout>
             <Frame Margin="0, 5, 0, 5" Padding="0" BackgroundColor="White" HasShadow="True" CornerRadius="2" OutlineColor="#C3CBCD" IsVisible="{Binding UnTimeOfInspection.IsInspection}">
                 <StackLayout Orientation="Horizontal" HeightRequest="100">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToInspectionDriveCommand}"/>
+                    </StackLayout.GestureRecognizers>
                     <FlexLayout Direction="Column">
                         <BoxView WidthRequest="8" BackgroundColor="#74DF00" Color="{Binding UnTimeOfInspection.BoxColor6}"/>
                         <BoxView WidthRequest="8" BackgroundColor="#74DF00" Color="{Binding UnTimeOfInspection.BoxColor5}"/>

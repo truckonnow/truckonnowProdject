@@ -7,6 +7,7 @@ namespace MDispatch.Models
     {
         public bool IsInspection { get; private set; }
         public string TimeOfInspection { get; private set; }
+        public string IdDriver { get; private set; }
 
         public UnTimeOfInspection(string statusInspection)
         {
@@ -16,6 +17,7 @@ namespace MDispatch.Models
             IsInspectionToDayDriver = Convert.ToBoolean(arrData[0]);
             IsInspectionDriver = Convert.ToBoolean(arrData[1]);
             TimeOfInspection = arrData[2] + " Hours";
+            IdDriver = arrData[3];
             if (IsInspectionDriver)
             {
                 if(IsInspectionToDayDriver)

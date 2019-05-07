@@ -14,15 +14,44 @@ namespace MDispatch.Vidget.VM
     {
         private ManagerDispatchMob managerDispatchMob = null;
         private INavigation navigation = null;
+        public TruckCar truckCar = null;
 
-        public FullPhotoTruckVM(ManagerDispatchMob managerDispatchMob, INavigation navigation, int idDriver)
+        public FullPhotoTruckVM(ManagerDispatchMob managerDispatchMob, INavigation navigation, string idDriver)
         {
             this.managerDispatchMob = managerDispatchMob;
             this.navigation = navigation;
+            InspectionDriver = new InspectionDriver();
+            truckCar = new TruckCar();
             IdDriver = idDriver;
+            NameLayute = truckCar.GetNameTruck(1);
+            truckCar.GetModalAlert(1);
+            truckCar.Orinteble(1);
         }
 
-        public int  IdDriver { get; set; }
+        public string IdDriver { get; set; }
+
+        private string nameLayute = null;
+        public string NameLayute
+        {
+            get => nameLayute;
+            set => SetProperty(ref nameLayute, value);
+        }
+
+        private ImageSource imageSource = null;
+        public ImageSource ImageSource
+        { 
+            get => imageSource;
+            set => SetProperty(ref imageSource, value);
+        }
+
+        private ImageSource imageSourceTake = null;
+        public ImageSource ImageSourceTake
+        {
+            get => imageSourceTake;
+            set => SetProperty(ref imageSourceTake, value);
+        }
+
+
 
         public InspectionDriver InspectionDriver { get; set; }
 
