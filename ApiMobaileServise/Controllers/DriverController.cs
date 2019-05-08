@@ -3,6 +3,7 @@ using ApiMobaileServise.Servise;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Threading.Tasks;
 
 namespace ApiMobaileServise.Controllers
 {
@@ -13,7 +14,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("CheckInspectionDriver")]
-        public string CheckInspecktionDriver(string token, string idVe, string jsonStrAsk, int type)
+        public async Task<string> CheckInspecktionDriver(string token, string idVe, string jsonStrAsk, int type)
         {
             string respons = null;
             if (token == null || token == "")
@@ -25,8 +26,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-
-                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", await managerMobileApi.ChechToDayInspaction(token)));
                 }
                 else
                 {

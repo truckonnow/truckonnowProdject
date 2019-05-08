@@ -19,9 +19,9 @@ namespace ApiMobaileServise.Servise
             CheckAndCreatedFolder();
         }
 
-        private bool ChechToDayInspaction(string token)
+        public async Task<bool> ChechToDayInspaction(string token)
         {
-
+            return await sqlCommandApiMobile.ChechToDayInspactionInDb(token);
         }
 
         public void SaveGPSLocationData(string token, string longitude, string latitude)

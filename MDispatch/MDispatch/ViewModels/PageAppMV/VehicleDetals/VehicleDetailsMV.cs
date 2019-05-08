@@ -37,7 +37,6 @@ namespace MDispatch.ViewModels.PageAppMV.VehicleDetals
         [System.Obsolete]
         private async void InitVehiclwInformation(int idVech)
         {
-            var sync = SynchronizationContext.Current;
             await PopupNavigation.PushAsync(new LoadPage(), true);
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;

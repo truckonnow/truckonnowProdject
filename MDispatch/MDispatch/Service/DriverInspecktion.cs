@@ -7,7 +7,7 @@ namespace MDispatch.Service
 {
     public class DriverInspecktion
     {
-        public int CheckInspectionDriver(string token, ref string description)
+        public int CheckInspectionDriver(string token, ref string description, ref bool isInspection)
         {
             IRestResponse response = null;
             string content = null;
@@ -31,11 +31,11 @@ namespace MDispatch.Service
             }
             else
             {
-                return GetData(content, ref description);
+                return GetData(content, ref description, ref isInspection);
             }
         }
 
-        private int GetData(string respJsonStr, ref string description)
+        private int GetData(string respJsonStr, ref string description, ref bool isInspection)
         {
             respJsonStr = respJsonStr.Replace("\\", "");
             respJsonStr = respJsonStr.Remove(0, 1);
@@ -45,6 +45,7 @@ namespace MDispatch.Service
             description = responseAppS.Value<string>("Description");
             if (status == "success")
             {
+                isInspection = Convert.ToBoolean(responseAppS.Value<bool>("ResponseStr"));
                 return 3;
             }
             else

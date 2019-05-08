@@ -303,7 +303,6 @@ namespace WebDispacher.Dao
 
         public Shipping GetShipping(string id)
         {
-            Init();
             return context.Shipping.FirstOrDefault(s => s.Id == id);
         }
 

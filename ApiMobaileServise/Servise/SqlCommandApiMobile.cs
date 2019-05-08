@@ -19,7 +19,7 @@ namespace ApiMobaileServise.Servise
             context = new Context();
         }
 
-        private async Task<bool> ChechToDayInspactionInDb(string token)
+        public async Task<bool> ChechToDayInspactionInDb(string token)
         {
             bool isToDayInspaction = false;
             context.Drivers.Load();

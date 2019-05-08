@@ -1,8 +1,9 @@
-﻿using MDispatch.Models;
+﻿  using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.Service.Net;
 using MDispatch.VidgetFolder.View;
 using MDispatch.View.GlobalDialogView;
+using MDispatch.ViewModels.TAbbMV.DialogAsk;
 using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -79,6 +80,10 @@ namespace MDispatch.ViewModels.TAbbMV
                 {
                     Shippings = shippings;
                     UnTimeOfInspection = new UnTimeOfInspection(description);
+                    if(UnTimeOfInspection.BoxColor6 == "#fb2e2e")
+                    {
+                        await PopupNavigation.PushAsync(new AskHint(this));
+                    }
                 }
                 else if (state == 4)
                 {
@@ -88,9 +93,41 @@ namespace MDispatch.ViewModels.TAbbMV
             IsRefr = false;
         }
 
-        private async void GoToInspectionDrive()
+        public async void GoToInspectionDrive()
         {
-            await Navigation.PushAsync(new FullPhotoTruck(managerDispatchMob, UnTimeOfInspection.IdDriver));
+            IsRefr = true;
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            bool isInspection = default;
+            int state = 0;
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.DriverWork("CheckInspeacktion", token, ref description, ref isInspection);
+                });
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, null));
+                }
+                else if (state == 3)
+                {
+                    if (isInspection)
+                    {
+                        Init();
+                    }
+                    else
+                    {
+                        await Navigation.PushAsync(new FullPhotoTruck(managerDispatchMob, UnTimeOfInspection.IdDriver));
+                    }
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
+            }
+            IsRefr = false;
         }
     }
 }

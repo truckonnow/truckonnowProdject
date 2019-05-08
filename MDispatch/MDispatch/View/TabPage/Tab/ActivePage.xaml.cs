@@ -1,6 +1,8 @@
 ﻿using MDispatch.Service;
 using MDispatch.View.PageApp;
 using MDispatch.ViewModels.TAbbMV;
+using MDispatch.ViewModels.TAbbMV.DialogAsk;
+using Rg.Plugins.Popup.Services;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -22,9 +24,11 @@ namespace MDispatch.View.TabPage.Tab
             BindingContext = this.activeMV;
         }
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
+
             StackLayout stackLayout = ((StackLayout)sender).FindByName<StackLayout>("st");
+
             if (SelectStackLayout != null)
             {
                 SelectStackLayout.BackgroundColor = Color.White;
@@ -33,25 +37,33 @@ namespace MDispatch.View.TabPage.Tab
             SelectStackLayout.BackgroundColor = Color.FromHex("#f5c8c8");
         }
 
+        [Obsolete]
         private async void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
         {
-            if (SelectStackLayout != null)
+            if (activeMV.UnTimeOfInspection.BoxColor6 == "#fb2e2e")
             {
-                SelectStackLayout.BackgroundColor = Color.White;
-                SelectStackLayout = null;
-            }
-            string idOrder = null;
-            StackLayout stackLayout = (StackLayout)sender;
-            Label idorderL = stackLayout.FindByName<Label>("idOrder");
-            if(idorderL != null)
-            {
-                idOrder = idorderL.Text;
+                await PopupNavigation.PushAsync(new AskHint(activeMV));
             }
             else
             {
-                idOrder = stackLayout.Parent.Parent.FindByName<Label>("idOrder").Text;
+                if (SelectStackLayout != null)
+                {
+                    SelectStackLayout.BackgroundColor = Color.White;
+                    SelectStackLayout = null;
+                }
+                string idOrder = null;
+                StackLayout stackLayout = (StackLayout)sender;
+                Label idorderL = stackLayout.FindByName<Label>("idOrder");
+                if (idorderL != null)
+                {
+                    idOrder = idorderL.Text;
+                }
+                else
+                {
+                    idOrder = stackLayout.Parent.Parent.FindByName<Label>("idOrder").Text;
+                }
+                await activeMV.Navigation.PushAsync(new InfoOrder(activeMV.managerDispatchMob, activeMV.Shippings.Find(s => s.Id == idOrder), activeMV.initDasbordDelegate));
             }
-            await activeMV.Navigation.PushAsync(new InfoOrder(activeMV.managerDispatchMob, activeMV.Shippings.Find(s => s.Id == idOrder), activeMV.initDasbordDelegate));
         }
 
         private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
