@@ -2,9 +2,13 @@
 using MDispatch.Service;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
+using Newtonsoft.Json;
 using Plugin.Settings;
+using Prism.Commands;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -15,26 +19,51 @@ namespace MDispatch.Vidget.VM
         private ManagerDispatchMob managerDispatchMob = null;
         private INavigation navigation = null;
         public TruckCar truckCar = null;
+        public DelegateCommand NextCommand { get; set; }
 
-        public FullPhotoTruckVM(ManagerDispatchMob managerDispatchMob, INavigation navigation, string idDriver)
+        public FullPhotoTruckVM(ManagerDispatchMob managerDispatchMob, INavigation navigation, string idDriver, int indexCurent)
         {
             this.managerDispatchMob = managerDispatchMob;
             this.navigation = navigation;
-            InspectionDriver = new InspectionDriver();
             truckCar = new TruckCar();
             IdDriver = idDriver;
-            NameLayute = truckCar.GetNameTruck(1);
-            truckCar.GetModalAlert(1);
-            truckCar.Orinteble(1);
+            IndexCurent = indexCurent;
+            NextCommand = new DelegateCommand(NextPage);
+            NameLayute = truckCar.GetNameTruck(IndexCurent);
+            truckCar.GetModalAlert(IndexCurent);
+            truckCar.Orinteble(IndexCurent);
         }
 
         public string IdDriver { get; set; }
+
+        private int IndexCurent { get; set; }
+
+        private bool isVisableNext = false;
+        public bool IsVisableNext
+        {
+            get => isVisableNext;
+            set => SetProperty(ref isVisableNext, value);
+        }
+
+        private bool isVisableAdd = true;
+        public bool IsVisableAdd
+        {
+            get => isVisableAdd;
+            set => SetProperty(ref isVisableAdd, value);
+        }
 
         private string nameLayute = null;
         public string NameLayute
         {
             get => nameLayute;
             set => SetProperty(ref nameLayute, value);
+        }
+
+        private ImageSource source = null;
+        public ImageSource Source
+        {
+            get => source;
+            set => SetProperty(ref source, value);
         }
 
         private ImageSource imageSource = null;
@@ -51,9 +80,43 @@ namespace MDispatch.Vidget.VM
             set => SetProperty(ref imageSourceTake, value);
         }
 
-
-
         public InspectionDriver InspectionDriver { get; set; }
+
+        public void AddPhoto(byte[] photoRes)
+        {
+            if(InspectionDriver == null)
+            {
+                InspectionDriver = new InspectionDriver();
+                InspectionDriver.PhotosTruck = new List<Photo>();
+            }
+            Photo photo = new Photo();
+            photo.Base64 = JsonConvert.SerializeObject(photoRes);
+            photo.path = $"../Photo/Driver/{IdDriver}/{IndexCurent}.jpg";
+            InspectionDriver.PhotosTruck.Add(photo);
+            Stream stream = new MemoryStream(photoRes);
+            ImageSourceTake = ImageSource.FromStream(() => { return stream; });
+            IsVisableAdd = false;
+            IsVisableNext = true;
+        }
+
+        private void NextPage()
+        {
+            if (IndexCurent == 45)
+            {
+
+            }
+            else
+            {
+                IndexCurent++;
+                NameLayute = truckCar.GetNameTruck(IndexCurent);
+                truckCar.GetModalAlert(IndexCurent);
+                truckCar.Orinteble(IndexCurent);
+                ImageSourceTake = null;
+                IsVisableAdd = true;
+                IsVisableNext = false;
+                Source = null;
+            }
+        }
 
         [System.Obsolete]
         private async void Init()

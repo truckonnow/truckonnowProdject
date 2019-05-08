@@ -1,6 +1,5 @@
 ﻿using MDispatch.NewElement;
 using MDispatch.View.Inspection.PickedUp;
-using MDispatch.ViewModels.InspectionMV.PickedUpMV;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

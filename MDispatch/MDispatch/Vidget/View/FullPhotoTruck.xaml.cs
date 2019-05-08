@@ -11,13 +11,13 @@ namespace MDispatch.VidgetFolder.View
     {
         private FullPhotoTruckVM fullPhotoTruckVM = null;
 
-        public FullPhotoTruck(ManagerDispatchMob managerDispatchMob, string idDriver)
+        public FullPhotoTruck(ManagerDispatchMob managerDispatchMob, string idDriver, int indexCurrent)
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-            fullPhotoTruckVM = new FullPhotoTruckVM(managerDispatchMob, Navigation, idDriver);
+            fullPhotoTruckVM = new FullPhotoTruckVM(managerDispatchMob, Navigation, idDriver, indexCurrent);
             BindingContext = fullPhotoTruckVM;
-            SelectPhoto.Source = fullPhotoTruckVM.ImageSource;
+            fullPhotoTruckVM.Source = fullPhotoTruckVM.ImageSource;
         }
 
         protected override bool OnBackButtonPressed()
@@ -31,6 +31,21 @@ namespace MDispatch.VidgetFolder.View
         {
             DependencyService.Get<IOrientationHandler>().ForceSensor();
             await Navigation.PopAsync();
+        }
+
+        private async void BtnAddPhoto_Clicked(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new Vidget.View.CameraPage(fullPhotoTruckVM));
+        }
+
+        private void TapGestureRecognizer_Tapped_1(object sender, System.EventArgs e)
+        {
+            fullPhotoTruckVM.Source = fullPhotoTruckVM.ImageSourceTake;
+        }
+
+        private void TapGestureRecognizer_Tapped_2(object sender, System.EventArgs e)
+        {
+            fullPhotoTruckVM.Source = fullPhotoTruckVM.ImageSource;
         }
     }
 }

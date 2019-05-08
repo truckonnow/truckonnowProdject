@@ -3,7 +3,6 @@ using MDispatch.NewElement;
 using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
 using MDispatch.Service.Net;
-using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection;
 using MDispatch.View.Inspection.PickedUp;
@@ -17,7 +16,6 @@ using Rg.Plugins.Popup.Services;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -193,10 +191,9 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             PhotoInspection.IndexPhoto = InderxPhotoInspektion;
             PhotoInspection.CurrentStatusPhoto = "PikedUp";
             Photo photo = new Photo();
-            string photoJson = JsonConvert.SerializeObject(PhotoInArrayByte);
             string pathIndePhoto = PhotoInspection.Photos.Count == 0 ? PhotoInspection.IndexPhoto.ToString() : $"{PhotoInspection.IndexPhoto}.{PhotoInspection.Photos.Count}";
             PhotoInspection.CurrentStatusPhoto = "PikedUp";
-            photo.Base64 = photoJson;
+            photo.Base64 = JsonConvert.SerializeObject(PhotoInArrayByte);
             photo.path = $"../Photo/{VehiclwInformation.Id}/PikedUp/PhotoInspection/{pathIndePhoto}.jpg";
             PhotoInspection.Photos.Add(photo);
         }

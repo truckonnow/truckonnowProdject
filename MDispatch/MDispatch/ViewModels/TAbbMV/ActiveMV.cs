@@ -1,4 +1,4 @@
-﻿  using MDispatch.Models;
+﻿using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.Service.Net;
 using MDispatch.VidgetFolder.View;
@@ -10,7 +10,6 @@ using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -119,7 +118,7 @@ namespace MDispatch.ViewModels.TAbbMV
                     }
                     else
                     {
-                        await Navigation.PushAsync(new FullPhotoTruck(managerDispatchMob, UnTimeOfInspection.IdDriver));
+                        await Navigation.PushAsync(new FullPhotoTruck(managerDispatchMob, UnTimeOfInspection.IdDriver, 1));
                     }
                 }
                 else if (state == 4)
