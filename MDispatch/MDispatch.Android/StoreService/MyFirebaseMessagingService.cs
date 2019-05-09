@@ -49,9 +49,16 @@ namespace MDispatch.Droid.StoreService
             else if (actionClick == "Oreder")
             {
                 Intent intent = new Intent(this, typeof(MainActivity));
-                const int pendingIntentId = 0;
+                const int pendingIntentId = 100;
                 PendingIntent.GetActivity(this, pendingIntentId, intent, PendingIntentFlags.OneShot);
                 pendingIntent = PendingIntent.GetActivity(this, 100, intent, PendingIntentFlags.OneShot);
+            }
+            else if (actionClick == "Driver")
+            {
+                Intent intent = new Intent(this, typeof(MainActivity));
+                const int pendingIntentId = 50;
+                PendingIntent.GetActivity(this, pendingIntentId, intent, PendingIntentFlags.OneShot);
+                pendingIntent = PendingIntent.GetActivity(this, 50, intent, PendingIntentFlags.OneShot);
             }
             return pendingIntent;
         }

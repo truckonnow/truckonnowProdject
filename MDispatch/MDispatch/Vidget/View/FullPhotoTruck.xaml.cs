@@ -3,6 +3,7 @@ using MDispatch.Service;
 using MDispatch.Vidget.VM;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static MDispatch.Service.ManagerDispatchMob;
 
 namespace MDispatch.VidgetFolder.View
 {
@@ -11,11 +12,11 @@ namespace MDispatch.VidgetFolder.View
     {
         private FullPhotoTruckVM fullPhotoTruckVM = null;
 
-        public FullPhotoTruck(ManagerDispatchMob managerDispatchMob, string idDriver, int indexCurrent)
+        public FullPhotoTruck(ManagerDispatchMob managerDispatchMob, string idDriver, int indexCurrent, InitDasbordDelegate initDasbordDelegate = null)
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-            fullPhotoTruckVM = new FullPhotoTruckVM(managerDispatchMob, Navigation, idDriver, indexCurrent);
+            fullPhotoTruckVM = new FullPhotoTruckVM(managerDispatchMob, idDriver, indexCurrent, Navigation, initDasbordDelegate);
             BindingContext = fullPhotoTruckVM;
             fullPhotoTruckVM.Source = fullPhotoTruckVM.ImageSource;
         }

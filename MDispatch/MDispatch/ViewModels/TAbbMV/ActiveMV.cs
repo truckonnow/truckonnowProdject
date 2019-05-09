@@ -118,7 +118,7 @@ namespace MDispatch.ViewModels.TAbbMV
                     }
                     else
                     {
-                        await Navigation.PushAsync(new FullPhotoTruck(managerDispatchMob, UnTimeOfInspection.IdDriver, 1));
+                        await Navigation.PushAsync(new FullPhotoTruck(managerDispatchMob, UnTimeOfInspection.IdDriver, 1, initDasbordDelegate));
                     }
                 }
                 else if (state == 4)

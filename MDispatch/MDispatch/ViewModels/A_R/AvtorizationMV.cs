@@ -75,14 +75,14 @@ namespace MDispatch.ViewModels
             }
             else if(state == 3)
             {
-                CrossSettings.Current.AddOrUpdateValue("Token", token);
-                Application.Current.MainPage = new NavigationPage(new TabPage(managerDispatchMob));
                 App.isAvtorization = true;
-                Task.Run(async () =>
+                CrossSettings.Current.AddOrUpdateValue("Token", token);
+                await Task.Run(() =>
                 {
-                    await Utils.StartListening();
                     DependencyService.Get<IStore>().OnTokenRefresh();
+                    _ = Utils.StartListening();
                 });
+                Application.Current.MainPage = new NavigationPage(new TabPage(managerDispatchMob));
             }
             else if(state == 4)
             {

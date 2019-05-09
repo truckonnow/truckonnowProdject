@@ -14,7 +14,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("CheckInspectionDriver")]
-        public async Task<string> CheckInspecktionDriver(string token, string)
+        public async Task<string> CheckInspecktionDriver(string token)
         {
             string respons = null;
             if (token == null || token == "")

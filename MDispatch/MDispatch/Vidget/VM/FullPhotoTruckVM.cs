@@ -1,7 +1,9 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.View;
+using MDispatch.View.A_R;
 using MDispatch.View.GlobalDialogView;
+using MDispatch.View.TabPage;
 using Newtonsoft.Json;
 using Plugin.Settings;
 using Prism.Commands;
@@ -23,7 +25,7 @@ namespace MDispatch.Vidget.VM
         public DelegateCommand NextCommand { get; set; }
         private InitDasbordDelegate initDasbordDelegate = null;
 
-        public FullPhotoTruckVM(ManagerDispatchMob managerDispatchMob, INavigation navigation, string idDriver, int indexCurent, InitDasbordDelegate initDasbordDelegate)
+        public FullPhotoTruckVM(ManagerDispatchMob managerDispatchMob, string idDriver, int indexCurent, INavigation navigation, InitDasbordDelegate initDasbordDelegate = null)
         {
             this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
@@ -184,5 +186,7 @@ namespace MDispatch.Vidget.VM
                 await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
             }
         }
+
+        
     }
 }

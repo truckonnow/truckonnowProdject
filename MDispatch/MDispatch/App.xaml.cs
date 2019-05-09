@@ -1,8 +1,11 @@
 using MDispatch.Service.GeloctionGPS;
 using MDispatch.StoreNotify;
+using MDispatch.VidgetFolder.View;
 using MDispatch.View.A_R;
 using MDispatch.View.TabPage;
+using MDispatch.View.TabPage.Tab;
 using Plugin.Settings;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -15,12 +18,8 @@ namespace MDispatch
         public static bool isStart;
             
         public App ()
-		{
-			InitializeComponent();
-        }
-
-		protected override async void OnStart ()
         {
+			InitializeComponent();
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             if (token == "")
             {
@@ -32,12 +31,43 @@ namespace MDispatch
                 isAvtorization = true;
                 MainPage = new NavigationPage(new TabPage(new Service.ManagerDispatchMob()));
             }
+        }
+
+        //private async void SelecterPage(bool isNotify)
+        //{
+        //    if(isNotify)
+        //    {
+        //        TabPage tabPage = new TabPage(new Service.ManagerDispatchMob());
+        //        NavigationPage navigation = (NavigationPage)tabPage.Children.ToList()[0];
+        //        ActivePage activePage = (ActivePage)navigation.Navigation.NavigationStack[0];
+        //        MainPage = new NavigationPage(tabPage);
+        //       // await MainPage.Navigation.PushAsync(new FullPhotoTruck(activePage.activeMV.managerDispatchMob, activePage.activeMV.UnTimeOfInspection.IdDriver, 1, activePage.activeMV.initDasbordDelegate));
+        //    }
+        //    else
+        //    {
+        //        string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+        //        if (token == "")
+        //        {
+        //            isAvtorization = false;
+        //            MainPage = new NavigationPage(new Avtorization());
+        //        }
+        //        else
+        //        {
+        //            isAvtorization = true;
+        //            MainPage = new NavigationPage(new TabPage(new Service.ManagerDispatchMob()));
+        //        }
+        //    }
+        //}
+
+		protected override async void OnStart ()
+        {
+            
             if (isAvtorization)
             {
-                Task.Run(async () =>
-                {
-                    DependencyService.Get<IStore>().OnTokenRefresh();
-                });
+                //Task.Run(async () =>
+                //{
+                //    DependencyService.Get<IStore>().OnTokenRefresh();
+                //});
                 isStart = true;
                 await Utils.StartListening();
             }
