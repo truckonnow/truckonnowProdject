@@ -29,6 +29,25 @@ namespace MDispatch.Service
             return stateDriver;
         }
 
+        public int DriverWork(string typeDriver, string token, ref string description, string idDriver, InspectionDriver inspectionDriver = null)
+        {
+            driverInspecktion = new DriverInspecktion();
+            int stateDriver = 1;
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                if (typeDriver == "SetInspectionDriver")
+                {
+                    stateDriver = driverInspecktion.SetInspectionDriver(token, ref description, inspectionDriver, idDriver);
+                }
+                else if (typeDriver == "UpdateInspectionDriver")
+                {
+                    stateDriver = driverInspecktion.UpdateInspectionDriver(token, ref description, idDriver);
+                }
+            }
+            driverInspecktion = null;
+            return stateDriver;
+        }
+
         public int A_RWork(string typeR_A, string login, string password, ref string description, ref string token)
         {
             a_R = new A_R();

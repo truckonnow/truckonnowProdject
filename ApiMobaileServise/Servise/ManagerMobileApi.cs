@@ -19,6 +19,17 @@ namespace ApiMobaileServise.Servise
             CheckAndCreatedFolder();
         }
 
+        public void SetInspectionDriver(string idDriver, string inspectionDriverStr)
+        {
+            InspectionDriver inspectionDriver = JsonConvert.DeserializeObject<InspectionDriver>(inspectionDriverStr);
+            sqlCommandApiMobile.SetInspectionDriverInDb(idDriver, inspectionDriver);
+        }
+
+        public void UpdateInspectionDriver(string idDriver)
+        {
+            sqlCommandApiMobile.UpdateInspectionDriver(idDriver);
+        }
+
         public async Task<bool> ChechToDayInspaction(string token)
         {
             return await sqlCommandApiMobile.ChechToDayInspactionInDb(token);

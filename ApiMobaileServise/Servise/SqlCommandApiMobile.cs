@@ -19,6 +19,26 @@ namespace ApiMobaileServise.Servise
             context = new Context();
         }
 
+        public async void SetInspectionDriverInDb(string idDriver, InspectionDriver inspectionDriver)
+        {
+            context.InspectionDrivers.Load();
+            Driver driver = await context.Drivers.FirstOrDefaultAsync(d => d.Id == Convert.ToUInt32(idDriver));
+            if(driver.InspectionDrivers == null)
+            {
+                driver.InspectionDrivers = new List<InspectionDriver>();
+            }
+            driver.InspectionDrivers.Add(inspectionDriver);
+            await context.SaveChangesAsync();
+        }
+
+        public async void UpdateInspectionDriver(string idDriver)
+        {
+            Driver driver = await context.Drivers.FirstOrDefaultAsync(d => d.Id == Convert.ToUInt32(idDriver));
+            driver.IsInspectionDriver = true;
+            driver.IsInspectionToDayDriver = true;
+            await context.SaveChangesAsync();
+        }
+
         public async Task<bool> ChechToDayInspactionInDb(string token)
         {
             bool isToDayInspaction = false;

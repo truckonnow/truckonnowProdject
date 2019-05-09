@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using static MDispatch.Service.ManagerDispatchMob;
 
 namespace MDispatch.Vidget.VM
 {
@@ -20,9 +21,11 @@ namespace MDispatch.Vidget.VM
         private INavigation navigation = null;
         public TruckCar truckCar = null;
         public DelegateCommand NextCommand { get; set; }
+        private InitDasbordDelegate initDasbordDelegate = null;
 
-        public FullPhotoTruckVM(ManagerDispatchMob managerDispatchMob, INavigation navigation, string idDriver, int indexCurent)
+        public FullPhotoTruckVM(ManagerDispatchMob managerDispatchMob, INavigation navigation, string idDriver, int indexCurent, InitDasbordDelegate initDasbordDelegate)
         {
+            this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
             this.navigation = navigation;
             truckCar = new TruckCar();
@@ -99,11 +102,12 @@ namespace MDispatch.Vidget.VM
             IsVisableNext = true;
         }
 
-        private void NextPage()
+        [System.Obsolete]
+        private async void NextPage()
         {
             if (IndexCurent == 45)
             {
-
+                UpdateInspectionDriver();
             }
             else
             {
@@ -119,7 +123,7 @@ namespace MDispatch.Vidget.VM
         }
 
         [System.Obsolete]
-        private async void Init()
+        private async void UpdateInspectionDriver()
         {
             await PopupNavigation.PushAsync(new LoadPage(), true);
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
@@ -128,7 +132,39 @@ namespace MDispatch.Vidget.VM
             VehiclwInformation vehiclwInformation1 = null;
             await Task.Run(() =>
             {
-                //state = managerDispatchMob.OrderWork("GetVechicleInffo", idVech, ref vehiclwInformation1, token, ref description);
+                state = managerDispatchMob.DriverWork("UpdateInspectionDriver", token, ref description, IdDriver);
+            });
+            await PopupNavigation.PopAsync(true);
+            if (state == 1)
+            {
+                await PopupNavigation.PushAsync(new Errror("Not Network", null));
+            }
+            else if (state == 2)
+            {
+                await PopupNavigation.PushAsync(new Errror(description, null));
+            }
+            else if (state == 3)
+            {
+                initDasbordDelegate.Invoke();
+                await navigation.PopToRootAsync();
+                await Task.Run(() => SetInspectionDriver());
+            }
+            else if (state == 4)
+            {
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+            }
+        }
+
+        [System.Obsolete]
+        private async void SetInspectionDriver()
+        {
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            VehiclwInformation vehiclwInformation1 = null;
+            await Task.Run(() =>
+            {
+                state = managerDispatchMob.DriverWork("SetInspectionDriver", token, ref description, IdDriver, InspectionDriver);
             });
             await PopupNavigation.PopAsync(true);
             if (state == 1)
