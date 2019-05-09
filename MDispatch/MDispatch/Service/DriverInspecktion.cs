@@ -79,6 +79,7 @@ namespace MDispatch.Service
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 request.AddParameter("idDriver", idDriver);
+                response = client.Execute(request);
                 content = response.Content;
             }
             catch (Exception)

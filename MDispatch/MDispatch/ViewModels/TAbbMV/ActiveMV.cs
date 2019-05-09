@@ -32,6 +32,7 @@ namespace MDispatch.ViewModels.TAbbMV
             this.managerDispatchMob = managerDispatchMob;
             RefreshCommand = new DelegateCommand(Init);
             GoToInspectionDriveCommand = new DelegateCommand(GoToInspectionDrive);
+            
             Init();
         }
 
@@ -49,7 +50,7 @@ namespace MDispatch.ViewModels.TAbbMV
             set => SetProperty(ref isRefr, value);
         }
 
-        private UnTimeOfInspection unTimeOfInspection = null;
+        private UnTimeOfInspection unTimeOfInspection = new UnTimeOfInspection();
         public UnTimeOfInspection UnTimeOfInspection
         {
             get => unTimeOfInspection;
@@ -79,7 +80,7 @@ namespace MDispatch.ViewModels.TAbbMV
                 {
                     Shippings = shippings;
                     UnTimeOfInspection = new UnTimeOfInspection(description);
-                    if(UnTimeOfInspection.BoxColor6 == "#fb2e2e")
+                    if(UnTimeOfInspection.BoxColor6 == "#74DF00")
                     {
                         await PopupNavigation.PushAsync(new AskHint(this));
                     }

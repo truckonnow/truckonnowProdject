@@ -5,33 +5,36 @@ namespace MDispatch.Models
 {
     public class UnTimeOfInspection : BindableBase
     {
-        public bool IsInspection { get; private set; }
+        public bool IsInspection { get; private set; } = false;
         public string TimeOfInspection { get; private set; }
         public string IdDriver { get; private set; }
 
-        public UnTimeOfInspection(string statusInspection)
+        public UnTimeOfInspection(string statusInspection = null)
         {
             bool IsInspectionDriver;
             bool IsInspectionToDayDriver;
-            string[] arrData = statusInspection.Split(',');
-            IsInspectionToDayDriver = Convert.ToBoolean(arrData[0]);
-            IsInspectionDriver = Convert.ToBoolean(arrData[1]);
-            TimeOfInspection = arrData[2] + " Hours";
-            IdDriver = arrData[3];
-            if (IsInspectionDriver)
+            if (statusInspection != null)
             {
-                if(IsInspectionToDayDriver)
+                string[] arrData = statusInspection.Split(',');
+                IsInspectionToDayDriver = Convert.ToBoolean(arrData[0]);
+                IsInspectionDriver = Convert.ToBoolean(arrData[1]);
+                TimeOfInspection = arrData[2] + " Hours";
+                IdDriver = arrData[3];
+                if (IsInspectionDriver)
                 {
-                    IsInspection = false;
+                    if (IsInspectionToDayDriver)
+                    {
+                        IsInspection = false;
+                    }
+                    else
+                    {
+                        IsInspection = true;
+                    }
                 }
                 else
                 {
                     IsInspection = true;
                 }
-            }
-            else
-            {
-                IsInspection = true;
             }
         }
 
@@ -47,7 +50,7 @@ namespace MDispatch.Models
         {
             get
             {
-                string color = null;
+                string color = "#FFFFFF";
                 if(TimeOfInspection == "2 Hours" || IsInspection)
                 {
                     color = "#fb2e2e";
@@ -64,7 +67,7 @@ namespace MDispatch.Models
         {
             get
             {
-                string color = null;
+                string color = "#FFFFFF";
                 if (TimeOfInspection == "3 Hours" || IsInspection)
                 {
                     color = "#fb2e2e";
@@ -85,7 +88,7 @@ namespace MDispatch.Models
         {
             get
             {
-                string color = null;
+                string color = "#FFFFFF";
                 if (TimeOfInspection == "4 Hours" || IsInspection)
                 {
                     color = "#fb2e2e";
@@ -106,7 +109,7 @@ namespace MDispatch.Models
         {
             get
             {
-                string color = null;
+                string color = "#FFFFFF";
                 if (TimeOfInspection == "5 Hours" || IsInspection)
                 {
                     color = "#fb2e2e";
@@ -127,7 +130,7 @@ namespace MDispatch.Models
         {
             get
             {
-                string color = null;
+                string color = "#FFFFFF";
                 if (TimeOfInspection == "6 Hours" || IsInspection)
                 {
                     color = "#fb2e2e";
@@ -148,7 +151,7 @@ namespace MDispatch.Models
         {
             get
             {
-                string color = null;
+                string color = "#FFFFFF";
                 if (TimeOfInspection == "7 Hours" || IsInspection)
                 {
                     color = "#fb2e2e";
@@ -169,7 +172,7 @@ namespace MDispatch.Models
         {
             get
             {
-                string status = null;
+                string status = "";
                 if(IsInspection)
                 {
                     status = "Pass inspection now";

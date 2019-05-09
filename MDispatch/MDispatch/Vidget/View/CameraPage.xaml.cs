@@ -1,5 +1,6 @@
 ﻿using MDispatch.NewElement;
 using MDispatch.Vidget.VM;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace MDispatch.Vidget.View
@@ -13,6 +14,7 @@ namespace MDispatch.Vidget.View
         {
             this.fullPhotoTruckVM = fullPhotoTruckVM;
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)

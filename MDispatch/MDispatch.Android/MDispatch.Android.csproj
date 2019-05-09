@@ -104,7 +104,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InspectionActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="NewrRender\CameraPageRender.cs" />
     <Compile Include="NewrRender\Gradient\GradientViewRenderer.cs" />
