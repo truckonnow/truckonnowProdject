@@ -25,6 +25,12 @@ namespace ApiMobaileServise.Servise
             sqlCommandApiMobile.SetInspectionDriverInDb(idDriver, inspectionDriver);
         }
 
+        public void SaveInspactionDriver(string idDriver, string photoJson, int indexPhoto)
+        {
+            Photo photo = JsonConvert.DeserializeObject<Photo>(photoJson);
+            sqlCommandApiMobile.SaveInspectionDriverInDb(idDriver, photo, indexPhoto);
+        }
+
         public void UpdateInspectionDriver(string idDriver)
         {
             sqlCommandApiMobile.UpdateInspectionDriver(idDriver);

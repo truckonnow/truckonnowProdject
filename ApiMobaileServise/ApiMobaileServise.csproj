@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DaoModels\DaoModels.csproj" />
+    <ProjectReference Include="..\MDispatch\MDispatch\MDispatch.csproj" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties Properties_4launchSettings_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>

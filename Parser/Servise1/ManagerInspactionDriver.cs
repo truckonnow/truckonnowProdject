@@ -38,13 +38,13 @@ namespace Parser.Servise1
                 while (true)
                 {
                     List<Driver> drivers = sqlCommandParser.GetDriverInDb();
+                    if (CheckTimeZeroTime() && drivers != null)
+                    {
+                        RefreshInspectionTodayTimeDriver(drivers);
+                    }
                     if (CheckTime() && drivers != null)
                     {
                         RefreshInspectionTimeDriver(drivers);
-                    }
-                    else if (CheckTimeZeroTime() && drivers != null)
-                    {
-                        RefreshInspectionTodayTimeDriver(drivers);
                     }
                     Thread.Sleep(horseInmMiliSeconds);
                 }
@@ -55,12 +55,12 @@ namespace Parser.Servise1
         {
             foreach (var driver in drivers)
             {
-                //if (!driver.IsInspectionToDayDriver)
-                //{
+                if (!driver.IsInspectionToDayDriver)
+                {
                     LogEr.Logerr("Info1", $"check on the driver \"{driver.Id}\" to pass inspection", "RefreshInspectionTimeDriver", DateTime.Now.ToShortTimeString());
                     sqlCommandParser.RefreshInspectionDriverInDb(driver.Id);
                     SendNotyfyInspactionDrive(driver.TokenShope, "Truck Inspection", "Immediately go truck inspection or else you will not be able to continue working");
-               // }
+                }
             }
         }
 
@@ -77,7 +77,7 @@ namespace Parser.Servise1
         private bool CheckTime()
         {
             bool isTime = false;
-            if(11 <= DateTime.Now.Hour && 14 >= DateTime.Now.Hour)
+            if(11 <= DateTime.Now.Hour && 12 >= DateTime.Now.Hour)
             {
                 isTime = true;
             }

@@ -20,19 +20,21 @@
             <StackLayout  HeightRequest="70" AbsoluteLayout.LayoutFlags="PositionProportional,HeightProportional"
                           AbsoluteLayout.LayoutBounds="0, 1, 55, 0.9" Padding="7" Opacity="0.8">
                 <StackLayout Margin="2">
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2"/>
-                    </StackLayout.GestureRecognizers>
                     <Frame Padding="2" BorderColor="Black">
-                        <Image Source="{Binding ImageSource}" HeightRequest="40" WidthRequest="40" />
+                        <Image Source="{Binding ImageSource}" HeightRequest="40" WidthRequest="40" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2"/>
+                            </Image.GestureRecognizers>
+                        </Image>
                     </Frame>
                 </StackLayout>
                 <StackLayout Margin="2">
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
-                    </StackLayout.GestureRecognizers>
                     <Frame Padding="2" BorderColor="Black">
-                        <Image Source="{Binding ImageSourceTake}" HeightRequest="40" WidthRequest="40" />
+                        <Image Source="{Binding ImageSourceTake}" HeightRequest="40" WidthRequest="40" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                            </Image.GestureRecognizers>
+                        </Image>
                     </Frame>
                 </StackLayout>
             </StackLayout>

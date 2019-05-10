@@ -36,6 +36,37 @@ namespace MDispatch.Service
             }
         }
 
+        public int SaveInspactionDriver(string token, ref string description, string idDriver, Photo photo, int indexPhoto)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                string photoJson = JsonConvert.SerializeObject(photo);
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
+                RestRequest request = new RestRequest("Mobile/Driver/SaveInspactionDriver", Method.POST);
+                request.AddHeader("Accept", "application/json");
+                request.AddParameter("token", token);
+                request.AddParameter("idDriver", idDriver);
+                request.AddParameter("photoJson", photoJson);
+                request.AddParameter("indexPhoto", indexPhoto);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description);
+            }
+        }
+
         public int SetInspectionDriver(string token, ref string description, InspectionDriver inspectionDriver, string idDriver)
         {
             IRestResponse response = null;

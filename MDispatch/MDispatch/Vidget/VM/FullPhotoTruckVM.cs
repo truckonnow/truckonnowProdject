@@ -1,15 +1,15 @@
 ﻿using MDispatch.Models;
+using MDispatch.NewElement;
 using MDispatch.Service;
+using MDispatch.Service.Net;
+using MDispatch.VidgetFolder.View;
 using MDispatch.View;
-using MDispatch.View.A_R;
 using MDispatch.View.GlobalDialogView;
-using MDispatch.View.TabPage;
 using Newtonsoft.Json;
 using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -85,19 +85,14 @@ namespace MDispatch.Vidget.VM
             set => SetProperty(ref imageSourceTake, value);
         }
 
-        public InspectionDriver InspectionDriver { get; set; }
+        public Photo Photo { get; set; }
 
         public void AddPhoto(byte[] photoRes)
         {
-            if(InspectionDriver == null)
-            {
-                InspectionDriver = new InspectionDriver();
-                InspectionDriver.PhotosTruck = new List<Photo>();
-            }
             Photo photo = new Photo();
             photo.Base64 = JsonConvert.SerializeObject(photoRes);
             photo.path = $"../Photo/Driver/{IdDriver}/{IndexCurent}.jpg";
-            InspectionDriver.PhotosTruck.Add(photo);
+            Photo = photo; 
             Stream stream = new MemoryStream(photoRes);
             ImageSourceTake = ImageSource.FromStream(() => { return stream; });
             IsVisableAdd = false;
@@ -107,20 +102,52 @@ namespace MDispatch.Vidget.VM
         [System.Obsolete]
         private async void NextPage()
         {
-            if (IndexCurent == 45)
+            bool isEndInspection = false;
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
             {
-                UpdateInspectionDriver();
-            }
-            else
-            {
-                IndexCurent++;
-                NameLayute = truckCar.GetNameTruck(IndexCurent);
-                truckCar.GetModalAlert(IndexCurent);
-                truckCar.Orinteble(IndexCurent);
-                ImageSourceTake = null;
-                IsVisableAdd = true;
-                IsVisableNext = false;
-                Source = null;
+                if (IndexCurent < 45)
+                {
+                    isEndInspection = true;
+                    FullPhotoTruck fullPhotoTruck = new FullPhotoTruck(managerDispatchMob, IdDriver, IndexCurent + 1, initDasbordDelegate);
+                    await navigation.PushAsync(fullPhotoTruck);
+                }
+                else
+                {
+                    DependencyService.Get<IOrientationHandler>().ForceSensor();
+                    UpdateInspectionDriver();
+                    initDasbordDelegate.Invoke();
+                    await navigation.PopToRootAsync();
+                }
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.AskWork("SaveInspactionDriver", token, IdDriver, Photo, ref description, IndexCurent);
+                });
+                if (state == 1)
+                {
+                    await navigation.PopAsync();
+                    await PopupNavigation.PushAsync(new Errror("Not Network", null));
+                }
+                else if (state == 2)
+                {
+                    await navigation.PopAsync();
+                    await PopupNavigation.PushAsync(new Errror(description, null));
+                }
+                else if (state == 3)
+                {
+                    if (isEndInspection)
+                    {
+                        navigation.RemovePage(navigation.NavigationStack[1]);
+                    }
+                }
+                else if (state == 4)
+                {
+                    await navigation.PopAsync();
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
             }
         }
 
@@ -131,29 +158,33 @@ namespace MDispatch.Vidget.VM
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-            VehiclwInformation vehiclwInformation1 = null;
-            await Task.Run(() =>
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
             {
-                state = managerDispatchMob.DriverWork("UpdateInspectionDriver", token, ref description, IdDriver);
-            });
-            await PopupNavigation.PopAsync(true);
-            if (state == 1)
-            {
-                await PopupNavigation.PushAsync(new Errror("Not Network", null));
-            }
-            else if (state == 2)
-            {
-                await PopupNavigation.PushAsync(new Errror(description, null));
-            }
-            else if (state == 3)
-            {
-                initDasbordDelegate.Invoke();
-                await navigation.PopToRootAsync();
-                await Task.Run(() => SetInspectionDriver());
-            }
-            else if (state == 4)
-            {
-                await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.DriverWork("UpdateInspectionDriver", token, ref description, IdDriver);
+                });
+                await PopupNavigation.PopAsync(true);
+
+                if (state == 1)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Not Network", null));
+                }
+                else if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, null));
+                }
+                else if (state == 3)
+                {
+                    initDasbordDelegate.Invoke();
+                    await navigation.PopToRootAsync();
+                    //await Task.Run(() => SetInspectionDriver());
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
             }
         }
 
@@ -163,10 +194,9 @@ namespace MDispatch.Vidget.VM
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-            VehiclwInformation vehiclwInformation1 = null;
             await Task.Run(() =>
             {
-                state = managerDispatchMob.DriverWork("SetInspectionDriver", token, ref description, IdDriver, InspectionDriver);
+                //state = managerDispatchMob.DriverWork("SetInspectionDriver", token, ref description, IdDriver, InspectionDriver);
             });
             await PopupNavigation.PopAsync(true);
             if (state == 1)

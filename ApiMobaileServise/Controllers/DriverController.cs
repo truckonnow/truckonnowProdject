@@ -70,6 +70,35 @@ namespace ApiMobaileServise.Controllers
         }
 
         [HttpPost]
+        [Route("SaveInspactionDriver")]
+        public string SaveInspactionDriver(string token, string idDriver, string photoJson, int indexPhoto)
+        {
+            string respons = null;
+            if (token == null || token == "")
+            {
+                return JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
+            }
+            try
+            {
+                bool isToken = managerMobileApi.CheckToken(token);
+                if (isToken)
+                {
+                    managerMobileApi.SaveInspactionDriver(idDriver, photoJson, indexPhoto);
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
+                }
+                else
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "2", null));
+                }
+            }
+            catch (Exception)
+            {
+                respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
+            }
+            return respons;
+        }
+
+        [HttpPost]
         [Route("UpdateInspectionDriver")]
         public string UpdateInspectionDriver(string token, string idDriver)
         {

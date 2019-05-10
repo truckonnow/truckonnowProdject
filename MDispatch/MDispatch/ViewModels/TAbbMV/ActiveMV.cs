@@ -32,7 +32,6 @@ namespace MDispatch.ViewModels.TAbbMV
             this.managerDispatchMob = managerDispatchMob;
             RefreshCommand = new DelegateCommand(Init);
             GoToInspectionDriveCommand = new DelegateCommand(GoToInspectionDrive);
-            
             Init();
         }
 
@@ -80,7 +79,7 @@ namespace MDispatch.ViewModels.TAbbMV
                 {
                     Shippings = shippings;
                     UnTimeOfInspection = new UnTimeOfInspection(description);
-                    if(UnTimeOfInspection.BoxColor6 == "#74DF00")
+                    if(UnTimeOfInspection.BoxColor6 == "#fb2e2e")
                     {
                         await PopupNavigation.PushAsync(new AskHint(this));
                     }

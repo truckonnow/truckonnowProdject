@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using InspectionDriver = DaoModels.DAO.Models.InspectionDriver;
 
 namespace ApiMobaileServise.Servise
 {
@@ -31,9 +32,46 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
+        public async void SaveInspectionDriverInDb(string idDriver, Photo photo, int IndexPhoto)
+        {
+            InspectionDriver inspectionDrivers = null;
+            //context.InspectionDrivers.Load();
+            context.Drivers.Include("InspectionDrivers.PhotosTruck").ToList();
+            Driver driver = context.Drivers.FirstOrDefault(d => d.Id == Convert.ToUInt32(idDriver));
+            if (driver.InspectionDrivers != null && driver.InspectionDrivers.Count != 0)
+            {
+                inspectionDrivers = driver.InspectionDrivers.Last();
+                if (inspectionDrivers.CountPhoto >= IndexPhoto)
+                {
+                    driver.InspectionDrivers = new List<InspectionDriver>();
+                    inspectionDrivers = new InspectionDriver();
+                }
+                if(inspectionDrivers.PhotosTruck == null)
+                {
+                    inspectionDrivers.PhotosTruck = new List<Photo>();
+                }
+                inspectionDrivers.CountPhoto++;
+                inspectionDrivers.PhotosTruck.Add(photo);
+                await context.SaveChangesAsync();
+            }
+            else
+            {
+                driver.InspectionDrivers = new List<InspectionDriver>();
+                inspectionDrivers = new InspectionDriver();
+                inspectionDrivers.PhotosTruck = new List<Photo>();
+                inspectionDrivers.CountPhoto++;
+                inspectionDrivers.PhotosTruck.Add(photo);
+                driver.InspectionDrivers.Add(inspectionDrivers);
+                await context.SaveChangesAsync();
+            }
+        }
+
         public async void UpdateInspectionDriver(string idDriver)
         {
+            context.InspectionDrivers.Load();
             Driver driver = await context.Drivers.FirstOrDefaultAsync(d => d.Id == Convert.ToUInt32(idDriver));
+            InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
+            inspectionDriver.Date = DateTime.Now.ToString();
             driver.IsInspectionDriver = true;
             driver.IsInspectionToDayDriver = true;
             await context.SaveChangesAsync();
@@ -47,8 +85,9 @@ namespace ApiMobaileServise.Servise
             Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
             if (driver.InspectionDrivers != null && driver.InspectionDrivers.Count != 0)
             {
-                DateTime dateTime = Convert.ToDateTime(driver.InspectionDrivers.Last().Date);
-                if(dateTime.Day < DateTime.Now.Day)
+                InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
+                DateTime dateTime = Convert.ToDateTime(inspectionDriver.Date);
+                if(dateTime.Date < DateTime.Now.Date || inspectionDriver.CountPhoto >= 45)
                 {
                     isToDayInspaction = false;
                     driver.IsInspectionToDayDriver = false;

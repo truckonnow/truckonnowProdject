@@ -141,49 +141,64 @@ namespace MDispatch.Service
             return stateInspection;
         }
 
-        public int AskWork(string typeInspection, string token, string id, object obj, ref string description)
+        public int AskWork(string typeInspection, string token, string id, object obj, ref string description, int indexPhoto = 0)
         {
-            inspection = new Inspection();
+            
             int stateInspection = 1;
             if (CrossConnectivity.Current.IsConnected)
             {
                 if (typeInspection == "SaveAsk")
                 {
+                    inspection = new Inspection();
                     stateInspection = inspection.SaveAsk(token, id, (Models.Ask)obj, ref description);
                 }
                 else if(typeInspection == "SavePhoto")
                 {
+                    inspection = new Inspection();
                     stateInspection = inspection.SavePhoto(token, id, (Models.PhotoInspection)obj, ref description);
                 }
                 else if (typeInspection == "SaveAsk1")
                 {
+                    inspection = new Inspection();
                     stateInspection = inspection.SaveAsk(token, id, (Models.Ask1)obj, ref description);
                 }
                 else if (typeInspection == "AskFromUser")
                 {
+                    inspection = new Inspection();
                     stateInspection = inspection.SaveAsk(token, id, (AskFromUser)obj, ref description);
                 }
                 else if(typeInspection == "FeedBack")
                 {
+                    inspection = new Inspection();
                     stateInspection = inspection.SaveAsk(token, (Models.Feedback)obj, ref description);
                 }
                 else if(typeInspection == "AskDelyvery")
                 {
+                    inspection = new Inspection();
                     stateInspection = inspection.SaveAsk(token, id, (Models.AskDelyvery)obj, ref description);
                 }
                 else if (typeInspection == "AskForUserDelyvery")
                 {
+                    inspection = new Inspection();
                     stateInspection = inspection.SaveAsk(token, id, (Models.AskForUserDelyveryM)obj, ref description);
                 }
                 else if(typeInspection == "AskPikedUpSig")
                 {
+                    inspection = new Inspection();
                     stateInspection = inspection.SaveSigPikedUp(token, (Photo)obj, id, ref description);
                 }
                 else if (typeInspection == "DamageForUser")
                 {
+                    inspection = new Inspection();
                     stateInspection = inspection.SaveDamageForuser(token, id, (List<DamageForUser>)obj, ref description);
                 }
+                else if (typeInspection == "SaveInspactionDriver")
+                {
+                    driverInspecktion = new DriverInspecktion();
+                    stateInspection = driverInspecktion.SaveInspactionDriver(token, ref description, id, (Photo)obj, indexPhoto);
+                }
             }
+            driverInspecktion = null;
             inspection = null;
             return stateInspection;
         }
