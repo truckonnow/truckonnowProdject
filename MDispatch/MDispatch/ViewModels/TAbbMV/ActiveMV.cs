@@ -31,6 +31,7 @@ namespace MDispatch.ViewModels.TAbbMV
             initDasbordDelegate = Init;
             this.managerDispatchMob = managerDispatchMob;
             RefreshCommand = new DelegateCommand(Init);
+            UnTimeOfInspection = new UnTimeOfInspection();
             GoToInspectionDriveCommand = new DelegateCommand(GoToInspectionDrive);
             Init();
         }
@@ -115,6 +116,7 @@ namespace MDispatch.ViewModels.TAbbMV
                     if (isInspection)
                     {
                         Init();
+                        await PopupNavigation.PushAsync(new Errror("You have already passed inspection today", null));
                     }
                     else
                     {

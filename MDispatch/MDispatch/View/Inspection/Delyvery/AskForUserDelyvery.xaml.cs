@@ -27,10 +27,10 @@ namespace MDispatch.View.Inspection.Delyvery
             askForUsersDelyveryMW.AskForUserDelyveryM = new AskForUserDelyveryM();
             InitializeComponent ();
             BindingContext = askForUsersDelyveryMW; 
-            InitPayment(OnDeliveryToCarrier, totalPaymentToCarrier, vehiclwInformation);
+            InitPayment(OnDeliveryToCarrier, totalPaymentToCarrier);
         }
 
-        private void InitPayment(string OnDeliveryToCarrier, string totalPaymentToCarrier, VehiclwInformation vehiclwInformation)
+        private void InitPayment(string OnDeliveryToCarrier, string totalPaymentToCarrier)
         {
             if(totalPaymentToCarrier == "COD")
             {

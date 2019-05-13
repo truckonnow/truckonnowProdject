@@ -35,7 +35,6 @@ namespace ApiMobaileServise.Servise
         public async void SaveInspectionDriverInDb(string idDriver, Photo photo, int IndexPhoto)
         {
             InspectionDriver inspectionDrivers = null;
-            //context.InspectionDrivers.Load();
             context.Drivers.Include("InspectionDrivers.PhotosTruck").ToList();
             Driver driver = context.Drivers.FirstOrDefault(d => d.Id == Convert.ToUInt32(idDriver));
             if (driver.InspectionDrivers != null && driver.InspectionDrivers.Count != 0)
@@ -79,7 +78,7 @@ namespace ApiMobaileServise.Servise
 
         public async Task<bool> ChechToDayInspactionInDb(string token)
         {
-            bool isToDayInspaction = false;
+            bool isInspaction = false;
             context.Drivers.Load();
             context.InspectionDrivers.Load();
             Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
@@ -87,24 +86,23 @@ namespace ApiMobaileServise.Servise
             {
                 InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
                 DateTime dateTime = Convert.ToDateTime(inspectionDriver.Date);
-                if(dateTime.Date < DateTime.Now.Date || inspectionDriver.CountPhoto >= 45)
+                if(dateTime.Date < DateTime.Now.Date || (inspectionDriver.CountPhoto <= 40))
                 {
-                    isToDayInspaction = false;
-                    driver.IsInspectionToDayDriver = false;
+                    isInspaction = false;
                 }
                 else
                 {
-                    isToDayInspaction = true;
                     driver.IsInspectionToDayDriver = true;
+                    driver.IsInspectionDriver = true;
+                    isInspaction = true;
                 }
             }
             else
             {
-                isToDayInspaction = false; 
-                driver.IsInspectionToDayDriver = false;
+                isInspaction = false;
             }
             await context.SaveChangesAsync();
-            return isToDayInspaction;
+            return isInspaction;
         }
 
         public async void SaveGPSLocationData(string token, Geolocations geolocations)
@@ -166,12 +164,16 @@ namespace ApiMobaileServise.Servise
 
         public Shipping GetShippingInDb(string idShip)
         {
-            context.PhotoInspections.Load();
-            context.Shipping.Load();
-            context.VehiclwInformation.Load();
-            context.Damages.Load();
-            context.Photos.Load();
-            return context.Shipping.FirstOrDefault(v => v.Id.ToString() == idShip);
+            //context.PhotoInspections.Load();
+            //context.Shipping.Load();
+            //context.VehiclwInformation.Load();
+            //context.Damages.Load();
+            //context.Photos.Load();
+            Shipping shipping = context.Shipping.Where(s => s.Id.ToString() == idShip)
+                .Include("VehiclwInformations.PhotoInspections.Damages")
+                .Include("VehiclwInformations.Scan")
+                .FirstOrDefault();
+            return shipping;
         }
 
         public async void SaveAskInDb(string idve, Ask ask)
@@ -396,15 +398,29 @@ namespace ApiMobaileServise.Servise
 
         public VehiclwInformation GetVehiclwInformationInDb(int idVech)
         {
-            context.VehiclwInformation.Load();
-            context.Asks.Load();
-            context.Ask1s.Load();
-            context.PhotoInspections.Load();
-            context.Photos.Load();
-            context.AskFromUsers.Load();
-            context.AskDelyveries.Load();
-            context.askForUserDelyveryMs.Load();
-            return context.VehiclwInformation.FirstOrDefault(v => v.Id == idVech);
+            //context.VehiclwInformation.Load();
+            //context.Asks.Load();
+            //context.Ask1s.Load();
+            //context.Photos.Load();
+            //context.AskFromUsers.Load();
+            //context.AskDelyveries.Load();
+            //context.askForUserDelyveryMs.Load();
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.Where(v => v.Id == idVech)
+                .Include("Ask.Any_personal_or_additional_items_with_or_in_vehicle")
+                .Include("Ask.Any_paperwork_or_documentation")
+                .Include("Ask1.Any_additional_parts_been_given_to_you")
+                .Include("Ask1.Any_additional_documentation_been_given_after_loading")
+                .Include("Ask1.App_will_force_driver_to_take_pictures_of_each_strap")
+                .Include("Ask1.Photo_after_loading_in_the_truck")
+                .Include("PhotoInspections.Photos")
+                .Include("AskFromUser.PhotoPay")
+                .Include(v => v.AskDelyvery)
+                .Include("askForUserDelyveryM.PhotoPay")
+                .Include("askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature")
+                .Include(v => v.Scan)
+                .Include(v => v.DamageForUsers)
+                .FirstOrDefault();
+            return vehiclwInformation;
         }
 
         public List<Shipping> GetOrdersForToken(string token, ref bool isInspectionDriver)

@@ -95,7 +95,7 @@ namespace ApiMobaileServise.Controllers
                     respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "2", null));
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
             }

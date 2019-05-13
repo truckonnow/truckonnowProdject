@@ -41,12 +41,12 @@ namespace MDispatch.VidgetFolder.View
 
         private void TapGestureRecognizer_Tapped_1(object sender, System.EventArgs e)
         {
-            fullPhotoTruckVM.Source = ((Image)sender).Source;
+            fullPhotoTruckVM.Source = fullPhotoTruckVM.ImageSourceTake;
         }
 
         private void TapGestureRecognizer_Tapped_2(object sender, System.EventArgs e)
         {
-            fullPhotoTruckVM.Source = ((Image)sender).Source;
+            paternPhoto.Source = fullPhotoTruckVM.ImageSource;
         }
     }
 }

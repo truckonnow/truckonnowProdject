@@ -27,8 +27,10 @@ namespace MDispatch.View.PageApp
             BindingContext = vehicleDetailsMV;
         }
 
+        [Obsolete]
         public async Task InitPhoto(VehiclwInformation vehiclwInformation)
         {
+            await PopupNavigation.PushAsync(new LoadPage());
             AddScan(vehiclwInformation);
             AddBlocDocumentPhoto(vehiclwInformation);
             AddBlocItemPhoto(vehiclwInformation);
@@ -39,6 +41,7 @@ namespace MDispatch.View.PageApp
             AddBlocInspectionPhoto(vehiclwInformation);
             AddBlocInspectionPhoto1(vehiclwInformation);
             AddBlocPhotoClient(vehiclwInformation);
+            await PopupNavigation.PopAsync();
         }
 
         private void AddScan(VehiclwInformation vehiclwInformation)

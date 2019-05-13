@@ -78,6 +78,7 @@ namespace MDispatch.ViewModels.InspectionMV
                 else if (state == 3)
                 {
                     DependencyService.Get<IToast>().ShowMessage("Answers to questions saved");
+                    Navigation.RemovePage(Navigation.NavigationStack[2]);
                 }
                 else if (state == 4)
                 {
@@ -94,14 +95,12 @@ namespace MDispatch.ViewModels.InspectionMV
             if(vehiclwInformation1s.Count-1 == indexCurrentVechecle)
             {
                 await Navigation.PushAsync(new AskForUser(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, OnDeliveryToCarrier, TotalPaymentToCarrier));
-                Navigation.RemovePage(Navigation.NavigationStack[2]);
                 await PopupNavigation.PushAsync(new TempPageHint1());
             }
             else
             {
                 await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", vehiclwInformation1s[indexCurrentVechecle + 1]));
                 await Navigation.PushAsync(new AskPage(managerDispatchMob, vehiclwInformation1s[indexCurrentVechecle+1], IdShip, initDasbordDelegate, getVechicleDelegate, OnDeliveryToCarrier, TotalPaymentToCarrier), true);
-                Navigation.RemovePage(Navigation.NavigationStack[2]);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using MDispatch.Models;
 using MDispatch.NewElement;
+using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
 using MDispatch.Service.Net;
 using MDispatch.VidgetFolder.View;
@@ -92,9 +93,12 @@ namespace MDispatch.Vidget.VM
             Photo photo = new Photo();
             photo.Base64 = JsonConvert.SerializeObject(photoRes);
             photo.path = $"../Photo/Driver/{IdDriver}/{IndexCurent}.jpg";
-            Photo = photo; 
-            Stream stream = new MemoryStream(photoRes);
-            ImageSourceTake = ImageSource.FromStream(() => { return stream; });
+            Photo = photo;
+            MemoryStream stream = new MemoryStream(photoRes);
+            stream.Position = 0;
+            var byteArray = stream.ToArray();
+            ImageSourceTake = ImageSource.FromStream(() => new MemoryStream(byteArray));
+            Source = ImageSourceTake;
             IsVisableAdd = false;
             IsVisableNext = true;
         }
@@ -138,6 +142,7 @@ namespace MDispatch.Vidget.VM
                 }
                 else if (state == 3)
                 {
+                    DependencyService.Get<IToast>().ShowMessage($"Photo {truckCar.GetNameTruck(IndexCurent)} saved");
                     if (isEndInspection)
                     {
                         navigation.RemovePage(navigation.NavigationStack[1]);
@@ -154,19 +159,18 @@ namespace MDispatch.Vidget.VM
         [System.Obsolete]
         private async void UpdateInspectionDriver()
         {
-            await PopupNavigation.PushAsync(new LoadPage(), true);
+            await PopupNavigation.PushAsync(new LoadPage());
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
             await Task.Run(() => Utils.CheckNet());
+            await PopupNavigation.PopAsync();
             if (App.isNetwork)
             {
                 await Task.Run(() =>
                 {
                     state = managerDispatchMob.DriverWork("UpdateInspectionDriver", token, ref description, IdDriver);
                 });
-                await PopupNavigation.PopAsync(true);
-
                 if (state == 1)
                 {
                     await PopupNavigation.PushAsync(new Errror("Not Network", null));
@@ -179,7 +183,6 @@ namespace MDispatch.Vidget.VM
                 {
                     initDasbordDelegate.Invoke();
                     await navigation.PopToRootAsync();
-                    //await Task.Run(() => SetInspectionDriver());
                 }
                 else if (state == 4)
                 {

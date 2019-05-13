@@ -78,7 +78,7 @@ namespace MDispatch.Service
             {
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Shipping", Method.POST);
-                client.Timeout = 10000;
+                client.Timeout = 300000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 request.AddParameter("idShip", id);

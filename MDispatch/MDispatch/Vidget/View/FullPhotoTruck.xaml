@@ -4,8 +4,7 @@
              x:Class="MDispatch.VidgetFolder.View.FullPhotoTruck">
     <ContentPage.Content>
         <AbsoluteLayout x:Name="laAbsul">
-            <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" Source="{Binding Source}"/>
-            <Image x:Name="paternPhoto" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" />
+            <Image x:Name="paternPhoto" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" Source="{Binding Source}" />
             <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" BackgroundColor="#E6E6E6"
                          AbsoluteLayout.LayoutBounds="1, 0, 1, 44" Opacity="0.7" Padding="7">
                 <Image Source="BackIconpage.png" HeightRequest="20" WidthRequest="20">
