@@ -51,13 +51,17 @@ namespace MDispatch.Models
             get
             {
                 string color = "#FFFFFF";
-                if(TimeOfInspection == "2 Hours" || IsInspection)
+                if(TimeOfInspection == "2 Hours")
                 {
                     color = "#fb2e2e";
                 }
                 else if(TimeOfInspection == "1 Hours")
                 {
                     color = "#ff5a00";
+                }
+                else if (TimeOfInspection == "0 Hours")
+                {
+                    color = "#fb2e2e";
                 }
                 return color;
             }
@@ -68,7 +72,7 @@ namespace MDispatch.Models
             get
             {
                 string color = "#FFFFFF";
-                if (TimeOfInspection == "3 Hours" || IsInspection)
+                if (TimeOfInspection == "3 Hours")
                 {
                     color = "#fb2e2e";
                 }
@@ -80,6 +84,10 @@ namespace MDispatch.Models
                 {
                     color = "#74DF00";
                 }
+                else if (TimeOfInspection == "0 Hours")
+                {
+                    color = "#fb2e2e";
+                }
                 return color;
             }
         }
@@ -89,7 +97,7 @@ namespace MDispatch.Models
             get
             {
                 string color = "#FFFFFF";
-                if (TimeOfInspection == "4 Hours" || IsInspection)
+                if (TimeOfInspection == "4 Hours")
                 {
                     color = "#fb2e2e";
                 }
@@ -97,9 +105,17 @@ namespace MDispatch.Models
                 {
                     color = "#ff5a00";
                 }
-                else if (TimeOfInspection == "1 Hours" || TimeOfInspection == "2 Hours")
+                else if (TimeOfInspection == "1 Hours" && TimeOfInspection == "2 Hours")
                 {
                     color = "#74DF00";
+                }
+                else if(TimeOfInspection == "0 Hours")
+                {
+                    color = "#fb2e2e";
+                }
+                else if (TimeOfInspection == "0 Hours")
+                {
+                    color = "#fb2e2e";
                 }
                 return color;
             }
@@ -110,7 +126,7 @@ namespace MDispatch.Models
             get
             {
                 string color = "#FFFFFF";
-                if (TimeOfInspection == "5 Hours" || IsInspection)
+                if (TimeOfInspection == "5 Hours")
                 {
                     color = "#fb2e2e";
                 }
@@ -122,6 +138,10 @@ namespace MDispatch.Models
                 {
                     color = "#74DF00";
                 }
+                else if (TimeOfInspection == "0 Hours")
+                {
+                    color = "#fb2e2e";
+                }
                 return color;
             }
         }
@@ -131,7 +151,7 @@ namespace MDispatch.Models
             get
             {
                 string color = "#FFFFFF";
-                if (TimeOfInspection == "6 Hours" || IsInspection)
+                if (TimeOfInspection == "6 Hours")
                 {
                     color = "#fb2e2e";
                 }
@@ -143,6 +163,10 @@ namespace MDispatch.Models
                 {
                     color = "#74DF00";
                 }
+                else if (TimeOfInspection == "0 Hours")
+                {
+                    color = "#fb2e2e";
+                }
                 return color;
             }
         }
@@ -152,7 +176,7 @@ namespace MDispatch.Models
             get
             {
                 string color = "#FFFFFF";
-                if (TimeOfInspection == "7 Hours" || IsInspection)
+                if (TimeOfInspection == "7 Hours")
                 {
                     color = "#fb2e2e";
                 }
@@ -164,6 +188,10 @@ namespace MDispatch.Models
                 {
                     color = "#74DF00";
                 }
+                else if (TimeOfInspection == "0 Hours" && IsInspection)
+                {
+                    color = "#fb2e2e";
+                }
                 return color;
             }
         }
@@ -173,11 +201,7 @@ namespace MDispatch.Models
             get
             {
                 string status = "";
-                if(IsInspection)
-                {
-                    status = "Pass inspection now";
-                }
-                else if(TimeOfInspection == "7 Hours" || TimeOfInspection == "6 Hours" || TimeOfInspection == "5 Hours" || TimeOfInspection == "4 Hours")
+                if(TimeOfInspection == "7 Hours" || TimeOfInspection == "6 Hours" || TimeOfInspection == "5 Hours" || TimeOfInspection == "4 Hours")
                 {
                     status = "You can pass the inspection after";
                 }
@@ -186,6 +210,10 @@ namespace MDispatch.Models
                     status = "best time to pass inspection";
                 }
                 else if (TimeOfInspection == "1 Hours")
+                {
+                    status = "Pass inspection now";
+                }
+                else if (TimeOfInspection == "0 Hours" && IsInspection)
                 {
                     status = "Pass inspection now";
                 }

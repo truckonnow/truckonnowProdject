@@ -3,7 +3,6 @@ using MDispatch.NewElement;
 using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
 using MDispatch.Service.Net;
-using MDispatch.VidgetFolder.View;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using Newtonsoft.Json;
@@ -43,40 +42,11 @@ namespace MDispatch.Vidget.VM
         public string IdDriver { get; set; }
 
         private int IndexCurent { get; set; }
-
-        private bool isVisableNext = false;
-        public bool IsVisableNext
-        {
-            get => isVisableNext;
-            set => SetProperty(ref isVisableNext, value);
-        }
-
-        private bool isVisableAdd = true;
-        public bool IsVisableAdd
-        {
-            get => isVisableAdd;
-            set => SetProperty(ref isVisableAdd, value);
-        }
-
         private string nameLayute = null;
         public string NameLayute
         {
             get => nameLayute;
             set => SetProperty(ref nameLayute, value);
-        }
-
-        private ImageSource source = null;
-        public ImageSource Source
-        {
-            get => source;
-            set => SetProperty(ref source, value);
-        }
-
-        private ImageSource imageSource = null;
-        public ImageSource ImageSource
-        { 
-            get => imageSource;
-            set => SetProperty(ref imageSource, value);
         }
 
         private ImageSource imageSourceTake = null;
@@ -88,6 +58,7 @@ namespace MDispatch.Vidget.VM
 
         public Photo Photo { get; set; }
 
+        [System.Obsolete]
         public void AddPhoto(byte[] photoRes)
         {
             Photo photo = new Photo();
@@ -98,26 +69,30 @@ namespace MDispatch.Vidget.VM
             stream.Position = 0;
             var byteArray = stream.ToArray();
             ImageSourceTake = ImageSource.FromStream(() => new MemoryStream(byteArray));
-            Source = ImageSourceTake;
-            IsVisableAdd = false;
-            IsVisableNext = true;
+            NextPage();
         }
 
         [System.Obsolete]
         private async void NextPage()
         {
+            bool isNavigationMany = false;
             bool isEndInspection = false;
+            if (navigation.NavigationStack.Count > 2)
+            {
+                await PopupNavigation.PushAsync(new LoadPage());
+                isNavigationMany = true;
+            }
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
+                
                 if (IndexCurent < 45)
                 {
                     isEndInspection = true;
-                    FullPhotoTruck fullPhotoTruck = new FullPhotoTruck(managerDispatchMob, IdDriver, IndexCurent + 1, initDasbordDelegate);
-                    await navigation.PushAsync(fullPhotoTruck);
+                    await navigation.PushAsync(new View.CameraPage(managerDispatchMob, IdDriver, IndexCurent + 1, initDasbordDelegate));
                 }
                 else
                 {
@@ -130,25 +105,54 @@ namespace MDispatch.Vidget.VM
                 });
                 if (state == 1)
                 {
-                    await navigation.PopAsync();
+                    if(isNavigationMany)
+                    {
+                        await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
+                        isNavigationMany = false;
+                    }
+                    if (navigation.NavigationStack.Count > 1)
+                    {
+                        await navigation.PopAsync();
+                    }
                     await PopupNavigation.PushAsync(new Errror("Not Network", null));
                 }
                 else if (state == 2)
                 {
-                    await navigation.PopAsync();
+                    if (isNavigationMany)
+                    {
+                        await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
+                        isNavigationMany = false;
+                    }
+                    if (navigation.NavigationStack.Count > 1)
+                    {
+                        await navigation.PopAsync();
+                    }
                     await PopupNavigation.PushAsync(new Errror(description, null));
                 }
                 else if (state == 3)
                 {
-                    DependencyService.Get<IToast>().ShowMessage($"Photo {truckCar.GetNameTruck(IndexCurent)} saved");
+                    if (isNavigationMany)
+                    {
+                        await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
+                        isNavigationMany = false;
+                    }
                     if (isEndInspection)
                     {
                         navigation.RemovePage(navigation.NavigationStack[1]);
                     }
+                    DependencyService.Get<IToast>().ShowMessage($"Photo {truckCar.GetNameTruck(IndexCurent)} saved");
                 }
                 else if (state == 4)
                 {
-                    await navigation.PopAsync();
+                    if (isNavigationMany)
+                    {
+                        await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
+                        isNavigationMany = false;
+                    }
+                    if (navigation.NavigationStack.Count > 1)
+                    {
+                        await navigation.PopAsync();
+                    }
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
                 }
             }

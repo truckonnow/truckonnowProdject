@@ -30,7 +30,7 @@ namespace MDispatch.View.PageApp
             dmla.IsVisible = false;
             if (fullPagePhotoDelyveryMV.Car.typeIndex != null && fullPagePhotoDelyveryMV.Car.typeIndex != "")
             {
-                NameSelectPhoto.Text = nameLayoute;
+                NameSelectPhoto.Text = $"{nameLayoute} - {photoIndex}/{fullPagePhotoDelyveryMV.Car.CountCarImg}";
             }
             else
             {
@@ -42,9 +42,10 @@ namespace MDispatch.View.PageApp
         {
             if (fullPagePhotoDelyveryMV.AllSourseImage != null && fullPagePhotoDelyveryMV.AllSourseImage.Count != 0)
             {
-                btnNext.HorizontalOptions = LayoutOptions.EndAndExpand;
+                btnNext.HorizontalOptions = LayoutOptions.End;
                 btnNext.IsVisible = true;
                 btnAddPhoto.IsVisible = false;
+                btnDamage.IsVisible = true;
             }
         }
         
@@ -65,7 +66,7 @@ namespace MDispatch.View.PageApp
             }
             else
             {
-                btnNext.HorizontalOptions = LayoutOptions.EndAndExpand;
+                btnNext.HorizontalOptions = LayoutOptions.End;
                 btnDamage.IsVisible = true;
                 dmla.IsVisible = true;
                 paternPhoto.Source = pngPaternPhoto;

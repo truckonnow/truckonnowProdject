@@ -59,6 +59,12 @@ namespace MDispatch.ViewModels.InspectionMV
         [System.Obsolete]
         public async void SaveAsk()
         {
+            bool isNavigationMany = false;
+            if (Navigation.NavigationStack.Count > 3)
+            {
+                await PopupNavigation.PushAsync(new LoadPage());
+                isNavigationMany = true;
+            }
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
@@ -73,6 +79,15 @@ namespace MDispatch.ViewModels.InspectionMV
                 });
                 if (state == 2)
                 {
+                    if (isNavigationMany)
+                    {
+                        await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
+                        isNavigationMany = false;
+                    }
+                    if (Navigation.NavigationStack.Count > 1)
+                    {
+                        await Navigation.PopAsync();
+                    }
                     await PopupNavigation.PushAsync(new Errror(description, Navigation));
                 }
                 else if (state == 3)
@@ -82,6 +97,15 @@ namespace MDispatch.ViewModels.InspectionMV
                 }
                 else if (state == 4)
                 {
+                    if (isNavigationMany)
+                    {
+                        await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
+                        isNavigationMany = false;
+                    }
+                    if (Navigation.NavigationStack.Count > 1)
+                    {
+                        await Navigation.PopAsync();
+                    }
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
                 }
             }

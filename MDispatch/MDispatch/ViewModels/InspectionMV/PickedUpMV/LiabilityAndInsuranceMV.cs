@@ -70,6 +70,12 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         [System.Obsolete]
         private async void InitShipping()
         {
+            bool isNavigationMany = false;
+            if (Navigation.NavigationStack.Count > 3)
+            {
+                await PopupNavigation.PushAsync(new LoadPage());
+                isNavigationMany = true;
+            }
             await PopupNavigation.PushAsync(new LoadPage());
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
@@ -85,6 +91,15 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 await PopupNavigation.PopAsync();
                 if (state == 2)
                 {
+                    if (isNavigationMany)
+                    {
+                        await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
+                        isNavigationMany = false;
+                    }
+                    if (Navigation.NavigationStack.Count > 1)
+                    {
+                        await Navigation.PopAsync();
+                    }
                     await PopupNavigation.PushAsync(new Errror(description, null));
                 }
                 else if (state == 3)
@@ -93,6 +108,15 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 }
                 else if (state == 4)
                 {
+                    if (isNavigationMany)
+                    {
+                        await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
+                        isNavigationMany = false;
+                    }
+                    if (Navigation.NavigationStack.Count > 1)
+                    {
+                        await Navigation.PopAsync();
+                    }
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
                 }
                 StataLoadShip = 1;

@@ -1,6 +1,5 @@
 using MDispatch.Service.GeloctionGPS;
 using MDispatch.StoreNotify;
-using MDispatch.VidgetFolder.View;
 using MDispatch.View.A_R;
 using MDispatch.View.TabPage;
 using MDispatch.View.TabPage.Tab;

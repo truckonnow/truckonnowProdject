@@ -1,7 +1,9 @@
 ﻿using MDispatch.NewElement;
+using MDispatch.Service;
 using MDispatch.Vidget.VM;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static MDispatch.Service.ManagerDispatchMob;
 
 namespace MDispatch.Vidget.View
 {
@@ -10,11 +12,12 @@ namespace MDispatch.Vidget.View
     {
         private FullPhotoTruckVM fullPhotoTruckVM = null;
 
-        public CameraPage(FullPhotoTruckVM fullPhotoTruckVM)
+        public CameraPage(ManagerDispatchMob managerDispatchMob, string idDriver, int indexCurrent, InitDasbordDelegate initDasbordDelegate)
         {
-            this.fullPhotoTruckVM = fullPhotoTruckVM;
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
+            NavigationPage.SetHasNavigationBar(this, false); 
+            fullPhotoTruckVM = new FullPhotoTruckVM(managerDispatchMob, idDriver, indexCurrent, Navigation, initDasbordDelegate);
+            BindingContext = fullPhotoTruckVM;
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
@@ -22,6 +25,7 @@ namespace MDispatch.Vidget.View
             await Navigation.PopAsync();
         }
 
+        [System.Obsolete]
         private async void CameraPage_OnPhotoResult(PhotoResultEventArgs result)
         {
             if (!result.Success)
@@ -29,7 +33,6 @@ namespace MDispatch.Vidget.View
                 return;
             }
             fullPhotoTruckVM.AddPhoto(result.Image);
-            await Navigation.PopAsync(true);
         }
     }
 }

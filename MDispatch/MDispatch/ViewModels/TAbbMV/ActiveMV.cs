@@ -1,7 +1,7 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.Service.Net;
-using MDispatch.VidgetFolder.View;
+using MDispatch.View.A_R;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.ViewModels.TAbbMV.DialogAsk;
 using Plugin.Settings;
@@ -93,6 +93,7 @@ namespace MDispatch.ViewModels.TAbbMV
             IsRefr = false;
         }
 
+        [Obsolete]
         public async void GoToInspectionDrive()
         {
             IsRefr = true;
@@ -120,7 +121,7 @@ namespace MDispatch.ViewModels.TAbbMV
                     }
                     else
                     {
-                        await Navigation.PushAsync(new FullPhotoTruck(managerDispatchMob, UnTimeOfInspection.IdDriver, 1, initDasbordDelegate));
+                        await Navigation.PushAsync(new Vidget.View.CameraPage(managerDispatchMob, UnTimeOfInspection.IdDriver, 1, initDasbordDelegate));
                     }
                 }
                 else if (state == 4)
@@ -129,6 +130,13 @@ namespace MDispatch.ViewModels.TAbbMV
                 }
             }
             IsRefr = false;
+        }
+
+        public void OutAccount()
+        {
+            CrossSettings.Current.Remove("Token");
+            App.isAvtorization = false;
+            App.Current.MainPage = new NavigationPage(new Avtorization());
         }
     }
 }

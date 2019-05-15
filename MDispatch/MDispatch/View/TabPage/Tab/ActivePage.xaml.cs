@@ -2,6 +2,7 @@
 using MDispatch.View.PageApp;
 using MDispatch.ViewModels.TAbbMV;
 using MDispatch.ViewModels.TAbbMV.DialogAsk;
+using Plugin.Settings;
 using Rg.Plugins.Popup.Services;
 using System;
 using Xamarin.Forms;
@@ -74,6 +75,11 @@ namespace MDispatch.View.TabPage.Tab
         private void TapGestureRecognizer_Tapped_3(object sender, EventArgs e)
         {
             TapGestureRecognizer_Tapped_1(sender, e);
+        }
+
+        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            activeMV.OutAccount();
         }
     }
 }
