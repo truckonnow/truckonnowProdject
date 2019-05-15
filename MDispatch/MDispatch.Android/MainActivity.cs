@@ -3,10 +3,12 @@ using Android.Content.PM;
 using Android.Gms.Common;
 using Android.OS;
 using Android.Runtime;
+using Android.Views;
 using Firebase;
 using MDispatch.Droid.StoreService;
 using Plugin.FirebasePushNotification;
 using Plugin.Permissions;
+using Xamarin.Forms.Platform.Android;
 
 namespace MDispatch.Droid
 {
@@ -17,6 +19,17 @@ namespace MDispatch.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+            this.Window.AddFlags(WindowManagerFlags.Fullscreen | WindowManagerFlags.TurnScreenOn);
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+            {
+                var stBarHeight = typeof(FormsAppCompatActivity).GetField("statusBarHeight", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                if (stBarHeight == null)
+                {
+                    stBarHeight = typeof(FormsAppCompatActivity).GetField("_statusBarHeight", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                }
+                stBarHeight?.SetValue(this, 0);
+            }
+
             base.OnCreate(bundle);
             Rg.Plugins.Popup.Popup.Init(this, bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);

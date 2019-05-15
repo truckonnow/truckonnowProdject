@@ -123,8 +123,6 @@ namespace MDispatch.Vidget.VM
                 {
                     DependencyService.Get<IOrientationHandler>().ForceSensor();
                     UpdateInspectionDriver();
-                    initDasbordDelegate.Invoke();
-                    await navigation.PopToRootAsync();
                 }
                 await Task.Run(() =>
                 {

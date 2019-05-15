@@ -24,7 +24,7 @@ namespace WebDispacher.Dao
             {
                 Users users = new Users();
                 users.Login = "DevRoma";
-                users.Password = "truckon777";
+                users.Password = "polkilo123";
                 context.User.AddAsync(users);
                 users = new Users();
                 users.Login = "ArtemManager";

@@ -5,12 +5,15 @@ using Android;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
+using Android.Content.Res;
 using Android.Graphics;
+using Android.Runtime;
 using Android.Support.V4.App;
 using Android.Support.V4.Content;
 using Android.Views;
 using Android.Widget;
 using Java.Lang;
+using Java.Lang.Reflect;
 using MDispatch.Droid.NewrRender;
 using MDispatch.Droid.NewrRender.NewElementXamarin.Forms;
 using MDispatch.NewElement;
@@ -20,13 +23,13 @@ using static Android.Hardware.Camera;
 [assembly: Xamarin.Forms.ExportRenderer(typeof(CameraPage), typeof(CameraPageRender))]
 namespace MDispatch.Droid.NewrRender
 {
+
     [Obsolete]
     class CameraPageRender : PageRenderer, TextureView.ISurfaceTextureListener, IAutoFocusCallback
     {
-        bool isPermissions = false;
-
         public CameraPageRender(Context context) : base(context)
-        { }
+        {
+        }
 
         RelativeLayout mainLayout;
         TextureView liveView;
@@ -73,20 +76,16 @@ namespace MDispatch.Droid.NewrRender
                 return;
             try
             {
-                var msw = MeasureSpec.MakeMeasureSpec(r - l, MeasureSpecMode.Exactly);
-                var msh = MeasureSpec.MakeMeasureSpec(b - t, MeasureSpecMode.Exactly);
-                mainLayout.Measure(msw, msh);
-                mainLayout.Layout(0, 0, r - l, b - t);
+                var msw1 = MeasureSpec.MakeMeasureSpec(r, MeasureSpecMode.Exactly);
+                var msh1 = MeasureSpec.MakeMeasureSpec(b, MeasureSpecMode.Exactly);
+                mainLayout.Measure(msw1, msh1);
+                mainLayout.Layout(l, t, r, b);
                 if (mainLayout.Width < mainLayout.Height)
                 {
                     if (camera != null)
                     {
-                        try
-                        {
-                            camera.SetDisplayOrientation(90);
-                        }
-                        catch(RuntimeException)
-                        { }
+                        camera.SetDisplayOrientation(90);
+
                     }
                     capturePhotoButton.SetX(mainLayout.Width / 2 - 60);
                     capturePhotoButton.SetY(mainLayout.Height - 200);
@@ -95,7 +94,7 @@ namespace MDispatch.Droid.NewrRender
                 {
                     if (camera != null)
                     {
-                        camera.SetDisplayOrientation(0);
+                       camera.SetDisplayOrientation(0);
                     }
                     capturePhotoButton.SetY(mainLayout.Height / 2 - 60);
                     capturePhotoButton.SetX(mainLayout.Width - 200);
@@ -140,7 +139,7 @@ namespace MDispatch.Droid.NewrRender
             byte[] imageBytes = null;
             using (var imageStream = new System.IO.MemoryStream())
             {
-                await image.CompressAsync(Bitmap.CompressFormat.Jpeg, 70, imageStream);
+                await image.CompressAsync(Bitmap.CompressFormat.Jpeg, 60, imageStream);
                 image.Recycle();
                 imageBytes = imageStream.ToArray();
             }
@@ -168,26 +167,40 @@ namespace MDispatch.Droid.NewrRender
             }
         }
 
-
         #region TextureView.ISurfaceTextureListener implementations
 
+        public bool GetOrientation()
+        {
+            IWindowManager windowManager = Android.App.Application.Context.GetSystemService(Context.WindowService).JavaCast<IWindowManager>();
+            var rotation = windowManager.DefaultDisplay.Rotation;
+            return rotation == SurfaceOrientation.Rotation0 || rotation == SurfaceOrientation.Rotation180;
+        }
+
         [Obsolete]
-        public void OnSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)
+        public async void OnSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)
         {
             if (ContextCompat.CheckSelfPermission(Activity, Manifest.Permission.Camera) != Permission.Granted)
             {
                 ActivityCompat.RequestPermissions(Activity, new string[] { Manifest.Permission.Camera }, 50);
+                await (Element as CameraPage).Navigation.PopAsync();
                 (Element as CameraPage).Cancel();
             }
             else
             {
+                decimal aspect = 0;
                 camera = Android.Hardware.Camera.Open();
                 var parameters = camera.GetParameters();
-                var aspect = ((decimal)height) / ((decimal)width);
+                if (GetOrientation())
+                {
+                    aspect = ((decimal)height) / ((decimal)width);
+                }
+                else
+                {
+                    aspect = ((decimal)width) / ((decimal)height);
+                }
                 var previewSize = parameters.SupportedPreviewSizes
                                             .OrderBy(s => System.Math.Abs(s.Width / (decimal)s.Height - aspect))
                                             .First();
-                System.Diagnostics.Debug.WriteLine($"Preview sizes: {parameters.SupportedPreviewSizes.Count}");
                 parameters.SetPreviewSize(previewSize.Width, previewSize.Height);
                 camera.SetParameters(parameters);
                 camera.SetPreviewTexture(surface);

@@ -29,6 +29,15 @@ namespace Parser.Servise1
             WorkerInspactionDriver();
         }
 
+        private void InitReqvest()
+        {
+            tRequest = WebRequest.Create("https://fcm.googleapis.com/fcm/send");
+            tRequest.Method = "post";
+            tRequest.Headers.Add(string.Format("Authorization: key={0}", "AAAACa2vxR0:APA91bGTTHJgDmirQgd92-snbn5eixwi-sEPufe8fpl6EojstTcNNMjRnod7nAdUOw0C6InZvWOvom1xlRiWbojN7ObxGTeEPhjBtZ53ac2RLzIVuZc9_AdEkuix-vlul_ylJV7_ctEK"));
+            tRequest.Headers.Add(string.Format("Sender: id={0}", "41568683293"));
+            tRequest.ContentType = "application/json";
+        }
+
         private void WorkerInspactionDriver()
         {
             LogEr.Logerr("Info1", "Start Servse WorkParser Inspaction", "WorkerInspactionDriver", DateTime.Now.ToShortTimeString());
@@ -37,6 +46,7 @@ namespace Parser.Servise1
             {
                 while (true)
                 {
+                    LogEr.Logerr("Info1", $"check on the time", "WorkerInspactionDriver", DateTime.Now.ToShortTimeString());
                     List<Driver> drivers = sqlCommandParser.GetDriverInDb();
                     if (CheckTimeZeroTime() && drivers != null)
                     {
@@ -77,7 +87,7 @@ namespace Parser.Servise1
         private bool CheckTime()
         {
             bool isTime = false;
-            if(11 <= DateTime.Now.Hour && 12 >= DateTime.Now.Hour)
+            if(11 <= DateTime.Now.Hour && 12 > DateTime.Now.Hour)
             {
                 isTime = true;
             }
@@ -87,7 +97,7 @@ namespace Parser.Servise1
         private bool CheckTimeZeroTime()
         {
             bool isTime = false;
-            if (5 <= DateTime.Now.Hour && 6 >= DateTime.Now.Hour)
+            if (5 <= DateTime.Now.Hour && 6 > DateTime.Now.Hour)
             {
                 isTime = true;
             }
@@ -127,6 +137,7 @@ namespace Parser.Servise1
                     }
                 }
             }
+            InitReqvest();
         }
     }
 }

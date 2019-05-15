@@ -53,8 +53,8 @@ namespace Parser.Servise
                 Init(isProxt);
                 var htm = httpRequest.Get("https://www.centraldispatch.com/login?uri=%2Fprotected%2F").ToString();
                 Tokene = Regex.Match(htm, @"CSRFToken.{4}lue\W\W(\w+)").Groups[1].Value;
-                httpRequest.AddParam("Username", "Gts2012");
-                httpRequest.AddParam("Password", "dispatch35211");
+                httpRequest.AddParam("Username", "Gtr2018");
+                httpRequest.AddParam("Password", "GtrDispatch_06");
                 httpRequest.AddParam("r", "");
                 httpRequest.AddParam("CSRFToken", Tokene);
                 var res = httpRequest.Post("https://www.centraldispatch.com/login?uri=/protected/");

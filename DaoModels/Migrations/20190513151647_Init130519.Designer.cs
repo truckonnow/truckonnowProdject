@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DaoModels.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190422204134_update220419")]
-    partial class update220419
+    [Migration("20190513151647_Init130519")]
+    partial class Init130519
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -274,6 +274,10 @@ namespace DaoModels.Migrations
 
                     b.Property<string>("FullName");
 
+                    b.Property<bool>("IsInspectionDriver");
+
+                    b.Property<bool>("IsInspectionToDayDriver");
+
                     b.Property<string>("IssuingState_Province");
 
                     b.Property<string>("Password");
@@ -329,6 +333,25 @@ namespace DaoModels.Migrations
                     b.ToTable("geolocations");
                 });
 
+            modelBuilder.Entity("DaoModels.DAO.Models.InspectionDriver", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CountPhoto");
+
+                    b.Property<string>("Date");
+
+                    b.Property<int?>("DriverId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DriverId");
+
+                    b.ToTable("InspectionDrivers");
+                });
+
             modelBuilder.Entity("DaoModels.DAO.Models.Photo", b =>
                 {
                     b.Property<int>("Id")
@@ -351,6 +374,8 @@ namespace DaoModels.Migrations
 
                     b.Property<string>("Base64");
 
+                    b.Property<int?>("InspectionDriverId");
+
                     b.Property<int?>("PhotoInspectionId");
 
                     b.Property<string>("path");
@@ -370,6 +395,8 @@ namespace DaoModels.Migrations
                     b.HasIndex("AskID");
 
                     b.HasIndex("AskID1");
+
+                    b.HasIndex("InspectionDriverId");
 
                     b.HasIndex("PhotoInspectionId");
 
@@ -423,6 +450,8 @@ namespace DaoModels.Migrations
                     b.Property<string>("ContactNameP");
 
                     b.Property<string>("CurrentStatus");
+
+                    b.Property<string>("DataPaid");
 
                     b.Property<string>("DeliveryEstimated");
 
@@ -600,6 +629,13 @@ namespace DaoModels.Migrations
                         .HasForeignKey("geolocationsID");
                 });
 
+            modelBuilder.Entity("DaoModels.DAO.Models.InspectionDriver", b =>
+                {
+                    b.HasOne("DaoModels.DAO.Models.Driver")
+                        .WithMany("InspectionDrivers")
+                        .HasForeignKey("DriverId");
+                });
+
             modelBuilder.Entity("DaoModels.DAO.Models.Photo", b =>
                 {
                     b.HasOne("DaoModels.DAO.Models.Ask1")
@@ -629,6 +665,10 @@ namespace DaoModels.Migrations
                     b.HasOne("DaoModels.DAO.Models.Ask")
                         .WithMany("Any_personal_or_additional_items_with_or_in_vehicle")
                         .HasForeignKey("AskID1");
+
+                    b.HasOne("DaoModels.DAO.Models.InspectionDriver")
+                        .WithMany("PhotosTruck")
+                        .HasForeignKey("InspectionDriverId");
 
                     b.HasOne("DaoModels.DAO.Models.PhotoInspection")
                         .WithMany("Photos")

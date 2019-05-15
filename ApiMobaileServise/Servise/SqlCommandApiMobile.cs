@@ -238,8 +238,8 @@ namespace ApiMobaileServise.Servise
 
         public string GerShopTokenForShipping(string idOrder)
         {
-           // context.Drivers.Load();
-            Shipping shipping = context.Shipping.FirstOrDefault<Shipping>(d => d.Id == idOrder);
+            context.Drivers.Load();
+            Shipping shipping = context.Shipping.FirstOrDefault(d => d.Id == idOrder);
             return shipping.Driverr.TokenShope;
         }
 
