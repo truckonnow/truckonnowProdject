@@ -37,11 +37,19 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             SaveLiabilityAndInsuranceCommand = new DelegateCommand(SendLiabilityAndInsuranceEmaile);
             InitShipping();
         }
+
         private string email = null;
         public string Email
         {
             get => email;
             set => SetProperty(ref email, value);
+        }
+
+        private string nameCustomer = null;
+        public string NameCustomer
+        {
+            get => nameCustomer;
+            set => SetProperty(ref nameCustomer, value);
         }
 
         public string IdShip { get; set; }
@@ -129,13 +137,14 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-            await Task.Run(() => Utils.CheckNet());
-            if (App.isNetwork)
-            {
-                Photo photo = new Photo();
+            Photo photo = new Photo();
                 photo.Base64 = JsonConvert.SerializeObject(photoResult);
                 photo.path = $"../Photo/{IdVech}/Pay/DelyverySig.jpg";
                 await Navigation.PopToRootAsync();
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                
                 await Task.Run(() =>
                 {
                     Continue();

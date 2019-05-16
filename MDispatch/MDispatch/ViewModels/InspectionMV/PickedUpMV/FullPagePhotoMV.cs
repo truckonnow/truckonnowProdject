@@ -197,7 +197,6 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             photo.Base64 = JsonConvert.SerializeObject(PhotoInArrayByte);
             photo.path = $"../Photo/{VehiclwInformation.Id}/PikedUp/PhotoInspection/{pathIndePhoto}.jpg";
             PhotoInspection.Photos.Add(photo);
-            SourseImage = ImageSource.FromStream(() => new MemoryStream(PhotoInArrayByte));
         }
 
         [System.Obsolete]
@@ -212,22 +211,22 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
+            if (InderxPhotoInspektion < Car.CountCarImg)
+            {
+                Car.OrintableScreen(InderxPhotoInspektion);
+                FullPagePhoto fullPagePhoto = new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", Car.typeIndex.Replace(" ", ""), InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1), OnDeliveryToCarrier, TotalPaymentToCarrier);
+                await Navigation.PushAsync(fullPagePhoto);
+                await Navigation.PushAsync(new CameraPagePhoto($"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", fullPagePhoto));
+            }
+            else
+            {
+                await PopupNavigation.PushAsync(new TempPageHint());
+                DependencyService.Get<IOrientationHandler>().ForceSensor();
+                await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate, Car.typeIndex.Replace(" ", ""), OnDeliveryToCarrier, TotalPaymentToCarrier), true);
+            }
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
-                if (InderxPhotoInspektion < Car.CountCarImg)
-                {
-                    Car.OrintableScreen(InderxPhotoInspektion);
-                    FullPagePhoto fullPagePhoto = new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", Car.typeIndex.Replace(" ", ""), InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1), OnDeliveryToCarrier, TotalPaymentToCarrier);
-                    await Navigation.PushAsync(fullPagePhoto);
-                    await Navigation.PushAsync(new CameraPagePhoto($"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", fullPagePhoto));
-                }
-                else
-                {
-                    await PopupNavigation.PushAsync(new TempPageHint());
-                    DependencyService.Get<IOrientationHandler>().ForceSensor();
-                    await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate, Car.typeIndex.Replace(" ", ""), OnDeliveryToCarrier, TotalPaymentToCarrier), true);
-                }
                 await Task.Run(() =>
                 {
                     state = managerDispatchMob.AskWork("SavePhoto", token, VehiclwInformation.Id, PhotoInspection, ref description);
@@ -263,6 +262,13 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                         await Navigation.PopAsync();
                     }
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                }
+            }
+            else
+            {
+                if (Navigation.NavigationStack.Count > 1)
+                {
+                    await Navigation.PopAsync();
                 }
             }
         }

@@ -202,7 +202,6 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             photo.Base64 = photoJson;
             photo.path = $"../Photo/{VehiclwInformation.Id}/Delyvery/PhotoInspection/{pathIndePhoto}.jpg";
             PhotoInspection.Photos.Add(photo);
-            SourseImage = ImageSource.FromStream(() => new MemoryStream(PhotoInArrayByte));
         }
 
         [System.Obsolete]
@@ -217,9 +216,6 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-            await Task.Run(() => Utils.CheckNet());
-            if (App.isNetwork)
-            {
                 if (Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1) == 0)
                 {
                     DependencyService.Get<IOrientationHandler>().ForceSensor();
@@ -231,6 +227,9 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                     await Navigation.PushAsync(fullPagePhotoDelyvery);
                     await Navigation.PushAsync(new CameraPagePhoto1($"{Car.typeIndex.Replace(" ", "")}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)}.png", fullPagePhotoDelyvery));
                 }
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
                 await Task.Run(() =>
                 {
                     state = managerDispatchMob.AskWork("SavePhoto", token, VehiclwInformation.Id, PhotoInspection, ref description);
@@ -266,6 +265,13 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                         await Navigation.PopAsync();
                     }
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                }
+            }
+            else
+            {
+                if (Navigation.NavigationStack.Count > 1)
+                {
+                    await Navigation.PopAsync();
                 }
             }
         }

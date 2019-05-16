@@ -2,6 +2,7 @@
 using Rg.Plugins.Popup.Pages;
 using System;
 using Xamarin.Forms.Xaml;
+using Xamarin.Forms;
 
 namespace MDispatch.View.Inspection.PickedUp
 {
@@ -22,9 +23,58 @@ namespace MDispatch.View.Inspection.PickedUp
             blockEmaile.IsVisible = true;
         }
 
+        [Obsolete]
         private void Button_Clicked_1(object sender, EventArgs e)
         {
             liabilityAndInsuranceMV.GoEvaluationAndSurvey();
+
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            var addr = new System.Net.Mail.MailAddress(email);
+            if (addr.Address == email)
+            {
+                emailE.TextColor = Color.Default;
+                return true;
+            }
+            else
+            {
+                emailE.TextColor = Color.Red;
+                return false;
+            }
+        }
+
+        private bool IsValidNameCusstomer(string email)
+        {
+            if (nameCE.Text != null && nameCE.Text != "" && nameCE.Text.Length > 2)
+            {
+                nameCE.TextColor = Color.Default;
+                return true;
+            }
+            else
+            {
+                nameCE.TextColor = Color.Red;
+                return false;
+            }
+        }
+
+        private void EmailE_TextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e)
+        {
+            IsValidEmail(e.NewTextValue);
+        }
+
+        private void Button_Clicked_2(object sender, EventArgs e)
+        {
+            if(IsValidEmail(emailE.Text) && IsValidNameCusstomer(nameCE.Text))
+            {
+
+            }
+        }
+
+        private void NameCE_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            IsValidNameCusstomer(e.NewTextValue);
         }
     }
 }

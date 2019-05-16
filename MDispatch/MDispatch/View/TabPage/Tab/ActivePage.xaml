@@ -4,7 +4,7 @@
              x:Class="MDispatch.View.TabPage.Tab.ActivePage"
              Title="Active">
     <ContentPage.ToolbarItems>
-        <ToolbarItem  Text="Out" Clicked="ToolbarItem_Clicked"/>
+        <ToolbarItem  Text="Exit" Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>

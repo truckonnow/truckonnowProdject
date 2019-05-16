@@ -135,16 +135,16 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         [System.Obsolete]
         public async void AddPhoto(byte[] photoResult)
         {
+            await PopupNavigation.PushAsync(new LoadPage());
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
+            Photo photo = new Photo();
+            photo.Base64 = JsonConvert.SerializeObject(photoResult);
+            photo.path = $"../Photo/{VehiclwInformation.Id}/Pay/DelyverySig.jpg";
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
-                Photo photo = new Photo();
-                photo.Base64 = JsonConvert.SerializeObject(photoResult);
-                photo.path = $"../Photo/{VehiclwInformation.Id}/Pay/DelyverySig.jpg";
-                await Navigation.PopToRootAsync();
                 await Task.Run(() =>
                 {
                     Continue();
@@ -152,7 +152,6 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 await Task.Run(() =>
                 {
                     state = managerDispatchMob.SavePay(token, VehiclwInformation.Id, 2, photo, ref description);
-                    initDasbordDelegate.Invoke();
                 });
                 if (state == 2)
                 {
@@ -161,12 +160,14 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 else if (state == 3)
                 {
                     DependencyService.Get<IToast>().ShowMessage("Payment method photo saved");
+                    await Navigation.PopToRootAsync();
                 }
                 else if (state == 4)
                 {
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
                 }
             }
+            await PopupNavigation.PopAsync();
         }
 
         public void RemmoveDamage(Image image, StackLayout stackLayout)
@@ -218,7 +219,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 await Task.Run(() =>
                 {
                     string status = null;
-                    if (TotalPaymentToCarrier == "COD" && TotalPaymentToCarrier == "COP")
+                    if (TotalPaymentToCarrier == "COD" || TotalPaymentToCarrier == "COP")
                     {
                         status = "Delivered,Paid";
                     }
@@ -227,7 +228,6 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                         status = "Delivered,Billed";
                     }
                     state = managerDispatchMob.Recurent(token, IdShip, status, ref description);
-                    initDasbordDelegate.Invoke();
                 });
                 if (state == 2)
                 {
@@ -235,6 +235,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 }
                 else if (state == 3)
                 {
+                    initDasbordDelegate.Invoke();
                 }
                 else if (state == 4)
                 {

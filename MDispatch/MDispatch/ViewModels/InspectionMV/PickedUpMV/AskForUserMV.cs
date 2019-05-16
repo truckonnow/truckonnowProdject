@@ -62,10 +62,10 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
+                await Navigation.PushAsync(new LiabilityAndInsurance(managerDispatchMob, VehiclwInformation.Id, IdShip, initDasbordDelegate, OnDeliveryToCarrier, TotalPaymentToCarrier), true);
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
-                await Navigation.PushAsync(new LiabilityAndInsurance(managerDispatchMob, VehiclwInformation.Id, IdShip, initDasbordDelegate, OnDeliveryToCarrier, TotalPaymentToCarrier), true);
                 await Task.Run(() =>
                 {
                     state = managerDispatchMob.AskWork("AskFromUser", token, VehiclwInformation.Id, AskForUser, ref description);
@@ -101,6 +101,13 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                         await Navigation.PopAsync();
                     }
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                }
+            }
+            else
+            {
+                if (Navigation.NavigationStack.Count > 1)
+                {
+                    await Navigation.PopAsync();
                 }
             }
         }

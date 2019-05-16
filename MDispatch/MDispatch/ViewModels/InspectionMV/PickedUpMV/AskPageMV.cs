@@ -67,13 +67,14 @@ namespace MDispatch.ViewModels.AskPhoto
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-            await Task.Run(() => Utils.CheckNet());
-            if (App.isNetwork)
-            {
-                DependencyService.Get<IOrientationHandler>().ForceSensor();
+            DependencyService.Get<IOrientationHandler>().ForceSensor();
                 FullPagePhoto fullPagePhoto = new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{indexTypeCar}1.png", indexTypeCar, 1, initDasbordDelegate, getVechicleDelegate, "", OnDeliveryToCarrier, TotalPaymentToCarrier);
                 await Navigation.PushAsync(fullPagePhoto);
                 await Navigation.PushAsync(new CameraPagePhoto($"{indexTypeCar}1.png", fullPagePhoto));
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                
                 await Task.Run(() =>
                 {
                     state = managerDispatchMob.AskWork("SaveAsk", token, VehiclwInformation.Id, Ask, ref description);
@@ -109,6 +110,13 @@ namespace MDispatch.ViewModels.AskPhoto
                         await Navigation.PopAsync();
                     }
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                }
+            }
+            else
+            {
+                if (Navigation.NavigationStack.Count > 1)
+                {
+                    await Navigation.PopAsync();
                 }
             }
         }

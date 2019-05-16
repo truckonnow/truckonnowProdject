@@ -80,7 +80,7 @@ namespace MDispatch.ViewModels
                 await Task.Run(() =>
                 {
                     DependencyService.Get<IStore>().OnTokenRefresh();
-                    _ = Utils.StartListening();
+                    Utils.StartListening();
                 });
                 Application.Current.MainPage = new NavigationPage(new TabPage(managerDispatchMob));
             }

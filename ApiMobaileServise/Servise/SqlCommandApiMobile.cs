@@ -377,7 +377,15 @@ namespace ApiMobaileServise.Servise
                 }
                 else
                 {
-                    string TimOfInsection = (12 - DateTime.Now.Hour).ToString(); 
+                    string TimOfInsection = "";
+                    if ((12 - DateTime.Now.Hour) < 0)
+                    {
+                        TimOfInsection = "0";
+                    }
+                    else
+                    {
+                        TimOfInsection = (12 - DateTime.Now.Hour).ToString();
+                    }
                     statusAndTimeInInspection = "true,false,"+ TimOfInsection;
                 }
             }

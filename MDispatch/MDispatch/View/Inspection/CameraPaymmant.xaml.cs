@@ -21,7 +21,6 @@ namespace MDispatch.View.Inspection
 
         private async void CameraPage_OnPhotoResult(NewElement.PhotoResultEventArgs result)
         {
-            await Navigation.PopAsync();
             if (!result.Success)
                 return;
             if(paymmant is AskForUsersDelyveryMW)

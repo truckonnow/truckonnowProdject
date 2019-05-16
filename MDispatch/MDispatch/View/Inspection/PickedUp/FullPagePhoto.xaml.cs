@@ -42,6 +42,7 @@ namespace MDispatch.View.PageApp
         {
             if (fullPagePhotoMV.AllSourseImage != null && fullPagePhotoMV.AllSourseImage.Count != 0)
             {
+                Photos.SelectedItem = fullPagePhotoMV.AllSourseImage[0];
                 btnNext.IsVisible = true;
                 btnNext.HorizontalOptions = LayoutOptions.End;
                 btnAddPhoto.IsVisible = false;

@@ -68,12 +68,12 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-            await Task.Run(() => Utils.CheckNet());
-            if (App.isNetwork)
-            {
                 FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{car.typeIndex.Replace(" ", "")}{car.GetIndexCarFullPhoto(1)}.png", car.typeIndex.Replace(" ", ""), 1, initDasbordDelegate, getVechicleDelegate, car.GetNameLayout(car.GetIndexCarFullPhoto(1)), OnDeliveryToCarrier, TotalPaymentToCarrier);
                 await Navigation.PushAsync(fullPagePhotoDelyvery);
                 await Navigation.PushAsync(new CameraPagePhoto1($"{car.typeIndex.Replace(" ", "")}{car.GetIndexCarFullPhoto(1)}.png", fullPagePhotoDelyvery));
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
                 await Task.Run(() =>
                 {
                     state = managerDispatchMob.AskWork("AskDelyvery", token, VehiclwInformation.Id, askDelyvery, ref description);
@@ -109,6 +109,13 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                         await Navigation.PopAsync();
                     }
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                }
+            }
+            else
+            {
+                if (Navigation.NavigationStack.Count > 1)
+                {
+                    await Navigation.PopAsync();
                 }
             }
         }
