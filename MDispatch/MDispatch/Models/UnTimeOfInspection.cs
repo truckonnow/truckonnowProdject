@@ -6,6 +6,7 @@ namespace MDispatch.Models
     public class UnTimeOfInspection : BindableBase
     {
         public bool IsInspection { get; private set; } = false;
+        public bool ISMaybiInspection { get; set; }
         public string TimeOfInspection { get; private set; }
         public string IdDriver { get; private set; }
 
@@ -22,6 +23,7 @@ namespace MDispatch.Models
                 IdDriver = arrData[3];
                 if (IsInspectionDriver)
                 {
+                    ISMaybiInspection = true;
                     if (IsInspectionToDayDriver)
                     {
                         IsInspection = false;
@@ -33,6 +35,7 @@ namespace MDispatch.Models
                 }
                 else
                 {
+                    ISMaybiInspection = false;
                     IsInspection = true;
                 }
             }
@@ -209,7 +212,7 @@ namespace MDispatch.Models
                 {
                     status = "Pass inspection now";
                 }
-                else if (TimeOfInspection == "0 Hours" && IsInspection)
+                else if (TimeOfInspection == "0 Hours")
                 {
                     status = "Pass inspection now";
                 }

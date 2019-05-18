@@ -41,7 +41,7 @@ namespace MDispatch.View.TabPage.Tab
         [Obsolete]
         private async void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
         {
-            if (activeMV.UnTimeOfInspection.BoxColor6 == "#fb2e2e")
+            if (!activeMV.UnTimeOfInspection.ISMaybiInspection)
             {
                 await PopupNavigation.PushAsync(new AskHint(activeMV));
             }

@@ -80,7 +80,7 @@ namespace MDispatch.ViewModels.TAbbMV
                 {
                     Shippings = shippings;
                     UnTimeOfInspection = new UnTimeOfInspection(description);
-                    if(UnTimeOfInspection.BoxColor6 == "#fb2e2e")
+                    if(!UnTimeOfInspection.ISMaybiInspection)
                     {
                         await PopupNavigation.PushAsync(new AskHint(this));
                     }
