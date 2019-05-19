@@ -15,7 +15,7 @@ namespace MDispatch.ViewModels
 {
     class AvtorizationMV : BindableBase
     {
-        ManagerDispatchMob managerDispatchMob = null;
+        private ManagerDispatchMob managerDispatchMob = null;
         public DelegateCommand AvtorizationCommand { get; set; }
 
         public AvtorizationMV()

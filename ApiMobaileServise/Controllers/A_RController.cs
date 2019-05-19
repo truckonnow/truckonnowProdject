@@ -39,7 +39,6 @@ namespace ApiMobaileServise.Controllers
                     respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Password field is empty", ""));
                 }
             }
-            managerMobileApi = null;
             return respons;
         }
     }

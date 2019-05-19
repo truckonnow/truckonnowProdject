@@ -8,7 +8,7 @@ namespace MDispatch.View.A_R
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Avtorization : ContentPage
 	{
-        AvtorizationMV avtorizationMV = null;
+        private  AvtorizationMV avtorizationMV = null;
 
         public Avtorization ()
 		{

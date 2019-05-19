@@ -4,8 +4,6 @@ using Parser.Servise;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Parser.DAO
 {
@@ -64,6 +62,7 @@ namespace Parser.DAO
             Driver driver = context.Drivers.FirstOrDefault(d => d.Id == idDriver);
             if(driver != null)
             {
+                LogEr.Logerr("Info1", $"Driver status change \"{driver.Id}\"", "RefreshInspectionToDayDriverInDb", DateTime.Now.ToShortTimeString());
                 driver.IsInspectionToDayDriver = false;
                 await context.SaveChangesAsync();
             }
@@ -74,6 +73,7 @@ namespace Parser.DAO
             Driver driver = context.Drivers.FirstOrDefault(d => d.Id == idDriver);
             if (driver != null)
             {
+                LogEr.Logerr("Info1", $"Refresh the driver \"{driver.Id}\" to pass inspection", "RefreshInspectionDriverInDb", DateTime.Now.ToShortTimeString());
                 driver.IsInspectionDriver = false;
                 await context.SaveChangesAsync();
             }

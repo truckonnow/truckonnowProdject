@@ -1,9 +1,6 @@
 ﻿using Parser.Servise;
 using Parser.Servise1;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Parser
@@ -12,7 +9,9 @@ namespace Parser
     {
         static void Main(string[] args)
         {
-            new ManagerParser();
+            Task.Run(() => new ManagerParser());
+            Task.Run(() => new ManagerInspactionDriver());
+            Console.ReadKey();
         }
     }
 }

@@ -29,7 +29,6 @@ namespace MDispatch.Droid
                 }
                 stBarHeight?.SetValue(this, 0);
             }
-
             base.OnCreate(bundle);
             Rg.Plugins.Popup.Popup.Init(this, bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);

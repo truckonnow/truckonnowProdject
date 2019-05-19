@@ -5,7 +5,6 @@ using Parser.Servise;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
@@ -46,9 +45,8 @@ namespace Parser.Servise1
             {
                 while (true)
                 {
-                    LogEr.Logerr("Info1", $"check on the time", "WorkerInspactionDriver", DateTime.Now.ToShortTimeString());
                     List<Driver> drivers = sqlCommandParser.GetDriverInDb();
-                    if (CheckTimeZeroTime() && drivers != null)
+                    if (CheckTodayTime() && drivers != null)
                     {
                         RefreshInspectionTodayTimeDriver(drivers);
                     }
@@ -78,7 +76,7 @@ namespace Parser.Servise1
         {
             foreach(var driver in drivers)
             {
-                LogEr.Logerr("Info1", $"driver status change \"{driver.Id}\"", "RefreshInspectionTimeDriver", DateTime.Now.ToShortTimeString());
+                LogEr.Logerr("Info1", $"driver status change \"{driver.Id}\"", "RefreshInspectionTodayTimeDriver", DateTime.Now.ToShortTimeString());
                 sqlCommandParser.RefreshInspectionToDayDriverInDb(driver.Id);
                 SendNotyfyInspactionDrive(driver.TokenShope, "Truck Inspection", "You can pass the truck inspection now");
             }
@@ -89,16 +87,18 @@ namespace Parser.Servise1
             bool isTime = false;
             if(11 <= DateTime.Now.Hour && 12 > DateTime.Now.Hour)
             {
+                LogEr.Logerr("Info1", $"Time 11 <= DateTime.Now.Hour && 12 > DateTime.Now.Hour", "CheckTime", DateTime.Now.ToShortTimeString());
                 isTime = true;
             }
             return isTime;
         }
 
-        private bool CheckTimeZeroTime()
+        private bool CheckTodayTime()
         {
             bool isTime = false;
             if (5 <= DateTime.Now.Hour && 6 > DateTime.Now.Hour)
             {
+                LogEr.Logerr("Info1", $"Time 5 <= DateTime.Now.Hour && 6 > DateTime.Now.Hour", "CheckTodayTime", DateTime.Now.ToShortTimeString());
                 isTime = true;
             }
             return isTime;
@@ -108,6 +108,8 @@ namespace Parser.Servise1
         {
             if (tokenShope != null && tokenShope != "")
             {
+
+                LogEr.Logerr("Info1", $"Send notyfy {body}", "SendNotyfyInspactionDrive", DateTime.Now.ToShortTimeString());
                 var payload = new
                 {
                     to = tokenShope,

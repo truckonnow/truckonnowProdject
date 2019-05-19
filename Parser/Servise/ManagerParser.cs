@@ -18,15 +18,14 @@ namespace Parser.Servise
         private void WorkParser()
         {
             LogEr.Logerr("Info", "Start Parser", "WorkParser", DateTime.Now.ToShortTimeString());
-            int horseInmMiliSeconds = 60000 * 60;
+            int horseInmMiliSeconds = (60000 * 60) * 12;
             Task.Run(() =>
             {
-                Task.Run(() => new ManagerInspactionDriver());
                 while (true)
                 {
                     LogEr.Logerr("Info", "Start pulling data from the site", "WorkParser", DateTime.Now.ToShortTimeString());
                     connectorDispatch.Worker();
-                    LogEr.Logerr("Info", "Pulling data from the site successfully, The following data will be drawn from the site after 1 hour", "WorkParser", DateTime.Now.ToShortTimeString());
+                    LogEr.Logerr("Info", "Pulling data from the site successfully, The following data will be drawn from the site after 12 hour", "WorkParser", DateTime.Now.ToShortTimeString());
                     Thread.Sleep(horseInmMiliSeconds);
                 }
             }).GetAwaiter().GetResult();
