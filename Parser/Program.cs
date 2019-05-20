@@ -9,7 +9,7 @@ namespace Parser
     {
         static void Main(string[] args)
         {
-            Task.Run(() => new ManagerParser());
+            //Task.Run(() => new ManagerParser());
             Task.Run(() => new ManagerInspactionDriver());
             Console.ReadKey();
         }

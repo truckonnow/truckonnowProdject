@@ -8,10 +8,9 @@ using Newtonsoft.Json;
 namespace ApiMobaileServise.Controllers
 {
     [Route("Mobile")]
-    public class AnyController : Controller
+    public class InspectionController : Controller
     {
         ManagerMobileApi managerMobileApi = new ManagerMobileApi();
-
         [HttpPost]
         [Route("Save/Ansver")]
         public string SaveAnsver(string token, string idVe, string jsonStrAsk, int type)
@@ -130,9 +129,9 @@ namespace ApiMobaileServise.Controllers
             return respons;
         }
 
-        [HttpPost]
-        [Route("SendPdfToEmail")]
-        public string SendPdfToEmail(string token, string idVe)
+        [HttpGet]
+        [Route("Email/BOL")]
+        public string SendPdfToEmail(string token, string idShip, string email)
         {
             string respons = null;
             if (token == null || token == "")
@@ -144,7 +143,8 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    //To Do
+
+                    //_emailSender.SendEmailAsync("webalfamedia@gmail.com", "subject", "Enter email body here");
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
@@ -204,34 +204,6 @@ namespace ApiMobaileServise.Controllers
                 {
                     PhotoInspection photoInspection = JsonConvert.DeserializeObject<PhotoInspection>(jsonStr);
                     managerMobileApi.SavePhotoInspection(idVe, photoInspection);
-                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
-                }
-                else
-                {
-                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "2", null));
-                }
-            }
-            catch (Exception)
-            {
-                respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
-            }
-            return respons;
-        }
-
-        [HttpPost]
-        [Route("SendEmail/CopyLibaryAndInsurance")]
-        public string CopyLibaryAndInsurance(string token)
-        {
-            string respons = null;
-            if (token == null || token == "")
-            {
-                return JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
-            }
-            try
-            {
-                bool isToken = managerMobileApi.CheckToken(token);
-                if (isToken)
-                {
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else

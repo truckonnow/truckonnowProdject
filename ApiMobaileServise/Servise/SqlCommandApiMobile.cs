@@ -378,7 +378,7 @@ namespace ApiMobaileServise.Servise
                 else
                 {
                     string TimOfInsection = "";
-                    if ((12 - DateTime.Now.Hour) < 0)
+                    if ((12 - DateTime.Now.Hour) < 0 || DateTime.Now.Hour < 5)
                     {
                         TimOfInsection = "0";
                     }
