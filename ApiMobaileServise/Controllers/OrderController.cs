@@ -25,8 +25,7 @@ namespace ApiMobaileServise.Controllers
             try
             {
                 List<Shipping> shippings = null;
-                bool isInspactionDriver = false;
-                bool isToken = ManagerMobileApi.GetOrdersForToken(token, ref shippings, ref isInspactionDriver);
+                bool isToken = ManagerMobileApi.GetOrdersForToken(token, ref shippings);
                 if(isToken)
                 {
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", ManagerMobileApi.GetInspectionDriver(token), shippings));

@@ -29,7 +29,6 @@
                     <Button Text="No" BackgroundColor="BlueViolet" TextColor="White" Clicked="Button_Clicked_1"/>
                 </StackLayout>
                 <StackLayout x:Name="blockEmaile" IsVisible="False">
-                    <Entry x:Name="nameCE" Text="{Binding NameCustomer}" Placeholder="Enter You name" TextChanged="NameCE_TextChanged" />
                     <Entry x:Name="emailE" Text="{Binding Email}" Placeholder="Enter Email" TextChanged="EmailE_TextChanged"/>
                     <Button Text="Continue" BackgroundColor="BlueViolet" Clicked="Button_Clicked_2" TextColor="White" />
                 </StackLayout>

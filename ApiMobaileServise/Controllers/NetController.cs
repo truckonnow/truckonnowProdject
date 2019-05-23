@@ -1,4 +1,5 @@
 ﻿using ApiMobaileServise.Models;
+using ApiMobaileServise.Servise;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -8,7 +9,7 @@ namespace ApiMobaileServise.Controllers
     [Route("Mobile")]
     public class NetController : Controller
     {
-
+        ManagerMobileApi manager = new ManagerMobileApi();
         [HttpGet]
         [Route("Net")]
         public string CheckNet()

@@ -32,29 +32,16 @@ namespace MDispatch.View.Inspection.PickedUp
 
         private bool IsValidEmail(string email)
         {
-            var addr = new System.Net.Mail.MailAddress(email);
-            if (addr.Address == email)
+            try
             {
+                var addr = new System.Net.Mail.MailAddress(email);
                 emailE.TextColor = Color.Default;
                 return true;
             }
-            else
+            catch
             {
-                emailE.TextColor = Color.Red;
-                return false;
-            }
-        }
 
-        private bool IsValidNameCusstomer(string email)
-        {
-            if (nameCE.Text != null && nameCE.Text != "" && nameCE.Text.Length > 2)
-            {
-                nameCE.TextColor = Color.Default;
-                return true;
-            }
-            else
-            {
-                nameCE.TextColor = Color.Red;
+                emailE.TextColor = Color.Red;
                 return false;
             }
         }
@@ -64,17 +51,13 @@ namespace MDispatch.View.Inspection.PickedUp
             IsValidEmail(e.NewTextValue);
         }
 
-        private void Button_Clicked_2(object sender, EventArgs e)
+        [Obsolete]
+        private async void Button_Clicked_2(object sender, EventArgs e)
         {
-            if(IsValidEmail(emailE.Text) && IsValidNameCusstomer(nameCE.Text))
+            if(IsValidEmail(emailE.Text))
             {
-
+                await liabilityAndInsuranceMV.SendLiabilityAndInsuranceEmaile();
             }
-        }
-
-        private void NameCE_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            IsValidNameCusstomer(e.NewTextValue);
         }
     }
 }

@@ -39,6 +39,36 @@ namespace MDispatch.Service
             }
         }
 
+        public int SendBolEmaile(string token, string idship, ref string description, string email)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
+                RestRequest request = new RestRequest("Mobile/Email/BOL", Method.POST);
+                client.Timeout = 10000;
+                request.AddHeader("Accept", "application/json");
+                request.AddParameter("token", token);
+                request.AddParameter("idShip", idship);
+                request.AddParameter("email", email);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description);
+            }
+        }
+
         public int SaveSigPikedUp(string token, Photo photoSig, string id, ref string description)
         {
             IRestResponse response = null;

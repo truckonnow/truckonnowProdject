@@ -1,4 +1,5 @@
-﻿using ApiMobaileServise.Notify;
+﻿using ApiMobaileServise.EmailSmtp;
+using ApiMobaileServise.Notify;
 using ApiMobaileServise.Servise.AddDamage;
 using DaoModels.DAO.Models;
 using Newtonsoft.Json;
@@ -17,6 +18,13 @@ namespace ApiMobaileServise.Servise
         {
             sqlCommandApiMobile = new SqlCommandApiMobile();
             CheckAndCreatedFolder();
+        }
+
+        public async void SendBol(string idShip, string email)
+        {
+            Shipping shipping = sqlCommandApiMobile.SendBolInDb(idShip);
+            string patern = new PaternSourse().GetPaternBol(shipping);
+            await new AuthMessageSender().Execute(email, "Truckonnow - BOL", patern);
         }
 
         public void SetInspectionDriver(string idDriver, string inspectionDriverStr)
@@ -221,12 +229,12 @@ namespace ApiMobaileServise.Servise
             return sqlCommandApiMobile.GetInspectionDriverIndb(token);
         }
 
-        public bool GetOrdersForToken(string token, ref List<Shipping> shippings, ref bool isInspectionDriver)
+        public bool GetOrdersForToken(string token, ref List<Shipping> shippings)
         {
             bool isToken = sqlCommandApiMobile.CheckToken(token);
             if (isToken)
             {
-                shippings = sqlCommandApiMobile.GetOrdersForToken(token, ref isInspectionDriver);
+                shippings = sqlCommandApiMobile.GetOrdersForToken(token);
             }
             return isToken;
         }

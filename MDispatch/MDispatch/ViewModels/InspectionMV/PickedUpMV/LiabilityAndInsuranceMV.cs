@@ -22,7 +22,6 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
     {
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation { get; set; }
-        public DelegateCommand SaveLiabilityAndInsuranceCommand { get; set; }
         public DelegateCommand GoToFeedBackCommand { get; set; }
         private InitDasbordDelegate initDasbordDelegate = null;
 
@@ -34,7 +33,6 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             IdVech = idVech;
             GoToFeedBackCommand = new DelegateCommand(GoToFeedBack);
             this.initDasbordDelegate = initDasbordDelegate;
-            SaveLiabilityAndInsuranceCommand = new DelegateCommand(SendLiabilityAndInsuranceEmaile);
             InitShipping();
         }
 
@@ -43,13 +41,6 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         {
             get => email;
             set => SetProperty(ref email, value);
-        }
-
-        private string nameCustomer = null;
-        public string NameCustomer
-        {
-            get => nameCustomer;
-            set => SetProperty(ref nameCustomer, value);
         }
 
         public string IdShip { get; set; }
@@ -231,16 +222,43 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
         }
 
-        private async void SendLiabilityAndInsuranceEmaile()
+        [System.Obsolete]
+        public async Task SendLiabilityAndInsuranceEmaile()
         {
             GoEvaluationAndSurvey();
-            //SendOnEmail
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.AskWork("SendBolMail", token, IdShip, Email, ref description);
+                    initDasbordDelegate.Invoke();
+                });
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, null));
+                }
+                else if (state == 3)
+                {
+                    DependencyService.Get<IToast>().ShowMessage($"A copy of BOL is sent to the mail {Email}");
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
+            }
         }
 
         [System.Obsolete]
         public async void GoEvaluationAndSurvey()
         {
-            await PopupNavigation.PopAsync(true);
+            if (PopupNavigation.PopupStack.Count != 0)
+            {
+                await PopupNavigation.PopAsync(true);
+            }
             await PopupNavigation.PushAsync(new EvaluationAndSurveyDialog(this, Navigation));
         }
 

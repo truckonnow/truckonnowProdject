@@ -129,7 +129,7 @@ namespace ApiMobaileServise.Controllers
             return respons;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("Email/BOL")]
         public string SendPdfToEmail(string token, string idShip, string email)
         {
@@ -143,8 +143,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-
-                    //_emailSender.SendEmailAsync("webalfamedia@gmail.com", "subject", "Enter email body here");
+                    managerMobileApi.SendBol(idShip, email);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else

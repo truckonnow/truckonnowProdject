@@ -20,6 +20,16 @@ namespace ApiMobaileServise.Servise
             context = new Context();
         }
 
+        public Shipping SendBolInDb(string idShip)
+        {
+            Shipping shipping = context.Shipping.Where(s => s.Id == idShip)
+                .Include("VehiclwInformations.Scan")
+                .Include("VehiclwInformations.AskFromUser.App_will_ask_for_signature_of_the_client_signature")
+                .Include("VehiclwInformations.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature")
+                .FirstOrDefault();
+            return shipping;
+        }
+
         public async void SetInspectionDriverInDb(string idDriver, InspectionDriver inspectionDriver)
         {
             context.InspectionDrivers.Load();
@@ -270,12 +280,14 @@ namespace ApiMobaileServise.Servise
 
         public void SaveAskFromUserInDb(string idve, AskFromUser askFromUser)
         {
-            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
-            if (vehiclwInformation.AskFromUser == null)
+            Shipping shipping = context.Shipping.Where(s => s.VehiclwInformations.FirstOrDefault(v => v.Id == Convert.ToInt32(idve)) != null)
+                .Include(s => s.VehiclwInformations)
+                .FirstOrDefault();
+            if (shipping.VehiclwInformations[0].AskFromUser == null)
             {
-                vehiclwInformation.AskFromUser = new AskFromUser();
+                shipping.VehiclwInformations[0].AskFromUser = new AskFromUser();
             }
-            vehiclwInformation.AskFromUser = askFromUser;
+            shipping.VehiclwInformations[0].AskFromUser = askFromUser;
             context.SaveChangesAsync();
         }
 
@@ -292,12 +304,15 @@ namespace ApiMobaileServise.Servise
 
         public void SaveAskForUserDelyveryInDb(string idve, AskForUserDelyveryM askForUserDelyveryM)
         {
-            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
-            if (vehiclwInformation.Ask1 == null)
+
+            Shipping shipping = context.Shipping.Where(s => s.VehiclwInformations.FirstOrDefault(v => v.Id == Convert.ToInt32(idve)) != null)
+                .Include(s => s.VehiclwInformations)
+                .FirstOrDefault();
+            if (shipping.VehiclwInformations[0].askForUserDelyveryM == null)
             {
-                vehiclwInformation.askForUserDelyveryM = new AskForUserDelyveryM();
+                shipping.VehiclwInformations[0].askForUserDelyveryM = new AskForUserDelyveryM();
             }
-            vehiclwInformation.askForUserDelyveryM = askForUserDelyveryM;
+            shipping.VehiclwInformations[0].askForUserDelyveryM = askForUserDelyveryM;
             context.SaveChangesAsync();
         }
 
@@ -431,7 +446,7 @@ namespace ApiMobaileServise.Servise
             return vehiclwInformation;
         }
 
-        public List<Shipping> GetOrdersForToken(string token, ref bool isInspectionDriver)
+        public List<Shipping> GetOrdersForToken(string token)
         {
             context.Shipping.Load();
             context.VehiclwInformation.Load();
@@ -445,7 +460,6 @@ namespace ApiMobaileServise.Servise
             List<Shipping> Shipping1 = new List<Shipping>();
             Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
             List<Shipping> shippings = context.Shipping.ToList().FindAll(s => s.Driverr != null && s.Driverr.Id == driver.Id);
-            isInspectionDriver = driver.IsInspectionDriver;
             if (shippings == null)
             {
                 return new List<Shipping>();

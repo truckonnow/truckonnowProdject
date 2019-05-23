@@ -45,16 +45,24 @@ namespace Parser.Servise1
             {
                 while (true)
                 {
-                    List<Driver> drivers = sqlCommandParser.GetDriverInDb();
-                    if (CheckTodayTime() && drivers != null)
+                    try
                     {
-                        RefreshInspectionTodayTimeDriver(drivers);
+                        LogEr.Logerr("Info1", "Check Time", "WorkerInspactionDriver", DateTime.Now.ToShortTimeString());
+                        List<Driver> drivers = sqlCommandParser.GetDriverInDb();
+                        if (CheckTodayTime() && drivers != null)
+                        {
+                            RefreshInspectionTodayTimeDriver(drivers);
+                        }
+                        if (CheckTime() && drivers != null)
+                        {
+                            RefreshInspectionTimeDriver(drivers);
+                        }
+                        Thread.Sleep(horseInmMiliSeconds);
                     }
-                    if (CheckTime() && drivers != null)
+                    catch
                     {
-                        RefreshInspectionTimeDriver(drivers);
+                        LogEr.Logerr("Info1", "Error", "WorkerInspactionDriver", DateTime.Now.ToShortTimeString());
                     }
-                    Thread.Sleep(horseInmMiliSeconds);
                 }
             }).GetAwaiter().GetResult();
         }

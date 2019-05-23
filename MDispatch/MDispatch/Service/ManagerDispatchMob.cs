@@ -197,6 +197,11 @@ namespace MDispatch.Service
                     driverInspecktion = new DriverInspecktion();
                     stateInspection = driverInspecktion.SaveInspactionDriver(token, ref description, id, (Photo)obj, indexPhoto);
                 }
+                else if(typeInspection == "SendBolMail")
+                {
+                    inspection = new Inspection();
+                    stateInspection = inspection.SendBolEmaile(token, id, ref description, (string)obj);
+                }
             }
             driverInspecktion = null;
             inspection = null;
