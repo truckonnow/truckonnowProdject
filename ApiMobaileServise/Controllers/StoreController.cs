@@ -3,8 +3,6 @@ using ApiMobaileServise.Servise;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ApiMobaileServise.Controllers
@@ -28,7 +26,10 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    managerMobileApi.SaveTokenStore(token, tokenStore);
+                    Task.Run(() =>
+                    {
+                        managerMobileApi.SaveTokenStore(token, tokenStore);
+                    });
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else

@@ -32,8 +32,9 @@ namespace ApiMobaileServise.Servise
 
         public async void SetInspectionDriverInDb(string idDriver, InspectionDriver inspectionDriver)
         {
-            context.InspectionDrivers.Load();
-            Driver driver = await context.Drivers.FirstOrDefaultAsync(d => d.Id == Convert.ToUInt32(idDriver));
+            Driver driver = await context.Drivers.Where(d => d.Id == Convert.ToUInt32(idDriver))
+                .Include(d => d.InspectionDrivers)
+                .FirstOrDefaultAsync();
             if(driver.InspectionDrivers == null)
             {
                 driver.InspectionDrivers = new List<InspectionDriver>();
@@ -77,8 +78,9 @@ namespace ApiMobaileServise.Servise
 
         public async void UpdateInspectionDriver(string idDriver)
         {
-            context.InspectionDrivers.Load();
-            Driver driver = await context.Drivers.FirstOrDefaultAsync(d => d.Id == Convert.ToUInt32(idDriver));
+            Driver driver = await context.Drivers.Where(d => d.Id == Convert.ToUInt32(idDriver))
+                   .Include(d => d.InspectionDrivers)
+                   .FirstOrDefaultAsync();
             InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
             inspectionDriver.Date = DateTime.Now.ToString();
             driver.IsInspectionDriver = true;
@@ -89,9 +91,9 @@ namespace ApiMobaileServise.Servise
         public async Task<bool> ChechToDayInspactionInDb(string token)
         {
             bool isInspaction = false;
-            context.Drivers.Load();
-            context.InspectionDrivers.Load();
-            Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
+            Driver driver = await context.Drivers.Where(d => d.Token == token)
+                 .Include(d => d.InspectionDrivers)
+                 .FirstOrDefaultAsync();
             if (driver.InspectionDrivers != null && driver.InspectionDrivers.Count != 0)
             {
                 InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
@@ -117,16 +119,15 @@ namespace ApiMobaileServise.Servise
 
         public async void SaveGPSLocationData(string token, Geolocations geolocations)
         {
-            context.Drivers.Load();
-            context.geolocations.Load();
-            Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
+            Driver driver = context.Drivers.Where(d => d.Token == token)
+                .Include(d => d.geolocations)
+                .FirstOrDefault();
             driver.geolocations = geolocations;
             await context.SaveChangesAsync();
         }
 
         public async void SaveTokenStoreinDb(string token, string tokenStore)
         {
-            context.Drivers.Load();
             Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
             driver.TokenShope = tokenStore;
             await context.SaveChangesAsync();
@@ -134,11 +135,11 @@ namespace ApiMobaileServise.Servise
 
         public async Task<VehiclwInformation> GetVehiclwInformationAndSaveDamageForUser(string idVech, List<DamageForUser> damageForUsers)
         {
-            context.VehiclwInformation.Load();
-            context.DamageForUsers.Load();
-            context.Asks.Load();
-            context.Photos.Load();
-            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idVech));
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.Where(v => v.Id.ToString() == idVech)
+                 .Include(v => v.Ask)
+                 .Include("PhotoInspections.Photos")
+                 .Include("DamageForUsers")
+                 .FirstOrDefault();
             if (vehiclwInformation.DamageForUsers == null)
             {
                 vehiclwInformation.DamageForUsers = new List<DamageForUser>();
@@ -150,12 +151,12 @@ namespace ApiMobaileServise.Servise
 
         public async Task<VehiclwInformation> SavePhotoInspectionInDb(string idVe, PhotoInspection photoInspection)
         {
-            context.VehiclwInformation.Load();
-            context.Asks.Load();
-            context.PhotoInspections.Load();
-            context.Damages.Load();
-            context.Photos.Load();
-            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == idVe);
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.Where(v => v.Id.ToString() == idVe)
+                .Include(v => v.Ask)
+                .Include(v => v.Scan)
+                .Include("PhotoInspections.Photos")
+                .Include("PhotoInspections.Damages")
+                .FirstOrDefault();
             if (vehiclwInformation.PhotoInspections == null)
             {
                 vehiclwInformation.PhotoInspections = new List<PhotoInspection>();
@@ -174,11 +175,6 @@ namespace ApiMobaileServise.Servise
 
         public Shipping GetShippingInDb(string idShip)
         {
-            //context.PhotoInspections.Load();
-            //context.Shipping.Load();
-            //context.VehiclwInformation.Load();
-            //context.Damages.Load();
-            //context.Photos.Load();
             Shipping shipping = context.Shipping.Where(s => s.Id.ToString() == idShip)
                 .Include("VehiclwInformations.PhotoInspections.Damages")
                 .Include("VehiclwInformations.Scan")
@@ -199,9 +195,9 @@ namespace ApiMobaileServise.Servise
 
         public async void SavePayMethotInDb(string idVech, string payMethod, string countPay)
         {
-            context.VehiclwInformation.Load();
-            context.AskFromUsers.Load();
-            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idVech));
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.Where(v => v.Id == Convert.ToInt32(idVech))
+                .Include(v => v.AskFromUser)
+                .FirstOrDefault();
             if (vehiclwInformation.AskFromUser == null)
             {
                 vehiclwInformation.AskFromUser = new AskFromUser();
@@ -213,16 +209,17 @@ namespace ApiMobaileServise.Servise
 
         public async void SavePayInDb(string idVech, int type, Photo photo)
         {
-            context.VehiclwInformation.Load();
             context.askForUserDelyveryMs.Load();
             context.AskFromUsers.Load();
-            context.Photos.Load();
-            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idVech));
-            if (type == 1 && vehiclwInformation.AskFromUser != null)
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.Where(v => v.Id == Convert.ToInt32(idVech))
+                .Include(v => v.AskFromUser)
+                .Include(v => v.askForUserDelyveryM)
+                .FirstOrDefault();
+            if (type == 2 && vehiclwInformation.AskFromUser != null)
             {
                 vehiclwInformation.AskFromUser.PhotoPay = photo;
             }
-            else if (type == 2 && vehiclwInformation != null && vehiclwInformation.askForUserDelyveryM != null)
+            else if (type == 1 && vehiclwInformation != null && vehiclwInformation.askForUserDelyveryM != null)
             {
                 vehiclwInformation.askForUserDelyveryM.PhotoPay = photo;
             }
@@ -248,17 +245,18 @@ namespace ApiMobaileServise.Servise
 
         public string GerShopTokenForShipping(string idOrder)
         {
-            context.Drivers.Load();
-            Shipping shipping = context.Shipping.FirstOrDefault(d => d.Id == idOrder);
+            Shipping shipping = context.Shipping.Where(d => d.Id == idOrder)
+                .Include(s => s.Driverr)
+                .FirstOrDefault();
             return shipping.Driverr.TokenShope;
         }
 
         public async void SaveSigPikedUpInDb(string idve, Photo sig)
         {
-            context.Shipping.Load();
-            context.VehiclwInformation.Load();
             context.askForUserDelyveryMs.Load();
-            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.Where(v => v.Id == Convert.ToInt32(idve))
+                .Include(v => v.askForUserDelyveryM)
+                .FirstOrDefault();
             if (vehiclwInformation.askForUserDelyveryM == null)
             {
                 vehiclwInformation.askForUserDelyveryM = new AskForUserDelyveryM();
@@ -421,13 +419,6 @@ namespace ApiMobaileServise.Servise
 
         public VehiclwInformation GetVehiclwInformationInDb(int idVech)
         {
-            //context.VehiclwInformation.Load();
-            //context.Asks.Load();
-            //context.Ask1s.Load();
-            //context.Photos.Load();
-            //context.AskFromUsers.Load();
-            //context.AskDelyveries.Load();
-            //context.askForUserDelyveryMs.Load();
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.Where(v => v.Id == idVech)
                 .Include("Ask.Any_personal_or_additional_items_with_or_in_vehicle")
                 .Include("Ask.Any_paperwork_or_documentation")
@@ -448,18 +439,17 @@ namespace ApiMobaileServise.Servise
 
         public List<Shipping> GetOrdersForToken(string token)
         {
-            context.Shipping.Load();
-            context.VehiclwInformation.Load();
-            context.Asks.Load();
-            context.PhotoInspections.Load();
-            context.Ask1s.Load();
-            context.AskFromUsers.Load();
-            context.AskDelyveries.Load();
-            context.askForUserDelyveryMs.Load();
-            context.Damages.Load();
+
             List<Shipping> Shipping1 = new List<Shipping>();
             Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
-            List<Shipping> shippings = context.Shipping.ToList().FindAll(s => s.Driverr != null && s.Driverr.Id == driver.Id);
+            List<Shipping> shippings = context.Shipping.Where(s => s.Driverr != null && s.Driverr.Id == driver.Id)
+                .Include("VehiclwInformations.Ask")
+                .Include("VehiclwInformations.Ask1")
+                .Include("VehiclwInformations.PhotoInspections.Damages")
+                .Include("VehiclwInformations.AskFromUser")
+                .Include("VehiclwInformations.AskDelyvery")
+                .Include("VehiclwInformations.askForUserDelyveryM")
+                .ToList();
             if (shippings == null)
             {
                 return new List<Shipping>();
@@ -474,16 +464,16 @@ namespace ApiMobaileServise.Servise
 
         public List<Shipping> GetOrdersDelyveryForToken(string token, int type)
         {
-            context.VehiclwInformation.Load();
-            context.Asks.Load();
-            context.Ask1s.Load();
-            context.AskDelyveries.Load();
-            context.askForUserDelyveryMs.Load();
-            context.PhotoInspections.Load();
-            context.Damages.Load();
             List<Shipping> Shipping1 = new List<Shipping>();
             Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
-            List<Shipping> shippings = context.Shipping.ToList().FindAll(s => s.Driverr != null && s.Driverr.Id == driver.Id);
+            List<Shipping> shippings = context.Shipping.Where(s => s.Driverr != null && s.Driverr.Id == driver.Id)
+                 .Include("VehiclwInformations.Ask")
+                 .Include("VehiclwInformations.Ask1")
+                 .Include("VehiclwInformations.PhotoInspections.Damages")
+                 .Include("VehiclwInformations.AskFromUser")
+                 .Include("VehiclwInformations.AskDelyvery")
+                 .Include("VehiclwInformations.askForUserDelyveryM")
+                 .ToList();
             if (shippings == null)
             {
                 return new List<Shipping>();

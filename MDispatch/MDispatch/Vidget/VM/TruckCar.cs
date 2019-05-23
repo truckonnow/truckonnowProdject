@@ -272,7 +272,18 @@ namespace MDispatch.Vidget.VM
 
         public void Orinteble(int indexTruckPhoto)
         {
-            DependencyService.Get<IOrientationHandler>().ForceSensor();
+            DependencyService.Get<IOrientationHandler>().ForceLandscape();
+            //if (indexTruckPhoto == 1 || indexTruckPhoto == 2 || indexTruckPhoto == 3 || indexTruckPhoto == 6 || indexTruckPhoto == 7 || indexTruckPhoto == 8 || indexTruckPhoto == 9 || indexTruckPhoto == 15 || indexTruckPhoto == 16
+            //    || indexTruckPhoto == 20 || indexTruckPhoto == 21 || indexTruckPhoto == 22 || indexTruckPhoto == 23 || indexTruckPhoto == 24 || indexTruckPhoto == 25 || indexTruckPhoto == 26 || indexTruckPhoto == 31 || indexTruckPhoto == 32
+            //    || indexTruckPhoto == 33 || indexTruckPhoto == 34 || indexTruckPhoto == 38 || indexTruckPhoto == 39 || indexTruckPhoto == 40 || indexTruckPhoto == 13)
+            //{
+            //    DependencyService.Get<IOrientationHandler>().ForceLandscape();
+            //}
+            //else if(indexTruckPhoto == 4 || indexTruckPhoto == 5 || indexTruckPhoto == 10 || indexTruckPhoto == 11 || indexTruckPhoto == 12 || indexTruckPhoto == 14 || indexTruckPhoto == 17 || indexTruckPhoto == 18
+            //    || indexTruckPhoto == 19 || indexTruckPhoto == 27 || indexTruckPhoto == 28 || indexTruckPhoto == 29 || indexTruckPhoto == 30 || indexTruckPhoto == 35 || indexTruckPhoto == 36 || indexTruckPhoto == 37 || indexTruckPhoto == 45)
+            //{
+            //    DependencyService.Get<IOrientationHandler>().ForcePortrait();
+            //}
         }
     }
 }

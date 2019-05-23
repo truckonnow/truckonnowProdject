@@ -202,6 +202,11 @@ namespace MDispatch.Service
                     inspection = new Inspection();
                     stateInspection = inspection.SendBolEmaile(token, id, ref description, (string)obj);
                 }
+                else if (typeInspection == "SendCouponMail")
+                {
+                    inspection = new Inspection();
+                    stateInspection = inspection.SendCouponEmaile(token, ref description, (string)obj);
+                }
             }
             driverInspecktion = null;
             inspection = null;

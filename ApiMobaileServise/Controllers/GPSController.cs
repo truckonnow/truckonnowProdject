@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ApiMobaileServise.Models;
 using ApiMobaileServise.Servise;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,11 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    managerMobileApi.SaveGPSLocationData(token, longitude, latitude);
+
+                    Task.Run(() =>
+                    {
+                        managerMobileApi.SaveGPSLocationData(token, longitude, latitude);
+                    });
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else

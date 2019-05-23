@@ -43,12 +43,15 @@ namespace MDispatch.Service.GeloctionGPS
             }
         }
 
-        private static void PositionChanged(object sender, PositionEventArgs e)
+        private static async void PositionChanged(object sender, PositionEventArgs e)
         {
-            if (App.isNetwork)
+            await Task.Run(() =>
             {
-                ReqvestGPS(e.Position.Longitude.ToString(), e.Position.Latitude.ToString());
-            }
+                if (App.isNetwork)
+                {
+                    ReqvestGPS(e.Position.Longitude.ToString(), e.Position.Latitude.ToString());
+                }
+            });
         }
 
         public static void ReqvestGPS(string longitude, string latitude)

@@ -24,7 +24,13 @@ namespace ApiMobaileServise.Servise
         {
             Shipping shipping = sqlCommandApiMobile.SendBolInDb(idShip);
             string patern = new PaternSourse().GetPaternBol(shipping);
-            await new AuthMessageSender().Execute(email, "Truckonnow - BOL", patern);
+            await new AuthMessageSender().Execute(email, "Truckonnow - Coupon", patern);
+        }
+
+        public async void SendCoupon(string email)
+        {
+            string patern = new PaternSourse().GetPaternCopon();
+            await new AuthMessageSender().Execute(email, "Truckonnow - Coupon", patern);
         }
 
         public void SetInspectionDriver(string idDriver, string inspectionDriverStr)
@@ -88,14 +94,11 @@ namespace ApiMobaileServise.Servise
             return sqlCommandApiMobile.GetShippingInDb(idShip);
         }
 
-        public void SavePhotoInspection(string idVe, PhotoInspection photoInspection)
+        public async void SavePhotoInspection(string idVe, PhotoInspection photoInspection)
         {
-            Task.Run( async() =>
-            {
                 VehiclwInformation vehiclwInformation = await sqlCommandApiMobile.SavePhotoInspectionInDb(idVe, photoInspection);
                 ITypeScan typeScan = GetTypeScan(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
                 typeScan.SetDamage(photoInspection, vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), vehiclwInformation.Scan.path);
-            });
         }
 
         private ITypeScan GetTypeScan(string type)

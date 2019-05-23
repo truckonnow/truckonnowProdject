@@ -11,7 +11,6 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -103,6 +102,11 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 }
                 else if (state == 3)
                 {
+                    if (isNavigationMany)
+                    {
+                        await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
+                        isNavigationMany = false;
+                    }
                     Shipping = shipping1;
                 }
                 else if (state == 4)

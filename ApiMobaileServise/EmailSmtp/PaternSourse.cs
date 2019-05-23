@@ -107,5 +107,11 @@ namespace ApiMobaileServise.EmailSmtp
             return patern += "</div>";
 ;
         }
+
+        public string GetPaternCopon()
+        {
+            string patern = "<p>Thank you for using our company, here is your 10% discount coupon.</p>";
+            return patern;
+        }
     }
 }

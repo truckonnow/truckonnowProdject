@@ -11,7 +11,6 @@ using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -114,6 +113,11 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 }
                 else if (state == 3)
                 {
+                    if (isNavigationMany)
+                    {
+                        await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
+                        isNavigationMany = false;
+                    }
                     DependencyService.Get<IToast>().ShowMessage("Answers to questions saved");
                 }
                 else if (state == 4)
@@ -249,11 +253,6 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         {
             await PopupNavigation.PopAllAsync(true);
             await Navigation.PushAsync(new View.Inspection.Feedback(managerDispatchMob, VehiclwInformation, this));
-        }
-
-        public void SendEmailCoupon()
-        {
-            //To Do
         }
     }
 }

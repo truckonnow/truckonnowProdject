@@ -25,6 +25,7 @@ namespace MDispatch.Vidget.VM
         public DelegateCommand NextCommand { get; set; }
         private InitDasbordDelegate initDasbordDelegate = null;
 
+        [System.Obsolete]
         public FullPhotoTruckVM(ManagerDispatchMob managerDispatchMob, string idDriver, int indexCurent, INavigation navigation, InitDasbordDelegate initDasbordDelegate = null)
         {
             this.initDasbordDelegate = initDasbordDelegate;
@@ -55,7 +56,7 @@ namespace MDispatch.Vidget.VM
             get => imageSourceTake;
             set => SetProperty(ref imageSourceTake, value);
         }
-
+         
         public Photo Photo { get; set; }
 
         [System.Obsolete]
@@ -88,7 +89,6 @@ namespace MDispatch.Vidget.VM
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
-                
                 if (IndexCurent < 45)
                 {
                     isEndInspection = true;

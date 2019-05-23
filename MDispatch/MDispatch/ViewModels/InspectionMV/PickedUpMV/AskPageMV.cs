@@ -9,7 +9,6 @@ using MDispatch.View.PageApp;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
-using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -95,6 +94,11 @@ namespace MDispatch.ViewModels.AskPhoto
                 }
                 else if (state == 3)
                 {
+                    if (isNavigationMany)
+                    {
+                        await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
+                        isNavigationMany = false;
+                    }
                     Navigation.RemovePage(Navigation.NavigationStack[2]);
                     DependencyService.Get<IToast>().ShowMessage("Answers to questions saved");
                 }

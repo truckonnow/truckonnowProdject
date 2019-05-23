@@ -69,6 +69,35 @@ namespace MDispatch.Service
             }
         }
 
+        public int SendCouponEmaile(string token, ref string description, string email)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
+                RestRequest request = new RestRequest("Mobile/Email/Copon", Method.POST);
+                client.Timeout = 10000;
+                request.AddHeader("Accept", "application/json");
+                request.AddParameter("token", token);
+                request.AddParameter("email", email);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description);
+            }
+        }
+
         public int SaveSigPikedUp(string token, Photo photoSig, string id, ref string description)
         {
             IRestResponse response = null;
@@ -501,21 +530,5 @@ namespace MDispatch.Service
                 return 2;
             }
         }
-
-        //void SaveBitmapWithQuality(Bitmap bitmap, int quality, Stream outputStream)
-        //{
-        //    if (quality < 0 || quality > 100)
-        //    {
-        //        throw new ArgumentOutOfRangeException(
-        //           "quality", "quality must be in [0..100].");
-        //    }
-
-        //    ImageCodecInfo jpgEncoder = ImageCodecInfo.GetImageDecoders()
-        //        .Where(codec => codec.FormatID == ImageFormat.Jpeg.Guid).Single();
-        //    var qualityEncoder = System.Drawing.Imaging.Encoder.Quality;
-        //    var encoderParams = new EncoderParameters(1);
-        //    encoderParams.Param[0] = new EncoderParameter(qualityEncoder, quality);
-        //    bitmap.Save(outputStream, jpgEncoder, encoderParams);
-        //}
     }
 }

@@ -11,7 +11,6 @@ using MDispatch.ViewModels.InspectionMV.PickedUpMV;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
-using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -45,6 +44,13 @@ namespace MDispatch.ViewModels.InspectionMV
             set => SetProperty(ref vehiclwInformation, value);
         }
 
+        private string email = null;
+        public string Email
+        {
+            get => email;
+            set => SetProperty(ref email, value);
+        }
+
         [System.Obsolete]
         public async void SaveAsk()
         {
@@ -57,6 +63,7 @@ namespace MDispatch.ViewModels.InspectionMV
             {
                 await Task.Run(() =>
                 {
+                    managerDispatchMob.AskWork("SendCouponMail", token, null, Email, ref description);
                     state = managerDispatchMob.AskWork("FeedBack", token, null, Feedback, ref description);
                 });
                 await PopupNavigation.PopAsync(true);

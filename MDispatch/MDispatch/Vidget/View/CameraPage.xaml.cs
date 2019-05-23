@@ -18,10 +18,12 @@ namespace MDispatch.Vidget.View
             NavigationPage.SetHasNavigationBar(this, false); 
             fullPhotoTruckVM = new FullPhotoTruckVM(managerDispatchMob, idDriver, indexCurrent, Navigation, initDasbordDelegate);
             BindingContext = fullPhotoTruckVM;
+            paternPhoto.Source = $"Hint{indexCurrent}.jpg";
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
         {
+            DependencyService.Get<IOrientationHandler>().ForceSensor();
             await Navigation.PopAsync();
         }
 
@@ -33,6 +35,12 @@ namespace MDispatch.Vidget.View
                 return;
             }
             fullPhotoTruckVM.AddPhoto(result.Image);
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            DependencyService.Get<IOrientationHandler>().ForceSensor();
+            return base.OnBackButtonPressed();
         }
     }
 }

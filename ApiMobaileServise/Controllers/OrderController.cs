@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ApiMobaileServise.Models;
 using ApiMobaileServise.Servise;
 using DaoModels.DAO.Models;
@@ -112,7 +113,10 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = ManagerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    ManagerMobileApi.SavepOrder(id, idOrder, name, contactName, address, city, state, zip, phone, email, typeSave);
+                    Task.Run(() =>
+                    {
+                        ManagerMobileApi.SavepOrder(id, idOrder, name, contactName, address, city, state, zip, phone, email, typeSave);
+                    });
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", ""));
                 }
                 else
@@ -137,7 +141,10 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = ManagerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    ManagerMobileApi.SavepOrder(id, typeSave, payment, paymentTeams);
+                    Task.Run(() =>
+                    {
+                        ManagerMobileApi.SavepOrder(id, typeSave, payment, paymentTeams);
+                    });
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", ""));
                 }
                 else

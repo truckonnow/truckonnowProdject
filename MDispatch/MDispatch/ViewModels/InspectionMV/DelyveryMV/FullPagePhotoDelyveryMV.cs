@@ -17,7 +17,6 @@ using Rg.Plugins.Popup.Services;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -216,17 +215,17 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-                if (Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1) == 0)
-                {
-                    DependencyService.Get<IOrientationHandler>().ForceSensor();
-                    await CheckVechicleAndGoToResultPage();
-                }
-                else
-                {
-                    FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)}.png", Car.typeIndex.Replace(" ", ""), inderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)), OnDeliveryToCarrier, TotalPaymentToCarrier);
-                    await Navigation.PushAsync(fullPagePhotoDelyvery);
-                    await Navigation.PushAsync(new CameraPagePhoto1($"{Car.typeIndex.Replace(" ", "")}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)}.png", fullPagePhotoDelyvery));
-                }
+            if (Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1) == 0)
+            {
+                DependencyService.Get<IOrientationHandler>().ForceSensor();
+                await CheckVechicleAndGoToResultPage();
+            }
+            else
+            {
+                FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)}.png", Car.typeIndex.Replace(" ", ""), inderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)), OnDeliveryToCarrier, TotalPaymentToCarrier);
+                await Navigation.PushAsync(fullPagePhotoDelyvery);
+                await Navigation.PushAsync(new CameraPagePhoto1($"{Car.typeIndex.Replace(" ", "")}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)}.png", fullPagePhotoDelyvery));
+            }
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
@@ -250,6 +249,16 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 }
                 else if (state == 3)
                 {
+                    if (isNavigationMany)
+                    {
+                        await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
+                        isNavigationMany = false;
+                    }
+                    if (isNavigationMany)
+                    {
+                        await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
+                        isNavigationMany = false;
+                    }
                     Navigation.RemovePage(Navigation.NavigationStack[2]);
                     DependencyService.Get<IToast>().ShowMessage($"Photo {Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion))} saved");
                 }

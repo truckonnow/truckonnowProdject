@@ -54,7 +54,10 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    managerMobileApi.SetInspectionDriver(idDriver, inspectionDriverStr);
+                    Task.Run(() =>
+                    {
+                        managerMobileApi.SetInspectionDriver(idDriver, inspectionDriverStr);
+                    });
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
@@ -83,7 +86,10 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    managerMobileApi.SaveInspactionDriver(idDriver, photoJson, indexPhoto);
+                    Task.Run(() =>
+                    {
+                        managerMobileApi.SaveInspactionDriver(idDriver, photoJson, indexPhoto);
+                    });
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
@@ -112,7 +118,10 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    managerMobileApi.UpdateInspectionDriver(idDriver);
+                    Task.Run(() =>
+                    {
+                        managerMobileApi.UpdateInspectionDriver(idDriver);
+                    });
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
