@@ -5,15 +5,12 @@ using Android;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.Content.Res;
 using Android.Graphics;
 using Android.Runtime;
 using Android.Support.V4.App;
 using Android.Support.V4.Content;
 using Android.Views;
 using Android.Widget;
-using Java.Lang;
-using Java.Lang.Reflect;
 using MDispatch.Droid.NewrRender;
 using MDispatch.Droid.NewrRender.NewElementXamarin.Forms;
 using MDispatch.NewElement;
@@ -27,6 +24,7 @@ namespace MDispatch.Droid.NewrRender
     [Obsolete]
     class CameraPageRender : PageRenderer, TextureView.ISurfaceTextureListener, IAutoFocusCallback
     {
+        private bool isFocus = false;
         public CameraPageRender(Context context) : base(context)
         {
         }
@@ -108,7 +106,11 @@ namespace MDispatch.Droid.NewrRender
         {
             capturePhotoButton.Click += async (sender, e) =>
             {
-                AutoFocus();
+                if (!isFocus)
+                {
+                    isFocus = true;
+                    AutoFocus();
+                }
             };
             liveView.SurfaceTextureListener = this;
         }
@@ -224,7 +226,6 @@ namespace MDispatch.Droid.NewrRender
 
         public void OnSurfaceTextureUpdated(Android.Graphics.SurfaceTexture surface)
         {
-
         }
 
         [Obsolete]
@@ -232,6 +233,7 @@ namespace MDispatch.Droid.NewrRender
         {
             var bytes = await TakePhoto();
             (Element as CameraPage).SetPhotoResult(bytes, liveView.Bitmap.Width, liveView.Bitmap.Height);
+            isFocus = false;
         }
         #endregion
     }
