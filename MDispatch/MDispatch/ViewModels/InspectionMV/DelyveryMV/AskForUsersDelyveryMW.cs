@@ -7,6 +7,7 @@ using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection.Delyvery;
 using Newtonsoft.Json;
 using Plugin.Settings;
+using Prism.Commands;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation { get; set; }
         private InitDasbordDelegate initDasbordDelegate = null;
+        public DelegateCommand GoToFeedBackCommand { get; set; }
 
         public AskForUsersDelyveryMW(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate, 
             string totalPaymentToCarrier, string paymmant = null)
@@ -32,7 +34,8 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             VehiclwInformation = vehiclwInformation;
             IdShip = idShip;
             TotalPaymentToCarrier = totalPaymentToCarrier;
-            if(paymmant != null)
+            GoToFeedBackCommand = new DelegateCommand(GoToFeedBack);
+            if (paymmant != null)
             {
                 Payment = paymmant;
             }

@@ -5,7 +5,6 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Firebase;
-using MDispatch.Droid.StoreService;
 using Plugin.FirebasePushNotification;
 using Plugin.Permissions;
 using Xamarin.Forms.Platform.Android;

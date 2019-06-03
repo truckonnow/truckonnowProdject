@@ -9,7 +9,6 @@ namespace ApiMobaileServise.Controllers
     [Route("Mobile")]
     public class NetController : Controller
     {
-        ManagerMobileApi manager = new ManagerMobileApi();
         [HttpGet]
         [Route("Net")]
         public string CheckNet()

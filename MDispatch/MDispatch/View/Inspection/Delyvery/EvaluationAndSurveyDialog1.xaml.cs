@@ -34,11 +34,5 @@ namespace MDispatch.View.Inspection.PickedUp
                 await askForUsersDelyveryMW.Navigation.PushAsync(new CameraPaymmant(askForUsersDelyveryMW, ""));
             }
         }
-
-        [System.Obsolete]
-        private async void Button_Clicked(object sender, System.EventArgs e)
-        {
-            await PopupNavigation.PopAsync(true);
-        }
     }
 }

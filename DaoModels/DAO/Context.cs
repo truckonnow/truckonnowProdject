@@ -32,8 +32,8 @@ namespace DaoModels.DAO
         {
             if (!optionsBuilder.IsConfigured)
             {
-               //optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=WebDispatchDB;Trusted_Connection=True;");
-                optionsBuilder.UseSqlServer("Data Source=127.0.0.1;Initial Catalog=WebDispatchDB;Integrated Security=False;User ID=WebDispatch;Password=WebDispatch;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
+                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=WebDispatchDB;Trusted_Connection=True;");
+                //optionsBuilder.UseSqlServer("Data Source=127.0.0.1;Initial Catalog=WebDispatchDB;Integrated Security=False;User ID=WebDispatch;Password=WebDispatch;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             }
         }
     }
