@@ -13,7 +13,7 @@ namespace Parser.DAO
 
         public SqlCommandParser()
         {
-            context = new Context();
+            context = new Context(true);
         }
 
         public async void AddOrder(Shipping shipping)
