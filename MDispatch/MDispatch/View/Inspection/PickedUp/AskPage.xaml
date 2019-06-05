@@ -72,7 +72,7 @@
                         <input:Dropdown CornerRadius="6" BorderColor="#4fd2c2" Placeholder="Select type car" SelectedItemChanged="Dropdown_SelectedItemChanged_1">
                             <input:Dropdown.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
-                                    <!--<x:String>Sedan</x:String>-->
+                                    <x:String>Sedan</x:String>
                                     <x:String>Suv</x:String>
                                     <!--<x:String>Convertible</x:String>-->
                                     <x:String>Coupe</x:String>

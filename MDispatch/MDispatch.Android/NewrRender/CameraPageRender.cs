@@ -92,13 +92,13 @@ namespace MDispatch.Droid.NewrRender
                 {
                     if (camera != null)
                     {
-                       camera.SetDisplayOrientation(0);
+                        camera.SetDisplayOrientation(0);
                     }
                     capturePhotoButton.SetY(mainLayout.Height / 2 - 60);
                     capturePhotoButton.SetX(mainLayout.Width - 200);
                 }
             }
-            catch(NullReferenceException)
+            catch (NullReferenceException)
             { }
         }
 
@@ -106,21 +106,26 @@ namespace MDispatch.Droid.NewrRender
         {
             capturePhotoButton.Click += async (sender, e) =>
             {
-                if (!isFocus)
-                {
-                    isFocus = true;
-                    AutoFocus();
-                }
+                AutoFocus();
             };
             liveView.SurfaceTextureListener = this;
         }
 
         private async void AutoFocus()
         {
-            await Task.Run(() =>
+            if (!isFocus)
             {
-                camera.AutoFocus(this);
-            });
+                isFocus = true;
+                await Task.Run(() =>
+                {
+                    camera.AutoFocus(this);
+                });
+            }
+            else
+            {
+
+            }
+
         }
 
         public override bool OnKeyDown(Keycode keyCode, KeyEvent e)
@@ -210,7 +215,7 @@ namespace MDispatch.Droid.NewrRender
             }
         }
 
-       
+
         public bool OnSurfaceTextureDestroyed(Android.Graphics.SurfaceTexture surface)
         {
             if (camera != null)
@@ -231,8 +236,15 @@ namespace MDispatch.Droid.NewrRender
         [Obsolete]
         public async void OnAutoFocus(bool success, Android.Hardware.Camera camera)
         {
-            var bytes = await TakePhoto();
-            (Element as CameraPage).SetPhotoResult(bytes, liveView.Bitmap.Width, liveView.Bitmap.Height);
+            if (success)
+            {
+                var bytes = await TakePhoto();
+                (Element as CameraPage).SetPhotoResult(bytes, liveView.Bitmap.Width, liveView.Bitmap.Height);
+            }
+            else
+            {
+
+            }
             isFocus = false;
         }
         #endregion

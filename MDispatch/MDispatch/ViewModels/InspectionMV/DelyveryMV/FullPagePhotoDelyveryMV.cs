@@ -10,6 +10,7 @@ using MDispatch.View.Inspection.Delyvery;
 using MDispatch.View.PageApp;
 using MDispatch.ViewModels.AskPhoto;
 using MDispatch.ViewModels.InspectionMV.Models;
+using MDispatch.ViewModels.InspectionMV.Servise.Models;
 using Newtonsoft.Json;
 using Plugin.Settings;
 using Prism.Mvvm;
@@ -165,6 +166,11 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 case "Suv":
                     {
                         car = new CarSuv();
+                        break;
+                    }
+                case "Sedan":
+                    {
+                        car = new CarSedan();
                         break;
                     }
             }

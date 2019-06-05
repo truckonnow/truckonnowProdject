@@ -5,7 +5,6 @@ namespace DaoModels.DAO
 {
     public class Context : DbContext
     {
-        private bool IsMigration { get; set; }
         public DbSet<Shipping> Shipping { get; set; }
         public DbSet<Users> User { get; set; }
         public DbSet<VehiclwInformation> VehiclwInformation { get; set; }
@@ -25,14 +24,16 @@ namespace DaoModels.DAO
 
         public Context(bool isMigration = false)
         {
-            IsMigration = IsMigration;
-            //Database.EnsureCreated();
-            Database.Migrate();
+            if (isMigration)
+            {
+                //Database.EnsureCreated();
+                Database.Migrate();
+            }
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured && IsMigration)
+            if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=WebDispatchDB;Trusted_Connection=True;");
                 //optionsBuilder.UseSqlServer("Data Source=127.0.0.1;Initial Catalog=WebDispatchDB;Integrated Security=False;User ID=WebDispatch;Password=WebDispatch;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");

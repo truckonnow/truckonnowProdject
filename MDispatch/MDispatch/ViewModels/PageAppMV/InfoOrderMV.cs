@@ -17,6 +17,7 @@ using System.Linq;
 using static MDispatch.Service.ManagerDispatchMob;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
+using MDispatch.ViewModels.InspectionMV.Servise.Models;
 
 namespace MDispatch.ViewModels.PageAppMV
 {
@@ -110,7 +111,7 @@ namespace MDispatch.ViewModels.PageAppMV
                     await Navigation.PushAsync(new AskPage(managerDispatchMob, vehiclwInformation, Shipping.Id, initDasbordDelegate, getVechicleDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier), true);
                     return;
                 }
-                else if (photoInspections == null)
+                else if (photoInspections == null || photoInspections.Count == 0)
                 {
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", vehiclwInformation));
                     FullPagePhoto fullPagePhoto = new FullPagePhoto(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 1, initDasbordDelegate, getVechicleDelegate, car.GetNameLayout(1), Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier);
@@ -219,6 +220,11 @@ namespace MDispatch.ViewModels.PageAppMV
                 case "Suv":
                     {
                         car = new CarSuv();
+                        break;
+                    }
+                case "Sedan":
+                    {
+                        car = new CarSedan();
                         break;
                     }
             }

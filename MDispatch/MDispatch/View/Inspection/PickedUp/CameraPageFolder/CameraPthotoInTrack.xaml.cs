@@ -2,6 +2,7 @@
 using MDispatch.NewElement;
 using MDispatch.ViewModels.AskPhoto;
 using MDispatch.ViewModels.InspectionMV.Models;
+using MDispatch.ViewModels.InspectionMV.Servise.Models;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using Xamarin.Forms;
@@ -74,6 +75,11 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
                 case "Suv":
                     {
                         car = new CarSuv();
+                        break;
+                    }
+                case "Sedan":
+                    {
+                        car = new CarSedan();
                         break;
                     }
             }

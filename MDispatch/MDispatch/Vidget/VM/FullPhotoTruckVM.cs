@@ -221,7 +221,5 @@ namespace MDispatch.Vidget.VM
                 await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
             }
         }
-
-        
     }
 }

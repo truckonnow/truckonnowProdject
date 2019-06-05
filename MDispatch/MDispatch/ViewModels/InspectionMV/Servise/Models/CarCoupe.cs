@@ -94,7 +94,6 @@ namespace MDispatch.ViewModels.InspectionMV.Models
                         indecCar = 0;
                         break;
                     }
-
             }
             return indecCar;
         }
