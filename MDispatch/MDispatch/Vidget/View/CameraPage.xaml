@@ -6,13 +6,13 @@
              OnPhotoResult="CameraPage_OnPhotoResult">
     <ContentPage.Content>
         <AbsoluteLayout>
-            <Image x:Name="paternPhoto" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" Opacity="0.3"/>
+            <Image x:Name="paternPhoto" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"/>
             <Image Source="BackIconpage.png"  HorizontalOptions="Start" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".02, .02, 30, 30">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                 </Image.GestureRecognizers>
             </Image>
-            <Label TextColor="#4fd2c2" Text="{Binding NameLayute}" FontSize="15" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .08, Autosize, Autosize"/>
+            <Label TextColor="Red" Text="{Binding NameLayute}" FontSize="20" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .08, Autosize, Autosize"/>
             <Label TextColor="#4fd2c2" Text="" FontSize="15" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .98, Autosize, Autosize"/>
         </AbsoluteLayout>
     </ContentPage.Content>
