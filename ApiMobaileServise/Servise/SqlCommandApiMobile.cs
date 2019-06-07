@@ -236,7 +236,7 @@ namespace ApiMobaileServise.Servise
         {
             Shipping shipping = context.Shipping.FirstOrDefault(s => s.Id == idShip);
             shipping.CurrentStatus = status;
-            if (status == "Delivered,Billed")
+            if (status == "Delivered,Billed" && shipping.TotalPaymentToCarrier.Contains(" days"))
             {
                 shipping.DataPaid = DateTime.Now.AddDays(Convert.ToInt32(shipping.TotalPaymentToCarrier.Replace(" days", ""))).ToString();
             }
