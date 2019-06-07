@@ -85,7 +85,7 @@ namespace MDispatch.Droid.NewrRender
                         camera.SetDisplayOrientation(90);
 
                     }
-                    capturePhotoButton.SetX(mainLayout.Width / 2 - 60);
+                    capturePhotoButton.SetX(mainLayout.Width / 2 + 300);
                     capturePhotoButton.SetY(mainLayout.Height - 200);
                 }
                 else
@@ -94,7 +94,7 @@ namespace MDispatch.Droid.NewrRender
                     {
                         camera.SetDisplayOrientation(0);
                     }
-                    capturePhotoButton.SetY(mainLayout.Height / 2 - 60);
+                    capturePhotoButton.SetY(mainLayout.Height / 2 + 320);
                     capturePhotoButton.SetX(mainLayout.Width - 200);
                 }
             }
