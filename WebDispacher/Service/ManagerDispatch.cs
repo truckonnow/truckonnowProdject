@@ -31,6 +31,11 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.RecurentOnArchived(id);
         }
 
+        public List<Contact> GetContacts()
+        {
+            return _sqlEntityFramworke.GetContactsDB();
+        }
+
         public async void SaveVechi(string idVech, string VIN, string Year, string Make, string Model, string Type, string Color, string LotNumber)
         {
             VehiclwInformation vehiclwInformation = new VehiclwInformation();
@@ -102,6 +107,16 @@ namespace WebDispacher.Service
                     managerNotify.SendNotyfyUnassign(idOrder, tokenShope, vehiclwInformations);
                 }
             });
+        }
+
+        public void CreateContact(string fullName, string emailAddress, string phoneNumbe)
+        {
+            Contact contact = new Contact();
+            contact.Email = emailAddress;
+            contact.Name = fullName;
+            contact.Phone = phoneNumbe;
+            contact.Phone = phoneNumbe;
+            _sqlEntityFramworke.SaveNewContact(contact);
         }
 
         public async void Unassign(string idOrder)

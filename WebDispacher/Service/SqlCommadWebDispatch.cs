@@ -61,6 +61,17 @@ namespace WebDispacher.Dao
             context.Drivers.Load();
         }
         
+        public async void SaveNewContact(Contact contact)
+        {
+            await context.Contacts.AddAsync(contact);
+            await context.SaveChangesAsync();
+        }
+
+        public List<Contact> GetContactsDB()
+        {
+            return context.Contacts.ToList();
+        }
+
         public List<Driver> GetDriversInDb()
         {
             context.geolocations.Load();

@@ -21,6 +21,7 @@ namespace DaoModels.DAO
         public DbSet<Geolocations> geolocations { get; set; }
         public DbSet<DamageForUser> DamageForUsers { get; set; }
         public DbSet<InspectionDriver> InspectionDrivers { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
 
         public Context(bool isMigration = false)
         {
