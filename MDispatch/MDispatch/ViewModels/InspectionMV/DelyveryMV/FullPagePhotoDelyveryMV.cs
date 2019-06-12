@@ -210,10 +210,11 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         }
 
         [System.Obsolete]
-        public async void SavePhoto()
+        public async void SavePhoto(bool isNavigWthDamag = false)
         {
             bool isNavigationMany = false;
-            if (Navigation.NavigationStack.Count > 3)
+            int navigationStack_Count = isNavigWthDamag ? Navigation.NavigationStack.Count - 1 : Navigation.NavigationStack.Count;
+            if (navigationStack_Count > 3)
             {
                 await PopupNavigation.PushAsync(new LoadPage());
                 isNavigationMany = true;
@@ -240,6 +241,10 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                     state = managerDispatchMob.AskWork("SavePhoto", token, VehiclwInformation.Id, PhotoInspection, ref description);
                     initDasbordDelegate.Invoke();
                 });
+                if (isNavigWthDamag)
+                {
+                    Navigation.RemovePage(Navigation.NavigationStack[3]);
+                }
                 if (state == 2)
                 {
                     if (isNavigationMany)

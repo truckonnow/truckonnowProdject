@@ -158,5 +158,11 @@ namespace MDispatch.View.Inspection.PickedUp
                     });
             }
         }
+
+        [Obsolete]
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            fullPagePhotoDelyveryMV.SavePhoto(true);
+        }
     }
 }

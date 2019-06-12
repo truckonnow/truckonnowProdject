@@ -7,11 +7,9 @@
     <ContentPage.Content>
         <AbsoluteLayout x:Name="absla">
             <TouchImage:TouchImage AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" x:Name="touchImage" TouchAction="TouchImage_TouchAction" />
-            <Image Source="BackIconpage.png"  HorizontalOptions="Start" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".02, .02, 30, 30">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
-                </Image.GestureRecognizers>
-            </Image>
+
+            <Button Clicked="TapGestureRecognizer_Tapped" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".02, .02, 80, 30" Text="Back Main" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" BorderRadius="5" />
+            <Button Clicked="Button_Clicked" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".98, .02, 120, 30" Text="Next inspection" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" BorderRadius="5" />
             <StackLayout x:Name="controlDmg" Orientation="Horizontal" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".92, .92, autosize, autosize" IsVisible="False" IsEnabled="False">
                 <input:AdvancedSlider x:Name="scrolSizeDmg" MaxValue="200" MinValue="15" StepValue="1" PropertyChanged="ScrolSizeDmg_PropertyChanged" TextColor="#4fd2c2" ValuePrefix="  damag   "/>
                 <StackLayout WidthRequest="50">
