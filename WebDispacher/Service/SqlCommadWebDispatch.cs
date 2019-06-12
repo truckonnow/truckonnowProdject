@@ -74,40 +74,63 @@ namespace WebDispacher.Dao
 
         public List<Driver> GetDriversInDb()
         {
-            context.geolocations.Load();
-            return context.Drivers.ToList();
+            return context.Drivers
+                .Include(d => d.geolocations)
+                .ToList();
         }
 
         public async void RecurentOnDeleted(string id)
         {
-            context.Shipping.Load();
             Shipping shipping = await context.Shipping.FirstOrDefaultAsync(s => s.Id == id);
             if(shipping != null)
             {
-                shipping.CurrentStatus = "Deleted";
+                if(shipping.CurrentStatus == "Delivered,Billed" || shipping.CurrentStatus == "Delivered,Paid")
+                {
+                    shipping.CurrentStatus = shipping.CurrentStatus.Replace("Delivered", "Deleted");
+                }
+                else
+                {
+                    shipping.CurrentStatus = "Deleted";
+                }
                 await context.SaveChangesAsync();
             }
         }
 
         public async void RecurentOnArchived(string id)
         {
-            context.Shipping.Load();
             Shipping shipping = await context.Shipping.FirstOrDefaultAsync(s => s.Id == id);
             if (shipping != null)
             {
-                shipping.CurrentStatus = "Archived";
+                if (shipping.CurrentStatus == "Delivered,Billed" || shipping.CurrentStatus == "Delivered,Paid")
+                {
+                    shipping.CurrentStatus = shipping.CurrentStatus.Replace("Delivered", "Archived");
+                }
+                else
+                {
+                    shipping.CurrentStatus = "Archived";
+                }
                 await context.SaveChangesAsync();
             }
         }
 
         public Shipping GetShipingCurrentVehiclwInDb(string id)
         {
-            context.Shipping.Load();
-            context.VehiclwInformation.Load();
-            context.PhotoInspections.Load();
-            context.Photos.Load();
-            context.Asks.Load();
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == id);
+            Shipping shipping = context.Shipping.Where(s => s.VehiclwInformations.FirstOrDefault(v => v == vehiclwInformation) != null)
+                .Include(s => s.VehiclwInformations)
+                .Include("VehiclwInformations.Ask.Any_personal_or_additional_items_with_or_in_vehicle")
+                .Include("VehiclwInformations.Ask.Any_paperwork_or_documentation")
+                .Include("VehiclwInformations.Ask1.Any_additional_parts_been_given_to_you")
+                .Include("VehiclwInformations.Ask1.Any_additional_documentation_been_given_after_loading")
+                .Include("VehiclwInformations.Ask1.App_will_force_driver_to_take_pictures_of_each_strap")
+                .Include("VehiclwInformations.Ask1.Photo_after_loading_in_the_truck")
+                .Include("VehiclwInformations.PhotoInspections.Photos")
+                .Include("VehiclwInformations.AskFromUser.App_will_ask_for_signature_of_the_client_signature")
+                .Include("VehiclwInformations.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo")
+                .Include("VehiclwInformations.askForUserDelyveryM.PhotoPay")
+                .Include("VehiclwInformations.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature")
+                .Include("VehiclwInformations.Scan")
+                .FirstOrDefault();
             return context.Shipping.FirstOrDefault(s => s.VehiclwInformations.FirstOrDefault(v => v == vehiclwInformation) != null);
         }
 
@@ -132,9 +155,9 @@ namespace WebDispacher.Dao
 
         public async Task<VehiclwInformation> AddVechInDb(string idOrder)
         {
-            context.Shipping.Load();
-            context.VehiclwInformation.Load();
-            Shipping shipping = await context.Shipping.FirstOrDefaultAsync(s => s.Id.ToString() == idOrder);
+            Shipping shipping = await context.Shipping
+                .Include(s => s.VehiclwInformations)
+                .FirstOrDefaultAsync(s => s.Id.ToString() == idOrder);
             VehiclwInformation vehiclwInformation = new VehiclwInformation();
             if(shipping.VehiclwInformations == null)
             {
@@ -186,15 +209,13 @@ namespace WebDispacher.Dao
 
         public bool CheckKeyDb(string key)
         {
-            Init();
             return context.User.FirstOrDefault(u => u.KeyAuthorized == key) != null;
         }
 
         public List<Shipping> GetShippings(string status, int page)
         {
-            Init();
             List<Shipping> shipping = null;
-            shipping = context.Shipping.ToList().FindAll(s => s.CurrentStatus == status);
+            shipping = context.Shipping.Where(s => s.CurrentStatus == status).ToList();
             
             if (page != 0)
             {
@@ -223,9 +244,8 @@ namespace WebDispacher.Dao
 
         public int GetCountPageInDb(string status)
         {
-            Init();
             int countPage = 0;
-            List<Shipping> shipping = context.Shipping.ToList().FindAll(s => s.CurrentStatus == status);
+            List<Shipping> shipping = context.Shipping.Where(s => s.CurrentStatus == status).ToList();
             countPage = shipping.Count / 20;
             int remainderPage = shipping.Count % 20;
             countPage = remainderPage > 0 ? countPage + 1 : countPage;
@@ -268,9 +288,11 @@ namespace WebDispacher.Dao
 
         public async Task<List<VehiclwInformation>> AddDriversInOrder(string idOrder, string idDriver)
         {
-            Init();
-            Shipping shipping = context.Shipping.FirstOrDefault<Shipping>(s => s.Id == idOrder);
-            Driver driver = context.Drivers.FirstOrDefault<Driver>(d => d.Id == Convert.ToInt32(idDriver));
+            Shipping shipping = context.Shipping
+                .Include(s => s.Driverr)
+                .Include(s => s.VehiclwInformations)
+                .FirstOrDefault(s => s.Id == idOrder);
+            Driver driver = context.Drivers.FirstOrDefault(d => d.Id == Convert.ToInt32(idDriver));
             shipping.Driverr = driver;
             shipping.CurrentStatus = "Assigned";
             await context.SaveChangesAsync();
@@ -280,8 +302,9 @@ namespace WebDispacher.Dao
         public bool CheckDriverOnShipping(string idShipping)
         {
             bool isDriverAssign = false;
-            context.Drivers.Load();
-            Shipping shipping = context.Shipping.FirstOrDefault<Shipping>(s => s.Id == idShipping);
+            Shipping shipping = context.Shipping
+                .Include(s => s.Driverr)
+                .FirstOrDefault(s => s.Id == idShipping);
             if(shipping.Driverr != null)
             {
                 isDriverAssign = true;
@@ -297,15 +320,18 @@ namespace WebDispacher.Dao
 
         public string GerShopTokenForShipping(string idOrder)
         {
-            context.Drivers.Load();
-            Shipping shipping = context.Shipping.FirstOrDefault<Shipping>(d => d.Id == idOrder);
+            Shipping shipping = context.Shipping
+                .Include(s => s.Driverr)
+                .FirstOrDefault(d => d.Id == idOrder);
             return shipping.Driverr.TokenShope;
         }
 
         public async Task<List<VehiclwInformation>> RemoveDriversInOrder(string idOrder)
         {
-            Init();
-            Shipping shipping = context.Shipping.FirstOrDefault<Shipping>(s => s.Id == idOrder);
+            Shipping shipping = context.Shipping
+                .Include(s => s.Driverr)
+                .Include(s => s.VehiclwInformations)
+                .FirstOrDefault(s => s.Id == idOrder);
             shipping.Driverr = null;
             shipping.CurrentStatus = "NewLoad";
             await context.SaveChangesAsync();
@@ -321,12 +347,22 @@ namespace WebDispacher.Dao
             string addressP, string cityP, string stateP, string zipP, string phoneP, string emailP, string scheduledPickupDateP, string nameD, string contactD, string addressD,
             string cityD, string stateD, string zipD, string phoneD, string emailD, string ScheduledPickupDateD, string paymentMethod, string price, string paymentTerms, string brokerFee)
         {
-            Init();
             Shipping shipping = context.Shipping.FirstOrDefault(s => s.Id == idOrder);
             shipping.idOrder = idLoad != null ? idLoad : shipping.Id;
             shipping.InternalLoadID = internalLoadID != null ? internalLoadID : shipping.InternalLoadID;
             //shipping.Driverr = internalLoadID != null ? internalLoadID : shipping.InternalLoadID;
-            shipping.CurrentStatus = status != null ? status : shipping.CurrentStatus;
+            if(status == "Delivered")
+            {
+                shipping.CurrentStatus = shipping.CurrentStatus.Replace("Deleted", "Delivered");
+            }
+            else if(status == "Archived")
+            {
+                shipping.CurrentStatus = shipping.CurrentStatus.Replace("Archived", "Delivered");
+            }
+            else
+            {
+                shipping.CurrentStatus = status != null ? status : shipping.CurrentStatus;
+            }
             shipping.Titl1DI = instructions != null ? instructions : shipping.Titl1DI;
             shipping.NameP = nameP != null ? nameP : shipping.NameD;
             shipping.ContactNameP = contactP != null ? contactP : shipping.ContactNameP;

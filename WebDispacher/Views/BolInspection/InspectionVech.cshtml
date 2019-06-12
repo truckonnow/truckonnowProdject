@@ -23,7 +23,10 @@
             @if (ViewBag.Vehiclw.PhotoInspections != null)
             {
                 <div class="blockAllPhoto">
+                    @if (@ViewBag.Vehiclw.Scan != null)
+                    {
                     <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.Scan.Base64" />
+                    }
                     @for (int i = 0; i < ViewBag.Vehiclw.PhotoInspections.Count; i++)
                     {
                         @for (int j = 0; j < ViewBag.Vehiclw.PhotoInspections[i].Photos.Count; j++)
@@ -50,7 +53,7 @@
             <p class="headPhoto">Photos of personal or additional items with the vehicle</p>
             @if (ViewBag.Vehiclw.Ask != null && ViewBag.Vehiclw.Ask.Any_personal_or_additional_items_with_or_in_vehicle != null)
             {
-                @for (int i = 0; i < ViewBag.Vehiclw.Ask.Any_personal_or_additional_items_with_or_in_vehicle.count; i++)
+                @for (int i = 0; i < ViewBag.Vehiclw.Ask.Any_personal_or_additional_items_with_or_in_vehicle.Count; i++)
                 {
                     byte[] image = Convert.FromBase64String(ViewBag.Vehiclw.Ask.Any_personal_or_additional_items_with_or_in_vehicle[i].Base64);
                     MemoryStream ms = new MemoryStream(image);

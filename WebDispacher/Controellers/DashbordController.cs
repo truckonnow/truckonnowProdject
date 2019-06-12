@@ -133,9 +133,20 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    ViewBag.Orders = managerDispatch.GetOrders("Archived", page);
+                     List<Shipping> shippings = managerDispatch.GetOrders("Archived,Billed", page);
+                    if (shippings.Count < 20)
+                    {
+                        shippings.AddRange(managerDispatch.GetOrders("Archived,Paid", page));
+                    }
+                    if (shippings.Count < 20)
+                    {
+                        shippings.AddRange(managerDispatch.GetOrders("Archived", page));
+                    }
+                    ViewBag.Orders = shippings;
                     ViewBag.Drivers = managerDispatch.GetDrivers();
                     ViewBag.count = managerDispatch.GetCountPage("Archived");
+                    ViewBag.count =+ managerDispatch.GetCountPage("Archived,Billed");
+                    ViewBag.count =+ managerDispatch.GetCountPage("Archived,Paid");
                     actionResult = View("Archived");
                 }
                 else
@@ -229,9 +240,20 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    ViewBag.Orders = managerDispatch.GetOrders("Deleted", page);
-                    ViewBag.Drivers = managerDispatch.GetDrivers();
+                    List<Shipping> shippings = managerDispatch.GetOrders("Deleted,Billed", page);
+                    if (shippings.Count < 20)
+                    {
+                        shippings.AddRange(managerDispatch.GetOrders("Deleted,Paid", page));
+                    }
+                    if (shippings.Count < 20)
+                    {
+                        shippings.AddRange(managerDispatch.GetOrders("Deleted", page));
+                    }
+                    ViewBag.Orders = shippings;
+                    //ViewBag.Drivers = managerDispatch.GetDrivers();
                     ViewBag.count = managerDispatch.GetCountPage("Deleted");
+                    ViewBag.count =+ managerDispatch.GetCountPage("Deleted,Billed");
+                    ViewBag.count =+ managerDispatch.GetCountPage("Deleted,Paid");
                     actionResult = View("Deleted");
                 }
                 else
@@ -261,17 +283,14 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    List<Shipping> shippings = managerDispatch.GetOrders("Delivered", page);
+                    List<Shipping> shippings = new List<Shipping>();
+                    shippings.AddRange(managerDispatch.GetOrders("Delivered,Paid", page));
                     if (shippings.Count < 20)
                     {
-                        shippings.AddRange(managerDispatch.GetOrders("Delivered,Paid", page));
+                        shippings.AddRange(managerDispatch.GetOrders("Delivered,Billed", page));
                     }
-                    if (shippings.Count < 20)
-                    {
-                        ViewBag.Orders = managerDispatch.GetOrders("Delivered,Billed,", page);
-                    }
+                    ViewBag.Orders = shippings;
                     ViewBag.Drivers = managerDispatch.GetDrivers();
-                    ViewBag.count = managerDispatch.GetCountPage("Delivered");
                     ViewBag.count += managerDispatch.GetCountPage("Delivered,Paid");
                     ViewBag.count += managerDispatch.GetCountPage("Delivered,Billed");
                     actionResult = View("Delivered");
