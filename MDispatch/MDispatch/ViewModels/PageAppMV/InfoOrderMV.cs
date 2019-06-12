@@ -18,6 +18,11 @@ using static MDispatch.Service.ManagerDispatchMob;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
 using MDispatch.ViewModels.InspectionMV.Servise.Models;
+using System.Threading.Tasks;
+using Plugin.Settings;
+using MDispatch.View.GlobalDialogView;
+using MDispatch.Service.Net;
+using MDispatch.View;
 
 namespace MDispatch.ViewModels.PageAppMV
 {
@@ -146,10 +151,14 @@ namespace MDispatch.ViewModels.PageAppMV
                 await Navigation.PushAsync(new LiabilityAndInsurance(managerDispatchMob, vehiclwInformation1.Id, Shipping.Id, initDasbordDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier), true);
                 return;
             }
-            else if(vehiclwInformation1 != null && vehiclwInformation1.AskFromUser.PhotoPay == null)
+            else if(vehiclwInformation1 != null && vehiclwInformation1.AskFromUser.PhotoPay == null && vehiclwInformation1.askForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation != "Biling")
             {
                 LiabilityAndInsuranceMV askForUsersDelyveryMW = new LiabilityAndInsuranceMV(managerDispatchMob, vehiclwInformation1.Id, Shipping.Id, Navigation, initDasbordDelegate);
                 await Navigation.PushAsync(new CameraPaymmant(askForUsersDelyveryMW, ""));
+            }
+            else
+            {
+                ContinuePick();
             }
         }
 
@@ -195,11 +204,88 @@ namespace MDispatch.ViewModels.PageAppMV
                 await Navigation.PushAsync(new AskForUserDelyvery(managerDispatchMob, vehiclwInformation1, Shipping.Id, initDasbordDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier), true);
                 return;
             }
-            else if (vehiclwInformation1 != null && vehiclwInformation1.askForUserDelyveryM.PhotoPay == null)
+            else if (vehiclwInformation1 != null && vehiclwInformation1.askForUserDelyveryM.PhotoPay == null && vehiclwInformation1.askForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation != "Biling")
             {
                 AskForUsersDelyveryMW askForUsersDelyveryMW = new AskForUsersDelyveryMW(managerDispatchMob, vehiclwInformation1, Shipping.Id, Navigation, initDasbordDelegate, Shipping.TotalPaymentToCarrier, vehiclwInformation1.askForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation);
                 await Navigation.PushAsync(new CameraPaymmant(askForUsersDelyveryMW, ""));
             }
+            else
+            {
+                ContinueDely();
+            }
+        }
+
+        [System.Obsolete]
+        public async void ContinuePick()
+        {
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            await PopupNavigation.PushAsync(new LoadPage());
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.Recurent(token, Shipping.Id, "Picked up", ref description);
+                    initDasbordDelegate.Invoke();
+                });
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, null));
+                }
+                else if (state == 3)
+                {
+                    initDasbordDelegate.Invoke();
+                    await Navigation.PopToRootAsync(true);
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
+            }
+            await PopupNavigation.PopAsync();
+        }
+
+
+        [System.Obsolete]
+        public async void ContinueDely()
+        {
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            await PopupNavigation.PushAsync(new LoadPage());
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                await Task.Run(() =>
+                {
+                    string status = null;
+                    if (Shipping.TotalPaymentToCarrier == "COD" || Shipping.TotalPaymentToCarrier == "COP")
+                    {
+                        status = "Delivered,Paid";
+                    }
+                    else
+                    {
+                        status = "Delivered,Billed";
+                    }
+                    state = managerDispatchMob.Recurent(token, Shipping.Id, status, ref description);
+                });
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, null));
+                }
+                else if (state == 3)
+                {
+                    initDasbordDelegate.Invoke();
+                    await Navigation.PopToRootAsync(true);
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
+            }
+            await PopupNavigation.PopAsync();
         }
 
         private ICar GetTypeCar(string typeCar)

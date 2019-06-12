@@ -22,7 +22,6 @@ namespace MDispatch.View.Inspection.Delyvery.CameraPage
 
         private async void CameraPage_OnPhotoResult(NewElement.PhotoResultEventArgs result)
         {
-            await Navigation.PopAsync();
             if (!result.Success)
                 return;
             askForUserDelyvery.AddPhotoAdditional(result.Image);

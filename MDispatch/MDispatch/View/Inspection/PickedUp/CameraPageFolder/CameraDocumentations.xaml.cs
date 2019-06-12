@@ -18,7 +18,6 @@ namespace MDispatch.View.Inspection.CameraPageFolder
 
         private async void CameraPage_OnPhotoResult(PhotoResultEventArgs result)
         {
-            await Navigation.PopAsync(true);
             if (!result.Success)
                 return;
             ask1Page.AddPhotoDocumentations(result.Image);
