@@ -188,7 +188,6 @@ namespace WebDispacher.Dao
 
         public bool ExistsDataUser(string login, string password)
         {
-            Init();
             return context.User.FirstOrDefault(u => u.Login == login && u.Password == password) != null;
         }
 
@@ -254,10 +253,8 @@ namespace WebDispacher.Dao
 
         public List<Driver> GetDrivers(int page)
         {
-            Init();
             List<Driver> drivers = null;
             drivers = context.Drivers.ToList();
-
             if (page == -1)
             {
             }
