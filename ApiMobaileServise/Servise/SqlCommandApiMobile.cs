@@ -164,8 +164,8 @@ namespace ApiMobaileServise.Servise
             if (photoInspection.IndexPhoto == 1 && photoInspection.CurrentStatusPhoto == "PikedUp")
             {
                 Photo photo = new Photo();
-                photo.path = $"../Photo/{vehiclwInformation.Id}/scan.png";
-                photo.Base64 = JsonConvert.SerializeObject(File.ReadAllBytes($"../Scans/scan{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}.png"));
+                photo.path = $"../Photo/{vehiclwInformation.Id}/scan.jpg";
+                photo.Base64 = JsonConvert.SerializeObject(File.ReadAllBytes($"../Scans/scan{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}.jpg"));
                 vehiclwInformation.Scan = photo;
             }
             vehiclwInformation.PhotoInspections.Add(photoInspection);

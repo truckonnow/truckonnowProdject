@@ -6870,26 +6870,26 @@ namespace MDispatch.Droid
 			// aapt resource value: 0x7f020056
 			public const int avd_hide_password = 2130837590;
 			
+			// aapt resource value: 0x7f02022a
+			public const int avd_hide_password_1 = 2130838058;
+			
+			// aapt resource value: 0x7f02022b
+			public const int avd_hide_password_2 = 2130838059;
+			
 			// aapt resource value: 0x7f02022c
-			public const int avd_hide_password_1 = 2130838060;
-			
-			// aapt resource value: 0x7f02022d
-			public const int avd_hide_password_2 = 2130838061;
-			
-			// aapt resource value: 0x7f02022e
-			public const int avd_hide_password_3 = 2130838062;
+			public const int avd_hide_password_3 = 2130838060;
 			
 			// aapt resource value: 0x7f020057
 			public const int avd_show_password = 2130837591;
 			
+			// aapt resource value: 0x7f02022d
+			public const int avd_show_password_1 = 2130838061;
+			
+			// aapt resource value: 0x7f02022e
+			public const int avd_show_password_2 = 2130838062;
+			
 			// aapt resource value: 0x7f02022f
-			public const int avd_show_password_1 = 2130838063;
-			
-			// aapt resource value: 0x7f020230
-			public const int avd_show_password_2 = 2130838064;
-			
-			// aapt resource value: 0x7f020231
-			public const int avd_show_password_3 = 2130838065;
+			public const int avd_show_password_3 = 2130838063;
 			
 			// aapt resource value: 0x7f020058
 			public const int BackIconpage = 2130837592;
@@ -7950,11 +7950,11 @@ namespace MDispatch.Droid
 			// aapt resource value: 0x7f0201b8
 			public const int notification_icon_background = 2130837944;
 			
-			// aapt resource value: 0x7f02022a
-			public const int notification_template_icon_bg = 2130838058;
+			// aapt resource value: 0x7f020228
+			public const int notification_template_icon_bg = 2130838056;
 			
-			// aapt resource value: 0x7f02022b
-			public const int notification_template_icon_low_bg = 2130838059;
+			// aapt resource value: 0x7f020229
+			public const int notification_template_icon_low_bg = 2130838057;
 			
 			// aapt resource value: 0x7f0201b9
 			public const int notification_tile_bg = 2130837945;
@@ -8074,226 +8074,220 @@ namespace MDispatch.Droid
 			public const int PickUp9 = 2130837983;
 			
 			// aapt resource value: 0x7f0201e0
-			public const int scanCoupe = 2130837984;
+			public const int Sedan1 = 2130837984;
 			
 			// aapt resource value: 0x7f0201e1
-			public const int scanSuv = 2130837985;
+			public const int Sedan10 = 2130837985;
 			
 			// aapt resource value: 0x7f0201e2
-			public const int Sedan1 = 2130837986;
+			public const int Sedan11 = 2130837986;
 			
 			// aapt resource value: 0x7f0201e3
-			public const int Sedan10 = 2130837987;
+			public const int Sedan12 = 2130837987;
 			
 			// aapt resource value: 0x7f0201e4
-			public const int Sedan11 = 2130837988;
+			public const int Sedan13 = 2130837988;
 			
 			// aapt resource value: 0x7f0201e5
-			public const int Sedan12 = 2130837989;
+			public const int Sedan14 = 2130837989;
 			
 			// aapt resource value: 0x7f0201e6
-			public const int Sedan13 = 2130837990;
+			public const int Sedan15 = 2130837990;
 			
 			// aapt resource value: 0x7f0201e7
-			public const int Sedan14 = 2130837991;
+			public const int Sedan16 = 2130837991;
 			
 			// aapt resource value: 0x7f0201e8
-			public const int Sedan15 = 2130837992;
+			public const int Sedan17 = 2130837992;
 			
 			// aapt resource value: 0x7f0201e9
-			public const int Sedan16 = 2130837993;
+			public const int Sedan18 = 2130837993;
 			
 			// aapt resource value: 0x7f0201ea
-			public const int Sedan17 = 2130837994;
+			public const int Sedan19 = 2130837994;
 			
 			// aapt resource value: 0x7f0201eb
-			public const int Sedan18 = 2130837995;
+			public const int Sedan2 = 2130837995;
 			
 			// aapt resource value: 0x7f0201ec
-			public const int Sedan19 = 2130837996;
+			public const int Sedan20 = 2130837996;
 			
 			// aapt resource value: 0x7f0201ed
-			public const int Sedan2 = 2130837997;
+			public const int Sedan21 = 2130837997;
 			
 			// aapt resource value: 0x7f0201ee
-			public const int Sedan20 = 2130837998;
+			public const int Sedan22 = 2130837998;
 			
 			// aapt resource value: 0x7f0201ef
-			public const int Sedan21 = 2130837999;
+			public const int Sedan23 = 2130837999;
 			
 			// aapt resource value: 0x7f0201f0
-			public const int Sedan22 = 2130838000;
+			public const int Sedan24 = 2130838000;
 			
 			// aapt resource value: 0x7f0201f1
-			public const int Sedan23 = 2130838001;
+			public const int Sedan25 = 2130838001;
 			
 			// aapt resource value: 0x7f0201f2
-			public const int Sedan24 = 2130838002;
+			public const int Sedan26 = 2130838002;
 			
 			// aapt resource value: 0x7f0201f3
-			public const int Sedan25 = 2130838003;
+			public const int Sedan27 = 2130838003;
 			
 			// aapt resource value: 0x7f0201f4
-			public const int Sedan26 = 2130838004;
+			public const int Sedan28 = 2130838004;
 			
 			// aapt resource value: 0x7f0201f5
-			public const int Sedan27 = 2130838005;
+			public const int Sedan29 = 2130838005;
 			
 			// aapt resource value: 0x7f0201f6
-			public const int Sedan28 = 2130838006;
+			public const int Sedan3 = 2130838006;
 			
 			// aapt resource value: 0x7f0201f7
-			public const int Sedan29 = 2130838007;
+			public const int Sedan30 = 2130838007;
 			
 			// aapt resource value: 0x7f0201f8
-			public const int Sedan3 = 2130838008;
+			public const int Sedan31 = 2130838008;
 			
 			// aapt resource value: 0x7f0201f9
-			public const int Sedan30 = 2130838009;
+			public const int Sedan32 = 2130838009;
 			
 			// aapt resource value: 0x7f0201fa
-			public const int Sedan31 = 2130838010;
+			public const int Sedan33 = 2130838010;
 			
 			// aapt resource value: 0x7f0201fb
-			public const int Sedan32 = 2130838011;
+			public const int Sedan4 = 2130838011;
 			
 			// aapt resource value: 0x7f0201fc
-			public const int Sedan33 = 2130838012;
+			public const int Sedan5 = 2130838012;
 			
 			// aapt resource value: 0x7f0201fd
-			public const int Sedan4 = 2130838013;
+			public const int Sedan6 = 2130838013;
 			
 			// aapt resource value: 0x7f0201fe
-			public const int Sedan5 = 2130838014;
+			public const int Sedan7 = 2130838014;
 			
 			// aapt resource value: 0x7f0201ff
-			public const int Sedan6 = 2130838015;
+			public const int Sedan8 = 2130838015;
 			
 			// aapt resource value: 0x7f020200
-			public const int Sedan7 = 2130838016;
+			public const int Sedan9 = 2130838016;
 			
 			// aapt resource value: 0x7f020201
-			public const int Sedan8 = 2130838017;
+			public const int signature_pad_background = 2130838017;
 			
 			// aapt resource value: 0x7f020202
-			public const int Sedan9 = 2130838018;
+			public const int Suv1 = 2130838018;
 			
 			// aapt resource value: 0x7f020203
-			public const int signature_pad_background = 2130838019;
+			public const int Suv10 = 2130838019;
 			
 			// aapt resource value: 0x7f020204
-			public const int Suv1 = 2130838020;
+			public const int Suv11 = 2130838020;
 			
 			// aapt resource value: 0x7f020205
-			public const int Suv10 = 2130838021;
+			public const int Suv12 = 2130838021;
 			
 			// aapt resource value: 0x7f020206
-			public const int Suv11 = 2130838022;
+			public const int Suv13 = 2130838022;
 			
 			// aapt resource value: 0x7f020207
-			public const int Suv12 = 2130838023;
+			public const int Suv14 = 2130838023;
 			
 			// aapt resource value: 0x7f020208
-			public const int Suv13 = 2130838024;
+			public const int Suv15 = 2130838024;
 			
 			// aapt resource value: 0x7f020209
-			public const int Suv14 = 2130838025;
+			public const int Suv16 = 2130838025;
 			
 			// aapt resource value: 0x7f02020a
-			public const int Suv15 = 2130838026;
+			public const int Suv17 = 2130838026;
 			
 			// aapt resource value: 0x7f02020b
-			public const int Suv16 = 2130838027;
+			public const int Suv18 = 2130838027;
 			
 			// aapt resource value: 0x7f02020c
-			public const int Suv17 = 2130838028;
+			public const int Suv19 = 2130838028;
 			
 			// aapt resource value: 0x7f02020d
-			public const int Suv18 = 2130838029;
+			public const int Suv2 = 2130838029;
 			
 			// aapt resource value: 0x7f02020e
-			public const int Suv19 = 2130838030;
+			public const int Suv20 = 2130838030;
 			
 			// aapt resource value: 0x7f02020f
-			public const int Suv2 = 2130838031;
+			public const int Suv21 = 2130838031;
 			
 			// aapt resource value: 0x7f020210
-			public const int Suv20 = 2130838032;
+			public const int Suv22 = 2130838032;
 			
 			// aapt resource value: 0x7f020211
-			public const int Suv21 = 2130838033;
+			public const int Suv23 = 2130838033;
 			
 			// aapt resource value: 0x7f020212
-			public const int Suv22 = 2130838034;
+			public const int Suv24 = 2130838034;
 			
 			// aapt resource value: 0x7f020213
-			public const int Suv23 = 2130838035;
+			public const int Suv25 = 2130838035;
 			
 			// aapt resource value: 0x7f020214
-			public const int Suv24 = 2130838036;
+			public const int Suv26 = 2130838036;
 			
 			// aapt resource value: 0x7f020215
-			public const int Suv25 = 2130838037;
+			public const int Suv27 = 2130838037;
 			
 			// aapt resource value: 0x7f020216
-			public const int Suv26 = 2130838038;
+			public const int Suv28 = 2130838038;
 			
 			// aapt resource value: 0x7f020217
-			public const int Suv27 = 2130838039;
+			public const int Suv29 = 2130838039;
 			
 			// aapt resource value: 0x7f020218
-			public const int Suv28 = 2130838040;
+			public const int Suv3 = 2130838040;
 			
 			// aapt resource value: 0x7f020219
-			public const int Suv29 = 2130838041;
+			public const int Suv30 = 2130838041;
 			
 			// aapt resource value: 0x7f02021a
-			public const int Suv3 = 2130838042;
+			public const int Suv31 = 2130838042;
 			
 			// aapt resource value: 0x7f02021b
-			public const int Suv30 = 2130838043;
+			public const int Suv32 = 2130838043;
 			
 			// aapt resource value: 0x7f02021c
-			public const int Suv31 = 2130838044;
+			public const int Suv33 = 2130838044;
 			
 			// aapt resource value: 0x7f02021d
-			public const int Suv32 = 2130838045;
+			public const int Suv34 = 2130838045;
 			
 			// aapt resource value: 0x7f02021e
-			public const int Suv33 = 2130838046;
+			public const int Suv35 = 2130838046;
 			
 			// aapt resource value: 0x7f02021f
-			public const int Suv34 = 2130838047;
+			public const int Suv36 = 2130838047;
 			
 			// aapt resource value: 0x7f020220
-			public const int Suv35 = 2130838048;
+			public const int Suv4 = 2130838048;
 			
 			// aapt resource value: 0x7f020221
-			public const int Suv36 = 2130838049;
+			public const int Suv5 = 2130838049;
 			
 			// aapt resource value: 0x7f020222
-			public const int Suv4 = 2130838050;
+			public const int Suv6 = 2130838050;
 			
 			// aapt resource value: 0x7f020223
-			public const int Suv5 = 2130838051;
+			public const int Suv7 = 2130838051;
 			
 			// aapt resource value: 0x7f020224
-			public const int Suv6 = 2130838052;
+			public const int Suv8 = 2130838052;
 			
 			// aapt resource value: 0x7f020225
-			public const int Suv7 = 2130838053;
+			public const int Suv9 = 2130838053;
 			
 			// aapt resource value: 0x7f020226
-			public const int Suv8 = 2130838054;
+			public const int tooltip_frame_dark = 2130838054;
 			
 			// aapt resource value: 0x7f020227
-			public const int Suv9 = 2130838055;
-			
-			// aapt resource value: 0x7f020228
-			public const int tooltip_frame_dark = 2130838056;
-			
-			// aapt resource value: 0x7f020229
-			public const int tooltip_frame_light = 2130838057;
+			public const int tooltip_frame_light = 2130838055;
 			
 			static Drawable()
 			{

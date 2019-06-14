@@ -96,9 +96,12 @@ namespace ApiMobaileServise.Servise
 
         public async void SavePhotoInspection(string idVe, PhotoInspection photoInspection)
         {
-            VehiclwInformation vehiclwInformation = await sqlCommandApiMobile.SavePhotoInspectionInDb(idVe, photoInspection);
-            ITypeScan typeScan = GetTypeScan(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
-            typeScan.SetDamage(photoInspection, vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), vehiclwInformation.Scan.path);
+            await Task.Run(async() =>
+            {
+                VehiclwInformation vehiclwInformation = await sqlCommandApiMobile.SavePhotoInspectionInDb(idVe, photoInspection);
+                ITypeScan typeScan = GetTypeScan(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+                typeScan.SetDamage(photoInspection, vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), vehiclwInformation.Scan.path);
+            });
         }
 
         private ITypeScan GetTypeScan(string type)

@@ -66,7 +66,7 @@ namespace ApiMobaileServise.EmailSmtp
             patern += "<div style='border-style:solid; border-width 2px; width:100%;'>";
             foreach (var vech in shipping.VehiclwInformations)
             {
-                patern += $"<img src='data:image/png;base64,{vech.Scan.Base64}' <br/>"
+                patern += $"<img src='data:image/jpg;base64,{vech.Scan.Base64}' <br/>"
                        + $"<span style='margin:10px;'> See inspection photos: http://truckonnow.com/Photo/BOL/{vech.Id}</span>";
             }
             patern += "</div>";

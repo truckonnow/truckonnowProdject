@@ -195,7 +195,7 @@ namespace ApiMobaileServise.Servise.AddDamage
                         g.DrawImage(img2, y, x);
                     }
                     string tempPath = pathScan + "1";
-                    res.Save($"{pathScan.Replace(".png", "")}1.png");
+                    res.Save($"{pathScan.Replace(".jpg", "")}1.jpg");
                     img1.Dispose();
                     res.Dispose();
                     g.Dispose();
@@ -203,7 +203,7 @@ namespace ApiMobaileServise.Servise.AddDamage
                     res = null;
                     g = null;
                     File.Delete(pathScan);
-                    File.Move($"{pathScan.Replace(".png", "")}1.png", pathScan);
+                    File.Move($"{pathScan.Replace(".jpg", "")}1.jpg", pathScan);
                 }
             }
         }
@@ -224,7 +224,7 @@ namespace ApiMobaileServise.Servise.AddDamage
                     g.DrawImage(img1, 0, 0);
                     g.DrawImage(img2, x, y);
                     string tempPath = pathScan + "1";
-                    res.Save($"{pathScan.Replace(".png", "")}1.png");
+                    res.Save($"{pathScan.Replace(".jpg", "")}1.jpg");
                     img1.Dispose();
                     res.Dispose();
                     g.Dispose();
@@ -232,7 +232,7 @@ namespace ApiMobaileServise.Servise.AddDamage
                     res = null;
                     g = null;
                     File.Delete(pathScan);
-                    File.Move($"{pathScan.Replace(".png", "")}1.png", pathScan);
+                    File.Move($"{pathScan.Replace(".jpg", "")}1.jpg", pathScan);
                 }
             }
         }

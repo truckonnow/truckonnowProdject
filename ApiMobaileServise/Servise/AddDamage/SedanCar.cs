@@ -35,9 +35,37 @@ namespace ApiMobaileServise.Servise.AddDamage
         public int[] GetMaxMinForYAndX(string indexPhoto)
         {
             int[] maxMinForYAndX = null;
-            if (indexPhoto == "2")
+            if (indexPhoto == "1")
             {
-                maxMinForYAndX = new int[] { 900, 200, 150, 1 };
+                maxMinForYAndX = new int[] { 447, 75, 320, 1 };
+            }
+            else if (indexPhoto == "2")
+            {
+                maxMinForYAndX = new int[] { 315, 115, 225, 1 };
+            }
+            else if (indexPhoto == "3")
+            {
+                maxMinForYAndX = new int[] { 230, 115, 135, 1 };
+            }
+            else if (indexPhoto == "4")
+            {
+                maxMinForYAndX = new int[] { 140, 80, 55, 1 };
+            }
+            else if (indexPhoto == "5")
+            {
+                maxMinForYAndX = new int[] { 55, 235, 135, 315 };
+            }
+            else if (indexPhoto == "6")
+            {
+                maxMinForYAndX = new int[] { 140, 207, 230, 315 };
+            }
+            else if (indexPhoto == "7")
+            {
+                maxMinForYAndX = new int[] { 225, 207, 315, 315 };
+            }
+            else if (indexPhoto == "8")
+            {
+                maxMinForYAndX = new int[] { 320, 235, 447, 315 };
             }
             return maxMinForYAndX;
         }
@@ -57,20 +85,17 @@ namespace ApiMobaileServise.Servise.AddDamage
                     int x = GetCordinatX(photoInspection.IndexPhoto.ToString(), damage.XInterest);
                     int y = GetCordinatY(photoInspection.IndexPhoto.ToString(), damage.YInterest);
                     g.DrawImage(img1, 0, 0);
-                    if (photoInspection.IndexPhoto == 1 || photoInspection.IndexPhoto == 2 || photoInspection.IndexPhoto == 3 || photoInspection.IndexPhoto == 4 || photoInspection.IndexPhoto == 5 || photoInspection.IndexPhoto == 6
-                        || photoInspection.IndexPhoto == 7 || photoInspection.IndexPhoto == 8 || photoInspection.IndexPhoto == 9 || photoInspection.IndexPhoto == 10 || photoInspection.IndexPhoto == 11 || photoInspection.IndexPhoto == 12
-                        || photoInspection.IndexPhoto == 13 || photoInspection.IndexPhoto == 14 || photoInspection.IndexPhoto == 15 || photoInspection.IndexPhoto == 26 || photoInspection.IndexPhoto == 27 || photoInspection.IndexPhoto == 28
-                        || photoInspection.IndexPhoto == 29)
+                    if (photoInspection.IndexPhoto == 1 || photoInspection.IndexPhoto == 2 || photoInspection.IndexPhoto == 3 || photoInspection.IndexPhoto == 4 || photoInspection.IndexPhoto == 5 || photoInspection.IndexPhoto == 6 || photoInspection.IndexPhoto == 7
+                        || photoInspection.IndexPhoto == 8)
                     {
                         g.DrawImage(img2, x, y);
                     }
-                    else if (photoInspection.IndexPhoto == 16 || photoInspection.IndexPhoto == 17 || photoInspection.IndexPhoto == 18 || photoInspection.IndexPhoto == 19 || photoInspection.IndexPhoto == 20 || photoInspection.IndexPhoto == 21 || photoInspection.IndexPhoto == 22
-                        || photoInspection.IndexPhoto == 24 || photoInspection.IndexPhoto == 25 || photoInspection.IndexPhoto == 30 || photoInspection.IndexPhoto == 31)
+                    else if (photoInspection.IndexPhoto == 0)
                     {
                         g.DrawImage(img2, y, x);
                     }
                     string tempPath = pathScan + "1";
-                    res.Save($"{pathScan.Replace(".png", "")}1.png");
+                    res.Save($"{pathScan.Replace(".jpg", "")}1.jpg");
                     img1.Dispose();
                     res.Dispose();
                     g.Dispose();
@@ -78,7 +103,7 @@ namespace ApiMobaileServise.Servise.AddDamage
                     res = null;
                     g = null;
                     File.Delete(pathScan);
-                    File.Move($"{pathScan.Replace(".png", "")}1.png", pathScan);
+                    File.Move($"{pathScan.Replace(".jpg", "")}1.jpg", pathScan);
                 }
             }
         }
@@ -99,7 +124,7 @@ namespace ApiMobaileServise.Servise.AddDamage
                     g.DrawImage(img1, 0, 0);
                     g.DrawImage(img2, x, y);
                     string tempPath = pathScan + "1";
-                    res.Save($"{pathScan.Replace(".png", "")}1.png");
+                    res.Save($"{pathScan.Replace(".jpg", "")}1.jpg");
                     img1.Dispose();
                     res.Dispose();
                     g.Dispose();
@@ -107,7 +132,7 @@ namespace ApiMobaileServise.Servise.AddDamage
                     res = null;
                     g = null;
                     File.Delete(pathScan);
-                    File.Move($"{pathScan.Replace(".png", "")}1.png", pathScan);
+                    File.Move($"{pathScan.Replace(".jpg", "")}1.jpg", pathScan);
                 }
             }
         }
