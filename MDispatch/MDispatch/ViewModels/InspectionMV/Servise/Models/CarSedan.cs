@@ -219,11 +219,11 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             }
             else if (inderxPhotoInspektion == 15)
             {
-                nameLayout = "Left rearview mirror vehicle";
+                nameLayout = "Right rearview mirror vehicle";
             }
             else if (inderxPhotoInspektion == 16)
             {
-                nameLayout = "Right rearview mirror of the vehicle";
+                nameLayout = "Left rearview mirror of the vehicle";
             }
             else if (inderxPhotoInspektion == 17)
             {
@@ -231,7 +231,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             }
             else if (inderxPhotoInspektion == 18)
             {
-                nameLayout = "Left rearview mirror of the vehicle (From the bottom)";
+                nameLayout = "Right rearview mirror of the vehicle (From the bottom)";
             }
             else if (inderxPhotoInspektion == 19)
             {
