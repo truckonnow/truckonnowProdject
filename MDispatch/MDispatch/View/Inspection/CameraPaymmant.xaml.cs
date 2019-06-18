@@ -25,11 +25,11 @@ namespace MDispatch.View.Inspection
                 return;
             if(paymmant is AskForUsersDelyveryMW)
             {
-                ((AskForUsersDelyveryMW)paymmant).AddPhoto(result.Image);
+                ((AskForUsersDelyveryMW)paymmant).AddPhoto(result.Result);
             }
             else
             {
-                ((LiabilityAndInsuranceMV)paymmant).AddPhoto(result.Image);
+                ((LiabilityAndInsuranceMV)paymmant).AddPhoto(result.Result);
             }
         }
     }

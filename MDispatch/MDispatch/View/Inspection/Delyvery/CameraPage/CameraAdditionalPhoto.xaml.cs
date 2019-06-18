@@ -24,7 +24,7 @@ namespace MDispatch.View.Inspection.Delyvery.CameraPage
         {
             if (!result.Success)
                 return;
-            askForUserDelyvery.AddPhotoAdditional(result.Image);
+            askForUserDelyvery.AddPhotoAdditional(result.Result);
             pageAddDamageFoUser.stateSelect = 0;
         }
 

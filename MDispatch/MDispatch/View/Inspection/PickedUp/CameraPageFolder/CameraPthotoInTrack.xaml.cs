@@ -37,10 +37,10 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
             if (!result.Success)
                 return;
             Photo photo1 = new Photo();
-            photo1.Base64 = JsonConvert.SerializeObject(result.Image);
+            photo1.Base64 = JsonConvert.SerializeObject(result.Result);
             photo1.path = $"../Photo/{ask1Page.ask1PageMV.VehiclwInformation.Id}/PikedUp/CameraTrack/{photos.Count + 1}.jpg";
             photos.Add(photo1);
-            imagesByte.Add(result.Image);
+            imagesByte.Add(result.Result);
             countPhoto++;
             if (car.GetIndexCar(countPhoto) == 0)
             {

@@ -20,7 +20,7 @@ namespace MDispatch.View.AskPhoto.CameraPageFolder
         {
             if (!result.Success)
                 return;
-            askPage.AddPhotoDocumentom(result.Image);
+            askPage.AddPhotoDocumentom(result.Result);
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)

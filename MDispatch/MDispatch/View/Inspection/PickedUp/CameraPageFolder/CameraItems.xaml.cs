@@ -21,7 +21,7 @@ namespace MDispatch.View.AskPhoto.CameraPageFolder
         {
             if (!result.Success)
                 return;
-            askPage.AddPhotoItems(result.Image);
+            askPage.AddPhotoItems(result.Result);
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)

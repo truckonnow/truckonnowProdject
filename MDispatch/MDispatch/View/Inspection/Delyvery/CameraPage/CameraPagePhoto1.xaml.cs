@@ -28,8 +28,8 @@ namespace MDispatch.View.PageApp
         {
             if (!result.Success)
                 return;
-            fullPagePhotoDelyvery.fullPagePhotoDelyveryMV.AddNewFotoSourse(result.Image);
-            fullPagePhotoDelyvery.fullPagePhotoDelyveryMV.SetPhoto(result.Image);
+            fullPagePhotoDelyvery.fullPagePhotoDelyveryMV.AddNewFotoSourse(result.Result);
+            fullPagePhotoDelyvery.fullPagePhotoDelyveryMV.SetPhoto(result.Result);
             fullPagePhotoDelyvery.SetbtnVisable();
             if (pageAddDamage1 != null)
             {

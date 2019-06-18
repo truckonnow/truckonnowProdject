@@ -115,6 +115,7 @@
     <Compile Include="NewrRender\ImageRender\RezizeImgRender.cs" />
     <Compile Include="NewrRender\Orientation\OrientationHandler.cs" />
     <Compile Include="NewrRender\PaintCodeButton.cs" />
+    <Compile Include="NewrRender\RebderVideoCamera\VideoRecorderRenderer.cs" />
     <Compile Include="NewrRender\ResizerImage\ResizeImgDroid.cs" />
     <Compile Include="NewrRender\ToastNotify\ToastDroid.cs" />
     <Compile Include="NewrRender\TouchCordinateRender\TouchImageRender.cs" />

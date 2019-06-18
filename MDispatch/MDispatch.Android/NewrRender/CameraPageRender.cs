@@ -165,13 +165,12 @@ namespace MDispatch.Droid.NewrRender
             if (mainLayout.Width < mainLayout.Height)
             {
                 camera.SetDisplayOrientation(90);
-                camera.StartPreview();
             }
             else
             {
                 camera.SetDisplayOrientation(0);
-                camera.StartPreview();
             }
+            camera.StartPreview();
         }
 
         #region TextureView.ISurfaceTextureListener implementations

@@ -9,15 +9,15 @@ namespace MDispatch.NewElement
             Success = false;
         }
 
-        public PhotoResultEventArgs(byte[] image, int width, int height)
+        public PhotoResultEventArgs(byte[] result, int width = 0, int height = 0)
         {
             Success = true;
-            Image = image;
+            Result = result;
             Width = width;
             Height = height;
         }
 
-        public byte[] Image { get; private set; }
+        public byte[] Result { get; private set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
         public bool Success { get; private set; }

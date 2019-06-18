@@ -29,8 +29,8 @@ namespace MDispatch.View.PageApp
             {
                 return;
             }
-            fullPagePhoto.fullPagePhotoMV.AddNewFotoSourse(result.Image);
-            fullPagePhoto.fullPagePhotoMV.SetPhoto(result.Image);
+            fullPagePhoto.fullPagePhotoMV.AddNewFotoSourse(result.Result);
+            fullPagePhoto.fullPagePhotoMV.SetPhoto(result.Result);
             fullPagePhoto.SetbtnVisable();
             if (pageAddDamage != null)
             {

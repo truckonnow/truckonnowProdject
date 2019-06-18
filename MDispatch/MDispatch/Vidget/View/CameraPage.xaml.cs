@@ -50,7 +50,7 @@ namespace MDispatch.Vidget.View
             {
                 return;
             }
-            fullPhotoTruckVM.AddPhoto(result.Image);
+            fullPhotoTruckVM.AddPhoto(result.Result);
         }
 
         protected override bool OnBackButtonPressed()
