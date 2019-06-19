@@ -88,6 +88,9 @@
                                                     </StackLayout>
                                                 </StackLayout>
                                             </StackLayout>
+                                            <StackLayout Orientation="Horizontal" IsVisible="{Binding IsStartInspection}">
+                                                <Label Text="Please complete inspection" FontSize="15" TextColor="{Binding ColorCurrentStatus}"/>
+                                            </StackLayout>
                                         </StackLayout>
                                     </StackLayout>
                                 </Frame>

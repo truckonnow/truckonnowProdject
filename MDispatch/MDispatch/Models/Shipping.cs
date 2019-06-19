@@ -208,5 +208,28 @@ namespace MDispatch.Models
                 return ico;
             }
         }
+
+        public bool IsStartInspection
+        {
+            get
+            {
+                bool isStartInspection = false;
+                if(CurrentStatus == "Assigned")
+                {
+                    if(VehiclwInformations[0].Ask != null)
+                    {
+                        isStartInspection = true;
+                    }
+                }
+                else if(CurrentStatus == "Picked up")
+                {
+                    if (VehiclwInformations[0].AskDelyvery != null)
+                    {
+                        isStartInspection = true;
+                    }
+                }
+                return isStartInspection;
+            }
+        }
     }
 }
