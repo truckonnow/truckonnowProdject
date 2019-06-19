@@ -11,6 +11,7 @@
         public string What_form_of_payment_are_you_using_to_pay_for_transportation { get; set; }
         public string CountPay { get; set; }
         public Photo PhotoPay { get; set; }
+        public Video VideoRecord { get; set; }
         public string EmailPay { get; set; }
         public string NamePaymment { get; set; }
     }

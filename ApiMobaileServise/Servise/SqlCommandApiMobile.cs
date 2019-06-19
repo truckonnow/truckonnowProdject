@@ -209,19 +209,34 @@ namespace ApiMobaileServise.Servise
 
         public async void SavePayInDb(string idVech, int type, Photo photo)
         {
-            context.askForUserDelyveryMs.Load();
-            context.AskFromUsers.Load();
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.Where(v => v.Id == Convert.ToInt32(idVech))
                 .Include(v => v.AskFromUser)
                 .Include(v => v.askForUserDelyveryM)
                 .FirstOrDefault();
-            if (type == 2 && vehiclwInformation.AskFromUser != null)
+            if (type == 1 && vehiclwInformation.AskFromUser != null)
             {
                 vehiclwInformation.AskFromUser.PhotoPay = photo;
             }
-            else if (type == 1 && vehiclwInformation != null && vehiclwInformation.askForUserDelyveryM != null)
+            else if (type == 2 && vehiclwInformation != null && vehiclwInformation.askForUserDelyveryM != null)
             {
                 vehiclwInformation.askForUserDelyveryM.PhotoPay = photo;
+            }
+            await context.SaveChangesAsync();
+        }
+
+        public async void SaveRecontInDb(string idVech, int type, Video video)
+        {
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.Where(v => v.Id == Convert.ToInt32(idVech))
+                .Include(v => v.AskFromUser)
+                .Include(v => v.askForUserDelyveryM)
+                .FirstOrDefault();
+            if (type == 1 && vehiclwInformation.AskFromUser != null)
+            {
+                vehiclwInformation.AskFromUser.VideoRecord = video;
+            }
+            else if (type == 2 && vehiclwInformation != null && vehiclwInformation.askForUserDelyveryM != null)
+            {
+                vehiclwInformation.askForUserDelyveryM.VideoRecord = video;
             }
             await context.SaveChangesAsync();
         }

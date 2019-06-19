@@ -458,6 +458,38 @@ namespace MDispatch.Service
             }
         }
 
+        public int SaveVideoRecount(string token, string idVech, int type, Video video, ref string description)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                string videojson = JsonConvert.SerializeObject(video);
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
+                RestRequest request = new RestRequest("Mobile/Save/Recount", Method.POST);
+                client.Timeout = 10000;
+                request.AddHeader("Accept", "application/json");
+                request.AddParameter("token", token);
+                request.AddParameter("idVech", idVech);
+                request.AddParameter("type", type);
+                request.AddParameter("video", videojson);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description);
+            }
+        }
+
         public int SaveMethodPay(string token, string idVech, string payMethod, string countPay, ref string description)
         {
             IRestResponse response = null;

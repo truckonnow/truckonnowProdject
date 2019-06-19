@@ -225,13 +225,20 @@ namespace MDispatch.Service
             return stateInspection;
         }
 
-        public int SavePay(string token, string id, int type, Photo photo, ref string description)
+        public int SavePay(string typeReqvest, string token, string id, int type, object obj, ref string description)
         {
             inspection = new Inspection();
             int statePay = 1;
             if (CrossConnectivity.Current.IsConnected)
             {
-                statePay = inspection.SavePhotPay(token, id, type, photo, ref description);
+                if (typeReqvest == "SaveSig")
+                {
+                    statePay = inspection.SavePhotPay(token, id, type, (Photo)obj, ref description);
+                }
+                else if (typeReqvest == "SaveRecount")
+                {
+                    statePay = inspection.SaveVideoRecount(token, id, type, (Video)obj, ref description);
+                }
             }
             inspection = null;
             return statePay;

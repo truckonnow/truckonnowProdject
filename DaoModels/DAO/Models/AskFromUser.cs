@@ -12,6 +12,7 @@ namespace DaoModels.DAO.Models
         public Photo App_will_ask_for_signature_of_the_client_signature { get; set; }
         public string CountPay { get; set; }
         public Photo PhotoPay { get; set; }
+        public Video VideoRecord { get; set; }
         public string EmailPay { get; set; }
         public string NamePaymment { get; set; }
     }

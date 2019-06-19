@@ -22,6 +22,7 @@ namespace DaoModels.DAO
         public DbSet<DamageForUser> DamageForUsers { get; set; }
         public DbSet<InspectionDriver> InspectionDrivers { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Video> Videos { get; set; }
 
         public Context(bool isMigration = false)
         {

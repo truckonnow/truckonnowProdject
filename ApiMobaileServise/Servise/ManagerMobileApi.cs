@@ -265,6 +265,11 @@ namespace ApiMobaileServise.Servise
             sqlCommandApiMobile.SavePayInDb(idVech, type, photo);
         }
 
+        public void SaveRecount(string idVech, int type, Video video)
+        {
+            sqlCommandApiMobile.SaveRecontInDb(idVech, type, video);
+        }
+
         public void SavePayMethot(string idVech, string payMethod, string countPay)
         {
             sqlCommandApiMobile.SavePayMethotInDb(idVech, payMethod, countPay);

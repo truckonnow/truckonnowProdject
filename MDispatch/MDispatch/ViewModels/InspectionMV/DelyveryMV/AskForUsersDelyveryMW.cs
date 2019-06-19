@@ -158,7 +158,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 });
                 await Task.Run(() =>
                 {
-                    state = managerDispatchMob.SavePay(token, VehiclwInformation.Id, 2, photo, ref description);
+                    state = managerDispatchMob.SavePay("SaveSig", token, VehiclwInformation.Id, 2, photo, ref description);
                 });
                 if (state == 2)
                 {

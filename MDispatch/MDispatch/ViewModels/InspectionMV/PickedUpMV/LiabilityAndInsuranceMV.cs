@@ -62,6 +62,13 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             set => SetProperty(ref sigPhoto, value);
         }
 
+        private Video videoRecount = null;
+        public Video VideoRecount
+        {
+            get => videoRecount;
+            set => SetProperty(ref videoRecount, value);
+        }
+
         public string What_form_of_payment_are_you_using_to_pay_for_transportation { set; get; }
         public string CountPay { set; get; }
 
@@ -139,14 +146,13 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
-                
                 await Task.Run(() =>
                 {
                     Continue();
                 });
                 await Task.Run(() =>
                 {
-                    state = managerDispatchMob.SavePay(token, IdVech, 1, photo, ref description);
+                    state = managerDispatchMob.SavePay("SaveSig", token, IdVech, 1, photo, ref description);
                     initDasbordDelegate.Invoke();
                 });
                 if (state == 2)
@@ -178,6 +184,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 {
                     state = managerDispatchMob.AskWork("AskPikedUpSig", token, IdVech, SigPhoto, ref description);
                     state = managerDispatchMob.SaveMethodPay(token, IdVech, What_form_of_payment_are_you_using_to_pay_for_transportation, CountPay, ref description);
+                    state = managerDispatchMob.SavePay("SaveRecount", token, IdVech, 1, videoRecount, ref description);
                     initDasbordDelegate.Invoke();
                 });
                 await PopupNavigation.PopAsync();

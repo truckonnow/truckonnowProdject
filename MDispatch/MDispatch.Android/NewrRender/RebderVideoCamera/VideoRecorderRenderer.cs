@@ -247,7 +247,7 @@ namespace MDispatch.Droid.NewrRender.RebderVideoCamera
         {
             if (!(Element as VideoCameraPage).IsRecording)
             {
-                capturePhotoButton.Background.SetColorFilter(Android.Graphics.Color.ParseColor("#FF0040"), PorterDuff.Mode.Darken);
+                capturePhotoButton.Background.SetColorFilter(Android.Graphics.Color.ParseColor("#FF0040"), PorterDuff.Mode.Add);
                 string filepath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
                 string filename = System.IO.Path.Combine(filepath, "video.mp4");
                 if (File.Exists(filename))
@@ -260,9 +260,9 @@ namespace MDispatch.Droid.NewrRender.RebderVideoCamera
                 recorder.SetVideoSource(VideoSource.Camera);
                 recorder.SetAudioSource(AudioSource.Mic);
                 recorder.SetProfile(CamcorderProfile.Get(0, CamcorderQuality.High));
-                recorder.SetVideoEncoder(VideoEncoder.Default);
-                recorder.SetAudioEncoder(AudioEncoder.Default);
-                recorder.SetOutputFormat(OutputFormat.Mpeg4);
+                //recorder.SetVideoEncoder(VideoEncoder.Default);
+                //recorder.SetAudioEncoder(AudioEncoder.Default);
+                //recorder.SetOutputFormat(OutputFormat.Mpeg4);
                 recorder.SetOutputFile(filename);
                 recorder.Prepare();
                 recorder.Start();
@@ -274,23 +274,17 @@ namespace MDispatch.Droid.NewrRender.RebderVideoCamera
         {
             if ((Element as VideoCameraPage).IsRecording)
             {
-                capturePhotoButton.Background.SetColorFilter(Android.Graphics.Color.ParseColor("#FAFAFA"), PorterDuff.Mode.Darken);
+                capturePhotoButton.Background.SetColorFilter(Android.Graphics.Color.ParseColor("#FAFAFA"), PorterDuff.Mode.Add);
                 recorder.Stop();
                 recorder.Release();
                 (Element as VideoCameraPage).IsRecording = false;
                 string filepath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
                 string filename = System.IO.Path.Combine(filepath, "video.mp4");
-                using (FileStream file = new FileStream(filename, FileMode.Create, System.IO.FileAccess.Write))
+                if (File.Exists(filename))
                 {
-                    if (File.Exists(filename))
-                    {
-                        byte[] bytes = new byte[file.Length];
-                        file.Read(bytes, 0, (int)file.Length);
-                        file.Write(bytes, 0, bytes.Length);
-                        file.Close();
-                        (Element as VideoCameraPage).SetPhotoResult(bytes);
-                        File.Delete(filename);
-                    }
+                    byte[] bytes = File.ReadAllBytes(filename);
+                    (Element as VideoCameraPage).SetPhotoResult(bytes);
+                    File.Delete(filename);
                 }
             }
         }

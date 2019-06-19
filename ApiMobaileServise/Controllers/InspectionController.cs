@@ -336,6 +336,39 @@ namespace ApiMobaileServise.Controllers
         }
 
         [HttpPost]
+        [Route("Save/Recount")]
+        public string SaveRecount(string token, string idVech, int type, string video)
+        {
+            string respons = null;
+            if (token == null || token == "")
+            {
+                return JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
+            }
+            try
+            {
+                bool isToken = managerMobileApi.CheckToken(token);
+                if (isToken)
+                {
+                    Task.Run(() =>
+                    {
+                        Video video1 = JsonConvert.DeserializeObject<Video>(video);
+                        managerMobileApi.SaveRecount(idVech, type, video1);
+                    });
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
+                }
+                else
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "2", null));
+                }
+            }
+            catch (Exception)
+            {
+                respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
+            }
+            return respons;
+        }
+
+        [HttpPost]
         [Route("Save/PickedUp/PayMethod")]
         public string SavePickedUpPayMethod(string token, string idVech, string payMethod, string countPay)
         {
