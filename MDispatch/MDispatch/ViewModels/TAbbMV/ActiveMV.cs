@@ -132,11 +132,36 @@ namespace MDispatch.ViewModels.TAbbMV
             IsRefr = false;
         }
 
-        public void OutAccount()
+        public async void OutAccount()
         {
-            CrossSettings.Current.Remove("Token");
-            App.isAvtorization = false;
-            App.Current.MainPage = new NavigationPage(new Avtorization());
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            bool isInspection = default;
+            int state = 0;
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.A_RWork("Clear", null, null, ref description, ref token);
+                });
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Error", null));
+                }
+                else if (state == 3)
+                {
+                    CrossSettings.Current.Remove("Token");
+                    App.isAvtorization = false;
+                    App.Current.MainPage = new NavigationPage(new Avtorization());
+                    IsRefr = true;
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
+            }
+            IsRefr = false;
         }
     }
 }

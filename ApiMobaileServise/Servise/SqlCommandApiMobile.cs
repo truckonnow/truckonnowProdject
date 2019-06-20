@@ -398,6 +398,13 @@ namespace ApiMobaileServise.Servise
             return context.Drivers.FirstOrDefault(d => d.Token == token) != null ? true : false;
         }
 
+        public async void ClearTokenDb(string token)
+        {
+            Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
+            driver.Token = null;
+            await context.SaveChangesAsync();
+        }
+
         public string GetInspectionDriverIndb(string token)
         {
             string statusAndTimeInInspection = null;

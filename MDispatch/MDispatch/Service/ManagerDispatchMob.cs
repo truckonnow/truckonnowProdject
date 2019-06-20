@@ -58,6 +58,10 @@ namespace MDispatch.Service
                 {
                     stateA_R = a_R.Avthorization(login, password, ref description, ref token);
                 }
+                else if (typeR_A == "Clear")
+                {
+                    stateA_R = a_R.ClearAvt(token);
+                }
             }
             a_R = null;
             return stateA_R;

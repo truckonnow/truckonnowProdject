@@ -18,3 +18,4 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Retake
             fullPagePhotoDelyveryMV.ReSetPhoto(photo, olPhoto);
         }
     }
+}

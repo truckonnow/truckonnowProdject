@@ -2,6 +2,7 @@
 using ApiMobaileServise.Servise;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System;
 
 namespace ApiMobaileServise.Controllers
 {
@@ -38,6 +39,35 @@ namespace ApiMobaileServise.Controllers
                 {
                     respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Password field is empty", ""));
                 }
+            }
+            return respons;
+        }
+
+        [HttpPost]
+        [Route("Avtorization/Clear")]
+        public string Clear(string token)
+        {
+            string respons = null;
+            if (token == null || token == "")
+            {
+                return JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
+            }
+            try
+            {
+                bool isToken = managerMobileApi.CheckToken(token);
+                if (isToken)
+                {
+                    managerMobileApi.CheckToken(token);
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", ""));
+                }
+                else
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "2", null));
+                }
+            }
+            catch (Exception)
+            {
+                respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
             }
             return respons;
         }

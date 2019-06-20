@@ -24,7 +24,7 @@ namespace ApiMobaileServise.Servise
         {
             Shipping shipping = sqlCommandApiMobile.SendBolInDb(idShip);
             string patern = new PaternSourse().GetPaternBol(shipping);
-            await new AuthMessageSender().Execute(email, "Truckonnow - Coupon", patern);
+            await new AuthMessageSender().Execute(email, "Truckonnow - BOL", patern);
         }
 
         public async void SendCoupon(string email)
@@ -273,6 +273,11 @@ namespace ApiMobaileServise.Servise
         public void SavePayMethot(string idVech, string payMethod, string countPay)
         {
             sqlCommandApiMobile.SavePayMethotInDb(idVech, payMethod, countPay);
+        }
+
+        public void ClearToken(string token)
+        {
+            sqlCommandApiMobile.ClearTokenDb(token);
         }
 
         private string CreateToken(string email, string password)
