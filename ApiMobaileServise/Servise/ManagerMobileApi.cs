@@ -24,7 +24,7 @@ namespace ApiMobaileServise.Servise
         {
             Shipping shipping = sqlCommandApiMobile.SendBolInDb(idShip);
             string patern = new PaternSourse().GetPaternBol(shipping);
-            await new AuthMessageSender().Execute(email, "Truckonnow - BOL", patern);
+            await new AuthMessageSender().Execute(email, "Truckonnow - BOL", patern, shipping.VehiclwInformations);
         }
 
         public async void SendCoupon(string email)

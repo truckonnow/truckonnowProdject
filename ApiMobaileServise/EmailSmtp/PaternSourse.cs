@@ -6,6 +6,7 @@ namespace ApiMobaileServise.EmailSmtp
     {
         public string GetPaternBol(Shipping shipping)
         {
+            int cId = 1;
             string patern = "<div style='width:700px;'>"
         + "<p><h3>BILL OF LADING / VEHICLE INSPECTION REPORT</h3></p>"
         + "<div style='border-style: solid; border-width: 2px;'>"
@@ -66,8 +67,9 @@ namespace ApiMobaileServise.EmailSmtp
             patern += "<div style='border-style:solid; border-width 2px; width:100%;'>";
             foreach (var vech in shipping.VehiclwInformations)
             {
-                patern += $"<img src='data:image/png;base64,{vech.Scan.Base64}'/> <br/>"
+                patern += $"<img src='cid:{cId}'/> <br/>"
                        + $"<span style='margin:10px;'> See inspection photos: http://truckonnow.com/Photo/BOL/{vech.Id}</span>";
+                cId++;
             }
             patern += "</div>";
             if(shipping.VehiclwInformations[0].AskFromUser != null && shipping.VehiclwInformations[0].AskFromUser.App_will_ask_for_signature_of_the_client_signature != null)
@@ -83,12 +85,13 @@ namespace ApiMobaileServise.EmailSmtp
                             + "Origin Signature"
                         + "</span>"
                         + "<br />"
-                        + $"<img style='margin:5px;' src='data:image/png;base64,{shipping.VehiclwInformations[0].AskFromUser.App_will_ask_for_signature_of_the_client_signature.Base64}' />"
+                        + $"<img style='margin:5px;' src='cid:{cId}' width='345' height='110'/>"
                     + "</div>";
+                cId++;
             }
             if (shipping.VehiclwInformations[0].askForUserDelyveryM != null && shipping.VehiclwInformations[0].askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature != null)
             {
-                patern += "<div style'border-style: solid; border-width: 2px; width: 50%;'>"
+                patern += "<div style'border-style: solid; border-width: 1px; width: 50%;'>"
                         + "<span style='margin:5px; font-weight:600;' >"
                             + "Vehicle received in good condition except as"
                             + "noted above."
@@ -98,7 +101,7 @@ namespace ApiMobaileServise.EmailSmtp
                             + "Destination Signature"
                         + "</span>"
                         + "<br />"
-                        + $"<img style='margin:5px;' src='data:image/png;base64,{shipping.VehiclwInformations[0].askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.Base64}' />"
+                        + $"<img style='margin:5px;' src='cid:{cId}' width='345' height='110' />"
                     + "</div>"
                 + "</div>"
             + "</div>"
