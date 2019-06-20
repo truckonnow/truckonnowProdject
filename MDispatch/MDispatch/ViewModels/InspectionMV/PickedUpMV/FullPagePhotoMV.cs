@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -173,6 +174,42 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
             return null;
         }
+
+        public void ReSetPhoto(byte[] newPhoto, byte[] oldPhoto)
+        {
+            List<ImageSource> imageSources1 = new List<ImageSource>(AllSourseImage);
+            Photo photo = new Photo();
+            int Index = PhotoInspection.Photos.FindIndex(p => p.Base64 == JsonConvert.SerializeObject(oldPhoto));
+            Photo photoOld = PhotoInspection.Photos.FirstOrDefault(p => p.Base64 == JsonConvert.SerializeObject(oldPhoto));
+            photo.path = photoOld.path;
+            photoOld = null;
+            photo.Base64 = JsonConvert.SerializeObject(newPhoto);
+            PhotoInspection.Photos.RemoveAt(Index);
+            PhotoInspection.Photos.Insert(Index, photo);
+            Index = imageSources1.FindIndex(a => Convert.ToBase64String(GetBytesInImageSourse(a)) == Convert.ToBase64String(oldPhoto));
+            imageSources1.RemoveAt(Index);
+            imageSources1.Insert(Index, ImageSource.FromStream(() => new MemoryStream(newPhoto)));
+            AllSourseImage = imageSources1;
+            SourseImage = AllSourseImage[Index];
+            if (PhotoInspection.Damages != null)
+            {
+               PhotoInspection.Damages.FirstOrDefault(d => Convert.ToBase64String(GetBytesInImageSourse(d.ImageSource)) == Convert.ToBase64String(oldPhoto)).ImageSource = AllSourseImage[Index];
+            }
+        }
+
+        private byte[] GetBytesInImageSourse(ImageSource imageSource)
+        {
+            byte[] sourseImage = null;
+            StreamImageSource streamImageSource = (StreamImageSource)imageSource;
+            System.Threading.CancellationToken cancellationToken = System.Threading.CancellationToken.None;
+            Task<Stream> task = streamImageSource.Stream(cancellationToken);
+            Stream stream = task.Result;
+            MemoryStream ms = new MemoryStream();
+            stream.CopyTo(ms);
+            sourseImage = ms.ToArray();
+            return sourseImage;
+        }
+
 
         public void AddNewFotoSourse(byte[] imageSorseByte)
         {

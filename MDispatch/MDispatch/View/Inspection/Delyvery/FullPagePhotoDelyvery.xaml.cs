@@ -2,9 +2,13 @@
 using MDispatch.NewElement;
 using MDispatch.NewElement.ResIzeImage;
 using MDispatch.Service;
+using MDispatch.View.Inspection;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
+using MDispatch.ViewModels.InspectionMV.Servise.Retake;
 using System;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -47,6 +51,7 @@ namespace MDispatch.View.PageApp
                 btnNext.IsVisible = true;
                 btnAddPhoto.IsVisible = false;
                 btnDamage.IsVisible = true;
+                btnRetake.IsVisible = true;
             }
         }
         
@@ -119,6 +124,20 @@ namespace MDispatch.View.PageApp
         {
             DependencyService.Get<IOrientationHandler>().ForceSensor();
             await Navigation.PopAsync();
+        }
+
+        private async void Button_Clicked_3(object sender, EventArgs e)
+        {
+            RetakeFullPageDelivery retakeFullPageDelivery = null;
+            StreamImageSource streamImageSource = (StreamImageSource)fullPagePhotoDelyveryMV.SourseImage;
+            System.Threading.CancellationToken cancellationToken = System.Threading.CancellationToken.None;
+            Task<Stream> task = streamImageSource.Stream(cancellationToken);
+            Stream stream = task.Result;
+            MemoryStream ms = new MemoryStream();
+            stream.CopyTo(ms);
+            byte[] bytes = ms.ToArray();
+            retakeFullPageDelivery = new RetakeFullPageDelivery(fullPagePhotoDelyveryMV, bytes);
+            await Navigation.PushAsync(new RetakePage(retakeFullPageDelivery));
         }
     }
 }

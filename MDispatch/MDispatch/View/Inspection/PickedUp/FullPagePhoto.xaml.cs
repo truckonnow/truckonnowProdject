@@ -2,10 +2,14 @@
 using MDispatch.NewElement;
 using MDispatch.NewElement.ResIzeImage;
 using MDispatch.Service;
+using MDispatch.View.Inspection;
 using MDispatch.View.Inspection.PickedUp;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
+using MDispatch.ViewModels.InspectionMV.Servise.Retake;
 using System;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -47,6 +51,7 @@ namespace MDispatch.View.PageApp
                 btnNext.HorizontalOptions = LayoutOptions.End;
                 btnAddPhoto.IsVisible = false;
                 btnDamage.IsVisible = true;
+                btnRetake.IsVisible = true;
             }
         }
 
@@ -95,10 +100,6 @@ namespace MDispatch.View.PageApp
             {
                 fullPagePhotoMV.SavePhoto();
             }
-            else
-            {
-               // await PopupNavigation.
-            }
         }
 
         private async void Button_Clicked_2(object sender, EventArgs e)
@@ -119,6 +120,20 @@ namespace MDispatch.View.PageApp
         {
             DependencyService.Get<IOrientationHandler>().ForceSensor();
             await Navigation.PopAsync();
+        }
+
+        private async void Button_Clicked_3(object sender, EventArgs e)
+        {
+            RetakeFullPagePickedUp retakeFullPagePickedUp = null;
+            StreamImageSource streamImageSource = (StreamImageSource)fullPagePhotoMV.SourseImage;
+            System.Threading.CancellationToken cancellationToken = System.Threading.CancellationToken.None;
+            Task<Stream> task = streamImageSource.Stream(cancellationToken);
+            Stream stream = task.Result;
+            MemoryStream ms = new MemoryStream();
+            stream.CopyTo(ms);
+            byte[] bytes = ms.ToArray();
+            retakeFullPagePickedUp = new RetakeFullPagePickedUp(fullPagePhotoMV, bytes);
+            await Navigation.PushAsync(new RetakePage(retakeFullPagePickedUp));
         }
     }
 }
