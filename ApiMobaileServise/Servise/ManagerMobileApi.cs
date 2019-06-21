@@ -20,14 +20,14 @@ namespace ApiMobaileServise.Servise
             CheckAndCreatedFolder();
         }
 
-        public async void SendBol(string idShip, string email)
+        public async Task SendBol(string idShip, string email)
         {
             Shipping shipping = sqlCommandApiMobile.SendBolInDb(idShip);
             string patern = new PaternSourse().GetPaternBol(shipping);
             await new AuthMessageSender().Execute(email, "Truckonnow - BOL", patern, shipping.VehiclwInformations);
         }
 
-        public async void SendCoupon(string email)
+        public async Task SendCoupon(string email)
         {
             string patern = new PaternSourse().GetPaternCopon();
             await new AuthMessageSender().Execute(email, "Truckonnow - Coupon", patern);
@@ -68,10 +68,10 @@ namespace ApiMobaileServise.Servise
             sqlCommandApiMobile.SaveTokenStoreinDb(token, tokenStore);
         }   
 
-        public void SaveDamageForUser(string idVech, string damageForUserJson)
+        public async Task SaveDamageForUser(string idVech, string damageForUserJson)
         {
             List<DamageForUser> damageForUsers = JsonConvert.DeserializeObject<List<DamageForUser>>(damageForUserJson);
-            Task.Run(async() =>
+            await Task.Run(async() =>
             {
                 VehiclwInformation vehiclwInformation = await sqlCommandApiMobile.GetVehiclwInformationAndSaveDamageForUser(idVech, damageForUsers);
                 ITypeScan typeScan = GetTypeScan(vehiclwInformation.Ask.TypeVehicle);
@@ -79,9 +79,10 @@ namespace ApiMobaileServise.Servise
             });
         }
 
-        public void SaveSigPhoto(string idVech, Photo sig)
+        public async Task SaveSigPhoto(string idVech, string sig)
         {
-            sqlCommandApiMobile.SaveSigPikedUpInDb(idVech, sig);
+            Photo photoSig = JsonConvert.DeserializeObject<Photo>(sig);
+            sqlCommandApiMobile.SaveSigPikedUpInDb(idVech, photoSig);
         }
 
         public VehiclwInformation GetVehiclwInformation(int idVech)
@@ -94,14 +95,12 @@ namespace ApiMobaileServise.Servise
             return sqlCommandApiMobile.GetShippingInDb(idShip);
         }
 
-        public async void SavePhotoInspection(string idVe, PhotoInspection photoInspection)
+        public async Task SavePhotoInspection(string idVe, string photoInspectionJson)
         {
-            await Task.Run(async() =>
-            {
-                VehiclwInformation vehiclwInformation = await sqlCommandApiMobile.SavePhotoInspectionInDb(idVe, photoInspection);
-                ITypeScan typeScan = GetTypeScan(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
-                typeScan.SetDamage(photoInspection, vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), vehiclwInformation.Scan.path);
-            });
+            PhotoInspection photoInspection = JsonConvert.DeserializeObject<PhotoInspection>(photoInspectionJson);
+            VehiclwInformation vehiclwInformation = await sqlCommandApiMobile.SavePhotoInspectionInDb(idVe, photoInspection);
+            ITypeScan typeScan = GetTypeScan(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+            typeScan.SetDamage(photoInspection, vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), vehiclwInformation.Scan.path);
         }
 
         private ITypeScan GetTypeScan(string type)
@@ -133,7 +132,7 @@ namespace ApiMobaileServise.Servise
             return typeScan;
         }
 
-        public void SaveAsk(string idVe, int type, string jsonStrAsk)
+        public async Task SaveAsk(string idVe, int type, string jsonStrAsk)
         {
             if(type == 1)
             {
@@ -157,21 +156,21 @@ namespace ApiMobaileServise.Servise
             }
             else if (type == 5)
             {
-                AskForUserDelyveryM askForUserDelyveryM = JsonConvert.DeserializeObject<AskForUserDelyveryM>(jsonStrAsk);
-                sqlCommandApiMobile.SaveAskForUserDelyveryInDb(idVe, askForUserDelyveryM);
+                 AskForUserDelyveryM askForUserDelyveryM = JsonConvert.DeserializeObject<AskForUserDelyveryM>(jsonStrAsk);
+                 sqlCommandApiMobile.SaveAskForUserDelyveryInDb(idVe, askForUserDelyveryM);
             }
         }
 
-        public void SaveFeedBack(string jsonStrAsk)
+        public async Task SaveFeedBack(string jsonStrAsk)
         {
             Feedback feedback = JsonConvert.DeserializeObject<Feedback>(jsonStrAsk);
             sqlCommandApiMobile.SaveFeedBackInDb(feedback);
         }
 
-        public void ReCurentStatus(string idShip, string status)
+        public async Task ReCurentStatus(string idShip, string status)
         {
             sqlCommandApiMobile.ReCurentStatus(idShip, status);
-            Task.Run(() =>
+            await Task.Run(() =>
             {
                 string tokenShope = sqlCommandApiMobile.GerShopTokenForShipping(idShip);
                 ManagerNotifyMobileApi managerNotifyMobileApi = new ManagerNotifyMobileApi();
@@ -260,17 +259,20 @@ namespace ApiMobaileServise.Servise
             return isToken;
         }
 
-        public void SavePay(string idVech, int type, Photo photo)
+        public async Task SavePay(string idVech, int type, string photo)
         {
-            sqlCommandApiMobile.SavePayInDb(idVech, type, photo);
+
+            Photo photo1 = JsonConvert.DeserializeObject<Photo>(photo);
+            sqlCommandApiMobile.SavePayInDb(idVech, type, photo1);
         }
 
-        public void SaveRecount(string idVech, int type, Video video)
+        public async Task SaveRecount(string idVech, int type, string video)
         {
-            sqlCommandApiMobile.SaveRecontInDb(idVech, type, video);
+            Video video1 = JsonConvert.DeserializeObject<Video>(video);
+            sqlCommandApiMobile.SaveRecontInDb(idVech, type, video1);
         }
 
-        public void SavePayMethot(string idVech, string payMethod, string countPay)
+        public async Task SavePayMethot(string idVech, string payMethod, string countPay)
         {
             sqlCommandApiMobile.SavePayMethotInDb(idVech, payMethod, countPay);
         }

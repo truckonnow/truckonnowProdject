@@ -184,7 +184,10 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 {
                     state = managerDispatchMob.AskWork("AskPikedUpSig", token, IdVech, SigPhoto, ref description);
                     state = managerDispatchMob.SaveMethodPay(token, IdVech, What_form_of_payment_are_you_using_to_pay_for_transportation, CountPay, ref description);
-                    state = managerDispatchMob.SavePay("SaveRecount", token, IdVech, 1, videoRecount, ref description);
+                    if (videoRecount != null)
+                    {
+                        state = managerDispatchMob.SavePay("SaveRecount", token, IdVech, 1, videoRecount, ref description);
+                    }
                     initDasbordDelegate.Invoke();
                 });
                 await PopupNavigation.PopAsync();

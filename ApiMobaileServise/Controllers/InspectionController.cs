@@ -12,9 +12,10 @@ namespace ApiMobaileServise.Controllers
     public class InspectionController : Controller
     {
         ManagerMobileApi managerMobileApi = new ManagerMobileApi();
+
         [HttpPost]
         [Route("Save/Ansver")]
-        public string SaveAnsver(string token, string idVe, string jsonStrAsk, int type)
+        public async Task<string> SaveAnsver(string token, string idVe, string jsonStrAsk, int type)
         {
             string respons = null;
             if (token == null || token == "")
@@ -26,10 +27,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    Task.Run(() =>
-                    {
-                        managerMobileApi.SaveAsk(idVe, type, jsonStrAsk);
-                    });
+                    await managerMobileApi.SaveAsk(idVe, type, jsonStrAsk);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
@@ -47,7 +45,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("SaveSigPikedUp")]
-        public string SaveSigPikedUp(string token, string idVech, string jsonSigPhoto)
+        public async Task<string> SaveSigPikedUp(string token, string idVech, string jsonSigPhoto)
         {
             string respons = null;
             if (token == null || token == "")
@@ -59,12 +57,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-
-                    Task.Run(() =>
-                    {
-                        Photo photoSig = JsonConvert.DeserializeObject<Photo>(jsonSigPhoto);
-                        managerMobileApi.SaveSigPhoto(idVech, photoSig);
-                    });
+                    await managerMobileApi.SaveSigPhoto(idVech, jsonSigPhoto);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
@@ -110,7 +103,7 @@ namespace ApiMobaileServise.Controllers
         
         [HttpPost]
         [Route("ReCurentStatus")]
-        public string ReCurentStatus(string token, string idShip, string status)
+        public async Task<string> ReCurentStatus(string token, string idShip, string status)
         {
             string respons = null;
             if (token == null || token == "")
@@ -122,11 +115,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-
-                    Task.Run(() =>
-                    {
-                        managerMobileApi.ReCurentStatus(idShip, status);
-                    });
+                    await managerMobileApi.ReCurentStatus(idShip, status);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
@@ -143,7 +132,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Email/BOL")]
-        public string SendPdfToEmail(string token, string idShip, string email)
+        public async Task<string> SendPdfToEmail(string token, string idShip, string email)
         {
             string respons = null;
             if (token == null || token == "")
@@ -155,10 +144,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    Task.Run(() =>
-                    {
-                        managerMobileApi.SendBol(idShip, email);
-                    });
+                    await managerMobileApi.SendBol(idShip, email);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
@@ -175,7 +161,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Email/Copon")]
-        public string SendCoponToEmail(string token, string email)
+        public async Task<string> SendCoponToEmail(string token, string email)
         {
             string respons = null;
             if (token == null || token == "")
@@ -187,10 +173,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    Task.Run(() =>
-                    {
-                        managerMobileApi.SendCoupon(email);
-                    });
+                    await managerMobileApi.SendCoupon(email);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
@@ -207,7 +190,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Save/FeedBack")]
-        public string SaveFeedBack(string token,string jsonStrAsk)
+        public async Task<string> SaveFeedBack(string token,string jsonStrAsk)
         {
             string respons = null;
             if (token == null || token == "")
@@ -219,10 +202,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    Task.Run(() =>
-                    {
-                        managerMobileApi.SaveFeedBack(jsonStrAsk);
-                    });
+                    await managerMobileApi.SaveFeedBack(jsonStrAsk);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
@@ -239,7 +219,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Save/Photo")]
-        public string SavePhoto(string token, string idVe, string jsonStr)
+        public async Task<string> SavePhoto(string token, string idVe, string jsonStr)
         {
             string respons = null;
             if (token == null || token == "")
@@ -251,11 +231,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    Task.Run(() =>
-                    {
-                        PhotoInspection photoInspection = JsonConvert.DeserializeObject<PhotoInspection>(jsonStr);
-                        managerMobileApi.SavePhotoInspection(idVe, photoInspection);
-                    });
+                    await managerMobileApi.SavePhotoInspection(idVe, jsonStr);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
@@ -272,7 +248,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Damages/User")]
-        public string AddDamageForUser(string token, string idVech, string damageForUserJson)
+        public async Task<string> AddDamageForUser(string token, string idVech, string damageForUserJson)
         {
             string respons = null;
             if (token == null || token == "")
@@ -284,10 +260,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    Task.Run(() =>
-                    {
-                        managerMobileApi.SaveDamageForUser(idVech, damageForUserJson);
-                    });
+                    await managerMobileApi.SaveDamageForUser(idVech, damageForUserJson);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
@@ -304,7 +277,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Save/Pay")]
-        public string SavePay(string token, string idVech, int type, string Photo)
+        public async Task<string> SavePay(string token, string idVech, int type, string Photo)
         {
             string respons = null;
             if (token == null || token == "")
@@ -314,13 +287,9 @@ namespace ApiMobaileServise.Controllers
             try
             {
                 bool isToken = managerMobileApi.CheckToken(token);
-                Photo photo1 = JsonConvert.DeserializeObject<Photo>(Photo);
                 if (isToken)
                 {
-                    Task.Run(() =>
-                    {
-                        managerMobileApi.SavePay(idVech, type, photo1);
-                    });
+                    await managerMobileApi.SavePay(idVech, type, Photo);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
@@ -337,7 +306,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Save/Recount")]
-        public string SaveRecount(string token, string idVech, int type, string video)
+        public async Task<string> SaveRecount(string token, string idVech, int type, string video)
         {
             string respons = null;
             if (token == null || token == "")
@@ -349,11 +318,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    Task.Run(() =>
-                    {
-                        Video video1 = JsonConvert.DeserializeObject<Video>(video);
-                        managerMobileApi.SaveRecount(idVech, type, video1);
-                    });
+                    await managerMobileApi.SaveRecount(idVech, type, video);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
@@ -370,7 +335,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Save/PickedUp/PayMethod")]
-        public string SavePickedUpPayMethod(string token, string idVech, string payMethod, string countPay)
+        public async Task<string> SavePickedUpPayMethod(string token, string idVech, string payMethod, string countPay)
         {
             string respons = null;
             if (token == null || token == "")
@@ -382,10 +347,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    Task.Run(() =>
-                    {
-                        managerMobileApi.SavePayMethot(idVech, payMethod, countPay);
-                    });
+                    await managerMobileApi.SavePayMethot(idVech, payMethod, countPay);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else

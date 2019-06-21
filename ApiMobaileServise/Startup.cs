@@ -16,6 +16,7 @@ namespace ApiMobaileServise
 
         public void ConfigureServices(IServiceCollection services)
         {
+            System.Net.ServicePointManager.DefaultConnectionLimit = 50;
             services.AddMvc();
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

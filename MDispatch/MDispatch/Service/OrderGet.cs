@@ -17,7 +17,7 @@ namespace MDispatch.Service
             {
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/ActiveOreder", Method.POST);
-                client.Timeout = 10000;
+                client.Timeout = 60000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 response = client.Execute(request);
@@ -45,7 +45,7 @@ namespace MDispatch.Service
             {
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/DelyveryOreder", Method.POST);
-                client.Timeout = 10000;
+                client.Timeout = 60000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 response = client.Execute(request);
@@ -73,7 +73,7 @@ namespace MDispatch.Service
             {
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/GetVechicleInffo", Method.POST);
-                client.Timeout = 10000;
+                client.Timeout = 60000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 request.AddParameter("idVech", idVech);
@@ -142,7 +142,7 @@ namespace MDispatch.Service
             {
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/SaveOrder1", Method.POST);
-                client.Timeout = 10000;
+                client.Timeout = 60000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 request.AddParameter("id", id);
@@ -168,25 +168,25 @@ namespace MDispatch.Service
 
         private int GetData(string respJsonStr, ref string description, ref List<Shipping> shippings)
         {
-            respJsonStr = respJsonStr.Replace("\\", "");
-            respJsonStr = respJsonStr.Remove(0, 1);
-            respJsonStr = respJsonStr.Remove(respJsonStr.Length - 1);
-            var responseAppS = JObject.Parse(respJsonStr);
-            string status = responseAppS.Value<string>("Status");
-            if (status == "success")
-            {
-                shippings = JsonConvert.DeserializeObject<List<Shipping>>(responseAppS.
-                        SelectToken("ResponseStr").ToString());
-                description = responseAppS
-                    .Value<string>("Description");
-                return 3;
-            }
-            else
-            {
-                description = responseAppS
-                    .Value<string>("Description");
-                return 2;
-            }
+                respJsonStr = respJsonStr.Replace("\\", "");
+                respJsonStr = respJsonStr.Remove(0, 1);
+                respJsonStr = respJsonStr.Remove(respJsonStr.Length - 1);
+                var responseAppS = JObject.Parse(respJsonStr);
+                string status = responseAppS.Value<string>("Status");
+                if (status == "success")
+                {
+                    shippings = JsonConvert.DeserializeObject<List<Shipping>>(responseAppS.
+                            SelectToken("ResponseStr").ToString());
+                    description = responseAppS
+                        .Value<string>("Description");
+                    return 3;
+                }
+                else
+                {
+                    description = responseAppS
+                        .Value<string>("Description");
+                    return 2;
+                }
         }
 
         private int GetData(string respJsonStr, ref string description, ref VehiclwInformation vehiclwInformation)

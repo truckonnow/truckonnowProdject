@@ -14,7 +14,7 @@ namespace MDispatch.Service
             {
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Avtorization", Method.POST);
-                client.Timeout = 10000;
+                client.Timeout = 20000;
                 request.AddParameter("email", login);
                 request.AddParameter("password", password);
                 response = client.Execute(request);

@@ -67,25 +67,25 @@ namespace Parser.Servise1
             }).GetAwaiter().GetResult();
         }
 
-        private void RefreshInspectionTimeDriver(List<Driver> drivers)
+        private async void RefreshInspectionTimeDriver(List<Driver> drivers)
         {
             foreach (var driver in drivers)
             {
                 if (!driver.IsInspectionToDayDriver)
                 {
                     LogEr.Logerr("Info1", $"check on the driver \"{driver.Id}\" to pass inspection", "RefreshInspectionTimeDriver", DateTime.Now.ToShortTimeString());
-                    sqlCommandParser.RefreshInspectionDriverInDb(driver.Id);
+                    await sqlCommandParser.RefreshInspectionDriverInDb(driver.Id);
                     SendNotyfyInspactionDrive(driver.TokenShope, "Truck Inspection", "Immediately go truck inspection or else you will not be able to continue working");
                 }
             }
         }
 
-        private void RefreshInspectionTodayTimeDriver(List<Driver> drivers)
+        private async void RefreshInspectionTodayTimeDriver(List<Driver> drivers)
         {
             foreach(var driver in drivers)
             {
                 LogEr.Logerr("Info1", $"driver status change \"{driver.Id}\"", "RefreshInspectionTodayTimeDriver", DateTime.Now.ToShortTimeString());
-                sqlCommandParser.RefreshInspectionToDayDriverInDb(driver.Id);
+                await sqlCommandParser.RefreshInspectionToDayDriverInDb(driver.Id);
                 SendNotyfyInspactionDrive(driver.TokenShope, "Truck Inspection", "You can pass the truck inspection now");
             }
         }

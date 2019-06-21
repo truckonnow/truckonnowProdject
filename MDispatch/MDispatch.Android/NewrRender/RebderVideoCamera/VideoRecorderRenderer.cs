@@ -195,7 +195,8 @@ namespace MDispatch.Droid.NewrRender.RebderVideoCamera
                         camera.SetDisplayOrientation(90);
 
                     }
-                    capturePhotoButton.SetX(mainLayout.Width / 2 + 300);
+                    int tmpPr = (mainLayout.Width / 100) * 10;
+                    capturePhotoButton.SetX(mainLayout.Width / 2 + tmpPr);
                     capturePhotoButton.SetY(mainLayout.Height - 200);
                 }
                 else
@@ -204,7 +205,8 @@ namespace MDispatch.Droid.NewrRender.RebderVideoCamera
                     {
                         camera.SetDisplayOrientation(0);
                     }
-                    capturePhotoButton.SetY(mainLayout.Height / 2 + 320);
+                    int tmpPr = (mainLayout.Width / 100) * 10;
+                    capturePhotoButton.SetY(mainLayout.Height / 2 + tmpPr);
                     capturePhotoButton.SetX(mainLayout.Width - 200);
                 }
             }

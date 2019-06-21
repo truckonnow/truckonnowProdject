@@ -116,6 +116,12 @@ namespace MDispatch.Service.Net
 
         private static void GetData(string respJsonStr, ref bool isCheck, ref string description)
         {
+            if(respJsonStr[0] == '!')
+            {
+                isCheck = false;
+                description = "Technical work on the service";
+                return;
+            }
             respJsonStr = respJsonStr.Replace("\\", "");
             respJsonStr = respJsonStr.Remove(0, 1);
             respJsonStr = respJsonStr.Remove(respJsonStr.Length - 1);

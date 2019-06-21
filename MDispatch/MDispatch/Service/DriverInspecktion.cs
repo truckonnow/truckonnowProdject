@@ -16,7 +16,7 @@ namespace MDispatch.Service
             {
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Driver/CheckInspectionDriver", Method.POST);
-                client.Timeout = 10000;
+                client.Timeout = 60000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 response = client.Execute(request);
@@ -45,6 +45,7 @@ namespace MDispatch.Service
                 string photoJson = JsonConvert.SerializeObject(photo);
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Driver/SaveInspactionDriver", Method.POST);
+                client.Timeout = 60000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 request.AddParameter("idDriver", idDriver);
@@ -76,7 +77,7 @@ namespace MDispatch.Service
                 string inspectionDriverjson = JsonConvert.SerializeObject(inspectionDriver);
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Driver/SetInspectionDriver", Method.POST);
-                client.Timeout = 10000;
+                client.Timeout = 60000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 request.AddParameter("idDriver", idDriver);
@@ -106,7 +107,7 @@ namespace MDispatch.Service
             {
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Driver/UpdateInspectionDriver", Method.POST);
-                client.Timeout = 10000;
+                client.Timeout = 60000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 request.AddParameter("idDriver", idDriver);

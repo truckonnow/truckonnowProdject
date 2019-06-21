@@ -57,7 +57,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    managerMobileApi.CheckToken(token);
+                    managerMobileApi.ClearToken(token);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", ""));
                 }
                 else

@@ -320,7 +320,7 @@ namespace ApiMobaileServise.Servise
             context.SaveChangesAsync();
         }
 
-        public void SaveAskForUserDelyveryInDb(string idve, AskForUserDelyveryM askForUserDelyveryM)
+        public async void SaveAskForUserDelyveryInDb(string idve, AskForUserDelyveryM askForUserDelyveryM)
         {
 
             Shipping shipping = context.Shipping.Where(s => s.VehiclwInformations.FirstOrDefault(v => v.Id == Convert.ToInt32(idve)) != null)
@@ -331,7 +331,7 @@ namespace ApiMobaileServise.Servise
                 shipping.VehiclwInformations[0].askForUserDelyveryM = new AskForUserDelyveryM();
             }
             shipping.VehiclwInformations[0].askForUserDelyveryM = askForUserDelyveryM;
-            context.SaveChangesAsync();
+            await context.SaveChangesAsync();
         }
 
         public bool CheckEmailAndPsw(string email, string password)
@@ -402,6 +402,7 @@ namespace ApiMobaileServise.Servise
         {
             Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
             driver.Token = null;
+            driver.TokenShope = null;
             await context.SaveChangesAsync();
         }
 
