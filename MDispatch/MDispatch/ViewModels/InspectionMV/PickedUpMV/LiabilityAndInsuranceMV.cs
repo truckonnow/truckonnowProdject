@@ -140,9 +140,9 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             string description = null;
             int state = 0;
             Photo photo = new Photo();
-                photo.Base64 = JsonConvert.SerializeObject(photoResult);
-                photo.path = $"../Photo/{IdVech}/Pay/DelyverySig.jpg";
-                await Navigation.PopToRootAsync();
+            photo.Base64 = JsonConvert.SerializeObject(photoResult);
+            photo.path = $"../Photo/{IdVech}/Pay/DelyverySig.jpg";
+            await Navigation.PopToRootAsync();
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
@@ -180,14 +180,11 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
+                Task.Run(async () => await SaveRecountVideo());
                 await Task.Run(() =>
                 {
                     state = managerDispatchMob.AskWork("AskPikedUpSig", token, IdVech, SigPhoto, ref description);
                     state = managerDispatchMob.SaveMethodPay(token, IdVech, What_form_of_payment_are_you_using_to_pay_for_transportation, CountPay, ref description);
-                    if (videoRecount != null)
-                    {
-                        state = managerDispatchMob.SavePay("SaveRecount", token, IdVech, 1, videoRecount, ref description);
-                    }
                     initDasbordDelegate.Invoke();
                 });
                 await PopupNavigation.PopAsync();
@@ -203,6 +200,48 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 else if (state == 4)
                 {
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                }
+            }
+            else
+            {
+                await PopupNavigation.PopAsync();
+            }
+        }
+
+        [System.Obsolete]
+        public async Task SaveRecountVideo()
+        {
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                if (videoRecount != null)
+                {
+                    state = managerDispatchMob.SavePay("SaveRecount", token, IdVech, 1, videoRecount, ref description);
+                }
+                if (state == 2)
+                {
+
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await PopupNavigation.PushAsync(new Errror(description, Navigation));
+                    });
+                }
+                else if (state == 3)
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        DependencyService.Get<IToast>().ShowMessage("Video capture saved successfully");
+                    });
+                }
+                else if (state == 4)
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                    });
                 }
             }
         }

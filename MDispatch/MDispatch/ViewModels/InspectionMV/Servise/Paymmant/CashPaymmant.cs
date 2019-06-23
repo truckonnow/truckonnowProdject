@@ -70,7 +70,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Paymmant
             if (AskForUserDelyvery != null)
             {
                 video.path = $"../Video/{AskForUserDelyvery.askForUsersDelyveryMW.VehiclwInformation.Id}/RecountPay.mp4";
-                AskForUserDelyvery.askForUsersDelyveryMW.AskForUserDelyveryM.VideoRecord = video;
+                AskForUserDelyvery.askForUsersDelyveryMW.VideoRecount = video;
             }
             else
             {

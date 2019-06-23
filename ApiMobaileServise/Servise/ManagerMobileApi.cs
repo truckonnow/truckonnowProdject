@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ApiMobaileServise.Servise
@@ -269,7 +270,7 @@ namespace ApiMobaileServise.Servise
         public async Task SaveRecount(string idVech, int type, string video)
         {
             Video video1 = JsonConvert.DeserializeObject<Video>(video);
-            sqlCommandApiMobile.SaveRecontInDb(idVech, type, video1);
+            await sqlCommandApiMobile.SaveRecontInDb(idVech, type, video1);
         }
 
         public async Task SavePayMethot(string idVech, string payMethod, string countPay)

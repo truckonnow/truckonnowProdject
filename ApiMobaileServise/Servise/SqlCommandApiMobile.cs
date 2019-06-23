@@ -224,7 +224,7 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
-        public async void SaveRecontInDb(string idVech, int type, Video video)
+        public async Task SaveRecontInDb(string idVech, int type, Video video)
         {
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.Where(v => v.Id == Convert.ToInt32(idVech))
                 .Include(v => v.AskFromUser)

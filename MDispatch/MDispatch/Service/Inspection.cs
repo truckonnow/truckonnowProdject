@@ -469,7 +469,7 @@ namespace MDispatch.Service
                 string videojson = JsonConvert.SerializeObject(video);
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Recount", Method.POST);
-                client.Timeout = 60000;
+                client.Timeout = 600000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 request.AddParameter("idVech", idVech);

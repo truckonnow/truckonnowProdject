@@ -18,7 +18,7 @@ namespace MDispatch.Service
         public int DriverWork(string typeDriver, string token, ref string description, ref bool isInspection)
         {
             driverInspecktion = new DriverInspecktion();
-            WaiteNoramalReqvestCount();
+            //WaiteNoramalReqvestCount();
             CountReqvest++;
             int stateDriver = 1;
             if (CrossConnectivity.Current.IsConnected)
@@ -36,7 +36,7 @@ namespace MDispatch.Service
         public int DriverWork(string typeDriver, string token, ref string description, string idDriver, InspectionDriver inspectionDriver = null)
         {
             driverInspecktion = new DriverInspecktion();
-            WaiteNoramalReqvestCount();
+            //WaiteNoramalReqvestCount();
             CountReqvest++;
             int stateDriver = 1;
             if (CrossConnectivity.Current.IsConnected)
@@ -58,7 +58,7 @@ namespace MDispatch.Service
         public int A_RWork(string typeR_A, string login, string password, ref string description, ref string token)
         {
             a_R = new A_R();
-            WaiteNoramalReqvestCount();
+            //WaiteNoramalReqvestCount();
             CountReqvest++;
             int stateA_R = 1;
             if (CrossConnectivity.Current.IsConnected)
@@ -80,7 +80,7 @@ namespace MDispatch.Service
         public int OrderWork(string typeOrder, string token, ref string description, ref List<Shipping> shippings)
         {
             orderGet = new OrderGet();
-            WaiteNoramalReqvestCount();
+            //WaiteNoramalReqvestCount();
             CountReqvest++;
             int stateOrder = 1;
             if (CrossConnectivity.Current.IsConnected)
@@ -104,7 +104,7 @@ namespace MDispatch.Service
             string city, string state, string zip, string phone, string email, string typeSave, ref string description)
         {
             orderGet = new OrderGet();
-            WaiteNoramalReqvestCount();
+            //WaiteNoramalReqvestCount();
             CountReqvest++;
             int stateOrder = 1;
             if (CrossConnectivity.Current.IsConnected)
@@ -122,7 +122,7 @@ namespace MDispatch.Service
         public int OrderOneWork(string typeOrder, string id, string token, string typeSave, string payment, string paymentTeams, ref string description)
         {
             orderGet = new OrderGet();
-            WaiteNoramalReqvestCount();
+            //WaiteNoramalReqvestCount();
             CountReqvest++;
             int stateOrder = 1;
             if (CrossConnectivity.Current.IsConnected)
@@ -140,7 +140,7 @@ namespace MDispatch.Service
         public int OrderWork(string typeOrder, int idVech, ref VehiclwInformation vehiclwInformation, string token, ref string description)
         {
             orderGet = new OrderGet();
-            WaiteNoramalReqvestCount();
+            //WaiteNoramalReqvestCount();
             CountReqvest++;
             int stateOrder = 1;
             if (CrossConnectivity.Current.IsConnected)
@@ -158,7 +158,7 @@ namespace MDispatch.Service
         public int Recurent(string token, string id, string status, ref string description)
         {
             inspection = new Inspection();
-            WaiteNoramalReqvestCount();
+            //WaiteNoramalReqvestCount();
             CountReqvest++;
             int stateInspection = 1;
             if (CrossConnectivity.Current.IsConnected)
@@ -173,7 +173,7 @@ namespace MDispatch.Service
         public int AskWork(string typeInspection, string token, string id, object obj, ref string description, int indexPhoto = 0)
         {
             int stateInspection = 1;
-            WaiteNoramalReqvestCount();
+            //WaiteNoramalReqvestCount();
             CountReqvest++;
             if (CrossConnectivity.Current.IsConnected)
             {
@@ -247,7 +247,7 @@ namespace MDispatch.Service
         public int GetShipping(string token, string id, ref string description, ref Shipping shipping)
         {
             inspection = new Inspection();
-            WaiteNoramalReqvestCount();
+            //WaiteNoramalReqvestCount();
             CountReqvest++;
             int stateInspection = 1;
             if (CrossConnectivity.Current.IsConnected)
@@ -262,7 +262,7 @@ namespace MDispatch.Service
         public int SavePay(string typeReqvest, string token, string id, int type, object obj, ref string description)
         {
             inspection = new Inspection();
-            WaiteNoramalReqvestCount();
+            //WaiteNoramalReqvestCount();
             CountReqvest++;
             int statePay = 1;
             if (CrossConnectivity.Current.IsConnected)
@@ -284,7 +284,7 @@ namespace MDispatch.Service
         public int SaveMethodPay(string token, string id, string payMethod, string countPay, ref string description)
         {
             inspection = new Inspection();
-            WaiteNoramalReqvestCount();
+            //WaiteNoramalReqvestCount();
             CountReqvest++;
             int statePay = 1;
             if (CrossConnectivity.Current.IsConnected)

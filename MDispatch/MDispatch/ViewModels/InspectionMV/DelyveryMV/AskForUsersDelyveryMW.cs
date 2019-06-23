@@ -73,6 +73,13 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             set => SetProperty(ref inderxPhotoInspektion, value);
         }
 
+        private Video videoRecount = null;
+        public Video VideoRecount
+        {
+            get => videoRecount;
+            set => SetProperty(ref videoRecount, value);
+        }
+
         public List<DamageForUser> damageForUsers { get; set; }
 
         [System.Obsolete]
@@ -92,6 +99,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
+                Task.Run(async () => await SaveRecountVideo());
                 await Task.Run(() =>
                 {
                     Task.Run(() =>
@@ -135,6 +143,44 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                         await Navigation.PopAsync();
                     }
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                }
+            }
+        }
+
+        [System.Obsolete]
+        public async Task SaveRecountVideo()
+        {
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                if (videoRecount != null)
+                {
+                    state = managerDispatchMob.SavePay("SaveRecount", token, vehiclwInformation.Id, 2, videoRecount, ref description);
+                }
+                if (state == 2)
+                {
+
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await PopupNavigation.PushAsync(new Errror(description, Navigation));
+                    });
+                }
+                else if (state == 3)
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        DependencyService.Get<IToast>().ShowMessage("Video capture saved successfully");
+                    });
+                }
+                else if (state == 4)
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                    });
                 }
             }
         }
