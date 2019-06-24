@@ -20,6 +20,11 @@ namespace ApiMobaileServise.Servise
             context = new Context();
         }
 
+        internal List<Driver> GetDriverInDb()
+        {
+            return context.Drivers.ToList();
+        }
+
         public Shipping SendBolInDb(string idShip)
         {
             Shipping shipping = context.Shipping.Where(s => s.Id == idShip)
@@ -28,6 +33,26 @@ namespace ApiMobaileServise.Servise
                 .Include("VehiclwInformations.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature")
                 .FirstOrDefault();
             return shipping;
+        }
+
+        public async Task RefreshInspectionDriverInDb(int idDriver)
+        {
+            Driver driver = context.Drivers.FirstOrDefault(d => d.Id == idDriver);
+            if (driver != null)
+            {
+                driver.IsInspectionDriver = false;
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public async Task RefreshInspectionToDayDriverInDb(int idDriver)
+        {
+            Driver driver = context.Drivers.FirstOrDefault(d => d.Id == idDriver);
+            if (driver != null)
+            {
+                driver.IsInspectionToDayDriver = false;
+                await context.SaveChangesAsync();
+            }
         }
 
         public async void SetInspectionDriverInDb(string idDriver, InspectionDriver inspectionDriver)
