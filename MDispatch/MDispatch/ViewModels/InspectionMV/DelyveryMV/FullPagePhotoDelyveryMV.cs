@@ -215,7 +215,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         {
             bool isNavigationMany = false;
             int navigationStack_Count = isNavigWthDamag ? Navigation.NavigationStack.Count - 1 : Navigation.NavigationStack.Count;
-            if (navigationStack_Count > 3)
+            if (navigationStack_Count > 2)
             {
                 await PopupNavigation.PushAsync(new LoadPage());
                 isNavigationMany = true;
@@ -244,7 +244,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 });
                 if (isNavigWthDamag)
                 {
-                    Navigation.RemovePage(Navigation.NavigationStack[3]);
+                    Navigation.RemovePage(Navigation.NavigationStack[2]);
                 }
                 if (state == 2)
                 {
@@ -266,12 +266,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                         await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
                         isNavigationMany = false;
                     }
-                    if (isNavigationMany)
-                    {
-                        await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
-                        isNavigationMany = false;
-                    }
-                    Navigation.RemovePage(Navigation.NavigationStack[2]);
+                    Navigation.RemovePage(Navigation.NavigationStack[1]);
                     DependencyService.Get<IToast>().ShowMessage($"Photo {Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion))} saved");
                 }
                 else if (state == 4)

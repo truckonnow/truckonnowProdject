@@ -53,7 +53,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         public async void SaveAsk()
         {
             bool isNavigationMany = false;
-            if (Navigation.NavigationStack.Count > 3)
+            if (Navigation.NavigationStack.Count > 2)
             {
                 await PopupNavigation.PushAsync(new LoadPage());
                 isNavigationMany = true;
@@ -90,7 +90,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                         await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
                         isNavigationMany = false;
                     }
-                    Navigation.RemovePage(Navigation.NavigationStack[2]);
+                    Navigation.RemovePage(Navigation.NavigationStack[1]);
                     DependencyService.Get<IToast>().ShowMessage("Answers to questions saved");
                 }
                 else if (state == 4)

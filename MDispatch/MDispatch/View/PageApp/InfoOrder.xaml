@@ -6,8 +6,8 @@
              BackgroundColor="White">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout SizeChanged="StackLayout_SizeChanged" Padding="4">
-                <StackLayout Padding="10">
+            <StackLayout SizeChanged="StackLayout_SizeChanged" Padding="4" x:Name="bodyBlock">
+                <StackLayout Padding="10" IsVisible="True" x:Name="bloc1" TranslationX="-200">
                     <StackLayout Orientation="Horizontal" Margin="5, 0, 0, 10">
                         <Label Text="{Binding Shipping.VehiclwInformations.Count}" VerticalTextAlignment="Center" FontSize="18"/>
                         <Label Text="vehicle" FontSize="18" VerticalTextAlignment="Center"/>
@@ -39,8 +39,8 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </StackLayout>
-                <BoxView HeightRequest="1" BackgroundColor="#BDBDBD"/>
-                <StackLayout Padding="10">
+                <BoxView HeightRequest="1" BackgroundColor="#BDBDBD" />
+                <StackLayout Padding="10" x:Name="bloc2" TranslationX="200">
                     <Label Text="Pickup information" FontSize="18"/>
                     <FlexLayout Wrap="Wrap">
                         <Label Text="{Binding Shipping.AddresP}" TextColor="Black" FontSize="16" Margin="3"/>
@@ -64,7 +64,7 @@
                     </Label>
                 </StackLayout>
                 <BoxView HeightRequest="1" BackgroundColor="#BDBDBD"/>
-                <StackLayout Padding="10">
+                <StackLayout Padding="10" x:Name="bloc3" TranslationX="-200">
                     <Label Text="Delivery Information" FontSize="18"/>
                     <FlexLayout Wrap="Wrap">
                         <Label Text="{Binding Shipping.AddresD}" TextColor="Black" FontSize="16" Margin="3"/>
@@ -87,8 +87,8 @@
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
-                <BoxView HeightRequest="1" BackgroundColor="#BDBDBD"/>
-                <StackLayout Padding="10">
+                <BoxView HeightRequest="1" BackgroundColor="#BDBDBD" />
+                <StackLayout Padding="10" x:Name="bloc4" TranslationX="200">
                     <Label Text="Payment Information" FontSize="18"/>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Payment:" FontSize="16" />
@@ -103,7 +103,7 @@
                     </Label>
                 </StackLayout>
                 <BoxView HeightRequest="1" BackgroundColor="#BDBDBD"/>
-                <StackLayout Padding="10">
+                <StackLayout Padding="10" x:Name="bloc5" TranslationX="-200">
                     <Label Text="Attachment" FontSize="18"/>
                     <StackLayout Orientation="Horizontal">
                     </StackLayout>

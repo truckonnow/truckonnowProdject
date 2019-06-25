@@ -2,6 +2,8 @@
 using MDispatch.Service;
 using MDispatch.ViewModels.PageAppMV;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -18,6 +20,19 @@ namespace MDispatch.View.PageApp
             this.infoOrderMV = new InfoOrderMV(managerDispatchMob, shipping, initDasbordDelegate) { Navigation = this.Navigation} ;
             InitializeComponent();
             BindingContext = this.infoOrderMV;
+            InitElement();
+        }
+
+        private async void InitElement()
+        {
+            await Task.Run(() => Thread.Sleep(100));
+            await Task.WhenAll(
+                bloc1.TranslateTo(0, 0, 500, Easing.SpringOut),
+                bloc2.TranslateTo(0, 0, 500, Easing.SpringOut),
+                bloc3.TranslateTo(0, 0, 500, Easing.SpringOut),
+                bloc4.TranslateTo(0, 0, 500, Easing.SpringOut),
+                bloc5.TranslateTo(0, 0, 500, Easing.SpringOut)
+                );
         }
 
         private void StackLayout_SizeChanged(object sender, EventArgs e)

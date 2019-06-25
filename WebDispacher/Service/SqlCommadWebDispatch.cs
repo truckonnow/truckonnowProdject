@@ -337,7 +337,7 @@ namespace WebDispacher.Dao
 
         public Shipping GetShipping(string id)
         {
-            return context.Shipping.FirstOrDefault(s => s.Id == id);
+            return context.Shipping.Include(s => s.VehiclwInformations).FirstOrDefault(s => s.Id == id);
         }
 
         public async void UpdateorderInDb(string idOrder, string idLoad, string internalLoadID, string driver, string status, string instructions, string nameP, string contactP,

@@ -27,11 +27,14 @@ namespace MDispatch.Droid.NewrRender
         private bool isFocus = false;
         public CameraPageRender(Context context) : base(context)
         {
+           
         }
 
         RelativeLayout mainLayout;
         TextureView liveView;
+        ProgressBar progressBar;
         PaintCodeButton capturePhotoButton;
+
         [Obsolete]
         Android.Hardware.Camera camera;
 
@@ -64,6 +67,17 @@ namespace MDispatch.Droid.NewrRender
             capturePhotoButton.LayoutParameters = captureButtonParams;
             mainLayout.AddView(capturePhotoButton);
 
+            progressBar = new ProgressBar(Context);
+            RelativeLayout.LayoutParams progresBarParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WrapContent,
+                RelativeLayout.LayoutParams.WrapContent);
+            progresBarParams.Height = 120;
+            progresBarParams.Width = 120;
+            progressBar.LayoutParameters = progresBarParams;
+            progressBar.Indeterminate = true;
+            progressBar.KeepScreenOn = true;
+            mainLayout.AddView(progressBar);
+
             AddView(mainLayout);
         }
 
@@ -74,6 +88,7 @@ namespace MDispatch.Droid.NewrRender
                 return;
             try
             {
+                progressBar.Visibility = Android.Views.ViewStates.Invisible;
                 var msw1 = MeasureSpec.MakeMeasureSpec(r, MeasureSpecMode.Exactly);
                 var msh1 = MeasureSpec.MakeMeasureSpec(b, MeasureSpecMode.Exactly);
                 mainLayout.Measure(msw1, msh1);
@@ -88,6 +103,8 @@ namespace MDispatch.Droid.NewrRender
                     int tmpPr = (mainLayout.Width / 100) * 10;
                     capturePhotoButton.SetX(mainLayout.Width / 2 + tmpPr);
                     capturePhotoButton.SetY(mainLayout.Height - 200);
+                    progressBar.SetX(mainLayout.Width / 2 + tmpPr);
+                    progressBar.SetY(mainLayout.Height - 200);
                 }
                 else
                 {
@@ -98,6 +115,8 @@ namespace MDispatch.Droid.NewrRender
                     int tmpPr = (mainLayout.Width / 100) * 10;
                     capturePhotoButton.SetY(mainLayout.Height / 2 + tmpPr);
                     capturePhotoButton.SetX(mainLayout.Width - 200);
+                    progressBar.SetY(mainLayout.Height / 2 + tmpPr);
+                    progressBar.SetX(mainLayout.Width - 200);
                 }
             }
             catch (NullReferenceException)
@@ -118,6 +137,8 @@ namespace MDispatch.Droid.NewrRender
             if (!isFocus)
             {
                 isFocus = true;
+                progressBar.Visibility = Android.Views.ViewStates.Visible;
+                capturePhotoButton.Visibility = Android.Views.ViewStates.Invisible;
                 await Task.Run(() =>
                 {
                     camera.AutoFocus(this);
@@ -237,15 +258,10 @@ namespace MDispatch.Droid.NewrRender
         [Obsolete]
         public async void OnAutoFocus(bool success, Android.Hardware.Camera camera)
         {
-            if (success)
-            {
-                var bytes = await TakePhoto();
-                (Element as CameraPage).SetPhotoResult(bytes, liveView.Bitmap.Width, liveView.Bitmap.Height);
-            }
-            else
-            {
-
-            }
+            var bytes = await TakePhoto();
+            (Element as CameraPage).SetPhotoResult(bytes, liveView.Bitmap.Width, liveView.Bitmap.Height);
+            progressBar.Visibility = Android.Views.ViewStates.Invisible;
+            capturePhotoButton.Visibility = Android.Views.ViewStates.Visible;
             isFocus = false;
         }
         #endregion

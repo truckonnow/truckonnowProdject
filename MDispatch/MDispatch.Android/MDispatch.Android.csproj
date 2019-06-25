@@ -109,12 +109,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
-    <Compile Include="NewrRender\CameraPageRender.cs" />
+    <Compile Include="NewrRender\CustomCamera\CameraPageRender.cs" />
+    <Compile Include="NewrRender\CustomCamera\IndicatorLoad.cs" />
+    <Compile Include="NewrRender\CustomCamera\PaintCodeButton.cs" />
     <Compile Include="NewrRender\Gradient\GradientViewRenderer.cs" />
     <Compile Include="NewrRender\ImageRender\ImageSizeRender.cs" />
     <Compile Include="NewrRender\ImageRender\RezizeImgRender.cs" />
     <Compile Include="NewrRender\Orientation\OrientationHandler.cs" />
-    <Compile Include="NewrRender\PaintCodeButton.cs" />
     <Compile Include="NewrRender\RebderVideoCamera\VideoRecorderRenderer.cs" />
     <Compile Include="NewrRender\ResizerImage\ResizeImgDroid.cs" />
     <Compile Include="NewrRender\ToastNotify\ToastDroid.cs" />

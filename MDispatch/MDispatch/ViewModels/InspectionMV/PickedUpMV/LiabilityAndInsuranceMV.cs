@@ -76,7 +76,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         private async void InitShipping()
         {
             bool isNavigationMany = false;
-            if (Navigation.NavigationStack.Count > 3)
+            if (Navigation.NavigationStack.Count > 2)
             {
                 await PopupNavigation.PushAsync(new LoadPage());
                 isNavigationMany = true;
