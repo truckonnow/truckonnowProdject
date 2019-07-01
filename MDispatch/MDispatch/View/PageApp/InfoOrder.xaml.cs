@@ -11,28 +11,16 @@ using static MDispatch.Service.ManagerDispatchMob;
 namespace MDispatch.View.PageApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class InfoOrder : ContentPage
+    public partial class InfoOrder : ContentPage, IAnimatonPage
     {
         private InfoOrderMV infoOrderMV = null;
+        private bool isNextPage = false;
 
         public InfoOrder(ManagerDispatchMob managerDispatchMob, Shipping shipping, InitDasbordDelegate initDasbordDelegate)
         {
             this.infoOrderMV = new InfoOrderMV(managerDispatchMob, shipping, initDasbordDelegate) { Navigation = this.Navigation} ;
             InitializeComponent();
             BindingContext = this.infoOrderMV;
-            InitElement();
-        }
-
-        private async void InitElement()
-        {
-            await Task.Run(() => Thread.Sleep(100));
-            await Task.WhenAll(
-                bloc1.TranslateTo(0, 0, 500, Easing.SpringOut),
-                bloc2.TranslateTo(0, 0, 500, Easing.SpringOut),
-                bloc3.TranslateTo(0, 0, 500, Easing.SpringOut),
-                bloc4.TranslateTo(0, 0, 500, Easing.SpringOut),
-                bloc5.TranslateTo(0, 0, 500, Easing.SpringOut)
-                );
         }
 
         private void StackLayout_SizeChanged(object sender, EventArgs e)
@@ -57,6 +45,40 @@ namespace MDispatch.View.PageApp
             {
                 infoOrderMV.ToStartInspectionDelyvery();
             }
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            Task.Delay(100).ContinueWith(t => InitElement());
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            //Task.Delay(500).ContinueWith(t => UnInitElement());
+        }
+
+        public async void UnInitElement()
+        {
+            await Task.WhenAll(
+                    ctp.TranslateTo(400, 0, 500, Easing.SpringIn)
+                    );
+        }
+
+        public async void InitElement()
+        {
+            if (isNextPage)
+            {
+                await Task.WhenAll(
+                    ctp.TranslateTo(0, 0, 500)
+                    );
+            }
+        }
+
+        public void AnimationNextPage(Page page)
+        {
+            isNextPage = true;
         }
     }
 }

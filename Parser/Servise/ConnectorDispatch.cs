@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using xNet;
 
 namespace Parser.Servise
@@ -127,7 +121,7 @@ namespace Parser.Servise
                     {
                         List<string> urlsPages = null;
                         string fullPageHtml = httpRequest.Get($"{url}{pref1}{page}{pref2}{coutnPage}").ToString();
-                       urlsPages = parserDispatch.ParseInManyUrl(fullPageHtml);
+                        urlsPages = parserDispatch.ParseInManyUrl(fullPageHtml);
                         if (urlsPages.Count != 0)
                         {
                             LogEr.Logerr("Info", $"Count Page : {urlsPages.Count}", "Worker", DateTime.Now.ToShortTimeString());
@@ -143,7 +137,6 @@ namespace Parser.Servise
                                 catch (Exception)
                                 {
                                     LogEr.Logerr("Error", $"Unsuccessful html pulling by reference: {urlpage}", "Worker", DateTime.Now.ToShortTimeString());
-                                    //https://www.centraldispatch.com//protected/dispatch/view?dsid=17990722
                                 }
                             }
                             LogEr.Logerr("Info", $"The number of successfully elongated html for links: {countLick}", "Worker", DateTime.Now.ToShortTimeString());
