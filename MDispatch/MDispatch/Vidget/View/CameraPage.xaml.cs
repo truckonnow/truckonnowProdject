@@ -18,9 +18,9 @@ namespace MDispatch.Vidget.View
 
         public CameraPage(ManagerDispatchMob managerDispatchMob, string idDriver, int indexCurrent, InitDasbordDelegate initDasbordDelegate)
         {
+            fullPhotoTruckVM = new FullPhotoTruckVM(managerDispatchMob, idDriver, indexCurrent, Navigation, initDasbordDelegate);
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false); 
-            fullPhotoTruckVM = new FullPhotoTruckVM(managerDispatchMob, idDriver, indexCurrent, Navigation, initDasbordDelegate);
             BindingContext = fullPhotoTruckVM;
             paternPhoto.Source = $"Hint{indexCurrent}.jpg";
             InitElement();

@@ -2,10 +2,8 @@
 using MDispatch.View.PageApp;
 using MDispatch.ViewModels.TAbbMV;
 using MDispatch.ViewModels.TAbbMV.DialogAsk;
-using Plugin.Settings;
 using Rg.Plugins.Popup.Services;
 using System;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static MDispatch.Service.ManagerDispatchMob;

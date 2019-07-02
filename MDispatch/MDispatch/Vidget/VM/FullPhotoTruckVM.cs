@@ -35,9 +35,17 @@ namespace MDispatch.Vidget.VM
             IdDriver = idDriver;
             IndexCurent = indexCurent;
             NextCommand = new DelegateCommand(NextPage);
-            NameLayute = truckCar.GetNameTruck(IndexCurent);
             truckCar.GetModalAlert(IndexCurent);
-            truckCar.Orinteble(IndexCurent);
+            Init();
+        }
+
+        private async void Init()
+        {
+            await Task.Run(() =>
+            {
+                NameLayute = truckCar.GetNameTruck(IndexCurent);
+                truckCar.Orinteble(IndexCurent);
+            });
         }
 
         public string IdDriver { get; set; }
