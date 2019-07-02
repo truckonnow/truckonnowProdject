@@ -1,4 +1,5 @@
-﻿using MDispatch.Service;
+﻿using FormsControls.Base;
+using MDispatch.Service;
 using MDispatch.Service.GeloctionGPS;
 using MDispatch.StoreNotify;
 using MDispatch.View;
@@ -82,7 +83,7 @@ namespace MDispatch.ViewModels
                     DependencyService.Get<IStore>().OnTokenRefresh();
                     Utils.StartListening();
                 });
-                Application.Current.MainPage = new NavigationPage(new TabPage(managerDispatchMob));
+                Application.Current.MainPage = new AnimationNavigationPage(new TabPage(managerDispatchMob));
             }
             else if(state == 4)
             {

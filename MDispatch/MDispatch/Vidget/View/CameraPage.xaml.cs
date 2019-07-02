@@ -1,4 +1,5 @@
-﻿using MDispatch.NewElement;
+﻿using FormsControls.Base;
+using MDispatch.NewElement;
 using MDispatch.Service;
 using MDispatch.Vidget.VM;
 using System.Threading;
@@ -12,6 +13,8 @@ namespace MDispatch.Vidget.View
     public partial class CameraPage : MDispatch.NewElement.CameraPage
     {
         private FullPhotoTruckVM fullPhotoTruckVM = null;
+
+        public IPageAnimation PageAnimation { get; } = new FlipPageAnimation { Duration = AnimationDuration.Long, Subtype = AnimationSubtype.FromTop };
 
         public CameraPage(ManagerDispatchMob managerDispatchMob, string idDriver, int indexCurrent, InitDasbordDelegate initDasbordDelegate)
         {

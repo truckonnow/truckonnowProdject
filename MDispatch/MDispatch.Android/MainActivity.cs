@@ -38,6 +38,10 @@ namespace MDispatch.Droid
             LoadApplication(new App());
         }
 
+        protected override void OnSaveInstanceState(Bundle outState)
+        {
+        }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);

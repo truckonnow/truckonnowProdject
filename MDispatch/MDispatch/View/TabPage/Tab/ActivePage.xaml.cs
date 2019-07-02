@@ -64,8 +64,7 @@ namespace MDispatch.View.TabPage.Tab
                 {
                     idOrder = stackLayout.Parent.Parent.FindByName<Label>("idOrder").Text;
                 }
-                //AnimationNextPage(new InfoOrder(activeMV.managerDispatchMob, activeMV.Shippings.Find(s => s.Id == idOrder), activeMV.initDasbordDelegate) { TranslationX = 500 });
-                await Navigation.PushAsync(new InfoOrder(activeMV.managerDispatchMob, activeMV.Shippings.Find(s => s.Id == idOrder), activeMV.initDasbordDelegate));
+                await activeMV.Navigation.PushAsync(new InfoOrder(activeMV.managerDispatchMob, activeMV.Shippings.Find(s => s.Id == idOrder), activeMV.initDasbordDelegate));
             }
         }
 
@@ -82,34 +81,6 @@ namespace MDispatch.View.TabPage.Tab
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             activeMV.OutAccount();
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            //Task.Delay(200).ContinueWith(t => InitElement());
-        }
-
-        public void UnInitElement()
-        {
-        }
-
-        public async void InitElement()
-        {
-            await Task.WhenAll(
-                ctp.TranslateTo(0, 0, 400, Easing.SpringOut)
-                );
-        }
-
-        public void AnimationNextPage(Page page)
-        {
-            new Animation(a => TranslationX = a, 0, -400)
-                    .Commit(this, "PageExitAnimation", 1, 400, Easing.SpringIn, (d, b) =>
-                    {
-                        var otherPage = page;
-                        Navigation.PushAsync(otherPage, false);
-                        otherPage.TranslateTo(0, 0, 400, Easing.SpringOut);
-                    });
         }
     }
 }

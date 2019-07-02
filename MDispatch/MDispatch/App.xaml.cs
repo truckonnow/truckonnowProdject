@@ -1,3 +1,4 @@
+using FormsControls.Base;
 using MDispatch.Service.GeloctionGPS;
 using MDispatch.StoreNotify;
 using MDispatch.View.A_R;
@@ -23,12 +24,12 @@ namespace MDispatch
             if (token == "")
             {
                 isAvtorization = false;
-                MainPage = new NavigationPage(new Avtorization());
+                MainPage = new AnimationNavigationPage(new Avtorization());
             }
             else
             {
                 isAvtorization = true;
-                MainPage = new NavigationPage(new TabPage(new Service.ManagerDispatchMob()));
+                MainPage = new AnimationNavigationPage(new TabPage(new Service.ManagerDispatchMob()));
             }
         }
 

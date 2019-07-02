@@ -184,7 +184,7 @@ namespace MDispatch.Vidget.VM
                 else if (state == 3)
                 {
                     initDasbordDelegate.Invoke();
-                    await navigation.PopToRootAsync();
+                    //await navigation.PopToRootAsync();
                 }
                 else if (state == 4)
                 {

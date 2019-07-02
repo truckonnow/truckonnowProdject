@@ -1,4 +1,5 @@
-﻿using MDispatch.Service;
+﻿using FormsControls.Base;
+using MDispatch.Service;
 using MDispatch.View.TabPage.Tab;
 using MDispatch.ViewModels.TAbbPage;
 using Xamarin.Forms;
@@ -26,21 +27,21 @@ namespace MDispatch.View.TabPage
 
         private void InitActivePage(ManagerDispatchMob managerDispatchMob)
         {
-            NavigationPage navigationPage = new NavigationPage(new ActivePage(managerDispatchMob, Navigation));
+            AnimationNavigationPage navigationPage = new AnimationNavigationPage(new ActivePage(managerDispatchMob, Navigation));
             navigationPage.Title = "Active";
             Children.Add(navigationPage);
         }
 
         private void InitDeiveredPage(ManagerDispatchMob managerDispatchMob)
         {
-            NavigationPage navigationPage = new NavigationPage(new DeiveredPage(managerDispatchMob, Navigation));
+            AnimationNavigationPage navigationPage = new AnimationNavigationPage(new DeiveredPage(managerDispatchMob, Navigation));
             navigationPage.Title = "Deiveredge";
             Children.Add(navigationPage);
         }
 
         private void InitArchivedPage(ManagerDispatchMob managerDispatchMob)
         {
-            NavigationPage navigationPage = new NavigationPage(new ArchivedPage());
+            AnimationNavigationPage navigationPage = new AnimationNavigationPage(new ArchivedPage());
             navigationPage.Title = "Archived";
             Children.Add(navigationPage);
         }

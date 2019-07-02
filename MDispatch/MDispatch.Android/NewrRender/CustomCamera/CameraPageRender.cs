@@ -212,7 +212,7 @@ namespace MDispatch.Droid.NewrRender
             {
                 ActivityCompat.RequestPermissions(Activity, new string[] { Manifest.Permission.Camera }, 50);
                 await (Element as CameraPage).Navigation.PopAsync();
-                (Element as CameraPage).Cancel();
+                //(Element as CameraPage).Cancel();
             }
             else
             {
