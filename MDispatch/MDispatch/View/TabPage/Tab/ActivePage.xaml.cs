@@ -13,7 +13,7 @@ using static MDispatch.Service.ManagerDispatchMob;
 namespace MDispatch.View.TabPage.Tab
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ActivePage : ContentPage, IAnimatonPage
+	public partial class ActivePage : ContentPage
     {
         public ActiveMV activeMV = null;
         private StackLayout SelectStackLayout = null;
@@ -64,7 +64,8 @@ namespace MDispatch.View.TabPage.Tab
                 {
                     idOrder = stackLayout.Parent.Parent.FindByName<Label>("idOrder").Text;
                 }
-                AnimationNextPage(new InfoOrder(activeMV.managerDispatchMob, activeMV.Shippings.Find(s => s.Id == idOrder), activeMV.initDasbordDelegate) { TranslationX = 500 });
+                //AnimationNextPage(new InfoOrder(activeMV.managerDispatchMob, activeMV.Shippings.Find(s => s.Id == idOrder), activeMV.initDasbordDelegate) { TranslationX = 500 });
+                await Navigation.PushAsync(new InfoOrder(activeMV.managerDispatchMob, activeMV.Shippings.Find(s => s.Id == idOrder), activeMV.initDasbordDelegate));
             }
         }
 
@@ -86,7 +87,7 @@ namespace MDispatch.View.TabPage.Tab
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            Task.Delay(200).ContinueWith(t => InitElement());
+            //Task.Delay(200).ContinueWith(t => InitElement());
         }
 
         public void UnInitElement()

@@ -34,6 +34,7 @@ namespace MDispatch.Droid
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
             FirebaseApp.InitializeApp(Android.App.Application.Context);
             FirebasePushNotificationManager.ProcessIntent(this, Intent);
+            FormsControls.Droid.Main.Init(this);
             LoadApplication(new App());
         }
 
