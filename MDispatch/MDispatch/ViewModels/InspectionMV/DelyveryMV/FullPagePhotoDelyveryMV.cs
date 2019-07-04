@@ -33,7 +33,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         private InitDasbordDelegate initDasbordDelegate = null;
         private GetVechicleDelegate getVechicleDelegate = null;
 
-        public FullPagePhotoDelyveryMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string typeCar, 
+        public FullPagePhotoDelyveryMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string typeCar,
             int inderxPhotoInspektion, INavigation navigation, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate,
             string onDeliveryToCarrier, string totalPaymentToCarrier)
         {
@@ -43,14 +43,22 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             this.managerDispatchMob = managerDispatchMob;
             VehiclwInformation = vehiclwInformation;
             this.inderxPhotoInspektion = inderxPhotoInspektion;
-            if (typeCar != null)
-            {
-                Car = GetTypeCar(typeCar.Replace(" ", ""));
-                Car.OrintableScreen(Car.GetIndexCarFullPhoto(inderxPhotoInspektion));
-            }
             IdShip = idShip;
             OnDeliveryToCarrier = onDeliveryToCarrier;
             TotalPaymentToCarrier = totalPaymentToCarrier;
+            Init(typeCar);
+        }
+
+        private async void Init(string typeCar)
+        {
+            await Task.Run(() =>
+            {
+                if (typeCar != null)
+                {
+                    Car = GetTypeCar(typeCar.Replace(" ", ""));
+                    Car.OrintableScreen(Car.GetIndexCarFullPhoto(inderxPhotoInspektion));
+                }
+            });
         }
 
         public string IdShip { get; set; }

@@ -1,7 +1,10 @@
-﻿using Android.Graphics;
+﻿using Android.Content.Res;
+using Android.Graphics;
 using MDispatch.Droid.NewrRender.ResizerImage;
 using MDispatch.View.ServiceView.ResizeImage;
+using System;
 using System.IO;
+using System.Reflection;
 
 [assembly: Xamarin.Forms.Dependency(typeof(ResizeImgDroid))]
 namespace MDispatch.Droid.NewrRender.ResizerImage

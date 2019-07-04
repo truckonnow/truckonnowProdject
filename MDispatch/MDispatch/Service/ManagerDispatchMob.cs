@@ -185,7 +185,7 @@ namespace MDispatch.Service
                 else if(typeInspection == "SavePhoto")
                 {
                     inspection = new Inspection();
-                    stateInspection = inspection.SavePhoto(token, id, (Models.PhotoInspection)obj, ref description);
+                    stateInspection =  inspection.SavePhoto(token, id, (Models.PhotoInspection)obj, ref description);
                 }
                 else if (typeInspection == "SaveAsk1")
                 {

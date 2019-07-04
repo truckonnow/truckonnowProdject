@@ -1,8 +1,8 @@
-﻿using FormsControls.Base;
-using MDispatch.NewElement;
+﻿using MDispatch.NewElement;
 using MDispatch.Service;
 using MDispatch.Vidget.VM;
 using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -14,8 +14,6 @@ namespace MDispatch.Vidget.View
     {
         private FullPhotoTruckVM fullPhotoTruckVM = null;
 
-        public IPageAnimation PageAnimation { get; } = new FlipPageAnimation { Duration = AnimationDuration.Long, Subtype = AnimationSubtype.FromTop };
-
         public CameraPage(ManagerDispatchMob managerDispatchMob, string idDriver, int indexCurrent, InitDasbordDelegate initDasbordDelegate)
         {
             fullPhotoTruckVM = new FullPhotoTruckVM(managerDispatchMob, idDriver, indexCurrent, Navigation, initDasbordDelegate);
@@ -26,7 +24,7 @@ namespace MDispatch.Vidget.View
             InitElement();
         }
 
-        private void InitElement()
+        private  void InitElement()
         {
             TimerCallback tm = new TimerCallback(Transparency);
             Timer timer = new Timer(tm, null, 3000, Timeout.Infinite);
@@ -53,7 +51,7 @@ namespace MDispatch.Vidget.View
             {
                 return;
             }
-            fullPhotoTruckVM.AddPhoto(result.Result);
+            await fullPhotoTruckVM.AddPhoto(result.Result);
         }
 
         protected override bool OnBackButtonPressed()

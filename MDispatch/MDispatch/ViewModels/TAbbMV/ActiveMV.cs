@@ -79,11 +79,14 @@ namespace MDispatch.ViewModels.TAbbMV
                 else if (state == 3)
                 {
                     Shippings = shippings;
-                    UnTimeOfInspection = new UnTimeOfInspection(description);
-                    if(!UnTimeOfInspection.ISMaybiInspection)
+                    await Task.Run(() =>
                     {
-                        await PopupNavigation.PushAsync(new AskHint(this));
-                    }
+                        UnTimeOfInspection = new UnTimeOfInspection(description);
+                        if (!UnTimeOfInspection.ISMaybiInspection)
+                        {
+                            Device.BeginInvokeOnMainThread(async () => await PopupNavigation.PushAsync(new AskHint(this)));
+                        }
+                    });
                 }
                 else if (state == 4)
                 {

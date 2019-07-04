@@ -34,7 +34,7 @@ namespace MDispatch.Vidget.VM
             truckCar = new TruckCar();
             IdDriver = idDriver;
             IndexCurent = indexCurent;
-            NextCommand = new DelegateCommand(NextPage);
+            //NextCommand = new DelegateCommand(NextPage);
             truckCar.GetModalAlert(IndexCurent);
             Init();
         }
@@ -68,7 +68,7 @@ namespace MDispatch.Vidget.VM
         public Photo Photo { get; set; }
 
         [System.Obsolete]
-        public void AddPhoto(byte[] photoRes)
+        public async Task AddPhoto(byte[] photoRes)
         {
             Photo photo = new Photo();
             photo.Base64 = JsonConvert.SerializeObject(photoRes);
@@ -78,11 +78,11 @@ namespace MDispatch.Vidget.VM
             stream.Position = 0;
             var byteArray = stream.ToArray();
             ImageSourceTake = ImageSource.FromStream(() => new MemoryStream(byteArray));
-            NextPage();
+            await NextPage();
         }
 
         [System.Obsolete]
-        private async void NextPage()
+        private async Task NextPage()
         {
             bool isNavigationMany = false;
             bool isEndInspection = false;
@@ -162,6 +162,9 @@ namespace MDispatch.Vidget.VM
                         await navigation.PopAsync();
                     }
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                    if(IndexCurent > 45)
+                    { 
+                    await navigation.PopToRootAsync();}
                 }
             }
         }
@@ -192,7 +195,6 @@ namespace MDispatch.Vidget.VM
                 else if (state == 3)
                 {
                     initDasbordDelegate.Invoke();
-                    //await navigation.PopToRootAsync();
                 }
                 else if (state == 4)
                 {

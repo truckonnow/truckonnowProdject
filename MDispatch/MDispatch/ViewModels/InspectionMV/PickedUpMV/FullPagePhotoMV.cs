@@ -42,14 +42,23 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             this.managerDispatchMob = managerDispatchMob;
             VehiclwInformation = vehiclwInformation;
             InderxPhotoInspektion = inderxPhotoInspektion;
-            if (typeCar != null)
-            {
-                Car = GetTypeCar(typeCar.Replace(" ", ""));
-            }
             IdShip = idShip;
             OnDeliveryToCarrier = onDeliveryToCarrier;
             TotalPaymentToCarrier = totalPaymentToCarrier;
             Car.OrintableScreen(InderxPhotoInspektion);
+            Init(typeCar);
+        }
+
+        private async void Init(string typeCar)
+        {
+            await Task.Run(() =>
+            {
+                if (typeCar != null)
+                {
+                    Car = GetTypeCar(typeCar.Replace(" ", ""));
+                    Car.OrintableScreen(Car.GetIndexCarFullPhoto(inderxPhotoInspektion));
+                }
+            });
         }
 
         public string IdShip { get; set; }
