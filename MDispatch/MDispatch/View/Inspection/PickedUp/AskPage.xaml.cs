@@ -2,6 +2,7 @@
 using MDispatch.Service;
 using MDispatch.View.AskPhoto.CameraPageFolder;
 using MDispatch.View.GlobalDialogView;
+using MDispatch.View.Inspection;
 using MDispatch.ViewModels.AskPhoto;
 using Newtonsoft.Json;
 using Plugin.InputKit.Shared.Controls;
@@ -15,7 +16,7 @@ using static MDispatch.Service.ManagerDispatchMob;
 
 namespace MDispatch.View.AskPhoto
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AskPage : ContentPage
 	{
         AskPageMV askPageMV = null;
@@ -324,12 +325,37 @@ namespace MDispatch.View.AskPhoto
             photo.Base64 = JsonConvert.SerializeObject(photob);
             photo.path = $"../Photo/{askPageMV.VehiclwInformation.Id}/PikedUp/Document/{ askPageMV.Ask.Any_paperwork_or_documentation.Count + 1}.jpg";
             askPageMV.Ask.Any_paperwork_or_documentation.Add(photo);
-            blockAskPhotoDocument.Children.Add(new Image()
+            Image image = new Image()
             {
                 Source = ImageSource.FromStream(() => new MemoryStream(photob)),
                 HeightRequest = 50,
-                WidthRequest = 50
-            });
+                WidthRequest = 50,
+            };
+            image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke));
+            blockAskPhotoDocument.Children.Add(image);
+        }
+
+        private async void ViewPhotoForRetacke(Xamarin.Forms.View v, object s)
+        {
+            if (v != null && blockAskPhotoDocument.Children.Contains(v))
+            {
+                await Navigation.PushAsync(new ViewPhotForAsk(v, this, "Ask"));
+            }
+        }
+
+        public void ReSetPhoto1(Xamarin.Forms.View view, byte[] newRetake)
+        {
+            byte[] r = GetImageBytes(((Image)view).Source);
+            askPageMV.ResetAskPhotoDocument(r, newRetake);
+            blockAskPhotoDocument.Children.Remove((Image)view);
+            Image image = new Image()
+            {
+                Source = ImageSource.FromStream(() => new MemoryStream(newRetake)),
+                HeightRequest = 50,
+                WidthRequest = 50,
+            };
+            image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke));
+            blockAskPhotoDocument.Children.Add(image);
         }
 
         public void AddPhotoItems(byte[] photob)
@@ -342,12 +368,51 @@ namespace MDispatch.View.AskPhoto
             photo.Base64 = JsonConvert.SerializeObject(photob);
             photo.path = $"../Photo/{askPageMV.VehiclwInformation.Id}/PikedUp/Items/{askPageMV.Ask.Any_personal_or_additional_items_with_or_in_vehicle.Count + 1}.jpg";
             askPageMV.Ask.Any_personal_or_additional_items_with_or_in_vehicle.Add(photo);
-            blockAskPhotoItem.Children.Add(new Image()
+            Image image = new Image()
             {
                 Source = ImageSource.FromStream(() => new MemoryStream(photob)),
                 HeightRequest = 50,
-                WidthRequest = 50
-            });
+                WidthRequest = 50,
+            };
+            image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke1));
+            blockAskPhotoItem.Children.Add(image);
+        }
+
+        private async void ViewPhotoForRetacke1(Xamarin.Forms.View v, object s)
+        {
+            if (v != null && blockAskPhotoItem.Children.Contains(v))
+            {
+                await Navigation.PushAsync(new ViewPhotForAsk(v, this, "Ask1"));
+            }
+        }
+
+        public void ReSetPhoto2(Xamarin.Forms.View view, byte[] newRetake)
+        {
+            byte[] r = GetImageBytes(((Image)view).Source);
+            askPageMV.ResetAskPhotoItem(r, newRetake);
+            blockAskPhotoItem.Children.Remove((Image)view);
+            Image image = new Image()
+            {
+                Source = ImageSource.FromStream(() => new MemoryStream(newRetake)),
+                HeightRequest = 50,
+                WidthRequest = 50,
+            };
+            image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke1));
+            blockAskPhotoItem.Children.Add(image);
+        }
+
+        private byte[] GetImageBytes(ImageSource imagesource)
+        {
+            StreamImageSource streamImageSource = (StreamImageSource)imagesource;
+            byte[] ImageBytes;
+            using (var memoryStream = new System.IO.MemoryStream())
+            {
+                var stream = streamImageSource.Stream.Invoke(new System.Threading.CancellationToken()).Result;
+                stream.CopyTo(memoryStream);
+                stream = null;
+                ImageBytes = memoryStream.ToArray();
+            }
+            return ImageBytes;
         }
     }
 }

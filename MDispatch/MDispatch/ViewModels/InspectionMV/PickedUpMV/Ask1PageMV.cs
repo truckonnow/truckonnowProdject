@@ -7,10 +7,13 @@ using MDispatch.View.AskPhoto;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection;
 using MDispatch.View.Inspection.PickedUp;
+using Newtonsoft.Json;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -136,6 +139,47 @@ namespace MDispatch.ViewModels.InspectionMV
             {
                 await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Picked up", vehiclwInformation1s[indexCurrentVechecle + 1]));
                 await Navigation.PushAsync(new AskPage(managerDispatchMob, vehiclwInformation1s[indexCurrentVechecle+1], IdShip, initDasbordDelegate, getVechicleDelegate, OnDeliveryToCarrier, TotalPaymentToCarrier), true);
+            }
+        }
+
+        public void ResetAskSpareParts(byte[] oldRes, byte[] newRetake)
+        {
+            string base64 = JsonConvert.SerializeObject(newRetake);
+            Photo photo = Ask1.Any_additional_parts_been_given_to_you.FirstOrDefault(a => a.Base64 == JsonConvert.SerializeObject(oldRes));
+            if (photo != null)
+            {
+                photo.Base64 = base64;
+            }
+        }
+
+        public void ResetAskDocumentations(byte[] oldRes, byte[] newRetake)
+        {
+            string base64 = JsonConvert.SerializeObject(newRetake);
+            Photo photo = Ask1.Any_additional_documentation_been_given_after_loading.FirstOrDefault(a => a.Base64 == JsonConvert.SerializeObject(oldRes));
+            if (photo != null)
+            {
+                photo.Base64 = base64;
+            }
+        }
+
+        internal void ResetAskSeatBelts(byte[] oldRes, byte[] newRetake)
+        {
+            string base64 = JsonConvert.SerializeObject(newRetake);
+            Photo photo = Ask1.App_will_force_driver_to_take_pictures_of_each_strap.FirstOrDefault(a => a.Base64 == JsonConvert.SerializeObject(oldRes));
+            if (photo != null)
+            {
+                photo.Base64 = base64;
+            }
+        }
+
+        internal void ResetAskInTrack(byte[] oldRes, byte[] newRetake)
+        {
+
+            string base64 = JsonConvert.SerializeObject(newRetake);
+            Photo photo = Ask1.Photo_after_loading_in_the_truck.FirstOrDefault(a => a.Base64 == JsonConvert.SerializeObject(oldRes));
+            if (photo != null)
+            {
+                photo.Base64 = base64;
             }
         }
     }

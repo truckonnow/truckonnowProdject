@@ -213,18 +213,44 @@ namespace MDispatch.View.Inspection
                 ask1PageMV.Ask1.App_will_force_driver_to_take_pictures_of_each_strap = new List<Photo>(photos);
                 foreach (var imageByte in imagesByte)
                 {
-                    blockAskPhotoSeatBelts.Children.Add(new Image()
+                    Image image = new Image()
                     {
                         Source = ImageSource.FromStream(() => new MemoryStream(imageByte)),
                         HeightRequest = 50,
                         WidthRequest = 50
-                    });
+
+                    };
+                    image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke2));
+                    blockAskPhotoSeatBelts.Children.Add(image);
                 }
             }
             else
             {
                 isAsk12 = false;
             }
+        }
+
+        private async void ViewPhotoForRetacke2(Xamarin.Forms.View v, object s)
+        {
+            if (v != null && blockAskPhotoSeatBelts.Children.Contains(v))
+            {
+                await Navigation.PushAsync(new ViewPhotForAsk(v, this, "Ask5"));
+            }
+        }
+
+        public void ReSetPhoto2(Xamarin.Forms.View view, byte[] newRetake)
+        {
+            byte[] r = GetImageBytes(((Image)view).Source);
+            ask1PageMV.ResetAskSeatBelts(r, newRetake);
+            blockAskPhotoSeatBelts.Children.Remove((Image)view);
+            Image image = new Image()
+            {
+                Source = ImageSource.FromStream(() => new MemoryStream(newRetake)),
+                HeightRequest = 50,
+                WidthRequest = 50,
+            };
+            image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke2));
+            blockAskPhotoSeatBelts.Children.Add(image);
         }
         #endregion
 
@@ -365,12 +391,37 @@ namespace MDispatch.View.Inspection
             photo.Base64 = JsonConvert.SerializeObject(photob);
             photo.path = $"../Photo/{ask1PageMV.VehiclwInformation.Id}/PikedUp/SpareParts/{ ask1PageMV.Ask1.Any_additional_parts_been_given_to_you.Count + 1}.jpg";
             ask1PageMV.Ask1.Any_additional_parts_been_given_to_you.Add(photo);
-            blockAskPhotoSpareParts.Children.Add(new Image()
+            Image image = new Image()
             {
                 Source = ImageSource.FromStream(() => new MemoryStream(photob)),
                 HeightRequest = 50,
                 WidthRequest = 50
-            });
+            };
+            image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke));
+            blockAskPhotoSpareParts.Children.Add(image);
+        }
+
+        private async void ViewPhotoForRetacke(Xamarin.Forms.View v, object s)
+        {
+            if (v != null && blockAskPhotoSpareParts.Children.Contains(v))
+            {
+                await Navigation.PushAsync(new ViewPhotForAsk(v, this, "Ask3"));
+            }
+        }
+
+        public void ReSetPhoto(Xamarin.Forms.View view, byte[] newRetake)
+        {
+            byte[] r = GetImageBytes(((Image)view).Source);
+            ask1PageMV.ResetAskSpareParts(r, newRetake);
+            blockAskPhotoSpareParts.Children.Remove((Image)view);
+            Image image = new Image()
+            {
+                Source = ImageSource.FromStream(() => new MemoryStream(newRetake)),
+                HeightRequest = 50,
+                WidthRequest = 50,
+            };
+            image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke));
+            blockAskPhotoSpareParts.Children.Add(image);
         }
 
         public void AddPhotoDocumentations(byte[] photob)
@@ -383,12 +434,37 @@ namespace MDispatch.View.Inspection
             photo.Base64 = JsonConvert.SerializeObject(photob);
             photo.path = $"../Photo/{ask1PageMV.VehiclwInformation.Id}/PikedUp/Documentations/{ ask1PageMV.Ask1.Any_additional_documentation_been_given_after_loading.Count + 1}.jpg";
             ask1PageMV.Ask1.Any_additional_documentation_been_given_after_loading.Add(photo);
-            blockAskPhotoDocumentations.Children.Add(new Image()
+            Image image = new Image()
             {
                 Source = ImageSource.FromStream(() => new MemoryStream(photob)),
                 HeightRequest = 50,
                 WidthRequest = 50
-            });
+            };
+            image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke1));
+            blockAskPhotoDocumentations.Children.Add(image);
+        }
+
+        private async void ViewPhotoForRetacke1(Xamarin.Forms.View v, object s)
+        {
+            if (v != null && blockAskPhotoDocumentations.Children.Contains(v))
+            {
+                await Navigation.PushAsync(new ViewPhotForAsk(v, this, "Ask4"));
+            }
+        }
+
+        public void ReSetPhoto1(Xamarin.Forms.View view, byte[] newRetake)
+        {
+            byte[] r = GetImageBytes(((Image)view).Source);
+            ask1PageMV.ResetAskDocumentations(r, newRetake);
+            blockAskPhotoDocumentations.Children.Remove((Image)view);
+            Image image = new Image()
+            {
+                Source = ImageSource.FromStream(() => new MemoryStream(newRetake)),
+                HeightRequest = 50,
+                WidthRequest = 50,
+            };
+            image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke1));
+            blockAskPhotoDocumentations.Children.Add(image);
         }
 
         private async void Button_Clicked_2(object sender, EventArgs e)
@@ -411,12 +487,14 @@ namespace MDispatch.View.Inspection
                 ask1PageMV.Ask1.Photo_after_loading_in_the_truck = new List<Photo>(photos);
                 foreach (var imageByte in imagesByte)
                 {
-                    blockPhotoInTrack.Children.Add(new Image()
+                    Image image = new Image()
                     {
                         Source = ImageSource.FromStream(() => new MemoryStream(imageByte)),
                         HeightRequest = 50,
                         WidthRequest = 50
-                    });
+                    };
+                    image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke3));
+                    blockPhotoInTrack.Children.Add(image);
                 }
             }
             else
@@ -424,6 +502,43 @@ namespace MDispatch.View.Inspection
                 isAsk13 = false;
             }
         }
+
+        private async void ViewPhotoForRetacke3(Xamarin.Forms.View v, object s)
+        {
+            if (v != null && blockPhotoInTrack.Children.Contains(v))
+            {
+                await Navigation.PushAsync(new ViewPhotForAsk(v, this, "Ask6"));
+            }
+        }
+
+        public void ReSetPhoto3(Xamarin.Forms.View view, byte[] newRetake)
+        {
+            byte[] r = GetImageBytes(((Image)view).Source);
+            ask1PageMV.ResetAskInTrack(r, newRetake);
+            blockPhotoInTrack.Children.Remove((Image)view);
+            Image image = new Image()
+            {
+                Source = ImageSource.FromStream(() => new MemoryStream(newRetake)),
+                HeightRequest = 50,
+                WidthRequest = 50,
+            };
+            image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke3));
+            blockPhotoInTrack.Children.Add(image);
+        }
         #endregion
+
+        private byte[] GetImageBytes(ImageSource imagesource)
+        {
+            StreamImageSource streamImageSource = (StreamImageSource)imagesource;
+            byte[] ImageBytes;
+            using (var memoryStream = new System.IO.MemoryStream())
+            {
+                var stream = streamImageSource.Stream.Invoke(new System.Threading.CancellationToken()).Result;
+                stream.CopyTo(memoryStream);
+                stream = null;
+                ImageBytes = memoryStream.ToArray();
+            }
+            return ImageBytes;
+        }
     }
 }

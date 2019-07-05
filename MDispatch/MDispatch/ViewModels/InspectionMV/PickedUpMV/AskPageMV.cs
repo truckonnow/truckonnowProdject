@@ -6,9 +6,11 @@ using MDispatch.Service.Net;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.PageApp;
+using Newtonsoft.Json;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -54,6 +56,26 @@ namespace MDispatch.ViewModels.AskPhoto
             set => SetProperty(ref vehiclwInformation, value);
         }
 
+        public void ResetAskPhotoDocument(byte[] oldRes, byte[] newRetake)
+        {
+            string base64 = JsonConvert.SerializeObject(newRetake);
+            Photo photo = Ask.Any_paperwork_or_documentation.FirstOrDefault(a => a.Base64 == JsonConvert.SerializeObject(oldRes));
+            if(photo != null)
+            {
+                photo.Base64 = base64;
+            }
+        }
+        public void ResetAskPhotoItem(byte[] oldRes, byte[] newRetake)
+        {
+            string base64 = JsonConvert.SerializeObject(newRetake);
+            Photo photo = Ask.Any_personal_or_additional_items_with_or_in_vehicle.FirstOrDefault(a => a.Base64 == JsonConvert.SerializeObject(oldRes));
+            if (photo != null)
+            {
+                photo.Base64 = base64;
+            }
+        }
+
+
         [System.Obsolete]
         public async void SaveAsk(string indexTypeCar)
         {
@@ -67,13 +89,13 @@ namespace MDispatch.ViewModels.AskPhoto
             string description = null;
             int state = 0;
             DependencyService.Get<IOrientationHandler>().ForceSensor();
-                FullPagePhoto fullPagePhoto = new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{indexTypeCar}1.png", indexTypeCar, 1, initDasbordDelegate, getVechicleDelegate, "", OnDeliveryToCarrier, TotalPaymentToCarrier);
-                await Navigation.PushAsync(fullPagePhoto);
-                await Navigation.PushAsync(new CameraPagePhoto($"{indexTypeCar}1.png", fullPagePhoto));
+            FullPagePhoto fullPagePhoto = new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{indexTypeCar}1.png", indexTypeCar, 1, initDasbordDelegate, getVechicleDelegate, "", OnDeliveryToCarrier, TotalPaymentToCarrier);
+            await Navigation.PushAsync(fullPagePhoto);
+            await Navigation.PushAsync(new CameraPagePhoto($"{indexTypeCar}1.png", fullPagePhoto));
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
-                
+
                 await Task.Run(() =>
                 {
                     state = managerDispatchMob.AskWork("SaveAsk", token, VehiclwInformation.Id, Ask, ref description);

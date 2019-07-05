@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDispatch.View.Inspection.ViewPhotForAsk">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <Image x:Name="parentPhoto" AbsoluteLayout.LayoutFlags="None"/>
+            <Button Clicked="Button_Clicked" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".02, .02, 80, 33" Text="Back Ask" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" BorderRadius="5" />
+            <Button Clicked="Button_Clicked_1" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".98, .02, 120, 33" Text="Retake" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" BorderRadius="5" />
+        </AbsoluteLayout>
+  </ContentPage.Content>
+</ContentPage>

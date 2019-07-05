@@ -163,17 +163,24 @@ namespace MDispatch.Droid.NewrRender
 
         public async Task<byte[]> TakePhoto()
         {
+            byte[] imageBytes = null;
             camera.StopPreview();
             var ratio = ((decimal)Height) / Width;
-            var image = Bitmap.CreateBitmap(liveView.Bitmap, 0, 0, liveView.Bitmap.Width, (int)(liveView.Bitmap.Width * ratio));
-            byte[] imageBytes = null;
-            using (var imageStream = new System.IO.MemoryStream())
+            try
             {
-                await image.CompressAsync(Bitmap.CompressFormat.Jpeg, 60, imageStream);
-                image.Recycle();
-                imageBytes = imageStream.ToArray();
+                var image = Bitmap.CreateBitmap(liveView.Bitmap, 0, 0, liveView.Bitmap.Width, (int)(liveView.Bitmap.Width * ratio));
+                using (var imageStream = new System.IO.MemoryStream())
+                {
+                    await image.CompressAsync(Bitmap.CompressFormat.Jpeg, 60, imageStream);
+                    image.Recycle();
+                    imageBytes = imageStream.ToArray();
+                }
+                camera.StartPreview();
             }
-            camera.StartPreview();
+            catch
+            {
+
+            }
             return imageBytes;
         }
 
