@@ -30,11 +30,16 @@
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
     <AotAssemblies>true</AotAssemblies>
-    <EnableLLVM>false</EnableLLVM>
+    <EnableLLVM>true</EnableLLVM>
     <BundleAssemblies>false</BundleAssemblies>
     <PlatformTarget>x64</PlatformTarget>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
+    <MandroidI18n />
+    <Debugger>Xamarin</Debugger>
+    <JavaMaximumHeapSize>
+    </JavaMaximumHeapSize>
+    <AndroidSupportedAbis />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
