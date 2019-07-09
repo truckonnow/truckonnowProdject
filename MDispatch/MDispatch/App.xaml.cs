@@ -1,13 +1,8 @@
 using FormsControls.Base;
-using MDispatch.Service.GCFolder;
 using MDispatch.Service.GeloctionGPS;
-using MDispatch.StoreNotify;
 using MDispatch.View.A_R;
 using MDispatch.View.TabPage;
-using MDispatch.View.TabPage.Tab;
 using Plugin.Settings;
-using System.Linq;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MDispatch
