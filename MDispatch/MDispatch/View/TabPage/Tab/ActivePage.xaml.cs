@@ -32,23 +32,23 @@ namespace MDispatch.View.TabPage.Tab
             if (activeMV.UnTimeOfInspection.IsInspection)
             {
                 await blockInspactionTrack.RotateTo(3, 50);
-                Vibration.Vibrate(20);
+                Vibration.Vibrate(30);
                 await blockInspactionTrack.RotateTo(-3, 50);
-                Vibration.Vibrate(20);
+                Vibration.Vibrate(30);
                 await blockInspactionTrack.RotateTo(3, 50);
-                Vibration.Vibrate(20);
+                Vibration.Vibrate(30);
                 await blockInspactionTrack.RotateTo(-3, 50);
-                Vibration.Vibrate(20);
+                Vibration.Vibrate(30);
                 await blockInspactionTrack.RotateTo(3, 50);
-                Vibration.Vibrate(20);
+                Vibration.Vibrate(30);
                 await blockInspactionTrack.RotateTo(-3, 50);
-                Vibration.Vibrate(20);
+                Vibration.Vibrate(30);
                 await blockInspactionTrack.RotateTo(3, 50);
-                Vibration.Vibrate(20);
+                Vibration.Vibrate(30);
                 await blockInspactionTrack.RotateTo(-3, 50);
-                Vibration.Vibrate(20);
+                Vibration.Vibrate(30);
                 await blockInspactionTrack.RotateTo(0, 50);
-                Vibration.Vibrate(20);
+                Vibration.Vibrate(30);
             }
             else
             {

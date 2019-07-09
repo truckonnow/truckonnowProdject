@@ -71,7 +71,6 @@ namespace MDispatch
                 //});
                 isStart = true;
                 await Utils.StartListening();
-               GCUntil.StartClereing();
             }
         }
 
@@ -81,7 +80,6 @@ namespace MDispatch
             {
                 isStart = false;
                 await Utils.StopListening();
-                GCUntil.StopClereing();
             }
         }
 
@@ -91,7 +89,6 @@ namespace MDispatch
             {
                 isStart = true;
                 await Utils.StartListening();
-                GCUntil.StartClereing();
             }
         }
 	}
