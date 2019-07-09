@@ -501,8 +501,6 @@ namespace MDispatch.View.Inspection
             {
                 isAsk13 = false;
             }
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
         }
 
         private async void ViewPhotoForRetacke3(Xamarin.Forms.View v, object s)

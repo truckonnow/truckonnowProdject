@@ -14,7 +14,7 @@ namespace WebDispacher.Dao
        
         public SqlCommadWebDispatch()
         {
-            context = new Context();
+            context = new Context(true);
             InitUserOne();
         }
 

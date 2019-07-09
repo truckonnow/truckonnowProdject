@@ -1,5 +1,6 @@
 ﻿using MDispatch.NewElement;
 using MDispatch.ViewModels.AskPhoto;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MDispatch.ViewModels.InspectionMV.Models
@@ -280,7 +281,7 @@ namespace MDispatch.ViewModels.InspectionMV.Models
             return nameLayout;
         }
 
-        public void OrintableScreen(int inderxPhotoInspektion)
+        public async Task OrintableScreen(int inderxPhotoInspektion)
         {
             if (inderxPhotoInspektion == 2 || inderxPhotoInspektion == 3 )
             {

@@ -1,5 +1,4 @@
-﻿using Android.App;
-using Plugin.Geolocator;
+﻿using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
@@ -11,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace MDispatch.Service.GeloctionGPS
 {
-    [Service]
     public static class Utils
     {
         [Obsolete]

@@ -46,19 +46,13 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             IdShip = idShip;
             OnDeliveryToCarrier = onDeliveryToCarrier;
             TotalPaymentToCarrier = totalPaymentToCarrier;
-            Init(typeCar);
+            Car = GetTypeCar(typeCar.Replace(" ", ""));
+            Init();
         }
 
-        private async void Init(string typeCar)
+        private async void Init()
         {
-            await Task.Run(() =>
-            {
-                if (typeCar != null)
-                {
-                    Car = GetTypeCar(typeCar.Replace(" ", ""));
-                    Car.OrintableScreen(Car.GetIndexCarFullPhoto(inderxPhotoInspektion));
-                }
-            });
+            await Car.OrintableScreen(Car.GetIndexCarFullPhoto(inderxPhotoInspektion));
         }
 
         public string IdShip { get; set; }

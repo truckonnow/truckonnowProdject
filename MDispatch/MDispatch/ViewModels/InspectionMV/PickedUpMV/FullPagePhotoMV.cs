@@ -51,11 +51,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
 
         private async void Init()
         {
-            await Task.Run(() =>
-            {
-                    Car.OrintableScreen(Car.GetIndexCarFullPhoto(inderxPhotoInspektion));
-                
-            });
+            await Car.OrintableScreen(inderxPhotoInspektion);
         }
 
         public string IdShip { get; set; }

@@ -1,4 +1,5 @@
 using FormsControls.Base;
+using MDispatch.Service.GCFolder;
 using MDispatch.Service.GeloctionGPS;
 using MDispatch.StoreNotify;
 using MDispatch.View.A_R;
@@ -70,6 +71,7 @@ namespace MDispatch
                 //});
                 isStart = true;
                 await Utils.StartListening();
+                GCUntil.StartClereing();
             }
         }
 
@@ -78,7 +80,8 @@ namespace MDispatch
             if (isAvtorization)
             {
                 isStart = false;
-                   await Utils.StopListening();
+                await Utils.StopListening();
+                GCUntil.StopClereing();
             }
         }
 
@@ -88,6 +91,7 @@ namespace MDispatch
             {
                 isStart = true;
                 await Utils.StartListening();
+                GCUntil.StartClereing();
             }
         }
 	}
