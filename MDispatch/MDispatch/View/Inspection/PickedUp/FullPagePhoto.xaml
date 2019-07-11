@@ -15,10 +15,10 @@
                     </Image.GestureRecognizers>
                 </Image>
                 <Label x:Name="NameSelectPhoto" Text="--------------------" TextColor="Black" Margin="5"/>
-                <Button x:Name="btnRetake" IsVisible="False" Text="Retake" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="81" HorizontalOptions="End" Clicked="Button_Clicked_3"/>
-                <Button x:Name="btnDamage" IsVisible="False" Text="Add Damag" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="81" HorizontalOptions="EndAndExpand" Clicked="Button_Clicked_2"/>
-                <Button x:Name="btnAddPhoto" Text="Add Photo" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="79" Clicked="Button_Clicked" HorizontalOptions="EndAndExpand" />
-                <Button x:Name="btnNext" IsVisible="False" Text="Next" Parent="2" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="50" Clicked="Button_Clicked_1" />
+                <Button x:Name="btnRetake" IsVisible="False" Text="Retake"  FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="81" HorizontalOptions="End" Clicked="Button_Clicked_3"/>
+                <Button x:Name="btnDamage" IsVisible="False" Text="Add Damag"  FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="81" HorizontalOptions="EndAndExpand" Clicked="Button_Clicked_2"/>
+                <Button x:Name="btnAddPhoto" Text="Add Photo" FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="79" Clicked="Button_Clicked" HorizontalOptions="EndAndExpand" />
+                <Button x:Name="btnNext" IsVisible="False" Text="Next"  FontSize="10" BackgroundColor="Blue" TextColor="White" WidthRequest="50" Clicked="Button_Clicked_1" />
             </StackLayout>
             <StackLayout Orientation="Horizontal" HeightRequest="70" AbsoluteLayout.LayoutFlags="PositionProportional,HeightProportional"
                           AbsoluteLayout.LayoutBounds="0, 1, 55, 0.9" Padding="7" Opacity="0.8">

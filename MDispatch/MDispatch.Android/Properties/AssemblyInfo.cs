@@ -1,6 +1,9 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 using Android.App;
+using MDispatch.NewElement.Tabs;
+using Plugin.Badge.Droid;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 // General Information about an assembly is controlled through the following 
@@ -30,7 +33,7 @@ using Xamarin.Forms.Xaml;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
-
+[assembly: ExportRenderer(typeof(CustomTabbedPage), typeof(BadgedTabbedPageRenderer))]
 // Add some common permissions, these can be removed if not needed
 [assembly: UsesPermission(Android.Manifest.Permission.Internet)]
 [assembly: UsesPermission(Android.Manifest.Permission.WriteExternalStorage)]

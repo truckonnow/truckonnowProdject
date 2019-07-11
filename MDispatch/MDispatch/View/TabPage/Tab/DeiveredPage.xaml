@@ -11,7 +11,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.View>
-                                <Frame Margin="5" Padding="0" BackgroundColor="White" HasShadow="True" CornerRadius="5" OutlineColor="#C3CBCD">
+                                <Frame Margin="1, 5, 1, 5" CornerRadius="2" Padding="0" BackgroundColor="White" HasShadow="True"  OutlineColor="#C3CBCD">
                                     <StackLayout Orientation="Horizontal" x:Name="st">
                                         <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="2" />

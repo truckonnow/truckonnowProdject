@@ -34,6 +34,7 @@ namespace MDispatch.Droid
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
             FirebaseApp.InitializeApp(Android.App.Application.Context);
             FirebasePushNotificationManager.ProcessIntent(this, Intent);
+            Xamarin.Essentials.Platform.Init(this, bundle);
             FormsControls.Droid.Main.Init(this);
             LoadApplication(new App());
         }
@@ -44,6 +45,7 @@ namespace MDispatch.Droid
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
