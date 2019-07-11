@@ -73,6 +73,35 @@ namespace ApiMobaileServise.Controllers
         }
 
         [HttpPost]
+        [Route("ArchiveOreder")]
+        public string GetArchiveOrder(string token)
+        {
+            string respons = null;
+            if (token == null || token == "")
+            {
+                return JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
+            }
+            try
+            {
+                List<Shipping> shippings = null;
+                bool isToken = ManagerMobileApi.GetOrdersArchiveForToken(token, ref shippings);
+                if (isToken)
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", shippings));
+                }
+                else
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "2", null));
+                }
+            }
+            catch (Exception)
+            {
+                respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
+            }
+            return respons;
+        }
+
+        [HttpPost]
         [Route("GetVechicleInffo")]
         public string GetVechicleInffo(string token, int idVech)
         {

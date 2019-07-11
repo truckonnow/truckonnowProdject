@@ -93,6 +93,10 @@ namespace MDispatch.Service
                 {
                     stateOrder = orderGet.DelyveryOreder(token, ref description, ref shippings);
                 }
+                else if (typeOrder == "OrderArchiveGet")
+                {
+                    stateOrder = orderGet.DelyveryOreder(token, ref description, ref shippings);
+                }
             }
             orderGet = null;
             CountReqvest--;

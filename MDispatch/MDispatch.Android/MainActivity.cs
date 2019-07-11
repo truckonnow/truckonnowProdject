@@ -8,6 +8,7 @@ using Firebase;
 using Plugin.FirebasePushNotification;
 using Plugin.Permissions;
 using Xamarin.Forms.Platform.Android;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 namespace MDispatch.Droid
 {
@@ -37,6 +38,7 @@ namespace MDispatch.Droid
             Xamarin.Essentials.Platform.Init(this, bundle);
             FormsControls.Droid.Main.Init(this);
             LoadApplication(new App());
+            Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
         }
 
         protected override void OnSaveInstanceState(Bundle outState)

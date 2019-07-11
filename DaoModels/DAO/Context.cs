@@ -24,13 +24,11 @@ namespace DaoModels.DAO
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Video> Videos { get; set; }
 
-        public Context(bool isMigration = false)
+        public Context()
         {
-            if (isMigration)
-            {
                 //Database.EnsureCreated();
                 Database.Migrate();
-            }
+            
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

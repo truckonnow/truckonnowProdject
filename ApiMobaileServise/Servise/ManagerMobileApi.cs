@@ -260,9 +260,18 @@ namespace ApiMobaileServise.Servise
             return isToken;
         }
 
+        public bool GetOrdersArchiveForToken(string token, ref List<Shipping> shippings)
+        {
+            bool isToken = sqlCommandApiMobile.CheckToken(token);
+            if (isToken)
+            {
+                shippings = sqlCommandApiMobile.GetOrdersArchiveForToken(token, 0);
+            }
+            return isToken;
+        }
+
         public async Task SavePay(string idVech, int type, string photo)
         {
-
             Photo photo1 = JsonConvert.DeserializeObject<Photo>(photo);
             sqlCommandApiMobile.SavePayInDb(idVech, type, photo1);
         }

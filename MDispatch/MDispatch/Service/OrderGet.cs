@@ -65,6 +65,34 @@ namespace MDispatch.Service
             }
         }
 
+        public int ArchiveOreder(string token, ref string description, ref List<Shipping> shippings)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
+                RestRequest request = new RestRequest("Mobile/OrderArchiveGet", Method.POST);
+                client.Timeout = 60000;
+                request.AddHeader("Accept", "application/json");
+                request.AddParameter("token", token);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description, ref shippings);
+            }
+        }
+
         public int GetVehiclwInformation(string token, int idVech, ref string description, ref VehiclwInformation vehiclwInformation)
         {
             IRestResponse response = null;

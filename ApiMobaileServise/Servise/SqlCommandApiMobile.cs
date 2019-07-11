@@ -20,6 +20,11 @@ namespace ApiMobaileServise.Servise
             context = new Context();
         }
 
+        public List<Shipping> GetShipingPayd()
+        {
+            return context.Shipping.Where(s => s.CurrentStatus == "Delivered,Paid").ToList();
+        }
+
         internal List<Driver> GetDriverInDb()
         {
             return context.Drivers.ToList();
@@ -276,15 +281,24 @@ namespace ApiMobaileServise.Servise
         {
             Shipping shipping = context.Shipping.FirstOrDefault(s => s.Id == idShip);
             shipping.CurrentStatus = status;
-            try
+            if (status == "Delivered,Billed" && shipping.TotalPaymentToCarrier.Contains(" days"))
             {
-                if (status == "Delivered,Billed" && shipping.TotalPaymentToCarrier.Contains(" days"))
-                {
-                    shipping.DataPaid = DateTime.Now.AddDays(Convert.ToInt32(shipping.TotalPaymentToCarrier.Replace(" days", ""))).ToString();
-                }
+                shipping.DataPaid = DateTime.Now.AddDays(Convert.ToInt32(shipping.TotalPaymentToCarrier.Replace(" days", ""))).ToString();
+                shipping.DataCancelOrder = DateTime.Now.ToString();
             }
-            catch
-            { }
+            else if (status == "Delivered,Paid")
+            {
+                shipping.DataFullArcive = DateTime.Now.AddDays(21).ToString();
+                shipping.DataCancelOrder = DateTime.Now.ToString();
+            }
+            else if (status == "Delivered,Billed")
+            {
+
+            }
+            else if (shipping.CurrentStatus == "Archived")
+            {
+                shipping.CurrentStatus = shipping.CurrentStatus.Replace("Delivered", "Archived");
+            }   
             await context.SaveChangesAsync();
         }
 
@@ -520,18 +534,33 @@ namespace ApiMobaileServise.Servise
             List<Shipping> Shipping1 = new List<Shipping>();
             Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
             List<Shipping> shippings = context.Shipping.Where(s => s.Driverr != null && s.Driverr.Id == driver.Id)
-                 .Include("VehiclwInformations.Ask")
-                 .Include("VehiclwInformations.Ask1")
-                 .Include("VehiclwInformations.PhotoInspections.Damages")
-                 .Include("VehiclwInformations.AskFromUser")
-                 .Include("VehiclwInformations.AskDelyvery")
-                 .Include("VehiclwInformations.askForUserDelyveryM")
+                 .Include("VehiclwInformations")
                  .ToList();
             if (shippings == null)
             {
                 return new List<Shipping>();
             }
-            Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Delivered,Paid" || s.CurrentStatus == "Delivered,Billed"));
+            Shipping1.AddRange(shippings.FindAll(s => (s.CurrentStatus == "Delivered,Paid" || s.CurrentStatus == "Delivered,Billed" || s.CurrentStatus == "Archived,Billed" || s.CurrentStatus == "Archived,Paid") 
+            && DateTime.Parse(s.DataCancelOrder).AddDays(7) > DateTime.Now));
+            //int countFor5 = Shipping1.Count / 5;
+            //int ost = Shipping1.Count % 5;
+            //int countGet = ost == 0 ? (5 * type) + 5 : (5 * type) + ost;
+            return Shipping1; //.GetRange(5 * type, countGet);
+        }
+
+        public List<Shipping> GetOrdersArchiveForToken(string token, int type)
+        {
+            List<Shipping> Shipping1 = new List<Shipping>();
+            Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
+            List<Shipping> shippings = context.Shipping.Where(s => s.Driverr != null && s.Driverr.Id == driver.Id)
+                 .Include("VehiclwInformations")
+                 .ToList();
+            if (shippings == null)
+            {
+                return new List<Shipping>();
+            }
+            Shipping1.AddRange(shippings.FindAll(s => (s.CurrentStatus == "Delivered,Paid" || s.CurrentStatus == "Delivered,Billed" || s.CurrentStatus == "Archived,Billed" || s.CurrentStatus == "Archived,Paid") 
+            && DateTime.Parse(s.DataCancelOrder).AddDays(7) < DateTime.Now && DateTime.Parse(s.DataCancelOrder).AddDays(21) > DateTime.Now));
             //int countFor5 = Shipping1.Count / 5;
             //int ost = Shipping1.Count % 5;
             //int countGet = ost == 0 ? (5 * type) + 5 : (5 * type) + ost;
