@@ -10,6 +10,7 @@ using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -167,6 +168,8 @@ namespace MDispatch.Vidget.VM
                     await navigation.PopToRootAsync();}
                 }
             }
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         [System.Obsolete]
@@ -201,6 +204,8 @@ namespace MDispatch.Vidget.VM
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
                 }
             }
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         [System.Obsolete]
@@ -230,6 +235,8 @@ namespace MDispatch.Vidget.VM
             {
                 await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
             }
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
     }
 }

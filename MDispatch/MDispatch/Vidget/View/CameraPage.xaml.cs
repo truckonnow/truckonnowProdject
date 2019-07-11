@@ -2,11 +2,11 @@
 using MDispatch.Service;
 using MDispatch.Vidget.VM;
 using System.Threading;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static MDispatch.Service.ManagerDispatchMob;
 
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MDispatch.Vidget.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]

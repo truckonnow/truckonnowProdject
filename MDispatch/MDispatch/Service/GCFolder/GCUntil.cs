@@ -12,7 +12,7 @@ namespace MDispatch.Service.GCFolder
         {
             if(!isWork)
             {
-                timer = new Timer(new TimerCallback(WorkGC), null, 2000, 2000);
+                timer = new Timer(new TimerCallback(WorkGC), null, 100000, 100000);
                 isWork = true;
             }
         }

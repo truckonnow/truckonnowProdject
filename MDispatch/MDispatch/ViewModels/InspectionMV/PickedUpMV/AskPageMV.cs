@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;

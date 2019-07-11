@@ -399,6 +399,8 @@ namespace MDispatch.View.Inspection
             };
             image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke));
             blockAskPhotoSpareParts.Children.Add(image);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private async void ViewPhotoForRetacke(Xamarin.Forms.View v, object s)
@@ -422,6 +424,8 @@ namespace MDispatch.View.Inspection
             };
             image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke));
             blockAskPhotoSpareParts.Children.Add(image);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         public void AddPhotoDocumentations(byte[] photob)
@@ -442,6 +446,8 @@ namespace MDispatch.View.Inspection
             };
             image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke1));
             blockAskPhotoDocumentations.Children.Add(image);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private async void ViewPhotoForRetacke1(Xamarin.Forms.View v, object s)
@@ -465,6 +471,8 @@ namespace MDispatch.View.Inspection
             };
             image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke1));
             blockAskPhotoDocumentations.Children.Add(image);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private async void Button_Clicked_2(object sender, EventArgs e)

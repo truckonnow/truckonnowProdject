@@ -9,6 +9,7 @@ using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -90,6 +91,8 @@ namespace MDispatch.ViewModels
                 await PopupNavigation.PushAsync(new Errror(FeedBack, null));
                 FeedBack = "Technical work on the service";
             }
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
     }
 }

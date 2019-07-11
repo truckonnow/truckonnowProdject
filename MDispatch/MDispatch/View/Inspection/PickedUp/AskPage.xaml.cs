@@ -333,6 +333,8 @@ namespace MDispatch.View.AskPhoto
             };
             image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke));
             blockAskPhotoDocument.Children.Add(image);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private async void ViewPhotoForRetacke(Xamarin.Forms.View v, object s)
@@ -356,6 +358,8 @@ namespace MDispatch.View.AskPhoto
             };
             image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke));
             blockAskPhotoDocument.Children.Add(image);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         public void AddPhotoItems(byte[] photob)
@@ -376,6 +380,8 @@ namespace MDispatch.View.AskPhoto
             };
             image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke1));
             blockAskPhotoItem.Children.Add(image);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private async void ViewPhotoForRetacke1(Xamarin.Forms.View v, object s)
@@ -399,6 +405,8 @@ namespace MDispatch.View.AskPhoto
             };
             image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke1));
             blockAskPhotoItem.Children.Add(image);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         private byte[] GetImageBytes(ImageSource imagesource)
