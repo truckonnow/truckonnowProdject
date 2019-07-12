@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -152,6 +153,7 @@ namespace MDispatch.View.Inspection.PickedUp
 
         private void ScrolSizeDmg_ValueChanged(object sender, ValueChangedEventArgs e)
         {
+            Vibration.Vibrate(10);
             ImgResize rezizeImgnew = (ImgResize)dmgSelected;
             Rectangle rectangle = AbsoluteLayout.GetLayoutBounds(rezizeImgnew);
             rectangle.Height = scrolSizeDmg.Value;
