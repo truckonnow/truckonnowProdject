@@ -9,6 +9,7 @@ using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
 
@@ -27,7 +28,7 @@ namespace MDispatch.ViewModels.TAbbMV
             Shippings = new List<Shipping>();
             initDasbordDelegate = Init;
             this.managerDispatchMob = managerDispatchMob;
-            RefreshCommand = new DelegateCommand(Init);
+            RefreshCommand = new DelegateCommand(PreVibartionLoad);
             Init();
         }
 
@@ -44,6 +45,13 @@ namespace MDispatch.ViewModels.TAbbMV
             get => isRefr;
             set => SetProperty(ref isRefr, value);
         }
+
+        private void PreVibartionLoad()
+        {
+            Vibration.Vibrate(20);
+            Init();
+        }
+
         private async void Init()
         {
             IsRefr = true;
