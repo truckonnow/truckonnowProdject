@@ -95,7 +95,7 @@ namespace MDispatch.Service
                 }
                 else if (typeOrder == "OrderArchiveGet")
                 {
-                    stateOrder = orderGet.DelyveryOreder(token, ref description, ref shippings);
+                    stateOrder = orderGet.ActiveOreder(token, ref description, ref shippings);
                 }
             }
             orderGet = null;

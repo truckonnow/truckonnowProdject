@@ -23,7 +23,7 @@ namespace ApiMobaileServise.BackgraundService.OrderWork
             List<Shipping> shippings = sqlCommandApiMobile.GetShipingPayd();
             foreach(Shipping shipping in shippings)
             {
-                if(DateTime.Parse(shipping.DataFullArcive) < DateTime.Now)
+                if(shipping.DataFullArcive != null && DateTime.Parse(shipping.DataFullArcive) < DateTime.Now)
                 {
                     sqlCommandApiMobile.ReCurentStatus(shipping.Id, "Archived");
                 }

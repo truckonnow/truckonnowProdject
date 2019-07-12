@@ -541,7 +541,7 @@ namespace ApiMobaileServise.Servise
                 return new List<Shipping>();
             }
             Shipping1.AddRange(shippings.FindAll(s => (s.CurrentStatus == "Delivered,Paid" || s.CurrentStatus == "Delivered,Billed" || s.CurrentStatus == "Archived,Billed" || s.CurrentStatus == "Archived,Paid") 
-            && DateTime.Parse(s.DataCancelOrder).AddDays(7) > DateTime.Now));
+            && s.DataCancelOrder != null && DateTime.Parse(s.DataCancelOrder).AddDays(7) > DateTime.Now));
             //int countFor5 = Shipping1.Count / 5;
             //int ost = Shipping1.Count % 5;
             //int countGet = ost == 0 ? (5 * type) + 5 : (5 * type) + ost;
@@ -560,7 +560,7 @@ namespace ApiMobaileServise.Servise
                 return new List<Shipping>();
             }
             Shipping1.AddRange(shippings.FindAll(s => (s.CurrentStatus == "Delivered,Paid" || s.CurrentStatus == "Delivered,Billed" || s.CurrentStatus == "Archived,Billed" || s.CurrentStatus == "Archived,Paid") 
-            && DateTime.Parse(s.DataCancelOrder).AddDays(7) < DateTime.Now && DateTime.Parse(s.DataCancelOrder).AddDays(21) > DateTime.Now));
+            && s.DataCancelOrder != null && DateTime.Parse(s.DataCancelOrder).AddDays(7) < DateTime.Now && DateTime.Parse(s.DataCancelOrder).AddDays(21) > DateTime.Now));
             //int countFor5 = Shipping1.Count / 5;
             //int ost = Shipping1.Count % 5;
             //int countGet = ost == 0 ? (5 * type) + 5 : (5 * type) + ost;

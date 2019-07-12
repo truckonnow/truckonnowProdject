@@ -134,6 +134,7 @@
     <Compile Include="NewrRender\Orientation\OrientationHandler.cs" />
     <Compile Include="NewrRender\RebderVideoCamera\VideoRecorderRenderer.cs" />
     <Compile Include="NewrRender\ResizerImage\ResizeImgDroid.cs" />
+    <Compile Include="NewrRender\Sider\CusstomSider.cs" />
     <Compile Include="NewrRender\ToastNotify\ToastDroid.cs" />
     <Compile Include="NewrRender\TouchCordinateRender\TouchImageRender.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -857,6 +858,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Archive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\custom_progressbar_style.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

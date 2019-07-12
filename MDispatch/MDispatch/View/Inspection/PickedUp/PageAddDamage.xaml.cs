@@ -32,6 +32,7 @@ namespace MDispatch.View.Inspection.PickedUp
             {
                 foreach (var view in views)
                 {
+                    view.Opacity = 0.5;
                     absla.Children.Add(view);
                     ((ImgResize)view).OneTabAction += AddControlPanelDmg;
                 }
@@ -57,6 +58,7 @@ namespace MDispatch.View.Inspection.PickedUp
                     WidthRequest = 30,
                     HeightRequest = 30,
                 };
+                image.Opacity = 0.5;
                 image.OneTabAction += AddControlPanelDmg;
                 AbsoluteLayout.SetLayoutBounds(image, new Rectangle(e.XInterest * 0.0001, e.YInterest * 0.0001, 30, 30));
                 AbsoluteLayout.SetLayoutFlags(image, AbsoluteLayoutFlags.PositionProportional);
@@ -78,7 +80,7 @@ namespace MDispatch.View.Inspection.PickedUp
             controlDmg.IsEnabled = true;
             controlDmg.IsVisible = true;
             dmgSelected = (Image)sender;
-            scrolSizeDmg.PropertyChanged += ScrolSizeDmg_PropertyChanged;
+            scrolSizeDmg.ValueChanged += ScrolSizeDmg_ValueChanged;
             deletBtnDmg.Clicked += DeleteDamage;
         }
 
@@ -93,7 +95,7 @@ namespace MDispatch.View.Inspection.PickedUp
 
         private void RemoveSelectedDmg()
         {
-            scrolSizeDmg.PropertyChanged -= ScrolSizeDmg_PropertyChanged;
+            scrolSizeDmg.ValueChanged -= ScrolSizeDmg_ValueChanged;
             controlDmg.IsEnabled = false;
             controlDmg.IsVisible = false;
             dmgSelected = null;
@@ -142,26 +144,29 @@ namespace MDispatch.View.Inspection.PickedUp
             await Navigation.PopAsync();
         }
 
-        private void ScrolSizeDmg_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "Value")
-            {
-                ImgResize rezizeImgnew = (ImgResize)dmgSelected;
-                Rectangle rectangle = AbsoluteLayout.GetLayoutBounds(rezizeImgnew);
-                rectangle.Height = scrolSizeDmg.Value;
-                rectangle.Width = scrolSizeDmg.Value;
-                    AbsoluteLayout.SetLayoutBounds(rezizeImgnew, rectangle);
-                    Task.Run(() =>
-                    {
-                        FullPagePhotoMV.ReSetDamage(dmgSelected, (int)rectangle.Width, (int)rectangle.Height);
-                    });
-            }
-        }
-
         [Obsolete]
         private void Button_Clicked(object sender, EventArgs e)
         {
             FullPagePhotoMV.SavePhoto(true);
+        }
+
+        private void ScrolSizeDmg_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            ImgResize rezizeImgnew = (ImgResize)dmgSelected;
+            Rectangle rectangle = AbsoluteLayout.GetLayoutBounds(rezizeImgnew);
+            rectangle.Height = scrolSizeDmg.Value;
+            rectangle.Width = scrolSizeDmg.Value;
+            AbsoluteLayout.SetLayoutBounds(rezizeImgnew, rectangle);
+            Task.Run(() =>
+            {
+                FullPagePhotoMV.ReSetDamage(dmgSelected, (int)rectangle.Width, (int)rectangle.Height);
+            });
+        }
+
+        private void ScrolSizeDmg_SizeChanged(object sender, EventArgs e)
+        {
+            double width = App.Current.MainPage.Width;
+           ((Slider)sender).WidthRequest = width * 0.80;
         }
     }
 }
