@@ -23,19 +23,19 @@
             <tbody>
                 @if (ViewBag.Order.VehiclwInformations != null)
                 {
-                @for (int i = 0; i < ViewBag.Order.VehiclwInformations.Count; i++)
-                {
-                    <tr>
-                        <td>@i</td>
-                        <td>@ViewBag.Order.VehiclwInformations[i].VIN</td>
-                        <td>@ViewBag.Order.VehiclwInformations[i].Year</td>
-                        <td>@ViewBag.Order.VehiclwInformations[i].Make</td>
-                        <td>@ViewBag.Order.VehiclwInformations[i].Model</td>
-                        <td>@ViewBag.Order.VehiclwInformations[i].Type</td>
-                        <td>@ViewBag.Order.VehiclwInformations[i].Color</td>
-                        <td>@ViewBag.Order.VehiclwInformations[i].Lot</td>
-                    </tr>
-                }
+                    @for (int i = 0; i < ViewBag.Order.VehiclwInformations.Count; i++)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@ViewBag.Order.VehiclwInformations[i].VIN</td>
+                            <td>@ViewBag.Order.VehiclwInformations[i].Year</td>
+                            <td>@ViewBag.Order.VehiclwInformations[i].Make</td>
+                            <td>@ViewBag.Order.VehiclwInformations[i].Model</td>
+                            <td>@ViewBag.Order.VehiclwInformations[i].Type</td>
+                            <td>@ViewBag.Order.VehiclwInformations[i].Color</td>
+                            <td>@ViewBag.Order.VehiclwInformations[i].Lot</td>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>
@@ -46,9 +46,11 @@
                 <h3 class="panel-title">Origin</h3>
             </div>
             <div class="outer">
-                <p class="list-group-item">@ViewBag.Order.AddresP, @ViewBag.Order.CityP, 
-                    <br/> @ViewBag.Order.StateP, @ViewBag.Order.ZipP</p>
-                <hr  style="border-color:rgba(228, 228, 228, 0.40);border-width:.78px;"/>
+                <p class="list-group-item">
+                    @ViewBag.Order.AddresP, @ViewBag.Order.CityP,
+                    <br /> @ViewBag.Order.StateP, @ViewBag.Order.ZipP
+                </p>
+                <hr style="border-color:rgba(228, 228, 228, 0.40);border-width:.78px;" />
                 <span class="list-group-item">Contact: @ViewBag.Order.ContactNameP</span>
                 <span class="list-group-item">Phone: @ViewBag.Order.PhoneP</span>
                 <span class="list-group-item">Pickup date: @ViewBag.Order.PickupExactly</span>
@@ -63,7 +65,7 @@
                     @ViewBag.Order.AddresD, @ViewBag.Order.CityD,
                     <br /> @ViewBag.Order.StateD, @ViewBag.Order.ZipD
                 </p>
-                <hr style="border-color:rgba(228, 228, 228, 0.40);border-width:.78px;"/>
+                <hr style="border-color:rgba(228, 228, 228, 0.40);border-width:.78px;" />
                 <span class="list-group-item">Contact: @ViewBag.Order.ContactNameD</span>
                 <span class="list-group-item">Phone: @ViewBag.Order.PhoneD</span>
                 <span class="list-group-item">Delivery date: @ViewBag.Order.DeliveryEstimated</span>
@@ -76,7 +78,7 @@
             <div class="outer">
                 <span class="list-group-item">Price: @ViewBag.Order.PriceListed</span>
                 <span class="list-group-item">Payment Method: @ViewBag.Order.TotalPaymentToCarrier</span>
-                <hr style="border-color:rgba(228, 228, 228, 0.40);border-width:.78px;"/>
+                <hr style="border-color:rgba(228, 228, 228, 0.40);border-width:.78px;" />
                 <span class="list-group-item">@ViewBag.Order.OnDeliveryToCarrier</span>
             </div>
         </div>
@@ -102,6 +104,16 @@
             </div>
         </div>
     </div>
+    <p><h2>BOL</h2></p>
+    @if (ViewBag.Order.VehiclwInformations != null)
+    {
+        @for (int i = 0; i < ViewBag.Order.VehiclwInformations.Count; i++)
+        {
+            <p><a href="@ViewBag.BaseUrl/Photo/BOL/@ViewBag.Order.VehiclwInformations[i].Id">@ViewBag.Order.VehiclwInformations[i].Make @ViewBag.Order.VehiclwInformations[i].Model @ViewBag.Order.VehiclwInformations[i].Year </a></p>
+            <p>@ViewBag.BaseUrl/Photo/BOL/@ViewBag.Order.VehiclwInformations[i].Id</p>
+            <hr />
+        }
+    }
 </div>
 
         <style>

@@ -47,7 +47,7 @@ namespace MDispatch.View.TabPage
 
         private void InitArchivedPage(ManagerDispatchMob managerDispatchMob)
         {
-            AnimationNavigationPage navigationPage = new AnimationNavigationPage(new ArchivedPage());
+            AnimationNavigationPage navigationPage = new AnimationNavigationPage(new ArchivedPage(managerDispatchMob, Navigation));
             navigationPage.Title = "Archived";
             navigationPage.IconImageSource = "Delivery.png";
             navigationPage.SetBinding(TabBadge.BadgeTextProperty, new Binding("Count"));
