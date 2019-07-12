@@ -249,7 +249,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         {
             bool isNavigationMany = false;
             int navigationStack_Count = isNavigWthDamag ? Navigation.NavigationStack.Count - 1 : Navigation.NavigationStack.Count;
-            if (navigationStack_Count > 2)
+            if (navigationStack_Count > 3)
             {
                 await PopupNavigation.PushAsync(new LoadPage());
                 isNavigationMany = true;
