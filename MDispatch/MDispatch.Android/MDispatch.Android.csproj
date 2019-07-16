@@ -15,7 +15,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -31,10 +30,8 @@
     <AndroidLinkMode>None</AndroidLinkMode>
     <AotAssemblies>true</AotAssemblies>
     <EnableLLVM>true</EnableLLVM>
-    <BundleAssemblies>false</BundleAssemblies>
     <PlatformTarget>x64</PlatformTarget>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
-    <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
     <MandroidI18n />
     <Debugger>Xamarin</Debugger>
     <JavaMaximumHeapSize>
@@ -174,7 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MDispatch\MDispatch.csproj">
-      <Project>{AECFAA71-12E9-4FD9-8E0B-907C2530F235}</Project>
+      <Project>{D6CD94AD-B4AF-4C31-B29D-789E2FBD7D48}</Project>
       <Name>MDispatch</Name>
     </ProjectReference>
   </ItemGroup>
