@@ -131,6 +131,7 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="NewRender\ResizerImgIOS.cs" />
+    <Compile Include="NewRender\TextIn\TextRender.cs" />
     <Compile Include="NewRender\ToastNotify\ToastIOS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
