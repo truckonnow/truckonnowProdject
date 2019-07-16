@@ -19,6 +19,21 @@ namespace MDispatch.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+            IntSrtatusBar();
+            base.OnCreate(bundle);
+            Rg.Plugins.Popup.Popup.Init(this, bundle);
+            global::Xamarin.Forms.Forms.Init(this, bundle);
+            Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
+            FirebaseApp.InitializeApp(Android.App.Application.Context);
+            FirebasePushNotificationManager.ProcessIntent(this, Intent);
+            Xamarin.Essentials.Platform.Init(this, bundle);
+            FormsControls.Droid.Main.Init(this);
+            LoadApplication(new App());
+            ResizeForKeyBord();
+        }
+
+        private void IntSrtatusBar()
+        {
             this.Window.AddFlags(WindowManagerFlags.Fullscreen | WindowManagerFlags.TurnScreenOn);
             if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
             {
@@ -29,15 +44,10 @@ namespace MDispatch.Droid
                 }
                 stBarHeight?.SetValue(this, 0);
             }
-            base.OnCreate(bundle);
-            Rg.Plugins.Popup.Popup.Init(this, bundle);
-            global::Xamarin.Forms.Forms.Init(this, bundle);
-            Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
-            FirebaseApp.InitializeApp(Android.App.Application.Context);
-            FirebasePushNotificationManager.ProcessIntent(this, Intent);
-            Xamarin.Essentials.Platform.Init(this, bundle);
-            FormsControls.Droid.Main.Init(this);
-            LoadApplication(new App());
+        }
+
+        private void ResizeForKeyBord()
+        {
             Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
         }
 

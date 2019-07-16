@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
+﻿using Foundation;
 using UIKit;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 
 namespace MDispatch.iOS
 {
@@ -25,6 +23,7 @@ namespace MDispatch.iOS
             Rg.Plugins.Popup.Popup.Init();
             global::Xamarin.Forms.Forms.Init();
             FormsControls.Touch.Main.Init();
+            UINavigationBar.Appearance.BarTintColor = Color.FromHex("#4fd2c2").ToUIColor();
             LoadApplication(new App());
             return base.FinishedLaunching(app, options);
         }
