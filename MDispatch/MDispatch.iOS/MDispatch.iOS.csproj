@@ -135,6 +135,7 @@
     <Compile Include="NewRender\TextIn\TextRender.cs" />
     <Compile Include="NewRender\ToastNotify\ToastIOS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="NewRender\Button\CorectButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -268,5 +269,8 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\pickedUpViewOrder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NewRender\Button\" />
   </ItemGroup>
 </Project>

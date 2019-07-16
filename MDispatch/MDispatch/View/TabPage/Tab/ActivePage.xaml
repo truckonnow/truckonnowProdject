@@ -10,7 +10,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Frame x:Name="blockInspactionTrack" Margin="0, 5, 0, 5" Padding="0" BackgroundColor="White" HasShadow="True" CornerRadius="2" OutlineColor="#C3CBCD" IsVisible="{Binding UnTimeOfInspection.IsInspection}">
-                <StackLayout Orientation="Horizontal" HeightRequest="100">
+                <StackLayout Orientation="Horizontal" HeightRequest="120">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToInspectionDriveCommand}"/>
                     </StackLayout.GestureRecognizers>
@@ -25,16 +25,16 @@
                     </FlexLayout>
                     <StackLayout Padding="10">
                         <Label Text="Inspection Driver" FontSize="17"/>
-                        <FlexLayout JustifyContent="SpaceBetween" Wrap="Wrap">
+                        <StackLayout>
                             <StackLayout FlexLayout.AlignSelf="Center" Margin="3" Orientation="Horizontal">
                                 <Label Text="Time to inspection:"/>
                                 <Label Text="{Binding UnTimeOfInspection.TimeOfInspection}" TextColor="Black"/>
                             </StackLayout>
-                            <StackLayout FlexLayout.AlignSelf="Center" Margin="5" Orientation="Horizontal">
+                            <StackLayout Margin="5" Orientation="Horizontal">
                                 <Label Text="Need for inspection:"/>
                                 <Label Text="{Binding UnTimeOfInspection.TimeOfStatus}" TextColor="Black"/>
                             </StackLayout>
-                        </FlexLayout>
+                        </StackLayout>
                     </StackLayout>
                 </StackLayout>
             </Frame>
