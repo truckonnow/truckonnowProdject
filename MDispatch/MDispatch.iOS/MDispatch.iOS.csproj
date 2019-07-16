@@ -241,4 +241,13 @@
       <Name>MDispatch</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Delivery.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Aktiv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Archive.png" />
+  </ItemGroup>
 </Project>
