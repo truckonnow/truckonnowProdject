@@ -27,6 +27,7 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -237,7 +238,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\MDispatch\MDispatch.csproj">
-      <Project>{AECFAA71-12E9-4FD9-8E0B-907C2530F235}</Project>
+      <Project>{D6CD94AD-B4AF-4C31-B29D-789E2FBD7D48}</Project>
       <Name>MDispatch</Name>
     </ProjectReference>
   </ItemGroup>

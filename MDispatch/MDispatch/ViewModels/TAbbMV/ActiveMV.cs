@@ -109,7 +109,7 @@ namespace MDispatch.ViewModels.TAbbMV
             IsRefr = true;
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
-            bool isInspection = default;
+            bool isInspection = false;
             int state = 0;
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
@@ -146,7 +146,7 @@ namespace MDispatch.ViewModels.TAbbMV
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
-            bool isInspection = default;
+            bool isInspection = false;
             int state = 0;
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
