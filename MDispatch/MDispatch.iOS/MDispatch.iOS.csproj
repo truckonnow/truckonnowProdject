@@ -260,4 +260,13 @@
   <ItemGroup>
     <BundleResource Include="Resources\newOrder.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\deliveredViewOrder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\newViewOrder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pickedUpViewOrder.png" />
+  </ItemGroup>
 </Project>
