@@ -251,4 +251,13 @@
   <ItemGroup>
     <BundleResource Include="Resources\Archive.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pickedUpOrder1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\deliveredOrder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\newOrder.png" />
+  </ItemGroup>
 </Project>
