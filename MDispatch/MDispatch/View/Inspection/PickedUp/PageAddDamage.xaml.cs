@@ -153,7 +153,7 @@ namespace MDispatch.View.Inspection.PickedUp
 
         private void ScrolSizeDmg_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            Vibration.Vibrate(10);
+            Vibration.Vibrate(7);
             ImgResize rezizeImgnew = (ImgResize)dmgSelected;
             Rectangle rectangle = AbsoluteLayout.GetLayoutBounds(rezizeImgnew);
             rectangle.Height = scrolSizeDmg.Value;
@@ -163,6 +163,7 @@ namespace MDispatch.View.Inspection.PickedUp
             {
                 FullPagePhotoMV.ReSetDamage(dmgSelected, (int)rectangle.Width, (int)rectangle.Height);
             });
+            Vibration.Vibrate(7);
         }
 
         private void ScrolSizeDmg_SizeChanged(object sender, EventArgs e)

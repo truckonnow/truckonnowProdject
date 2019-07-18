@@ -6,6 +6,7 @@ using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.Runtime;
 using Android.Support.V4.App;
 using Android.Support.V4.Content;
@@ -33,7 +34,7 @@ namespace MDispatch.Droid.NewrRender
         RelativeLayout mainLayout;
         TextureView liveView;
         ProgressBar progressBar;
-        PaintCodeButton capturePhotoButton;
+        Button capturePhotoButton;
 
         [Obsolete]
         Android.Hardware.Camera camera;
@@ -57,8 +58,8 @@ namespace MDispatch.Droid.NewrRender
                 RelativeLayout.LayoutParams.MatchParent);
             liveView.LayoutParameters = liveViewParams;
             mainLayout.AddView(liveView);
-
             capturePhotoButton = new PaintCodeButton(Context);
+            capturePhotoButton.SetBackgroundDrawable(ContextCompat.GetDrawable(Context, Resource.Drawable.Take));
             RelativeLayout.LayoutParams captureButtonParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WrapContent,
                 RelativeLayout.LayoutParams.WrapContent);

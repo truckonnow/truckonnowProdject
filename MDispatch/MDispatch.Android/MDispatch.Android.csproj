@@ -206,7 +206,7 @@
     <AndroidResource Include="Resources\drawable\DamageP16.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\DamageP17.png" />
+    <AndroidResource Include="Resources\drawable\DamageP23.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\DamageP0.png" />
@@ -260,7 +260,7 @@
     <AndroidResource Include="Resources\drawable\DamageD16.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\DamageD17.png" />
+    <AndroidResource Include="Resources\drawable\DamageD23.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\DamageD0.png" />
@@ -860,6 +860,21 @@
     <AndroidResource Include="Resources\drawable\custom_progressbar_style.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Take.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\DamageD19.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\DamageD17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\DamageD18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\DamageD21.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

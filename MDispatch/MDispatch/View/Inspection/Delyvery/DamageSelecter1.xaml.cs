@@ -65,6 +65,12 @@ namespace MDispatch.View.Inspection.PickedUp
             "HD - Hail Damage",
             "LC - Loose Contents",
             "RU - Rust",
+            "B - Bulged",
+            "C - Chip",
+            "DN - Ding",
+            "HS - Hairline Scratch",
+            "P - Peeling",
+            "PT - Pitted",
             "O - Other"
         };
 

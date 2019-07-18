@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -44,7 +45,7 @@ namespace MDispatch.View.Inspection.PickedUp
             controlDmg.IsEnabled = true;
             controlDmg.IsVisible = true;
             dmgSelected = (Image)sender;
-            scrolSizeDmg.PropertyChanged += ScrolSizeDmg_PropertyChanged;
+            scrolSizeDmg.ValueChanged += ScrolSizeDmg_ValueChanged;
             deletBtnDmg.Clicked += DeleteDamage;
         }
 
@@ -59,7 +60,7 @@ namespace MDispatch.View.Inspection.PickedUp
 
         private void RemoveSelectedDmg()
         {
-            scrolSizeDmg.PropertyChanged -= ScrolSizeDmg_PropertyChanged;
+            scrolSizeDmg.ValueChanged -= ScrolSizeDmg_ValueChanged;
             deletBtnDmg.Clicked -= DeleteDamage;
             controlDmg.IsEnabled = false;
             controlDmg.IsVisible = false;
@@ -143,26 +144,32 @@ namespace MDispatch.View.Inspection.PickedUp
             await Navigation.PopAsync();
         }
 
-        private void ScrolSizeDmg_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ScrolSizeDmg_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            if (e.PropertyName == "Value")
+            Vibration.Vibrate(7);
+            ImgResize rezizeImgnew = (ImgResize)dmgSelected;
+            Rectangle rectangle = AbsoluteLayout.GetLayoutBounds(rezizeImgnew);
+            rectangle.Height = scrolSizeDmg.Value;
+            rectangle.Width = scrolSizeDmg.Value;
+            AbsoluteLayout.SetLayoutBounds(rezizeImgnew, rectangle);
+            Task.Run(() =>
             {
-                ImgResize rezizeImgnew = (ImgResize)dmgSelected;
-                Rectangle rectangle = AbsoluteLayout.GetLayoutBounds(rezizeImgnew);
-                rectangle.Height = scrolSizeDmg.Value;
-                rectangle.Width = scrolSizeDmg.Value;
-                    AbsoluteLayout.SetLayoutBounds(rezizeImgnew, rectangle);
-                    Task.Run(() =>
-                    {
-                        fullPagePhotoDelyveryMV.ReSetDamage(dmgSelected, (int)rectangle.Width, (int)rectangle.Height);
-                    });
-            }
+                fullPagePhotoDelyveryMV.ReSetDamage(dmgSelected, (int)rectangle.Width, (int)rectangle.Height);
+            });
+            Vibration.Vibrate(7);
         }
+
 
         [Obsolete]
         private void Button_Clicked(object sender, EventArgs e)
         {
             fullPagePhotoDelyveryMV.SavePhoto(true);
+        }
+
+        private void ScrolSizeDmg_SizeChanged(object sender, EventArgs e)
+        {
+            double width = App.Current.MainPage.Width;
+            ((Slider)sender).WidthRequest = width * 0.80;
         }
     }
 }
