@@ -136,6 +136,7 @@
     <Compile Include="NewRender\ToastNotify\ToastIOS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NewRender\Button\CorectButton.cs" />
+    <Compile Include="NewRender\Picker\PikerCustom.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -272,5 +273,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="NewRender\Button\" />
+    <Folder Include="NewRender\Picker\" />
   </ItemGroup>
 </Project>

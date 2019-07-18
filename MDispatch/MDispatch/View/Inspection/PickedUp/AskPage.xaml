@@ -69,6 +69,8 @@
                     <StackLayout>
                         <Label Text="Type car" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                         <OnPlatform x:TypeArguments="View">
+                    <On Platform="Android">
                         <input:Dropdown CornerRadius="6" BorderColor="#4fd2c2" Placeholder="Select type car" SelectedItemChanged="Dropdown_SelectedItemChanged_1">
                             <input:Dropdown.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
@@ -82,6 +84,25 @@
                                 </x:Array>
                             </input:Dropdown.ItemsSource>
                         </input:Dropdown>
+                    </On>
+                    <On Platform="iOS">
+                        <Frame Padding="5" CornerRadius="5" BorderColor="#4fd2c2">
+                            <Picker SelectedIndexChanged="ToolbarItem_Clicked ">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Sedan</x:String>
+                                        <x:String>Suv</x:String>
+                                        <!--<x:String>Convertible</x:String>-->
+                                        <x:String>Coupe</x:String>
+                                        <x:String>Pick Up</x:String>
+                                        <!--<x:String>Trike</x:String>
+                                        <x:String>Van</x:String>-->
+                                    </x:Array> 
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </Frame>
+                    </On>
+                </OnPlatform>
                     </StackLayout>
                 </Frame>
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock10">
