@@ -422,5 +422,10 @@ namespace MDispatch.View.AskPhoto
             }
             return ImageBytes;
         }
+
+        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

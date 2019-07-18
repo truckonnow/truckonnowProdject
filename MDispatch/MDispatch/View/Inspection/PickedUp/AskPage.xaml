@@ -87,7 +87,7 @@
                     </On>
                     <On Platform="iOS">
                         <Frame Padding="5" CornerRadius="5" BorderColor="#4fd2c2">
-                            <Picker SelectedIndexChanged="ToolbarItem_Clicked ">
+                            <Picker SelectedIndexChanged="Picker_SelectedIndexChanged">
                                 <Picker.ItemsSource>
                                     <x:Array Type="{x:Type x:String}">
                                         <x:String>Sedan</x:String>
