@@ -316,5 +316,17 @@ namespace MDispatch.View.Inspection.PickedUp
             }
             return paymmant;
         }
+
+        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            liabilityAndInsuranceMV.What_form_of_payment_are_you_using_to_pay_for_transportation = (string)((Picker)sender).SelectedItem;
+            Paymmant = GetPaymmant((string)((Picker)sender).SelectedItem);
+            if (payBlockSelectPatment.Children.Count == 4)
+            {
+                payBlockSelectPatment.Children.RemoveAt(3);
+            }
+            payBlockSelectPatment.Children.Add(Paymmant.GetStackLayout());
+            isAsk2 = false;
+        }
     }
 }

@@ -425,7 +425,9 @@ namespace MDispatch.View.AskPhoto
 
         private void Picker_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            isAsk11 = true;
+            askPageMV.Ask.TypeVehicle = (string)((Picker)sender).SelectedItem;
+            askPageMV.VehiclwInformation.Type = askPageMV.Ask.TypeVehicle;
         }
     }
 }

@@ -548,5 +548,17 @@ namespace MDispatch.View.Inspection
             }
             return ImageBytes;
         }
+
+        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            isAsk6 = true;
+            ask1PageMV.Ask1.What_method_of_exit_did_you_use = (string)((Picker)sender).SelectedItem;
+        }
+
+        private void Picker_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            isAsk11 = true;
+            ask1PageMV.Ask1.What_method_of_exit_did_you_use = (string)((Picker)sender).SelectedItem;
+        }
     }
 }

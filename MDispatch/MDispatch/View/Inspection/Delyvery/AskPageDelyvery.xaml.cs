@@ -408,5 +408,11 @@ namespace MDispatch.View.Inspection.Delyvery
                 askBlock16.BorderColor = Color.BlueViolet;
             }
         }
+
+        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            isAsk5 = true;
+            askDelyveryMV.AskDelyvery.How_did_you_get_inside_of_the_vehicle = (string)((Picker)sender).SelectedItem;
+        }
     }
 }
