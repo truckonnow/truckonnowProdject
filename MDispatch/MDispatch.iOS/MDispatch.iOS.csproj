@@ -270,4 +270,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\pickedUpViewOrder.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NewRender\Button\" />
+  </ItemGroup>
 </Project>
