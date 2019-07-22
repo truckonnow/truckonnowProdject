@@ -50,7 +50,14 @@
                         <div>
                             <p class="stPData">Delivery to @ViewBag.Orders[i].Driverr.FullName</p>
                             <p class="stPData">Phone: @ViewBag.Orders[i].Driverr.PhoneNumber</p>
-                            <p class="stPData">Customer must pay shipping to @ViewBag.Orders[i].DataPaid</p>
+                            @if (DateTime.Parse(ViewBag.Orders[i].DataPaid) >= DateTime.Now)
+                            {
+                                <p class="stPData">Customer must pay shipping to @ViewBag.Orders[i].DataPaid</p>
+                            }
+                            else
+                            {
+                                <p style="color:red;" class="stPData">Customer must pay shipping to @ViewBag.Orders[i].DataPaid</p>
+                            }
                         </div>
                     </div>
                 </div>
