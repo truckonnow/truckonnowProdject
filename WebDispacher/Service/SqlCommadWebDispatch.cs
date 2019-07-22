@@ -134,6 +134,11 @@ namespace WebDispacher.Dao
             return context.Shipping.FirstOrDefault(s => s.VehiclwInformations.FirstOrDefault(v => v == vehiclwInformation) != null);
         }
 
+        public Driver GetDriver(int id)
+        {
+            return context.Drivers.FirstOrDefault(d => d.Id == id);
+        }
+
         public async void SavevechInDb(string idVech, VehiclwInformation vehiclwInformation)
         {
             VehiclwInformation vehiclwInformationDb = await context.VehiclwInformation.FirstOrDefaultAsync(v => v.Id.ToString() == idVech);
@@ -424,6 +429,14 @@ namespace WebDispacher.Dao
         public async void AddDriver(Driver driver)
         {
             await context.Drivers.AddAsync(driver);
+            await context.SaveChangesAsync();
+        }
+
+
+
+        public async void UpdateDriver(Driver driver)
+        {
+            context.Drivers.Update(driver);
             await context.SaveChangesAsync();
         }
 

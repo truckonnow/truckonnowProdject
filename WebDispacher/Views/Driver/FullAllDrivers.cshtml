@@ -11,7 +11,7 @@
                 <span class="inpData">Email: @ViewBag.Drivers[i].EmailAddress</span>
                 <span class="inpData">, </span>
                 <span class="inpData">Phone: @ViewBag.Drivers[i].PhoneNumber</span><br /> <br />
-                <input class="btnId" value="Edit" type="button" />
+                <a href="@ViewBag.BaseUrl/Driver/Drivers/Edit?id=@ViewBag.Drivers[i].Id" class="btnId">Edit</a>
                 <input class="btnId" value="Remove" type="button" onclick="Remove(@ViewBag.Drivers[i].Id)"/>
             </div>
         }
