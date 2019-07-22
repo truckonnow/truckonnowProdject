@@ -1,17 +1,13 @@
 ﻿<div class="body">
     <input class="backBtn" type="button" value="← Back to Orders" onclick="history.back();" />
     <form action="SavaOrder" method="post">
-        <input type="text" name="idOrder" style="display:none;" value="@ViewBag.Order.Id"/>
+        <input type="text" name="idOrder" style="display:none;" value="@ViewBag.Order.Id" />
         <div class="contentBody">
             <div class="content">
                 <p class="inpLabe">Load Id</p>
                 <input name="idLoad" class="inpText" type="text" value="@ViewBag.Order.idOrder" />
-                <p class="inpLabe">Internal Load ID</p>
-                <input name="internalLoadID" class="inpText" type="text" value="@ViewBag.Order.InternalLoadID" />
-                <p class="inpLabe">Driver</p>
-                <select name="driver" class="dropDown">
-                    <option value="">------------------------------------</option>
-                </select>
+                <p class="inpLabe">Instructions</p>
+                <textarea name="instructions" class="inpText" style="height:92px;">@ViewBag.Order.Titl1DI</textarea>
             </div>
             <div class="content">
                 <p class="inpLabe">Status</p>
@@ -21,8 +17,6 @@
                     <option value="Picked up">Picked up</option>
                     <option value="Delivered">Delivered</option>
                 </select>
-                <p class="inpLabe">Instructions</p>
-                <textarea name="instructions" class="inpText" style="height:92px;">@ViewBag.Order.Titl1DI</textarea>
             </div>
         </div>
         <div class="contentBody">
@@ -65,8 +59,6 @@
                 <input name="phoneD" class="inpText" type="text" value="@ViewBag.Order.PhoneD" />
                 <p class="inpLabe">Email</p>
                 <input name="emailD" class="inpText" type="text" value="@ViewBag.Order.EmailD" />
-                <p class="inpLabe">Scheduled Pickup Date</p>
-                <input name="scheduledPickupDateD" class="inpText" type="text" value="@ViewBag.Order.DeliveryEstimated" />
             </div>
         </div>
         <div class="bodyTable">
@@ -106,7 +98,7 @@
                     }
                 </tbody>
             </table>
-            <input class="btnAddandRevoveVech btnD" type="button" value="+" onclick="AddVech(this)"/>
+            <input class="btnAddandRevoveVech btnD" type="button" value="+" onclick="AddVech(this)" />
         </div>
         <hr style="border-color:rgba(228, 228, 228, 0.40);margin:10px;" />
         <div class="contentBody">
@@ -125,12 +117,10 @@
                 </select>
                 <p class="inpLabe">Price</p>
                 <input name="price" class="inpText" type="text" value="@ViewBag.Order.PriceListed" />
-                <p class="inpLabe">Broker Fee</p>
-                <input name="brokerFee" class="inpText" type="text" value="@ViewBag.Order.BrokerFee" />
             </div>
             <div class="content">
-                <p class="inpLabe">Payment terms</p>
-                <textarea name="paymentTerms" class="inpText" style="height:92px;">IT ADD</textarea>
+                <p class="inpLabe">Broker Fee</p>
+                <input name="brokerFee" class="inpText" type="text" value="@ViewBag.Order.BrokerFee" />
                 <div style="display:flex;">
                     <input class="btnSave" value="Save" type="submit" />
                     <a class="btnArchived" href="Config.BaseReqvesteUrl/Dashbord/Order/ArchivedOrder?id=@ViewBag.Order.Id">Archive</a>
@@ -334,6 +324,10 @@
 
             .content {
                 width: 40%;
+            }
+            
+            .contentCenrer {
+                width: 90%;
             }
 
             .contentBody {
