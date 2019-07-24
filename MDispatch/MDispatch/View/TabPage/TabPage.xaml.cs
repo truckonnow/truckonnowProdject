@@ -32,7 +32,6 @@ namespace MDispatch.View.TabPage
             AnimationNavigationPage navigationPage = new AnimationNavigationPage(new ActivePage(managerDispatchMob, Navigation));
             navigationPage.Title = "Active";
             navigationPage.IconImageSource = "Aktiv.png";
-            navigationPage.SetBinding(TabBadge.BadgeTextProperty, new Binding("Count"));
             Children.Add(navigationPage);
         }
 
@@ -40,8 +39,7 @@ namespace MDispatch.View.TabPage
         {
             AnimationNavigationPage navigationPage = new AnimationNavigationPage(new DeiveredPage(managerDispatchMob, Navigation));
             navigationPage.Title = "Deiveredge";
-            navigationPage.IconImageSource = "Archive.png";
-            navigationPage.SetBinding(TabBadge.BadgeTextProperty, new Binding("Count"));
+            navigationPage.IconImageSource = "Delivery.png";
             Children.Add(navigationPage);
         }
 
@@ -49,8 +47,7 @@ namespace MDispatch.View.TabPage
         {
             AnimationNavigationPage navigationPage = new AnimationNavigationPage(new ArchivedPage(managerDispatchMob, Navigation));
             navigationPage.Title = "Archived";
-            navigationPage.IconImageSource = "Delivery.png";
-            navigationPage.SetBinding(TabBadge.BadgeTextProperty, new Binding("Count"));
+            navigationPage.IconImageSource = "Archive.png";
             Children.Add(navigationPage);
         }
     }
