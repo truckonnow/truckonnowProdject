@@ -251,9 +251,6 @@
     <BundleResource Include="Resources\Aktiv.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Archive.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\pickedUpOrder1.png" />
   </ItemGroup>
   <ItemGroup>
@@ -963,5 +960,8 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Suv27.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Archive.png" />
   </ItemGroup>
 </Project>
