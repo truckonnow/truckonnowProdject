@@ -72,11 +72,11 @@ namespace ApiMobaileServise.Servise
         public async Task SaveDamageForUser(string idVech, string damageForUserJson)
         {
             List<DamageForUser> damageForUsers = JsonConvert.DeserializeObject<List<DamageForUser>>(damageForUserJson);
-            await Task.Run(async() =>
+            Task.Run(async() =>
             {
                 VehiclwInformation vehiclwInformation = await sqlCommandApiMobile.GetVehiclwInformationAndSaveDamageForUser(idVech, damageForUsers);
                 ITypeScan typeScan = GetTypeScan(vehiclwInformation.Ask.TypeVehicle);
-                typeScan.SetDamage(damageForUsers, vehiclwInformation.Ask.TypeVehicle, vehiclwInformation.Scan.path);
+                await typeScan.SetDamage(damageForUsers, vehiclwInformation.Ask.TypeVehicle, vehiclwInformation.Scan.path);
             });
         }
 
@@ -100,8 +100,11 @@ namespace ApiMobaileServise.Servise
         {
             PhotoInspection photoInspection = JsonConvert.DeserializeObject<PhotoInspection>(photoInspectionJson);
             VehiclwInformation vehiclwInformation = await sqlCommandApiMobile.SavePhotoInspectionInDb(idVe, photoInspection);
-            ITypeScan typeScan = GetTypeScan(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
-            typeScan.SetDamage(photoInspection, vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), vehiclwInformation.Scan.path);
+            Task.Run(async() =>
+            {
+                ITypeScan typeScan = GetTypeScan(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+                await typeScan.SetDamage(photoInspection, vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), vehiclwInformation.Scan.path);
+            });
         }
 
         private ITypeScan GetTypeScan(string type)

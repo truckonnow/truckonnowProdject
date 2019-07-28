@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Threading.Tasks;
 using DaoModels.DAO.Models;
 
 namespace ApiMobaileServise.Servise.AddDamage
@@ -162,7 +163,7 @@ namespace ApiMobaileServise.Servise.AddDamage
             return maxMinForYAndX;
         }
 
-        public void SetDamage(PhotoInspection photoInspection, string typrCar, string pathScan)
+        public async Task SetDamage(PhotoInspection photoInspection, string typrCar, string pathScan)
         {
             if (photoInspection.Damages != null)
             {
@@ -201,7 +202,7 @@ namespace ApiMobaileServise.Servise.AddDamage
             }
         }
 
-        public void SetDamage(List<DamageForUser> damageForUsers, string typrCar, string pathScan)
+        public async Task SetDamage(List<DamageForUser> damageForUsers, string typrCar, string pathScan)
         {
             if(damageForUsers != null)
             {
