@@ -224,7 +224,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             AllSourseImage = imageSources1;
         }
 
-        public async void SetPhoto(byte[] PhotoInArrayByte)
+        public async void SetPhoto(byte[] PhotoInArrayByte, double width, double height)
         {
             if (PhotoInspection == null)
             {
@@ -239,7 +239,9 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             Photo photo = new Photo();
             string pathIndePhoto = PhotoInspection.Photos.Count == 0 ? PhotoInspection.IndexPhoto.ToString() : $"{PhotoInspection.IndexPhoto}.{PhotoInspection.Photos.Count}";
             PhotoInspection.CurrentStatusPhoto = "PikedUp";
-            photo.Base64 = JsonConvert.SerializeObject(PhotoInArrayByte);
+            photo.Width = width;
+            photo.Height = height;
+            photo.Base64 = Convert.ToBase64String(PhotoInArrayByte);
             photo.path = $"../Photo/{VehiclwInformation.Id}/PikedUp/PhotoInspection/{pathIndePhoto}.jpg";
             PhotoInspection.Photos.Add(photo);
         }
@@ -249,7 +251,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         {
             bool isNavigationMany = false;
             int navigationStack_Count = isNavigWthDamag ? Navigation.NavigationStack.Count - 1 : Navigation.NavigationStack.Count;
-            if (navigationStack_Count > 3)
+            if (navigationStack_Count > 2)
             {
                 await PopupNavigation.PushAsync(new LoadPage());
                 isNavigationMany = true;

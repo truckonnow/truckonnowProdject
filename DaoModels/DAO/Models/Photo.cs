@@ -8,13 +8,15 @@ namespace DaoModels.DAO.Models
     {
         public int Id { get; set; }
         public string path { get; set; }
+        public double Width { get; set; }
+        public double Height { get; set; }
         public string Base64
         {
             set
             {
                 try
                 {
-                    byte[] photoInArrayByte = JsonConvert.DeserializeObject<byte[]>(value);
+                    byte[] photoInArrayByte = Convert.FromBase64String(value);
                     if (!Directory.Exists(path))
                     {
                         string pathTmp = path.Remove(path.LastIndexOf("/"));

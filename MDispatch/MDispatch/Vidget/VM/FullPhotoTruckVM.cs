@@ -87,7 +87,7 @@ namespace MDispatch.Vidget.VM
         {
             bool isNavigationMany = false;
             bool isEndInspection = false;
-            if (navigation.NavigationStack.Count > 2)
+            if (navigation.NavigationStack.Count > 1)
             {
                 await PopupNavigation.PushAsync(new LoadPage());
                 isNavigationMany = true;

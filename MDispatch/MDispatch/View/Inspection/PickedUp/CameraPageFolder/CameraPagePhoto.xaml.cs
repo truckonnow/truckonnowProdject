@@ -30,7 +30,7 @@ namespace MDispatch.View.PageApp
                 return;
             }
             fullPagePhoto.fullPagePhotoMV.AddNewFotoSourse(result.Result);
-            fullPagePhoto.fullPagePhotoMV.SetPhoto(result.Result);
+            fullPagePhoto.fullPagePhotoMV.SetPhoto(result.Result, result.Width, result.Height);
             fullPagePhoto.SetbtnVisable();
             if (pageAddDamage != null)
             {

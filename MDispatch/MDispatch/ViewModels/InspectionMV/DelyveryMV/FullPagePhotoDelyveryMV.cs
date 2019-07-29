@@ -204,7 +204,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             PhotoInspection.IndexPhoto = Car.GetIndexCarFullPhoto(inderxPhotoInspektion);
             PhotoInspection.CurrentStatusPhoto = "Delyvery";
             Photo photo = new Photo();
-            string photoJson = JsonConvert.SerializeObject(PhotoInArrayByte);
+            string photoJson = Convert.ToBase64String(PhotoInArrayByte);
             string pathIndePhoto = PhotoInspection.Photos.Count == 0 ? PhotoInspection.IndexPhoto.ToString() : $"{PhotoInspection.IndexPhoto}.{PhotoInspection.Photos.Count}";
             PhotoInspection.CurrentStatusPhoto = "Delyvery";
             photo.Base64 = photoJson;
@@ -217,7 +217,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         {
             bool isNavigationMany = false;
             int navigationStack_Count = isNavigWthDamag ? Navigation.NavigationStack.Count - 1 : Navigation.NavigationStack.Count;
-            if (navigationStack_Count > 3)
+            if (navigationStack_Count > 2)
             {
                 await PopupNavigation.PushAsync(new LoadPage());
                 isNavigationMany = true;

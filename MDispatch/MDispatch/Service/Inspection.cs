@@ -1,10 +1,17 @@
-﻿using MDispatch.Models;
+﻿using ImageMagick;
+using MDispatch.Models;
+using MDispatch.View.ServiceView.ResizeImage;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Net;
+using Xamarin.Forms;
 
 namespace MDispatch.Service
 {
@@ -363,7 +370,7 @@ namespace MDispatch.Service
                         dm.Image = null;
                         dm.ImageSource = null;
                     });
-                }
+                }   
                 string strPhotoInspection = JsonConvert.SerializeObject(photoInspection);
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Photo", Method.POST);
@@ -375,7 +382,7 @@ namespace MDispatch.Service
                 response = client.Execute(request);
                 content = response.Content;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return 4;
             }
@@ -387,6 +394,26 @@ namespace MDispatch.Service
             {
                 return GetData(content, ref description);
             }
+        }
+
+        protected byte[] OptimizeNResize(Bitmap original_image, double width, double heidth)
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            Bitmap final_image = null;
+            Graphics graphic = null;
+            int reqW = (int)width;
+            int reqH = (int)heidth;
+            final_image = new Bitmap(reqW, reqH);
+            graphic = Graphics.FromImage(final_image);
+            graphic.FillRectangle(new SolidBrush(System.Drawing.Color.Transparent),
+                new System.Drawing.Rectangle(0, 0, reqW, reqH));
+            graphic.InterpolationMode = InterpolationMode.HighQualityBicubic; 
+            graphic.DrawImage(original_image, 0, 0, reqW, reqH);
+            final_image.Save(memoryStream, ImageFormat.Jpeg);
+            if (graphic != null) graphic.Dispose();
+            if (original_image != null) original_image.Dispose();
+            if (final_image != null) final_image.Dispose();
+            return memoryStream.ToArray();
         }
 
         public int SaveDamageForuser(string token, string idVech, List<DamageForUser> damageForUsers, ref string description)

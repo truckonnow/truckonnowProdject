@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Android;
@@ -229,25 +230,11 @@ namespace MDispatch.Droid.NewrRender
                 var parameters = camera.GetParameters();
                 if (GetOrientation())
                 {
-                    if (height > 1280 && width > 720)
-                    {
-                        aspect = ((decimal)1280) / ((decimal)720);
-                    }
-                    else
-                    {
-                        aspect = ((decimal)height) / ((decimal)width);
-                    }
+                    aspect = ((decimal)height) / ((decimal)width);
                 }
                 else
                 {
-                    if (height > 720 && width > 1280)
-                    {
-                        aspect = ((decimal)1280) / ((decimal)720);
-                    }
-                    else
-                    {
-                        aspect = ((decimal)width) / ((decimal)height);
-                    }
+                    aspect = ((decimal)width) / ((decimal)height);
                 }
                 var previewSize = parameters.SupportedPreviewSizes
                                             .OrderBy(s => System.Math.Abs(s.Width / (decimal)s.Height - aspect))
@@ -281,10 +268,29 @@ namespace MDispatch.Droid.NewrRender
         public async void OnAutoFocus(bool success, Android.Hardware.Camera camera)
         {
             var bytes = await TakePhoto();
+            if (GetOrientation())
+            {
+                bytes = ResizeImage(bytes, 720, 1280);
+            }
+            else
+            {
+                bytes = ResizeImage(bytes, 1280, 720);
+            }
             (Element as CameraPage).SetPhotoResult(bytes, liveView.Bitmap.Width, liveView.Bitmap.Height);
             progressBar.Visibility = Android.Views.ViewStates.Invisible;
             capturePhotoButton.Visibility = Android.Views.ViewStates.Visible;
             isFocus = false;
+        }
+
+        public byte[] ResizeImage(byte[] imageData, float width, float height)
+        {
+            Bitmap originalImage = BitmapFactory.DecodeByteArray(imageData, 0, imageData.Length);
+            Bitmap resizedImage = Bitmap.CreateScaledBitmap(originalImage, (int)width, (int)height, false);
+            using (MemoryStream ms = new MemoryStream())
+            {
+                resizedImage.Compress(Bitmap.CompressFormat.Jpeg, 75, ms);
+                return ms.ToArray();
+            }
         }
         #endregion
     }
