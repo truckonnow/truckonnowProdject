@@ -172,7 +172,7 @@ namespace MDispatch.Droid.NewrRender
                 var image = Bitmap.CreateBitmap(liveView.Bitmap, 0, 0, liveView.Bitmap.Width, (int)(liveView.Bitmap.Width * ratio));
                 using (var imageStream = new System.IO.MemoryStream())
                 {
-                    await image.CompressAsync(Bitmap.CompressFormat.Jpeg, 50, imageStream);
+                    await image.CompressAsync(Bitmap.CompressFormat.Jpeg, 70, imageStream);
                     image.Recycle();
                     imageBytes = imageStream.ToArray();
                 }
@@ -229,11 +229,25 @@ namespace MDispatch.Droid.NewrRender
                 var parameters = camera.GetParameters();
                 if (GetOrientation())
                 {
-                    aspect = ((decimal)height) / ((decimal)width);
+                    if (height > 1280 && width > 720)
+                    {
+                        aspect = ((decimal)1280) / ((decimal)720);
+                    }
+                    else
+                    {
+                        aspect = ((decimal)height) / ((decimal)width);
+                    }
                 }
                 else
                 {
-                    aspect = ((decimal)width) / ((decimal)height);
+                    if (height > 720 && width > 1280)
+                    {
+                        aspect = ((decimal)1280) / ((decimal)720);
+                    }
+                    else
+                    {
+                        aspect = ((decimal)width) / ((decimal)height);
+                    }
                 }
                 var previewSize = parameters.SupportedPreviewSizes
                                             .OrderBy(s => System.Math.Abs(s.Width / (decimal)s.Height - aspect))
