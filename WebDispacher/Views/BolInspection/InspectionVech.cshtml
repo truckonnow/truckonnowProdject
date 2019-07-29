@@ -19,7 +19,7 @@
         <div class="inspectionBlock">
             @if (@ViewBag.Vehiclw.Scan != null)
             {
-                <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.Scan.Base64" />
+                <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.Scan.Base64" onclick="ClickImg(this)"/>
             }
             <p class="headStlP">Pickup Inspection</p>
             <br />
@@ -39,11 +39,11 @@
                                 Image img = Image.FromStream(ms);
                                 if (img.Height > img.Width)
                                 {
-                                    <img class="img Photove" src="data:image/gif;base64,@ViewBag.Vehiclw.PhotoInspections[i].Photos[j].Base64" />
+                                    <img class="img Photove" src="data:image/gif;base64,@ViewBag.Vehiclw.PhotoInspections[i].Photos[j].Base64" onclick="ClickImg(this)" />
                                 }
                                 else
                                 {
-                                    <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.PhotoInspections[i].Photos[j].Base64" />
+                                    <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.PhotoInspections[i].Photos[j].Base64" onclick="ClickImg(this)" />
                                 }
                             }
                         }
@@ -64,11 +64,11 @@
                     Image img = Image.FromStream(ms);
                     if (img.Height > img.Width)
                     {
-                        <img class="img Photove" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask.Any_personal_or_additional_items_with_or_in_vehicle[1].Base64" />
+                        <img class="img Photove" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask.Any_personal_or_additional_items_with_or_in_vehicle[i].Base64" onclick="ClickImg(this)" />
                     }
                     else
                     {
-                        <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask.Any_personal_or_additional_items_with_or_in_vehicle[i].Base64" />
+                        <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask.Any_personal_or_additional_items_with_or_in_vehicle[i].Base64" onclick="ClickImg(this)" />
                     }
                 }
             }
@@ -86,11 +86,11 @@
                     Image img = Image.FromStream(ms);
                     if (img.Height > img.Width)
                     {
-                        <img class="img Photove" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask.Any_paperwork_or_documentation[1].Base64" />
+                        <img class="img Photove" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask.Any_paperwork_or_documentation[i].Base64" onclick="ClickImg(this)" />
                     }
                     else
                     {
-                        <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask.Any_paperwork_or_documentation[i].Base64" />
+                        <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask.Any_paperwork_or_documentation[i].Base64" onclick="ClickImg(this)" />
                     }
                 }
             }
@@ -101,18 +101,18 @@
             <p class="headPhoto">Photos of additional details</p>
             @if (ViewBag.Vehiclw.Ask1 != null && ViewBag.Vehiclw.Ask1.Any_additional_parts_been_given_to_you != null && ViewBag.Vehiclw.Ask1.Any_additional_parts_been_given_to_you.Count != 0)
             {
-                @for (int i = 0; i < ViewBag.Vehiclw.Ask.Any_paperwork_or_documentation.Count; i++)
+                @for (int i = 0; i < ViewBag.Vehiclw.Ask1.Any_additional_parts_been_given_to_you.Count; i++)
                 {
                     byte[] image = Convert.FromBase64String(ViewBag.Vehiclw.Ask1.Any_additional_parts_been_given_to_you[i].Base64);
                     MemoryStream ms = new MemoryStream(image);
                     Image img = Image.FromStream(ms);
                     if (img.Height > img.Width)
                     {
-                        <img class="img Photove" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask1.Any_additional_parts_been_given_to_you[1].Base64" />
+                        <img class="img Photove" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask1.Any_additional_parts_been_given_to_you[i].Base64" onclick="ClickImg(this)" />
                     }
                     else
                     {
-                        <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask1.Any_additional_parts_been_given_to_you[i].Base64" />
+                        <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask1.Any_additional_parts_been_given_to_you[i].Base64" onclick="ClickImg(this)" />
                     }
                 }
             }
@@ -130,11 +130,11 @@
                     Image img = Image.FromStream(ms);
                     if (img.Height > img.Width)
                     {
-                        <img class="img Photove" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask1.Any_additional_documentation_been_given_after_loading[1].Base64" />
+                        <img class="img Photove" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask1.Any_additional_documentation_been_given_after_loading[i].Base64" onclick="ClickImg(this)" />
                     }
                     else
                     {
-                        <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask1.Any_additional_documentation_been_given_after_loading[i].Base64" />
+                        <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask1.Any_additional_documentation_been_given_after_loading[i].Base64" onclick="ClickImg(this)" />
                     }
                 }
             }
@@ -152,11 +152,11 @@
                     Image img = Image.FromStream(ms);
                     if (img.Height > img.Width)
                     {
-                        <img class="img Photove" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask1.App_will_force_driver_to_take_pictures_of_each_strap[1].Base64" />
+                        <img class="img Photove" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask1.App_will_force_driver_to_take_pictures_of_each_strap[i].Base64" onclick="ClickImg(this)"/>
                     }
                     else
                     {
-                        <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask1.App_will_force_driver_to_take_pictures_of_each_strap[i].Base64" />
+                        <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask1.App_will_force_driver_to_take_pictures_of_each_strap[i].Base64" onclick="ClickImg(this)"/>
                     }
                 }
             }
@@ -174,11 +174,11 @@
                     Image img = Image.FromStream(ms);
                     if (img.Height > img.Width)
                     {
-                        <img class="img Photove" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask1.Photo_after_loading_in_the_truck[1].Base64" />
+                        <img class="img Photove" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask1.Photo_after_loading_in_the_truck[i].Base64" onclick="ClickImg(this)"/>
                     }
                     else
                     {
-                        <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask1.Photo_after_loading_in_the_truck[i].Base64" />
+                        <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.Ask1.Photo_after_loading_in_the_truck[i].Base64" onclick="ClickImg(this)"/>
                     }
                 }
             }
@@ -203,11 +203,11 @@
                                 Image img = Image.FromStream(ms);
                                 if (img.Height > img.Width)
                                 {
-                                    <img class="img Photove" src="data:image/gif;base64,@ViewBag.Vehiclw.PhotoInspections[i].Photos[j].Base64" />
+                                    <img class="img Photove" src="data:image/gif;base64,@ViewBag.Vehiclw.PhotoInspections[i].Photos[j].Base64" onclick="ClickImg(this)"/>
                                 }
                                 else
                                 {
-                                    <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.PhotoInspections[i].Photos[j].Base64" />
+                                    <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.PhotoInspections[i].Photos[j].Base64" onclick="ClickImg(this)"/>
                                 }
                             }
                         }
@@ -228,11 +228,11 @@
                     Image img = Image.FromStream(ms);
                     if (img.Height > img.Width)
                     {
-                        <img class="img Photove" src="data:image/gif;base64,@ViewBag.Vehiclw.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo[1].Base64" />
+                        <img class="img Photove" src="data:image/gif;base64,@ViewBag.Vehiclw.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo[1].Base64" onclick="ClickImg(this)"/>
                     }
                     else
                     {
-                        <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo[i].Base64" />
+                        <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo[i].Base64" onclick="ClickImg(this)"/>
                     }
                 }
             }
@@ -243,6 +243,25 @@
         </div>
     </div>
 </div>
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="imgMD">
+  <div id="caption"></div>
+</div>
+<script>
+    var modal = document.getElementById("myModal");
+    var img = document.getElementById("imgMD");
+    var captionText = document.getElementById("caption");
+    var span = document.getElementsByClassName("close")[0];
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    function ClickImg(elm) {
+        modal.style.display = "block";
+        img.src = elm.src;
+    }
+</script>
 <style type="text/css">
     * {
         margin: 0px;
@@ -272,6 +291,8 @@
         padding: 5px;
         border-style: groove;
     }
+
+    .img:hover {opacity: 0.7;}
 
     .Photola {
         height: 19%;
@@ -341,5 +362,74 @@
 
     .filling {
         width: 100%;
+    }
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    }
+
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+    }
+
+    #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+    }
+
+    .modal-content, #caption {
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    }
+
+    @@keyframes zoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    @@media only screen and (max-width: 700px) {
+        .modal-content {
+            width: 100%;
+        }
     }
 </style>
