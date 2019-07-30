@@ -38,5 +38,9 @@
 	<string>NSCalendarsUsageDescription</string>
 	<key>CustomProperty1</key>
 	<string>Needs Calendar Permission</string>
+	<key>NSCameraUsageDescription</key>
+	<string>New Entry</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>New Entry</string>
 </dict>
 </plist>

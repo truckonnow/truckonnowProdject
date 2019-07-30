@@ -5,7 +5,9 @@ using MDispatch.View.TabPage.Tab;
 using MDispatch.ViewModels.TAbbPage;
 using Plugin.Badge.Abstractions;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace MDispatch.View.TabPage
@@ -19,7 +21,9 @@ namespace MDispatch.View.TabPage
         {
             tablePageMV = new TablePageMV(managerDispatchMob);
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
+                .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
             On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
             BindingContext = this.tablePageMV;
             InitActivePage(managerDispatchMob);

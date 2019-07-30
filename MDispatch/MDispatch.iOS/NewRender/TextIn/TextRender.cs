@@ -30,7 +30,7 @@ namespace MDispatch.iOS.NewRender.TextIn
         {
             var borderLayer = new CALayer();
             borderLayer.MasksToBounds = true;
-            borderLayer.Frame = new CoreGraphics.CGRect(0f, view.Height - 3, view.Width, 1f);
+            borderLayer.Frame = new CoreGraphics.CGRect(0f, view.Height - 2, view.Width, 1f);
             borderLayer.BorderColor = Color.FromHex("#000000").ToCGColor();
             borderLayer.BorderWidth = 1.0f;
             Control.Layer.AddSublayer(borderLayer);

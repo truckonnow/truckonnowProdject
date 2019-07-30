@@ -137,6 +137,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NewRender\Button\CorectButton.cs" />
     <Compile Include="NewRender\Picker\PikerCustom.cs" />
+    <Compile Include="NewRender\CustomCamera\CameraPageRender.cs" />
+    <Compile Include="NewRender\CustomCamera\UIPaintCodeButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -963,5 +965,8 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Archive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NewRender\CustomCamera\" />
   </ItemGroup>
 </Project>
