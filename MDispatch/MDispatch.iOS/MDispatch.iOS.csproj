@@ -139,6 +139,7 @@
     <Compile Include="NewRender\Picker\PikerCustom.cs" />
     <Compile Include="NewRender\CustomCamera\CameraPageRender.cs" />
     <Compile Include="NewRender\CustomCamera\UIPaintCodeButton.cs" />
+    <Compile Include="NewRender\Orientation\OrientationHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -968,5 +969,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="NewRender\CustomCamera\" />
+    <Folder Include="NewRender\Orientation\" />
   </ItemGroup>
 </Project>

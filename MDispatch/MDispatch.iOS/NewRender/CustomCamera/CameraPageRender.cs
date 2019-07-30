@@ -93,7 +93,6 @@ namespace MDispatch.iOS.NewRender.CustomCamera
             {
                 var data = await CapturePhoto();
                 UIImage imageInfo = new UIImage(data);
-
                 (Element as CameraPage).SetPhotoResult(data.ToArray(),
                                                             (int)imageInfo.Size.Width,
                                                             (int)imageInfo.Size.Height);
