@@ -140,6 +140,7 @@
     <Compile Include="NewRender\CustomCamera\CameraPageRender.cs" />
     <Compile Include="NewRender\CustomCamera\UIPaintCodeButton.cs" />
     <Compile Include="NewRender\Orientation\OrientationHandler.cs" />
+    <Compile Include="NewRender\ContextPage\RenderContextPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -970,5 +971,8 @@
   <ItemGroup />
   <ItemGroup>
     <BundleResource Include="Resources\BackIconpage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NewRender\ContextPage\" />
   </ItemGroup>
 </Project>

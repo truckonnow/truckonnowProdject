@@ -26,6 +26,7 @@ namespace MDispatch.iOS
             UINavigationBar.Appearance.BarTintColor = Color.FromHex("#4fd2c2").ToUIColor();
             LoadApplication(new App());
             return base.FinishedLaunching(app, options);
+            //Window.RootViewController = new UINavigationController(Window.RootViewController);
         }
 
         public UIInterfaceOrientationMask CurrentOrientation = UIInterfaceOrientationMask.All;

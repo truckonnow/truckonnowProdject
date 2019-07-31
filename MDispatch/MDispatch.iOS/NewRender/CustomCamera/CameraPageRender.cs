@@ -25,6 +25,8 @@ namespace MDispatch.iOS.NewRender.CustomCamera
         {
         }
 
+        
+
         public override async void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -54,7 +56,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
             videoPreviewLayer = new AVCaptureVideoPreviewLayer(captureSession)
             {
                 Frame = liveCameraStream.Bounds,
-                Orientation = AVCaptureVideoOrientation.LandscapeRight
+                Orientation = GetCameraForOrientation()
             };
             liveCameraStream.Layer.AddSublayer(videoPreviewLayer);
             var captureDevice = AVCaptureDevice.DefaultDeviceWithMediaType(AVMediaType.Video);
@@ -79,6 +81,22 @@ namespace MDispatch.iOS.NewRender.CustomCamera
             return jpegImageAsNsData;
         }
 
+        public AVCaptureVideoOrientation GetCameraForOrientation()
+        {
+            var currentOrientation = UIApplication.SharedApplication.StatusBarOrientation;
+            AVCaptureVideoOrientation aVCaptureVideoOrientation = AVCaptureVideoOrientation.Portrait;
+
+            if (currentOrientation == UIInterfaceOrientation.Portrait)
+            {
+                aVCaptureVideoOrientation = AVCaptureVideoOrientation.Portrait;
+            }
+            else if (currentOrientation == UIInterfaceOrientation.LandscapeRight)
+            {
+                aVCaptureVideoOrientation = AVCaptureVideoOrientation.LandscapeRight;
+            }
+            return aVCaptureVideoOrientation;
+        }
+
         private void SetupEventHandlers()
         {
             takePhotoButton.TouchUpInside += async (s, e) =>
@@ -93,7 +111,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
 
         private void SetupUserInterface()
         {
-            var centerButtonX = View.Bounds.GetMidX();
+            var centerButtonX = View.Bounds.GetMidX() + 150;
             var bottomButtonY = View.Bounds.Bottom - 85;
             var topRightX = View.Bounds.Right - 65;
             var buttonWidth = 70;
