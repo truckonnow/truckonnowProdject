@@ -967,8 +967,8 @@
   <ItemGroup>
     <BundleResource Include="Resources\Archive.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="NewRender\CustomCamera\" />
-    <Folder Include="NewRender\Orientation\" />
+    <BundleResource Include="Resources\BackIconpage.png" />
   </ItemGroup>
 </Project>
