@@ -42,11 +42,8 @@ namespace MDispatch.Vidget.VM
 
         private async void Init()
         {
-            await Task.Run(() =>
-            {
-                NameLayute = truckCar.GetNameTruck(IndexCurent);
-                truckCar.Orinteble(IndexCurent);
-            });
+               NameLayute = truckCar.GetNameTruck(IndexCurent);
+               await truckCar.Orinteble(IndexCurent);
         }
 
         public string IdDriver { get; set; }
@@ -87,7 +84,7 @@ namespace MDispatch.Vidget.VM
         {
             bool isNavigationMany = false;
             bool isEndInspection = false;
-            if (navigation.NavigationStack.Count > 1)
+            if (navigation.NavigationStack.Count > 2)
             {
                 await PopupNavigation.PushAsync(new LoadPage());
                 isNavigationMany = true;

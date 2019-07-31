@@ -17,6 +17,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
         AVCaptureDeviceInput captureDeviceInput;
         AVCaptureStillImageOutput stillImageOutput;
 
+        AVCaptureVideoPreviewLayer videoPreviewLayer = null;
         UIPaintCodeButton takePhotoButton;
         UIView liveCameraStream;
 
@@ -33,6 +34,11 @@ namespace MDispatch.iOS.NewRender.CustomCamera
             SetupLiveCameraStream();
         }
 
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+        }
+
         private async Task AuthorizeCameraUse()
         {
             var authorizationStatus = AVCaptureDevice.GetAuthorizationStatus(AVMediaType.Video);
@@ -45,9 +51,10 @@ namespace MDispatch.iOS.NewRender.CustomCamera
         private void SetupLiveCameraStream()
         {
             captureSession = new AVCaptureSession();
-            var videoPreviewLayer = new AVCaptureVideoPreviewLayer(captureSession)
+            videoPreviewLayer = new AVCaptureVideoPreviewLayer(captureSession)
             {
-                Frame = liveCameraStream.Bounds
+                Frame = liveCameraStream.Bounds,
+                Orientation = AVCaptureVideoOrientation.LandscapeRight
             };
             liveCameraStream.Layer.AddSublayer(videoPreviewLayer);
             var captureDevice = AVCaptureDevice.DefaultDeviceWithMediaType(AVMediaType.Video);
@@ -72,21 +79,6 @@ namespace MDispatch.iOS.NewRender.CustomCamera
             return jpegImageAsNsData;
         }
 
-
-        public AVCaptureDevice GetCameraForOrientation(AVCaptureDevicePosition orientation)
-        {
-            var devices = AVCaptureDevice.DevicesWithMediaType(AVMediaType.Video);
-
-            foreach (var device in devices)
-            {
-                if (device.Position == orientation)
-                {
-                    return device;
-                }
-            }
-            return null;
-        }
-
         private void SetupEventHandlers()
         {
             takePhotoButton.TouchUpInside += async (s, e) =>
@@ -101,11 +93,9 @@ namespace MDispatch.iOS.NewRender.CustomCamera
 
         private void SetupUserInterface()
         {
-            var centerButtonX = View.Bounds.GetMidX() - 35f;
+            var centerButtonX = View.Bounds.GetMidX();
             var bottomButtonY = View.Bounds.Bottom - 85;
             var topRightX = View.Bounds.Right - 65;
-            var topLeftX = View.Bounds.X + 25;
-            var topButtonY = View.Bounds.Top + 25;
             var buttonWidth = 70;
             var buttonHeight = 70;
             liveCameraStream = new UIView()

@@ -27,5 +27,12 @@ namespace MDispatch.iOS
             LoadApplication(new App());
             return base.FinishedLaunching(app, options);
         }
+
+        public UIInterfaceOrientationMask CurrentOrientation = UIInterfaceOrientationMask.All;
+
+        public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations(UIApplication application, UIWindow forWindow)
+        {
+            return CurrentOrientation;
+        }
     }
 }

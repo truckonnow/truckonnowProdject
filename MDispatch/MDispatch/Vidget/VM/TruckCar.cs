@@ -1,4 +1,5 @@
-﻿using MDispatch.NewElement;
+﻿using System.Threading.Tasks;
+using MDispatch.NewElement;
 using MDispatch.View.GlobalDialogView;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
@@ -270,7 +271,7 @@ namespace MDispatch.Vidget.VM
             }
         }
 
-        public async void Orinteble(int indexTruckPhoto)
+        public async Task Orinteble(int indexTruckPhoto)
         {
             DependencyService.Get<IOrientationHandler>().ForceLandscape();
             //if (indexTruckPhoto == 1 || indexTruckPhoto == 2 || indexTruckPhoto == 3 || indexTruckPhoto == 6 || indexTruckPhoto == 7 || indexTruckPhoto == 8 || indexTruckPhoto == 9 || indexTruckPhoto == 15 || indexTruckPhoto == 16

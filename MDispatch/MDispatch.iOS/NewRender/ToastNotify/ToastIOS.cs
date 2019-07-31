@@ -1,16 +1,43 @@
-﻿using MDispatch.iOS.NewRender.ToastNotify;
+﻿using Foundation;
+using MDispatch.iOS.NewRender.ToastNotify;
 using MDispatch.NewElement.ToastNotify;
+using UIKit;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(ToastIOS))]
 namespace MDispatch.iOS.NewRender.ToastNotify
 {
-    class ToastIOS : IToast
+    public class ToastIOS : IToast
     {
-        ToastIOS toastIOS = new ToastIOS();
+
+        NSTimer alertDelay;
+        UIAlertController alert;
+
         public void ShowMessage(string message)
         {
-            toastIOS.ShowMessage(message);
+            ShowAlert(message, 1.5);
+        }
+
+        void ShowAlert(string message, double seconds)
+        {
+            alertDelay = NSTimer.CreateScheduledTimer(seconds, (obj) =>
+            {
+                dismissMessage();
+            });
+            alert = UIAlertController.Create(null, message, UIAlertControllerStyle.ActionSheet);
+            UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
+        }
+
+        void dismissMessage()
+        {
+            if (alert != null)
+            {
+                alert.DismissViewController(true, null);
+            }
+            if (alertDelay != null)
+            {
+                alertDelay.Dispose();
+            }
         }
     }
 }
