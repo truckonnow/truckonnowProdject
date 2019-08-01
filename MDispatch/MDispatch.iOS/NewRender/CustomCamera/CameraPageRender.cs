@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Threading.Tasks;
 using AVFoundation;
 using CoreGraphics;
@@ -25,7 +26,11 @@ namespace MDispatch.iOS.NewRender.CustomCamera
         {
         }
 
-        
+        public override void WillAnimateRotation(UIInterfaceOrientation toInterfaceOrientation, double duration)
+        {
+            base.WillAnimateRotation(toInterfaceOrientation, duration);
+            ReSetOrientation(toInterfaceOrientation);
+        }
 
         public override async void ViewDidLoad()
         {
@@ -34,11 +39,6 @@ namespace MDispatch.iOS.NewRender.CustomCamera
             SetupEventHandlers();
             await AuthorizeCameraUse();
             SetupLiveCameraStream();
-        }
-
-        public override void ViewWillDisappear(bool animated)
-        {
-            base.ViewWillDisappear(animated);
         }
 
         private async Task AuthorizeCameraUse()
@@ -66,7 +66,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
             dictionary[AVVideo.CodecKey] = new NSNumber((int)AVVideoCodec.JPEG);
             stillImageOutput = new AVCaptureStillImageOutput()
             {
-                OutputSettings = new NSDictionary()
+                OutputSettings = new NSDictionary(),
             };
             captureSession.AddOutput(stillImageOutput);
             captureSession.AddInput(captureDeviceInput);
@@ -97,33 +97,89 @@ namespace MDispatch.iOS.NewRender.CustomCamera
             return aVCaptureVideoOrientation;
         }
 
+        public AVCaptureVideoOrientation GetCameraForOrientation(UIInterfaceOrientation toInterfaceOrientation)
+        {
+            AVCaptureVideoOrientation aVCaptureVideoOrientation = AVCaptureVideoOrientation.Portrait;
+
+            if (toInterfaceOrientation == UIInterfaceOrientation.Portrait)
+            {
+                aVCaptureVideoOrientation = AVCaptureVideoOrientation.Portrait;
+            }
+            else if (toInterfaceOrientation == UIInterfaceOrientation.LandscapeRight)
+            {
+                aVCaptureVideoOrientation = AVCaptureVideoOrientation.LandscapeRight;
+            }
+            return aVCaptureVideoOrientation;
+        }
+
+
         private void SetupEventHandlers()
         {
             takePhotoButton.TouchUpInside += async (s, e) =>
             {
                 var data = await CapturePhoto();
-                UIImage imageInfo = new UIImage(data);
-                (Element as CameraPage).SetPhotoResult(data.ToArray(),
-                                                            (int)imageInfo.Size.Width,
-                                                            (int)imageInfo.Size.Height);
+                UIImage originalImage = ImageFromByteArray(data.ToArray());
+                byte[] res = ResizeImageIOS(originalImage, 1280, 720);
+                (Element as CameraPage).SetPhotoResult(res, 1280, 720);
             };
+        }
+
+        public static byte[] ResizeImageIOS(UIImage originalImage, float width, float height)
+        {
+            UIImageOrientation orientation = originalImage.Orientation;
+            using (CGBitmapContext context = new CGBitmapContext(IntPtr.Zero,
+                                                 (int)width, (int)height, 8,
+                                                 4 * (int)width, CGColorSpace.CreateDeviceRGB(),
+                                                 CGImageAlphaInfo.PremultipliedFirst))
+            {
+                RectangleF imageRect = new RectangleF(0, 0, width, height);
+                context.DrawImage(imageRect, originalImage.CGImage);
+                UIKit.UIImage resizedImage = UIKit.UIImage.FromImage(context.ToImage(), 0, orientation);
+                return resizedImage.AsJPEG().ToArray();
+            }
+        }
+
+        public static UIKit.UIImage ImageFromByteArray(byte[] data)
+        {
+            if (data == null)
+            {
+                return null;
+            }
+            UIKit.UIImage image;
+            try
+            {
+                image = new UIKit.UIImage(Foundation.NSData.FromArray(data));
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return image;
+        }
+
+        private void ReSetOrientation(UIInterfaceOrientation toInterfaceOrientation)
+        {
+            var rightButtonX = View.Bounds.Right - 85;
+            var bottomButtonY = View.Bounds.Bottom - 85;
+            liveCameraStream.Frame = new CGRect(0f, 0f, View.Bounds.Width, View.Bounds.Height);
+            videoPreviewLayer.Frame = liveCameraStream.Bounds;
+            videoPreviewLayer.Orientation = GetCameraForOrientation(toInterfaceOrientation);
+            takePhotoButton.Frame = new CGRect(rightButtonX, bottomButtonY, 70, 70);
         }
 
         private void SetupUserInterface()
         {
-            var centerButtonX = View.Bounds.GetMidX() + 150;
+            var rightButtonX = View.Bounds.Right - 85;
             var bottomButtonY = View.Bounds.Bottom - 85;
-            var topRightX = View.Bounds.Right - 65;
             var buttonWidth = 70;
             var buttonHeight = 70;
             liveCameraStream = new UIView()
             {
                 Frame = new CGRect(0f, 0f, View.Bounds.Width, View.Bounds.Height)
             };
-
             takePhotoButton = new UIPaintCodeButton(DrawTakePhotoButton)
             {
-                Frame = new CGRect(centerButtonX, bottomButtonY, buttonWidth, buttonHeight)
+                Frame = new CGRect(rightButtonX, bottomButtonY, buttonWidth, buttonHeight)
             };
             View.InsertSubview(liveCameraStream, 0);
             View.Add(takePhotoButton);
