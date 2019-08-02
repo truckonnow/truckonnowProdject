@@ -1,6 +1,4 @@
-﻿using ImageMagick;
-using MDispatch.Models;
-using MDispatch.View.ServiceView.ResizeImage;
+﻿using MDispatch.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -10,8 +8,6 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Net;
-using Xamarin.Forms;
 
 namespace MDispatch.Service
 {
@@ -234,6 +230,10 @@ namespace MDispatch.Service
             string content = null;
             try
             {
+                EncodeJPEG(ask1.Any_additional_documentation_been_given_after_loading);
+                EncodeJPEG(ask1.Any_additional_parts_been_given_to_you);
+                EncodeJPEG(ask1.App_will_force_driver_to_take_pictures_of_each_strap);
+                EncodeJPEG(ask1.Photo_after_loading_in_the_truck);
                 string strJsonAsk = JsonConvert.SerializeObject(ask1);
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
@@ -370,7 +370,8 @@ namespace MDispatch.Service
                         dm.Image = null;
                         dm.ImageSource = null;
                     });
-                }   
+                }
+                EncodeJPEG(photoInspection.Photos);
                 string strPhotoInspection = JsonConvert.SerializeObject(photoInspection);
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Photo", Method.POST);
@@ -589,6 +590,39 @@ namespace MDispatch.Service
                 description = responseAppS
                     .Value<string>("description");
                 return 2;
+            }
+        }
+
+        private ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
+        }
+
+        private void EncodeJPEG(List<Photo> photos)
+        {
+            if (photos != null)
+            {
+                photos.ForEach((dm) =>
+                {
+                    Bitmap bmp1 = new Bitmap(new MemoryStream(Convert.FromBase64String(dm.Base64)));
+                    ImageCodecInfo jgpEncoder = GetEncoder(ImageFormat.Jpeg);
+                    System.Drawing.Imaging.Encoder myEncoder =
+                        System.Drawing.Imaging.Encoder.Quality;
+                    EncoderParameters myEncoderParameters = new EncoderParameters(1);
+                    EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 0L);
+                    myEncoderParameters.Param[0] = myEncoderParameter;
+                    MemoryStream memoryStream = new MemoryStream();
+                    bmp1.Save(memoryStream, jgpEncoder, myEncoderParameters);
+                    dm.Base64 = Convert.ToBase64String(memoryStream.ToArray());
+                });
             }
         }
     }
