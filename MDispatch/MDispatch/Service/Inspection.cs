@@ -230,10 +230,10 @@ namespace MDispatch.Service
             string content = null;
             try
             {
-                EncodeJPEG(ask1.Any_additional_documentation_been_given_after_loading);
-                EncodeJPEG(ask1.Any_additional_parts_been_given_to_you);
-                EncodeJPEG(ask1.App_will_force_driver_to_take_pictures_of_each_strap);
-                EncodeJPEG(ask1.Photo_after_loading_in_the_truck);
+                //EncodeJPEG(ask1.Any_additional_documentation_been_given_after_loading);
+                //EncodeJPEG(ask1.Any_additional_parts_been_given_to_you);
+                //EncodeJPEG(ask1.App_will_force_driver_to_take_pictures_of_each_strap);
+                //EncodeJPEG(ask1.Photo_after_loading_in_the_truck);
                 string strJsonAsk = JsonConvert.SerializeObject(ask1);
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
@@ -371,7 +371,7 @@ namespace MDispatch.Service
                         dm.ImageSource = null;
                     });
                 }
-                EncodeJPEG(photoInspection.Photos);
+                //EncodeJPEG(photoInspection.Photos);
                 string strPhotoInspection = JsonConvert.SerializeObject(photoInspection);
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Photo", Method.POST);

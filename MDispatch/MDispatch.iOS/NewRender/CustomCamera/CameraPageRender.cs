@@ -117,10 +117,25 @@ namespace MDispatch.iOS.NewRender.CustomCamera
         {
             takePhotoButton.TouchUpInside += async (s, e) =>
             {
+                int width = 0;
+                int height = 0;
                 var data = await CapturePhoto();
                 UIImage originalImage = ImageFromByteArray(data.ToArray());
-                byte[] res = ResizeImageIOS(originalImage, 1280, 720);
-                (Element as CameraPage).SetPhotoResult(res, 1280, 720);
+                var currentOrientation = UIApplication.SharedApplication.StatusBarOrientation;
+                if (currentOrientation == UIInterfaceOrientation.Portrait)
+                {
+                    width = 1280;
+                    height = 720;
+                    //aVCaptureVideoOrientation = AVCaptureVideoOrientation.Portrait;
+                }
+                else if (currentOrientation == UIInterfaceOrientation.LandscapeRight)
+                {
+                    width = 720;
+                    height = 1280;
+                    //aVCaptureVideoOrientation = AVCaptureVideoOrientation.LandscapeRight;
+                }
+                byte[] res = ResizeImageIOS(originalImage, width, height);
+                (Element as CameraPage).SetPhotoResult(res, width, height);
             };
         }
 
@@ -135,7 +150,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
                 RectangleF imageRect = new RectangleF(0, 0, width, height);
                 context.DrawImage(imageRect, originalImage.CGImage);
                 UIKit.UIImage resizedImage = UIKit.UIImage.FromImage(context.ToImage(), 0, orientation);
-                return resizedImage.AsJPEG().ToArray();
+                return resizedImage.AsJPEG(.5f).ToArray();
             }
         }
 
