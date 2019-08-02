@@ -58,6 +58,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
                 Frame = liveCameraStream.Bounds,
                 Orientation = GetCameraForOrientation()
             };
+            videoPreviewLayer.Connection.VideoOrientation = GetCameraForOrientation();
             liveCameraStream.Layer.AddSublayer(videoPreviewLayer);
             var captureDevice = AVCaptureDevice.DefaultDeviceWithMediaType(AVMediaType.Video);
             ConfigureCameraForDevice(captureDevice);
@@ -178,6 +179,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
             var bottomButtonY = View.Bounds.Bottom - 85;
             liveCameraStream.Frame = new CGRect(0f, 0f, View.Bounds.Width, View.Bounds.Height);
             videoPreviewLayer.Frame = liveCameraStream.Bounds;
+            videoPreviewLayer.Connection.VideoOrientation = GetCameraForOrientation();
             videoPreviewLayer.Orientation = GetCameraForOrientation(toInterfaceOrientation);
             takePhotoButton.Frame = new CGRect(rightButtonX, bottomButtonY, 70, 70);
         }
