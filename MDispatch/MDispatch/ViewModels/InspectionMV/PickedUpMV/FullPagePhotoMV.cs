@@ -42,11 +42,11 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             this.managerDispatchMob = managerDispatchMob;
             VehiclwInformation = vehiclwInformation;
             InderxPhotoInspektion = inderxPhotoInspektion;
+            Car = GetTypeCar(typeCar.Replace(" ", ""));
+            Init();
             IdShip = idShip;
             OnDeliveryToCarrier = onDeliveryToCarrier;
             TotalPaymentToCarrier = totalPaymentToCarrier;
-            Car = GetTypeCar(typeCar.Replace(" ", ""));
-            Init();
         }
 
         private async void Init()

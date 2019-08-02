@@ -58,7 +58,6 @@ namespace MDispatch.iOS.NewRender.CustomCamera
                 Frame = liveCameraStream.Bounds,
                 Orientation = GetCameraForOrientation()
             };
-            videoPreviewLayer.Connection.VideoOrientation = GetCameraForOrientation();
             liveCameraStream.Layer.AddSublayer(videoPreviewLayer);
             var captureDevice = AVCaptureDevice.DefaultDeviceWithMediaType(AVMediaType.Video);
             ConfigureCameraForDevice(captureDevice);
@@ -71,6 +70,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
             };
             captureSession.AddOutput(stillImageOutput);
             captureSession.AddInput(captureDeviceInput);
+            stillImageOutput.ConnectionFromMediaType(AVMediaType.Video).VideoOrientation = GetCameraForOrientation();
             captureSession.StartRunning();
         }
 
@@ -121,20 +121,17 @@ namespace MDispatch.iOS.NewRender.CustomCamera
                 int width = 0;
                 int height = 0;
                 var data = await CapturePhoto();
-                UIImage originalImage = ImageFromByteArray(data.ToArray());
-                var currentOrientation = UIApplication.SharedApplication.StatusBarOrientation;
-                if (currentOrientation == UIInterfaceOrientation.Portrait)
-                {
-                    width = 1280;
-                    height = 720;
-                    //aVCaptureVideoOrientation = AVCaptureVideoOrientation.Portrait;
-                }
-                else if (currentOrientation == UIInterfaceOrientation.LandscapeRight)
+                if(GetCameraForOrientation() == AVCaptureVideoOrientation.LandscapeRight)
                 {
                     width = 720;
                     height = 1280;
-                    //aVCaptureVideoOrientation = AVCaptureVideoOrientation.LandscapeRight;
                 }
+                else if (GetCameraForOrientation() == AVCaptureVideoOrientation.Portrait)
+                {
+                    width = 1280;
+                    height = 720;
+                }
+                UIImage originalImage = ImageFromByteArray(data.ToArray());
                 byte[] res = ResizeImageIOS(originalImage, width, height);
                 (Element as CameraPage).SetPhotoResult(res, width, height);
             };

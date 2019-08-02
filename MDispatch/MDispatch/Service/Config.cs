@@ -1,4 +1,4 @@
-﻿namespace MDispatch.Service
+namespace MDispatch.Service
 {
     public static class Config
     {
