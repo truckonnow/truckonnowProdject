@@ -213,7 +213,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         }
 
 
-        public void AddNewFotoSourse(byte[] imageSorseByte)
+        public async Task AddNewFotoSourse(byte[] imageSorseByte)
         {
             if (AllSourseImage == null)
             {
@@ -224,7 +224,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             AllSourseImage = imageSources1;
         }
 
-        public async void SetPhoto(byte[] PhotoInArrayByte, double width, double height)
+        public async Task SetPhoto(byte[] PhotoInArrayByte, double width, double height)
         {
             if (PhotoInspection == null)
             {

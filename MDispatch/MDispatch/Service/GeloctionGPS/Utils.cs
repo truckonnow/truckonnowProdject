@@ -6,12 +6,15 @@ using Plugin.Settings;
 using RestSharp;
 using Rg.Plugins.Popup.Services;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MDispatch.Service.GeloctionGPS
 {
     public static class Utils
     {
+        private static bool isTimeUpdate = true;
+
         [Obsolete]
         public static async Task StartListening(bool isTwoConection = false)
         {
@@ -22,6 +25,7 @@ namespace MDispatch.Service.GeloctionGPS
             try
             {
                 bool s = await CrossGeolocator.Current.StartListeningAsync(TimeSpan.FromSeconds(5), 1, true);
+                CrossGeolocator.Current.DesiredAccuracy = 50;
                 CrossGeolocator.Current.PositionChanged += PositionChanged;
             }
             catch(GeolocationException)
@@ -45,8 +49,9 @@ namespace MDispatch.Service.GeloctionGPS
         {
             await Task.Run(() =>
             {
-                if (App.isNetwork)
+                if (App.isNetwork && isTimeUpdate)
                 {
+                    Waite();
                     ReqvestGPS(e.Position.Longitude.ToString(), e.Position.Latitude.ToString());
                 }
             });
@@ -82,6 +87,16 @@ namespace MDispatch.Service.GeloctionGPS
             }
             await CrossGeolocator.Current.StopListeningAsync();
             CrossGeolocator.Current.PositionChanged -= PositionChanged;
+        }
+
+        private static async void Waite()
+        {
+            await Task.Run(() =>
+            {
+                isTimeUpdate = false;
+                Thread.Sleep(120000);
+                isTimeUpdate = true;
+            });
         }
     }
 }

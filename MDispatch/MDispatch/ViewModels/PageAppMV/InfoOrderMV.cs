@@ -191,20 +191,20 @@ namespace MDispatch.ViewModels.PageAppMV
                 }
                 else if (photoInspections != null && photoInspections.Count + 1 == 1)
                 {
+                    await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Delyvered", vehiclwInformation));
                     FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{Car.GetIndexCarFullPhoto(photoInspections.Count + 1)}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), photoInspections.Count + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(photoInspections.Count + 1)), Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier);
                     await Navigation.PushAsync(fullPagePhotoDelyvery, true);
                     await Navigation.PushAsync(new CameraPagePhoto1($"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{Car.GetIndexCarFullPhoto(photoInspections.Count + 1)}.png", fullPagePhotoDelyvery));
-                    await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Delyvered", vehiclwInformation));
                     Navigation.RemovePage(Navigation.NavigationStack[1]);
                     return;
                 }
                 else if (Car.GetIndexCarFullPhoto(photoInspections.Count+1) != 0)
                 {
+                    await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Delyvered", vehiclwInformation));
                     int photoInspection = Car.GetIndexCarFullPhoto(photoInspections.Count + 1);
                     FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{Car.GetIndexCarFullPhoto(photoInspections.Count + 1)}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), photoInspections.Count + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(photoInspections.Count + 1)), Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier);
                     await Navigation.PushAsync(fullPagePhotoDelyvery);
                     await Navigation.PushAsync(new CameraPagePhoto1($"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{Car.GetIndexCarFullPhoto(photoInspections.Count + 1)}.png", fullPagePhotoDelyvery));
-                    await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Delyvered", vehiclwInformation));
                     Navigation.RemovePage(Navigation.NavigationStack[1]);
                     return;
                 }

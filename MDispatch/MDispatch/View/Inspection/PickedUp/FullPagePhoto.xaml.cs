@@ -28,7 +28,6 @@ namespace MDispatch.View.PageApp
             this.pngPaternPhoto = pngPaternPhoto;
             fullPagePhotoMV = new FullPagePhotoMV(managerDispatchMob, vehiclwInformation, idShip, typeCar, photoIndex, Navigation, initDasbordDelegate, getVechicleDelegate, onDeliveryToCarrier, totalPaymentToCarrier);
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = fullPagePhotoMV;
             paternPhoto.Source = pngPaternPhoto;
             dmla.IsVisible = false;
@@ -40,9 +39,10 @@ namespace MDispatch.View.PageApp
             {
                 NameSelectPhoto.Text = "--------------------";
             }
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
-        public void SetbtnVisable()
+        public async Task SetbtnVisable()
         {
             if (fullPagePhotoMV.AllSourseImage != null && fullPagePhotoMV.AllSourseImage.Count != 0)
             {

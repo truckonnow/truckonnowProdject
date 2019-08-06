@@ -118,19 +118,9 @@ namespace MDispatch.iOS.NewRender.CustomCamera
         {
             takePhotoButton.TouchUpInside += async (s, e) =>
             {
-                int width = 0;
-                int height = 0;
+                int width = 1280;
+                int height = 720;
                 var data = await CapturePhoto();
-                if(GetCameraForOrientation() == AVCaptureVideoOrientation.LandscapeRight)
-                {
-                    width = 720;
-                    height = 1280;
-                }
-                else if (GetCameraForOrientation() == AVCaptureVideoOrientation.Portrait)
-                {
-                    width = 1280;
-                    height = 720;
-                }
                 UIImage originalImage = ImageFromByteArray(data.ToArray());
                 byte[] res = ResizeImageIOS(originalImage, width, height);
                 (Element as CameraPage).SetPhotoResult(res, width, height);
@@ -179,6 +169,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
             videoPreviewLayer.Connection.VideoOrientation = GetCameraForOrientation();
             videoPreviewLayer.Orientation = GetCameraForOrientation(toInterfaceOrientation);
             takePhotoButton.Frame = new CGRect(rightButtonX, bottomButtonY, 70, 70);
+            stillImageOutput.ConnectionFromMediaType(AVMediaType.Video).VideoOrientation = GetCameraForOrientation();
         }
 
         private void SetupUserInterface()
