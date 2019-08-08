@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>637225605966-jl4i5m71cvuumt8ntqlnh88j0hckeo5s.apps.googleusercontent.com</string>
+	<string>41568683293-dtotlue70a3vmbue9llt5fd8n5356f3r.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.637225605966-jl4i5m71cvuumt8ntqlnh88j0hckeo5s</string>
+	<string>com.googleusercontent.apps.41568683293-dtotlue70a3vmbue9llt5fd8n5356f3r</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBZ8YnaHCqsPmQv54wT6q45tNDxibksBv8</string>
+	<string>AIzaSyAHzijuQBn-hTw85pKCM_yCRoUgS1Ib4os</string>
 	<key>GCM_SENDER_ID</key>
-	<string>637225605966</string>
+	<string>41568683293</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.companyname.MDispatch</string>
+	<string>TruckonnowIOS</string>
 	<key>PROJECT_ID</key>
-	<string>taxiapp-acc23</string>
+	<string>truckonnow</string>
 	<key>STORAGE_BUCKET</key>
-	<string>taxiapp-acc23.appspot.com</string>
+	<string>truckonnow.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:637225605966:ios:8680c862731e06a9</string>
+	<string>1:41568683293:ios:1ef10e22ed32d053</string>
 	<key>DATABASE_URL</key>
-	<string>https://taxiapp-acc23.firebaseio.com</string>
+	<string>https://truckonnow.firebaseio.com</string>
 </dict>
 </plist>
