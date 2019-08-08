@@ -130,6 +130,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
+    <BundleResource Include="GoogleService-Info.plist" />
     <None Include="Info.plist" />
     <Compile Include="NewRender\ResizerImgIOS.cs" />
     <Compile Include="NewRender\TextIn\TextRender.cs" />
@@ -972,7 +973,5 @@
   <ItemGroup>
     <BundleResource Include="Resources\BackIconpage.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NewRender\ContextPage\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
