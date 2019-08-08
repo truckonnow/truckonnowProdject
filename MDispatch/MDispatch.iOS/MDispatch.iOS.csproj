@@ -52,6 +52,7 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignProvision>Dispatch</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -142,6 +143,7 @@
     <Compile Include="NewRender\CustomCamera\UIPaintCodeButton.cs" />
     <Compile Include="NewRender\Orientation\OrientationHandler.cs" />
     <Compile Include="NewRender\ContextPage\RenderContextPage.cs" />
+    <Compile Include="Alert\MyFirebaseMessagingService.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -240,6 +242,9 @@
     </PackageReference>
     <PackageReference Include="XForms.Plugin.AnimationNavigationPage">
       <Version>1.0.7</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.iOS.CloudMessaging">
+      <Version>3.1.2</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -974,4 +979,7 @@
     <BundleResource Include="Resources\BackIconpage.png" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Alert\" />
+  </ItemGroup>
 </Project>
