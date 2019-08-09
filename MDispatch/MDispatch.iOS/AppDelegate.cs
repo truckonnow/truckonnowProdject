@@ -24,13 +24,57 @@ namespace MDispatch.iOS
             UINavigationBar.Appearance.BarTintColor = Color.FromHex("#4fd2c2").ToUIColor();
             LoadApplication(new App());
             Firebase.Core.App.Configure();
+            Messaging.SharedInstance.Delegate = this;
+			if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
+			{
 
-            return base.FinishedLaunching(app, options);
+				// For iOS 10 display notification (sent via APNS)
+				UNUserNotificationCenter.Current.Delegate = this;
+
+				var authOptions = UNAuthorizationOptions.Alert | UNAuthorizationOptions.Badge | UNAuthorizationOptions.Sound;
+				UNUserNotificationCenter.Current.RequestAuthorization(authOptions, (granted, error) => {
+					Console.WriteLine(granted);
+				});
+			}
+			else
+			{
+				// iOS 9 or before
+				var allNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound;
+				var settings = UIUserNotificationSettings.GetSettingsForTypes(allNotificationTypes, null);
+				UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
+			}
+			UIApplication.SharedApplication.RegisterForRemoteNotifications();
+			return base.FinishedLaunching(app, options);
         }
 
-        
+        public UIInterfaceOrientationMask CurrentOrientation = UIInterfaceOrientationMask.All;
 
-        public void OnTokenRefresh()
+        public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations(UIApplication application, UIWindow forWindow)
+        {
+            return CurrentOrientation;
+        }
+
+        [Export("messaging:didReceiveRegistrationToken:")]
+		public void DidReceiveRegistrationToken(Messaging messaging, string fcmToken)
+		{
+
+		}
+
+		public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
+		{
+			Messaging.SharedInstance.ApnsToken = deviceToken;
+		}
+
+		public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
+		{
+		}
+
+		public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
+		{
+			completionHandler(UIBackgroundFetchResult.NewData);
+		}
+
+		public void OnTokenRefresh()
         {
             
             ManagerStore managerStore = new ManagerStore();

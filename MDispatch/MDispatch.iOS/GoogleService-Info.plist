@@ -18,8 +18,6 @@
 	<string>truckonnow</string>
 	<key>STORAGE_BUCKET</key>
 	<string>truckonnow.appspot.com</string>
-	<key>IS_GCM_ENABLED</key>
-	<true/>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 </dict>
