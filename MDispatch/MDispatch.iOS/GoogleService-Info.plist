@@ -19,6 +19,6 @@
 	<key>STORAGE_BUCKET</key>
 	<string>truckonnow.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true/>
+	<false/>
 </dict>
 </plist>
