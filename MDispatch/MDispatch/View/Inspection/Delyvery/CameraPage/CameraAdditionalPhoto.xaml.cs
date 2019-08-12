@@ -1,6 +1,8 @@
 ﻿using MDispatch.NewElement;
 using MDispatch.View.Inspection.PickedUp;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace MDispatch.View.Inspection.Delyvery.CameraPage
@@ -16,7 +18,9 @@ namespace MDispatch.View.Inspection.Delyvery.CameraPage
             this.pageAddDamageFoUser = pageAddDamageFoUser;
             this.askForUserDelyvery = askForUserDelyvery;
 			InitializeComponent ();
-            NavigationPage.SetHasNavigationBar(this, false);
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
+                .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
             DependencyService.Get<IOrientationHandler>().ForceLandscape();
         }
 

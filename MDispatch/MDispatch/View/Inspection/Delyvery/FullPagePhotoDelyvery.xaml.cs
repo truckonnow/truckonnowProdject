@@ -10,6 +10,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 using static MDispatch.Service.ManagerDispatchMob;
 
@@ -28,7 +30,9 @@ namespace MDispatch.View.PageApp
             this.pngPaternPhoto = pngPaternPhoto;
             fullPagePhotoDelyveryMV = new FullPagePhotoDelyveryMV(managerDispatchMob, vehiclwInformation, idShip, typeCar, photoIndex, Navigation, initDasbordDelegate, getVechicleDelegate, onDeliveryToCarrier, totalPaymentToCarrier);
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
+                .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
             BindingContext = fullPagePhotoDelyveryMV;
             paternPhoto.Source = pngPaternPhoto;
             dmla.IsVisible = false;

@@ -3,6 +3,8 @@ using MDispatch.View.Inspection.PickedUp;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using MDispatch.ViewModels.PageAppMV;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace MDispatch.View.PageApp
@@ -20,7 +22,9 @@ namespace MDispatch.View.PageApp
             this.fullPagePhotoDelyvery = fullPagePhotoDelyvery;
             this.pngPaternPhoto = pngPaternPhoto;
             InitializeComponent ();
-            NavigationPage.SetHasNavigationBar(this, false);
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
+                .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
             paternPhoto.Source = pngPaternPhoto;
         }
 
@@ -50,8 +54,8 @@ namespace MDispatch.View.PageApp
 
         private void StackLayout_SizeChanged(object sender, System.EventArgs e)
         {
-            double onePercentheigth = Application.Current.MainPage.Height / 100;
-            double onePercentwidth = Application.Current.MainPage.Width / 100;
+            double onePercentheigth = Xamarin.Forms.Application.Current.MainPage.Height / 100;
+            double onePercentwidth = Xamarin.Forms.Application.Current.MainPage.Width / 100;
             paternPhoto.HeightRequest = onePercentheigth * 100;
             paternPhoto.WidthRequest = onePercentwidth * 100;
         }

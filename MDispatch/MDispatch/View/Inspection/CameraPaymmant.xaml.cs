@@ -2,6 +2,8 @@
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace MDispatch.View.Inspection
@@ -15,8 +17,10 @@ namespace MDispatch.View.Inspection
         {
             this.paymmant = paymmant;
             InitializeComponent();
+            On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
+                .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
             NamaPayment.Text = instructionAndNamePaymmant;
-            NavigationPage.SetHasNavigationBar(this, false);
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
         }
 
         private async void CameraPage_OnPhotoResult(NewElement.PhotoResultEventArgs result)

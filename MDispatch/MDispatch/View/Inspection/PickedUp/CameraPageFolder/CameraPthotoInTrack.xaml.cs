@@ -6,6 +6,8 @@ using MDispatch.ViewModels.InspectionMV.Servise.Models;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
@@ -26,7 +28,9 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
             InitializeComponent ();
             this.ask1Page = ask1Page;
             this.nameVech = nameVech;
-            NavigationPage.SetHasNavigationBar(this, false);
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
+                .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
             car.OrintableScreen(car.GetIndexCar(countPhoto));
             paternPhoto.Source = $"{car.typeIndex.Replace(" ", "")}{car.GetIndexCar(countPhoto)}.png";
             titlePhoto.Text = car.GetNameLayout(car.GetIndexCar(countPhoto));

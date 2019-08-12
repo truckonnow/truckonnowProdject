@@ -3,6 +3,8 @@ using MDispatch.Service;
 using MDispatch.Vidget.VM;
 using System.Threading;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 using static MDispatch.Service.ManagerDispatchMob;
 
@@ -18,7 +20,9 @@ namespace MDispatch.Vidget.View
         {
             fullPhotoTruckVM = new FullPhotoTruckVM(managerDispatchMob, idDriver, indexCurrent, Navigation, initDasbordDelegate);
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false); 
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
+                .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
             BindingContext = fullPhotoTruckVM;
             paternPhoto.Source = $"Hint{indexCurrent}.jpg";
             InitElement();

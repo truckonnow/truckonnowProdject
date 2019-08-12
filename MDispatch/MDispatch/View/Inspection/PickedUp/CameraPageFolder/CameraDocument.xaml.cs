@@ -1,5 +1,7 @@
 ﻿using MDispatch.NewElement;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace MDispatch.View.AskPhoto.CameraPageFolder
@@ -13,7 +15,9 @@ namespace MDispatch.View.AskPhoto.CameraPageFolder
 		{
             this.askPage = askPage;
 			InitializeComponent ();
-            NavigationPage.SetHasNavigationBar(this, false);
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
+                .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
         }
 
         private async void CameraPage_OnPhotoResult(PhotoResultEventArgs result)

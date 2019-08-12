@@ -8,6 +8,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace MDispatch.View.Inspection.PickedUp
@@ -28,7 +30,9 @@ namespace MDispatch.View.Inspection.PickedUp
             FullPagePhotoMV = fullPagePhotoMV;
             InitializeComponent();
             touchImage.Source = FullPagePhotoMV.SourseImage;
-            NavigationPage.SetHasNavigationBar(this, false);
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
+                .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
             if (views != null)
             {
                 foreach (var view in views)
@@ -169,7 +173,7 @@ namespace MDispatch.View.Inspection.PickedUp
         private void ScrolSizeDmg_SizeChanged(object sender, EventArgs e)
         {
             double width = App.Current.MainPage.Width;
-           ((Slider)sender).WidthRequest = width * 0.80;
+           ((Xamarin.Forms.Slider)sender).WidthRequest = width * 0.80;
         }
     }
 }

@@ -3,6 +3,8 @@ using MDispatch.NewElement;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace MDispatch.View.Inspection.PickUp.CameraPageFolder
@@ -19,7 +21,9 @@ namespace MDispatch.View.Inspection.PickUp.CameraPageFolder
             this.ask1Page = ask1Page;
 			InitializeComponent ();
             titlePhoto.Text = $"safety belt {photos.Count + 1}";
-            NavigationPage.SetHasNavigationBar(this, false);
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
+                .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
         }
 
         private async void CameraPage_OnPhotoResult(PhotoResultEventArgs result)

@@ -6,6 +6,8 @@ using Rg.Plugins.Popup.Services;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace MDispatch.View.Inspection.PickedUp
@@ -29,7 +31,9 @@ namespace MDispatch.View.Inspection.PickedUp
             this.askForUsersDelyveryMW = askForUsersDelyveryMW;
             InitializeComponent();
             touchImage.Source = $"scan{askForUsersDelyveryMW.VehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}";
-            NavigationPage.SetHasNavigationBar(this, false);
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
+                .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
         }
 
         [System.Obsolete]
