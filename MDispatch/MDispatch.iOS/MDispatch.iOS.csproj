@@ -143,6 +143,7 @@
     <Compile Include="NewRender\Orientation\OrientationHandler.cs" />
     <Compile Include="NewRender\ContextPage\RenderContextPage.cs" />
     <Compile Include="Alert\MyFirebaseMessagingService.cs" />
+    <Compile Include="TouchCordinateRender\TouchImageRender.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -258,6 +259,7 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Delivery.png" />
+    <BundleResource Include="GoogleService-Info.plist" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Aktiv.png" />
@@ -982,4 +984,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="TouchCordinateRender\" />
+  </ItemGroup>
 </Project>

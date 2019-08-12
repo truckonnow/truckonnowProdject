@@ -43,7 +43,8 @@ namespace MDispatch.iOS
 				var settings = UIUserNotificationSettings.GetSettingsForTypes(allNotificationTypes, null);
 				UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
 			}
-			UIApplication.SharedApplication.RegisterForRemoteNotifications();
+            Messaging.SharedInstance.ShouldEstablishDirectChannel = false;
+            UIApplication.SharedApplication.RegisterForRemoteNotifications();
 			return base.FinishedLaunching(app, options);
         }
 
@@ -63,7 +64,7 @@ namespace MDispatch.iOS
 		public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
 		{
 			Messaging.SharedInstance.ApnsToken = deviceToken;
-		}
+        }
 
 		public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
 		{
@@ -74,9 +75,25 @@ namespace MDispatch.iOS
 			completionHandler(UIBackgroundFetchResult.NewData);
 		}
 
-		public void OnTokenRefresh()
+       
+
+        [Export("userNotificationCenter:willPresentNotification:withCompletionHandler:")]
+        public void WillPresentNotification(UNUserNotificationCenter center, UNNotification notification, Action<UNNotificationPresentationOptions> completionHandler)
         {
-            
+            var userInfo = notification.Request.Content.UserInfo;
+            completionHandler(UNNotificationPresentationOptions.None);
+        }
+
+        [Export("userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:")]
+        public void DidReceiveNotificationResponse(UNUserNotificationCenter center, UNNotificationResponse response, Action completionHandler)
+        {
+            var userInfo = response.Notification.Request.Content.UserInfo;
+
+            completionHandler();
+        }
+
+        public void OnTokenRefresh()
+        {
             ManagerStore managerStore = new ManagerStore();
             var newToken = Firebase.InstanceID.InstanceId.SharedInstance.Token;
             managerStore.SendTokenStore(newToken);
