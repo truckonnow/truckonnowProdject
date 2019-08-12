@@ -11,7 +11,6 @@ namespace MDispatch.Droid.NewrRender.ImageRender
 {
     class RezizeImgRender : ImageRenderer
     {
-
         public RezizeImgRender(Context context) : base(context)
         {
 

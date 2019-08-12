@@ -35,7 +35,6 @@ namespace MDispatch.Droid.NewrRender.TouchCordinateRender
                 Point point = new Point(e.Event.GetX(), e.Event.GetY());
                 double xInterest = (e.Event.GetX() / Control.Width) * 10000;
                 double yInterest = (e.Event.GetY() / Control.Height) * 10000;
-
                 MDispatch.NewElement.TouchCordinate.TouchActionEventArgs TouchActionEventArgs = new TouchActionEventArgs(point, Control.Height, Control.Width, xInterest, yInterest);
                 (Element as TouchImage).FireClick(TouchActionEventArgs);
             }
