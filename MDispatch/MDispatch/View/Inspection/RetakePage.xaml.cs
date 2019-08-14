@@ -1,6 +1,8 @@
 ﻿using MDispatch.NewElement;
 using MDispatch.ViewModels.InspectionMV.Servise.Retake;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace MDispatch.View.Inspection
@@ -14,7 +16,9 @@ namespace MDispatch.View.Inspection
         {
             this.retake = retake;
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
+                .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
         }
 
         private async void CameraPage_OnPhotoResult(PhotoResultEventArgs result)

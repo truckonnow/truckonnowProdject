@@ -145,6 +145,8 @@
     <Compile Include="Alert\MyFirebaseMessagingService.cs" />
     <Compile Include="NewRender\ImageRender\RezizeImgRender.cs" />
     <Compile Include="NewRender\TouchCordinateRender\TouchImageRender.cs" />
+    <Compile Include="NewRender\RebderVideoCamera\VideoRecorderRenderer.cs" />
+    <Compile Include="NewRender\RebderVideoCamera\UIPaintCodeButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -988,5 +990,6 @@
   <ItemGroup>
     <Folder Include="NewRender\ImageRender\" />
     <Folder Include="NewRender\TouchCordinateRender\" />
+    <Folder Include="NewRender\RebderVideoCamera\" />
   </ItemGroup>
 </Project>
