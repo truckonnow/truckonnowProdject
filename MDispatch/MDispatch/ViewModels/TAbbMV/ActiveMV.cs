@@ -4,6 +4,8 @@ using MDispatch.Service.Net;
 using MDispatch.View.A_R;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.ViewModels.TAbbMV.DialogAsk;
+using Plugin.DeviceInfo;
+using Plugin.DeviceInfo.Abstractions;
 using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -60,7 +62,10 @@ namespace MDispatch.ViewModels.TAbbMV
 
         private void PreVibartionLoad()
         {
-            Vibration.Vibrate(20);
+            if (CrossDeviceInfo.Current.Platform == Platform.Android)
+            {
+                Vibration.Vibrate(20);
+            }
             Init();
         }
 

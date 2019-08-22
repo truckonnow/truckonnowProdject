@@ -15,7 +15,7 @@ namespace MDispatch.iOS.NewRender.ToastNotify
 
         public void ShowMessage(string message)
         {
-            ShowAlert(message, 1.5);
+            ShowAlert(message, 0.9);
         }
 
         void ShowAlert(string message, double seconds)

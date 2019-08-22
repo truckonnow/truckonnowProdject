@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading;
 using System.Threading.Tasks;
 using AVFoundation;
 using CoreGraphics;
+using CoreMedia;
 using Foundation;
 using MDispatch.iOS.NewRender.CustomCamera;
 using MDispatch.NewElement;
@@ -22,6 +24,8 @@ namespace MDispatch.iOS.NewRender.CustomCamera
         UIPaintCodeButton takePhotoButton;
         UIView liveCameraStream;
 
+        private Timer timer = null;
+
         public CameraPageRender()
         {
         }
@@ -39,6 +43,15 @@ namespace MDispatch.iOS.NewRender.CustomCamera
             SetupEventHandlers();
             await AuthorizeCameraUse();
             SetupLiveCameraStream();
+            timer = new Timer(new TimerCallback(WaiteBtn), null, 1500, Timeout.Infinite);
+        }
+
+        private void WaiteBtn(object state)
+        {
+            InvokeOnMainThread(() =>
+            {
+                View.Add(takePhotoButton);
+            });
         }
 
         private async Task AuthorizeCameraUse()
@@ -76,9 +89,19 @@ namespace MDispatch.iOS.NewRender.CustomCamera
 
         public async Task<NSData> CapturePhoto()
         {
-            var videoConnection = stillImageOutput.ConnectionFromMediaType(AVMediaType.Video);
-            var sampleBuffer = await stillImageOutput.CaptureStillImageTaskAsync(videoConnection);
-            var jpegImageAsNsData = AVCaptureStillImageOutput.JpegStillToNSData(sampleBuffer);
+            CMSampleBuffer sampleBuffer = null;
+            NSData jpegImageAsNsData = null;
+            AVCaptureConnection videoConnection = null;
+            try
+            {
+                videoConnection = stillImageOutput.ConnectionFromMediaType(AVMediaType.Video);
+                sampleBuffer = await stillImageOutput.CaptureStillImageTaskAsync(videoConnection);
+                jpegImageAsNsData = AVCaptureStillImageOutput.JpegStillToNSData(sampleBuffer);
+            }
+            catch (Exception e)
+            {
+                jpegImageAsNsData = null;
+            }
             return jpegImageAsNsData;
         }
 
@@ -121,9 +144,12 @@ namespace MDispatch.iOS.NewRender.CustomCamera
                 int width = 1280;
                 int height = 720;
                 var data = await CapturePhoto();
-                UIImage originalImage = ImageFromByteArray(data.ToArray());
-                byte[] res = ResizeImageIOS(originalImage, width, height);
-                (Element as CameraPage).SetPhotoResult(res, width, height);
+                if (data != null)
+                {
+                    UIImage originalImage = ImageFromByteArray(data.ToArray());
+                    byte[] res = ResizeImageIOS(originalImage, width, height);
+                    (Element as CameraPage).SetPhotoResult(res, width, height);
+                }
             };
         }
 
@@ -187,7 +213,6 @@ namespace MDispatch.iOS.NewRender.CustomCamera
                 Frame = new CGRect(rightButtonX, bottomButtonY, buttonWidth, buttonHeight)
             };
             View.InsertSubview(liveCameraStream, 0);
-            View.Add(takePhotoButton);
         }
 
         public void ConfigureCameraForDevice(AVCaptureDevice device)

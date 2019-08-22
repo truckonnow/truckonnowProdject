@@ -33,6 +33,7 @@
     <PackageReference Include="Xamarin.Forms.InputKit" Version="2.3.5" />
     <PackageReference Include="XForms.Plugin.AnimationNavigationPage" Version="1.0.7" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Xam.Plugin.DeviceInfo" Version="4.1.1" />
   </ItemGroup>
 
   <ItemGroup>

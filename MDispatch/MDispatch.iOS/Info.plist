@@ -32,12 +32,10 @@
 	<string>MDispatch</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
-	<key>CustomProperty</key>
-	<string>NSCalendarsUsageDescription</string>
-	<key>CustomProperty1</key>
-	<string>Needs Calendar Permission</string>
+	<key>Needs Calendar Permission</key>
+	<string></string>
 	<key>NSCameraUsageDescription</key>
-	<string>New Entry</string>
+	<string>This app requires contacts access to function properly</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>New Entry</string>
 	<key>UIBackgroundModes</key>
@@ -45,5 +43,19 @@
 		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
+	<key>CFBundleVersion</key>
+	<string>0.0.3</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Your explanation</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This app requires contacts access to function properly</string>
+	<key>NSSiriUsageDescription</key>
+	<string>Siri needs to listen for tasks and notes</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>This app need to access your calendar events</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Play using while you are hiking</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.0.3</string>
 </dict>
 </plist>

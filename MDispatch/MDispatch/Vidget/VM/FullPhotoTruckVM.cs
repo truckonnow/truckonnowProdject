@@ -162,7 +162,8 @@ namespace MDispatch.Vidget.VM
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
                     if(IndexCurent > 45)
                     { 
-                    await navigation.PopToRootAsync();}
+                    await navigation.PopToRootAsync();
+                    }
                 }
             }
             GC.Collect();
@@ -195,14 +196,13 @@ namespace MDispatch.Vidget.VM
                 else if (state == 3)
                 {
                     initDasbordDelegate.Invoke();
+                    navigation.PopToRootAsync();
                 }
                 else if (state == 4)
                 {
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
                 }
             }
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
         }
 
         [System.Obsolete]

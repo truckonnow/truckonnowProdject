@@ -2,12 +2,13 @@
 using MDispatch.Service;
 using MDispatch.Service.Net;
 using MDispatch.View.GlobalDialogView;
+using Plugin.DeviceInfo;
+using Plugin.DeviceInfo.Abstractions;
 using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -48,7 +49,10 @@ namespace MDispatch.ViewModels.TAbbMV
 
         private void PreVibartionLoad()
         {
-            Vibration.Vibrate(20);
+            if (CrossDeviceInfo.Current.Platform == Platform.Android)
+            {
+                Vibration.Vibrate(20);
+            }
             Init();
         }
 
