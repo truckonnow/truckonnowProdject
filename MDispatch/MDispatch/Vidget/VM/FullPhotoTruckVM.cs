@@ -42,8 +42,8 @@ namespace MDispatch.Vidget.VM
 
         private async void Init()
         {
-               NameLayute = truckCar.GetNameTruck(IndexCurent);
-               await truckCar.Orinteble(IndexCurent);
+            NameLayute = truckCar.GetNameTruck(IndexCurent);
+            await truckCar.Orinteble(IndexCurent);
         }
 
         public string IdDriver { get; set; }

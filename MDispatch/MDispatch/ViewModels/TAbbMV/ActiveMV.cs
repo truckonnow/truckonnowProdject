@@ -115,13 +115,14 @@ namespace MDispatch.ViewModels.TAbbMV
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             bool isInspection = false;
+            int indexPhoto = 1;
             int state = 0;
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
                 await Task.Run(() =>
                 {
-                    state = managerDispatchMob.DriverWork("CheckInspeacktion", token, ref description, ref isInspection);
+                    state = managerDispatchMob.DriverWork("CheckInspeacktion", token, ref description, ref isInspection, ref indexPhoto);
                 });
                 if (state == 2)
                 {
@@ -136,7 +137,7 @@ namespace MDispatch.ViewModels.TAbbMV
                     }
                     else
                     {
-                        await Navigation.PushAsync(new Vidget.View.CameraPage(managerDispatchMob, UnTimeOfInspection.IdDriver, 1, initDasbordDelegate));
+                        await Navigation.PushAsync(new Vidget.View.CameraPage(managerDispatchMob, UnTimeOfInspection.IdDriver, indexPhoto, initDasbordDelegate));
                     }
                 }
                 else if (state == 4)
