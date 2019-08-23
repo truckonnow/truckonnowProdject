@@ -46,6 +46,7 @@ namespace ApiMobaileServise.Servise
         public async void SaveInspactionDriver(string idDriver, string photoJson, int indexPhoto)
         {
             Photo photo = JsonConvert.DeserializeObject<Photo>(photoJson);
+            //photo.path = photo.path.Insert(2, $"/{DateTime.Now.ToLongDateString()}");
             await sqlCommandApiMobile.SaveInspectionDriverInDb(idDriver, photo, indexPhoto);
         }
 
@@ -57,6 +58,11 @@ namespace ApiMobaileServise.Servise
         public async Task<bool> ChechToDayInspaction(string token)
         {
             return await sqlCommandApiMobile.ChechToDayInspactionInDb(token);
+        }
+
+        public async Task<int> GetIndexPhoto(string token)
+        {
+            return await sqlCommandApiMobile.GetIndexDb(token);
         }
 
         public void SaveGPSLocationData(string token, string longitude, string latitude)

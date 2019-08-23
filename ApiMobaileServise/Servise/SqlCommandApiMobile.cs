@@ -75,20 +75,17 @@ namespace ApiMobaileServise.Servise
 
         public async Task SaveInspectionDriverInDb(string idDriver, Photo photo, int IndexPhoto)
         {
-            InspectionDriver inspectionDrivers = null;
             context.Drivers.Include("InspectionDrivers.PhotosTruck").ToList();
-            Driver driver = context.Drivers.FirstOrDefault(d => d.Id == Convert.ToUInt32(idDriver));
+            Driver driver = context.Drivers.FirstOrDefault(d => d.Id == Convert.ToInt32(idDriver));
             if (driver.InspectionDrivers != null && driver.InspectionDrivers.Count != 0)
             {
-                inspectionDrivers = driver.InspectionDrivers.Last();
-                if (inspectionDrivers.CountPhoto >= IndexPhoto)
+                InspectionDriver inspectionDrivers = driver.InspectionDrivers.FirstOrDefault(i => DateTime.Parse(i.Date).Date == DateTime.Now.Date);
+                if(inspectionDrivers == null)
                 {
-                    driver.InspectionDrivers = new List<InspectionDriver>();
                     inspectionDrivers = new InspectionDriver();
-                }
-                if(inspectionDrivers.PhotosTruck == null)
-                {
+                    inspectionDrivers.Date = DateTime.Now.ToString();
                     inspectionDrivers.PhotosTruck = new List<Photo>();
+                    driver.InspectionDrivers.Add(inspectionDrivers);
                 }
                 inspectionDrivers.CountPhoto++;
                 inspectionDrivers.PhotosTruck.Add(photo);
@@ -96,8 +93,9 @@ namespace ApiMobaileServise.Servise
             }
             else
             {
+                InspectionDriver inspectionDrivers = new InspectionDriver();
                 driver.InspectionDrivers = new List<InspectionDriver>();
-                inspectionDrivers = new InspectionDriver();
+                inspectionDrivers.Date = DateTime.Now.ToString();
                 inspectionDrivers.PhotosTruck = new List<Photo>();
                 inspectionDrivers.CountPhoto++;
                 inspectionDrivers.PhotosTruck.Add(photo);
@@ -128,7 +126,7 @@ namespace ApiMobaileServise.Servise
             {
                 InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
                 DateTime dateTime = Convert.ToDateTime(inspectionDriver.Date);
-                if(dateTime.Date < DateTime.Now.Date || (inspectionDriver.CountPhoto <= 40))
+                if(dateTime.Date < DateTime.Now.Date || (inspectionDriver.CountPhoto <= 44))
                 {
                     isInspaction = false;
                 }
@@ -145,6 +143,31 @@ namespace ApiMobaileServise.Servise
             }
             await context.SaveChangesAsync();
             return isInspaction;
+        }
+
+        public async Task<int> GetIndexDb(string token)
+        {
+            int indexPhoto = 0;
+            Driver driver = await context.Drivers.Where(d => d.Token == token)
+                 .Include(d => d.InspectionDrivers)
+                 .FirstOrDefaultAsync();
+            if (driver.InspectionDrivers != null && driver.InspectionDrivers.Count != 0)
+            {
+                InspectionDriver inspectionDrivers = driver.InspectionDrivers.FirstOrDefault(i => DateTime.Parse(i.Date).Date == DateTime.Now.Date);
+                if (inspectionDrivers == null)
+                {
+                    indexPhoto = 1;
+                }
+                else
+                {
+                    indexPhoto = inspectionDrivers.CountPhoto + 1;
+                }
+            }
+            else
+            {
+                indexPhoto = 1;
+            }
+            return indexPhoto;
         }
 
         public async void SaveGPSLocationData(string token, Geolocations geolocations)
@@ -448,7 +471,7 @@ namespace ApiMobaileServise.Servise
         public string GetInspectionDriverIndb(string token)
         {
             string statusAndTimeInInspection = null;
-            Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
+            Driver driver = context.Drivers.Include(d => d.InspectionDrivers).FirstOrDefault(d => d.Token == token);
             if(driver.IsInspectionDriver)
             {
                 if(driver.IsInspectionToDayDriver)
