@@ -60,7 +60,7 @@ namespace ApiMobaileServise.Servise
             }
         }
 
-        public async void SetInspectionDriverInDb(string idDriver, InspectionDriver inspectionDriver)
+        public async Task SetInspectionDriverInDb(string idDriver, InspectionDriver inspectionDriver)
         {
             Driver driver = await context.Drivers.Where(d => d.Id == Convert.ToUInt32(idDriver))
                 .Include(d => d.InspectionDrivers)
@@ -73,7 +73,7 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
-        public async void SaveInspectionDriverInDb(string idDriver, Photo photo, int IndexPhoto)
+        public async Task SaveInspectionDriverInDb(string idDriver, Photo photo, int IndexPhoto)
         {
             InspectionDriver inspectionDrivers = null;
             context.Drivers.Include("InspectionDrivers.PhotosTruck").ToList();
@@ -106,7 +106,7 @@ namespace ApiMobaileServise.Servise
             }
         }
 
-        public async void UpdateInspectionDriver(string idDriver)
+        public async Task UpdateInspectionDriver(string idDriver)
         {
             Driver driver = await context.Drivers.Where(d => d.Id == Convert.ToUInt32(idDriver))
                    .Include(d => d.InspectionDrivers)

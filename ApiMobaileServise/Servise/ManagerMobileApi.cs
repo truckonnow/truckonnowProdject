@@ -37,21 +37,21 @@ namespace ApiMobaileServise.Servise
             await new AuthMessageSender().Execute(email, "Truckonnow - Coupon", patern);
         }
 
-        public void SetInspectionDriver(string idDriver, string inspectionDriverStr)
+        public async void SetInspectionDriver(string idDriver, string inspectionDriverStr)
         {
             InspectionDriver inspectionDriver = JsonConvert.DeserializeObject<InspectionDriver>(inspectionDriverStr);
-            sqlCommandApiMobile.SetInspectionDriverInDb(idDriver, inspectionDriver);
+            await sqlCommandApiMobile.SetInspectionDriverInDb(idDriver, inspectionDriver);
         }
 
-        public void SaveInspactionDriver(string idDriver, string photoJson, int indexPhoto)
+        public async void SaveInspactionDriver(string idDriver, string photoJson, int indexPhoto)
         {
             Photo photo = JsonConvert.DeserializeObject<Photo>(photoJson);
-            sqlCommandApiMobile.SaveInspectionDriverInDb(idDriver, photo, indexPhoto);
+            await sqlCommandApiMobile.SaveInspectionDriverInDb(idDriver, photo, indexPhoto);
         }
 
-        public void UpdateInspectionDriver(string idDriver)
+        public async void UpdateInspectionDriver(string idDriver)
         {
-            sqlCommandApiMobile.UpdateInspectionDriver(idDriver);
+            await sqlCommandApiMobile.UpdateInspectionDriver(idDriver);
         }
 
         public async Task<bool> ChechToDayInspaction(string token)

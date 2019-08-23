@@ -26,7 +26,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", await managerMobileApi.ChechToDayInspaction(token)));
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", await managerMobileApi.ChechToDayInspaction(token), 5));
                 }
                 else
                 {
@@ -54,10 +54,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    Task.Run(() =>
-                    {
-                        managerMobileApi.SetInspectionDriver(idDriver, inspectionDriverStr);
-                    });
+                    managerMobileApi.SetInspectionDriver(idDriver, inspectionDriverStr);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
@@ -86,10 +83,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    Task.Run(() =>
-                    {
-                        managerMobileApi.SaveInspactionDriver(idDriver, photoJson, indexPhoto);
-                    });
+                    managerMobileApi.SaveInspactionDriver(idDriver, photoJson, indexPhoto);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
@@ -118,10 +112,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    Task.Run(() =>
-                    {
-                        managerMobileApi.UpdateInspectionDriver(idDriver);
-                    });
+                    managerMobileApi.UpdateInspectionDriver(idDriver);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
