@@ -1,5 +1,7 @@
 ﻿using DaoModels.DAO.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.IO;
 
 namespace DaoModels.DAO
 {
@@ -26,8 +28,15 @@ namespace DaoModels.DAO
 
         public Context()
         {
+            try
+            {
                 //Database.EnsureCreated();
                 Database.Migrate();
+            }
+            catch (Exception e)
+            {
+                File.AppendAllText("db.txt", e.Message);
+            }
             
         }
 
@@ -36,7 +45,7 @@ namespace DaoModels.DAO
             if (!optionsBuilder.IsConfigured)
             {
                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=WebDispatchDB;Trusted_Connection=True;");
-                //optionsBuilder.UseSqlServer("Data Source=127.0.0.1;Initial Catalog=WebDispatchDB;Integrated Security=False;User ID=roma;Password=123;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
+               //optionsBuilder.UseSqlServer("Data Source=127.0.0.1;Initial Catalog=WebDispatchDB;Integrated Security=False;User ID=roma;Password=123;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             }
         }
     }

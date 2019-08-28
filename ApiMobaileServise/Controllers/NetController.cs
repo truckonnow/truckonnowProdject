@@ -24,5 +24,21 @@ namespace ApiMobaileServise.Controllers
             }
             return respons;
         }
+
+        [HttpGet]
+        [Route("Sync")]
+        public string CheckSync()
+        {
+            string respons = null;
+            try
+            {
+                respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", DateTime.Now.AddHours(-3)));
+            }
+            catch (Exception)
+            {
+                respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
+            }
+            return respons;
+        }
     }
 }
