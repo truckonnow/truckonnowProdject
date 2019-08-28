@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -31,15 +32,23 @@ namespace MDispatch.Service.TimeSync
             {
                 string token = CrossSettings.Current.GetValueOrDefault("Token", "");
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
-                RestRequest request = new RestRequest("Mobile/Sync", Method.POST);
+                RestRequest request = new RestRequest("Mobile/Sync", Method.GET);
                 request.AddHeader("Accept", "application/json");
                 client.Timeout = 10000;
                 request.AddParameter("token", token);
                 response = client.Execute(request);
                 content = response.Content;
-                GetData(content, ref dateTime);
-                string timeZpneCount = NodaTime.DateTimeZoneProviders.Tzdb.GetSystemDefault().MaxOffset.ToString();
-                dateTime.AddHours(Convert.ToInt32(timeZpneCount));
+                if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                   
+                }
+                else
+                {
+                    GetData(content, ref dateTime);
+                    string timeZpneCount = NodaTime.DateTimeZoneProviders.Tzdb.GetSystemDefault().MaxOffset.ToString();
+                    dateTime = dateTime.AddHours(Convert.ToInt32(timeZpneCount));
+                    App.time = dateTime;
+                }
             }
             catch (Exception)
             {
@@ -64,9 +73,45 @@ namespace MDispatch.Service.TimeSync
             string status = responseAppS.Value<string>("Status");
             if (status == "success")
             {
-                dateTime = JsonConvert.DeserializeObject<DateTime>(responseAppS.
-                        SelectToken("ResponseStr").ToString());
+                string date_Time = responseAppS.
+                        SelectToken("ResponseStr").ToString();
+                string date = date_Time.Remove(date_Time.IndexOf(" "));
+                string time = date_Time.Remove(0, date_Time.IndexOf(" ")+1);
+                dateTime = DateTime.Parse($"{GetDFormat(date)} {time}");
             }
+        }
+
+        private static string GetDFormat(string data)
+        {
+            DateTime date;
+            if (DateTime.TryParseExact(data, "MM.dd.yyyy", null, DateTimeStyles.None, out date))
+            {
+            }
+            else if (DateTime.TryParseExact(data, "dd.MM.yyyy", null, DateTimeStyles.None, out date))
+            {
+            }
+            else if (DateTime.TryParseExact(data, "yyyy.MM.dd", null, DateTimeStyles.None, out date))
+            {
+            }
+            else if (DateTime.TryParseExact(data, "MM-dd-yyyy", null, DateTimeStyles.None, out date))
+            {
+            }
+            else if (DateTime.TryParseExact(data, "dd-MM-yyyy", null, DateTimeStyles.None, out date))
+            {
+            }
+            else if (DateTime.TryParseExact(data, "yyyy-MM-dd", null, DateTimeStyles.None, out date))
+            {
+            }
+            else if (DateTime.TryParseExact(data, "MM/dd/yyyy", null, DateTimeStyles.None, out date))
+            {
+            }
+            else if (DateTime.TryParseExact(data, "dd/MM/yyyy", null, DateTimeStyles.None, out date))
+            {
+            }
+            else if (DateTime.TryParseExact(data, "yyyy/MM/dd", null, DateTimeStyles.None, out date))
+            {
+            }
+            return date.ToShortDateString();
         }
     }
 }

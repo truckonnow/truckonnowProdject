@@ -13,7 +13,8 @@ namespace MDispatch
         public static bool isAvtorization;
         public static bool isNetwork;
         public static bool isStart;
-            
+        public static DateTime time = DateTime.Now;
+
         public App ()
         {
 			InitializeComponent();
