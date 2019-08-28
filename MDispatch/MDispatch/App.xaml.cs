@@ -1,3 +1,4 @@
+using System;
 using FormsControls.Base;
 using MDispatch.Service.GeloctionGPS;
 using MDispatch.View.A_R;
@@ -27,6 +28,7 @@ namespace MDispatch
                 isAvtorization = true;
                 MainPage = new AnimationNavigationPage(new TabPage(new Service.ManagerDispatchMob()));
             }
+
         }
 
         //private async void SelecterPage(bool isNotify)
@@ -55,7 +57,7 @@ namespace MDispatch
         //    }
         //}
 
-		protected override async void OnStart()
+        protected override async void OnStart()
         {
             
             if (isAvtorization)
@@ -65,6 +67,7 @@ namespace MDispatch
                 //    DependencyService.Get<IStore>().OnTokenRefresh();
                 //});
                 isStart = true;
+                MDispatch.Service.TimeSync.Untils.Start();
                 await Utils.StartListening();
             }
         }
@@ -74,6 +77,7 @@ namespace MDispatch
             if (isAvtorization)
             {
                 isStart = false;
+                MDispatch.Service.TimeSync.Untils.Stop();
                 await Utils.StopListening();
             }
         }
@@ -83,6 +87,7 @@ namespace MDispatch
             if (isAvtorization)
             {
                 isStart = true;
+                MDispatch.Service.TimeSync.Untils.Start();
                 await Utils.StartListening();
             }
         }
