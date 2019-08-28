@@ -18,7 +18,7 @@ namespace MDispatch.Service.TimeSync
         {
             if (!isUpdate)
             {
-                timer = new Timer(new TimerCallback(SyncServer), null, 0, 60000);
+                timer = new Timer(new TimerCallback(SyncServer), null, 3000, 60000);
                 isUpdate = true;
             }
         }
