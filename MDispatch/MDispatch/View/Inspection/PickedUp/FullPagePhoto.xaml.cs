@@ -24,7 +24,7 @@ namespace MDispatch.View.PageApp
         public FullPagePhotoMV fullPagePhotoMV = null;
         private string pngPaternPhoto = null;
 
-        public FullPagePhoto(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string pngPaternPhoto, string typeCar, int photoIndex, InitDasbordDelegate initDasbordDelegate, 
+        public FullPagePhoto(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string pngPaternPhoto, string typeCar, int photoIndex, InitDasbordDelegate initDasbordDelegate,
             GetVechicleDelegate getVechicleDelegate, string nameLayoute, string onDeliveryToCarrier, string totalPaymentToCarrier)
         {
             this.pngPaternPhoto = pngPaternPhoto;
@@ -33,6 +33,7 @@ namespace MDispatch.View.PageApp
             BindingContext = fullPagePhotoMV;
             paternPhoto.Source = pngPaternPhoto;
             dmla.IsVisible = false;
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             if (fullPagePhotoMV.Car.typeIndex != null && fullPagePhotoMV.Car.typeIndex != "")
             {
                 NameSelectPhoto.Text = $"{nameLayoute} - {photoIndex}/{fullPagePhotoMV.Car.CountCarImg}";
@@ -41,6 +42,7 @@ namespace MDispatch.View.PageApp
             {
                 NameSelectPhoto.Text = "--------------------";
             }
+        }
 
         public async Task SetbtnVisable()
         {
@@ -93,8 +95,8 @@ namespace MDispatch.View.PageApp
                 paternPhoto.Source = pngPaternPhoto;
             }
         }
-        
-        private async void Button_Clicked_1(object sender, EventArgs e)
+
+            private async void Button_Clicked_1(object sender, EventArgs e)
         {
             if(fullPagePhotoMV.AllSourseImage != null && fullPagePhotoMV.AllSourseImage.Count != 0)
             {

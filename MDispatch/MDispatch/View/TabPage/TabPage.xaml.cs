@@ -22,8 +22,7 @@ namespace MDispatch.View.TabPage
             tablePageMV = new TablePageMV(managerDispatchMob);
             InitializeComponent();
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-            On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
-                .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
+            On<iOS>().SetUseSafeArea(true);
             On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
             BindingContext = this.tablePageMV;
             InitActivePage(managerDispatchMob);
