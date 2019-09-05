@@ -283,23 +283,24 @@ namespace MDispatch.ViewModels.InspectionMV.Models
 
         public async Task OrintableScreen(int inderxPhotoInspektion)
         {
-            if (inderxPhotoInspektion == 2 || inderxPhotoInspektion == 3 )
-            {
-                DependencyService.Get<IOrientationHandler>().ForceSensor();
-            }
-            else if (inderxPhotoInspektion == 7 || inderxPhotoInspektion == 8 || inderxPhotoInspektion == 9 || inderxPhotoInspektion == 10 || inderxPhotoInspektion == 10
-                || inderxPhotoInspektion == 12 || inderxPhotoInspektion == 13 || inderxPhotoInspektion == 14 || inderxPhotoInspektion == 15 || inderxPhotoInspektion == 16
-                || inderxPhotoInspektion == 17 || inderxPhotoInspektion == 18 || inderxPhotoInspektion == 19 || inderxPhotoInspektion == 20 || inderxPhotoInspektion == 22
-                || inderxPhotoInspektion == 23 || inderxPhotoInspektion == 26 || inderxPhotoInspektion == 27 || inderxPhotoInspektion == 33 || inderxPhotoInspektion == 35)
-            {
-                DependencyService.Get<IOrientationHandler>().ForcePortrait();
-            }
-            else if (inderxPhotoInspektion == 1 || inderxPhotoInspektion == 4 || inderxPhotoInspektion == 5 || inderxPhotoInspektion == 6 || inderxPhotoInspektion == 21
-                || inderxPhotoInspektion == 24 || inderxPhotoInspektion == 25 || inderxPhotoInspektion == 25 || inderxPhotoInspektion == 28 || inderxPhotoInspektion == 29 
-                || inderxPhotoInspektion == 30 || inderxPhotoInspektion == 31 || inderxPhotoInspektion == 32 || inderxPhotoInspektion == 34 || inderxPhotoInspektion == 36)
-            {
-                DependencyService.Get<IOrientationHandler>().ForceLandscape();
-            }
+            DependencyService.Get<IOrientationHandler>().ForceLandscape();
+            //if (inderxPhotoInspektion == 2 || inderxPhotoInspektion == 3 )
+            //{
+            //    DependencyService.Get<IOrientationHandler>().ForceSensor();
+            //}
+            //else if (inderxPhotoInspektion == 7 || inderxPhotoInspektion == 8 || inderxPhotoInspektion == 9 || inderxPhotoInspektion == 10 || inderxPhotoInspektion == 10
+            //    || inderxPhotoInspektion == 12 || inderxPhotoInspektion == 13 || inderxPhotoInspektion == 14 || inderxPhotoInspektion == 15 || inderxPhotoInspektion == 16
+            //    || inderxPhotoInspektion == 17 || inderxPhotoInspektion == 18 || inderxPhotoInspektion == 19 || inderxPhotoInspektion == 20 || inderxPhotoInspektion == 22
+            //    || inderxPhotoInspektion == 23 || inderxPhotoInspektion == 26 || inderxPhotoInspektion == 27 || inderxPhotoInspektion == 33 || inderxPhotoInspektion == 35)
+            //{
+            //    DependencyService.Get<IOrientationHandler>().ForcePortrait();
+            //}
+            //else if (inderxPhotoInspektion == 1 || inderxPhotoInspektion == 4 || inderxPhotoInspektion == 5 || inderxPhotoInspektion == 6 || inderxPhotoInspektion == 21
+            //    || inderxPhotoInspektion == 24 || inderxPhotoInspektion == 25 || inderxPhotoInspektion == 25 || inderxPhotoInspektion == 28 || inderxPhotoInspektion == 29 
+            //    || inderxPhotoInspektion == 30 || inderxPhotoInspektion == 31 || inderxPhotoInspektion == 32 || inderxPhotoInspektion == 34 || inderxPhotoInspektion == 36)
+            //{
+            //    DependencyService.Get<IOrientationHandler>().ForceLandscape();
+            //}
         }
     }
 }
