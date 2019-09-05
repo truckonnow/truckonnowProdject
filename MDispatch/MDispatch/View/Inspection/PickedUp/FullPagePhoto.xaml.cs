@@ -41,10 +41,6 @@ namespace MDispatch.View.PageApp
             {
                 NameSelectPhoto.Text = "--------------------";
             }
-            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-            On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
-                .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
-        }
 
         public async Task SetbtnVisable()
         {
