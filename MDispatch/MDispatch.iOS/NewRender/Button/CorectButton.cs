@@ -23,11 +23,8 @@ namespace MDispatch.iOS.NewRender.Button
             var element = this.Element as Xamarin.Forms.Button;
             if (element != null)
             {
-                this.Control.ContentEdgeInsets = new UIEdgeInsets(5, 10, 5, 10);
-                if (Control.TitleLabel.Font.PointSize <= 15)
-                {
-                    Control.TitleLabel.Font = Control.Font.WithSize(Control.TitleLabel.Font.PointSize + 5);
-                }
+                this.Element.Text = this.Element.Text.ToUpper();
+                this.Element.Padding = new Thickness(6, 4, 6, 4);
             }
         }
     
