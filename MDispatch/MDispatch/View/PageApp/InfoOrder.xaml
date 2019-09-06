@@ -116,9 +116,9 @@
                 </StackLayout>
                 <BoxView HeightRequest="1" BackgroundColor="#BDBDBD"/>
                 <FlexLayout>
-                    <Button Text="Tap to instructions" BackgroundColor="#4fd2c2" FontSize="12" Margin="5"
+                    <Button Text="Instructions" BackgroundColor="#4fd2c2" FontSize="12" Margin="5"
                         TextColor="White" Command="{Binding ToInstructionComand}"/>
-                    <Button Text="start vehicle inspection" BackgroundColor="BlueViolet" FontSize="12" Margin="5"
+                    <Button Text="Start vehicle inspection" BackgroundColor="BlueViolet" FontSize="12" Margin="5"
                         TextColor="White" Clicked="Button_Clicked_2"/>
                 </FlexLayout>
             </StackLayout>

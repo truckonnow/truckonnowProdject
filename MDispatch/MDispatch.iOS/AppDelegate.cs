@@ -21,6 +21,7 @@ namespace MDispatch.iOS
             Rg.Plugins.Popup.Popup.Init();
             global::Xamarin.Forms.Forms.Init();
             FormsControls.Touch.Main.Init();
+            UIApplication.SharedApplication.StatusBarHidden = false;
             UINavigationBar.Appearance.BarTintColor = Color.FromHex("#4fd2c2").ToUIColor();
             LoadApplication(new App());
             Firebase.Core.App.Configure();
