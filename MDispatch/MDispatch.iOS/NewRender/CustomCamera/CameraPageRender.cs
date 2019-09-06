@@ -19,12 +19,11 @@ namespace MDispatch.iOS.NewRender.CustomCamera
         AVCaptureSession captureSession;
         AVCaptureDeviceInput captureDeviceInput;
         AVCaptureStillImageOutput stillImageOutput;
-
         AVCaptureVideoPreviewLayer videoPreviewLayer = null;
         UIPaintCodeButton takePhotoButton;
         UIView liveCameraStream;
-
         private Timer timer = null;
+        private bool isTake = false;
 
         public CameraPageRender()
         {
@@ -141,14 +140,21 @@ namespace MDispatch.iOS.NewRender.CustomCamera
         {
             takePhotoButton.TouchUpInside += async (s, e) =>
             {
-                int width = 1280;
-                int height = 720;
-                var data = await CapturePhoto();
-                if (data != null)
+                if (!isTake)
                 {
-                    UIImage originalImage = ImageFromByteArray(data.ToArray());
-                    byte[] res = ResizeImageIOS(originalImage, width, height);
-                    (Element as CameraPage).SetPhotoResult(res, width, height);
+                    takePhotoButton.Enabled = false;
+                    isTake = true;
+                    int width = 1280;
+                    int height = 720;
+                    var data = await CapturePhoto();
+                    if (data != null)
+                    {
+                        UIImage originalImage = ImageFromByteArray(data.ToArray());
+                        byte[] res = ResizeImageIOS(originalImage, width, height);
+                        (Element as CameraPage).SetPhotoResult(res, width, height);
+                    }
+                    isTake = false;
+                    takePhotoButton.Enabled = true;
                 }
             };
         }
