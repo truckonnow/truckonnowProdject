@@ -24,6 +24,7 @@ namespace MDispatch.iOS.NewRender.Button
             if (element != null)
             {
                 this.Element.Text = this.Element.Text.ToUpper();
+                this.Element.FontAttributes = FontAttributes.Bold;
                 this.Element.Padding = new Thickness(6, 4, 6, 4);
             }
         }
