@@ -218,7 +218,7 @@ namespace ApiMobaileServise.Servise
             {
                 Photo photo = new Photo();
                 photo.path = $"../Photo/{vehiclwInformation.Id}/scan.jpg";
-                photo.Base64 = JsonConvert.SerializeObject(File.ReadAllBytes($"../Scans/scan{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}.jpg"));
+                photo.Base64 = Convert.ToBase64String(File.ReadAllBytes($"../Scans/scan{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}.jpg"));
                 vehiclwInformation.Scan = photo;
             }
             vehiclwInformation.PhotoInspections.Add(photoInspection);

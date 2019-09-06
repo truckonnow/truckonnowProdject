@@ -24,7 +24,7 @@ namespace MDispatch.View.PageApp
         public FullPagePhotoMV fullPagePhotoMV = null;
         private string pngPaternPhoto = null;
 
-        public FullPagePhoto(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string pngPaternPhoto, string typeCar, int photoIndex, InitDasbordDelegate initDasbordDelegate, 
+        public FullPagePhoto(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, string pngPaternPhoto, string typeCar, int photoIndex, InitDasbordDelegate initDasbordDelegate,
             GetVechicleDelegate getVechicleDelegate, string nameLayoute, string onDeliveryToCarrier, string totalPaymentToCarrier)
         {
             this.pngPaternPhoto = pngPaternPhoto;
@@ -41,6 +41,7 @@ namespace MDispatch.View.PageApp
             {
                 NameSelectPhoto.Text = "--------------------";
             }
+        }
 
         public async Task SetbtnVisable()
         {
