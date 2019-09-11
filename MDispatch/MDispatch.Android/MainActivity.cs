@@ -15,6 +15,8 @@ namespace MDispatch.Droid
     [Activity(Label = "Tru", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        private static MainActivity mainActivity = null;
+
         protected override void OnCreate(Bundle bundle)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -29,6 +31,7 @@ namespace MDispatch.Droid
             Xamarin.Essentials.Platform.Init(this, bundle);
             FormsControls.Droid.Main.Init(this);
             LoadApplication(new App());
+            mainActivity = this;
             ResizeForKeyBord();
         }
 
@@ -82,6 +85,11 @@ namespace MDispatch.Droid
                 // services are available message
                 return true;
             }
+        }
+
+        public static MainActivity GetContext()
+        {
+            return mainActivity;
         }
 
     }

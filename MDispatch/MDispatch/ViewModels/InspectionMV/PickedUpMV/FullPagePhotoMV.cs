@@ -3,6 +3,7 @@ using MDispatch.NewElement;
 using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
 using MDispatch.Service.Net;
+using MDispatch.Service.Tasks;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection;
@@ -11,7 +12,6 @@ using MDispatch.View.PageApp;
 using MDispatch.ViewModels.AskPhoto;
 using MDispatch.ViewModels.InspectionMV.Models;
 using MDispatch.ViewModels.InspectionMV.Servise.Models;
-using Newtonsoft.Json;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
@@ -249,6 +249,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         [System.Obsolete]
         public async void SavePhoto(bool isNavigWthDamag = false)
         {
+            TaskManager.CommandToDo("DashbordVehicle", PhotoInspection.Photos[0].Base64);
             bool isNavigationMany = false;
             int navigationStack_Count = isNavigWthDamag ? Navigation.NavigationStack.Count - 1 : Navigation.NavigationStack.Count;
             if (navigationStack_Count > 2)

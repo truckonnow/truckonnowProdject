@@ -115,6 +115,9 @@
     <PackageReference Include="Xamarin.GooglePlayServices.Basement">
       <Version>60.1142.1</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Tesseract">
+      <Version>0.3.4</Version>
+    </PackageReference>
     <PackageReference Include="XForms.Plugin.AnimationNavigationPage">
       <Version>1.0.7</Version>
     </PackageReference>
@@ -127,6 +130,7 @@
     <Compile Include="NewrRender\ImageRender\ImageSizeRender.cs" />
     <Compile Include="NewrRender\ImageRender\RezizeImgRender.cs" />
     <Compile Include="NewrRender\Orientation\OrientationHandler.cs" />
+    <Compile Include="NewrRender\ORS\ORCReader.cs" />
     <Compile Include="NewrRender\RebderVideoCamera\VideoRecorderRenderer.cs" />
     <Compile Include="NewrRender\ResizerImage\ResizeImgDroid.cs" />
     <Compile Include="NewrRender\Sider\CusstomSider.cs" />
@@ -139,6 +143,15 @@
   </ItemGroup>
   <ItemGroup>
     <GoogleServicesJson Include="google-services.json" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.bigrams" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.fold" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.lm" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.nn" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.params" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.size" />
+    <AndroidAsset Include="Assets\tessdata\eng.cube.word-freq" />
+    <AndroidAsset Include="Assets\tessdata\eng.tesseract_cube.nn" />
+    <AndroidAsset Include="Assets\tessdata\eng.traineddata" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />

@@ -143,7 +143,7 @@ namespace MDispatch.ViewModels.InspectionMV.Models
             }
             else if (inderxPhotoInspektion == 33)
             {
-                nameLayout = "Vehicle dashbord";
+                nameLayout = "Vehicle dashboard";
             }
             else if (inderxPhotoInspektion == 34)
             {

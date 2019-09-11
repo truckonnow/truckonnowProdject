@@ -7090,6 +7090,8 @@ namespace MDispatch.Droid
 			global::Xamarin.Controls.Resource.Styleable.SignaturePadView_signaturePromptTextSize = global::MDispatch.Droid.Resource.Styleable.SignaturePadView_signaturePromptTextSize;
 			global::Xamarin.Controls.Resource.Styleable.SignaturePadView_strokeColor = global::MDispatch.Droid.Resource.Styleable.SignaturePadView_strokeColor;
 			global::Xamarin.Controls.Resource.Styleable.SignaturePadView_strokeWidth = global::MDispatch.Droid.Resource.Styleable.SignaturePadView_strokeWidth;
+			global::Tesseract.Droid.Resource.String.ApplicationName = global::MDispatch.Droid.Resource.String.ApplicationName;
+			global::Tesseract.Droid.Resource.String.Hello = global::MDispatch.Droid.Resource.String.Hello;
 			global::Xamarin.Essentials.Resource.Attribute.font = global::MDispatch.Droid.Resource.Attribute.font;
 			global::Xamarin.Essentials.Resource.Attribute.fontProviderAuthority = global::MDispatch.Droid.Resource.Attribute.fontProviderAuthority;
 			global::Xamarin.Essentials.Resource.Attribute.fontProviderCerts = global::MDispatch.Droid.Resource.Attribute.fontProviderCerts;
@@ -16872,6 +16874,12 @@ namespace MDispatch.Droid
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f090056
+			public const int ApplicationName = 2131296342;
+			
+			// aapt resource value: 0x7f090055
+			public const int Hello = 2131296341;
+			
 			// aapt resource value: 0x7f09002e
 			public const int abc_action_bar_home_description = 2131296302;
 			
@@ -17043,8 +17051,8 @@ namespace MDispatch.Droid
 			// aapt resource value: 0x7f090006
 			public const int google_storage_bucket = 2131296262;
 			
-			// aapt resource value: 0x7f090058
-			public const int library_name = 2131296344;
+			// aapt resource value: 0x7f09005a
+			public const int library_name = 2131296346;
 			
 			// aapt resource value: 0x7f090019
 			public const int mr_button_content_description = 2131296281;
@@ -17127,14 +17135,14 @@ namespace MDispatch.Droid
 			// aapt resource value: 0x7f09003f
 			public const int search_menu_title = 2131296319;
 			
+			// aapt resource value: 0x7f090059
+			public const int signature_pad_caption_text = 2131296345;
+			
 			// aapt resource value: 0x7f090057
-			public const int signature_pad_caption_text = 2131296343;
+			public const int signature_pad_clear_label_text = 2131296343;
 			
-			// aapt resource value: 0x7f090055
-			public const int signature_pad_clear_label_text = 2131296341;
-			
-			// aapt resource value: 0x7f090056
-			public const int signature_pad_prompt_text = 2131296342;
+			// aapt resource value: 0x7f090058
+			public const int signature_pad_prompt_text = 2131296344;
 			
 			// aapt resource value: 0x7f090054
 			public const int status_bar_notification_info_overflow = 2131296340;
