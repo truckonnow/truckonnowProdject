@@ -32,7 +32,6 @@ namespace MDispatch.View.PageApp
         {
             await PopupNavigation.PushAsync(new LoadPage());
             AddScan(vehiclwInformation);
-            AddBlocDocumentPhoto(vehiclwInformation);
             AddBlocItemPhoto(vehiclwInformation);
             AddBlocBeen(vehiclwInformation);
             AddBlocDocumentationBeen(vehiclwInformation);
@@ -89,31 +88,6 @@ namespace MDispatch.View.PageApp
                 VechInfoSt3.IsVisible = false;
                 VechInfoSt1.IsVisible = false;
                 VechInfoSt2.IsVisible = true;
-            }
-        }
-
-        [Obsolete]
-        private void AddBlocDocumentPhoto(VehiclwInformation vehiclwInformation)
-        {
-            if (vehiclwInformation.Ask != null && vehiclwInformation.Ask.Any_paperwork_or_documentation != null)
-            {
-                foreach (var document in vehiclwInformation.Ask.Any_paperwork_or_documentation)
-                {
-                    Image image = new Image()
-                    {
-                        Source = ImageSource.FromStream(() => new MemoryStream(ResizeImage(document.Base64))),
-                        HeightRequest = 100,
-                        WidthRequest = 100,
-                        Margin = 3
-                    };
-                    image.GestureRecognizers.Add(new TapGestureRecognizer(VievFull));
-                    blockDocument.Children.Add(image);
-                }
-            }
-            else
-            {
-                blockDocument.IsVisible = false;
-                documentNotContent.IsVisible = true;
             }
         }
 

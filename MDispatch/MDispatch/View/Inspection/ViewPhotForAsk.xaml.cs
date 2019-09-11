@@ -45,11 +45,6 @@ namespace MDispatch.View.Inspection
             IRetake retake = null;
             switch(namePage)
             {
-                case "Ask":
-                    {
-                        retake = new RetakeAsk1((AskPage)ask, view);
-                        break;
-                    }
                 case "Ask1":
                     {
                         retake = new RetakeAsk2((AskPage)ask, view);

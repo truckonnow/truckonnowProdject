@@ -17,18 +17,18 @@ using static MDispatch.Service.ManagerDispatchMob;
 namespace MDispatch.View.AskPhoto
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AskPage : ContentPage
-	{
+    public partial class AskPage : ContentPage
+    {
         AskPageMV askPageMV = null;
 
-        public AskPage (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate, 
+        public AskPage(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate,
             string onDeliveryToCarrier, string totalPaymentToCarrier)
-		{
+        {
             askPageMV = new AskPageMV(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate, getVechicleDelegate, onDeliveryToCarrier, totalPaymentToCarrier);
             askPageMV.Ask = new Ask();
-            InitializeComponent ();
+            InitializeComponent();
             BindingContext = askPageMV;
-		}
+        }
 
 
         #region Ask1
@@ -65,20 +65,37 @@ namespace MDispatch.View.AskPhoto
         }
         #endregion
 
-        #region Ask3
-        Button button3 = null;
-        bool isAsk3 = false;
-        private void Button_Clicked_2(object sender, EventArgs e)
+        #region Ask12
+        Button button12 = null;
+        bool isAsk12 = false;
+        private void Button_Clicked_7(object sender, EventArgs e)
         {
-            isAsk3 = true;
+            isAsk12 = true;
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
-            askPageMV.Ask.Enough_distance_to_take_pictures_at_least_4ft = button.Text;
-            if (button3 != null)
+            askPageMV.Ask.Safe_delivery_location = button.Text;
+            if (button12 != null)
             {
-                button3.TextColor = Color.Silver;
+                button12.TextColor = Color.Silver;
             }
-            button3 = button;
+            button12 = button;
+        }
+        #endregion
+
+        #region Ask15
+        bool isAsk15 = false;
+        Button button15 = null;
+        private void Button_Clicked_8(object sender, EventArgs e)
+        {
+            isAsk15 = true;
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            askPageMV.Ask.Enough_space_to_take_pictures = button.Text;
+            if (button15 != null)
+            {
+                button15.TextColor = Color.Silver;
+            }
+            button15 = button;
         }
         #endregion
 
@@ -91,45 +108,11 @@ namespace MDispatch.View.AskPhoto
         }
         #endregion
 
-        #region Ask5
-        Button button5 = null;
-        bool isAsk5 = false;
-        private void Button_Clicked_3(object sender, EventArgs e)
-        {
-            isAsk5 = true;
-            Button button = (Button)sender;
-            button.TextColor = Color.FromHex("#4fd2c2");
-            askPageMV.Ask.Does_The_vehicle_Starts = button.Text;
-            if (button5 != null)
-            {
-                button5.TextColor = Color.Silver;
-            }
-            button5 = button;
-        }
-        #endregion
-
-        #region Ask6
-        Button button6 = null;
-        bool isAsk6 = false;
-        private void Button_Clicked_4(object sender, EventArgs e)
-        {
-            isAsk6 = true;
-            Button button = (Button)sender;
-            button.TextColor = Color.FromHex("#4fd2c2");
-            askPageMV.Ask.Does_The_vehicle_Drives = button.Text;
-            if (button6 != null)
-            {
-                button6.TextColor = Color.Silver;
-            }
-            button6 = button;
-        }
-        #endregion
-
         #region Ask7
         bool isAsk7 = false;
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(e.NewTextValue != "")
+            if (e.NewTextValue != "")
             {
                 isAsk7 = true;
             }
@@ -138,22 +121,6 @@ namespace MDispatch.View.AskPhoto
                 isAsk7 = false;
             }
             askPageMV.Ask.Anyone_Rushing_you_to_perform_the_inspection = e.NewTextValue;
-        }
-        #endregion
-
-        #region Ask8
-        bool isAsk8 = false;
-        private void Entry_TextChanged_1(object sender, TextChangedEventArgs e)
-        {
-            if (e.NewTextValue != "")
-            {
-                isAsk8 = true;
-            }
-            else
-            {
-                isAsk8 = false;
-            }
-            askPageMV.Ask.How_far_is_the_vehicle_from_Trailer_Aprox_in_ft = e.NewTextValue;
         }
         #endregion
 
@@ -173,19 +140,35 @@ namespace MDispatch.View.AskPhoto
         }
         #endregion
 
-        #region Ask10
-        bool isAsk10 = false;
-        private void Entry_TextChanged_2(object sender, TextChangedEventArgs e)
+        #region Ask13
+        bool isAsk13 = false;
+        private void Entry_TextChanged_4(object sender, TextChangedEventArgs e)
         {
             if (e.NewTextValue != "")
             {
-                isAsk10 = true;
+                isAsk13 = true;
             }
             else
             {
-                isAsk10 = false;
+                isAsk13 = false;
             }
-            askPageMV.Ask.Exact_Mileage = e.NewTextValue;
+            askPageMV.Ask.How_far_from_trailer = e.NewTextValue;
+        }
+        #endregion
+
+        #region Ask14
+        bool isAsk14 = false;
+        private void Entry_TextChanged_5(object sender, TextChangedEventArgs e)
+        {
+            if (e.NewTextValue != "")
+            {
+                isAsk14 = true;
+            }
+            else
+            {
+                isAsk14 = false;
+            }
+            askPageMV.Ask.Name_of_the_person_who_gave_you_keys = e.NewTextValue;
         }
         #endregion
 
@@ -202,7 +185,7 @@ namespace MDispatch.View.AskPhoto
         [Obsolete]
         private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-            if(isAsk1 && isAsk2 && isAsk3 && isAsk4 && isAsk5 && isAsk6 && isAsk7 && isAsk8 && isAsk9 && isAsk10 && isAsk11)
+            if (isAsk1 && isAsk2 && isAsk12 && isAsk4 && isAsk13 && isAsk14 && isAsk7 && isAsk14 && isAsk9 && isAsk11)
             {
                 askPageMV.SaveAsk(askPageMV.Ask.TypeVehicle.Replace(" ", ""));
             }
@@ -215,7 +198,7 @@ namespace MDispatch.View.AskPhoto
 
         private void CheckAsk()
         {
-            if(!isAsk1)
+            if (!isAsk1)
             {
                 askBlock1.BorderColor = Color.Red;
             }
@@ -231,13 +214,13 @@ namespace MDispatch.View.AskPhoto
             {
                 askBlock2.BorderColor = Color.BlueViolet;
             }
-            if (!isAsk3)
+            if (!isAsk12)
             {
-                askBlock3.BorderColor = Color.Red;
+                askBlock12.BorderColor = Color.Red;
             }
             else
             {
-                askBlock3.BorderColor = Color.BlueViolet;
+                askBlock12.BorderColor = Color.BlueViolet;
             }
             if (!isAsk4)
             {
@@ -247,21 +230,21 @@ namespace MDispatch.View.AskPhoto
             {
                 askBlock4.BorderColor = Color.BlueViolet;
             }
-            if (!isAsk5)
+            if (!isAsk13)
             {
-                askBlock5.BorderColor = Color.Red;
+                askBlock13.BorderColor = Color.Red;
             }
             else
             {
-                askBlock5.BorderColor = Color.BlueViolet;
+                askBlock13.BorderColor = Color.BlueViolet;
             }
-            if (!isAsk6)
+            if (!isAsk14)
             {
-                askBlock6.BorderColor = Color.Red;
+                askBlock14.BorderColor = Color.Red;
             }
             else
             {
-                askBlock6.BorderColor = Color.BlueViolet;
+                askBlock14.BorderColor = Color.BlueViolet;
             }
             if (!isAsk7)
             {
@@ -271,13 +254,13 @@ namespace MDispatch.View.AskPhoto
             {
                 askBlock7.BorderColor = Color.BlueViolet;
             }
-            if (!isAsk8)
+            if (!isAsk15)
             {
-                askBlock8.BorderColor = Color.Red;
+                askBlock15.BorderColor = Color.Red;
             }
             else
             {
-                askBlock8.BorderColor = Color.BlueViolet;
+                askBlock15.BorderColor = Color.BlueViolet;
             }
             if (!isAsk9)
             {
@@ -286,14 +269,6 @@ namespace MDispatch.View.AskPhoto
             else
             {
                 askBlock9.BorderColor = Color.BlueViolet;
-            }
-            if (!isAsk10)
-            {
-                askBlock10.BorderColor = Color.Red;
-            }
-            else
-            {
-                askBlock10.BorderColor = Color.BlueViolet;
             }
             if (!isAsk11)
             {
@@ -305,61 +280,9 @@ namespace MDispatch.View.AskPhoto
             }
         }
 
-        private async void Button_Clicked_5(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new CameraDocument(this));
-        }
-
         private async void Button_Clicked_6(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new CameraItems(this));
-        }
-
-        public void AddPhotoDocumentom(byte[] photob)
-        {
-            if(askPageMV.Ask.Any_paperwork_or_documentation == null)
-            {
-                askPageMV.Ask.Any_paperwork_or_documentation = new List<Models.Photo>();
-            }
-            Models.Photo photo = new Models.Photo();
-            photo.Base64 = JsonConvert.SerializeObject(photob);
-            photo.path = $"../Photo/{askPageMV.VehiclwInformation.Id}/PikedUp/Document/{ askPageMV.Ask.Any_paperwork_or_documentation.Count + 1}.jpg";
-            askPageMV.Ask.Any_paperwork_or_documentation.Add(photo);
-            Image image = new Image()
-            {
-                Source = ImageSource.FromStream(() => new MemoryStream(photob)),
-                HeightRequest = 50,
-                WidthRequest = 50,
-            };
-            image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke));
-            blockAskPhotoDocument.Children.Add(image);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-        }
-
-        private async void ViewPhotoForRetacke(Xamarin.Forms.View v, object s)
-        {
-            if (v != null && blockAskPhotoDocument.Children.Contains(v))
-            {
-                await Navigation.PushAsync(new ViewPhotForAsk(v, this, "Ask"));
-            }
-        }
-
-        public void ReSetPhoto1(Xamarin.Forms.View view, byte[] newRetake)
-        {
-            byte[] r = GetImageBytes(((Image)view).Source);
-            askPageMV.ResetAskPhotoDocument(r, newRetake);
-            blockAskPhotoDocument.Children.Remove((Image)view);
-            Image image = new Image()
-            {
-                Source = ImageSource.FromStream(() => new MemoryStream(newRetake)),
-                HeightRequest = 50,
-                WidthRequest = 50,
-            };
-            image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke));
-            blockAskPhotoDocument.Children.Add(image);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
         }
 
         public void AddPhotoItems(byte[] photob)

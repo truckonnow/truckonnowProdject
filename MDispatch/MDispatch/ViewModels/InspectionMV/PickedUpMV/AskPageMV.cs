@@ -57,15 +57,6 @@ namespace MDispatch.ViewModels.AskPhoto
             set => SetProperty(ref vehiclwInformation, value);
         }
 
-        public void ResetAskPhotoDocument(byte[] oldRes, byte[] newRetake)
-        {
-            string base64 = JsonConvert.SerializeObject(newRetake);
-            Photo photo = Ask.Any_paperwork_or_documentation.FirstOrDefault(a => a.Base64 == JsonConvert.SerializeObject(oldRes));
-            if(photo != null)
-            {
-                photo.Base64 = base64;
-            }
-        }
         public void ResetAskPhotoItem(byte[] oldRes, byte[] newRetake)
         {
             string base64 = JsonConvert.SerializeObject(newRetake);
