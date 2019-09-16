@@ -22,7 +22,7 @@
                  Margin="5">
         <Frame CornerRadius="6" Padding="15" Margin="4" BorderColor="BlueViolet">
             <StackLayout>
-                <Label TextColor="Black" FontSize="17" Text="Thank you for using our company  please fill out some information for safe delivery" VerticalOptions="Center"/>
+                <Label TextColor="Black" FontSize="17" Text="Please pass the device to the client" VerticalOptions="Center"/>
                 <Button Text="Continue" BackgroundColor="BlueViolet" TextColor="White" Clicked="Button_Clicked"/>
             </StackLayout>
         </Frame>

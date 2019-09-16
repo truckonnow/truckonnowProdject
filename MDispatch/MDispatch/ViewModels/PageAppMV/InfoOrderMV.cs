@@ -148,7 +148,7 @@ namespace MDispatch.ViewModels.PageAppMV
             if (vehiclwInformation1 == null)
             {
                 vehiclwInformation1 = Shipping.VehiclwInformations[0];
-                await Navigation.PushAsync(new AskForUser(managerDispatchMob, vehiclwInformation1, Shipping.Id, initDasbordDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier), true);
+                await Navigation.PushAsync(new ClientStart(managerDispatchMob, vehiclwInformation1, Shipping.Id, initDasbordDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier), true);
                 Navigation.RemovePage(Navigation.NavigationStack[1]);
                 return;
             }

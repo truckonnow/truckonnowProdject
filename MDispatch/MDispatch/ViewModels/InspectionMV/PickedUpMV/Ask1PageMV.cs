@@ -70,7 +70,7 @@ namespace MDispatch.ViewModels.InspectionMV
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-                CheckVechicleAndGoToResultPage();
+            CheckVechicleAndGoToResultPage();
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
@@ -132,7 +132,7 @@ namespace MDispatch.ViewModels.InspectionMV
             int indexCurrentVechecle = vehiclwInformation1s.FindIndex(v => v == VehiclwInformation);
             if(vehiclwInformation1s.Count-1 == indexCurrentVechecle)
             {
-                await Navigation.PushAsync(new AskForUser(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, OnDeliveryToCarrier, TotalPaymentToCarrier));
+                await Navigation.PushAsync(new ClientStart(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, OnDeliveryToCarrier, TotalPaymentToCarrier));
                 await PopupNavigation.PushAsync(new TempPageHint1());
             }
             else
