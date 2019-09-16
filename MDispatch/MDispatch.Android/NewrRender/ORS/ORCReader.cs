@@ -14,11 +14,14 @@ namespace MDispatch.Droid.NewRender.ORC
         {
             string textResult = null;
             ITesseractApi api = new TesseractApi(Android.App.Application.Context, AssetsDeployment.OncePerVersion);
-            bool initialised = await api.Init("eng", OcrEngineMode.CubeOnly);
-            bool success = await api.SetImage(data);
-            if (success)
+            bool initialised = await api.Init("eng");
+            if (initialised)
             {
-                textResult = api.Text;
+                bool success = await api.SetImage(data);
+                if (success)
+                {
+                    textResult = api.Text;
+                }
             }
             return textResult;
         }

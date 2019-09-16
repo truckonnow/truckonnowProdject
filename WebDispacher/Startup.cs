@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;         
+﻿using ApiMobaileServise.BackgraundService;
+using FluentScheduler;
+using Microsoft.AspNetCore.Builder;         
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
