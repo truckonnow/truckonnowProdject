@@ -149,6 +149,7 @@ namespace MDispatch.ViewModels.PageAppMV
             {
                 vehiclwInformation1 = Shipping.VehiclwInformations[0];
                 await Navigation.PushAsync(new ClientStart(managerDispatchMob, vehiclwInformation1, Shipping.Id, initDasbordDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier), true);
+                await PopupNavigation.PushAsync(new TempPageHint1());
                 Navigation.RemovePage(Navigation.NavigationStack[1]);
                 return;
             }
