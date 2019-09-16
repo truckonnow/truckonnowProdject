@@ -1,7 +1,6 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.View.GlobalDialogView;
-using MDispatch.View.Inspection.CameraPageFolder;
 using MDispatch.View.Inspection.PickedUp.CameraPageFolder;
 using MDispatch.View.Inspection.PickUp.CameraPageFolder;
 using MDispatch.ViewModels.InspectionMV;
@@ -48,21 +47,7 @@ namespace MDispatch.View.Inspection
         }
         #endregion
 
-        #region Ask2
-        bool isAsk2 = false;
-        private void Entry_TextChanged1(object sender, TextChangedEventArgs e)
-        {
-            if (e.NewTextValue != "")
-            {
-                isAsk2 = true;
-            }
-            else
-            {
-                isAsk2 = false;
-            }
-            ask1PageMV.Ask1.Did_you_notice_any_mechanical_imperfections_wile_loading = e.NewTextValue;
-        }
-        #endregion
+        
 
         #region Ask3
         Button button3 = null;
@@ -156,48 +141,6 @@ namespace MDispatch.View.Inspection
         }
         #endregion
 
-        #region Ask9
-        bool isAsk9 = false;
-        private void Entry_TextChanged4(object sender, TextChangedEventArgs e)
-        {
-            if (e.NewTextValue != "")
-            {
-                isAsk9 = true;
-            }
-            else
-            {
-                isAsk9 = false;
-            }
-            ask1PageMV.Ask1.How_many_keys_total_you_been_given = e.NewTextValue;
-        }
-        #endregion
-
-        #region Ask10
-        Button button4 = null;
-        bool isAsk10 = false;
-        private void Button_Clicked3(object sender, EventArgs e)
-        {
-            isAsk10 = true;
-            Button button = (Button)sender;
-            button.TextColor = Color.FromHex("#4fd2c2");
-            ask1PageMV.Ask1.All_4_wheels_are_correctly_strapped_strapped = button.Text;
-            if (button4 != null)
-            {
-                button4.TextColor = Color.Silver;
-            }
-            button4 = button;
-        }
-        #endregion
-
-        #region Ask11
-        bool isAsk11 = false;
-        private void Dropdown_SelectedItemChanged1(object sender, Plugin.InputKit.Shared.Utils.SelectedItemChangedArgs e)
-        {
-            isAsk11 = true;
-            ask1PageMV.Ask1.What_method_of_exit_did_you_use = (string)e.NewItem;
-        }
-        #endregion
-
         #region Ask12
         bool isAsk12 = false;
         private async void Button_Clicked_3(object sender, EventArgs e)
@@ -257,7 +200,7 @@ namespace MDispatch.View.Inspection
         [Obsolete]
         private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-            if (isAsk1 && isAsk2 && isAsk3 && isAsk4 && isAsk5 && isAsk6 && isAsk7 && isAsk8 && isAsk9 && isAsk10 && isAsk11 && isAsk12 && isAsk13)
+            if (isAsk1 && isAsk14 && isAsk3 && isAsk4 && isAsk5 && isAsk6 && isAsk7 && isAsk8  && isAsk12 && isAsk13)
             {
                 ask1PageMV.SaveAsk();
             }
@@ -278,13 +221,13 @@ namespace MDispatch.View.Inspection
             {
                 askBlock1.BorderColor = Color.BlueViolet;
             }
-            if (!isAsk2)
+            if (!isAsk14)
             {
-                askBlock2.BorderColor = Color.Red;
+                askBlock14.BorderColor = Color.Red;
             }
             else
             {
-                askBlock2.BorderColor = Color.BlueViolet;
+                askBlock14.BorderColor = Color.BlueViolet;
             }
             if (!isAsk3)
             {
@@ -334,30 +277,6 @@ namespace MDispatch.View.Inspection
             {
                 askBlock8.BorderColor = Color.BlueViolet;
             }
-            if (!isAsk9)
-            {
-                askBlock9.BorderColor = Color.Red;
-            }
-            else
-            {
-                askBlock9.BorderColor = Color.BlueViolet;
-            }
-            if (!isAsk10)
-            {
-                askBlock10.BorderColor = Color.Red;
-            }
-            else
-            {
-                askBlock10.BorderColor = Color.BlueViolet;
-            }
-            if (!isAsk11)
-            {
-                askBlock11.BorderColor = Color.Red;
-            }
-            else
-            {
-                askBlock11.BorderColor = Color.BlueViolet;
-            }
             if (!isAsk12)
             {
                 askBlock12.BorderColor = Color.Red;
@@ -374,110 +293,6 @@ namespace MDispatch.View.Inspection
             {
                 askBlock13.BorderColor = Color.BlueViolet;
             }
-        }
-
-        private async void Button_Clicked_1(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new CameraSpareParts(this));
-        }
-
-        public void AddPhotoSpareParts(byte[] photob)
-        {
-            if (ask1PageMV.Ask1.Any_additional_parts_been_given_to_you == null)
-            {
-                ask1PageMV.Ask1.Any_additional_parts_been_given_to_you = new List<Models.Photo>();
-            }
-            Models.Photo photo = new Models.Photo();
-            photo.Base64 = JsonConvert.SerializeObject(photob);
-            photo.path = $"../Photo/{ask1PageMV.VehiclwInformation.Id}/PikedUp/SpareParts/{ ask1PageMV.Ask1.Any_additional_parts_been_given_to_you.Count + 1}.jpg";
-            ask1PageMV.Ask1.Any_additional_parts_been_given_to_you.Add(photo);
-            Image image = new Image()
-            {
-                Source = ImageSource.FromStream(() => new MemoryStream(photob)),
-                HeightRequest = 50,
-                WidthRequest = 50
-            };
-            image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke));
-            blockAskPhotoSpareParts.Children.Add(image);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-        }
-
-        private async void ViewPhotoForRetacke(Xamarin.Forms.View v, object s)
-        {
-            if (v != null && blockAskPhotoSpareParts.Children.Contains(v))
-            {
-                await Navigation.PushAsync(new ViewPhotForAsk(v, this, "Ask3"));
-            }
-        }
-
-        public void ReSetPhoto(Xamarin.Forms.View view, byte[] newRetake)
-        {
-            byte[] r = GetImageBytes(((Image)view).Source);
-            ask1PageMV.ResetAskSpareParts(r, newRetake);
-            blockAskPhotoSpareParts.Children.Remove((Image)view);
-            Image image = new Image()
-            {
-                Source = ImageSource.FromStream(() => new MemoryStream(newRetake)),
-                HeightRequest = 50,
-                WidthRequest = 50,
-            };
-            image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke));
-            blockAskPhotoSpareParts.Children.Add(image);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-        }
-
-        public void AddPhotoDocumentations(byte[] photob)
-        {
-            if (ask1PageMV.Ask1.Any_additional_documentation_been_given_after_loading == null)
-            {
-                ask1PageMV.Ask1.Any_additional_documentation_been_given_after_loading = new List<Models.Photo>();
-            }
-            Models.Photo photo = new Models.Photo();
-            photo.Base64 = JsonConvert.SerializeObject(photob);
-            photo.path = $"../Photo/{ask1PageMV.VehiclwInformation.Id}/PikedUp/Documentations/{ ask1PageMV.Ask1.Any_additional_documentation_been_given_after_loading.Count + 1}.jpg";
-            ask1PageMV.Ask1.Any_additional_documentation_been_given_after_loading.Add(photo);
-            Image image = new Image()
-            {
-                Source = ImageSource.FromStream(() => new MemoryStream(photob)),
-                HeightRequest = 50,
-                WidthRequest = 50
-            };
-            image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke1));
-            blockAskPhotoDocumentations.Children.Add(image);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-        }
-
-        private async void ViewPhotoForRetacke1(Xamarin.Forms.View v, object s)
-        {
-            if (v != null && blockAskPhotoDocumentations.Children.Contains(v))
-            {
-                await Navigation.PushAsync(new ViewPhotForAsk(v, this, "Ask4"));
-            }
-        }
-
-        public void ReSetPhoto1(Xamarin.Forms.View view, byte[] newRetake)
-        {
-            byte[] r = GetImageBytes(((Image)view).Source);
-            ask1PageMV.ResetAskDocumentations(r, newRetake);
-            blockAskPhotoDocumentations.Children.Remove((Image)view);
-            Image image = new Image()
-            {
-                Source = ImageSource.FromStream(() => new MemoryStream(newRetake)),
-                HeightRequest = 50,
-                WidthRequest = 50,
-            };
-            image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke1));
-            blockAskPhotoDocumentations.Children.Add(image);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-        }
-
-        private async void Button_Clicked_2(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new CameraDocumentations(this));
         }
         
         #region Ask13
@@ -555,10 +370,58 @@ namespace MDispatch.View.Inspection
             ask1PageMV.Ask1.What_method_of_exit_did_you_use = (string)((Picker)sender).SelectedItem;
         }
 
-        private void Picker_SelectedIndexChanged_1(object sender, EventArgs e)
+        #region Ask14
+        Button button14 = null;
+        bool isAsk14 = false;
+        bool isTypeText = false;
+        string btnText = "";
+        string entryText = "";
+        private void Entry_TextChanged_1(object sender, TextChangedEventArgs e)
         {
-            isAsk11 = true;
-            ask1PageMV.Ask1.What_method_of_exit_did_you_use = (string)((Picker)sender).SelectedItem;
+            if (e.NewTextValue != "")
+            {
+                isAsk14 = true;
+                isTypeText = true;
+            }
+            else
+            {
+                isAsk14 = false;
+                isTypeText = false;
+            }
+            entryText = e.NewTextValue;
+            ask1PageMV.Ask1.Did_you_notice_any_mechanical_imperfections_wile_loading = $"{btnText}, {entryText}";
         }
+
+        private void Button_Clicked_5(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            btnText = button.Text;
+            if (button14 != null)
+            {
+                button14.TextColor = Color.Silver;
+            }
+            if(button.Text == "Yes")
+            {
+                if(isTypeText)
+                {
+                    isAsk14 = true;
+                }
+                else
+                {
+                    isAsk14 = false;
+                }
+                nameE.IsVisible = true;
+            }
+            else
+            {
+                isAsk14 = true;
+                nameE.IsVisible = false;
+            }
+            button14 = button;
+
+            ask1PageMV.Ask1.Did_you_notice_any_mechanical_imperfections_wile_loading = $"{btnText}, {entryText}";
+        }
+        #endregion
     }
 }

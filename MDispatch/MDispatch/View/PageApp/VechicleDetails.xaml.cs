@@ -33,8 +33,6 @@ namespace MDispatch.View.PageApp
             await PopupNavigation.PushAsync(new LoadPage());
             AddScan(vehiclwInformation);
             AddBlocItemPhoto(vehiclwInformation);
-            AddBlocBeen(vehiclwInformation);
-            AddBlocDocumentationBeen(vehiclwInformation);
             AddBlocSeatBelts(vehiclwInformation);
             AddBlocTakePictures(vehiclwInformation);
             AddBlocInspectionPhoto(vehiclwInformation);
@@ -124,56 +122,6 @@ namespace MDispatch.View.PageApp
             {
                 blockItems.IsVisible = false;
                 itemsNotContent.IsVisible = true;
-            }
-        }
-
-        [Obsolete]
-        private void AddBlocBeen(VehiclwInformation vehiclwInformation)
-        {
-            if (vehiclwInformation.Ask1 != null && vehiclwInformation.Ask1.Any_additional_parts_been_given_to_you != null)
-            {
-                foreach (var item in vehiclwInformation.Ask1.Any_additional_parts_been_given_to_you)
-                {
-                    Image image = new Image()
-                    {
-                        Source = ImageSource.FromStream(() => new MemoryStream(ResizeImage(item.Base64))),
-                        HeightRequest = 100,
-                        WidthRequest = 100,
-                        Margin = 3
-                    };
-                    image.GestureRecognizers.Add(new TapGestureRecognizer(VievFull));
-                    blockBeen.Children.Add(image);
-                }
-            }
-            else
-            {
-                blockBeen.IsVisible = false;
-                beenNotContent.IsVisible = true;
-            }
-        }
-
-        [Obsolete]
-        private void AddBlocDocumentationBeen(VehiclwInformation vehiclwInformation)
-        {
-            if (vehiclwInformation.Ask1 != null && vehiclwInformation.Ask1.Any_additional_documentation_been_given_after_loading != null)
-            {
-                foreach (var item in vehiclwInformation.Ask1.Any_additional_documentation_been_given_after_loading)
-                {
-                    Image image = new Image()
-                    {
-                        Source = ImageSource.FromStream(() => new MemoryStream(ResizeImage(item.Base64))),
-                        HeightRequest = 100,
-                        WidthRequest = 100,
-                        Margin = 3
-                    };
-                    image.GestureRecognizers.Add(new TapGestureRecognizer(VievFull));
-                    blockDocumentationBeen.Children.Add(image);
-                }
-            }
-            else
-            {
-                blockDocumentationBeen.IsVisible = false;
-                documentationBeenNotContent.IsVisible = true;
             }
         }
 

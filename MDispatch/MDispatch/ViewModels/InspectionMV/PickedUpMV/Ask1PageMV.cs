@@ -142,26 +142,6 @@ namespace MDispatch.ViewModels.InspectionMV
             }
         }
 
-        public void ResetAskSpareParts(byte[] oldRes, byte[] newRetake)
-        {
-            string base64 = JsonConvert.SerializeObject(newRetake);
-            Photo photo = Ask1.Any_additional_parts_been_given_to_you.FirstOrDefault(a => a.Base64 == JsonConvert.SerializeObject(oldRes));
-            if (photo != null)
-            {
-                photo.Base64 = base64;
-            }
-        }
-
-        public void ResetAskDocumentations(byte[] oldRes, byte[] newRetake)
-        {
-            string base64 = JsonConvert.SerializeObject(newRetake);
-            Photo photo = Ask1.Any_additional_documentation_been_given_after_loading.FirstOrDefault(a => a.Base64 == JsonConvert.SerializeObject(oldRes));
-            if (photo != null)
-            {
-                photo.Base64 = base64;
-            }
-        }
-
         internal void ResetAskSeatBelts(byte[] oldRes, byte[] newRetake)
         {
             string base64 = JsonConvert.SerializeObject(newRetake);

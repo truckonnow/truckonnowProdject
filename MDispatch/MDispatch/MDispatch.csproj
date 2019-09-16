@@ -86,16 +86,10 @@
     <Compile Update="View\Inspection\hintPageVechicle.xaml.cs">
       <DependentUpon>HintPageVechicle.xaml</DependentUpon>
     </Compile>
-    <Compile Update="View\Inspection\PickedUp\CameraPageFolder\CameraDocumentations.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
     <Compile Update="View\Inspection\PickedUp\CameraPageFolder\CameraItems.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
     <Compile Update="View\Inspection\PickedUp\CameraPageFolder\CameraPagePhoto.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="View\Inspection\PickedUp\CameraPageFolder\CameraSpareParts.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
     <Compile Update="View\Inspection\PickedUp\PhotoInspectionWeb.xaml.cs">

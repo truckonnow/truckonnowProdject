@@ -50,16 +50,6 @@ namespace MDispatch.View.Inspection
                         retake = new RetakeAsk2((AskPage)ask, view);
                         break;
                     }
-                case "Ask3":
-                    {
-                        retake = new RetakeAsk3((Ask1Page)ask, view);
-                        break;
-                    }
-                case "Ask4":
-                    {
-                        retake = new RetakeAsk4((Ask1Page)ask, view);
-                        break;
-                    }
                 case "Ask5":
                     {
                         retake = new RetakeAsk5((Ask1Page)ask, view);
