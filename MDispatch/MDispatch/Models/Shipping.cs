@@ -78,8 +78,10 @@ namespace MDispatch.Models
         public Driver Driverr { get; set; }
 
         /////////////////////////////////////////////
-          
-        
+
+        public Ask2 Ask2 { get; set; }
+
+        ///////////////////////////////////////////////
 
         public string ColorCurrentStatus
         {

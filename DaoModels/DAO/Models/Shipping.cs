@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 
 namespace DaoModels.DAO.Models
 {
@@ -63,7 +62,11 @@ namespace DaoModels.DAO.Models
         public List<VehiclwInformation> VehiclwInformations { get; set; }
 
         ////////////////////////////////////////////////
-        
+
+        public Ask2 Ask2 { get; set; }
+
+        ///////////////////////////////////////////////
+
         public Driver Driverr { get; set; }
 
         public string DataPaid { get; set; }

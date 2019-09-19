@@ -172,6 +172,11 @@ namespace ApiMobaileServise.Servise
                  AskForUserDelyveryM askForUserDelyveryM = JsonConvert.DeserializeObject<AskForUserDelyveryM>(jsonStrAsk);
                  sqlCommandApiMobile.SaveAskForUserDelyveryInDb(idVe, askForUserDelyveryM);
             }
+            else if (type == 6)
+            {
+                Ask2 ask2 = JsonConvert.DeserializeObject<Ask2>(jsonStrAsk);
+                sqlCommandApiMobile.SaveAsk2InDb(idVe, ask2);
+            }
         }
 
         public async Task SaveFeedBack(string jsonStrAsk)

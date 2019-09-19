@@ -165,6 +165,12 @@ namespace MDispatch.ViewModels.PageAppMV
                 await Navigation.PushAsync(new CameraPaymmant(askForUsersDelyveryMW, ""));
                 Navigation.RemovePage(Navigation.NavigationStack[1]);
             }
+            else if(Shipping.Ask2 != null)
+            {
+                Ask2Page ask2Page = new Ask2Page(managerDispatchMob, vehiclwInformation1.Id, shipping.Id, initDasbordDelegate);
+                await Navigation.PushAsync(new CameraPaymmant(ask2Page, ""));
+                Navigation.RemovePage(Navigation.NavigationStack[1]);
+            }
             else
             {
                 ContinuePick();

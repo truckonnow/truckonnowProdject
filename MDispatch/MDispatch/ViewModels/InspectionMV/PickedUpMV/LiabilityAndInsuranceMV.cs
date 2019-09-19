@@ -23,7 +23,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation { get; set; }
         public DelegateCommand GoToFeedBackCommand { get; set; }
-        private InitDasbordDelegate initDasbordDelegate = null;
+        public InitDasbordDelegate initDasbordDelegate = null;
 
         public LiabilityAndInsuranceMV(ManagerDispatchMob managerDispatchMob, string idVech, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
         {
@@ -143,14 +143,9 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             Photo photo = new Photo();
             photo.Base64 = JsonConvert.SerializeObject(photoResult);
             photo.path = $"../Photo/{IdVech}/Pay/DelyverySig.jpg";
-            await Navigation.PopToRootAsync();
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
-                await Task.Run(() =>
-                {
-                    Continue();
-                });
                 await Task.Run(() =>
                 {
                     state = managerDispatchMob.SavePay("SaveSig", token, IdVech, 1, photo, ref description);
@@ -162,6 +157,8 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 }
                 else if (state == 3)
                 {
+                    await Navigation.PushAsync(new Ask2Page(managerDispatchMob, IdVech, IdShip, initDasbordDelegate));
+                    Navigation.RemovePage(Navigation.NavigationStack[1]);
                     DependencyService.Get<IToast>().ShowMessage("Paymmant photo saved");
                 }
                 else if (state == 4)
@@ -248,35 +245,6 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         }
 
         [System.Obsolete]
-        public async void Continue()
-        {
-            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
-            string description = null;
-            int state = 0;
-            await Task.Run(() => Utils.CheckNet());
-            if (App.isNetwork)
-            {
-                await Task.Run(() =>
-                {
-                    state = managerDispatchMob.Recurent(token, IdShip, "Picked up", ref description);
-                    initDasbordDelegate.Invoke();
-                });
-                if (state == 2)
-                {
-                    await PopupNavigation.PushAsync(new Errror(description, null));
-                }
-                else if (state == 3)
-                {
-                    DependencyService.Get<IToast>().ShowMessage("Answers to questions saved");
-                }
-                else if (state == 4)
-                {
-                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
-                }
-            }
-        }
-
-        [System.Obsolete]
         public async Task SendLiabilityAndInsuranceEmaile()
         {
             GoEvaluationAndSurvey();
@@ -321,6 +289,12 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         {
             await PopupNavigation.PopAllAsync(true);
             await Navigation.PushAsync(new View.Inspection.Feedback(managerDispatchMob, Shipping.VehiclwInformations.FirstOrDefault(v => v.Id == IdVech), this));
+        }
+
+        public async void GoToContinue()
+        {
+            await Navigation.PushAsync(new Ask2Page(managerDispatchMob, IdVech, IdShip, initDasbordDelegate));
+            Navigation.RemovePage(Navigation.NavigationStack[1]);
         }
     }
 }

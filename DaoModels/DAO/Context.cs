@@ -15,6 +15,7 @@ namespace DaoModels.DAO
         public DbSet<Ask> Asks { get; set; }
         public DbSet<PhotoInspection> PhotoInspections { get; set; }
         public DbSet<Ask1> Ask1s { get; set; }
+        public DbSet<Ask2> Ask2s { get; set; }
         public DbSet<AskFromUser> AskFromUsers { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<AskDelyvery> AskDelyveries { get; set; }

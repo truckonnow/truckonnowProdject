@@ -91,8 +91,8 @@ namespace MDispatch.ViewModels.InspectionMV
                     {
                         if (((LiabilityAndInsuranceMV)paymmpayMVInspactionant).What_form_of_payment_are_you_using_to_pay_for_transportation == "COD" || ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).What_form_of_payment_are_you_using_to_pay_for_transportation == "COP" || ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).What_form_of_payment_are_you_using_to_pay_for_transportation == "Biling")
                         {
-                            ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).Continue();
-                            await Navigation.PopToRootAsync(true);
+                            await ((AskForUsersDelyveryMW)paymmpayMVInspactionant).Navigation.PushAsync(new Ask2Page(managerDispatchMob, ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).IdVech, ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).IdShip, ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).initDasbordDelegate));
+                            Navigation.RemovePage(Navigation.NavigationStack[1]);
                         }
                         else
                         {

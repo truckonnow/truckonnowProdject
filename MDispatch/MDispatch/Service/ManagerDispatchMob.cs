@@ -196,6 +196,11 @@ namespace MDispatch.Service
                     inspection = new Inspection();
                     stateInspection = inspection.SaveAsk(token, id, (Models.Ask1)obj, ref description);
                 }
+                else if (typeInspection == "SaveAsk2")
+                {
+                    inspection = new Inspection();
+                    stateInspection = inspection.SaveAsk(token, id, (Models.Ask2)obj, ref description);
+                }
                 else if (typeInspection == "AskFromUser")
                 {
                     inspection = new Inspection();

@@ -194,6 +194,38 @@ namespace MDispatch.Service
             }
         }
 
+        public int SaveAsk(string token, string id, Ask2 ask, ref string description)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                string strJsonAsk = JsonConvert.SerializeObject(ask);
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
+                RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
+                client.Timeout = 60000;
+                request.AddHeader("Accept", "application/json");
+                request.AddParameter("token", token);
+                request.AddParameter("idVe", id);
+                request.AddParameter("jsonStrAsk", strJsonAsk);
+                request.AddParameter("type", 6);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception e)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description);
+            }
+        }
+
         public int SaveAsk(string token, Feedback feedback, ref string description)
         {
             IRestResponse response = null;

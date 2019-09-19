@@ -179,6 +179,13 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
+        internal async void SaveAsk2InDb(string idShiping, Ask2 ask2)
+        {
+            Shipping shipping = context.Shipping.FirstOrDefault(s => s.Id == idShiping);
+            shipping.Ask2 = ask2;
+            await context.SaveChangesAsync();
+        }
+
         public async void SaveTokenStoreinDb(string token, string tokenStore)
         {
             Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
@@ -539,6 +546,7 @@ namespace ApiMobaileServise.Servise
                 .Include("VehiclwInformations.AskFromUser")
                 .Include("VehiclwInformations.AskDelyvery")
                 .Include("VehiclwInformations.askForUserDelyveryM")
+                .Include(s => s.Ask2)
                 .ToList();
             if (shippings == null)
             {
