@@ -1,10 +1,14 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.View.GlobalDialogView;
+using MDispatch.View.Inspection.Delyvery.CameraPage;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
+using Newtonsoft.Json;
 using Plugin.InputKit.Shared.Controls;
 using Rg.Plugins.Popup.Services;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -26,7 +30,9 @@ namespace MDispatch.View.Inspection.Delyvery
             InitAsk();
         }
 
-        #region Ask1
+        
+
+        #region Ask19
         string curentTime = null;
         string currentDate = null;
 
@@ -56,50 +62,75 @@ namespace MDispatch.View.Inspection.Delyvery
         }
         #endregion
 
-        #region Ask3
-        Button button3 = null;
-        bool isAsk3 = false;
+        #region Ask10
+        Button button10 = null;
+        bool isAsk10 = false;
         private void Button_Clicked_2(object sender, EventArgs e)
         {
-            isAsk3 = true;
+            isAsk10 = true;
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
             askDelyveryMV.AskDelyvery.Vehicle_Condition_on_delivery = button.Text;
-            if (button3 != null)
+            if (button10 != null)
             {
-                button3.TextColor = Color.Silver;
+                button10.TextColor = Color.Silver;
             }
-            button3 = button;
+            button10 = button;
+        }
+        #endregion
+
+        #region Ask3
+        bool isAsk3 = false;
+        private void RadioButton_Clicked_1(object sender, EventArgs e)
+        {
+            askDelyveryMV.AskDelyvery.Safe_delivery_location_Truck_and_trailer_parked_on = ((RadioButton)sender).Text;
+            isAsk3 = true;
         }
         #endregion
 
         #region Ask4
+        Button button4 = null;
         bool isAsk4 = false;
-        private void RadioButton_Clicked(object sender, EventArgs e)
+        private void Button_Clicked_3(object sender, EventArgs e)
         {
-            askDelyveryMV.AskDelyvery.How_did_you_get_inside_of_the_vehicle = ((RadioButton)sender).Text;
             isAsk4 = true;
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            askDelyveryMV.AskDelyvery.Did_you_meet_the_client = button.Text;
+            if (button4 != null)
+            {
+                button4.TextColor = Color.Silver;
+            }
+            button4 = button;
         }
         #endregion
 
         #region Ask5
+        Button button5 = null;
         bool isAsk5 = false;
-        private void Dropdown_SelectedItemChanged_1(object sender, Plugin.InputKit.Shared.Utils.SelectedItemChangedArgs e)
+        private void Button_Clicked(object sender, EventArgs e)
         {
             isAsk5 = true;
-            askDelyveryMV.AskDelyvery.How_did_you_get_inside_of_the_vehicle = (string)e.NewItem;
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            askDelyveryMV.AskDelyvery.Truck_on_emergency_brake = button.Text;
+            if (button5 != null)
+            {
+                button5.TextColor = Color.Silver;
+            }
+            button5 = button;
         }
         #endregion
 
         #region Ask6
         Button button6 = null;
         bool isAsk6 = false;
-        private void Button_Clicked_6(object sender, EventArgs e)
+        private void Button_Clicked_4(object sender, EventArgs e)
         {
             isAsk6 = true;
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
-            askDelyveryMV.AskDelyvery.Did_the_vehicle_starts = button.Text;
+            askDelyveryMV.AskDelyvery.Truck_locked = button.Text;
             if (button6 != null)
             {
                 button6.TextColor = Color.Silver;
@@ -111,39 +142,55 @@ namespace MDispatch.View.Inspection.Delyvery
         #region Ask7
         Button button7 = null;
         bool isAsk7 = false;
-        private void Button_Clicked_7(object sender, EventArgs e)
+        private async void Button_Clicked_5(object sender, EventArgs e)
         {
-            isAsk7 = true;
-            Button button = (Button)sender;
-            button.TextColor = Color.FromHex("#4fd2c2");
-            askDelyveryMV.AskDelyvery.Does_the_vehicle_Drives = button.Text;
-            if (button7 != null)
+            await Navigation.PushAsync(new IDpersonFace(this));
+        }
+
+        public void AddPhoto(byte[] result)
+        {
+            if (askDelyveryMV.AskDelyvery.Please_take_a_picture_Id_of_the_person_taking_the_delivery == null)
             {
-                button7.TextColor = Color.Silver;
+                askDelyveryMV.AskDelyvery.Please_take_a_picture_Id_of_the_person_taking_the_delivery = new List<Models.Photo>();
             }
-            button7 = button;
+            Models.Photo photo = new Models.Photo();
+            photo.Base64 = JsonConvert.SerializeObject(result);
+            photo.path = $"../Photo/{askDelyveryMV.VehiclwInformation.Id}/PikedUp/Items/{askDelyveryMV.AskDelyvery.Please_take_a_picture_Id_of_the_person_taking_the_delivery.Count + 1}.jpg";
+            askDelyveryMV.AskDelyvery.Please_take_a_picture_Id_of_the_person_taking_the_delivery.Add(photo);
+            Image image = new Image()
+            {
+                Source = ImageSource.FromStream(() => new MemoryStream(result)),
+                HeightRequest = 50,
+                WidthRequest = 50,
+            };
+            //image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke1));
+            blockPhoto.Children.Add(image);
+            isAsk7 = true;
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
         #endregion
 
         #region Ask8
+        Button button8 = null;
         bool isAsk8 = false;
-        private void Entry_TextChanged_8(object sender, TextChangedEventArgs e)
+        private void Button_Clicked_8(object sender, EventArgs e)
         {
-            if (e.NewTextValue != "")
+            isAsk8 = true;
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            askDelyveryMV.AskDelyvery.Truck_on_emergency_brake = button.Text;
+            if (button8 != null)
             {
-                isAsk8 = true;
+                button8.TextColor = Color.Silver;
             }
-            else
-            {
-                isAsk8 = false;
-            }
-            askDelyveryMV.AskDelyvery.Anyone_Rushing_you_to_perform_the_delivery = e.NewTextValue;
+            button8 = button;
         }
         #endregion
 
         #region Ask9
         bool isAsk9 = false;
-        private void Entry_TextChanged_9(object sender, TextChangedEventArgs e)
+        private void Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (e.NewTextValue != "")
             {
@@ -153,93 +200,96 @@ namespace MDispatch.View.Inspection.Delyvery
             {
                 isAsk9 = false;
             }
-            askDelyveryMV.AskDelyvery.How_Far_is_the_Trailer_from_Delivery_destination = e.NewTextValue;
+            askDelyveryMV.AskDelyvery.Anyone_Rushing_you_to_perform_the_delivery = e.NewTextValue;
         }
         #endregion
 
-        #region Ask10
-        bool isAsk10 = false;
-        private void Entry_TextChanged_10(object sender, TextChangedEventArgs e)
-        {
-            if (e.NewTextValue != "")
-            {
-                isAsk10 = true;
-            }
-            else
-            {
-                isAsk10 = false;
-            }
-            askDelyveryMV.AskDelyvery.Exact_mileage_after_unloading = e.NewTextValue;
-        }
-        #endregion
+       
 
         #region Ask11
         bool isAsk11 = false;
-        private void Entry_TextChanged_11(object sender, TextChangedEventArgs e)
+        private void Dropdown_SelectedItemChanged_1(object sender, Plugin.InputKit.Shared.Utils.SelectedItemChangedArgs e)
         {
-            if (e.NewTextValue != "")
-            {
-                isAsk11 = true;
-            }
-            else
-            {
-                isAsk11 = false;
-            }
-            askDelyveryMV.AskDelyvery.Anyone_helping_you_unload = e.NewTextValue;
+            isAsk11 = true;
+            askDelyveryMV.AskDelyvery.How_did_you_get_inside_of_the_vehicle = (string)e.NewItem;
         }
         #endregion
 
-        #region Ask12
-        bool isAsk12 = false;
-        private void Entry_TextChanged_12(object sender, TextChangedEventArgs e)
+        #region Ask1
+        bool isAsk1 = false;
+        private void Dropdown_SelectedItemChanged_2(object sender, Plugin.InputKit.Shared.Utils.SelectedItemChangedArgs e)
         {
-            if (e.NewTextValue != "")
-            {
-                isAsk12 = true;
-            }
-            else
-            {
-                isAsk12 = false;
-            }
-            askDelyveryMV.AskDelyvery.Did_someone_else_unloaded_the_vehicle_for_you = e.NewTextValue;
+            isAsk1 = true;
+            askDelyveryMV.AskDelyvery.Weather_Conditions = (string)e.NewItem;
         }
         #endregion
 
         #region Ask13
+        Button button13 = null;
         bool isAsk13 = false;
-        private void Entry_TextChanged_13(object sender, TextChangedEventArgs e)
+        private void Button_Clicked_6(object sender, EventArgs e)
         {
-            if (e.NewTextValue != "")
+            isAsk13 = true;
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            askDelyveryMV.AskDelyvery.Did_the_vehicle_starts = button.Text;
+            if (button13 != null)
             {
-                isAsk13 = true;
+                button13.TextColor = Color.Silver;
             }
-            else
-            {
-                isAsk13 = false;
-            }
-            askDelyveryMV.AskDelyvery.Did_you_notice_any_imperfections_on_body_wile_vehicle_been_transported = e.NewTextValue;
+            button13 = button;
         }
         #endregion
 
         #region Ask14
+        Button button14 = null;
         bool isAsk14 = false;
-        private void Entry_TextChanged_14(object sender, TextChangedEventArgs e)
+        private void Button_Clicked_7(object sender, EventArgs e)
         {
-            if (e.NewTextValue != "")
+            isAsk14 = true;
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            askDelyveryMV.AskDelyvery.Does_the_vehicle_Drives = button.Text;
+            if (button14 != null)
             {
-                isAsk14 = true;
+                button14.TextColor = Color.Silver;
             }
-            else
-            {
-                isAsk14 = false;
-            }
-            askDelyveryMV.AskDelyvery.How_many_keys_are_you_giving_to_client = e.NewTextValue;
+            button14 = button;
         }
         #endregion
 
+        #region Ask18
+        Button button18 = null;
+        bool isAsk18 = false;
+        private void Button_Clicked_9(object sender, EventArgs e)
+        {
+            isAsk18 = true;
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            askDelyveryMV.AskDelyvery.Does_the_vehicle_Drives = button.Text;
+            if (button18 != null)
+            {
+                button18.TextColor = Color.Silver;
+            }
+            button18 = button;
+        }
+        #endregion
+
+        #region Ask20
+        bool isAsk20 = false;
+        private void Button_Clicked_10(object sender, EventArgs e)
+        {
+            isAsk20 = true;
+            Button button = (Button)sender;
+            button.IsEnabled = false;
+        }
+        #endregion
+
+        
+
         #region Ask15
         bool isAsk15 = false;
-        private void Entry_TextChanged_15(object sender, TextChangedEventArgs e)
+        private void Entry_TextChanged_10(object sender, TextChangedEventArgs e)
         {
             if (e.NewTextValue != "")
             {
@@ -249,32 +299,63 @@ namespace MDispatch.View.Inspection.Delyvery
             {
                 isAsk15 = false;
             }
-            askDelyveryMV.AskDelyvery.Are_you_giving_any_paperwork_to_a_client = e.NewTextValue;
+            askDelyveryMV.AskDelyvery.Exact_mileage_after_unloading = e.NewTextValue;
         }
         #endregion
 
         #region Ask16
-        Button button16 = null;
         bool isAsk16 = false;
-        private void Button_Clicked_16(object sender, EventArgs e)
+        private void Entry_TextChanged_11(object sender, TextChangedEventArgs e)
         {
-            isAsk16 = true;
-            Button button = (Button)sender;
-            button.TextColor = Color.FromHex("#4fd2c2");
-            askDelyveryMV.AskDelyvery.How_did_you_get_inside_of_the_vehicle = button.Text;
-            if (button16 != null)
+            if (e.NewTextValue != "")
             {
-                button16.TextColor = Color.Silver;
+                isAsk16 = true;
             }
-            button16 = button;
+            else
+            {
+                isAsk16 = false;
+            }
+            askDelyveryMV.AskDelyvery.Anyone_helping_you_unload = e.NewTextValue;
         }
         #endregion
 
+        #region Ask17
+        bool isAsk17 = false;
+        private void Entry_TextChanged_12(object sender, TextChangedEventArgs e)
+        {
+            if (e.NewTextValue != "")
+            {
+                isAsk17 = true;
+            }
+            else
+            {
+                isAsk17 = false;
+            }
+            askDelyveryMV.AskDelyvery.Did_someone_else_unloaded_the_vehicle_for_you = e.NewTextValue;
+        }
+        #endregion
 
+        #region Ask12
+        bool isAsk12 = false;
+        private void Entry_TextChanged_13(object sender, TextChangedEventArgs e)
+        {
+            if (e.NewTextValue != "")
+            {
+                isAsk12 = true;
+            }
+            else
+            {
+                isAsk12 = false;
+            }
+            askDelyveryMV.AskDelyvery.Did_you_notice_any_imperfections_on_body_wile_vehicle_been_transported = e.NewTextValue;
+        }
+        #endregion
+
+       
         [Obsolete]
         private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-            if (isAsk2 && isAsk3 && isAsk4 && isAsk5 && isAsk6 && isAsk7 && isAsk8 && isAsk9 && isAsk10 && isAsk11 && isAsk12 && isAsk13 && isAsk14 && isAsk15 && isAsk16)
+            if (isAsk1 && isAsk2 && isAsk3 && isAsk4 && isAsk5 && isAsk6 && isAsk7 && isAsk8 && isAsk9 && isAsk10 && isAsk11 && isAsk12 && isAsk13 && isAsk14 && isAsk15 && isAsk16)
             {
                 askDelyveryMV.SaveAsk();
             }
@@ -287,6 +368,14 @@ namespace MDispatch.View.Inspection.Delyvery
 
         private void CheckAsk()
         {
+            if (!isAsk1)
+            {
+                askBlock1.BorderColor = Color.Red;
+            }
+            else
+            {
+                askBlock1.BorderColor = Color.BlueViolet;
+            }
             if (!isAsk2)
             {
                 askBlock2.BorderColor = Color.Red;
@@ -406,6 +495,30 @@ namespace MDispatch.View.Inspection.Delyvery
             else
             {
                 askBlock16.BorderColor = Color.BlueViolet;
+            }
+            if (!isAsk17)
+            {
+                askBlock17.BorderColor = Color.Red;
+            }
+            else
+            {
+                askBlock17.BorderColor = Color.BlueViolet;
+            }
+            if (!isAsk18)
+            {
+                askBlock18.BorderColor = Color.Red;
+            }
+            else
+            {
+                askBlock18.BorderColor = Color.BlueViolet;
+            }
+            if (!isAsk20)
+            {
+                askBlock20.BorderColor = Color.Red;
+            }
+            else
+            {
+                askBlock20.BorderColor = Color.BlueViolet;
             }
         }
 

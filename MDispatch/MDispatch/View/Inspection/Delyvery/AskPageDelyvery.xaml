@@ -12,10 +12,15 @@
             <StackLayout x:Name="stBody">
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock1">
                     <StackLayout>
-                        <Label Text="Time Of Delivery" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <Label Text="What is the weather?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
                         <StackLayout Orientation="Horizontal">
-                            <Label x:Name="time" Text="" />
+                            <input:RadioButtonGroupView x:Name="radioBtnWeather" Orientation="Horizontal">
+                                <input:RadioButton Text="Clear" TextFontSize="13" Clicked="RadioButton_Clicked"/>
+                                <input:RadioButton Text="Rain" TextFontSize="13" Clicked="RadioButton_Clicked"/>
+                                <input:RadioButton Text="Snow" TextFontSize="13" Clicked="RadioButton_Clicked"/>
+                                <input:RadioButton Text="Dust" TextFontSize="13" Clicked="RadioButton_Clicked"/>
+                            </input:RadioButtonGroupView>
                         </StackLayout>
                     </StackLayout>
                 </Frame>
@@ -31,29 +36,94 @@
                 </Frame>
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock3">
                     <StackLayout>
-                        <Label Text="Vehicle Condition on delivery" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <Label Text="Safe delivery location" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
                         <StackLayout Orientation="Horizontal">
-                            <Button Text="Clean" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_2"/>
-                            <Button Text="Dirty" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_2"/>
+                            <input:RadioButtonGroupView x:Name="radioBtnWeather" Orientation="Horizontal">
+                                <input:RadioButton Text="Parking lot" TextFontSize="13" Clicked="RadioButton_Clicked_1"/>
+                                <input:RadioButton Text="Driveway" TextFontSize="13" Clicked="RadioButton_Clicked_1"/>
+                                <input:RadioButton Text="Gravel" TextFontSize="13" Clicked="RadioButton_Clicked_1"/>
+                                <input:RadioButton Text="Sidewalk" TextFontSize="13" Clicked="RadioButton_Clicked_1"/>
+                                <input:RadioButton Text="Street" TextFontSize="13" Clicked="RadioButton_Clicked_1"/>
+                                <input:RadioButton Text="Middle of the street" TextFontSize="13" Clicked="RadioButton_Clicked_1"/>
+                            </input:RadioButtonGroupView>
                         </StackLayout>
                     </StackLayout>
                 </Frame>
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock4">
                     <StackLayout>
-                        <Label Text="Weather conditions" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <Label Text="Did you meet the client?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
                         <StackLayout Orientation="Horizontal">
-                            <input:RadioButtonGroupView x:Name="radioBtnWeather" Orientation="Horizontal">
-                                <input:RadioButton Text="Clear" TextFontSize="13" Clicked="RadioButton_Clicked"/>
-                                <input:RadioButton Text="Rain" TextFontSize="13" Clicked="RadioButton_Clicked"/>
-                                <input:RadioButton Text="Snow" TextFontSize="13" Clicked="RadioButton_Clicked"/>
-                                <input:RadioButton Text="Dust" TextFontSize="13" Clicked="RadioButton_Clicked"/>
-                            </input:RadioButtonGroupView>
+                            <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_3"/>
+                            <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_3"/>
                         </StackLayout>
                     </StackLayout>
                 </Frame>
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock5">
+                    <StackLayout>
+                        <Label Text="Truck on emergency brake?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked"/>
+                            <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock6">
+                    <StackLayout>
+                        <Label Text="Truck locked?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_4"/>
+                            <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_4"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock7">
+                    <StackLayout>
+                        <Label Text="Please take a picture Id of the person taking the delivery" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Button Text="Yes" BackgroundColor="BlueViolet" TextColor="White" Clicked="Button_Clicked_5" />
+                            <ScrollView Orientation="Horizontal">
+                                <StackLayout x:Name="blockPhoto" Orientation="Horizontal">
+                                </StackLayout>
+                            </ScrollView>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock8">
+                    <StackLayout>
+                        <Label Text="All locks on the trailer?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_8"/>
+                            <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_8"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock9">
+                    <StackLayout>
+                        <Label Text="Anyone Rushing you to perform the delivery?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                        <Entry Placeholder="Name" TextChanged="Entry_TextChanged" />
+                    </StackLayout>
+                </Frame>
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock10">
+                    <StackLayout>
+                        <Label Text="Vehicle Condition on delivery" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Button Text="Clean" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_2"/>
+                            <Button Text="Dirty" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_2"/>
+                            <Button Text="Wet" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_2"/>
+                            <Button Text="Snow" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_2"/>
+                            <Button Text="Extra dirty" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_2"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock11">
                     <StackLayout>
                         <Label Text="How did you get inside of the vehicle?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
@@ -87,7 +157,14 @@
                         </OnPlatform>
                     </StackLayout>
                 </Frame>
-                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock6">
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock12">
+                    <StackLayout>
+                        <Label Text="Did you notice any imperfections on body while vehicle being transported?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                        <Entry Placeholder="What kind" TextChanged="Entry_TextChanged_13"/>
+                    </StackLayout>
+                </Frame>
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock13">
                     <StackLayout>
                         <Label Text="Did the vehicle starts" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
@@ -97,7 +174,7 @@
                         </StackLayout>
                     </StackLayout>
                 </Frame>
-                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock7">
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock14">
                     <StackLayout>
                         <Label Text="Does the vehicle Drives" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
@@ -107,69 +184,57 @@
                         </StackLayout>
                     </StackLayout>
                 </Frame>
-                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock8">
-                    <StackLayout>
-                        <Label Text="Anyone Rushing you to perform the delivery?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
-                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Entry Placeholder="Name" TextChanged="Entry_TextChanged_8" />
-                    </StackLayout>
-                </Frame>
-                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock9">
-                    <StackLayout>
-                        <Label Text="How Far is the Trailer from Delivery destination" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
-                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Entry Placeholder="Miles" Keyboard="Numeric" TextChanged="Entry_TextChanged_9"/>
-                    </StackLayout>
-                </Frame>
-                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock10">
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock15">
                     <StackLayout>
                         <Label Text="Exact mileage after unloading" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
                         <Entry Placeholder="Miles" Keyboard="Numeric" TextChanged="Entry_TextChanged_10"/>
                     </StackLayout>
                 </Frame>
-                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock11">
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock16">
                     <StackLayout>
                         <Label Text="Anyone helping you unload?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
                         <Entry Placeholder="Name" TextChanged="Entry_TextChanged_11" />
                     </StackLayout>
                 </Frame>
-                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock12">
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock17">
                     <StackLayout>
                         <Label Text="Did someone else unloaded the vehicle for you?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
                         <Entry Placeholder="Name" TextChanged="Entry_TextChanged_12"/>
                     </StackLayout>
                 </Frame>
-                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock13">
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock18">
                     <StackLayout>
-                        <Label Text="Did you notice any imperfections on body while vehicle being transported?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
-                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Entry Placeholder="What kind" TextChanged="Entry_TextChanged_13"/>
-                    </StackLayout>
-                </Frame>
-                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock14">
-                    <StackLayout>
-                        <Label Text="How many keys are you giving to client" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
-                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Entry Placeholder="Keys" Keyboard="Numeric" TextChanged="Entry_TextChanged_14"/>
-                    </StackLayout>
-                </Frame>
-                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock15">
-                    <StackLayout>
-                        <Label Text="Are you given any paperwork to a client?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
-                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Entry Placeholder="What kind? list separated by commas" Keyboard="Numeric" TextChanged="Entry_TextChanged_15"/>
-                    </StackLayout>
-                </Frame>
-                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock16">
-                    <StackLayout>
-                        <Label Text="Did client inspected the vehicle?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <Label Text="Vehicle parked in the safe location" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
                         <StackLayout Orientation="Horizontal">
-                            <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_16" />
-                            <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_16"/>
+                            <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_9"/>
+                            <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_9"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock19">
+                    <StackLayout>
+                        <Label Text="Time Of Delivery" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Label x:Name="time" Text="" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6">
+                    <StackLayout>
+                        <Label Text="Please remove all your delivery items and keep keys to yourself" TextColor="Red" FontSize="18" Margin="10, 0, 0, 0"/>
+                    </StackLayout>
+                </Frame>
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock20">
+                    <StackLayout>
+                        <Label Text="Ask the delivery customer to inspect the car? After inspecting the car, press the confirm button" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Button Text="I confirm the inspection" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_10" />
                         </StackLayout>
                     </StackLayout>
                 </Frame>

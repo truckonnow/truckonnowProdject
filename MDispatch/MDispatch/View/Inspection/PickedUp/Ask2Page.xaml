@@ -54,7 +54,7 @@
                         <input:AdvancedSlider MaxValue="10" MinValue="0" StepValue="1" PropertyChanged="AdvancedSlider_PropertyChanged1" />
                     </StackLayout>
                 </Frame>
-                <Button Text="Continue" BackgroundColor="BlueViolet" TextColor="White" Clicked="ToolbarItem_Clicked" Margin="10"/>
+                <Button Text="Complete inspection" BackgroundColor="BlueViolet" TextColor="White" Clicked="ToolbarItem_Clicked" Margin="10"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
