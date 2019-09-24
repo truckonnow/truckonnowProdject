@@ -189,22 +189,24 @@ namespace MDispatch.View.Inspection.Delyvery
         #endregion
 
         #region Ask9
+        Button button9 = null;
         bool isAsk9 = false;
-        private void Entry_TextChanged(object sender, TextChangedEventArgs e)
+       
+        private void Button_Clicked_11(object sender, EventArgs e)
         {
-            if (e.NewTextValue != "")
+            isAsk9 = true;
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            askDelyveryMV.AskDelyvery.Anyone_Rushing_you_to_perform_the_delivery = button.Text;
+            if (button9 != null)
             {
-                isAsk9 = true;
+                button9.TextColor = Color.Silver;
             }
-            else
-            {
-                isAsk9 = false;
-            }
-            askDelyveryMV.AskDelyvery.Anyone_Rushing_you_to_perform_the_delivery = e.NewTextValue;
+            button9 = button;
         }
         #endregion
 
-       
+
 
         #region Ask11
         bool isAsk11 = false;
@@ -213,14 +215,28 @@ namespace MDispatch.View.Inspection.Delyvery
             isAsk11 = true;
             askDelyveryMV.AskDelyvery.How_did_you_get_inside_of_the_vehicle = (string)e.NewItem;
         }
+
+        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            isAsk5 = true;
+            askDelyveryMV.AskDelyvery.How_did_you_get_inside_of_the_vehicle = (string)((Picker)sender).SelectedItem;
+        }
         #endregion
 
         #region Ask1
         bool isAsk1 = false;
-        private void Dropdown_SelectedItemChanged_2(object sender, Plugin.InputKit.Shared.Utils.SelectedItemChangedArgs e)
+        Button button1 = null;
+        private void Dropdown_SelectedItemChanged_2(object sender, EventArgs e)
         {
             isAsk1 = true;
-            askDelyveryMV.AskDelyvery.Weather_Conditions = (string)e.NewItem;
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            askDelyveryMV.AskDelyvery.Weather_Conditions = button.Text;
+            if (button1 != null)
+            {
+                button1.TextColor = Color.Silver;
+            }
+            button1 = button;
         }
         #endregion
 
@@ -244,17 +260,47 @@ namespace MDispatch.View.Inspection.Delyvery
         #region Ask14
         Button button14 = null;
         bool isAsk14 = false;
+        string answer = "";
+        string answerStr = "";
         private void Button_Clicked_7(object sender, EventArgs e)
         {
-            isAsk14 = true;
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
-            askDelyveryMV.AskDelyvery.Does_the_vehicle_Drives = button.Text;
+            answer = button.Text;
             if (button14 != null)
             {
                 button14.TextColor = Color.Silver;
             }
             button14 = button;
+            if (button.Text == "Yes")
+            {
+                isAsk14 = true;
+            }
+            else
+            {
+                if(button14V2 != null)
+                {
+                    isAsk14 = true;
+                }
+                else
+                {
+                    isAsk14 = false;
+                }
+            }
+        }
+
+        Button button14V2 = null;
+        private void Button_Clicked_12(object sender, EventArgs e)
+        {
+            isAsk14 = true;
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            answerStr = button.Text;
+            if (button14V2 != null)
+            {
+                button14V2.TextColor = Color.Silver;
+            }
+            button14V2 = button;
         }
         #endregion
 
@@ -520,12 +566,6 @@ namespace MDispatch.View.Inspection.Delyvery
             {
                 askBlock20.BorderColor = Color.BlueViolet;
             }
-        }
-
-        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            isAsk5 = true;
-            askDelyveryMV.AskDelyvery.How_did_you_get_inside_of_the_vehicle = (string)((Picker)sender).SelectedItem;
         }
     }
 }
