@@ -275,6 +275,7 @@ namespace MDispatch.View.Inspection.Delyvery
             if (button.Text == "Yes")
             {
                 isAsk14 = true;
+                startST.IsVisible = false;
             }
             else
             {
@@ -286,6 +287,7 @@ namespace MDispatch.View.Inspection.Delyvery
                 {
                     isAsk14 = false;
                 }
+                startST.IsVisible = true;
             }
         }
 
