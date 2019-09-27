@@ -5,6 +5,7 @@
              x:Class="MDispatch.View.Inspection.Delyvery.AskPageDelyvery"
              Title="Question inspection">
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="BOL" Clicked="ToolbarItem_Clicked_1"/>
         <ToolbarItem Text="Next" Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
@@ -37,14 +38,12 @@
                         <Label Text="Safe delivery location" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
                         <FlexLayout Wrap="Wrap">
-                            <input:RadioButtonGroupView x:Name="radioBtnWeather" Orientation="Horizontal" FlowDirection="MatchParent">
-                                <input:RadioButton Text="Parking lot" TextFontSize="13" Clicked="RadioButton_Clicked_1"/>
-                                <input:RadioButton Text="Driveway" TextFontSize="13" Clicked="RadioButton_Clicked_1"/>
-                                <input:RadioButton Text="Gravel" TextFontSize="13" Clicked="RadioButton_Clicked_1"/>
-                                <input:RadioButton Text="Sidewalk" TextFontSize="13" Clicked="RadioButton_Clicked_1"/>
-                                <input:RadioButton Text="Street" TextFontSize="13" Clicked="RadioButton_Clicked_1"/>
-                                <input:RadioButton Text="Middle of the street" TextFontSize="13" Clicked="RadioButton_Clicked_1"/>
-                            </input:RadioButtonGroupView>
+                            <Button Text="Parking lot" BackgroundColor="White" TextColor="Silver" Clicked="RadioButton_Clicked_1"/>
+                            <Button Text="Driveway" BackgroundColor="White" TextColor="Silver" Clicked="RadioButton_Clicked_1"/>
+                            <Button Text="Gravel" BackgroundColor="White" TextColor="Silver" Clicked="RadioButton_Clicked_1"/>
+                            <Button Text="Sidewalk" BackgroundColor="White" TextColor="Silver" Clicked="RadioButton_Clicked_1"/>
+                            <Button Text="Street" BackgroundColor="White" TextColor="Silver" Clicked="RadioButton_Clicked_1"/>
+                            <Button Text="Middle of the street" BackgroundColor="White" TextColor="Silver" Clicked="RadioButton_Clicked_1"/>
                         </FlexLayout>
                     </StackLayout>
                 </Frame>

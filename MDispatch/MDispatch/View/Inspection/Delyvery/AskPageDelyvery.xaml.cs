@@ -80,11 +80,19 @@ namespace MDispatch.View.Inspection.Delyvery
         #endregion
 
         #region Ask3
+        Button button3 = null;
         bool isAsk3 = false;
         private void RadioButton_Clicked_1(object sender, EventArgs e)
         {
-            askDelyveryMV.AskDelyvery.Safe_delivery_location_Truck_and_trailer_parked_on = ((RadioButton)sender).Text;
             isAsk3 = true;
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            askDelyveryMV.AskDelyvery.Vehicle_Condition_on_delivery = button.Text;
+            if (button3 != null)
+            {
+                button3.TextColor = Color.Silver;
+            }
+            button3 = button;
         }
         #endregion
 
@@ -403,7 +411,7 @@ namespace MDispatch.View.Inspection.Delyvery
         [Obsolete]
         private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-            if (isAsk1 && isAsk2 && isAsk3 && isAsk4 && isAsk5 && isAsk6 && isAsk7 && isAsk8 && isAsk9 && isAsk10 && isAsk11 && isAsk12 && isAsk13 && isAsk14 && isAsk15 && isAsk16)
+            if (isAsk1 && isAsk2 && isAsk3 && isAsk4 && isAsk5 && isAsk6 && isAsk7 && isAsk8 && isAsk9 && isAsk10 && isAsk11 && isAsk12 && isAsk13 && isAsk14 && isAsk15 && isAsk16 && isAsk17 && isAsk18 && isAsk20)
             {
                 askDelyveryMV.SaveAsk();
             }
@@ -568,6 +576,11 @@ namespace MDispatch.View.Inspection.Delyvery
             {
                 askBlock20.BorderColor = Color.BlueViolet;
             }
+        }
+
+        private async void ToolbarItem_Clicked_1(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new BOLPage(askDelyveryMV.managerDispatchMob, askDelyveryMV.IdShip, askDelyveryMV.initDasbordDelegate));
         }
     }
 }

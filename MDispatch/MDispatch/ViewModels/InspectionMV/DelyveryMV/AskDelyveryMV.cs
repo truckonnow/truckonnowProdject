@@ -21,7 +21,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
     {
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation { get; set; }
-        private InitDasbordDelegate initDasbordDelegate = null;
+        public InitDasbordDelegate initDasbordDelegate = null;
         private GetVechicleDelegate getVechicleDelegate = null;
 
         public AskDelyveryMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, 
@@ -37,7 +37,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             TotalPaymentToCarrier = totalPaymentToCarrier;
         }
 
-        private string IdShip { get; set; }
+        public string IdShip { get; set; }
         private string OnDeliveryToCarrier { get; set; }
         private string TotalPaymentToCarrier { get; set; }
 

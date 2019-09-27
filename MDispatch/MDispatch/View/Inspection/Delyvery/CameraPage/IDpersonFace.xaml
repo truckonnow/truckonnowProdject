@@ -6,7 +6,6 @@
              x:Class="MDispatch.View.Inspection.Delyvery.CameraPage.IDpersonFace">
     <ContentPage.Content>
         <AbsoluteLayout>
-            <Label x:Name="titlePhoto" HorizontalTextAlignment="Center" TextColor="Black" BackgroundColor="Silver" AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" AbsoluteLayout.LayoutBounds=".5, .0, 1, 20"/>
             <Image Source="BackIconpage.png"  HorizontalOptions="Start" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".02, .02, 20, 20">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>

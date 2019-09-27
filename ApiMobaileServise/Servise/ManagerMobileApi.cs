@@ -105,6 +105,11 @@ namespace ApiMobaileServise.Servise
             return sqlCommandApiMobile.GetShippingInDb(idShip);
         }
 
+        public Shipping GetShippingPhot(string idShip)
+        {
+            return sqlCommandApiMobile.GetShippingPhotInDb(idShip);
+        }
+
         public async Task SavePhotoInspection(string idVe, string photoInspectionJson)
         {
             PhotoInspection photoInspection = JsonConvert.DeserializeObject<PhotoInspection>(photoInspectionJson);

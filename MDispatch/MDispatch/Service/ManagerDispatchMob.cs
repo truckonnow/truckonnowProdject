@@ -268,6 +268,21 @@ namespace MDispatch.Service
             return stateInspection;
         }
 
+        public int GetShippingPhoto(string token, string id, ref string description, ref Shipping shipping)
+        {
+            inspection = new Inspection();
+            //WaiteNoramalReqvestCount();
+            CountReqvest++;
+            int stateInspection = 1;
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                stateInspection = inspection.GetShippingPhoto(token, id, ref description, ref shipping);
+            }
+            inspection = null;
+            CountReqvest--;
+            return stateInspection;
+        }
+
         public int SavePay(string typeReqvest, string token, string id, int type, object obj, ref string description)
         {
             inspection = new Inspection();

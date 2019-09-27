@@ -242,6 +242,16 @@ namespace ApiMobaileServise.Servise
             return shipping;
         }
 
+        public Shipping GetShippingPhotInDb(string idShip)
+        {
+            Shipping shipping = context.Shipping.Where(s => s.Id.ToString() == idShip)
+                .Include("VehiclwInformations.PhotoInspections.Damages")
+                .Include("VehiclwInformations.Scan")
+                .Include("VehiclwInformations.PhotoInspections.Photos")
+                .FirstOrDefault();
+            return shipping;
+        }
+
         public async void SaveAskInDb(string idve, Ask ask)
         {
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));

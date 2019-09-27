@@ -162,6 +162,35 @@ namespace MDispatch.Service
             }
         }
 
+        public int GetShippingPhoto(string token, string id, ref string description, ref Shipping shipping)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
+                RestRequest request = new RestRequest("Mobile/ShippingPhoto", Method.POST);
+                client.Timeout = 600000;
+                request.AddHeader("Accept", "application/json");
+                request.AddParameter("token", token);
+                request.AddParameter("idShip", id);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description, ref shipping);
+            }
+        }
+
         public int SaveAsk(string token, string id, Ask ask, ref string description)
         {
             IRestResponse response = null;
