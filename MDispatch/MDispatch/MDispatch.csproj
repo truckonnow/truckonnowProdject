@@ -74,6 +74,9 @@
     <Compile Update="View\Inspection\Delyvery\CameraPage\CameraPagePhoto1.xaml.cs">
       <DependentUpon>CameraPagePhoto1.xaml</DependentUpon>
     </Compile>
+    <Compile Update="View\Inspection\Delyvery\ClientStart.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
     <Compile Update="View\Inspection\Delyvery\DamageSelecter1.xaml.cs">
       <DependentUpon>DamageSelecter1.xaml</DependentUpon>
     </Compile>
