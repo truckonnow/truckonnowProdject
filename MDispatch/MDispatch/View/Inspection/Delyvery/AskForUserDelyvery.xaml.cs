@@ -22,9 +22,9 @@ namespace MDispatch.View.Inspection.Delyvery
         private IPaymmant Paymmant = null;
 
         public AskForUserDelyvery (ManagerDispatchMob managerDispatchMob, string idShip, InitDasbordDelegate initDasbordDelegate, string OnDeliveryToCarrier, string totalPaymentToCarrier,
-            GetShiping getShiping, GetVechicleDelegate getVechicleDelegate)
+            VehiclwInformation vehiclwInformation, GetShiping getShiping, GetVechicleDelegate getVechicleDelegate)
 		{
-            askForUsersDelyveryMW = new AskForUsersDelyveryMW(managerDispatchMob, idShip, Navigation, getShiping, initDasbordDelegate, getVechicleDelegate, totalPaymentToCarrier);
+            askForUsersDelyveryMW = new AskForUsersDelyveryMW(managerDispatchMob, idShip, Navigation, getShiping, initDasbordDelegate, getVechicleDelegate, vehiclwInformation, totalPaymentToCarrier);
             askForUsersDelyveryMW.AskForUserDelyveryM = new AskForUserDelyveryM();
             InitializeComponent ();
             BindingContext = askForUsersDelyveryMW; 

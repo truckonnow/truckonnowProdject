@@ -34,7 +34,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         public DelegateCommand GoToFeedBackCommand { get; set; }
 
         public AskForUsersDelyveryMW(ManagerDispatchMob managerDispatchMob, string idShip, INavigation navigation, GetShiping getShiping, InitDasbordDelegate initDasbordDelegate,
-            GetVechicleDelegate getVechicleDelegate, string totalPaymentToCarrier, string paymmant = null)
+            GetVechicleDelegate getVechicleDelegate, VehiclwInformation vehiclwInformation, string totalPaymentToCarrier, string paymmant = null)
         {
             this.initDasbordDelegate = initDasbordDelegate;
             this.getVechicleDelegate = getVechicleDelegate;
@@ -107,7 +107,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             string description = null;
             int state = 0;
             //await PopupNavigation.PushAsync(new TempDialogPage1(this));
-            if (Payment == "COD" || Payment == "COP")
+            if (Payment == "COD" || Payment == "COP" || Payment == "Biling")
             {
                 ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
                 FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)}.png", Car.typeIndex.Replace(" ", ""), inderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)), Payment, TotalPaymentToCarrier);
