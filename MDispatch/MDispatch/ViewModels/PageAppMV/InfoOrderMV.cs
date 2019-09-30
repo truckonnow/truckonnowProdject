@@ -36,6 +36,7 @@ namespace MDispatch.ViewModels.PageAppMV
         public INavigation Navigation { get; set; }
         private InitDasbordDelegate initDasbordDelegate = null;
         private GetVechicleDelegate getVechicleDelegate = null;
+        private GetShiping GetShiping = null;
 
         public InfoOrderMV(ManagerDispatchMob managerDispatchMob, Shipping shipping, InitDasbordDelegate initDasbordDelegate)
         {
@@ -43,6 +44,7 @@ namespace MDispatch.ViewModels.PageAppMV
             this.managerDispatchMob = managerDispatchMob;
             Shipping = shipping;
             getVechicleDelegate = GetVehiclwInformations;
+            GetShiping = GetShipings;
             ToInstructionComand = new DelegateCommand(ToInstruction);
             ToEditPikedUpCommand = new DelegateCommand(ToEditPikedUp);
             ToEditDeliveryCommand = new DelegateCommand(ToEditDelivery);
@@ -67,6 +69,11 @@ namespace MDispatch.ViewModels.PageAppMV
         {
             return Shipping.VehiclwInformations;
         }
+        private Shipping GetShipings()
+        {
+            return Shipping;
+        }
+
 
         private void ToInstruction()
         {
@@ -148,7 +155,7 @@ namespace MDispatch.ViewModels.PageAppMV
             if (vehiclwInformation1 == null)
             {
                 vehiclwInformation1 = Shipping.VehiclwInformations[0];
-                await Navigation.PushAsync(new ClientStart(managerDispatchMob, vehiclwInformation1, Shipping.Id, initDasbordDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier), true);
+                await Navigation.PushAsync(new View.Inspection.PickedUp.ClientStart(managerDispatchMob, vehiclwInformation1, Shipping.Id, initDasbordDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier), true);
                 await PopupNavigation.PushAsync(new TempPageHint1());
                 Navigation.RemovePage(Navigation.NavigationStack[1]);
                 return;
@@ -183,20 +190,37 @@ namespace MDispatch.ViewModels.PageAppMV
             VehiclwInformation vehiclwInformation1 = null;
             foreach (var vehiclwInformation in Shipping.VehiclwInformations)
             {
+                if (vehiclwInformation.AskDelyvery == null)
+                {
+                    await Navigation.PushAsync(new AskPageDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, initDasbordDelegate, getVechicleDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier, GetShiping), true);
+                    await PopupNavigation.PushAsync(new HintPageVechicle("Start Inspection Delyvered", vehiclwInformation));
+                    Navigation.RemovePage(Navigation.NavigationStack[1]);
+                    return;
+                }
+            }
+            vehiclwInformation1 = Shipping.VehiclwInformations.FirstOrDefault(v => v.askForUserDelyveryM != null);
+            if (vehiclwInformation1 == null || vehiclwInformation1.askForUserDelyveryM.App_will_ask_for_name_of_the_client_signature == null)
+            {
+                await PopupNavigation.PushAsync(new HintPageVechicle("Continue Inspection Delyvered"));
+                await Navigation.PushAsync(new View.Inspection.Delyvery.ClientStart(managerDispatchMob, Shipping.Id, initDasbordDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier, GetShiping, getVechicleDelegate), true);
+                Navigation.RemovePage(Navigation.NavigationStack[1]);
+                return;
+            }
+            else if (vehiclwInformation1 != null && vehiclwInformation1.askForUserDelyveryM.PhotoPay == null && vehiclwInformation1.askForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation != "Biling")
+            {
+                AskForUsersDelyveryMW askForUsersDelyveryMW = new AskForUsersDelyveryMW(managerDispatchMob, Shipping.Id, Navigation, GetShiping, initDasbordDelegate, getVechicleDelegate, Shipping.TotalPaymentToCarrier, vehiclwInformation1.askForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation);
+                await Navigation.PushAsync(new CameraPaymmant(askForUsersDelyveryMW, ""));
+                Navigation.RemovePage(Navigation.NavigationStack[1]);
+            }
+            foreach (var vehiclwInformation in Shipping.VehiclwInformations)
+            {
                 ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
                 List<PhotoInspection> photoInspections = null;
                 if (vehiclwInformation.PhotoInspections != null)
                 {
                     photoInspections = vehiclwInformation.PhotoInspections.FindAll(p => p.CurrentStatusPhoto == "Delyvery");
                 }
-                if (vehiclwInformation.AskDelyvery == null)
-                {
-                    await Navigation.PushAsync(new AskPageDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, initDasbordDelegate, getVechicleDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier), true);
-                    await PopupNavigation.PushAsync(new HintPageVechicle("Start Inspection Delyvered", vehiclwInformation));
-                    Navigation.RemovePage(Navigation.NavigationStack[1]);
-                    return;
-                }
-                else if (photoInspections != null && photoInspections.Count + 1 == 1)
+                if (photoInspections != null && photoInspections.Count + 1 == 1)
                 {
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Delyvered", vehiclwInformation));
                     FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{Car.GetIndexCarFullPhoto(photoInspections.Count + 1)}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), photoInspections.Count + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(photoInspections.Count + 1)), Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier);
@@ -205,7 +229,7 @@ namespace MDispatch.ViewModels.PageAppMV
                     Navigation.RemovePage(Navigation.NavigationStack[1]);
                     return;
                 }
-                else if (Car.GetIndexCarFullPhoto(photoInspections.Count+1) != 0)
+                else if (Car.GetIndexCarFullPhoto(photoInspections.Count + 1) != 0)
                 {
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Delyvered", vehiclwInformation));
                     int photoInspection = Car.GetIndexCarFullPhoto(photoInspections.Count + 1);
@@ -216,27 +240,7 @@ namespace MDispatch.ViewModels.PageAppMV
                     return;
                 }
             }
-            vehiclwInformation1 = Shipping.VehiclwInformations.FirstOrDefault(v => v.askForUserDelyveryM != null);
-            if (vehiclwInformation1 == null || vehiclwInformation1.askForUserDelyveryM.App_will_ask_for_name_of_the_client_signature == null)
-            {
-                if (vehiclwInformation1 == null)
-                {
-                    vehiclwInformation1 = Shipping.VehiclwInformations[0];
-                }
-                await Navigation.PushAsync(new AskForUserDelyvery(managerDispatchMob, vehiclwInformation1, Shipping.Id, initDasbordDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier), true);
-                Navigation.RemovePage(Navigation.NavigationStack[1]);
-                return;
-            }
-            else if (vehiclwInformation1 != null && vehiclwInformation1.askForUserDelyveryM.PhotoPay == null && vehiclwInformation1.askForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation != "Biling")
-            {
-                AskForUsersDelyveryMW askForUsersDelyveryMW = new AskForUsersDelyveryMW(managerDispatchMob, vehiclwInformation1, Shipping.Id, Navigation, initDasbordDelegate, Shipping.TotalPaymentToCarrier, vehiclwInformation1.askForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation);
-                await Navigation.PushAsync(new CameraPaymmant(askForUsersDelyveryMW, ""));
-                Navigation.RemovePage(Navigation.NavigationStack[1]);
-            }
-            else
-            {
-                ContinueDely();
-            }
+            ContinueDely();
         }
 
         [System.Obsolete]

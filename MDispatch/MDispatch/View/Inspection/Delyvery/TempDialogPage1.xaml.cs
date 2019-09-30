@@ -22,11 +22,10 @@ namespace MDispatch.View.Inspection.Delyvery
         private async void Button_Clicked(object sender, EventArgs e)
         {
             await PopupNavigation.PopAsync(true);
-            await PopupNavigation.PushAsync(new TempPageHint4());
             if (askForUsersDelyveryMW.Payment == "COD" || askForUsersDelyveryMW.Payment == "COP" || askForUsersDelyveryMW.Payment == "Biling")
             {
-                askForUsersDelyveryMW.Continue();
-                await askForUsersDelyveryMW.Navigation.PopToRootAsync();
+                //askForUsersDelyveryMW.Continue();
+                //await askForUsersDelyveryMW.Navigation.PopToRootAsync();
             }
             else
             {

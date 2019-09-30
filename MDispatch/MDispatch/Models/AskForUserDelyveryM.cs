@@ -15,5 +15,6 @@ namespace MDispatch.Models
         public string NamePaymment { get; set; }
         public string App_will_ask_for_name_of_the_client_signature  { get; set; }
         public Photo App_will_ask_for_signature_of_the_client_signature { get; set; }
+        public string Please_rate_the_driver { get; set; }
     }
 }

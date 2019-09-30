@@ -8,6 +8,7 @@ namespace MDispatch.Service
     {
         public delegate void InitDasbordDelegate();
         public delegate List<VehiclwInformation> GetVechicleDelegate();
+        public delegate Shipping GetShiping();
         private A_R a_R = null;
         private OrderGet orderGet = null;
         private Photo photo = null;

@@ -18,12 +18,12 @@ namespace MDispatch.View.Inspection.Delyvery
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AskPageDelyvery : ContentPage
 	{
-        AskDelyveryMV askDelyveryMV = null;
+        private AskDelyveryMV askDelyveryMV = null;
 
         public AskPageDelyvery (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate,
-             string onDeliveryToCarrier, string totalPaymentToCarrier)
+             string onDeliveryToCarrier, string totalPaymentToCarrier, GetShiping getShiping)
 		{
-            askDelyveryMV = new AskDelyveryMV(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate, getVechicleDelegate, onDeliveryToCarrier, totalPaymentToCarrier);
+            askDelyveryMV = new AskDelyveryMV(managerDispatchMob, vehiclwInformation, idShip, Navigation, getShiping, initDasbordDelegate, getVechicleDelegate, onDeliveryToCarrier, totalPaymentToCarrier);
             askDelyveryMV.AskDelyvery = new AskDelyvery();
             InitializeComponent ();
             BindingContext = askDelyveryMV;

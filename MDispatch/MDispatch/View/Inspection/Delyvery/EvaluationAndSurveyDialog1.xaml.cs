@@ -27,7 +27,7 @@ namespace MDispatch.View.Inspection.PickedUp
             if (askForUsersDelyveryMW.Payment == "COD" || askForUsersDelyveryMW.Payment == "COP" || askForUsersDelyveryMW.Payment == "Biling")
             {
                 await Navigation.PopToRootAsync(true);
-                askForUsersDelyveryMW.Continue();
+                //askForUsersDelyveryMW.Continue();
             }
             else
             {

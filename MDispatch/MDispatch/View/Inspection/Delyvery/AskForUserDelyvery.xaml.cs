@@ -21,9 +21,10 @@ namespace MDispatch.View.Inspection.Delyvery
         public AskForUsersDelyveryMW askForUsersDelyveryMW = null;
         private IPaymmant Paymmant = null;
 
-        public AskForUserDelyvery (ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate, string OnDeliveryToCarrier, string totalPaymentToCarrier)
+        public AskForUserDelyvery (ManagerDispatchMob managerDispatchMob, string idShip, InitDasbordDelegate initDasbordDelegate, string OnDeliveryToCarrier, string totalPaymentToCarrier,
+            GetShiping getShiping, GetVechicleDelegate getVechicleDelegate)
 		{
-            askForUsersDelyveryMW = new AskForUsersDelyveryMW(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate, totalPaymentToCarrier);
+            askForUsersDelyveryMW = new AskForUsersDelyveryMW(managerDispatchMob, idShip, Navigation, getShiping, initDasbordDelegate, getVechicleDelegate, totalPaymentToCarrier);
             askForUsersDelyveryMW.AskForUserDelyveryM = new AskForUserDelyveryM();
             InitializeComponent ();
             BindingContext = askForUsersDelyveryMW; 
@@ -153,7 +154,7 @@ namespace MDispatch.View.Inspection.Delyvery
             stream.CopyTo(memoryStream);
             byte[] image = memoryStream.ToArray();
             photo.Base64 = JsonConvert.SerializeObject(image);
-            photo.path = $"../Photo/{askForUsersDelyveryMW.VehiclwInformation.Id}/Delyvery/Signature/DelyverySig.jpg";
+            photo.path = $"../Photo/{askForUsersDelyveryMW.IdShip}/Delyvery/Signature/DelyverySig.jpg";
             askForUsersDelyveryMW.AskForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature = photo;
         }
 
@@ -169,6 +170,23 @@ namespace MDispatch.View.Inspection.Delyvery
         }
         #endregion
 
+        #region Ask5
+        bool isAsk5 = false;
+        Button button5 = null;
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            isAsk5 = true;
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            askForUsersDelyveryMW.AskForUserDelyveryM.Please_rate_the_driver = button.Text;
+            if (button5 != null)
+            {
+                button5.TextColor = Color.Silver;
+            }
+            button5 = button;
+        }
+        #endregion
+
         [Obsolete]
         private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
@@ -176,7 +194,7 @@ namespace MDispatch.View.Inspection.Delyvery
             {
                 isAsk2 = Paymmant.IsAskPaymmant;
             }
-            if (isAsk1 && isAsk2 && GetIsAsk3())
+            if (isAsk1 && isAsk2 && GetIsAsk3() && isAsk5)
             {
                 askForUsersDelyveryMW.SaveAsk(askForUsersDelyveryMW.AskForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation);
             }
@@ -212,6 +230,14 @@ namespace MDispatch.View.Inspection.Delyvery
             else
             {
                 askBlock3.BorderColor = Color.BlueViolet;
+            }
+            if(!isAsk5)
+            {
+                askBlock5.BorderColor = Color.Red;
+            }
+            else
+            {
+                askBlock5.BorderColor = Color.BlueViolet;
             }
         }
 

@@ -295,6 +295,43 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         }
 
         [System.Obsolete]
+        public async void Continue()
+        {
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                await Task.Run(() =>
+                {
+                    string status = null;
+                    if (TotalPaymentToCarrier == "COD" || TotalPaymentToCarrier == "COP")
+                    {
+                        status = "Delivered,Paid";
+                    }
+                    else
+                    {
+                        status = "Delivered,Billed";
+                    }
+                    state = managerDispatchMob.Recurent(token, IdShip, status, ref description);
+                });
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, null));
+                }
+                else if (state == 3)
+                {
+                    initDasbordDelegate.Invoke();
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
+            }
+        }
+
+        [System.Obsolete]
         private async Task CheckVechicleAndGoToResultPage()
         {
             List<VehiclwInformation> vehiclwInformation1s = getVechicleDelegate.Invoke();
@@ -302,12 +339,16 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             if (vehiclwInformation1s.Count - 1 == indexCurrentVechecle)
             {
                 await PopupNavigation.PushAsync(new TempDialogPage());
-                await Navigation.PushAsync(new AskForUserDelyvery(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, OnDeliveryToCarrier, TotalPaymentToCarrier));
+                Continue();
+                await Navigation.PopToRootAsync();
             }
             else
             {
                 await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Deliveri", vehiclwInformation1s[indexCurrentVechecle + 1]));
-                await Navigation.PushAsync(new AskPageDelyvery(managerDispatchMob, vehiclwInformation1s[indexCurrentVechecle + 1], IdShip, initDasbordDelegate, getVechicleDelegate, OnDeliveryToCarrier, TotalPaymentToCarrier), true);
+                ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+                FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)}.png", Car.typeIndex.Replace(" ", ""), inderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)), OnDeliveryToCarrier, TotalPaymentToCarrier);
+                await Navigation.PushAsync(fullPagePhotoDelyvery);
+                await Navigation.PushAsync(new CameraPagePhoto1($"{Car.typeIndex.Replace(" ", "")}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)}.png", fullPagePhotoDelyvery));
             }
         }
 

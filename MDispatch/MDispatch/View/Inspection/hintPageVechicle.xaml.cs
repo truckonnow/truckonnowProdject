@@ -8,7 +8,7 @@ namespace MDispatch.View.Inspection
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HintPageVechicle : PopupPage
     {
-        public HintPageVechicle(string hintText, VehiclwInformation vehiclwInformation)
+        public HintPageVechicle(string hintText, VehiclwInformation vehiclwInformation = null)
         {
             InitializeComponent();
             lHint.Text = hintText;

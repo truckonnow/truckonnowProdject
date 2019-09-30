@@ -4,12 +4,18 @@ using MDispatch.Service;
 using MDispatch.Service.Net;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
+using MDispatch.View.Inspection;
 using MDispatch.View.Inspection.Delyvery;
+using MDispatch.View.PageApp;
+using MDispatch.ViewModels.AskPhoto;
+using MDispatch.ViewModels.InspectionMV.Models;
+using MDispatch.ViewModels.InspectionMV.Servise.Models;
 using Newtonsoft.Json;
 using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,12 +29,16 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation { get; set; }
         private InitDasbordDelegate initDasbordDelegate = null;
+        private GetShiping getShiping = null; 
+        private GetVechicleDelegate getVechicleDelegate = null;
         public DelegateCommand GoToFeedBackCommand { get; set; }
 
-        public AskForUsersDelyveryMW(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate, 
-            string totalPaymentToCarrier, string paymmant = null)
+        public AskForUsersDelyveryMW(ManagerDispatchMob managerDispatchMob, string idShip, INavigation navigation, GetShiping getShiping, InitDasbordDelegate initDasbordDelegate,
+            GetVechicleDelegate getVechicleDelegate, string totalPaymentToCarrier, string paymmant = null)
         {
             this.initDasbordDelegate = initDasbordDelegate;
+            this.getVechicleDelegate = getVechicleDelegate;
+            this.getShiping = getShiping;
             this.managerDispatchMob = managerDispatchMob;
             Navigation = navigation;
             VehiclwInformation = vehiclwInformation;
@@ -41,7 +51,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
         }
 
-        private string IdShip { get; set; }
+        public string IdShip { get; set; }
         private string TotalPaymentToCarrier { get; set; }
         public string Payment { get; set; }
 
@@ -85,6 +95,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         [System.Obsolete]
         public async void SaveAsk(string paymmant)
         {
+            bool isPaymantPhoto = false;
             bool isNavigationMany = false;
             if (Navigation.NavigationStack.Count > 2)
             {
@@ -95,17 +106,25 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-            await PopupNavigation.PushAsync(new TempDialogPage1(this));
+            //await PopupNavigation.PushAsync(new TempDialogPage1(this));
+            if (Payment == "COD" || Payment == "COP")
+            {
+                ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+                FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)}.png", Car.typeIndex.Replace(" ", ""), inderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)), Payment, TotalPaymentToCarrier);
+                await Navigation.PushAsync(fullPagePhotoDelyvery);
+                await Navigation.PushAsync(new CameraPagePhoto1($"{Car.typeIndex.Replace(" ", "")}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)}.png", fullPagePhotoDelyvery));
+                isPaymantPhoto = true;
+            }
+            else
+            {
+                await Navigation.PushAsync(new CameraPaymmant(this, ""));
+            }
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
                 Task.Run(async () => await SaveRecountVideo());
                 await Task.Run(() =>
                 {
-                    Task.Run(() =>
-                    {
-                        managerDispatchMob.AskWork("DamageForUser", token, vehiclwInformation.Id, damageForUsers, ref description);
-                    });
                     state = managerDispatchMob.AskWork("AskForUserDelyvery", token, VehiclwInformation.Id, AskForUserDelyveryM, ref description);
                     initDasbordDelegate.Invoke();
                 });
@@ -129,6 +148,10 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                         await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
                         isNavigationMany = false;
                     }
+                    if (isPaymantPhoto)
+                    {
+                        Navigation.RemovePage(Navigation.NavigationStack[1]);
+                    }
                     DependencyService.Get<IToast>().ShowMessage("Answers to questions saved");
                 }
                 else if (state == 4)
@@ -145,6 +168,35 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
                 }
             }
+        }
+
+        private ICar GetTypeCar(string typeCar)
+        {
+            ICar car = null;
+            switch (typeCar)
+            {
+                case "PickUp":
+                    {
+                        car = new CarPickUp();
+                        break;
+                    }
+                case "Coupe":
+                    {
+                        car = new CarCoupe();
+                        break;
+                    }
+                case "Suv":
+                    {
+                        car = new CarSuv();
+                        break;
+                    }
+                case "Sedan":
+                    {
+                        car = new CarSedan();
+                        break;
+                    }
+            }
+            return car;
         }
 
         [System.Obsolete]
@@ -200,10 +252,6 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             {
                 await Task.Run(() =>
                 {
-                    Continue();
-                });
-                await Task.Run(() =>
-                {
                     state = managerDispatchMob.SavePay("SaveSig", token, VehiclwInformation.Id, 2, photo, ref description);
                 });
                 if (state == 2)
@@ -213,7 +261,11 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 else if (state == 3)
                 {
                     DependencyService.Get<IToast>().ShowMessage("Payment method photo saved");
-                    await Navigation.PopToRootAsync();
+                    ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+                    FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)}.png", Car.typeIndex.Replace(" ", ""), inderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)), Payment, TotalPaymentToCarrier);
+                    await Navigation.PushAsync(fullPagePhotoDelyvery);
+                    await Navigation.PushAsync(new CameraPagePhoto1($"{Car.typeIndex.Replace(" ", "")}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)}.png", fullPagePhotoDelyvery));
+                    Navigation.RemovePage(Navigation.NavigationStack[1]);
                 }
                 else if (state == 4)
                 {
@@ -260,42 +312,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             damageForUsers.Add(damageForUser);
         }
 
-        [System.Obsolete]
-        public async void Continue()
-        {
-            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
-            string description = null;
-            int state = 0;
-            await Task.Run(() => Utils.CheckNet());
-            if (App.isNetwork)
-            {
-                await Task.Run(() =>
-                {
-                    string status = null;
-                    if (TotalPaymentToCarrier == "COD" || TotalPaymentToCarrier == "COP")
-                    {
-                        status = "Delivered,Paid";
-                    }
-                    else
-                    {
-                        status = "Delivered,Billed";
-                    }
-                    state = managerDispatchMob.Recurent(token, IdShip, status, ref description);
-                });
-                if (state == 2)
-                {
-                    await PopupNavigation.PushAsync(new Errror(description, null));
-                }
-                else if (state == 3)
-                {
-                    initDasbordDelegate.Invoke();
-                }
-                else if (state == 4)
-                {
-                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
-                }
-            }
-        }
+        
 
         [System.Obsolete]
         public async void GoToFeedBack()

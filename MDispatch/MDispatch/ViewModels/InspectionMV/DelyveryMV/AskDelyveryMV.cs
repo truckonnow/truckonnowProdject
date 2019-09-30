@@ -4,6 +4,8 @@ using MDispatch.Service;
 using MDispatch.Service.Net;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
+using MDispatch.View.Inspection;
+using MDispatch.View.Inspection.Delyvery;
 using MDispatch.View.PageApp;
 using MDispatch.ViewModels.AskPhoto;
 using MDispatch.ViewModels.InspectionMV.Models;
@@ -11,6 +13,7 @@ using MDispatch.ViewModels.InspectionMV.Servise.Models;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -23,11 +26,13 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         public INavigation Navigation { get; set; }
         public InitDasbordDelegate initDasbordDelegate = null;
         private GetVechicleDelegate getVechicleDelegate = null;
+        private GetShiping getShiping = null;
 
-        public AskDelyveryMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, 
+        public AskDelyveryMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, GetShiping getShiping,
             InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate, string onDeliveryToCarrier, string totalPaymentToCarrier)
         {
             this.getVechicleDelegate = getVechicleDelegate;
+            this.getShiping = getShiping;
             this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
             Navigation = navigation;
@@ -68,9 +73,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
-                FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{car.typeIndex.Replace(" ", "")}{car.GetIndexCarFullPhoto(1)}.png", car.typeIndex.Replace(" ", ""), 1, initDasbordDelegate, getVechicleDelegate, car.GetNameLayout(car.GetIndexCarFullPhoto(1)), OnDeliveryToCarrier, TotalPaymentToCarrier);
-                await Navigation.PushAsync(fullPagePhotoDelyvery);
-                await Navigation.PushAsync(new CameraPagePhoto1($"{car.typeIndex.Replace(" ", "")}{car.GetIndexCarFullPhoto(1)}.png", fullPagePhotoDelyvery));
+            await CheckVechicleAndGoToResultPage();
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
@@ -122,6 +125,23 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 {
                     await Navigation.PopAsync();
                 }
+            }
+        }
+
+        [System.Obsolete]
+        private async Task CheckVechicleAndGoToResultPage()
+        {
+            List<VehiclwInformation> vehiclwInformation1s = getVechicleDelegate.Invoke();
+            int indexCurrentVechecle = vehiclwInformation1s.FindIndex(v => v == VehiclwInformation);
+            if (vehiclwInformation1s.Count - 1 == indexCurrentVechecle)
+            {
+                await PopupNavigation.PushAsync(new TempDialogPage());
+                await Navigation.PushAsync(new ClientStart(managerDispatchMob, IdShip, initDasbordDelegate, OnDeliveryToCarrier, TotalPaymentToCarrier, getShiping, getVechicleDelegate));
+            }
+            else
+            {
+                await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Deliveri", vehiclwInformation1s[indexCurrentVechecle + 1]));
+                await Navigation.PushAsync(new AskPageDelyvery(managerDispatchMob, vehiclwInformation1s[indexCurrentVechecle + 1], IdShip, initDasbordDelegate, getVechicleDelegate, OnDeliveryToCarrier, TotalPaymentToCarrier, getShiping), true);
             }
         }
 
