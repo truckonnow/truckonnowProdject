@@ -110,9 +110,9 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             if (Payment == "COD" || Payment == "COP" || Payment == "Biling")
             {
                 ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
-                FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)}.png", Car.typeIndex.Replace(" ", ""), inderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)), Payment, TotalPaymentToCarrier);
+                FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", Car.typeIndex.Replace(" ", ""), inderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)), Payment, TotalPaymentToCarrier);
                 await Navigation.PushAsync(fullPagePhotoDelyvery);
-                await Navigation.PushAsync(new CameraPagePhoto1($"{Car.typeIndex.Replace(" ", "")}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)}.png", fullPagePhotoDelyvery));
+                await Navigation.PushAsync(new CameraPagePhoto1($"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", fullPagePhotoDelyvery));
                 isPaymantPhoto = true;
             }
             else
@@ -262,9 +262,9 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 {
                     DependencyService.Get<IToast>().ShowMessage("Payment method photo saved");
                     ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
-                    FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)}.png", Car.typeIndex.Replace(" ", ""), inderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)), Payment, TotalPaymentToCarrier);
+                    FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", Car.typeIndex.Replace(" ", ""), inderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)), Payment, TotalPaymentToCarrier);
                     await Navigation.PushAsync(fullPagePhotoDelyvery);
-                    await Navigation.PushAsync(new CameraPagePhoto1($"{Car.typeIndex.Replace(" ", "")}{Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)}.png", fullPagePhotoDelyvery));
+                    await Navigation.PushAsync(new CameraPagePhoto1($"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", fullPagePhotoDelyvery));
                     Navigation.RemovePage(Navigation.NavigationStack[1]);
                 }
                 else if (state == 4)

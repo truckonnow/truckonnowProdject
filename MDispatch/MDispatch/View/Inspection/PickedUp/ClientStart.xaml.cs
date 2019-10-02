@@ -22,6 +22,7 @@ namespace MDispatch.View.Inspection.PickedUp
         private async void Button_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(askForUser);
+            Navigation.RemovePage(Navigation.NavigationStack[1]);
         }
     }
 }

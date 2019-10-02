@@ -8,6 +8,7 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
+                <ActivityIndicator IsRunning="{Binding Isloader}" IsVisible="{Binding Isloader}"/>
                 <Frame Padding="5" BorderColor="BlueViolet" Margin="5" CornerRadius="6">
                     <StackLayout>
                         <Label Text="ORIGIN" FontSize="16" TextColor="Black" HorizontalTextAlignment="Center"/>
@@ -109,6 +110,12 @@
                             <Label Text="Your signature" TextColor="Black" FontSize="18"/>
                             <sig:SignaturePadView x:Name="sign" StrokeColor="Black" StrokeWidth="3" BackgroundColor="White" HeightRequest="100" StrokeCompleted="Sign_StrokeCompleted" Cleared="Sign_Cleared" />
                         </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6">
+                    <StackLayout>
+                        <Label Text="Thank you. Please pass the device to the driver." 
+                               TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                     </StackLayout>
                 </Frame>
                 <Button Text="Continue" BackgroundColor="BlueViolet" TextColor="White" Clicked="Button_Clicked" Margin="10"/>

@@ -49,6 +49,13 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
 
         public int StataLoadShip { get; set; }
 
+        private bool isLoader = false;
+        public bool Isloader
+        {
+            get => isLoader;
+            set => SetProperty(ref isLoader, value);
+        }
+
         private Shipping shipping = null;
         public Shipping Shipping
         {
@@ -76,28 +83,29 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         [System.Obsolete]
         private async void InitShipping()
         {
+            Isloader = true;
             bool isNavigationMany = false;
             if (Navigation.NavigationStack.Count > 2)
             {
                 await PopupNavigation.PushAsync(new LoadPage());
                 isNavigationMany = true;
             }
-            await PopupNavigation.PushAsync(new LoadPage());
+            //await PopupNavigation.PushAsync(new LoadPage());
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
             Shipping shipping1 = null;
-            await Task.Run(() => Utils.CheckNet());
+            //await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
                 await Task.Run(() =>
                 {
                     state = managerDispatchMob.GetShipping(token, IdShip, ref description, ref shipping1);
                 });
-                await PopupNavigation.PopAsync();
+                await PopupNavigation.Instance.PopAsync();
                 if (state == 2)
                 {
-                    if (isNavigationMany)
+                    if (isNavigationMany)   
                     {
                         await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
                         isNavigationMany = false;
@@ -132,6 +140,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 }
                 StataLoadShip = 1;
             }
+            Isloader = false;
         }
 
         [System.Obsolete]
@@ -171,6 +180,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         [System.Obsolete]
         public async void SaveSigAndMethodPay()
         {
+            Isloader = true;
             await PopupNavigation.PushAsync(new LoadPage());
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
@@ -185,7 +195,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                     state = managerDispatchMob.SaveMethodPay(token, IdVech, What_form_of_payment_are_you_using_to_pay_for_transportation, CountPay, ref description);
                     initDasbordDelegate.Invoke();
                 });
-                await PopupNavigation.PopAsync();
+                await PopupNavigation.Instance.PopAsync();
                 if (state == 2)
                 {
                     await PopupNavigation.PushAsync(new Errror(description, Navigation));
@@ -202,8 +212,9 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
             else
             {
-                await PopupNavigation.PopAsync();
+                //await PopupNavigation.PopAsync();
             }
+            Isloader = true;
         }
 
         [System.Obsolete]

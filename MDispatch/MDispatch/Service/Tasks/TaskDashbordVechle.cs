@@ -10,7 +10,7 @@ namespace MDispatch.Service.Tasks
         public async void StartTask(params object[] task)
         {
             string base64 = (string)task[0];
-            string res = await DependencyService.Get<IORC>().ORCWorkDashbordVehicle(Convert.FromBase64String(base64));
+            //string res = await DependencyService.Get<IORC>().ORCWorkDashbordVehicle(Convert.FromBase64String(base64));
 
         }
     }

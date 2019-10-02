@@ -23,6 +23,7 @@ namespace MDispatch.View.Inspection.Delyvery
         private async void Button_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(askForUserDelyvery);
+            Navigation.RemovePage(Navigation.NavigationStack[1]);
         }
     }
 }

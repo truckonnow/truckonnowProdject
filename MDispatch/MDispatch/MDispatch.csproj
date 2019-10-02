@@ -22,7 +22,7 @@
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
     <PackageReference Include="Prism.Forms" Version="7.0.0.396" />
     <PackageReference Include="RestSharp" Version="106.5.4" />
-    <PackageReference Include="Rg.Plugins.Popup" Version="1.1.4.168" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.214" />
     <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
@@ -53,19 +53,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="View\Inspection\BOLPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\Inspection\Delyvery\CameraPage\IDpersonFace.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="View\Inspection\HintPageVechicle.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\Inspection\PickedUp\Ask2Page.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\Inspection\PickedUp\ClientStart.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

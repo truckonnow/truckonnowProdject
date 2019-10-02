@@ -226,7 +226,7 @@ namespace MDispatch.View.Inspection.Delyvery
 
         private void Picker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            isAsk5 = true;
+            isAsk11 = true;
             askDelyveryMV.AskDelyvery.How_did_you_get_inside_of_the_vehicle = (string)((Picker)sender).SelectedItem;
         }
         #endregion
@@ -280,7 +280,7 @@ namespace MDispatch.View.Inspection.Delyvery
                 button14.TextColor = Color.Silver;
             }
             button14 = button;
-            if (button.Text == "Yes")
+            if (button.Text == "Yes" || button.Text == "YES")
             {
                 isAsk14 = true;
                 startST.IsVisible = false;

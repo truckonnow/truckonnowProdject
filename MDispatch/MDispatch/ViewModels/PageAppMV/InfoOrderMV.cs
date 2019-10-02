@@ -199,14 +199,14 @@ namespace MDispatch.ViewModels.PageAppMV
                 }
             }
             vehiclwInformation1 = Shipping.VehiclwInformations.FirstOrDefault(v => v.askForUserDelyveryM != null);
-            if (vehiclwInformation1 == null || vehiclwInformation1.askForUserDelyveryM.App_will_ask_for_name_of_the_client_signature == null)
+            if (vehiclwInformation1 == null || vehiclwInformation1.askForUserDelyveryM == null)
             {
                 await PopupNavigation.PushAsync(new HintPageVechicle("Continue Inspection Delyvered"));
                 await Navigation.PushAsync(new View.Inspection.Delyvery.ClientStart(managerDispatchMob, Shipping.Id, initDasbordDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier, vehiclwInformation1, GetShiping, getVechicleDelegate), true);
                 Navigation.RemovePage(Navigation.NavigationStack[1]);
                 return;
             }
-            else if (vehiclwInformation1 != null && vehiclwInformation1.askForUserDelyveryM.PhotoPay == null && vehiclwInformation1.askForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation != "Biling")
+            else if (vehiclwInformation1 != null && vehiclwInformation1.askForUserDelyveryM.PhotoPay == null && vehiclwInformation1.askForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation != "Biling" && Shipping.TotalPaymentToCarrier == "COD")
             {
                 AskForUsersDelyveryMW askForUsersDelyveryMW = new AskForUsersDelyveryMW(managerDispatchMob, Shipping.Id, Navigation, GetShiping, initDasbordDelegate, getVechicleDelegate, vehiclwInformation1, Shipping.TotalPaymentToCarrier,  vehiclwInformation1.askForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation);
                 await Navigation.PushAsync(new CameraPaymmant(askForUsersDelyveryMW, ""));
