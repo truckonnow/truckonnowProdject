@@ -144,6 +144,7 @@
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
+    <Compile Include="NewRender\Labal\CorectLabel.cs" />
     <Compile Include="NewRender\ORC\ORCReader.cs" />
     <Compile Include="NewRender\ResizerImgIOS.cs" />
     <Compile Include="NewRender\TextIn\TextRender.cs" />

@@ -129,6 +129,7 @@
     <Compile Include="NewrRender\Gradient\GradientViewRenderer.cs" />
     <Compile Include="NewrRender\ImageRender\ImageSizeRender.cs" />
     <Compile Include="NewrRender\ImageRender\RezizeImgRender.cs" />
+    <Compile Include="NewrRender\Label\CorectLabel.cs" />
     <Compile Include="NewrRender\Orientation\OrientationHandler.cs" />
     <Compile Include="NewrRender\ORS\ORCReader.cs" />
     <Compile Include="NewrRender\RebderVideoCamera\VideoRecorderRenderer.cs" />
