@@ -22,7 +22,7 @@
                  Margin="5">
         <Frame CornerRadius="6" Padding="15" Margin="4" BorderColor="BlueViolet">
             <StackLayout>
-                <Label TextColor="Black" FontSize="17" Text="After you have loaded the car into the truck, click continue and continue the inspection to the car already in the truck" VerticalOptions="Center"/>
+                <Label TextColor="Black" FontSize="17" Text="please click continue after loading vehicle in to the trailer" VerticalOptions="Center"/>
                 <Button Text="Continue inspections" BackgroundColor="BlueViolet" TextColor="White" Clicked="Button_Clicked"/>
             </StackLayout>
         </Frame>

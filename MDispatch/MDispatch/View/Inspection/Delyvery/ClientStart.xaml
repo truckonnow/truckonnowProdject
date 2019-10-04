@@ -8,7 +8,7 @@
              x:Class="MDispatch.View.Inspection.Delyvery.ClientStart">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Press the start button to continue! Thank you for using our company."
+            <Label Text="Thank you for using our company. Press the start button to continue!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"
                 Margin="10" FontSize="20"/>

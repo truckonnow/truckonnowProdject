@@ -199,18 +199,43 @@ namespace MDispatch.View.Inspection.Delyvery
         #region Ask9
         Button button9 = null;
         bool isAsk9 = false;
-       
+        string btnAnswer = "";
         private void Button_Clicked_11(object sender, EventArgs e)
         {
-            isAsk9 = true;
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
-            askDelyveryMV.AskDelyvery.Anyone_Rushing_you_to_perform_the_delivery = button.Text;
+            txtAnswer = button.Text;
+            askDelyveryMV.AskDelyvery.Anyone_Rushing_you_to_perform_the_delivery = $"{btnAnswer}, {txtAnswer}";
             if (button9 != null)
             {
                 button9.TextColor = Color.Silver;
             }
             button9 = button;
+            if (button.Text == "Yes" || button.Text == "YES")
+            {
+                askBlock9v2.IsVisible = true;
+                if(txtAnswer != "")
+                {
+                    isAsk9 = true;
+                }
+                else
+                {
+                    isAsk9 = false;
+                }
+            }
+            else
+            {
+                askBlock9v2.IsVisible = false;
+                isAsk9 = true;
+            }
+        }
+
+        string txtAnswer = "";
+        private void Entry_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            txtAnswer = e.NewTextValue;
+            askDelyveryMV.AskDelyvery.Anyone_Rushing_you_to_perform_the_delivery = $"{btnAnswer}, {txtAnswer}";
+            isAsk9 = true;
         }
         #endregion
 

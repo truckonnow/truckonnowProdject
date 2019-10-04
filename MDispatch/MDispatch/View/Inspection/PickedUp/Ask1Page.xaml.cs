@@ -63,11 +63,27 @@ namespace MDispatch.View.Inspection
                 button3.TextColor = Color.Silver;
             }
             button3 = button;
+            if(button.Text == "Yes" || button.Text == "YES")
+            {
+                askBlock4.IsVisible = true;
+                if(ask1PageMV.Ask1.Did_someone_load_the_vehicle_for_you != null && ask1PageMV.Ask1.Did_someone_load_the_vehicle_for_you != "")
+                {
+                    isAsk4 = true;
+                }
+                else
+                {
+                    isAsk4 = false;
+                }
+            }
+            else
+            {
+                askBlock4.IsVisible = false;
+            }
         }
         #endregion
 
         #region Ask4
-        bool isAsk4 = false;
+        bool isAsk4 = true;
         private void Entry_TextChanged2(object sender, TextChangedEventArgs e)
         {
             if (e.NewTextValue != "")
@@ -401,7 +417,7 @@ namespace MDispatch.View.Inspection
             {
                 button14.TextColor = Color.Silver;
             }
-            if(button.Text == "Yes")
+            if(button.Text == "Yes" && button.Text == "YES")
             {
                 if(isTypeText)
                 {

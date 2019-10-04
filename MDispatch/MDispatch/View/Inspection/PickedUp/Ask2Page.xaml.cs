@@ -91,17 +91,18 @@ namespace MDispatch.View.Inspection.PickedUp
 
         #region Ask5
         bool isAsk5 = false;
-        private void Entry_TextChanged5(object sender, TextChangedEventArgs e)
+        Button button5= null;
+        private void Button_Clicked(object sender, EventArgs e)
         {
-            if (e.NewTextValue != "")
+            isAsk5 = true;
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            ask2PageMW.Ask2.Car_locked = button.Text;
+            if (button5 != null)
             {
-                isAsk5 = true;
+                button5.TextColor = Color.Silver;
             }
-            else
-            {
-                isAsk5 = false;
-            }
-            ask2PageMW.Ask2.Keys_location = e.NewTextValue;
+            button5 = button;
         }
         #endregion
 

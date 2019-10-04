@@ -110,17 +110,45 @@ namespace MDispatch.View.AskPhoto
 
         #region Ask7
         bool isAsk7 = false;
+        string txtAnswer7 = "";
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (e.NewTextValue != "")
+            isAsk7 = true;
+            txtAnswer7 = e.NewTextValue;
+            askPageMV.Ask.Anyone_Rushing_you_to_perform_the_inspection = $"{btnAnswer7} {txtAnswer7}";
+        }
+
+        Button button7 = null;
+        string btnAnswer7 = "";
+        private void Button_Clicked_2(object sender, EventArgs e)
+        {
+            isAsk1 = true;
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            btnAnswer7 = button.Text;
+            askPageMV.Ask.Anyone_Rushing_you_to_perform_the_inspection = $"{btnAnswer7} {txtAnswer7}";
+            if (button1 != null)
             {
-                isAsk7 = true;
+                button1.TextColor = Color.Silver;
+            }
+            button1 = button;
+            if(button.Text == "Yes" && button.Text == "YES")
+            {
+                askBlock7v2.IsVisible = true;
+                if (txtAnswer7 != "")
+                {
+                    isAsk7 = true;
+                }
+                else
+                {
+                    isAsk7 = false;
+                }
             }
             else
             {
-                isAsk7 = false;
+                askBlock7v2.IsVisible = false;
+                isAsk7 = true;
             }
-            askPageMV.Ask.Anyone_Rushing_you_to_perform_the_inspection = e.NewTextValue;
         }
         #endregion
 
@@ -185,7 +213,7 @@ namespace MDispatch.View.AskPhoto
         [Obsolete]
         private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-            if (isAsk1 && isAsk2 && isAsk12 && isAsk4 && isAsk13 && isAsk14 && isAsk7 && isAsk14 && isAsk9 && isAsk11)
+            if (isAsk1 && isAsk2 && isAsk12 && isAsk4 && isAsk13 && isAsk14 && isAsk7 && isAsk14 && isAsk9 && isAsk10 && isAsk11)
             {
                 askPageMV.SaveAsk(askPageMV.Ask.TypeVehicle.Replace(" ", ""));
             }
@@ -270,6 +298,14 @@ namespace MDispatch.View.AskPhoto
             {
                 askBlock9.BorderColor = Color.BlueViolet;
             }
+            if (!isAsk10)
+            {
+                askBlock10.BorderColor = Color.Red;
+            }
+            else
+            {
+                askBlock10.BorderColor = Color.BlueViolet;
+            }
             if (!isAsk11)
             {
                 askBlock11.BorderColor = Color.Red;
@@ -280,10 +316,19 @@ namespace MDispatch.View.AskPhoto
             }
         }
 
+        #region Ask10
+        bool isAsk10 = false;
         private async void Button_Clicked_6(object sender, EventArgs e)
         {
+            isAsk10 = true;
             await Navigation.PushAsync(new CameraItems(this));
         }
+
+        private async void Button_Clicked_6v1(object sender, EventArgs e)
+        {
+            isAsk10 = true;
+        }
+        #endregion
 
         public void AddPhotoItems(byte[] photob)
         {

@@ -13,7 +13,7 @@
             <StackLayout x:Name="stBody">
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock1">
                     <StackLayout>
-                        <Label Text="What is the weather?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <Label Text="Weather conditions" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
                         <FlexLayout Wrap="Wrap">
                             <Button Text="Clear" BackgroundColor="White" TextColor="Silver" Clicked="Dropdown_SelectedItemChanged_2"/>
@@ -107,6 +107,11 @@
                         <StackLayout Orientation="Horizontal">
                             <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_11"/>
                             <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_11"/>
+                        </StackLayout>
+                        <StackLayout IsVisible="False" x:Name="askBlock9v2">
+                            <Label Text="Enter the name of the person" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                            <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                            <Entry Placeholder="Enter full name" TextChanged="Entry_TextChanged" />
                         </StackLayout>
                     </StackLayout>
                 </Frame>
