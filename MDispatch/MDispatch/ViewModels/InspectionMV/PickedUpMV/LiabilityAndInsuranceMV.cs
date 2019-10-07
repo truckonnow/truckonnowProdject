@@ -102,7 +102,6 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 {
                     state = managerDispatchMob.GetShipping(token, IdShip, ref description, ref shipping1);
                 });
-                await PopupNavigation.Instance.PopAsync();
                 if (state == 2)
                 {
                     if (isNavigationMany)   
@@ -157,7 +156,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             {
                 await Task.Run(() =>
                 {
-                    state = managerDispatchMob.SavePay("SaveSig", token, IdVech, 1, photo, ref description);
+                    state = managerDispatchMob.SavePay("SaveSig", token, IdShip, 1, photo, ref description);
                     initDasbordDelegate.Invoke();
                 });
                 if (state == 2)
@@ -191,8 +190,8 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 Task.Run(async () => await SaveRecountVideo());
                 await Task.Run(() =>
                 {
-                    state = managerDispatchMob.AskWork("AskPikedUpSig", token, IdVech, SigPhoto, ref description);
-                    state = managerDispatchMob.SaveMethodPay(token, IdVech, What_form_of_payment_are_you_using_to_pay_for_transportation, CountPay, ref description);
+                    state = managerDispatchMob.AskWork("AskPikedUpSig", token, IdShip, SigPhoto, ref description);
+                    state = managerDispatchMob.SaveMethodPay(token, IdShip, What_form_of_payment_are_you_using_to_pay_for_transportation, CountPay, ref description);
                     initDasbordDelegate.Invoke();
                 });
                 await PopupNavigation.Instance.PopAsync();
@@ -228,7 +227,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             {
                 if (videoRecount != null)
                 {
-                    state = managerDispatchMob.SavePay("SaveRecount", token, IdVech, 1, videoRecount, ref description);
+                    state = managerDispatchMob.SavePay("SaveRecount", token, IdShip, 1, videoRecount, ref description);
                 }
                 if (state == 2)
                 {

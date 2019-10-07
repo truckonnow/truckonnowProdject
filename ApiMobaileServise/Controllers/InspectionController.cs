@@ -45,7 +45,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("SaveSigPikedUp")]
-        public async Task<string> SaveSigPikedUp(string token, string idVech, string jsonSigPhoto)
+        public async Task<string> SaveSigPikedUp(string token, string idShip, string jsonSigPhoto)
         {
             string respons = null;
             if (token == null || token == "")
@@ -57,7 +57,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    await managerMobileApi.SaveSigPhoto(idVech, jsonSigPhoto);
+                    await managerMobileApi.SaveSigPhoto(idShip, jsonSigPhoto);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
@@ -277,7 +277,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Damages/User")]
-        public async Task<string> AddDamageForUser(string token, string idVech, string damageForUserJson)
+        public async Task<string> AddDamageForUser(string token, string idVech, string idShiping, string damageForUserJson)
         {
             string respons = null;
             if (token == null || token == "")
@@ -289,7 +289,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    await managerMobileApi.SaveDamageForUser(idVech, damageForUserJson);
+                    await managerMobileApi.SaveDamageForUser(idVech, idShiping, damageForUserJson);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
@@ -306,7 +306,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Save/Pay")]
-        public async Task<string> SavePay(string token, string idVech, int type, string Photo)
+        public async Task<string> SavePay(string token, string idShiping, int type, string Photo)
         {
             string respons = null;
             if (token == null || token == "")
@@ -318,7 +318,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    await managerMobileApi.SavePay(idVech, type, Photo);
+                    await managerMobileApi.SavePay(idShiping, type, Photo);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
@@ -335,7 +335,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Save/Recount")]
-        public async Task<string> SaveRecount(string token, string idVech, int type, string video)
+        public async Task<string> SaveRecount(string token, string idShiping, int type, string video)
         {
             string respons = null;
             if (token == null || token == "")
@@ -347,7 +347,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    await managerMobileApi.SaveRecount(idVech, type, video);
+                    await managerMobileApi.SaveRecount(idShiping, type, video);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
@@ -364,7 +364,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Save/PickedUp/PayMethod")]
-        public async Task<string> SavePickedUpPayMethod(string token, string idVech, string payMethod, string countPay)
+        public async Task<string> SavePickedUpPayMethod(string token, string idShiping, string payMethod, string countPay)
         {
             string respons = null;
             if (token == null || token == "")
@@ -376,7 +376,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    await managerMobileApi.SavePayMethot(idVech, payMethod, countPay);
+                    await managerMobileApi.SavePayMethot(idShiping, payMethod, countPay);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else

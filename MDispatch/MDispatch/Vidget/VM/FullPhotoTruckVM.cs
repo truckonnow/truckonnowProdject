@@ -107,7 +107,7 @@ namespace MDispatch.Vidget.VM
                 }
                 await Task.Run(() =>
                 {
-                    state = managerDispatchMob.AskWork("SaveInspactionDriver", token, IdDriver, Photo, ref description, IndexCurent);
+                    state = managerDispatchMob.AskWork("SaveInspactionDriver", token, IdDriver, Photo, ref description, null, IndexCurent);
                 });
                 if (state == 1)
                 {

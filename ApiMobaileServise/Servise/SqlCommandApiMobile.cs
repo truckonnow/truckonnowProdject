@@ -34,8 +34,8 @@ namespace ApiMobaileServise.Servise
         {
             Shipping shipping = context.Shipping.Where(s => s.Id == idShip)
                 .Include("VehiclwInformations.Scan")
-                .Include("VehiclwInformations.AskFromUser.App_will_ask_for_signature_of_the_client_signature")
-                .Include("VehiclwInformations.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature")
+                .Include(s => s.askForUserDelyveryM)
+                .Include(s => s.AskFromUser)
                 .FirstOrDefault();
             return shipping;
         }
@@ -193,18 +193,21 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
-        public async Task<VehiclwInformation> GetVehiclwInformationAndSaveDamageForUser(string idVech, List<DamageForUser> damageForUsers)
+        public async Task<VehiclwInformation> GetVehiclwInformationAndSaveDamageForUser(string idVech, string idShiping, List<DamageForUser> damageForUsers)
         {
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.Where(v => v.Id.ToString() == idVech)
                  .Include(v => v.Ask)
                  .Include("PhotoInspections.Photos")
                  .Include("DamageForUsers")
                  .FirstOrDefault();
-            if (vehiclwInformation.DamageForUsers == null)
+            Shipping shipping = context.Shipping
+                 .Include("DamageForUsers")
+                 .FirstOrDefault(v => v.Id == idShiping);
+            if (shipping.DamageForUsers == null)
             {
-                vehiclwInformation.DamageForUsers = new List<DamageForUser>();
+                shipping.DamageForUsers = new List<DamageForUser>();
             }
-            vehiclwInformation.DamageForUsers.AddRange(damageForUsers);
+            shipping.DamageForUsers.AddRange(damageForUsers);
             await context.SaveChangesAsync();
             return vehiclwInformation;
         }
@@ -263,50 +266,50 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
-        public async void SavePayMethotInDb(string idVech, string payMethod, string countPay)
+        public async void SavePayMethotInDb(string idShiping, string payMethod, string countPay)
         {
-            VehiclwInformation vehiclwInformation = context.VehiclwInformation.Where(v => v.Id == Convert.ToInt32(idVech))
+            Shipping shipping = context.Shipping.Where(v => v.Id == idShiping)
                 .Include(v => v.AskFromUser)
                 .FirstOrDefault();
-            if (vehiclwInformation.AskFromUser == null)
+            if (shipping.AskFromUser == null)
             {
-                vehiclwInformation.AskFromUser = new AskFromUser();
+                shipping.AskFromUser = new AskFromUser();
             }
-            vehiclwInformation.AskFromUser.What_form_of_payment_are_you_using_to_pay_for_transportation = payMethod;
-            vehiclwInformation.AskFromUser.CountPay = countPay;
+            shipping.AskFromUser.What_form_of_payment_are_you_using_to_pay_for_transportation = payMethod;
+            shipping.AskFromUser.CountPay = countPay;
             await context.SaveChangesAsync();
         }
 
-        public async void SavePayInDb(string idVech, int type, Photo photo)
+        public async void SavePayInDb(string idShiping, int type, Photo photo)
         {
-            VehiclwInformation vehiclwInformation = context.VehiclwInformation.Where(v => v.Id == Convert.ToInt32(idVech))
+            Shipping shipping = context.Shipping.Where(v => v.Id == idShiping)
                 .Include(v => v.AskFromUser)
                 .Include(v => v.askForUserDelyveryM)
                 .FirstOrDefault();
-            if (type == 1 && vehiclwInformation.AskFromUser != null)
+            if (type == 1 && shipping.AskFromUser != null)
             {
-                vehiclwInformation.AskFromUser.PhotoPay = photo;
+                shipping.AskFromUser.PhotoPay = photo;
             }
-            else if (type == 2 && vehiclwInformation != null && vehiclwInformation.askForUserDelyveryM != null)
+            else if (type == 2 && shipping != null && shipping.askForUserDelyveryM != null)
             {
-                vehiclwInformation.askForUserDelyveryM.PhotoPay = photo;
+                shipping.askForUserDelyveryM.PhotoPay = photo;
             }
             await context.SaveChangesAsync();
         }
 
-        public async Task SaveRecontInDb(string idVech, int type, Video video)
+        public async Task SaveRecontInDb(string idShiping, int type, Video video)
         {
-            VehiclwInformation vehiclwInformation = context.VehiclwInformation.Where(v => v.Id == Convert.ToInt32(idVech))
+            Shipping shipping = context.Shipping.Where(v => v.Id == idShiping)
                 .Include(v => v.AskFromUser)
                 .Include(v => v.askForUserDelyveryM)
                 .FirstOrDefault();
-            if (type == 1 && vehiclwInformation.AskFromUser != null)
+            if (type == 1 && shipping.AskFromUser != null)
             {
-                vehiclwInformation.AskFromUser.VideoRecord = video;
+                shipping.AskFromUser.VideoRecord = video;
             }
-            else if (type == 2 && vehiclwInformation != null && vehiclwInformation.askForUserDelyveryM != null)
+            else if (type == 2 && shipping != null && shipping.askForUserDelyveryM != null)
             {
-                vehiclwInformation.askForUserDelyveryM.VideoRecord = video;
+                shipping.askForUserDelyveryM.VideoRecord = video;
             }
             await context.SaveChangesAsync();
         }
@@ -350,17 +353,16 @@ namespace ApiMobaileServise.Servise
             return shipping.Driverr.TokenShope;
         }
 
-        public async void SaveSigPikedUpInDb(string idve, Photo sig)
+        public async void SaveSigPikedUpInDb(string idShip, Photo sig)
         {
-            context.askForUserDelyveryMs.Load();
-            VehiclwInformation vehiclwInformation = context.VehiclwInformation.Where(v => v.Id == Convert.ToInt32(idve))
+            Shipping shipping = context.Shipping.Where(v => v.Id == idShip)
                 .Include(v => v.askForUserDelyveryM)
                 .FirstOrDefault();
-            if (vehiclwInformation.askForUserDelyveryM == null)
+            if (shipping.askForUserDelyveryM == null)
             {
-                vehiclwInformation.askForUserDelyveryM = new AskForUserDelyveryM();
+                shipping.askForUserDelyveryM = new AskForUserDelyveryM();
             }
-            vehiclwInformation.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature = sig;
+            shipping.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature = sig;
             await context.SaveChangesAsync();
         }
 
@@ -375,16 +377,15 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
-        public void SaveAskFromUserInDb(string idve, AskFromUser askFromUser)
+        public void SaveAskFromUserInDb(string idShip, AskFromUser askFromUser)
         {
-            Shipping shipping = context.Shipping.Where(s => s.VehiclwInformations.FirstOrDefault(v => v.Id == Convert.ToInt32(idve)) != null)
-                .Include(s => s.VehiclwInformations)
+            Shipping shipping = context.Shipping.Where(s => s.Id == idShip)
                 .FirstOrDefault();
-            if (shipping.VehiclwInformations[0].AskFromUser == null)
+            if (shipping.AskFromUser == null)
             {
-                shipping.VehiclwInformations[0].AskFromUser = new AskFromUser();
+                shipping.AskFromUser = new AskFromUser();
             }
-            shipping.VehiclwInformations[0].AskFromUser = askFromUser;
+            shipping.AskFromUser = askFromUser;
             context.SaveChangesAsync();
         }
 
@@ -399,17 +400,16 @@ namespace ApiMobaileServise.Servise
             context.SaveChangesAsync();
         }
 
-        public async void SaveAskForUserDelyveryInDb(string idve, AskForUserDelyveryM askForUserDelyveryM)
+        public async void SaveAskForUserDelyveryInDb(string idShiping, AskForUserDelyveryM askForUserDelyveryM)
         {
 
-            Shipping shipping = context.Shipping.Where(s => s.VehiclwInformations.FirstOrDefault(v => v.Id == Convert.ToInt32(idve)) != null)
-                .Include(s => s.VehiclwInformations)
+            Shipping shipping = context.Shipping.Where(v => v.Id == idShiping)
                 .FirstOrDefault();
-            if (shipping.VehiclwInformations[0].askForUserDelyveryM == null)
+            if (shipping.askForUserDelyveryM == null)
             {
-                shipping.VehiclwInformations[0].askForUserDelyveryM = new AskForUserDelyveryM();
+                shipping.askForUserDelyveryM = new AskForUserDelyveryM();
             }
-            shipping.VehiclwInformations[0].askForUserDelyveryM = askForUserDelyveryM;
+            shipping.askForUserDelyveryM = askForUserDelyveryM;
             await context.SaveChangesAsync();
         }
 
@@ -539,7 +539,6 @@ namespace ApiMobaileServise.Servise
                 .Include("askForUserDelyveryM.PhotoPay")
                 .Include("askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature")
                 .Include(v => v.Scan)
-                .Include(v => v.DamageForUsers)
                 .FirstOrDefault();
             return vehiclwInformation;
         }

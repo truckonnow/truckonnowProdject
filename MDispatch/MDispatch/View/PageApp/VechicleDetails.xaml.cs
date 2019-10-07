@@ -178,31 +178,31 @@ namespace MDispatch.View.PageApp
         [Obsolete]
         private void AddBlocPhotoClient(VehiclwInformation vehiclwInformation)
         {
-            if (vehiclwInformation.askForUserDelyveryM != null && vehiclwInformation.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo != null)
-            {
-                foreach (var item in vehiclwInformation.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo)
-                {
-                    Image image = new Image()
-                    {
-                        Source = ImageSource.FromStream(() => new MemoryStream(ResizeImage(item.Base64))),
-                        HeightRequest = 100,
-                        WidthRequest = 100,
-                        Margin = 3
-                    };
-                    image.GestureRecognizers.Add(new TapGestureRecognizer(VievFull));
-                    blockPhotoInspectedClient.Children.Add(image);
-                }
-            }
-            else if(vehiclwInformation.askForUserDelyveryM != null && vehiclwInformation.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up != null)
-            {
-                blockPhotoInspectedClient.IsVisible = false;
-                answerClient.IsVisible = true;
-            }
-            else
-            {
-                blockPhotoInspectedClient.IsVisible = false;
-                photoClientNotContent.IsVisible = true;
-            }
+            //if (vehiclwInformation.askForUserDelyveryM != null && vehiclwInformation.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo != null)
+            //{
+            //    foreach (var item in vehiclwInformation.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo)
+            //    {
+            //        Image image = new Image()
+            //        {
+            //            Source = ImageSource.FromStream(() => new MemoryStream(ResizeImage(item.Base64))),
+            //            HeightRequest = 100,
+            //            WidthRequest = 100,
+            //            Margin = 3
+            //        };
+            //        image.GestureRecognizers.Add(new TapGestureRecognizer(VievFull));
+            //        blockPhotoInspectedClient.Children.Add(image);
+            //    }
+            //}
+            //else if(vehiclwInformation.askForUserDelyveryM != null && vehiclwInformation.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up != null)
+            //{
+            //    blockPhotoInspectedClient.IsVisible = false;
+            //    answerClient.IsVisible = true;
+            //}
+            //else
+            //{
+            //    blockPhotoInspectedClient.IsVisible = false;
+            //    photoClientNotContent.IsVisible = true;
+            //}
         }
 
         [Obsolete]

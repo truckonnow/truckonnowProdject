@@ -16,7 +16,7 @@ namespace MDispatch.Droid.NewrRender.Label
         {
             base.OnElementChanged(e);
             var element = this.Element as Xamarin.Forms.Label;
-            if (element != null)
+            if (element != null && element.Text != null && element.Text != "")
             {
                 this.Element.Text = this.Element.Text.ToUpper();
             }

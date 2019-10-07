@@ -17,10 +17,10 @@ namespace MDispatch.Models
         public Ask Ask { get; set; }
         public Ask1 Ask1 { get; set; }
         public List<PhotoInspection> PhotoInspections { get; set; }
-        public AskFromUser AskFromUser { get; set; }
+        //public AskFromUser AskFromUser { get; set; }
         public AskDelyvery AskDelyvery { get; set; }
-        public AskForUserDelyveryM askForUserDelyveryM { get; set; }
+        //public AskForUserDelyveryM askForUserDelyveryM { get; set; }
         public Photo Scan { get; set; }
-        public List<DamageForUser> DamageForUsers { get; set; }
+        //public List<DamageForUser> DamageForUsers { get; set; }
     }
 }

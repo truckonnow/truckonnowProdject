@@ -28,7 +28,7 @@ namespace ApiMobaileServise.Servise
         {
             Shipping shipping = sqlCommandApiMobile.SendBolInDb(idShip);
             string patern = new PaternSourse().GetPaternBol(shipping);
-            await new AuthMessageSender().Execute(email, "Truckonnow - BOL", patern, shipping.VehiclwInformations);
+            await new AuthMessageSender().Execute(email, "Truckonnow - BOL", patern, shipping.VehiclwInformations, shipping);
         }
 
         public async Task SendCoupon(string email)
@@ -78,21 +78,21 @@ namespace ApiMobaileServise.Servise
             sqlCommandApiMobile.SaveTokenStoreinDb(token, tokenStore);
         }   
 
-        public async Task SaveDamageForUser(string idVech, string damageForUserJson)
+        public async Task SaveDamageForUser(string idVech, string idShiping, string damageForUserJson)
         {
             List<DamageForUser> damageForUsers = JsonConvert.DeserializeObject<List<DamageForUser>>(damageForUserJson);
             Task.Run(async() =>
             {
-                VehiclwInformation vehiclwInformation = await sqlCommandApiMobile.GetVehiclwInformationAndSaveDamageForUser(idVech, damageForUsers);
+                VehiclwInformation vehiclwInformation = await sqlCommandApiMobile.GetVehiclwInformationAndSaveDamageForUser(idVech, idShiping, damageForUsers);
                 ITypeScan typeScan = GetTypeScan(vehiclwInformation.Ask.TypeVehicle);
                 await typeScan.SetDamage(damageForUsers, vehiclwInformation.Ask.TypeVehicle, vehiclwInformation.Scan.path);
             });
         }
 
-        public async Task SaveSigPhoto(string idVech, string sig)
+        public async Task SaveSigPhoto(string idShip, string sig)
         {
             Photo photoSig = JsonConvert.DeserializeObject<Photo>(sig);
-            sqlCommandApiMobile.SaveSigPikedUpInDb(idVech, photoSig);
+            sqlCommandApiMobile.SaveSigPikedUpInDb(idShip, photoSig);
         }
 
         public VehiclwInformation GetVehiclwInformation(int idVech)
@@ -150,37 +150,37 @@ namespace ApiMobaileServise.Servise
             return typeScan;
         }
 
-        public async Task SaveAsk(string idVe, int type, string jsonStrAsk)
+        public async Task SaveAsk(string id, int type, string jsonStrAsk)
         {
             if(type == 1)
             {
                 Ask ask = JsonConvert.DeserializeObject<Ask>(jsonStrAsk);
-                sqlCommandApiMobile.SaveAskInDb(idVe, ask);
+                sqlCommandApiMobile.SaveAskInDb(id, ask);
             }
             else if(type == 2)
             {
                 Ask1 ask1 = JsonConvert.DeserializeObject<Ask1>(jsonStrAsk);
-                sqlCommandApiMobile.SaveAsk1InDb(idVe, ask1);
+                sqlCommandApiMobile.SaveAsk1InDb(id, ask1);
             }
             else if (type == 3)
             {
                 AskFromUser askFromUser = JsonConvert.DeserializeObject<AskFromUser>(jsonStrAsk);
-                sqlCommandApiMobile.SaveAskFromUserInDb(idVe, askFromUser);
+                sqlCommandApiMobile.SaveAskFromUserInDb(id, askFromUser);
             }
             else if(type == 4)
             {
                 AskDelyvery askDelyvery = JsonConvert.DeserializeObject<AskDelyvery>(jsonStrAsk);
-                sqlCommandApiMobile.SaveAskDelyveryInDb(idVe, askDelyvery);
+                sqlCommandApiMobile.SaveAskDelyveryInDb(id, askDelyvery);
             }
             else if (type == 5)
             {
                  AskForUserDelyveryM askForUserDelyveryM = JsonConvert.DeserializeObject<AskForUserDelyveryM>(jsonStrAsk);
-                 sqlCommandApiMobile.SaveAskForUserDelyveryInDb(idVe, askForUserDelyveryM);
+                 sqlCommandApiMobile.SaveAskForUserDelyveryInDb(id, askForUserDelyveryM);
             }
             else if (type == 6)
             {
                 Ask2 ask2 = JsonConvert.DeserializeObject<Ask2>(jsonStrAsk);
-                sqlCommandApiMobile.SaveAsk2InDb(idVe, ask2);
+                sqlCommandApiMobile.SaveAsk2InDb(id, ask2);
             }
         }
 
@@ -292,21 +292,21 @@ namespace ApiMobaileServise.Servise
             return isToken;
         }
 
-        public async Task SavePay(string idVech, int type, string photo)
+        public async Task SavePay(string idShiping, int type, string photo)
         {
             Photo photo1 = JsonConvert.DeserializeObject<Photo>(photo);
-            sqlCommandApiMobile.SavePayInDb(idVech, type, photo1);
+            sqlCommandApiMobile.SavePayInDb(idShiping, type, photo1);
         }
 
-        public async Task SaveRecount(string idVech, int type, string video)
+        public async Task SaveRecount(string idShiping, int type, string video)
         {
             Video video1 = JsonConvert.DeserializeObject<Video>(video);
-            await sqlCommandApiMobile.SaveRecontInDb(idVech, type, video1);
+            await sqlCommandApiMobile.SaveRecontInDb(idShiping, type, video1);
         }
 
-        public async Task SavePayMethot(string idVech, string payMethod, string countPay)
+        public async Task SavePayMethot(string idShiping, string payMethod, string countPay)
         {
-            sqlCommandApiMobile.SavePayMethotInDb(idVech, payMethod, countPay);
+            sqlCommandApiMobile.SavePayMethotInDb(idShiping, payMethod, countPay);
         }
 
         public void ClearToken(string token)

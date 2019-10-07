@@ -102,7 +102,7 @@ namespace MDispatch.Service
             }
         }
 
-        public int SaveSigPikedUp(string token, Photo photoSig, string id, ref string description)
+        public int SaveSigPikedUp(string token, Photo photoSig, string idShip, ref string description)
         {
             IRestResponse response = null;
             string content = null;
@@ -114,7 +114,7 @@ namespace MDispatch.Service
                 client.Timeout = 60000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
-                request.AddParameter("idVech", id);
+                request.AddParameter("idShip", idShip);
                 request.AddParameter("jsonSigPhoto", sigPhoto);
                 response = client.Execute(request);
                 content = response.Content;
@@ -478,7 +478,7 @@ namespace MDispatch.Service
             return memoryStream.ToArray();
         }
 
-        public int SaveDamageForuser(string token, string idVech, List<DamageForUser> damageForUsers, ref string description)
+        public int SaveDamageForuser(string token, string idVech, string idShiping, List<DamageForUser> damageForUsers, ref string description)
         {
             IRestResponse response = null;
             string content = null;
@@ -499,6 +499,7 @@ namespace MDispatch.Service
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 request.AddParameter("idVech", idVech);
+                request.AddParameter("idShiping", idShiping);
                 request.AddParameter("damageForUserJson", strDamageForUsers);
                 response = client.Execute(request);
                 content = response.Content;
@@ -517,7 +518,7 @@ namespace MDispatch.Service
             }
         }
 
-        public int SavePhotPay(string token, string idVech, int type, Photo photo, ref string description)
+        public int SavePhotPay(string token, string idShiping, int type, Photo photo, ref string description)
         {
             IRestResponse response = null;
             string content = null;
@@ -529,7 +530,7 @@ namespace MDispatch.Service
                 client.Timeout = 60000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
-                request.AddParameter("idVech", idVech);
+                request.AddParameter("idVech", idShiping);
                 request.AddParameter("type", type);
                 request.AddParameter("Photo", photojson);
                 response = client.Execute(request);
@@ -549,7 +550,7 @@ namespace MDispatch.Service
             }
         }
 
-        public int SaveVideoRecount(string token, string idVech, int type, Video video, ref string description)
+        public int SaveVideoRecount(string token, string idShiping, int type, Video video, ref string description)
         {
             IRestResponse response = null;
             string content = null;
@@ -561,7 +562,7 @@ namespace MDispatch.Service
                 client.Timeout = 600000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
-                request.AddParameter("idVech", idVech);
+                request.AddParameter("idVech", idShiping);
                 request.AddParameter("type", type);
                 request.AddParameter("video", videojson);
                 response = client.Execute(request);
@@ -581,7 +582,7 @@ namespace MDispatch.Service
             }
         }
 
-        public int SaveMethodPay(string token, string idVech, string payMethod, string countPay, ref string description)
+        public int SaveMethodPay(string token, string idShiping, string payMethod, string countPay, ref string description)
         {
             IRestResponse response = null;
             string content = null;
@@ -592,7 +593,7 @@ namespace MDispatch.Service
                 client.Timeout = 60000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
-                request.AddParameter("idVech", idVech);
+                request.AddParameter("idShiping", idShiping);
                 request.AddParameter("payMethod", payMethod);
                 request.AddParameter("countPay", countPay);
                 response = client.Execute(request);

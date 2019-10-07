@@ -10,7 +10,7 @@ namespace ApiMobaileServise.EmailSmtp
     public class AuthMessageSender
     {
 
-        public async Task Execute(string email, string subject, string body, List<VehiclwInformation> vehiclwInformation = null)
+        public async Task Execute(string email, string subject, string body, List<VehiclwInformation> vehiclwInformation = null, Shipping shipping = null)
         {
             try
             {
@@ -34,16 +34,16 @@ namespace ApiMobaileServise.EmailSmtp
                         cId++;
                     }
                 }
-                if (vehiclwInformation[0].AskFromUser != null && vehiclwInformation[0].AskFromUser.App_will_ask_for_signature_of_the_client_signature != null)
+                if (shipping.AskFromUser != null && shipping.AskFromUser.App_will_ask_for_signature_of_the_client_signature != null)
                 {
-                    Attachment attachment = new Attachment(vehiclwInformation[0].AskFromUser.App_will_ask_for_signature_of_the_client_signature.path);
+                    Attachment attachment = new Attachment(shipping.AskFromUser.App_will_ask_for_signature_of_the_client_signature.path);
                     attachment.ContentId = cId.ToString();
                     mail.Attachments.Add(attachment);
                     cId++;
                 }
-                if (vehiclwInformation[0].askForUserDelyveryM != null && vehiclwInformation[0].askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature != null)
+                if (shipping.askForUserDelyveryM != null && shipping.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature != null)
                 {
-                    Attachment attachment = new Attachment(vehiclwInformation[0].askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.path);
+                    Attachment attachment = new Attachment(shipping.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.path);
                     attachment.ContentId = cId.ToString();
                     mail.Attachments.Add(attachment);
                     cId++;

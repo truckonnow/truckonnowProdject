@@ -318,15 +318,30 @@ namespace MDispatch.View.AskPhoto
 
         #region Ask10
         bool isAsk10 = false;
+        Button button10 = null;
         private async void Button_Clicked_6(object sender, EventArgs e)
         {
             isAsk10 = true;
             await Navigation.PushAsync(new CameraItems(this));
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            if (button10 != null)
+            {
+                button10.TextColor = Color.Silver;
+            }
+            button10 = button;
         }
 
         private async void Button_Clicked_6v1(object sender, EventArgs e)
         {
             isAsk10 = true;
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            if (button10 != null)
+            {
+                button1.TextColor = Color.Silver;
+            }
+            button10 = button;
         }
         #endregion
 

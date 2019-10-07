@@ -77,6 +77,7 @@ namespace MDispatch.View.Inspection
             }
             else
             {
+                isAsk4 = true;
                 askBlock4.IsVisible = false;
             }
         }
@@ -159,9 +160,30 @@ namespace MDispatch.View.Inspection
 
         #region Ask12
         bool isAsk12 = false;
+        Button button12 = null;
         private async void Button_Clicked_3(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new CameraSeatBelts(this));
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            if (button12 != null)
+            {
+                button12.TextColor = Color.Silver;
+            }
+            button12 = button;
+        }
+
+        private async void Button_Clicked_3v2(object sender, EventArgs e)
+        {
+            isAsk12 = true;
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            if (button12 != null)
+            {
+                button12.TextColor = Color.Silver;
+            }
+            button12 = button;
+
         }
 
         public void AddPhotoSeatBelts(List<Photo> photos, List<byte[]> imagesByte)
@@ -313,9 +335,29 @@ namespace MDispatch.View.Inspection
         
         #region Ask13
         bool isAsk13 = false;
+        Button button13 = null;
         private async void Button_Clicked_4(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new CameraPthotoInTrack(this, typeCar.Replace(" ", "")));
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            if (button13 != null)
+            {
+                button13.TextColor = Color.Silver;
+            }
+            button13 = button;
+        }
+
+        private async void Button_Clicked_4v2(object sender, EventArgs e)
+        {
+            isAsk13 = true;
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            if (button13 != null)
+            {
+                button13.TextColor = Color.Silver;
+            }
+            button13 = button;
         }
 
         public void AddPhotoInTrack(List<Photo> photos, List<byte[]> imagesByte)

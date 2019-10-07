@@ -67,7 +67,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             {
                 await Task.Run(() =>
                 {
-                    state = managerDispatchMob.AskWork("AskFromUser", token, VehiclwInformation.Id, AskForUser, ref description);
+                    state = managerDispatchMob.AskWork("AskFromUser", token, IdShip, AskForUser, ref description);
                     initDasbordDelegate.Invoke();
                 });
                 if (state == 2)

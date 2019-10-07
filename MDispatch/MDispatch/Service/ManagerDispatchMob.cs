@@ -175,7 +175,7 @@ namespace MDispatch.Service
             return stateInspection;
         }
 
-        public int AskWork(string typeInspection, string token, string id, object obj, ref string description, int indexPhoto = 0)
+        public int AskWork(string typeInspection, string token, string id, object obj, ref string description, string idShiping = null, int indexPhoto = 0)
         {
             int stateInspection = 1;
             //WaiteNoramalReqvestCount();
@@ -230,7 +230,7 @@ namespace MDispatch.Service
                 else if (typeInspection == "DamageForUser")
                 {
                     inspection = new Inspection();
-                    stateInspection = inspection.SaveDamageForuser(token, id, (List<DamageForUser>)obj, ref description);
+                    stateInspection = inspection.SaveDamageForuser(token, id, idShiping, (List<DamageForUser>)obj, ref description);
                 }
                 else if (typeInspection == "SaveInspactionDriver")
                 {
@@ -284,7 +284,7 @@ namespace MDispatch.Service
             return stateInspection;
         }
 
-        public int SavePay(string typeReqvest, string token, string id, int type, object obj, ref string description)
+        public int SavePay(string typeReqvest, string token, string idShiping, int type, object obj, ref string description)
         {
             inspection = new Inspection();
             //WaiteNoramalReqvestCount();
@@ -294,11 +294,11 @@ namespace MDispatch.Service
             {
                 if (typeReqvest == "SaveSig")
                 {
-                    statePay = inspection.SavePhotPay(token, id, type, (Photo)obj, ref description);
+                    statePay = inspection.SavePhotPay(token, idShiping, type, (Photo)obj, ref description);
                 }
                 else if (typeReqvest == "SaveRecount")
                 {
-                    statePay = inspection.SaveVideoRecount(token, id, type, (Video)obj, ref description);
+                    statePay = inspection.SaveVideoRecount(token, idShiping, type, (Video)obj, ref description);
                 }
             }
             inspection = null;
@@ -306,7 +306,7 @@ namespace MDispatch.Service
             return statePay;
         }
 
-        public int SaveMethodPay(string token, string id, string payMethod, string countPay, ref string description)
+        public int SaveMethodPay(string token, string idShiping, string payMethod, string countPay, ref string description)
         {
             inspection = new Inspection();
             //WaiteNoramalReqvestCount();
@@ -314,7 +314,7 @@ namespace MDispatch.Service
             int statePay = 1;
             if (CrossConnectivity.Current.IsConnected)
             {
-                statePay = inspection.SaveMethodPay(token, id, payMethod, countPay, ref description);
+                statePay = inspection.SaveMethodPay(token, idShiping, payMethod, countPay, ref description);
             }
             inspection = null;
             CountReqvest--;

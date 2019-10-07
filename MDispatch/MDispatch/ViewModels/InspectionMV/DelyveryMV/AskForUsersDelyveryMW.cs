@@ -5,7 +5,6 @@ using MDispatch.Service.Net;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection;
-using MDispatch.View.Inspection.Delyvery;
 using MDispatch.View.PageApp;
 using MDispatch.ViewModels.AskPhoto;
 using MDispatch.ViewModels.InspectionMV.Models;
@@ -125,7 +124,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 Task.Run(async () => await SaveRecountVideo());
                 await Task.Run(() =>
                 {
-                    state = managerDispatchMob.AskWork("AskForUserDelyvery", token, VehiclwInformation.Id, AskForUserDelyveryM, ref description);
+                    state = managerDispatchMob.AskWork("AskForUserDelyvery", token, IdShip, AskForUserDelyveryM, ref description);
                     initDasbordDelegate.Invoke();
                 });
                 if (state == 2)
@@ -210,7 +209,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             {
                 if (videoRecount != null)
                 {
-                    state = managerDispatchMob.SavePay("SaveRecount", token, vehiclwInformation.Id, 2, videoRecount, ref description);
+                    state = managerDispatchMob.SavePay("SaveRecount", token, IdShip, 2, videoRecount, ref description);
                 }
                 if (state == 2)
                 {
@@ -252,7 +251,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             {
                 await Task.Run(() =>
                 {
-                    state = managerDispatchMob.SavePay("SaveSig", token, VehiclwInformation.Id, 2, photo, ref description);
+                    state = managerDispatchMob.SavePay("SaveSig", token, IdShip, 2, photo, ref description);
                 });
                 if (state == 2)
                 {

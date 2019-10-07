@@ -21,7 +21,7 @@ namespace MDispatch.View.Inspection.PickedUp
             askForUserMV.AskForUser = new AskFromUser();
             InitializeComponent ();
             BindingContext = askForUserMV;
-            Navigation.RemovePage(Navigation.NavigationStack[1]);
+            //Navigation.RemovePage(Navigation.NavigationStack[1]);
         }
 
         #region Ask1

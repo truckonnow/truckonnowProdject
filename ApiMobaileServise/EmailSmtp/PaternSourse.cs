@@ -72,7 +72,7 @@ namespace ApiMobaileServise.EmailSmtp
                 cId++;
             }
             patern += "</div>";
-            if(shipping.VehiclwInformations[0].AskFromUser != null && shipping.VehiclwInformations[0].AskFromUser.App_will_ask_for_signature_of_the_client_signature != null)
+            if(shipping.AskFromUser != null && shipping.AskFromUser.App_will_ask_for_signature_of_the_client_signature != null)
             {
                 patern += "<div style='display: flex; justify-content: space-between;'>"
                     + "<div style'border-style: solid; border-width: 2px; width: 50%;'>"
@@ -89,7 +89,7 @@ namespace ApiMobaileServise.EmailSmtp
                     + "</div>";
                 cId++;
             }
-            if (shipping.VehiclwInformations[0].askForUserDelyveryM != null && shipping.VehiclwInformations[0].askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature != null)
+            if (shipping.askForUserDelyveryM != null && shipping.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature != null)
             {
                 patern += "<div style'border-style: solid; border-width: 1px; width: 50%;'>"
                         + "<span style='margin:5px; font-weight:600;' >"
