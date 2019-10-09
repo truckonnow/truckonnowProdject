@@ -6,6 +6,9 @@
              mc:Ignorable="d"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              x:Class="MDispatch.View.Inspection.PickedUp.Ask2Page">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="BOL" Clicked="ToolbarItem_Clicked_1"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>

@@ -23,7 +23,7 @@
         <Frame CornerRadius="6" Padding="15" Margin="4" BorderColor="BlueViolet">
             <StackLayout>
                 <Label TextColor="Black" FontSize="17" Text="Thank you for a survey. Your 10% will be mailed to you immediately. (please return the device to our driver)" VerticalOptions="Center"/>
-                <Button Text="" BackgroundColor="BlueViolet" TextColor="White" Clicked="Button_Clicked"/>
+                <Button Text="OK" BackgroundColor="BlueViolet" TextColor="White" Clicked="Button_Clicked"/>
             </StackLayout>
         </Frame>
     </StackLayout>

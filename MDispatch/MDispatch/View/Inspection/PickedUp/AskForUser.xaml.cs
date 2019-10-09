@@ -139,5 +139,10 @@ namespace MDispatch.View.Inspection.PickedUp
                 askBlock4.BorderColor = Color.BlueViolet;
             }
         }
+
+        private async void ToolbarItem_Clicked_1(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new BOLPage(askForUserMV.managerDispatchMob, askForUserMV.IdShip, askForUserMV.initDasbordDelegate));
+        }
     }
 }

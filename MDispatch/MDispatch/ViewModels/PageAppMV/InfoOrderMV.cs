@@ -104,7 +104,7 @@ namespace MDispatch.ViewModels.PageAppMV
         [System.Obsolete]
         public async void ToStartInspection()
         {
-            VehiclwInformation vehiclwInformation1 = null;
+            VehiclwInformation vehiclwInformation1 = Shipping.VehiclwInformations[0];
             foreach (var vehiclwInformation in Shipping.VehiclwInformations)
             {
                 ICar car = null;
@@ -159,13 +159,20 @@ namespace MDispatch.ViewModels.PageAppMV
                 Navigation.RemovePage(Navigation.NavigationStack[1]);
                 return;
             }
-            else if (shipping.AskFromUser.App_will_ask_for_signature_of_the_client_signature == null || shipping.AskFromUser.What_form_of_payment_are_you_using_to_pay_for_transportation == null || Shipping.AskFromUser.CountPay == null)
+            else if (Shipping.AskFromUser.App_will_ask_for_signature_of_the_client_signature == null || Shipping.AskFromUser.What_form_of_payment_are_you_using_to_pay_for_transportation == null 
+                || ((Shipping.TotalPaymentToCarrier == "COP" || Shipping.TotalPaymentToCarrier == "COD") && Shipping.AskFromUser.CountPay == null))
             {
                 await Navigation.PushAsync(new LiabilityAndInsurance(managerDispatchMob, vehiclwInformation1.Id, Shipping.Id, initDasbordDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier), true);
                 Navigation.RemovePage(Navigation.NavigationStack[1]);
                 return;
             }
-            else if(Shipping.Ask2 != null)
+            else if (Shipping.AskFromUser.PhotoPay == null && Shipping.AskFromUser.What_form_of_payment_are_you_using_to_pay_for_transportation != "Biling" && Shipping.TotalPaymentToCarrier == "COP")
+            {
+                LiabilityAndInsurance askForUsersDelyveryMW = new LiabilityAndInsurance(managerDispatchMob, vehiclwInformation1.Id, Shipping.Id, initDasbordDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier);
+                await Navigation.PushAsync(new CameraPaymmant(askForUsersDelyveryMW, ""));
+                Navigation.RemovePage(Navigation.NavigationStack[1]);
+            }
+            else if(Shipping.Ask2 == null)
             {
                 Ask2Page ask2Page = new Ask2Page(managerDispatchMob, vehiclwInformation1.Id, shipping.Id, initDasbordDelegate);
                 await Navigation.PushAsync(new CameraPaymmant(ask2Page, ""));
@@ -192,8 +199,8 @@ namespace MDispatch.ViewModels.PageAppMV
             }
             if (Shipping.askForUserDelyveryM == null)
             {
-                await PopupNavigation.PushAsync(new HintPageVechicle("Continue Inspection Delyvered"));
                 await Navigation.PushAsync(new View.Inspection.Delyvery.ClientStart(managerDispatchMob, Shipping.Id, initDasbordDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier, Shipping.VehiclwInformations[0], GetShiping, getVechicleDelegate), true);
+                await PopupNavigation.PushAsync(new TempPageHint1());
                 Navigation.RemovePage(Navigation.NavigationStack[1]);
                 return;
             }

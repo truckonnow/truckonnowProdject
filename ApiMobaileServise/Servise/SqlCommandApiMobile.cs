@@ -356,13 +356,13 @@ namespace ApiMobaileServise.Servise
         public async void SaveSigPikedUpInDb(string idShip, Photo sig)
         {
             Shipping shipping = context.Shipping.Where(v => v.Id == idShip)
-                .Include(v => v.askForUserDelyveryM)
+                .Include(v => v.AskFromUser)
                 .FirstOrDefault();
-            if (shipping.askForUserDelyveryM == null)
+            if (shipping.AskFromUser == null)
             {
-                shipping.askForUserDelyveryM = new AskForUserDelyveryM();
+                shipping.AskFromUser = new AskFromUser();
             }
-            shipping.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature = sig;
+            shipping.AskFromUser.App_will_ask_for_signature_of_the_client_signature = sig;
             await context.SaveChangesAsync();
         }
 
@@ -552,9 +552,9 @@ namespace ApiMobaileServise.Servise
                 .Include("VehiclwInformations.Ask")
                 .Include("VehiclwInformations.Ask1")
                 .Include("VehiclwInformations.PhotoInspections.Damages")
-                .Include("VehiclwInformations.AskFromUser")
+                .Include(s => s.AskFromUser.App_will_ask_for_signature_of_the_client_signature)
                 .Include("VehiclwInformations.AskDelyvery")
-                .Include("VehiclwInformations.askForUserDelyveryM")
+                .Include(s => s.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature)
                 .Include(s => s.Ask2)
                 .ToList();
             if (shippings == null)

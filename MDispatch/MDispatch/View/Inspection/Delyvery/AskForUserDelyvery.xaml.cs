@@ -5,6 +5,7 @@ using MDispatch.View.Inspection.PickedUp;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using MDispatch.ViewModels.InspectionMV.Servise.Paymmant;
 using Newtonsoft.Json;
+using Plugin.InputKit.Shared.Controls;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -170,6 +171,28 @@ namespace MDispatch.View.Inspection.Delyvery
         }
         #endregion
 
+        #region Ask4
+        Button button4 = null;
+        bool isAsk4 = false;
+        private async void Button_Clicked_1(object sender, EventArgs e)
+        {
+            isAsk4 = true;
+            if (button4 != null)
+            {
+                button4.TextColor = Color.Silver;
+            }
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            button4 = button;
+            if(button.Text == "Yes" || button.Text == "YES")
+            {
+
+                await PopupNavigation.PopAllAsync(true);
+                await Navigation.PushAsync(new View.Inspection.Feedback(askForUsersDelyveryMW.managerDispatchMob, askForUsersDelyveryMW.VehiclwInformation, askForUsersDelyveryMW));
+            }
+        }
+        #endregion
+
         #region Ask5
         bool isAsk5 = false;
         Button button5 = null;
@@ -185,6 +208,13 @@ namespace MDispatch.View.Inspection.Delyvery
             }
             button5 = button;
         }
+        private void AdvancedSlider_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "value")
+            {
+                askForUsersDelyveryMW.AskForUserDelyveryM.Please_rate_the_driver = ((AdvancedSlider)sender).Value.ToString();
+            }
+        }
         #endregion
 
         [Obsolete]
@@ -194,7 +224,7 @@ namespace MDispatch.View.Inspection.Delyvery
             {
                 isAsk2 = Paymmant.IsAskPaymmant;
             }
-            if (isAsk1 && isAsk2 && GetIsAsk3() && isAsk5)
+            if (isAsk1 && isAsk2 && GetIsAsk3() && isAsk4 && isAsk5 )
             {
                 askForUsersDelyveryMW.SaveAsk(askForUsersDelyveryMW.AskForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation);
             }
@@ -231,7 +261,15 @@ namespace MDispatch.View.Inspection.Delyvery
             {
                 askBlock3.BorderColor = Color.BlueViolet;
             }
-            if(!isAsk5)
+            if (!isAsk4)
+            {
+                askBlock4.BorderColor = Color.Red;
+            }
+            else
+            {
+                askBlock4.BorderColor = Color.BlueViolet;
+            }
+            if (!isAsk5)
             {
                 askBlock5.BorderColor = Color.Red;
             }
@@ -251,6 +289,11 @@ namespace MDispatch.View.Inspection.Delyvery
             }
             payBlockSelectPatment.Children.Add(Paymmant.GetStackLayout());
             isAsk2 = false;
+        }
+
+        private async void ToolbarItem_Clicked_1(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new BOLPage(askForUsersDelyveryMW.managerDispatchMob, askForUsersDelyveryMW.IdShip, askForUsersDelyveryMW.initDasbordDelegate));
         }
     }
 }

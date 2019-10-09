@@ -27,7 +27,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
     {
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation { get; set; }
-        private InitDasbordDelegate initDasbordDelegate = null;
+        public InitDasbordDelegate initDasbordDelegate = null;
         private GetShiping getShiping = null; 
         private GetVechicleDelegate getVechicleDelegate = null;
         public DelegateCommand GoToFeedBackCommand { get; set; }

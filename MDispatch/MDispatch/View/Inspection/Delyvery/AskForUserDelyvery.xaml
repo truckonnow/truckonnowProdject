@@ -5,6 +5,9 @@
              xmlns:sig="clr-namespace:SignaturePad.Forms;assembly=SignaturePad.Forms"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              Title="Question inspection">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="BOL" Clicked="ToolbarItem_Clicked_1"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
@@ -76,13 +79,18 @@
                         </StackLayout>
                     </StackLayout>
                 </Frame>
-                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6">
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock4">
                     <StackLayout>
-                        <Label Text="Would you like to recive 20% off from your next car transport? Yes – will go in to next scree, if no next question." 
+                        <Label Text="Would you like to recive 20% off from your next car transport?" 
                                TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Button Text="Yes" BackgroundColor="White" TextColor="Silver"  Clicked="Button_Clicked_1"/>
+                            <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_1"/>
+                        </StackLayout>
                     </StackLayout>
                 </Frame>
-                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6">
+                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6">
                     <StackLayout>
                         <Label Text="Would you like to leave a tip to a deriver ? if yes will open credit card info to charge the card , if no will go in to next question." 
                                TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
@@ -90,21 +98,9 @@
                 </Frame>
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock5">
                     <StackLayout>
-                        <Label Text="Safe delivery location" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <Label Text="Rate driver" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <FlexLayout Wrap="Wrap">
-                            <Button Text="0" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked"/>
-                            <Button Text="1" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked"/>
-                            <Button Text="2" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked"/>
-                            <Button Text="3" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked"/>
-                            <Button Text="4" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked"/>
-                            <Button Text="5" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked"/>
-                            <Button Text="6" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked"/>
-                            <Button Text="7" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked"/>
-                            <Button Text="8" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked"/>
-                            <Button Text="9" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked"/>
-                            <Button Text="10" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked"/>
-                        </FlexLayout>
+                        <input:AdvancedSlider MaxValue="10" MinValue="0" StepValue="1" ValuePrefix="Service - " PropertyChanged="AdvancedSlider_PropertyChanged" />
                     </StackLayout>
                 </Frame>
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6">

@@ -281,12 +281,12 @@ namespace MDispatch.View.Inspection.Delyvery
             isAsk13 = true;
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
-            askDelyveryMV.AskDelyvery.Did_the_vehicle_starts = button.Text;
             if (button13 != null)
             {
                 button13.TextColor = Color.Silver;
             }
             button13 = button;
+            askDelyveryMV.AskDelyvery.Does_the_vehicle_Drives = button.Text;
         }
         #endregion
 
@@ -322,6 +322,8 @@ namespace MDispatch.View.Inspection.Delyvery
                 }
                 startST.IsVisible = true;
             }
+            answer = button.Text;
+            askDelyveryMV.AskDelyvery.Did_the_vehicle_starts = $"{answer}, {answerStr}";
         }
 
         Button button14V2 = null;
@@ -336,6 +338,8 @@ namespace MDispatch.View.Inspection.Delyvery
                 button14V2.TextColor = Color.Silver;
             }
             button14V2 = button;
+            answerStr = button.Text;
+            askDelyveryMV.AskDelyvery.Did_the_vehicle_starts = $"{answer}, {answerStr}";
         }
         #endregion
 

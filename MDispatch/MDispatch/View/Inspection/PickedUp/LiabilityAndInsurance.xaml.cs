@@ -328,5 +328,11 @@ namespace MDispatch.View.Inspection.PickedUp
             payBlockSelectPatment.Children.Add(Paymmant.GetStackLayout());
             isAsk2 = false;
         }
+
+
+        private async void ToolbarItem_Clicked_1(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new BOLPage(liabilityAndInsuranceMV.managerDispatchMob, liabilityAndInsuranceMV.IdShip, liabilityAndInsuranceMV.initDasbordDelegate));
+        }
     }
 }

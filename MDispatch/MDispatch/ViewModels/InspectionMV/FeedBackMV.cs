@@ -74,24 +74,16 @@ namespace MDispatch.ViewModels.InspectionMV
                 else if (state == 3)
                 {
                     DependencyService.Get<IToast>().ShowMessage("Feedback saved");
-                    await PopupNavigation.PushAsync(new TempPageHint3());
                     if (paymmpayMVInspactionant is AskForUsersDelyveryMW)
                     {
-                        if (((AskForUsersDelyveryMW)paymmpayMVInspactionant).Payment == "COD" || ((AskForUsersDelyveryMW)paymmpayMVInspactionant).Payment == "COP")
-                        {
-                            //((AskForUsersDelyveryMW)paymmpayMVInspactionant).Continue();
-                            await Navigation.PopToRootAsync(true);
-                        }
-                        else
-                        {
-                            await ((AskForUsersDelyveryMW)paymmpayMVInspactionant).Navigation.PushAsync(new CameraPaymmant(((AskForUsersDelyveryMW)paymmpayMVInspactionant), ""));
-                        }
+                        await Navigation.PopAsync(true);
                     }
                     else
                     {
-                        if (((LiabilityAndInsuranceMV)paymmpayMVInspactionant).What_form_of_payment_are_you_using_to_pay_for_transportation == "COD" || ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).What_form_of_payment_are_you_using_to_pay_for_transportation == "COP" )
+                        //Check Navigation.RemovePage(Navigation.NavigationStack[1]); Emty
+                        if (((LiabilityAndInsuranceMV)paymmpayMVInspactionant).What_form_of_payment_are_you_using_to_pay_for_transportation == "Biling")
                         {
-                            await ((AskForUsersDelyveryMW)paymmpayMVInspactionant).Navigation.PushAsync(new Ask2Page(managerDispatchMob, ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).IdVech, ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).IdShip, ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).initDasbordDelegate));
+                            await ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).Navigation.PushAsync(new Ask2Page(managerDispatchMob, ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).IdVech, ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).IdShip, ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).initDasbordDelegate));
                             Navigation.RemovePage(Navigation.NavigationStack[1]);
                         }
                         else

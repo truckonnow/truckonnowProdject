@@ -24,7 +24,7 @@ namespace MDispatch.ViewModels.InspectionMV
     {
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation { get; set; }
-        private InitDasbordDelegate initDasbordDelegate = null;
+        public InitDasbordDelegate initDasbordDelegate = null;
         private GetVechicleDelegate getVechicleDelegate = null;
 
         public Ask1PageMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate, 

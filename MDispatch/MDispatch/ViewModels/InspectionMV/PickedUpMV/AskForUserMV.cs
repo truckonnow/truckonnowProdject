@@ -18,7 +18,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
     {
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation { get; set; }
-        private InitDasbordDelegate initDasbordDelegate = null;
+        public InitDasbordDelegate initDasbordDelegate = null;
 
         public AskForUserMV(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate, string onDeliveryToCarrier, string totalPaymentToCarrier)
         {
