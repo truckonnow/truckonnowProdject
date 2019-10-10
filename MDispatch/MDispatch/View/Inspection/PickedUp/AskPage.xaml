@@ -6,6 +6,7 @@
              Title="Question inspection">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Next" Clicked="ToolbarItem_Clicked" />
+        <ToolbarItem Text="Contact" Clicked="ToolbarItem_Clicked_1"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>

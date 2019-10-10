@@ -6,9 +6,9 @@
              Title="Info"
              BackgroundColor="White"
              x:Name="ctp">
-    <!--<controls:AnimationPage.PageAnimation>
-        <controls:PageAnimation Duration="Short" Subtype="FromRight" />
-    </controls:AnimationPage.PageAnimation>-->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Contact" Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>
             <StackLayout SizeChanged="StackLayout_SizeChanged" Padding="4" x:Name="bodyBlock">

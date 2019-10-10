@@ -334,5 +334,10 @@ namespace MDispatch.View.Inspection.PickedUp
         {
             await Navigation.PushAsync(new BOLPage(liabilityAndInsuranceMV.managerDispatchMob, liabilityAndInsuranceMV.IdShip, liabilityAndInsuranceMV.initDasbordDelegate));
         }
+
+        private async void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            await PopupNavigation.PushAsync(new ContactInfo());
+        }
     }
 }

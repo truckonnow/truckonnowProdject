@@ -1,6 +1,8 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
+using MDispatch.View.GlobalDialogView;
 using MDispatch.View.PageApp;
+using Rg.Plugins.Popup.Services;
 using System;
 
 using Xamarin.Forms;
@@ -24,6 +26,11 @@ namespace MDispatch.View.Inspection.Delyvery
         {
             await Navigation.PushAsync(askForUserDelyvery);
             Navigation.RemovePage(Navigation.NavigationStack[1]);
+        }
+
+        private async void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            await PopupNavigation.PushAsync(new ContactInfo());
         }
     }
 }

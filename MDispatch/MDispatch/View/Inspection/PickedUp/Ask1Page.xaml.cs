@@ -488,5 +488,10 @@ namespace MDispatch.View.Inspection
         {
             await Navigation.PushAsync(new BOLPage(ask1PageMV.managerDispatchMob, ask1PageMV.IdShip, ask1PageMV.initDasbordDelegate));
         }
+
+        private async void ToolbarItem_Clicked_2(object sender, EventArgs e)
+        {
+            await PopupNavigation.PushAsync(new ContactInfo());
+        }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using FormsControls.Base;
 using MDispatch.Models;
 using MDispatch.Service;
+using MDispatch.View.GlobalDialogView;
 using MDispatch.ViewModels.PageAppMV;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -46,6 +48,11 @@ namespace MDispatch.View.PageApp
             {
                 infoOrderMV.ToStartInspectionDelyvery();
             }
+        }
+
+        private async void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            await PopupNavigation.PushAsync(new ContactInfo());
         }
     }
 }

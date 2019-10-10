@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    x:Class="MDispatch.View.GlobalDialogView.ContactInfo">
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="3"     
+            ScaleOut="1.5"
+            DurationIn="200"
+            DurationOut="200"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+    <StackLayout VerticalOptions="Center"
+                 HorizontalOptions="FillAndExpand"
+                 Margin="5">
+        <Frame CornerRadius="6" Padding="15" Margin="4" BorderColor="BlueViolet">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Information about the company (Example)" FontSize="17" TextColor="BlueViolet"/>
+                    <Image Source="Close.png" HorizontalOptions="End" WidthRequest="20" HeightRequest="20">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_8"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+                <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                <StackLayout>
+                    <Label FontSize="14" Text="Name company: Truckonnow ltd" TextColor="Blue">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_7" NumberOfTapsRequired="2"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label FontSize="14" Text="Web site: http://truckonnow.com/" TextColor="Blue">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_6" NumberOfTapsRequired="2"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label FontSize="14" Text="Contact name: Artyom" TextColor="Blue">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_5" NumberOfTapsRequired="2"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label FontSize="14" Text="Contact Emal: truckonnow_LTD@gmail.com" TextColor="Blue">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_4" NumberOfTapsRequired="2"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label FontSize="14" Text="Contact Phone: +17734305155" TextColor="Blue">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2"/>
+                            <TapGestureRecognizer NumberOfTapsRequired="2" Tapped="TapGestureRecognizer_Tapped_3"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                <Label FontSize="10" Text="Click on the selected contact information to call or send mail" TextColor="Red"/>
+                <Label FontSize="10" Text="Double click on the selected contact information to copy" TextColor="Red"/>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</pages:PopupPage>

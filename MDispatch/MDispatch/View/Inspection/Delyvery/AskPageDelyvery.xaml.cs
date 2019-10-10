@@ -611,5 +611,10 @@ namespace MDispatch.View.Inspection.Delyvery
         {
             await Navigation.PushAsync(new BOLPage(askDelyveryMV.managerDispatchMob, askDelyveryMV.IdShip, askDelyveryMV.initDasbordDelegate));
         }
+
+        private async void ToolbarItem_Clicked_2(object sender, EventArgs e)
+        {
+            await PopupNavigation.PushAsync(new ContactInfo());
+        }
     }
 }

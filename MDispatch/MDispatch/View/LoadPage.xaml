@@ -18,5 +18,6 @@
     </pages:PopupPage.Animation>
     <StackLayout VerticalOptions="Center" Padding="10" Margin="50" Orientation="Horizontal">
         <ActivityIndicator IsRunning="True" HeightRequest="40" WidthRequest="40"/>
+        <Label Text="Loading ..." TextColor="#4fd2c2" FontSize="17"/>
     </StackLayout>
 </pages:PopupPage>

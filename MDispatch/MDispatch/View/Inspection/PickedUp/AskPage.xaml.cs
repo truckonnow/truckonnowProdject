@@ -412,5 +412,10 @@ namespace MDispatch.View.AskPhoto
             askPageMV.Ask.TypeVehicle = (string)((Picker)sender).SelectedItem;
             askPageMV.VehiclwInformation.Type = askPageMV.Ask.TypeVehicle;
         }
+
+        private async void ToolbarItem_Clicked_1(object sender, EventArgs e)
+        {
+            await PopupNavigation.PushAsync(new ContactInfo());
+        }
     }
 }

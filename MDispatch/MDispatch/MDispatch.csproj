@@ -53,6 +53,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="View\GlobalDialogView\ContactInfo.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\GlobalDialogView\SendMail.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="View\Inspection\HintPageVechicle.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

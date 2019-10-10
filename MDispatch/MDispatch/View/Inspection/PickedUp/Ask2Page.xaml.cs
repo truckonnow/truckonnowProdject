@@ -181,5 +181,10 @@ namespace MDispatch.View.Inspection.PickedUp
         {
             await Navigation.PushAsync(new BOLPage(ask2PageMW.managerDispatchMob, ask2PageMW.IdShip, ask2PageMW.initDasbordDelegate));
         }
+
+        private async void ToolbarItem_Clicked_2(object sender, EventArgs e)
+        {
+            await PopupNavigation.PushAsync(new ContactInfo());
+        }
     }
 }
