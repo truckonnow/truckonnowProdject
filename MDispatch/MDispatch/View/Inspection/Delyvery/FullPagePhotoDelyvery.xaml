@@ -37,11 +37,11 @@
                 </ListView>
             </StackLayout>
             <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" BackgroundColor="#E6E6E6"
-                         AbsoluteLayout.LayoutBounds="1, 1, 1, 44" Opacity="0.7" Padding="7">
-                <Button x:Name="btnRetake" IsVisible="False" Text="Retake"  FontSize="10" BackgroundColor="Blue" TextColor="White" HorizontalOptions="End" Clicked="Button_Clicked_3"/>
-                <Button x:Name="btnDamage" IsVisible="False" Text="Add Damag" FontSize="10" BackgroundColor="Blue" TextColor="White" HorizontalOptions="End" Clicked="Button_Clicked_2"/>
-                <Button x:Name="btnAddPhoto" Text="Add Photo" FontSize="10" BackgroundColor="Blue" TextColor="White" HorizontalOptions="End" Clicked="Button_Clicked"/>
-                <Button x:Name="btnNext" IsVisible="False" Text="Next" FontSize="10" BackgroundColor="Blue" TextColor="White" Clicked="Button_Clicked_1" HorizontalOptions="End" />
+                         AbsoluteLayout.LayoutBounds="1, 1, 1, 44" Opacity="0.85" Padding="7">
+                <Button x:Name="btnRetake" IsVisible="False" Text="Retake"  FontSize="10" BackgroundColor="BlueViolet" TextColor="White" HorizontalOptions="End" Clicked="Button_Clicked_3"/>
+                <Button x:Name="btnDamage" IsVisible="False" Text="Add Damag" FontSize="10" BackgroundColor="BlueViolet" TextColor="White" HorizontalOptions="End" Clicked="Button_Clicked_2"/>
+                <Button x:Name="btnAddPhoto" Text="Add Photo" FontSize="10" BackgroundColor="BlueViolet" TextColor="White" HorizontalOptions="End" Clicked="Button_Clicked"/>
+                <Button x:Name="btnNext" IsVisible="False" Text="Next" FontSize="10" BackgroundColor="#4fd2c2" TextColor="White" Clicked="Button_Clicked_1" HorizontalOptions="End" />
             </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>

@@ -186,8 +186,6 @@ namespace MDispatch.View.Inspection.Delyvery
             button4 = button;
             if(button.Text == "Yes" || button.Text == "YES")
             {
-
-                await PopupNavigation.PopAllAsync(true);
                 await Navigation.PushAsync(new View.Inspection.Feedback(askForUsersDelyveryMW.managerDispatchMob, askForUsersDelyveryMW.VehiclwInformation, askForUsersDelyveryMW));
             }
         }
@@ -195,23 +193,11 @@ namespace MDispatch.View.Inspection.Delyvery
 
         #region Ask5
         bool isAsk5 = false;
-        Button button5 = null;
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            isAsk5 = true;
-            Button button = (Button)sender;
-            button.TextColor = Color.FromHex("#4fd2c2");
-            askForUsersDelyveryMW.AskForUserDelyveryM.Please_rate_the_driver = button.Text;
-            if (button5 != null)
-            {
-                button5.TextColor = Color.Silver;
-            }
-            button5 = button;
-        }
         private void AdvancedSlider_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "value")
+            if (e.PropertyName == "Value")
             {
+                isAsk5 = true;
                 askForUsersDelyveryMW.AskForUserDelyveryM.Please_rate_the_driver = ((AdvancedSlider)sender).Value.ToString();
             }
         }

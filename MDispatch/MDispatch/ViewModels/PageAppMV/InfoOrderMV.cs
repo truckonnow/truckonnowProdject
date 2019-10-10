@@ -175,7 +175,7 @@ namespace MDispatch.ViewModels.PageAppMV
             else if(Shipping.Ask2 == null)
             {
                 Ask2Page ask2Page = new Ask2Page(managerDispatchMob, vehiclwInformation1.Id, shipping.Id, initDasbordDelegate);
-                await Navigation.PushAsync(new CameraPaymmant(ask2Page, ""));
+                await Navigation.PushAsync(ask2Page);
                 Navigation.RemovePage(Navigation.NavigationStack[1]);
             }
             else
@@ -212,28 +212,28 @@ namespace MDispatch.ViewModels.PageAppMV
             }
             foreach (var vehiclwInformation in Shipping.VehiclwInformations)
             {
-                ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+                ICar car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
                 List<PhotoInspection> photoInspections = null;
                 if (vehiclwInformation.PhotoInspections != null)
                 {
                     photoInspections = vehiclwInformation.PhotoInspections.FindAll(p => p.CurrentStatusPhoto == "Delyvery");
                 }
-                if (photoInspections != null && photoInspections.Count + 1 == 1)
+                if (photoInspections != null && photoInspections.Count == 0)
                 {
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Delyvered", vehiclwInformation));
-                    FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{Car.GetIndexCarFullPhoto(photoInspections.Count + 1)}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), photoInspections.Count + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(photoInspections.Count + 1)), Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier);
+                    FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{car.GetIndexCarFullPhoto(photoInspections.Count + 1)}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), photoInspections.Count + 1, initDasbordDelegate, getVechicleDelegate, car.GetNameLayout(photoInspection), Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier);
                     await Navigation.PushAsync(fullPagePhotoDelyvery, true);
-                    await Navigation.PushAsync(new CameraPagePhoto1($"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{Car.GetIndexCarFullPhoto(photoInspections.Count + 1)}.png", fullPagePhotoDelyvery));
+                    await Navigation.PushAsync(new CameraPagePhoto1($"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{car.GetIndexCarFullPhoto(photoInspections.Count + 1)}.png", fullPagePhotoDelyvery));
                     Navigation.RemovePage(Navigation.NavigationStack[1]);
                     return;
                 }
-                else if (Car.GetIndexCarFullPhoto(photoInspections.Count + 1) != 0)
+                else if (photoInspections.Find(p => p.IndexPhoto == car.CountCarImg) == null)
                 {
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Delyvered", vehiclwInformation));
-                    int photoInspection = Car.GetIndexCarFullPhoto(photoInspections.Count + 1);
-                    FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{Car.GetIndexCarFullPhoto(photoInspections.Count + 1)}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), photoInspections.Count + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(photoInspections.Count + 1)), Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier);
+                    int photoInspection = photoInspections[vehiclwInformation.PhotoInspections.Count - 1].IndexPhoto + 1;
+                    FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{photoInspection}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), photoInspections.Count + 1, initDasbordDelegate, getVechicleDelegate, car.GetNameLayout(photoInspection), Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier);
                     await Navigation.PushAsync(fullPagePhotoDelyvery);
-                    await Navigation.PushAsync(new CameraPagePhoto1($"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{Car.GetIndexCarFullPhoto(photoInspections.Count + 1)}.png", fullPagePhotoDelyvery));
+                    await Navigation.PushAsync(new CameraPagePhoto1($"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{photoInspection}.png", fullPagePhotoDelyvery));
                     Navigation.RemovePage(Navigation.NavigationStack[1]);
                     return;
                 }
