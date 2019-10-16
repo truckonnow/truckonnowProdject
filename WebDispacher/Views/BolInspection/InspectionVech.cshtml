@@ -173,23 +173,23 @@
             }
             <hr />
             <p class="headPhoto">Customer painting Pickup</p>
-            @if (ViewBag.AskFromUser != null)
+            @if (ViewBag.Shipp.AskFromUser != null)
             {
                 <div class="blockAllPhoto">
-                    @if (ViewBag.AskFromUser.App_will_ask_for_signature_of_the_client_signature != null)
+                    @if (ViewBag.Shipp.AskFromUser.App_will_ask_for_signature_of_the_client_signature != null)
                     {
-                        byte[] image = Convert.FromBase64String(ViewBag.AskFromUser.App_will_ask_for_signature_of_the_client_signature.Base64);
+                        byte[] image = Convert.FromBase64String(ViewBag.Shipp.AskFromUser.App_will_ask_for_signature_of_the_client_signature.Base64);
                         if (image != null && image.Length != 0)
                         {
                             MemoryStream ms = new MemoryStream(image);
                             Image img = Image.FromStream(ms);
                             if (img.Height > img.Width)
                             {
-                                <img class="img Photove" src="data:image/gif;base64,@ViewBag.AskFromUser.App_will_ask_for_signature_of_the_client_signature.Base64" onclick="ClickImg(this)" />
+                                <img class="img Photove" src="data:image/gif;base64,@ViewBag.Shipp.AskFromUser.App_will_ask_for_signature_of_the_client_signature.Base64" onclick="ClickImg(this)" />
                             }
                             else
                             {
-                                <img class="img Photola" src="data:image/gif;base64,@ViewBag.AskFromUser.App_will_ask_for_signature_of_the_client_signature.Base64" onclick="ClickImg(this)" />
+                                <img class="img Photola" src="data:image/gif;base64,@ViewBag.Shipp.AskFromUser.App_will_ask_for_signature_of_the_client_signature.Base64" onclick="ClickImg(this)" />
                             }
                         }
                         else
@@ -210,23 +210,23 @@
             }
             <hr />
             <p class="headPhoto">Payment Photo Pickup</p>
-            @if (ViewBag.AskFromUser != null)
+            @if (ViewBag.Shipp.AskFromUser != null)
             {
                 <div class="blockAllPhoto">
-                    @if (ViewBag.AskFromUser.PhotoPay != null)
+                    @if (ViewBag.Shipp.AskFromUser.PhotoPay != null)
                     {
-                        byte[] image = Convert.FromBase64String(ViewBag.AskFromUser.PhotoPay.Base64);
+                        byte[] image = Convert.FromBase64String(ViewBag.Shipp.AskFromUser.PhotoPay.Base64);
                         if (image != null && image.Length != 0)
                         {
                             MemoryStream ms = new MemoryStream(image);
                             Image img = Image.FromStream(ms);
                             if (img.Height > img.Width)
                             {
-                                <img class="img Photove" src="data:image/gif;base64,@ViewBag.AskFromUser.PhotoPay.Base64" onclick="ClickImg(this)" />
+                                <img class="img Photove" src="data:image/gif;base64,@ViewBag.Shipp.AskFromUser.PhotoPay.Base64" onclick="ClickImg(this)" />
                             }
                             else
                             {
-                                <img class="img Photola" src="data:image/gif;base64,@ViewBag.AskFromUser.PhotoPay.Base64" onclick="ClickImg(this)" />
+                                <img class="img Photola" src="data:image/gif;base64,@ViewBag.Shipp.AskFromUser.PhotoPay.Base64" onclick="ClickImg(this)" />
                             }
                         }
                         else
@@ -320,25 +320,25 @@
             }
             <hr />
             <p class="headPhoto">Customer Vehicle Inspection</p>
-            @if (ViewBag.askForUserDelyveryM != null)
+            @if (ViewBag.Shipp.askForUserDelyveryM != null)
             {
                 <div class="blockAllPhoto">
-                    @if (ViewBag.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo != null && ViewBag.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo.Count != 0)
+                    @if (ViewBag.Shipp.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo != null && ViewBag.Shipp.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo.Count != 0)
                     {
-                        for (int i = 0; i < ViewBag.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo.Count; i++)
+                        for (int i = 0; i < ViewBag.Shipp.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo.Count; i++)
                         {
-                            byte[] image = Convert.FromBase64String(ViewBag.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo[i].Base64);
+                            byte[] image = Convert.FromBase64String(ViewBag.Shipp.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo[i].Base64);
                             if (image != null && image.Length != 0)
                             {
                                 MemoryStream ms = new MemoryStream(image);
                                 Image img = Image.FromStream(ms);
                                 if (img.Height > img.Width)
                                 {
-                                    <img class="img Photove" src="data:image/gif;base64,@ViewBag.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo[i].Base64" onclick="ClickImg(this)" />
+                                    <img class="img Photove" src="data:image/gif;base64,@ViewBag.Shipp.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo[i].Base64" onclick="ClickImg(this)" />
                                 }
                                 else
                                 {
-                                    <img class="img Photola" src="data:image/gif;base64,@ViewBag.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo[i].Base64" onclick="ClickImg(this)" />
+                                    <img class="img Photola" src="data:image/gif;base64,@ViewBag.Shipp.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo[i].Base64" onclick="ClickImg(this)" />
                                 }
                             }
                             else
@@ -359,23 +359,23 @@
             }
             <hr />
             <p class="headPhoto">Customer painting Delivery</p>
-            @if (ViewBag.askForUserDelyveryM != null)
+            @if (ViewBag.Shipp.askForUserDelyveryM != null)
             {
                 <div class="blockAllPhoto">
-                    @if (ViewBag.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature != null)
+                    @if (ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature != null)
                     {
-                        byte[] image = Convert.FromBase64String(ViewBag.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.Base64);
+                        byte[] image = Convert.FromBase64String(ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.Base64);
                         if (image != null && image.Length != 0)
                         {
                             MemoryStream ms = new MemoryStream(image);
                             Image img = Image.FromStream(ms);
                             if (img.Height > img.Width)
                             {
-                                <img class="img Photove" src="data:image/gif;base64,@ViewBag.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.Base64" onclick="ClickImg(this)" />
+                                <img class="img Photove" src="data:image/gif;base64,@ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.Base64" onclick="ClickImg(this)" />
                             }
                             else
                             {
-                                <img class="img Photola" src="data:image/gif;base64,@ViewBag.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.Base64" onclick="ClickImg(this)" />
+                                <img class="img Photola" src="data:image/gif;base64,@ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.Base64" onclick="ClickImg(this)" />
                             }
                         }
                         else
@@ -396,23 +396,23 @@
             }
             <hr />
             <p class="headPhoto">Payment Photo Delivery</p>
-            @if (ViewBag.askForUserDelyveryM != null)
+            @if (ViewBag.Shipp.askForUserDelyveryM != null)
             {
                 <div class="blockAllPhoto">
-                    @if (ViewBag.askForUserDelyveryM.PhotoPay != null)
+                    @if (ViewBag.Shipp.askForUserDelyveryM.PhotoPay != null)
                     {
-                        byte[] image = Convert.FromBase64String(ViewBag.askForUserDelyveryM.PhotoPay.Base64);
+                        byte[] image = Convert.FromBase64String(ViewBag.Shipp.askForUserDelyveryM.PhotoPay.Base64);
                         if (image != null && image.Length != 0)
                         {
                             MemoryStream ms = new MemoryStream(image);
                             Image img = Image.FromStream(ms);
                             if (img.Height > img.Width)
                             {
-                                <img class="img Photove" src="data:image/gif;base64,@ViewBag.askForUserDelyveryM.PhotoPay.Base64" onclick="ClickImg(this)" />
+                                <img class="img Photove" src="data:image/gif;base64,@ViewBag.Shipp.askForUserDelyveryM.PhotoPay.Base64" onclick="ClickImg(this)" />
                             }
                             else
                             {
-                                <img class="img Photola" src="data:image/gif;base64,@ViewBag.askForUserDelyveryM.PhotoPay.Base64" onclick="ClickImg(this)" />
+                                <img class="img Photola" src="data:image/gif;base64,@ViewBag.Shipp.askForUserDelyveryM.PhotoPay.Base64" onclick="ClickImg(this)" />
                             }
                         }
                         else

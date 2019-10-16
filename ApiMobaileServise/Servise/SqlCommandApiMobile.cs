@@ -357,6 +357,7 @@ namespace ApiMobaileServise.Servise
         {
             Shipping shipping = context.Shipping.Where(v => v.Id == idShip)
                 .Include(v => v.AskFromUser)
+                .Include(v => v.AskFromUser.App_will_ask_for_signature_of_the_client_signature)
                 .FirstOrDefault();
             if (shipping.AskFromUser == null)
             {
