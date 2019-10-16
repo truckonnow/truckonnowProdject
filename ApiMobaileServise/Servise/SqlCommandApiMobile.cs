@@ -553,8 +553,10 @@ namespace ApiMobaileServise.Servise
                 .Include("VehiclwInformations.Ask1")
                 .Include("VehiclwInformations.PhotoInspections.Damages")
                 .Include(s => s.AskFromUser.App_will_ask_for_signature_of_the_client_signature)
+                .Include(s => s.AskFromUser.PhotoPay)
                 .Include("VehiclwInformations.AskDelyvery")
                 .Include(s => s.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature)
+                .Include(s => s.askForUserDelyveryM.PhotoPay)
                 .Include(s => s.Ask2)
                 .ToList();
             if (shippings == null)

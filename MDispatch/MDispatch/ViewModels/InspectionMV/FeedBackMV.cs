@@ -81,7 +81,7 @@ namespace MDispatch.ViewModels.InspectionMV
                     else
                     {
                         //Check Navigation.RemovePage(Navigation.NavigationStack[1]); Emty
-                        if (((LiabilityAndInsuranceMV)paymmpayMVInspactionant).What_form_of_payment_are_you_using_to_pay_for_transportation == "Biling")
+                        if (((LiabilityAndInsuranceMV)paymmpayMVInspactionant).What_form_of_payment_are_you_using_to_pay_for_transportation == "COP" || ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).What_form_of_payment_are_you_using_to_pay_for_transportation == "COD")
                         {
                             await ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).Navigation.PushAsync(new Ask2Page(managerDispatchMob, ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).IdVech, ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).IdShip, ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).initDasbordDelegate));
                             Navigation.RemovePage(Navigation.NavigationStack[1]);

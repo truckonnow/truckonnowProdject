@@ -530,7 +530,7 @@ namespace MDispatch.Service
                 client.Timeout = 60000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
-                request.AddParameter("idVech", idShiping);
+                request.AddParameter("idShiping", idShiping);
                 request.AddParameter("type", type);
                 request.AddParameter("Photo", photojson);
                 response = client.Execute(request);

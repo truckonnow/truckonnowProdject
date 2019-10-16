@@ -168,7 +168,7 @@ namespace MDispatch.ViewModels.PageAppMV
             }
             else if (Shipping.AskFromUser.PhotoPay == null && Shipping.AskFromUser.What_form_of_payment_are_you_using_to_pay_for_transportation != "Biling" && Shipping.TotalPaymentToCarrier == "COP")
             {
-                LiabilityAndInsurance askForUsersDelyveryMW = new LiabilityAndInsurance(managerDispatchMob, vehiclwInformation1.Id, Shipping.Id, initDasbordDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier);
+                LiabilityAndInsuranceMV askForUsersDelyveryMW = new LiabilityAndInsuranceMV(managerDispatchMob, vehiclwInformation1.Id, Shipping.Id, Navigation, initDasbordDelegate);
                 await Navigation.PushAsync(new CameraPaymmant(askForUsersDelyveryMW, ""));
                 Navigation.RemovePage(Navigation.NavigationStack[1]);
             }
@@ -230,7 +230,7 @@ namespace MDispatch.ViewModels.PageAppMV
                 else if (photoInspections.Find(p => p.IndexPhoto == car.CountCarImg) == null)
                 {
                     await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Delyvered", vehiclwInformation));
-                    int photoInspection = photoInspections[vehiclwInformation.PhotoInspections.Count - 1].IndexPhoto + 1;
+                    int photoInspection = photoInspections[photoInspections.Count - 1].IndexPhoto + 1;
                     FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, Shipping.Id, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{photoInspection}.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), photoInspections.Count + 1, initDasbordDelegate, getVechicleDelegate, car.GetNameLayout(photoInspection), Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier);
                     await Navigation.PushAsync(fullPagePhotoDelyvery);
                     await Navigation.PushAsync(new CameraPagePhoto1($"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}{photoInspection}.png", fullPagePhotoDelyvery));

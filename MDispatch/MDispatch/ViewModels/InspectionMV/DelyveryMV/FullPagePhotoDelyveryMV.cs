@@ -274,7 +274,15 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                         await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
                         isNavigationMany = false;
                     }
-                    Navigation.RemovePage(Navigation.NavigationStack[1]);
+                        try
+                        {
+                            Navigation.RemovePage(Navigation.NavigationStack[1]);
+                        }
+                        catch(ArgumentOutOfRangeException e)
+                        {
+
+                        }
+                    
                     DependencyService.Get<IToast>().ShowMessage($"Photo {Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion))} saved");
                 }
                 else if (state == 4)

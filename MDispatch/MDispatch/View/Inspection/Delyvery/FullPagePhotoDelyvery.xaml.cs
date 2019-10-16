@@ -49,8 +49,8 @@ namespace MDispatch.View.PageApp
             if (fullPagePhotoDelyveryMV.AllSourseImage != null && fullPagePhotoDelyveryMV.AllSourseImage.Count != 0)
             {
                 Photos.SelectedItem = fullPagePhotoDelyveryMV.AllSourseImage[0];
-                btnNext.HorizontalOptions = LayoutOptions.End;
                 btnNext.IsVisible = true;
+                btnNext.HorizontalOptions = LayoutOptions.End;
                 btnAddPhoto.IsVisible = false;
                 btnDamage.IsVisible = true;
                 btnRetake.IsVisible = true;
@@ -69,10 +69,12 @@ namespace MDispatch.View.PageApp
             {
                 dmla.IsVisible = false;
                 paternPhoto.Source = "";
+                btnNext.HorizontalOptions = LayoutOptions.EndAndExpand;
                 btnDamage.IsVisible = false;
             }
             else
             {
+                btnNext.HorizontalOptions = LayoutOptions.End;
                 btnDamage.IsVisible = true;
                 dmla.IsVisible = true;
                 paternPhoto.Source = pngPaternPhoto;

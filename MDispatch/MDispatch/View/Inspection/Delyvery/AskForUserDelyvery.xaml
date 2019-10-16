@@ -91,12 +91,12 @@
                         </StackLayout>
                     </StackLayout>
                 </Frame>
-                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6">
+                <!--<Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6">
                     <StackLayout>
                         <Label Text="Would you like to leave a tip to a deriver ? if yes will open credit card info to charge the card , if no will go in to next question." 
                                TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                     </StackLayout>
-                </Frame>
+                </Frame>-->
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock5">
                     <StackLayout>
                         <Label Text="Rate driver" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>

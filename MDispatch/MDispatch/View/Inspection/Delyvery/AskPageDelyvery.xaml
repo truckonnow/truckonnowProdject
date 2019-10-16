@@ -6,8 +6,8 @@
              Title="Question inspection">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="BOL" Clicked="ToolbarItem_Clicked_1"/>
-        <ToolbarItem Text="Next" Clicked="ToolbarItem_Clicked"/>
         <ToolbarItem Text="Contact" Clicked="ToolbarItem_Clicked_2"/>
+        <ToolbarItem Text="Next" Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>
