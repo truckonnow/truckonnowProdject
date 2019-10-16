@@ -118,9 +118,13 @@ namespace WebDispacher.Dao
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == id);
             Shipping shipping = context.Shipping.Where(s => s.VehiclwInformations.FirstOrDefault(v => v == vehiclwInformation) != null)
                 .Include(s => s.VehiclwInformations)
+                .Include("VehiclwInformations.Ask")
                 .Include("VehiclwInformations.Ask.Any_personal_or_additional_items_with_or_in_vehicle")
+                .Include("VehiclwInformations.Ask1")
                 .Include("VehiclwInformations.Ask1.App_will_force_driver_to_take_pictures_of_each_strap")
                 .Include("VehiclwInformations.Ask1.Photo_after_loading_in_the_truck")
+                .Include("VehiclwInformations.AskDelyvery")
+                .Include("VehiclwInformations.AskDelyvery.Please_take_a_picture_Id_of_the_person_taking_the_delivery")
                 .Include("VehiclwInformations.PhotoInspections.Photos")
                 .Include(v => v.AskFromUser)
                 .Include(v => v.AskFromUser.App_will_ask_for_signature_of_the_client_signature)
