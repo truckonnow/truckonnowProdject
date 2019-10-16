@@ -60,7 +60,7 @@ namespace MDispatch.ViewModels.AskPhoto
         public void ResetAskPhotoItem(byte[] oldRes, byte[] newRetake)
         {
             string base64 = JsonConvert.SerializeObject(newRetake);
-            Photo photo = Ask.Any_personal_or_additional_items_with_or_in_vehicle.FirstOrDefault(a => a.Base64 == JsonConvert.SerializeObject(oldRes));
+            Photo photo = Ask.Any_personal_or_additional_items_with_or_in_vehicle.FirstOrDefault(a => a.Base64 == Convert.ToBase64String(oldRes));
             if (photo != null)
             {
                 photo.Base64 = base64;

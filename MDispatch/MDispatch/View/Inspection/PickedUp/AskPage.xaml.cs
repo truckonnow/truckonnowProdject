@@ -352,7 +352,7 @@ namespace MDispatch.View.AskPhoto
                 askPageMV.Ask.Any_personal_or_additional_items_with_or_in_vehicle = new List<Models.Photo>();
             }
             Models.Photo photo = new Models.Photo();
-            photo.Base64 = JsonConvert.SerializeObject(photob);
+            photo.Base64 = Convert.ToBase64String(photob);
             photo.path = $"../Photo/{askPageMV.VehiclwInformation.Id}/PikedUp/Items/{askPageMV.Ask.Any_personal_or_additional_items_with_or_in_vehicle.Count + 1}.jpg";
             askPageMV.Ask.Any_personal_or_additional_items_with_or_in_vehicle.Add(photo);
             Image image = new Image()

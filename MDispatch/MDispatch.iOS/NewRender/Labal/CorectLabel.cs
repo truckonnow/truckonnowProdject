@@ -1,4 +1,5 @@
-﻿using MDispatch.iOS.NewRender.Labal;
+﻿using System;
+using MDispatch.iOS.NewRender.Labal;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
@@ -16,10 +17,16 @@ namespace MDispatch.iOS.NewRender.Labal
 
         private void UpdatePadding()
         {
-            var element = this.Element as Xamarin.Forms.Label;
-            if (element != null)
+            try
             {
-                this.Element.Text = this.Element.Text.ToUpper();
+                var element = this.Element as Xamarin.Forms.Label;
+                if (element != null && this.Element.Text != null)
+                {
+                    this.Element.Text = this.Element.Text.ToUpper();
+                }
+            }
+            catch(Exception e)
+            {
             }
         }
     }

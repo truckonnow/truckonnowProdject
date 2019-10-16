@@ -1,6 +1,7 @@
 ﻿using MDispatch.Models;
 using MDispatch.NewElement;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
@@ -34,7 +35,7 @@ namespace MDispatch.View.Inspection.PickUp.CameraPageFolder
             {
                 await Navigation.PopAsync(true);
                 Photo photo1 = new Photo();
-                photo1.Base64 = JsonConvert.SerializeObject(result.Result);
+                photo1.Base64 = Convert.ToBase64String(result.Result);
                 photo1.path = $"../Photo/{ask1Page.ask1PageMV.VehiclwInformation.Id}/PikedUp/CameraSeatBelts/{photos.Count + 1}.jpg";
                 photos.Add(photo1);
                 imagesByte.Add(result.Result);
@@ -42,7 +43,7 @@ namespace MDispatch.View.Inspection.PickUp.CameraPageFolder
                 return;
             }
             Photo photo = new Photo();
-            photo.Base64 = JsonConvert.SerializeObject(result.Result);
+            photo.Base64 = Convert.ToBase64String(result.Result);
             photo.path = $"../Photo/{ask1Page.ask1PageMV.VehiclwInformation.Id}/PikedUp/CameraSeatBelts/{photos.Count + 1}.jpg";
             photos.Add(photo);
             imagesByte.Add(result.Result);

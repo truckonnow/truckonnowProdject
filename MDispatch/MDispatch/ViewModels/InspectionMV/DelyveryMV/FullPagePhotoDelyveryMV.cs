@@ -369,11 +369,11 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         {
             List<ImageSource> imageSources1 = new List<ImageSource>(AllSourseImage);
             Photo photo = new Photo();
-            int Index = PhotoInspection.Photos.FindIndex(p => p.Base64 == JsonConvert.SerializeObject(oldPhoto));
-            Photo photoOld = PhotoInspection.Photos.FirstOrDefault(p => p.Base64 == JsonConvert.SerializeObject(oldPhoto));
+            int Index = PhotoInspection.Photos.FindIndex(p => p.Base64 == Convert.ToBase64String(oldPhoto));
+            Photo photoOld = PhotoInspection.Photos.FirstOrDefault(p => p.Base64 == Convert.ToBase64String(oldPhoto));
             photo.path = photoOld.path;
             photoOld = null;
-            photo.Base64 = JsonConvert.SerializeObject(newPhoto);
+            photo.Base64 = Convert.ToBase64String(newPhoto);
             PhotoInspection.Photos.RemoveAt(Index);
             PhotoInspection.Photos.Insert(Index, photo);
             Index = imageSources1.FindIndex(a => Convert.ToBase64String(GetBytesInImageSourse(a)) == Convert.ToBase64String(oldPhoto));

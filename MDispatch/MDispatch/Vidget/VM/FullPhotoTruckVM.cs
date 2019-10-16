@@ -69,7 +69,7 @@ namespace MDispatch.Vidget.VM
         public async Task AddPhoto(byte[] photoRes)
         {
             Photo photo = new Photo();
-            photo.Base64 = JsonConvert.SerializeObject(photoRes);
+            photo.Base64 = Convert.ToBase64String(photoRes);
             photo.path = $"../Photo/Driver/{IdDriver}/{IndexCurent}.jpg";
             Photo = photo;
             MemoryStream stream = new MemoryStream(photoRes);

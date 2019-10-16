@@ -239,7 +239,7 @@ namespace MDispatch.View.Inspection.PickedUp
             MemoryStream memoryStream = new MemoryStream();
             stream.CopyTo(memoryStream);
             byte[] image = memoryStream.ToArray();
-            photo.Base64 = JsonConvert.SerializeObject(image);
+            photo.Base64 = Convert.ToBase64String(image);
             photo.path = $"../Photo/{liabilityAndInsuranceMV.Shipping.VehiclwInformations.Find(v => v.Id == liabilityAndInsuranceMV.IdVech)}/PikedUp/Signature/PikedUp.jpg";
             liabilityAndInsuranceMV.SigPhoto = photo;
         }

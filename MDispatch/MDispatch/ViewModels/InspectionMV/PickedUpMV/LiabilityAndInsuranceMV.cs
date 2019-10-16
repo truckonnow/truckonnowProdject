@@ -1,4 +1,4 @@
-﻿using MDispatch.Models;
+using MDispatch.Models;
 using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
 using MDispatch.Service.Net;
@@ -149,7 +149,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             string description = null;
             int state = 0;
             Photo photo = new Photo();
-            photo.Base64 = JsonConvert.SerializeObject(photoResult);
+            photo.Base64 = Convert.ToBase64String(photoResult);
             photo.path = $"../Photo/{IdVech}/Pay/DelyverySig.jpg";
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)

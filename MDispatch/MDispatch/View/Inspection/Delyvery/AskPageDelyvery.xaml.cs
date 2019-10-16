@@ -162,7 +162,7 @@ namespace MDispatch.View.Inspection.Delyvery
                 askDelyveryMV.AskDelyvery.Please_take_a_picture_Id_of_the_person_taking_the_delivery = new List<Models.Photo>();
             }
             Models.Photo photo = new Models.Photo();
-            photo.Base64 = JsonConvert.SerializeObject(result);
+            photo.Base64 = Convert.ToBase64String(result);
             photo.path = $"../Photo/{askDelyveryMV.VehiclwInformation.Id}/PikedUp/Items/{askDelyveryMV.AskDelyvery.Please_take_a_picture_Id_of_the_person_taking_the_delivery.Count + 1}.jpg";
             askDelyveryMV.AskDelyvery.Please_take_a_picture_Id_of_the_person_taking_the_delivery.Add(photo);
             Image image = new Image()

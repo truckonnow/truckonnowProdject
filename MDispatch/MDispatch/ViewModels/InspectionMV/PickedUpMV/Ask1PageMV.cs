@@ -144,8 +144,8 @@ namespace MDispatch.ViewModels.InspectionMV
 
         internal void ResetAskSeatBelts(byte[] oldRes, byte[] newRetake)
         {
-            string base64 = JsonConvert.SerializeObject(newRetake);
-            Photo photo = Ask1.App_will_force_driver_to_take_pictures_of_each_strap.FirstOrDefault(a => a.Base64 == JsonConvert.SerializeObject(oldRes));
+            string base64 = Convert.ToBase64String(newRetake);
+            Photo photo = Ask1.App_will_force_driver_to_take_pictures_of_each_strap.FirstOrDefault(a => a.Base64 == Convert.ToBase64String(oldRes));
             if (photo != null)
             {
                 photo.Base64 = base64;
@@ -155,8 +155,8 @@ namespace MDispatch.ViewModels.InspectionMV
         internal void ResetAskInTrack(byte[] oldRes, byte[] newRetake)
         {
 
-            string base64 = JsonConvert.SerializeObject(newRetake);
-            Photo photo = Ask1.Photo_after_loading_in_the_truck.FirstOrDefault(a => a.Base64 == JsonConvert.SerializeObject(oldRes));
+            string base64 = Convert.ToBase64String(newRetake);
+            Photo photo = Ask1.Photo_after_loading_in_the_truck.FirstOrDefault(a => a.Base64 == Convert.ToBase64String(oldRes));
             if (photo != null)
             {
                 photo.Base64 = base64;

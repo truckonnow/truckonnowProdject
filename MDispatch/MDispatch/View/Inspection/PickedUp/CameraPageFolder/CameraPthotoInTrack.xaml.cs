@@ -4,6 +4,7 @@ using MDispatch.ViewModels.AskPhoto;
 using MDispatch.ViewModels.InspectionMV.Models;
 using MDispatch.ViewModels.InspectionMV.Servise.Models;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
@@ -41,7 +42,7 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
             if (!result.Success)
                 return;
             Photo photo1 = new Photo();
-            photo1.Base64 = JsonConvert.SerializeObject(result.Result);
+            photo1.Base64 = Convert.ToBase64String(result.Result);
             photo1.path = $"../Photo/{ask1Page.ask1PageMV.VehiclwInformation.Id}/PikedUp/CameraTrack/{photos.Count + 1}.jpg";
             photos.Add(photo1);
             imagesByte.Add(result.Result);

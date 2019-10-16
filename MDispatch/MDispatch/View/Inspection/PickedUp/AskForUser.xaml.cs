@@ -1,4 +1,4 @@
-﻿using MDispatch.Models;
+using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
@@ -21,7 +21,6 @@ namespace MDispatch.View.Inspection.PickedUp
             askForUserMV.AskForUser = new AskFromUser();
             InitializeComponent ();
             BindingContext = askForUserMV;
-            //Navigation.RemovePage(Navigation.NavigationStack[1]);
         }
 
         #region Ask1

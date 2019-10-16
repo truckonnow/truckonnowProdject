@@ -48,9 +48,11 @@
                     <StackLayout>
                         <Label Text="Keys location" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Button Text="Truck" BackgroundColor="White" TextColor="Silver"  Clicked="Button_Clicked"/>
-                        <Button Text="Vehicle" BackgroundColor="White" TextColor="Silver"  Clicked="Button_Clicked"/>
-                        <Button Text="Trailer" BackgroundColor="White" TextColor="Silver"  Clicked="Button_Clicked"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Button Text="Truck" BackgroundColor="White" TextColor="Silver"  Clicked="Button_Clicked"/>
+                            <Button Text="Vehicle" BackgroundColor="White" TextColor="Silver"  Clicked="Button_Clicked"/>
+                            <Button Text="Trailer" BackgroundColor="White" TextColor="Silver"  Clicked="Button_Clicked"/>
+                        </StackLayout>
                     </StackLayout>
                 </Frame>
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock6">

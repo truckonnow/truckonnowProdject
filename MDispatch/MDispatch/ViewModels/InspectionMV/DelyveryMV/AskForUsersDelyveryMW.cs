@@ -244,7 +244,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             string description = null;
             int state = 0;
             Photo photo = new Photo();
-            photo.Base64 = JsonConvert.SerializeObject(photoResult);
+            photo.Base64 = Convert.ToBase64String(photoResult);
             photo.path = $"../Photo/{VehiclwInformation.Id}/Pay/DelyverySig.jpg";
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
