@@ -33,6 +33,122 @@ namespace ApiMobaileServise.Servise.AddDamage
             return y1;
         }
 
+        private int CorectSetDamageY(string indexPhoto)
+        {
+            int yCorect = 0;
+            if (indexPhoto == "1")
+            {
+                yCorect = 8;
+            }
+            else if (indexPhoto == "2")
+            {
+                yCorect = 2;
+            }
+            else if (indexPhoto == "4")
+            {
+                yCorect = 18;
+            }
+            else if (indexPhoto == "5")
+            {
+                yCorect = 5;
+            }
+            else if (indexPhoto == "6")
+            {
+                yCorect = 5;
+            }
+            else if (indexPhoto == "7")
+            {
+                yCorect = 5;
+            }
+            else if (indexPhoto == "8")
+            {
+                yCorect = 20;
+            }
+            else if (indexPhoto == "9")
+            {
+                yCorect = -18;
+            }
+            else if (indexPhoto == "10")
+            {
+                yCorect = -5;
+            }
+            else if (indexPhoto == "11")
+            {
+                yCorect = 5;
+            }
+            else if (indexPhoto == "19")
+            {
+                yCorect = -20;
+            }
+            else if (indexPhoto == "25")
+            {
+                yCorect = 3;
+            }
+            return yCorect;
+        }
+
+        private int CorectSetDamageX(string indexPhoto)
+        {
+            int xCorect = 0;
+            if (indexPhoto == "1")
+            {
+                xCorect = 5;
+            }
+            if (indexPhoto == "2")
+            {
+                xCorect = 5;
+            }
+            //else if (indexPhoto == "3")
+            //{
+            //    xCorect = -10;
+            //}
+            else if (indexPhoto == "4")
+            {
+                xCorect = -6;
+            }
+            else if (indexPhoto == "6")
+            {
+                xCorect = -3;
+            }
+            else if (indexPhoto == "7")
+            {
+                xCorect = 15;
+            }
+            else if (indexPhoto == "8")
+            {
+                xCorect = 15;
+            }
+            else if (indexPhoto == "9")
+            {
+                xCorect = 8;
+            }
+            else if (indexPhoto == "10")
+            {
+                xCorect = 7;
+            }
+            else if (indexPhoto == "12")
+            {
+                xCorect = 5;
+            }
+            else if (indexPhoto == "12")
+            {
+                xCorect = 5;
+            }
+            else if (indexPhoto == "19")
+            {
+                xCorect = 10;
+            }
+            else if (indexPhoto == "20")
+            {
+                xCorect = 10;
+            }
+            else if (indexPhoto == "22")
+            {
+                xCorect = 20;
+            }
+            return xCorect;
+        }
+
         public int[] GetMaxMinForYAndX(string indexPhoto)
         {
             int[] maxMinForYAndX = null;
@@ -78,11 +194,13 @@ namespace ApiMobaileServise.Servise.AddDamage
             }
             else if (indexPhoto == "11")
             {
-                maxMinForYAndX = new int[] { 107, 48, 167, 0 };
+                maxMinForYAndX = new int[] { 167, 48, 107, 0 };
             }
             else if (indexPhoto == "12")
             {
-                maxMinForYAndX = new int[] { 340, 48, 400, 0 };
+                
+                //maxMinForYAndX = new int[] { 400, 48, 340, 0 };
+                maxMinForYAndX = new int[] { 400, 48, 340, 0 };
             }
             else if (indexPhoto == "13")
             {
@@ -156,22 +274,22 @@ namespace ApiMobaileServise.Servise.AddDamage
                 {
                     Image img1 = Bitmap.FromFile(pathScan);
                     Image img2 = Bitmap.FromFile($"../Damages/Damage{damage.TypeCurrentStatus}{damage.IndexDamage}.png");
-                    img2 = img2.GetThumbnailImage(damage.WidthDamage, damage.HeightDamage, null, IntPtr.Zero);
+                    img2 = img2.GetThumbnailImage((int)((double)damage.WidthDamage * 0.30), (int)((double)damage.HeightDamage * 0.30), null, IntPtr.Zero);
                     Bitmap res = new Bitmap(img1.Width, img1.Height);
                     Graphics g = Graphics.FromImage(res);
                     int x = GetCordinatX(photoInspection.IndexPhoto.ToString(), damage.XInterest);
                     int y = GetCordinatY(photoInspection.IndexPhoto.ToString(), damage.YInterest);
                     g.DrawImage(img1, 0, 0);
                     if (photoInspection.IndexPhoto == 1 || photoInspection.IndexPhoto == 2 || photoInspection.IndexPhoto == 3 || photoInspection.IndexPhoto == 4 || photoInspection.IndexPhoto == 5 || photoInspection.IndexPhoto == 6 || photoInspection.IndexPhoto == 7
-                        || photoInspection.IndexPhoto == 8 || photoInspection.IndexPhoto == 9 || photoInspection.IndexPhoto == 10 || photoInspection.IndexPhoto == 11 || photoInspection.IndexPhoto == 12 || photoInspection.IndexPhoto == 15 || photoInspection.IndexPhoto == 16
-                         || photoInspection.IndexPhoto == 17 || photoInspection.IndexPhoto == 18 )
+                         || photoInspection.IndexPhoto == 8 || photoInspection.IndexPhoto == 9 || photoInspection.IndexPhoto == 10 || photoInspection.IndexPhoto == 11 || photoInspection.IndexPhoto == 12 || photoInspection.IndexPhoto == 15 || photoInspection.IndexPhoto == 16
+                          || photoInspection.IndexPhoto == 17 || photoInspection.IndexPhoto == 18)
                     {
-                        g.DrawImage(img2, x, y);
+                        g.DrawImage(img2, x + CorectSetDamageX(photoInspection.IndexPhoto.ToString()), y + CorectSetDamageY(photoInspection.IndexPhoto.ToString()));
                     }
                     else if (photoInspection.IndexPhoto == 13 || photoInspection.IndexPhoto == 14 || photoInspection.IndexPhoto == 19 || photoInspection.IndexPhoto == 20 || photoInspection.IndexPhoto == 21 || photoInspection.IndexPhoto == 22 || photoInspection.IndexPhoto == 23
                         || photoInspection.IndexPhoto == 24 || photoInspection.IndexPhoto == 25 || photoInspection.IndexPhoto == 26 || photoInspection.IndexPhoto == 27)
                     {
-                        g.DrawImage(img2, y, x);
+                        g.DrawImage(img2, y + CorectSetDamageY(photoInspection.IndexPhoto.ToString()), x + CorectSetDamageX(photoInspection.IndexPhoto.ToString()));
                     }
                     string tempPath = pathScan + "1";
                     res.Save($"{pathScan.Replace(".jpg", "")}1.jpg");
