@@ -167,7 +167,7 @@ namespace ApiMobaileServise.Servise.AddDamage
                 {
                     Image img1 = Bitmap.FromFile(pathScan);
                     Image img2 = Bitmap.FromFile($"../Damages/Damage{damage.TypeCurrentStatus}{damage.IndexDamage}.png");
-                    img2 = img2.GetThumbnailImage(damage.WidthDamage, damage.HeightDamage, null, IntPtr.Zero);
+                    img2 = img2.GetThumbnailImage((int)((double)damage.WidthDamage * 0.30), (int)((double)damage.HeightDamage * 0.30), null, IntPtr.Zero);
                     Bitmap res = new Bitmap(img1.Width, img1.Height);
                     Graphics g = Graphics.FromImage(res);
                     int x = GetCordinatX(photoInspection.IndexPhoto.ToString(), damage.XInterest);
