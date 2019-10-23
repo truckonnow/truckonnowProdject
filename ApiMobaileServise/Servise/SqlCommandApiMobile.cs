@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using InspectionDriver = DaoModels.DAO.Models.InspectionDriver;
 
@@ -312,6 +313,69 @@ namespace ApiMobaileServise.Servise
                 shipping.askForUserDelyveryM.VideoRecord = video;
             }
             await context.SaveChangesAsync();
+        }
+
+        public string LoadTaskDb(string idTask, byte[] buffer)
+        {
+            TaskLoad taskLoad = context.TaskLoads
+                .FirstOrDefault(l => l.Id.ToString() == idTask);
+            if(taskLoad == null)
+            {
+                return "No";
+            }
+            string str = Encoding.Default.GetString(taskLoad.Array);
+            string str1 = Encoding.Default.GetString(buffer);
+            taskLoad.Array = Encoding.Default.GetBytes(str + str1);
+            context.SaveChanges();
+            return taskLoad.Id.ToString();
+        }
+
+        public string[] EndTaskDb(string idTask)
+        {
+            LogTask logTask = context.LogTasks
+                .Include(l => l.TaskLoads)
+                .FirstOrDefault();
+            if(logTask == null)
+            {
+                return null;
+            }
+            TaskLoad taskLoad = logTask.TaskLoads.FirstOrDefault(l => l.Id.ToString() == idTask);
+            if (taskLoad == null)
+            {
+                return null;
+            }
+            string str = Encoding.Default.GetString(taskLoad.Array);
+            context.TaskLoads.Remove(taskLoad);
+            context.SaveChanges();
+            return new string[] { str, taskLoad.OptionalParameter};
+        }
+
+        public string StartTaskDb(string nameMethod, string optionalParameter)
+        {
+            LogTask logTask = context.LogTasks
+                .Include(l => l.TaskLoads)
+                .FirstOrDefault();
+            if(logTask == null)
+            {
+                context.LogTasks.Add(new LogTask()
+                {
+                    TaskLoads = new List<TaskLoad>()
+                });
+                context.SaveChanges();
+                logTask = context.LogTasks
+                 .Include(l => l.TaskLoads)
+                 .Include("TaskLoads.Array")
+                 .FirstOrDefault();
+            }
+            TaskLoad taskLoad = new TaskLoad()
+            {
+                Array = new byte[0],
+                NameMethod = nameMethod,
+                OptionalParameter = optionalParameter
+            };
+            logTask.TaskLoads.Add(taskLoad);
+            context.SaveChanges();
+            return taskLoad.Id.ToString();
         }
 
         public async void SaveFeedBackInDb(Feedback feedback)

@@ -327,5 +327,42 @@ namespace ApiMobaileServise.Servise
             }
             return token;
         }
+
+
+        #region Task
+        public string StartTask(string nameMethod, string optionalParameter)
+        {
+            return sqlCommandApiMobile.StartTaskDb(nameMethod, optionalParameter);
+        }
+
+        public string LoadTask(string idTask, string byteBase64)
+        {
+            byte[] buffer = Convert.FromBase64String(byteBase64);
+            return sqlCommandApiMobile.LoadTaskDb(idTask, buffer);
+        }
+
+        public void EndTask(string idTask, string nameMethod)
+        {
+            string[] objSave = sqlCommandApiMobile.EndTaskDb(idTask);
+            if (objSave != null)
+            {
+                GoToEndTask(objSave[0], nameMethod, objSave[1]);
+            }
+        }
+
+        private async void GoToEndTask(string objSave, string nameMethod, string optionalParameter)
+        {
+            string[] parameter = null;
+            if (nameMethod == "Photo")
+            {
+                parameter = optionalParameter.Split(',');
+                await SavePhotoInspection(parameter[0], objSave);
+            }
+            else if(nameMethod == "Test")
+            {
+
+            }
+        }
+        #endregion
     }
 }

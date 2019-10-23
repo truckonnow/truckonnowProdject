@@ -26,6 +26,8 @@ namespace DaoModels.DAO
         public DbSet<InspectionDriver> InspectionDrivers { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Video> Videos { get; set; }
+        public DbSet<LogTask> LogTasks { get; set; }
+        public DbSet<TaskLoad> TaskLoads { get; set; }
 
         public Context()
         {
