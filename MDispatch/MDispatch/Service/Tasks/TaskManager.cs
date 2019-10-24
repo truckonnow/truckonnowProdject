@@ -14,7 +14,7 @@
                     }
                 case "SavePhoto":
                     {
-                        task = new CheckTasks();
+                        task = new SavePhoto();
                         break;
                     }
             }

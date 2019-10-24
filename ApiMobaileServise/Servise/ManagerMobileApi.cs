@@ -330,6 +330,11 @@ namespace ApiMobaileServise.Servise
 
 
         #region Task
+        public List<int> CheckTask()
+        {
+            return sqlCommandApiMobile.CheckTask();
+        }
+
         public string StartTask(string nameMethod, string optionalParameter)
         {
             return sqlCommandApiMobile.StartTaskDb(nameMethod, optionalParameter);
@@ -353,14 +358,10 @@ namespace ApiMobaileServise.Servise
         private async void GoToEndTask(string objSave, string nameMethod, string optionalParameter)
         {
             string[] parameter = null;
-            if (nameMethod == "Photo")
+            if (nameMethod == "SavePhoto")
             {
                 parameter = optionalParameter.Split(',');
                 await SavePhotoInspection(parameter[0], objSave);
-            }
-            else if(nameMethod == "Test")
-            {
-
             }
         }
         #endregion

@@ -13,12 +13,33 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("CheckTask")]
-        public void CheckTask()
+        public string CheckTask(string token)
         {
-
+            string respons = null;
+            if (token == null || token == "")
+            {
+                return JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
+            }
+            try
+            {
+                bool isToken = managerMobileApi.CheckToken(token);
+                if (isToken)
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", managerMobileApi.CheckTask()));
+                }
+                else
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "2", null));
+                }
+            }
+            catch (Exception)
+            {
+                respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
+            }
+            return respons;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("StartTask")]
         public string StartTask(string token, string nameMethod, string optionalParameter)
         {
@@ -46,7 +67,7 @@ namespace ApiMobaileServise.Controllers
             return respons;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("LoadTask")]
         public string LoadTask(string token, string idTask, string byteBase64)
         {
@@ -74,7 +95,7 @@ namespace ApiMobaileServise.Controllers
             return respons;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("EndTask")]
         public string EndTask(string token, string idTask, string nameMethod)
         {

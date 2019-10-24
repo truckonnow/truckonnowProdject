@@ -315,6 +315,11 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
+        public List<int> CheckTask()
+        {
+            return context.TaskLoads.Select(t => t.Id).ToList();
+        }
+
         public string LoadTaskDb(string idTask, byte[] buffer)
         {
             TaskLoad taskLoad = context.TaskLoads
@@ -364,7 +369,6 @@ namespace ApiMobaileServise.Servise
                 context.SaveChanges();
                 logTask = context.LogTasks
                  .Include(l => l.TaskLoads)
-                 .Include("TaskLoads.Array")
                  .FirstOrDefault();
             }
             TaskLoad taskLoad = new TaskLoad()

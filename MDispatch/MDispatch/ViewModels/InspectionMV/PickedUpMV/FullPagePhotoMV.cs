@@ -249,15 +249,17 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         [System.Obsolete]
         public async void SavePhoto(bool isNavigWthDamag = false)
         {
-            TaskManager.CommandToDo("DashbordVehicle", PhotoInspection.Photos[0].Base64);
             bool isNavigationMany = false;
-            int navigationStack_Count = isNavigWthDamag ? Navigation.NavigationStack.Count - 1 : Navigation.NavigationStack.Count;
-            if (navigationStack_Count > 2)
-            {
-                await PopupNavigation.PushAsync(new LoadPage());
-                isNavigationMany = true;
-            }
+            bool isTask = false;
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            int navigationStack_Count = isNavigWthDamag ? Navigation.NavigationStack.Count - 1 : Navigation.NavigationStack.Count;
+            if (navigationStack_Count > 1)
+            {
+                //await PopupNavigation.PushAsync(new LoadPage());
+                //isNavigationMany = true;
+                isTask = true;
+                TaskManager.CommandToDo("SavePhoto", token, VehiclwInformation.Id, PhotoInspection);
+            }
             string description = null;
             int state = 0;
             if (InderxPhotoInspektion < Car.CountCarImg)
@@ -269,7 +271,9 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
             else
             {
-                await PopupNavigation.PushAsync(new TempPageHint());
+                isTask = true;
+                TaskManager.CommandToDo("SavePhoto", token, VehiclwInformation.Id, PhotoInspection);
+                //await PopupNavigation.PushAsync(new TempPageHint());
                 DependencyService.Get<IOrientationHandler>().ForceSensor();
                 await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate, Car.typeIndex.Replace(" ", ""), OnDeliveryToCarrier, TotalPaymentToCarrier), true);
             }
@@ -278,7 +282,14 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             {
                 await Task.Run(() =>
                 {
-                    state = managerDispatchMob.AskWork("SavePhoto", token, VehiclwInformation.Id, PhotoInspection, ref description);
+                    if (!isTask)
+                    {
+                        state = managerDispatchMob.AskWork("SavePhoto", token, VehiclwInformation.Id, PhotoInspection, ref description);
+                    }
+                    else
+                    {
+                        state = 3;
+                    }
                     initDasbordDelegate.Invoke();
                 });
                 if (isNavigWthDamag)
