@@ -12,6 +12,11 @@
                         task = new TaskDashbordVechle();
                         break;
                     }
+                case "SavePhoto":
+                    {
+                        task = new CheckTasks();
+                        break;
+                    }
             }
             if (task != null)
             {
