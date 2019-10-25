@@ -1,6 +1,7 @@
 using System;
 using FormsControls.Base;
 using MDispatch.Service.GeloctionGPS;
+using MDispatch.Service.Tasks;
 using MDispatch.View.A_R;
 using MDispatch.View.TabPage;
 using Plugin.Settings;
@@ -58,6 +59,7 @@ namespace MDispatch
         //    }
         //}
 
+        [Obsolete]
         protected override async void OnStart()
         {
             
@@ -70,6 +72,7 @@ namespace MDispatch
                 isStart = true;
                 MDispatch.Service.TimeSync.Untils.Start();
                 await Utils.StartListening();
+                TaskManager.CommandToDo("CheckTask");
             }
         }
 

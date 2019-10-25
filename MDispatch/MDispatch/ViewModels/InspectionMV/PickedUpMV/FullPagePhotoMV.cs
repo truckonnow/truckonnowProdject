@@ -258,7 +258,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 //await PopupNavigation.PushAsync(new LoadPage());
                 //isNavigationMany = true;
                 isTask = true;
-                TaskManager.CommandToDo("SavePhoto", token, VehiclwInformation.Id, PhotoInspection);
+                TaskManager.CommandToDo("SavePhoto", token, false, VehiclwInformation.Id, PhotoInspection);
             }
             string description = null;
             int state = 0;

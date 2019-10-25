@@ -330,14 +330,14 @@ namespace ApiMobaileServise.Servise
 
 
         #region Task
-        public List<int> CheckTask()
+        public List<int> CheckTask(string token)
         {
-            return sqlCommandApiMobile.CheckTask();
+            return sqlCommandApiMobile.CheckTask(token);
         }
 
-        public string StartTask(string nameMethod, string optionalParameter)
+        public string StartTask(string nameMethod, string optionalParameter, string token)
         {
-            return sqlCommandApiMobile.StartTaskDb(nameMethod, optionalParameter);
+            return sqlCommandApiMobile.StartTaskDb(nameMethod, optionalParameter, token);
         }
 
         public string LoadTask(string idTask, string byteBase64)

@@ -25,7 +25,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", managerMobileApi.CheckTask()));
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", managerMobileApi.CheckTask(token)));
                 }
                 else
                 {
@@ -53,7 +53,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", managerMobileApi.StartTask(nameMethod, optionalParameter)));
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", managerMobileApi.StartTask(nameMethod, optionalParameter, token)));
                 }
                 else
                 {
@@ -110,7 +110,7 @@ namespace ApiMobaileServise.Controllers
                 if (isToken)
                 {
                     managerMobileApi.EndTask(idTask, nameMethod);
-                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", ""));
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "3", ""));
                 }
                 else
                 {

@@ -315,9 +315,13 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
-        public List<int> CheckTask()
+        public List<int> CheckTask(string token)
         {
-            return context.TaskLoads.Select(t => t.Id).ToList();
+            Driver driver = context.Drivers
+                .First(d => d.Token == token);
+            return context.TaskLoads
+                .Where(t => t.IdDriver == driver.Id.ToString())
+                .Select(t => t.Id).ToList();
         }
 
         public string LoadTaskDb(string idTask, byte[] buffer)
@@ -355,8 +359,9 @@ namespace ApiMobaileServise.Servise
             return new string[] { str, taskLoad.OptionalParameter};
         }
 
-        public string StartTaskDb(string nameMethod, string optionalParameter)
+        public string StartTaskDb(string nameMethod, string optionalParameter, string token)
         {
+            Driver driver = context.Drivers.First(d => d.Token == token);
             LogTask logTask = context.LogTasks
                 .Include(l => l.TaskLoads)
                 .FirstOrDefault();
@@ -375,7 +380,8 @@ namespace ApiMobaileServise.Servise
             {
                 Array = new byte[0],
                 NameMethod = nameMethod,
-                OptionalParameter = optionalParameter
+                OptionalParameter = optionalParameter,
+                IdDriver = driver.Id.ToString()
             };
             logTask.TaskLoads.Add(taskLoad);
             context.SaveChanges();

@@ -17,6 +17,11 @@
                         task = new SavePhoto();
                         break;
                     }
+                case "CheckTask":
+                    {
+                        task = new CheckTask();
+                        break;
+                    }
             }
             if (task != null)
             {
