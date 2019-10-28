@@ -1,6 +1,7 @@
 ﻿using FormsControls.Base;
 using MDispatch.Service;
 using MDispatch.Service.GeloctionGPS;
+using MDispatch.Service.Tasks;
 using MDispatch.StoreNotify;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
@@ -83,6 +84,7 @@ namespace MDispatch.ViewModels
                 {
                     DependencyService.Get<IStore>().OnTokenRefresh();
                     Utils.StartListening();
+                    TaskManager.CommandToDo("CheckTask");
                 });
                 Application.Current.MainPage = new AnimationNavigationPage(new TabPage(managerDispatchMob));
             }

@@ -1,4 +1,5 @@
 ﻿using MDispatch.NewElement.ToastNotify;
+using MDispatch.Service.Tasks;
 using MDispatch.View.GlobalDialogView;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -16,7 +17,7 @@ namespace MDispatch.Service.Net
         private static bool isAlRedy = false;
 
         [Obsolete]
-        public static async Task CheckNet()
+        public static async Task CheckNet(bool isInspection = false)
         {
             var sync = SynchronizationContext.Current;
             IRestResponse response = null;
@@ -33,8 +34,9 @@ namespace MDispatch.Service.Net
                 {
                     if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
                     {
-                        if (App.isNetwork)
+                        if (App.isNetwork && !isInspection)
                         {
+                            TaskManager.isWorkTask = false;
                             App.isNetwork = false;
                             if (App.isStart)
                             {
@@ -45,7 +47,7 @@ namespace MDispatch.Service.Net
                                 DependencyService.Get<IToast>().ShowMessage("Not Network");
                             }
                         }
-                        else if (!isAlRedy)
+                        else if (!isAlRedy && !isInspection)
                         {
                             isAlRedy = true;
                             if (App.isStart)
@@ -61,12 +63,13 @@ namespace MDispatch.Service.Net
                     }
                     else
                     {
+                        TaskManager.isWorkTask = false;
                         bool isCheck = false;
                         string description = null;
                         GetData(content, ref isCheck, ref description);
                         if (!isCheck)
                         {
-                            if (App.isNetwork)
+                            if (App.isNetwork && !isInspection)
                             {
                                 App.isNetwork = false;
                                 if (App.isStart)
@@ -78,7 +81,7 @@ namespace MDispatch.Service.Net
                                     DependencyService.Get<IToast>().ShowMessage(description);
                                 }
                             }
-                            else if (!isAlRedy)
+                            else if (!isAlRedy && !isInspection)
                             {
                                 isAlRedy = true;
                                 if (App.isStart)
@@ -94,6 +97,11 @@ namespace MDispatch.Service.Net
                         }
                         else
                         {
+                            TaskManager.isWorkTask = true;
+                            if(!TaskManager.isWorkTask)
+                            {
+                                TaskManager.CommandToDo("CheckTask");
+                            }
                             App.isNetwork = true;
                         }
                     }

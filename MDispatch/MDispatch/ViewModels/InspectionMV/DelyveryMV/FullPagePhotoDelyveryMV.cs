@@ -3,6 +3,7 @@ using MDispatch.NewElement;
 using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
 using MDispatch.Service.Net;
+using MDispatch.Service.Tasks;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection;
@@ -220,14 +221,17 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         [System.Obsolete]
         public async void SavePhoto(bool isNavigWthDamag = false)
         {
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             bool isNavigationMany = false;
+            bool isTask = false;
             int navigationStack_Count = isNavigWthDamag ? Navigation.NavigationStack.Count - 1 : Navigation.NavigationStack.Count;
             if (navigationStack_Count > 2)
             {
-                await PopupNavigation.PushAsync(new LoadPage());
-                isNavigationMany = true;
+                //await PopupNavigation.PushAsync(new LoadPage());
+                //isNavigationMany = true;
+                isTask = true;
+                TaskManager.CommandToDo("SavePhoto", token, 1, VehiclwInformation.Id, PhotoInspection);
             }
-            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
             if (InderxPhotoInspektion >= Car.CountCarImg)
@@ -247,7 +251,14 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             {
                 await Task.Run(() =>
                 {
-                    state = managerDispatchMob.AskWork("SavePhoto", token, VehiclwInformation.Id, PhotoInspection, ref description);
+                    if (!isTask)
+                    {
+                        state = managerDispatchMob.AskWork("SavePhoto", token, VehiclwInformation.Id, PhotoInspection, ref description);
+                    }
+                    else
+                    {
+                        state = 3;
+                    }
                     initDasbordDelegate.Invoke();
                 });
                 if (isNavigWthDamag)

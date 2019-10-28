@@ -22,13 +22,42 @@ namespace MDispatch.Service.Tasks
                     {
                         CrossSettings.Current.AddOrUpdateValue("workLoad", workLoad + idTask.ToString() + ",");
                     }
-                    TaskManager.CommandToDo("SavePhoto", true, token, idTask.ToString());
+                    TaskManager.CommandToDo("SavePhoto", 2, token, idTask.ToString());
                 }
                 else
                 {
                     //remove Task
                     continue;
                 }
+            }
+            string noStartkLoad = CrossSettings.Current.GetValueOrDefault("noStartkLoad", "");
+            string[] noStartkLoads = noStartkLoad.Split(',');
+            for(int i = 0; i < noStartkLoad.Length-1; i++)
+            {
+                string obj = CrossSettings.Current.GetValueOrDefault(noStartkLoads[i], "");
+                string vehiclwInformationId = CrossSettings.Current.GetValueOrDefault(noStartkLoads[i]+ "Param", "");
+                string method = CrossSettings.Current.GetValueOrDefault(noStartkLoads[i] + "method", "");
+                GoToCommand(token, 1, obj, method, vehiclwInformationId);
+                CrossSettings.Current.AddOrUpdateValue("noStartkLoad", noStartkLoad.Replace(noStartkLoads[i] + ",", ""));
+            }
+            string noEndkLoad = CrossSettings.Current.GetValueOrDefault("noEndkLoad", "");
+            string[] noEndkLoads = noEndkLoad.Split(',');
+            for (int i = 0; i < noEndkLoads.Length - 1; i++)
+            {
+                string obj = CrossSettings.Current.GetValueOrDefault(noEndkLoads[i], "");
+                string vehiclwInformationId = CrossSettings.Current.GetValueOrDefault(noEndkLoads[i] + "Param", "");
+                string method = CrossSettings.Current.GetValueOrDefault(noEndkLoads[i] + "method", "");
+                GoToCommand(token, 3, obj, method, vehiclwInformationId);
+                CrossSettings.Current.AddOrUpdateValue("noEndkLoad", noEndkLoad.Replace(noEndkLoads[i] + ",", ""));
+            }
+        }
+
+        private void GoToCommand(string token, int type, string obj, string method, params string[] param)
+        {
+            if(method == "SavePhoto")
+            {
+                string vehiclwInformationId = param[0];
+                TaskManager.CommandToDo("SavePhoto", type, token, vehiclwInformationId, obj);
             }
         }
 

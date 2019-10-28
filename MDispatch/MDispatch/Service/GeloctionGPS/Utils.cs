@@ -45,10 +45,12 @@ namespace MDispatch.Service.GeloctionGPS
             }
         }
 
+        [Obsolete]
         private static async void PositionChanged(object sender, PositionEventArgs e)
         {
-            await Task.Run(() =>
+            await Task.Run(async() =>
             {
+                await Task.Run(() => Net.Utils.CheckNet());
                 if (App.isNetwork && isTimeUpdate)
                 {
                     Waite();

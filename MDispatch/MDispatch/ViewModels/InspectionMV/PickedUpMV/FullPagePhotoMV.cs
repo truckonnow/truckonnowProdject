@@ -249,16 +249,16 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         [System.Obsolete]
         public async void SavePhoto(bool isNavigWthDamag = false)
         {
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             bool isNavigationMany = false;
             bool isTask = false;
-            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             int navigationStack_Count = isNavigWthDamag ? Navigation.NavigationStack.Count - 1 : Navigation.NavigationStack.Count;
-            if (navigationStack_Count > 1)
+            if (navigationStack_Count > 2)
             {
                 //await PopupNavigation.PushAsync(new LoadPage());
                 //isNavigationMany = true;
                 isTask = true;
-                TaskManager.CommandToDo("SavePhoto", token, false, VehiclwInformation.Id, PhotoInspection);
+                TaskManager.CommandToDo("SavePhoto", token, 1, VehiclwInformation.Id, PhotoInspection);
             }
             string description = null;
             int state = 0;
@@ -271,13 +271,11 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
             else
             {
-                isTask = true;
-                TaskManager.CommandToDo("SavePhoto", token, VehiclwInformation.Id, PhotoInspection);
                 //await PopupNavigation.PushAsync(new TempPageHint());
                 DependencyService.Get<IOrientationHandler>().ForceSensor();
                 await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate, Car.typeIndex.Replace(" ", ""), OnDeliveryToCarrier, TotalPaymentToCarrier), true);
             }
-            await Task.Run(() => Utils.CheckNet());
+            await Task.Run(() => Utils.CheckNet(true));
             if (App.isNetwork)
             {
                 await Task.Run(() =>
@@ -335,9 +333,9 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
             else
             {
-                if (Navigation.NavigationStack.Count > 1)
+                if (!isTask)
                 {
-                    await Navigation.PopAsync();
+
                 }
             }
         }

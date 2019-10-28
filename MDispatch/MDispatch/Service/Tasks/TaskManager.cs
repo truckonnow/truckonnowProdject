@@ -2,6 +2,8 @@
 {
     public class TaskManager
     {
+        public static bool isWorkTask = true;
+
         public static void CommandToDo(string nameCommand, params object[] tasks)
         {
             ITask task = null;
