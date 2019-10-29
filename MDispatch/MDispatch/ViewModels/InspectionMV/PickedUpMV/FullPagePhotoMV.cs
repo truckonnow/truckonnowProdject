@@ -258,7 +258,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 //await PopupNavigation.PushAsync(new LoadPage());
                 //isNavigationMany = true;
                 isTask = true;
-                TaskManager.CommandToDo("SavePhoto", token, 1, VehiclwInformation.Id, PhotoInspection);
+                TaskManager.CommandToDo("SavePhoto", 1, token, VehiclwInformation.Id, PhotoInspection);
             }
             string description = null;
             int state = 0;
@@ -333,10 +333,14 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
             else
             {
-                if (!isTask)
+                if (isNavigationMany)
                 {
-
+                    await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
+                    isNavigationMany = false;
                 }
+                Navigation.RemovePage(Navigation.NavigationStack[1]);
+                DependencyService.Get<IToast>().ShowMessage($"Photo {Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion))} saved");
+                TaskManager.CommandToDo("SavePhoto", 1, token, VehiclwInformation.Id, PhotoInspection);
             }
         }
     }

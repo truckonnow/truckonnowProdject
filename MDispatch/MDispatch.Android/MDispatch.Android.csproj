@@ -125,7 +125,6 @@
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="NewrRender\CustomCamera\CameraPageRender.cs" />
-    <Compile Include="NewrRender\CustomCamera\PaintCodeButton.cs" />
     <Compile Include="NewrRender\Gradient\GradientViewRenderer.cs" />
     <Compile Include="NewrRender\ImageRender\ImageSizeRender.cs" />
     <Compile Include="NewrRender\ImageRender\RezizeImgRender.cs" />

@@ -110,7 +110,7 @@ namespace ApiMobaileServise.Controllers
                 if (isToken)
                 {
                     managerMobileApi.EndTask(idTask, nameMethod);
-                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "3", ""));
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", "3"));
                 }
                 else
                 {

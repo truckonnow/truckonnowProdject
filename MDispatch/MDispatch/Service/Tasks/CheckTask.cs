@@ -2,7 +2,9 @@
 using Newtonsoft.Json.Linq;
 using Plugin.Settings;
 using RestSharp;
+using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace MDispatch.Service.Tasks
 {
@@ -32,32 +34,38 @@ namespace MDispatch.Service.Tasks
             }
             string noStartkLoad = CrossSettings.Current.GetValueOrDefault("noStartkLoad", "");
             string[] noStartkLoads = noStartkLoad.Split(',');
-            for(int i = 0; i < noStartkLoad.Length-1; i++)
+            for(int i = 0; i < noStartkLoads.Length-1; i++)
             {
                 string obj = CrossSettings.Current.GetValueOrDefault(noStartkLoads[i], "");
                 string vehiclwInformationId = CrossSettings.Current.GetValueOrDefault(noStartkLoads[i]+ "Param", "");
                 string method = CrossSettings.Current.GetValueOrDefault(noStartkLoads[i] + "method", "");
                 GoToCommand(token, 1, obj, method, vehiclwInformationId);
                 CrossSettings.Current.AddOrUpdateValue("noStartkLoad", noStartkLoad.Replace(noStartkLoads[i] + ",", ""));
+                CrossSettings.Current.Remove(noStartkLoads[i] + "method");
+                CrossSettings.Current.Remove(noStartkLoads[i] + "Param");
+                CrossSettings.Current.Remove(noStartkLoads[i]);
             }
-            string noEndkLoad = CrossSettings.Current.GetValueOrDefault("noEndkLoad", "");
-            string[] noEndkLoads = noEndkLoad.Split(',');
-            for (int i = 0; i < noEndkLoads.Length - 1; i++)
-            {
-                string obj = CrossSettings.Current.GetValueOrDefault(noEndkLoads[i], "");
-                string vehiclwInformationId = CrossSettings.Current.GetValueOrDefault(noEndkLoads[i] + "Param", "");
-                string method = CrossSettings.Current.GetValueOrDefault(noEndkLoads[i] + "method", "");
-                GoToCommand(token, 3, obj, method, vehiclwInformationId);
-                CrossSettings.Current.AddOrUpdateValue("noEndkLoad", noEndkLoad.Replace(noEndkLoads[i] + ",", ""));
-            }
+            //string noEndkLoad = CrossSettings.Current.GetValueOrDefault("noEndkLoad", "");
+            //string[] noEndkLoads = noEndkLoad.Split(',');
+            //for (int i = 0; i < noEndkLoads.Length - 1; i++)
+            //{
+            //    string obj = CrossSettings.Current.GetValueOrDefault(noEndkLoads[i], "");
+            //    string vehiclwInformationId = CrossSettings.Current.GetValueOrDefault(noEndkLoads[i] + "Param", "");
+            //    string method = CrossSettings.Current.GetValueOrDefault(noEndkLoads[i] + "method", "");
+            //    GoToCommand(token, 3, obj, method, vehiclwInformationId);
+            //    CrossSettings.Current.AddOrUpdateValue("noEndkLoad", noEndkLoad.Replace(noEndkLoads[i] + ",", ""));
+            //}
         }
 
         private void GoToCommand(string token, int type, string obj, string method, params string[] param)
         {
             if(method == "SavePhoto")
             {
+                byte[] photoInspectionArray = Convert.FromBase64String(obj);
+                string photoInspectionjson = Encoding.Default.GetString(photoInspectionArray);
                 string vehiclwInformationId = param[0];
-                TaskManager.CommandToDo("SavePhoto", type, token, vehiclwInformationId, obj);
+                Models.PhotoInspection photoInspection = JsonConvert.DeserializeObject<Models.PhotoInspection>(photoInspectionjson);
+                TaskManager.CommandToDo("SavePhoto", type, token, vehiclwInformationId, photoInspection);
             }
         }
 
@@ -68,7 +76,7 @@ namespace MDispatch.Service.Tasks
             string content = null;
             RestClient client = new RestClient(Config.BaseReqvesteUrl);
             RestRequest request = new RestRequest("api.Task/CheckTask", Method.POST);
-            client.Timeout = 60000;
+            client.Timeout = 10000;
             request.AddHeader("Accept", "application/json");
             request.AddParameter("token", token);
             response = client.Execute(request);

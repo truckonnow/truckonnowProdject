@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using RestSharp;
 using Rg.Plugins.Popup.Services;
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -30,34 +31,45 @@ namespace MDispatch.Service.Net
                 client.Timeout = 10000;
                 response = client.Execute(request);
                 content = response.Content;
-                Device.BeginInvokeOnMainThread(async () =>
-                {
+              
                     if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
                     {
-                        if (App.isNetwork && !isInspection)
+                        if (App.isNetwork)
                         {
                             TaskManager.isWorkTask = false;
                             App.isNetwork = false;
                             if (App.isStart)
+                        {
+                            Device.BeginInvokeOnMainThread(async () =>
                             {
                                 await PopupNavigation.PushAsync(new Errror("Not Network", null));
+                            });
                             }
                             else
+                        {
+                            Device.BeginInvokeOnMainThread(async () =>
                             {
                                 DependencyService.Get<IToast>().ShowMessage("Not Network");
+                            });
                             }
                         }
-                        else if (!isAlRedy && !isInspection)
+                        else if (!isAlRedy)
                         {
                             isAlRedy = true;
-                            if (App.isStart)
+                        if (App.isStart)
+                        {
+                            Device.BeginInvokeOnMainThread(async () =>
                             {
                                 await PopupNavigation.PushAsync(new Errror("Not Network", null));
-                            }
-                            else
+                            });
+                        }
+                        else
+                        {
+                            Device.BeginInvokeOnMainThread(async () =>
                             {
                                 DependencyService.Get<IToast>().ShowMessage("Not Network");
-                            }
+                            });
+                        }
                             RefreshIsAlRed();
                         }
                     }
@@ -67,49 +79,60 @@ namespace MDispatch.Service.Net
                         bool isCheck = false;
                         string description = null;
                         GetData(content, ref isCheck, ref description);
-                        if (!isCheck)
+                    if (!isCheck)
+                    {
+                        if (App.isNetwork && !isInspection)
                         {
-                            if (App.isNetwork && !isInspection)
+                            App.isNetwork = false;
+                            if (App.isStart)
                             {
-                                App.isNetwork = false;
-                                if (App.isStart)
+                                Device.BeginInvokeOnMainThread(async () =>
                                 {
                                     await PopupNavigation.PushAsync(new Errror(description, null));
-                                }
-                                else
-                                {
-                                    DependencyService.Get<IToast>().ShowMessage(description);
-                                }
+                                });
                             }
-                            else if (!isAlRedy && !isInspection)
+                            else
                             {
-                                isAlRedy = true;
-                                if (App.isStart)
-                                {
-                                    await PopupNavigation.PushAsync(new Errror(description, null));
-                                }
-                                else
+                                Device.BeginInvokeOnMainThread(async () =>
                                 {
                                     DependencyService.Get<IToast>().ShowMessage(description);
-                                }
-                                RefreshIsAlRed();
+                                });
                             }
                         }
-                        else
+                        else if (!isAlRedy && !isInspection)
                         {
-                            TaskManager.isWorkTask = true;
-                            if(!TaskManager.isWorkTask)
+                            isAlRedy = true;
+                            if (App.isStart)
                             {
-                                TaskManager.CommandToDo("CheckTask");
+                                Device.BeginInvokeOnMainThread(async () =>
+                                {
+                                    await PopupNavigation.PushAsync(new Errror(description, null));
+                                });
                             }
-                            App.isNetwork = true;
+                            else
+                            {
+                                Device.BeginInvokeOnMainThread(async () =>
+                                {
+                                    DependencyService.Get<IToast>().ShowMessage(description);
+                                });
+                            }
+                            RefreshIsAlRed();
                         }
                     }
-                });
+                    else
+                    {
+                        TaskManager.isWorkTask = true;
+                        if (!TaskManager.isWorkTask)
+                        {
+                            TaskManager.CommandToDo("CheckTask");
+                        }
+                        App.isNetwork = true;
+                    }
+                    }
             }
             catch (Exception e)
             {
-
+                App.isNetwork = false;
             }
         }
 

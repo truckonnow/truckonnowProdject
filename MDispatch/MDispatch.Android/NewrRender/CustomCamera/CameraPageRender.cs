@@ -14,7 +14,6 @@ using Android.Support.V4.Content;
 using Android.Views;
 using Android.Widget;
 using MDispatch.Droid.NewrRender;
-using MDispatch.Droid.NewrRender.NewElementXamarin.Forms;
 using MDispatch.NewElement;
 using Xamarin.Forms.Platform.Android;
 using static Android.Hardware.Camera;
@@ -59,7 +58,7 @@ namespace MDispatch.Droid.NewrRender
                 RelativeLayout.LayoutParams.MatchParent);
             liveView.LayoutParameters = liveViewParams;
             mainLayout.AddView(liveView);
-            capturePhotoButton = new PaintCodeButton(Context);
+            capturePhotoButton = new Button(Context);
             capturePhotoButton.SetBackgroundDrawable(ContextCompat.GetDrawable(Context, Resource.Drawable.Take));
             RelativeLayout.LayoutParams captureButtonParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WrapContent,

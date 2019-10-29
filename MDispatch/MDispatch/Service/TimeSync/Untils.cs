@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using System.Threading;
+using System.Threading.Tasks;
+using MDispatch.Service.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Plugin.Settings;
@@ -23,35 +25,39 @@ namespace MDispatch.Service.TimeSync
             }
         }
 
-        private static void SyncServer(object state)
+        private static async void SyncServer(object state)
         {
-            DateTime dateTime = new DateTime();
-            IRestResponse response = null;
-            string content = null;
-            try
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
             {
-                string token = CrossSettings.Current.GetValueOrDefault("Token", "");
-                RestClient client = new RestClient(Config.BaseReqvesteUrl);
-                RestRequest request = new RestRequest("Mobile/Sync", Method.GET);
-                request.AddHeader("Accept", "application/json");
-                client.Timeout = 10000;
-                request.AddParameter("token", token);
-                response = client.Execute(request);
-                content = response.Content;
-                if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                DateTime dateTime = new DateTime();
+                IRestResponse response = null;
+                string content = null;
+                try
                 {
-                   
+                    string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+                    RestClient client = new RestClient(Config.BaseReqvesteUrl);
+                    RestRequest request = new RestRequest("Mobile/Sync", Method.GET);
+                    request.AddHeader("Accept", "application/json");
+                    client.Timeout = 10000;
+                    request.AddParameter("token", token);
+                    response = client.Execute(request);
+                    content = response.Content;
+                    if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    {
+                        App.isNetwork = false;
+                    }
+                    else
+                    {
+                        GetData(content, ref dateTime);
+                        string timeZpneCount = NodaTime.DateTimeZoneProviders.Tzdb.GetSystemDefault().MaxOffset.ToString();
+                        dateTime = dateTime.AddHours(Convert.ToInt32(timeZpneCount));
+                        App.time = dateTime;
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    GetData(content, ref dateTime);
-                    string timeZpneCount = NodaTime.DateTimeZoneProviders.Tzdb.GetSystemDefault().MaxOffset.ToString();
-                    dateTime = dateTime.AddHours(Convert.ToInt32(timeZpneCount));
-                    App.time = dateTime;
                 }
-            }
-            catch (Exception)
-            {
             }
         }
 

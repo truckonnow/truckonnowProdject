@@ -3,7 +3,9 @@ using Newtonsoft.Json.Linq;
 using Plugin.Settings;
 using RestSharp;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
@@ -17,9 +19,9 @@ namespace MDispatch.Service.Tasks
         {
             if ((int)task[0] == 1)
             {
-                string token = (string)task[0];
-                string vehiclwInformationId = (string)task[1];
-                Models.PhotoInspection photoInspection = (Models.PhotoInspection)task[2];
+                string token = (string)task[1];
+                string vehiclwInformationId = (string)task[2];
+                Models.PhotoInspection photoInspection = (Models.PhotoInspection)task[3];
                 if (photoInspection.Damages != null)
                 {
                     photoInspection.Damages.ForEach((dm) =>
@@ -53,7 +55,7 @@ namespace MDispatch.Service.Tasks
                 string content = null;
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("api.Task/StartTask", Method.POST);
-                client.Timeout = 60000;
+                client.Timeout = 5000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 request.AddParameter("nameMethod", "SavePhoto");
@@ -77,27 +79,29 @@ namespace MDispatch.Service.Tasks
                 }
                 else
                 {
+                    string noStartkLoad = CrossSettings.Current.GetValueOrDefault("noStartkLoad", "");
+                    int noStartkLoads = noStartkLoad.Split(',').Where(s => s == id).ToList().Count;
                     TaskManager.isWorkTask = false;
                     string photoInspectionJson = JsonConvert.SerializeObject(photoInspection);
                     byte[] photoInspectionArray = Encoding.Default.GetBytes(photoInspectionJson);
                     string photoInspectionBase64 = Convert.ToBase64String(photoInspectionArray);
-                    CrossSettings.Current.AddOrUpdateValue(res, photoInspectionBase64);
-                    CrossSettings.Current.AddOrUpdateValue(res + "Param", $"{id}");
-                    CrossSettings.Current.AddOrUpdateValue(res + "method", $"SavePhoto");
-                    string noStartkLoad = CrossSettings.Current.GetValueOrDefault("noStartkLoad", "");
-                    CrossSettings.Current.AddOrUpdateValue("noStartkLoad", noStartkLoad + res + ",");
+                    CrossSettings.Current.AddOrUpdateValue($"{id}_{noStartkLoads}", photoInspectionBase64);
+                    CrossSettings.Current.AddOrUpdateValue($"{id}_{noStartkLoads}" + "Param", $"{id}");
+                    CrossSettings.Current.AddOrUpdateValue($"{id}_{noStartkLoads}" + "method", $"SavePhoto");
+                    CrossSettings.Current.AddOrUpdateValue("noStartkLoad", noStartkLoad + $"{id}_{noStartkLoads}" + ",");
                 }
             }
             catch
             {
+                string noStartkLoad = CrossSettings.Current.GetValueOrDefault("noStartkLoad", "");
+                int noStartkLoads = noStartkLoad.Split(',').Where(s => s == id).ToList().Count;
                 string photoInspectionJson = JsonConvert.SerializeObject(photoInspection);
                 byte[] photoInspectionArray = Encoding.Default.GetBytes(photoInspectionJson);
                 string photoInspectionBase64 = Convert.ToBase64String(photoInspectionArray);
-                CrossSettings.Current.AddOrUpdateValue(res, photoInspectionBase64);
-                CrossSettings.Current.AddOrUpdateValue(res + "Param", $"{id}");
-                CrossSettings.Current.AddOrUpdateValue(res + "method", $"SavePhoto");
-                string noStartkLoad = CrossSettings.Current.GetValueOrDefault("noStartkLoad", "");
-                CrossSettings.Current.AddOrUpdateValue("noStartkLoad", noStartkLoad + res + ",");
+                CrossSettings.Current.AddOrUpdateValue($"{id}_{noStartkLoads}", photoInspectionBase64);
+                CrossSettings.Current.AddOrUpdateValue($"{id}_{noStartkLoads}" + "Param", $"{id}");
+                CrossSettings.Current.AddOrUpdateValue($"{id}_{noStartkLoads}" + "method", $"SavePhoto");
+                CrossSettings.Current.AddOrUpdateValue("noStartkLoad", noStartkLoad + $"{id}_{noStartkLoads}" + ",");
             }
         }
 
@@ -112,12 +116,12 @@ namespace MDispatch.Service.Tasks
                 {
                     RestClient client = new RestClient(Config.BaseReqvesteUrl);
                     int countReqvest = photoInspectionBase64.Length / 256;
-                    for (int i = 0; i < countReqvest + 1; i++)
+                    for (int i = 0; countReqvest != 0 && i < countReqvest + 1; i++)
                     {
                         photoInspectionBase64 = CrossSettings.Current.GetValueOrDefault(idTask, null);
                         string photoInspectionTmp = GetRangeArray(photoInspectionBase64, 256);
                         RestRequest request = new RestRequest("api.Task/LoadTask", Method.POST);
-                        client.Timeout = 60000;
+                        client.Timeout = 10000;
                         request.AddHeader("Accept", "application/json");
                         request.AddParameter("token", token);
                         request.AddParameter("idTask", idTask);
@@ -164,7 +168,7 @@ namespace MDispatch.Service.Tasks
                 string method = CrossSettings.Current.GetValueOrDefault(idTask + "method", "");
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("api.Task/EndTask", Method.POST);
-                client.Timeout = 60000;
+                client.Timeout = 10000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 request.AddParameter("idTask", idTask);
@@ -184,15 +188,15 @@ namespace MDispatch.Service.Tasks
                 }
                 else if (res != null && res != "" && App.isNetwork)
                 {
-                    TaskManager.isWorkTask = false;
-                    string noEndkLoad = CrossSettings.Current.GetValueOrDefault("noEndkLoad", "");
-                    CrossSettings.Current.AddOrUpdateValue("noEndkLoad", noEndkLoad + res + ",");
+                    //TaskManager.isWorkTask = false;
+                    //string noEndkLoad = CrossSettings.Current.GetValueOrDefault("noEndkLoad", "");
+                    //CrossSettings.Current.AddOrUpdateValue("noEndkLoad", noEndkLoad + idTask + ",");
                 }
             }
             catch
             {
-                string noEndkLoad = CrossSettings.Current.GetValueOrDefault("noEndkLoad", "");
-                CrossSettings.Current.AddOrUpdateValue("noEndkLoad", noEndkLoad + res + ",");
+                //string noEndkLoad = CrossSettings.Current.GetValueOrDefault("noEndkLoad", "");
+                //CrossSettings.Current.AddOrUpdateValue("noEndkLoad", noEndkLoad + idTask + ",");
             }
         }
 

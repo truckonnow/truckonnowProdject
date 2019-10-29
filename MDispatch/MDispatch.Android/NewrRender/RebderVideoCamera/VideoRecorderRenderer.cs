@@ -11,23 +11,22 @@ using Android.Media;
 using Android.Support.V4.App;
 using Android.Support.V4.Content;
 using Android.Views;
+using Android.Widget;
 using Java.Interop;
-using MDispatch.Droid.NewrRender.NewElementXamarin.Forms;
 using MDispatch.Droid.NewrRender.RebderVideoCamera;
 using MDispatch.NewElement.CustomVideoCam;
-using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using static Android.Hardware.Camera;
 using static Android.Views.TextureView;
 
-[assembly: ExportRenderer(typeof(VideoCameraPage), typeof(VideoRecorderRenderer))]
+[assembly: Xamarin.Forms.ExportRenderer(typeof(VideoCameraPage), typeof(VideoRecorderRenderer))]
 namespace MDispatch.Droid.NewrRender.RebderVideoCamera
 {
     class VideoRecorderRenderer : PageRenderer, ISurfaceTextureListener, IAutoFocusCallback
     {
         Android.Widget.RelativeLayout mainLayout;
         TextureView liveView;
-        PaintCodeButton capturePhotoButton;
+        Button capturePhotoButton;
         [Obsolete]
         Android.Hardware.Camera camera;
         MediaRecorder recorder;
@@ -87,7 +86,7 @@ namespace MDispatch.Droid.NewrRender.RebderVideoCamera
             liveView.LayoutParameters = liveViewParams;
             mainLayout.AddView(liveView);
 
-            capturePhotoButton = new PaintCodeButton(Context);
+            capturePhotoButton = new Button(Context);
             Android.Widget.RelativeLayout.LayoutParams captureButtonParams = new Android.Widget.RelativeLayout.LayoutParams(
                 LayoutParams.WrapContent,
                 LayoutParams.WrapContent);
