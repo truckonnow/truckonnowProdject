@@ -14766,88 +14766,88 @@ namespace MDispatch.Droid
 			public const int Hint13 = 2130837707;
 			
 			// aapt resource value: 0x7f0200cc
-			public const int Hint15 = 2130837708;
+			public const int Hint14 = 2130837708;
 			
 			// aapt resource value: 0x7f0200cd
-			public const int Hint16 = 2130837709;
+			public const int Hint15 = 2130837709;
 			
 			// aapt resource value: 0x7f0200ce
-			public const int Hint17 = 2130837710;
+			public const int Hint16 = 2130837710;
 			
 			// aapt resource value: 0x7f0200cf
-			public const int Hint18 = 2130837711;
+			public const int Hint17 = 2130837711;
 			
 			// aapt resource value: 0x7f0200d0
 			public const int Hint19 = 2130837712;
 			
 			// aapt resource value: 0x7f0200d1
-			public const int hint2 = 2130837713;
+			public const int Hint2 = 2130837713;
 			
 			// aapt resource value: 0x7f0200d2
-			public const int Hint21 = 2130837714;
+			public const int Hint20 = 2130837714;
 			
 			// aapt resource value: 0x7f0200d3
-			public const int Hint22 = 2130837715;
+			public const int Hint21 = 2130837715;
 			
 			// aapt resource value: 0x7f0200d4
-			public const int Hint23 = 2130837716;
+			public const int Hint22 = 2130837716;
 			
 			// aapt resource value: 0x7f0200d5
-			public const int Hint24 = 2130837717;
+			public const int Hint23 = 2130837717;
 			
 			// aapt resource value: 0x7f0200d6
-			public const int Hint25 = 2130837718;
+			public const int Hint24 = 2130837718;
 			
 			// aapt resource value: 0x7f0200d7
-			public const int Hint26 = 2130837719;
+			public const int Hint25 = 2130837719;
 			
 			// aapt resource value: 0x7f0200d8
-			public const int Hint27 = 2130837720;
+			public const int Hint26 = 2130837720;
 			
 			// aapt resource value: 0x7f0200d9
-			public const int Hint28 = 2130837721;
+			public const int Hint27 = 2130837721;
 			
 			// aapt resource value: 0x7f0200da
-			public const int Hint3 = 2130837722;
+			public const int Hint28 = 2130837722;
 			
 			// aapt resource value: 0x7f0200db
-			public const int Hint30 = 2130837723;
+			public const int Hint29 = 2130837723;
 			
 			// aapt resource value: 0x7f0200dc
-			public const int Hint31 = 2130837724;
+			public const int Hint3 = 2130837724;
 			
 			// aapt resource value: 0x7f0200dd
-			public const int Hint32 = 2130837725;
+			public const int Hint30 = 2130837725;
 			
 			// aapt resource value: 0x7f0200de
-			public const int Hint33 = 2130837726;
+			public const int Hint31 = 2130837726;
 			
 			// aapt resource value: 0x7f0200df
-			public const int Hint34 = 2130837727;
+			public const int Hint32 = 2130837727;
 			
 			// aapt resource value: 0x7f0200e0
-			public const int Hint35 = 2130837728;
+			public const int Hint33 = 2130837728;
 			
 			// aapt resource value: 0x7f0200e1
-			public const int Hint36 = 2130837729;
+			public const int Hint34 = 2130837729;
 			
 			// aapt resource value: 0x7f0200e2
-			public const int Hint37 = 2130837730;
+			public const int Hint35 = 2130837730;
 			
 			// aapt resource value: 0x7f0200e3
-			public const int Hint38 = 2130837731;
+			public const int Hint36 = 2130837731;
 			
 			// aapt resource value: 0x7f0200e4
-			public const int Hint39 = 2130837732;
+			public const int Hint37 = 2130837732;
 			
 			// aapt resource value: 0x7f0200e5
-			public const int Hint4 = 2130837733;
+			public const int Hint38 = 2130837733;
 			
 			// aapt resource value: 0x7f0200e6
-			public const int Hint40 = 2130837734;
+			public const int Hint39 = 2130837734;
 			
 			// aapt resource value: 0x7f0200e7
-			public const int Hint45 = 2130837735;
+			public const int Hint4 = 2130837735;
 			
 			// aapt resource value: 0x7f0200e8
 			public const int Hint5 = 2130837736;

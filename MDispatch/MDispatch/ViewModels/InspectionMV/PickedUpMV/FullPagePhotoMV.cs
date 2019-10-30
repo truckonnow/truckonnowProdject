@@ -338,7 +338,10 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                     await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
                     isNavigationMany = false;
                 }
-                Navigation.RemovePage(Navigation.NavigationStack[1]);
+                if (Navigation.NavigationStack.Count > 1)
+                {
+                    Navigation.RemovePage(Navigation.NavigationStack[1]);
+                }
                 DependencyService.Get<IToast>().ShowMessage($"Photo {Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion))} saved");
                 TaskManager.CommandToDo("SavePhoto", 1, token, VehiclwInformation.Id, PhotoInspection);
             }

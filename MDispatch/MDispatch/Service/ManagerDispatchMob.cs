@@ -298,7 +298,7 @@ namespace MDispatch.Service
                 }
                 else if (typeReqvest == "SaveRecount")
                 {
-                    statePay = inspection.SaveVideoRecount(token, idShiping, type, (Video)obj, ref description);
+                    statePay = new Inspection().SaveVideoRecount(token, idShiping, type, (Video)obj, ref description);
                 }
             }
             inspection = null;

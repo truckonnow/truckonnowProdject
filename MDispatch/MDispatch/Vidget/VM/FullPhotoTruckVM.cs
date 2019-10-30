@@ -3,6 +3,7 @@ using MDispatch.NewElement;
 using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
 using MDispatch.Service.Net;
+using MDispatch.Service.Tasks;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using Newtonsoft.Json;
@@ -82,14 +83,17 @@ namespace MDispatch.Vidget.VM
         [System.Obsolete]
         private async Task NextPage()
         {
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            bool isTask = false;
             bool isNavigationMany = false;
             bool isEndInspection = false;
             if (navigation.NavigationStack.Count > 2)
             {
-                await PopupNavigation.PushAsync(new LoadPage());
-                isNavigationMany = true;
+                //await PopupNavigation.PushAsync(new LoadPage());
+                //isNavigationMany = true;
+                isTask = true;
+                TaskManager.CommandToDo("SaveInspactionDriver", 1, token, IdDriver, Photo, IndexCurent);
             }
-            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
             await Task.Run(() => Utils.CheckNet());

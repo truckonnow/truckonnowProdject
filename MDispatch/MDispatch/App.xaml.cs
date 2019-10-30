@@ -27,6 +27,7 @@ namespace MDispatch
             }
             else
             {
+                TaskManager.isWorkTask = true;
                 isAvtorization = true;
                 MainPage = new AnimationNavigationPage(new TabPage(new Service.ManagerDispatchMob()));
             }
@@ -65,6 +66,7 @@ namespace MDispatch
             
             if (isAvtorization)
             {
+                TaskManager.isWorkTask = true;
                 //Task.Run(async () =>
                 //{
                 //    DependencyService.Get<IStore>().OnTokenRefresh();

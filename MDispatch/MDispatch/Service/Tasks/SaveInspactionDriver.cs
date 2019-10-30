@@ -1,38 +1,27 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using System.Linq;
+using System.Text;
+using MDispatch.Models;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Plugin.Settings;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 
 namespace MDispatch.Service.Tasks
 {
-    public class SavePhoto : ITask
+    public class SaveInspactionDriver : ITask
     {
-        private Inspection inspection = new Inspection(); 
-
         public void StartTask(params object[] task)
         {
             if ((int)task[0] == 1)
             {
                 string token = (string)task[1];
-                string vehiclwInformationId = (string)task[2];
-                Models.PhotoInspection photoInspection = (Models.PhotoInspection)task[3];
-                if (photoInspection.Damages != null)
-                {
-                    photoInspection.Damages.ForEach((dm) =>
-                    {
-                        dm.Image = null;
-                        dm.ImageSource = null;
-                    });
-                }
-                StartTask1(token, vehiclwInformationId, photoInspection);
+                string IdDriver = (string)task[2];
+                Photo photo = (Photo)task[3];
+                int IndexCurent = (int)task[3];
+                StartTask1(token, IdDriver, photo, IndexCurent);
             }
-            else if((int)task[0] == 2)
+            else if ((int)task[0] == 2)
             {
                 string token = (string)task[1];
                 string taskId = (string)task[2];
@@ -46,7 +35,7 @@ namespace MDispatch.Service.Tasks
             }
         }
 
-        private void StartTask1(string token, string id, Models.PhotoInspection photoInspection)
+        private void StartTask1(string token, string idDriver, Photo photo, int indexCurent)
         {
             string res = null;
             try
@@ -58,19 +47,19 @@ namespace MDispatch.Service.Tasks
                 client.Timeout = 5000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
-                request.AddParameter("nameMethod", "SavePhoto");
-                request.AddParameter("optionalParameter", $"{id}");
+                request.AddParameter("nameMethod", "SaveInspactionDriver");
+                request.AddParameter("optionalParameter", $"{idDriver},{indexCurent}");
                 response = client.Execute(request);
                 content = response.Content;
                 res = GetData(content);
                 if (res != null && res != "" && App.isNetwork)
                 {
-                    string photoInspectionJson = JsonConvert.SerializeObject(photoInspection);
-                    byte[] photoInspectionArray = Encoding.Default.GetBytes(photoInspectionJson);
-                    string photoInspectionBase64 = Convert.ToBase64String(photoInspectionArray);
-                    CrossSettings.Current.AddOrUpdateValue(res, photoInspectionBase64);
-                    CrossSettings.Current.AddOrUpdateValue(res + "Param", $"{id}");
-                    CrossSettings.Current.AddOrUpdateValue(res + "method", $"SavePhoto");
+                    string photoJson = JsonConvert.SerializeObject(photo);
+                    byte[] photoArray = Encoding.Default.GetBytes(photoJson);
+                    string photoBase64 = Convert.ToBase64String(photoArray);
+                    CrossSettings.Current.AddOrUpdateValue(res, photoBase64);
+                    CrossSettings.Current.AddOrUpdateValue(res + "Param", $"{idDriver},{indexCurent}");
+                    CrossSettings.Current.AddOrUpdateValue(res + "method", $"SaveInspactionDriver");
                     string allTaskLoad = CrossSettings.Current.GetValueOrDefault("allTaskLoad", "");
                     string workLoad = CrossSettings.Current.GetValueOrDefault("workLoad", "");
                     CrossSettings.Current.AddOrUpdateValue("allTaskLoad", allTaskLoad + res + ",");
@@ -80,28 +69,28 @@ namespace MDispatch.Service.Tasks
                 else
                 {
                     string noStartkLoad = CrossSettings.Current.GetValueOrDefault("noStartkLoad", "");
-                    int noStartkLoads = noStartkLoad.Split(',').Where(s => s.Contains(id)).ToList().Count;
+                    int noStartkLoads = noStartkLoad.Split(',').Where(s => s.Contains(idDriver)).ToList().Count;
                     TaskManager.isWorkTask = false;
-                    string photoInspectionJson = JsonConvert.SerializeObject(photoInspection);
-                    byte[] photoInspectionArray = Encoding.Default.GetBytes(photoInspectionJson);
-                    string photoInspectionBase64 = Convert.ToBase64String(photoInspectionArray);
-                    CrossSettings.Current.AddOrUpdateValue($"{id}_{noStartkLoads}", photoInspectionBase64);
-                    CrossSettings.Current.AddOrUpdateValue($"{id}_{noStartkLoads}" + "Param", $"{id}");
-                    CrossSettings.Current.AddOrUpdateValue($"{id}_{noStartkLoads}" + "method", $"SavePhoto");
-                    CrossSettings.Current.AddOrUpdateValue("noStartkLoad", noStartkLoad + $"{id}_{noStartkLoads}" + ",");
+                    string photoJson = JsonConvert.SerializeObject(photo);
+                    byte[] photoArray = Encoding.Default.GetBytes(photoJson);
+                    string photoBase64 = Convert.ToBase64String(photoArray);
+                    CrossSettings.Current.AddOrUpdateValue($"{idDriver}_{noStartkLoads}", photoBase64);
+                    CrossSettings.Current.AddOrUpdateValue($"{idDriver}_{noStartkLoads}" + "Param", $"{idDriver}");
+                    CrossSettings.Current.AddOrUpdateValue($"{idDriver}_{noStartkLoads}" + "method", $"SavePhoto");
+                    CrossSettings.Current.AddOrUpdateValue("noStartkLoad", noStartkLoad + $"{idDriver}_{noStartkLoads}" + ",");
                 }
             }
             catch
             {
                 string noStartkLoad = CrossSettings.Current.GetValueOrDefault("noStartkLoad", "");
-                int noStartkLoads = noStartkLoad.Split(',').Where(s => s.Contains(id)).ToList().Count;
-                string photoInspectionJson = JsonConvert.SerializeObject(photoInspection);
-                byte[] photoInspectionArray = Encoding.Default.GetBytes(photoInspectionJson);
-                string photoInspectionBase64 = Convert.ToBase64String(photoInspectionArray);
-                CrossSettings.Current.AddOrUpdateValue($"{id}_{noStartkLoads}", photoInspectionBase64);
-                CrossSettings.Current.AddOrUpdateValue($"{id}_{noStartkLoads}" + "Param", $"{id}");
-                CrossSettings.Current.AddOrUpdateValue($"{id}_{noStartkLoads}" + "method", $"SavePhoto");
-                CrossSettings.Current.AddOrUpdateValue("noStartkLoad", noStartkLoad + $"{id}_{noStartkLoads}" + ",");
+                int noStartkLoads = noStartkLoad.Split(',').Where(s => s.Contains(idDriver)).ToList().Count;
+                string photoJson = JsonConvert.SerializeObject(photo);
+                byte[] photoArray = Encoding.Default.GetBytes(photoJson);
+                string photoBase64 = Convert.ToBase64String(photoArray);
+                CrossSettings.Current.AddOrUpdateValue($"{idDriver}_{noStartkLoads}", photoBase64);
+                CrossSettings.Current.AddOrUpdateValue($"{idDriver}_{noStartkLoads}" + "Param", $"{idDriver}");
+                CrossSettings.Current.AddOrUpdateValue($"{idDriver}_{noStartkLoads}" + "method", $"SavePhoto");
+                CrossSettings.Current.AddOrUpdateValue("noStartkLoad", noStartkLoad + $"{idDriver}_{noStartkLoads}" + ",");
             }
         }
 
@@ -200,7 +189,6 @@ namespace MDispatch.Service.Tasks
             }
         }
 
-
         private string GetData(string respJsonStr)
         {
             string res = null;
@@ -222,9 +210,9 @@ namespace MDispatch.Service.Tasks
             string tmp = null;
             if (base64.Length != 0)
             {
-                if(base64.Length >= count)
+                if (base64.Length >= count)
                 {
-                    for(int i = 0; i < count; i++)
+                    for (int i = 0; i < count; i++)
                     {
                         tmp += base64[i];
                     }
@@ -240,15 +228,5 @@ namespace MDispatch.Service.Tasks
                 return null;
             }
         }
-
-        //private byte[] ObjectToByteArray(Models.PhotoInspection obj)
-        //{
-        //    BinaryFormatter bf = new BinaryFormatter();
-        //    using (var ms = new MemoryStream())
-        //    {
-        //        bf.Serialize(ms, obj);
-        //        return ms.ToArray();
-        //    }
-        //}
     }
 }

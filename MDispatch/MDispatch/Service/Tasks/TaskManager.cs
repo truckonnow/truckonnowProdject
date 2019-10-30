@@ -19,6 +19,11 @@
                         task = new SavePhoto();
                         break;
                     }
+                case "SaveInspactionDriver":
+                    {
+                        task = new SaveInspactionDriver();
+                        break;
+                    }
                 case "CheckTask":
                     {
                         task = new CheckTask();

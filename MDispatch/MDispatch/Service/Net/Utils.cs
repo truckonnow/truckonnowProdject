@@ -75,14 +75,14 @@ namespace MDispatch.Service.Net
                     }
                     else
                     {
-                        TaskManager.isWorkTask = false;
                         bool isCheck = false;
                         string description = null;
                         GetData(content, ref isCheck, ref description);
                     if (!isCheck)
                     {
-                        if (App.isNetwork && !isInspection)
+                        if (App.isNetwork)
                         {
+                            TaskManager.isWorkTask = false;
                             App.isNetwork = false;
                             if (App.isStart)
                             {
@@ -99,8 +99,9 @@ namespace MDispatch.Service.Net
                                 });
                             }
                         }
-                        else if (!isAlRedy && !isInspection)
+                        else if (!isAlRedy)
                         {
+                            TaskManager.isWorkTask = false;
                             isAlRedy = true;
                             if (App.isStart)
                             {
@@ -121,11 +122,12 @@ namespace MDispatch.Service.Net
                     }
                     else
                     {
-                        TaskManager.isWorkTask = true;
                         if (!TaskManager.isWorkTask)
                         {
                             TaskManager.CommandToDo("CheckTask");
                         }
+
+                        TaskManager.isWorkTask = true;
                         App.isNetwork = true;
                     }
                     }

@@ -1,4 +1,5 @@
 ﻿using ApiMobaileServise.EmailSmtp;
+using ApiMobaileServise.Models;
 using ApiMobaileServise.Notify;
 using ApiMobaileServise.Servise.AddDamage;
 using DaoModels.DAO.Models;
@@ -330,7 +331,7 @@ namespace ApiMobaileServise.Servise
 
 
         #region Task
-        public List<int> CheckTask(string token)
+        public List<Tasks> CheckTask(string token)
         {
             return sqlCommandApiMobile.CheckTask(token);
         }
@@ -362,6 +363,11 @@ namespace ApiMobaileServise.Servise
             {
                 parameter = optionalParameter.Split(',');
                 await SavePhotoInspection(parameter[0], objSave);
+            }
+            else if (nameMethod == "SaveInspactionDriver")
+            {
+                //parameter = optionalParameter.Split(',');
+                //await SavePhotoInspection(parameter[0], objSave);
             }
         }
         #endregion

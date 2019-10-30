@@ -1,4 +1,5 @@
-﻿using DaoModels.DAO;
+﻿using ApiMobaileServise.Models;
+using DaoModels.DAO;
 using DaoModels.DAO.Models;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -315,13 +316,18 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
-        public List<int> CheckTask(string token)
+        public List<Tasks> CheckTask(string token)
         {
             Driver driver = context.Drivers
                 .First(d => d.Token == token);
             return context.TaskLoads
                 .Where(t => t.IdDriver == driver.Id.ToString())
-                .Select(t => t.Id).ToList();
+                .Select(t => new Tasks()
+                {
+                    IdTask = t.Id.ToString(),
+                    Method =t.NameMethod
+                })
+                .ToList();
         }
 
         public string LoadTaskDb(string idTask, byte[] buffer)

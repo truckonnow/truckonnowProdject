@@ -84,13 +84,6 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         private async void InitShipping()
         {
             Isloader = true;
-            bool isNavigationMany = false;
-            if (Navigation.NavigationStack.Count > 2)
-            {
-                await PopupNavigation.PushAsync(new LoadPage());
-                isNavigationMany = true;
-            }
-            //await PopupNavigation.PushAsync(new LoadPage());
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
@@ -104,11 +97,6 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 });
                 if (state == 2)
                 {
-                    if (isNavigationMany)   
-                    {
-                        await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
-                        isNavigationMany = false;
-                    }
                     if (Navigation.NavigationStack.Count > 1)
                     {
                         await Navigation.PopAsync();
@@ -117,20 +105,10 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 }
                 else if (state == 3)
                 {
-                    if (isNavigationMany)
-                    {
-                        await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
-                        isNavigationMany = false;
-                    }
                     Shipping = shipping1;
                 }
                 else if (state == 4)
                 {
-                    if (isNavigationMany)
-                    {
-                        await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
-                        isNavigationMany = false;
-                    }
                     if (Navigation.NavigationStack.Count > 1)
                     {
                         await Navigation.PopAsync();
