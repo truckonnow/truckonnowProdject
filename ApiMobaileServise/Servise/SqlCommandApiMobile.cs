@@ -75,10 +75,11 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
-        public async Task SaveInspectionDriverInDb(string idDriver, Photo photo, int IndexPhoto)
+        public async Task SaveInspectionDriverInDb(string idDriver, PhotoDriver photo, int IndexPhoto)
         {
-            context.Drivers.Include("InspectionDrivers.PhotosTruck").ToList();
-            Driver driver = context.Drivers.FirstOrDefault(d => d.Id == Convert.ToInt32(idDriver));
+            //context.Drivers.Include("InspectionDrivers.PhotosTruck").ToList();
+            Driver driver = context.Drivers.Include(d => d.InspectionDrivers)
+                .FirstOrDefault(d => d.Id == Convert.ToInt32(idDriver));
             if (driver.InspectionDrivers != null && driver.InspectionDrivers.Count != 0)
             {
                 InspectionDriver inspectionDrivers = driver.InspectionDrivers.FirstOrDefault(i => DateTime.Parse(i.Date).Date == DateTime.Now.Date);
@@ -86,11 +87,23 @@ namespace ApiMobaileServise.Servise
                 {
                     inspectionDrivers = new InspectionDriver();
                     inspectionDrivers.Date = DateTime.Now.ToString();
-                    inspectionDrivers.PhotosTruck = new List<Photo>();
+                    inspectionDrivers.PhotosTruck = new List<PhotoDriver>();
+                    //inspectionDrivers.PhotosTruck.
                     driver.InspectionDrivers.Add(inspectionDrivers);
                 }
-                inspectionDrivers.CountPhoto++;
-                inspectionDrivers.PhotosTruck.Add(photo);
+                await context.SaveChangesAsync();
+                photo.IdInspaction = inspectionDrivers.Id;
+                photo.IndexPhoto = IndexPhoto;
+                inspectionDrivers.PhotosTruck = context.PhotoDrivers.Where(p => p.IdInspaction == inspectionDrivers.Id).ToList();
+                if(inspectionDrivers.PhotosTruck.FirstOrDefault(p => p.IndexPhoto == IndexPhoto) == null)
+                {
+                    inspectionDrivers.CountPhoto++;
+                    inspectionDrivers.PhotosTruck.Add(photo);
+                }
+                else
+                {
+
+                }
                 await context.SaveChangesAsync();
             }
             else
@@ -98,10 +111,12 @@ namespace ApiMobaileServise.Servise
                 InspectionDriver inspectionDrivers = new InspectionDriver();
                 driver.InspectionDrivers = new List<InspectionDriver>();
                 inspectionDrivers.Date = DateTime.Now.ToString();
-                inspectionDrivers.PhotosTruck = new List<Photo>();
+                inspectionDrivers.PhotosTruck = new List<PhotoDriver>();
                 inspectionDrivers.CountPhoto++;
                 inspectionDrivers.PhotosTruck.Add(photo);
                 driver.InspectionDrivers.Add(inspectionDrivers);
+                await context.SaveChangesAsync();
+                photo.IdInspaction = inspectionDrivers.Id;
                 await context.SaveChangesAsync();
             }
         }
@@ -128,7 +143,7 @@ namespace ApiMobaileServise.Servise
             {
                 InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
                 DateTime dateTime = Convert.ToDateTime(inspectionDriver.Date);
-                if(dateTime.Date < DateTime.Now.Date || (inspectionDriver.CountPhoto <= 44))
+                if(dateTime.Date != DateTime.Now.Date || (inspectionDriver.CountPhoto <= 44))
                 {
                     isInspaction = false;
                 }

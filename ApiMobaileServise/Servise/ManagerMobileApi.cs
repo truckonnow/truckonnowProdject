@@ -46,7 +46,7 @@ namespace ApiMobaileServise.Servise
 
         public async void SaveInspactionDriver(string idDriver, string photoJson, int indexPhoto)
         {
-            Photo photo = JsonConvert.DeserializeObject<Photo>(photoJson);
+            PhotoDriver photo = JsonConvert.DeserializeObject<PhotoDriver>(photoJson);
             //photo.path = photo.path.Insert(2, $"/{DateTime.Now.ToLongDateString()}");
             await sqlCommandApiMobile.SaveInspectionDriverInDb(idDriver, photo, indexPhoto);
         }
@@ -359,15 +359,22 @@ namespace ApiMobaileServise.Servise
         private async void GoToEndTask(string objSave, string nameMethod, string optionalParameter)
         {
             string[] parameter = null;
-            if (nameMethod == "SavePhoto")
+            try
             {
-                parameter = optionalParameter.Split(',');
-                await SavePhotoInspection(parameter[0], objSave);
+                if (nameMethod == "SavePhoto")
+                {
+                    parameter = optionalParameter.Split(',');
+                    await SavePhotoInspection(parameter[0], objSave);
+                }
+                else if (nameMethod == "SaveInspactionDriver")
+                {
+                    parameter = optionalParameter.Split(',');
+                    SaveInspactionDriver(parameter[0], objSave, Convert.ToInt32(parameter[1]));
+                }
             }
-            else if (nameMethod == "SaveInspactionDriver")
+            catch
             {
-                //parameter = optionalParameter.Split(',');
-                //await SavePhotoInspection(parameter[0], objSave);
+
             }
         }
         #endregion

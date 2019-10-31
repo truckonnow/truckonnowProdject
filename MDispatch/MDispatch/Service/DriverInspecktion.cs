@@ -107,7 +107,7 @@ namespace MDispatch.Service
             {
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Driver/UpdateInspectionDriver", Method.POST);
-                client.Timeout = 60000;
+                client.Timeout = 10000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 request.AddParameter("idDriver", idDriver);

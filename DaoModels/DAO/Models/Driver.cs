@@ -18,6 +18,6 @@ namespace DaoModels.DAO.Models
         public bool IsInspectionDriver { get; set; }
         public bool IsInspectionToDayDriver { get; set; }
         public Geolocations geolocations { get; set; }
-        public List<InspectionDriver> InspectionDrivers { get; set; }
+        public virtual List<InspectionDriver> InspectionDrivers { get; set; }
     }
 }

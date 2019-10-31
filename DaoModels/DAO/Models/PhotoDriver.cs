@@ -1,12 +1,16 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace DaoModels.DAO.Models
 {
-    public class Photo
+    public class PhotoDriver
     {
         public int Id { get; set; }
+        public int IdInspaction { get; set; }
+        public int IndexPhoto { get; set; }
         public string path { get; set; }
         public double Width { get; set; }
         public double Height { get; set; }
@@ -28,7 +32,7 @@ namespace DaoModels.DAO.Models
                         imageFile.Flush();
                     }
                 }
-                catch(Exception)
+                catch (Exception)
                 {
 
                 }
@@ -43,7 +47,7 @@ namespace DaoModels.DAO.Models
                         tmpJson = tmpJson.Replace("\"", "");
                         return tmpJson;
                     }
-                    catch(Exception)
+                    catch (Exception)
                     {
                         return "";
                     }
@@ -53,11 +57,6 @@ namespace DaoModels.DAO.Models
                     return "";
                 }
             }
-        }
-
-        public Photo()
-        {
-
         }
     }
 }

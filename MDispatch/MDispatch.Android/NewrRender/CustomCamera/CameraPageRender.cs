@@ -98,7 +98,7 @@ namespace MDispatch.Droid.NewrRender
                 {
                     if (camera != null)
                     {
-                        camera.SetDisplayOrientation(90);
+                        //camera.SetDisplayOrientation(90);
 
                     }
                     int tmpPr = (mainLayout.Width / 100) * 10;

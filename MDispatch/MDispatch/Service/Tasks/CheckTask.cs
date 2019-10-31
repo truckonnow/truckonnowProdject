@@ -36,10 +36,11 @@ namespace MDispatch.Service.Tasks
             string[] noStartkLoads = noStartkLoad.Split(',');
             for(int i = 0; i < noStartkLoads.Length-1; i++)
             {
+                noStartkLoad = CrossSettings.Current.GetValueOrDefault("noStartkLoad", "");
                 string method = CrossSettings.Current.GetValueOrDefault(noStartkLoads[i] + "method", "");
                 GoToCommand1(token, 1, method, noStartkLoads[i]);
                 string s = noStartkLoad.Replace(noStartkLoads[i] + ",", "");
-                CrossSettings.Current.AddOrUpdateValue("noStartkLoad", noStartkLoad.Replace(s, ""));
+                bool isSave = CrossSettings.Current.AddOrUpdateValue("noStartkLoad", s);
                 CrossSettings.Current.Remove(noStartkLoads[i] + "method");
                 CrossSettings.Current.Remove(noStartkLoads[i] + "Param");
                 CrossSettings.Current.Remove(noStartkLoads[i]);
@@ -90,6 +91,17 @@ namespace MDispatch.Service.Tasks
                 string photoInspectionjson = Encoding.Default.GetString(photoInspectionArray);
                 Models.PhotoInspection photoInspection = JsonConvert.DeserializeObject<Models.PhotoInspection>(photoInspectionjson);
                 TaskManager.CommandToDo("SavePhoto", type, token, vehiclwInformationId, photoInspection);
+            }
+            else if (method == "SaveInspactionDriver")
+            {
+                string obj = CrossSettings.Current.GetValueOrDefault(idTaskNo, "");
+                string[] paramss = CrossSettings.Current.GetValueOrDefault(idTaskNo + "Param", "").Split(',');
+                string IdDriver = paramss[0];
+                string IndexCurent = paramss[1];
+                byte[] photoArray = Convert.FromBase64String(obj);
+                string photojson = Encoding.Default.GetString(photoArray);
+                Models.Photo photo = JsonConvert.DeserializeObject<Models.Photo>(photojson);
+                TaskManager.CommandToDo("SaveInspactionDriver", type, token, IdDriver, photo, IndexCurent);
             }
         }
 

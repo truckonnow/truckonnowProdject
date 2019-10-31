@@ -18,7 +18,7 @@ namespace MDispatch.Service.Tasks
                 string token = (string)task[1];
                 string IdDriver = (string)task[2];
                 Photo photo = (Photo)task[3];
-                int IndexCurent = (int)task[3];
+                int IndexCurent = Convert.ToInt32(task[4]);
                 StartTask1(token, IdDriver, photo, IndexCurent);
             }
             else if ((int)task[0] == 2)
@@ -75,8 +75,8 @@ namespace MDispatch.Service.Tasks
                     byte[] photoArray = Encoding.Default.GetBytes(photoJson);
                     string photoBase64 = Convert.ToBase64String(photoArray);
                     CrossSettings.Current.AddOrUpdateValue($"{idDriver}_{noStartkLoads}", photoBase64);
-                    CrossSettings.Current.AddOrUpdateValue($"{idDriver}_{noStartkLoads}" + "Param", $"{idDriver}");
-                    CrossSettings.Current.AddOrUpdateValue($"{idDriver}_{noStartkLoads}" + "method", $"SavePhoto");
+                    CrossSettings.Current.AddOrUpdateValue($"{idDriver}_{noStartkLoads}" + "Param", $"{idDriver},{indexCurent}");
+                    CrossSettings.Current.AddOrUpdateValue($"{idDriver}_{noStartkLoads}" + "method", $"SaveInspactionDriver");
                     CrossSettings.Current.AddOrUpdateValue("noStartkLoad", noStartkLoad + $"{idDriver}_{noStartkLoads}" + ",");
                 }
             }
@@ -88,8 +88,8 @@ namespace MDispatch.Service.Tasks
                 byte[] photoArray = Encoding.Default.GetBytes(photoJson);
                 string photoBase64 = Convert.ToBase64String(photoArray);
                 CrossSettings.Current.AddOrUpdateValue($"{idDriver}_{noStartkLoads}", photoBase64);
-                CrossSettings.Current.AddOrUpdateValue($"{idDriver}_{noStartkLoads}" + "Param", $"{idDriver}");
-                CrossSettings.Current.AddOrUpdateValue($"{idDriver}_{noStartkLoads}" + "method", $"SavePhoto");
+                CrossSettings.Current.AddOrUpdateValue($"{idDriver}_{noStartkLoads}" + "Param", $"{idDriver},{indexCurent}");
+                CrossSettings.Current.AddOrUpdateValue($"{idDriver}_{noStartkLoads}" + "method", $"SaveInspactionDriver");
                 CrossSettings.Current.AddOrUpdateValue("noStartkLoad", noStartkLoad + $"{idDriver}_{noStartkLoads}" + ",");
             }
         }

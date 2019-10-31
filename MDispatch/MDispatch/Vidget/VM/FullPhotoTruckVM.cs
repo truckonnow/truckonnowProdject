@@ -84,38 +84,42 @@ namespace MDispatch.Vidget.VM
         private async Task NextPage()
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
-            bool isTask = false;
             bool isNavigationMany = false;
             bool isEndInspection = false;
-            if (navigation.NavigationStack.Count > 2)
-            {
-                //await PopupNavigation.PushAsync(new LoadPage());
-                //isNavigationMany = true;
-                isTask = true;
-                TaskManager.CommandToDo("SaveInspactionDriver", 1, token, IdDriver, Photo, IndexCurent);
-            }
+            //if (navigation.NavigationStack.Count > 2)
+            //{
+            //    //await PopupNavigation.PushAsync(new LoadPage());
+            //    //isNavigationMany = true;
+            //}
             string description = null;
             int state = 0;
+            if (IndexCurent < 45)
+            {
+                isEndInspection = true;
+                await navigation.PushAsync(new View.CameraPage(managerDispatchMob, IdDriver, IndexCurent + 1, initDasbordDelegate));
+            }
+            else
+            {
+                DependencyService.Get<IOrientationHandler>().ForceSensor();
+                UpdateInspectionDriver();
+            }
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
-                if (IndexCurent < 45)
+                if (navigation.NavigationStack.Count > 2)
                 {
-                    isEndInspection = true;
-                    await navigation.PushAsync(new View.CameraPage(managerDispatchMob, IdDriver, IndexCurent + 1, initDasbordDelegate));
+                    TaskManager.CommandToDo("SaveInspactionDriver", 1, token, IdDriver, Photo, IndexCurent);
                 }
                 else
                 {
-                    DependencyService.Get<IOrientationHandler>().ForceSensor();
-                    UpdateInspectionDriver();
+                    await Task.Run(() =>
+                    {
+                        state = managerDispatchMob.AskWork("SaveInspactionDriver", token, IdDriver, Photo, ref description, null, IndexCurent);
+                    });
                 }
-                await Task.Run(() =>
-                {
-                    state = managerDispatchMob.AskWork("SaveInspactionDriver", token, IdDriver, Photo, ref description, null, IndexCurent);
-                });
                 if (state == 1)
                 {
-                    if(isNavigationMany)
+                    if (isNavigationMany)
                     {
                         await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
                         isNavigationMany = false;
@@ -148,7 +152,10 @@ namespace MDispatch.Vidget.VM
                     }
                     if (isEndInspection)
                     {
-                        navigation.RemovePage(navigation.NavigationStack[1]);
+                        if (navigation.NavigationStack.Count > 1)
+                        {
+                            navigation.RemovePage(navigation.NavigationStack[1]);
+                        }
                     }
                     DependencyService.Get<IToast>().ShowMessage($"Photo {truckCar.GetNameTruck(IndexCurent)} saved");
                 }
@@ -164,25 +171,40 @@ namespace MDispatch.Vidget.VM
                         await navigation.PopAsync();
                     }
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
-                    if(IndexCurent > 45)
-                    { 
-                    await navigation.PopToRootAsync();
+                    if (IndexCurent > 45)
+                    {
+                        await navigation.PopToRootAsync();
                     }
                 }
             }
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            else
+            {
+                if (isNavigationMany)
+                {
+                    await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
+                    isNavigationMany = false;
+                }
+                if (isEndInspection)
+                {
+                    if (navigation.NavigationStack.Count > 1)
+                    {
+                        navigation.RemovePage(navigation.NavigationStack[1]);
+                    }
+                }
+                TaskManager.CommandToDo("SaveInspactionDriver", 1, token, IdDriver, Photo, IndexCurent);
+                DependencyService.Get<IToast>().ShowMessage($"Photo {truckCar.GetNameTruck(IndexCurent)} saved");
+            }
+            //GC.Collect();
+            //GC.WaitForPendingFinalizers();
         }
 
         [System.Obsolete]
         private async void UpdateInspectionDriver()
         {
-            await PopupNavigation.PushAsync(new LoadPage());
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
             await Task.Run(() => Utils.CheckNet());
-            await PopupNavigation.PopAsync();
             if (App.isNetwork)
             {
                 await Task.Run(() =>
@@ -200,7 +222,7 @@ namespace MDispatch.Vidget.VM
                 else if (state == 3)
                 {
                     initDasbordDelegate.Invoke();
-                    navigation.PopToRootAsync();
+                    await navigation.PopToRootAsync();
                 }
                 else if (state == 4)
                 {

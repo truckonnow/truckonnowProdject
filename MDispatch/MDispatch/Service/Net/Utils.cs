@@ -28,7 +28,7 @@ namespace MDispatch.Service.Net
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Net", Method.GET);
                 request.AddHeader("Accept", "application/json");
-                client.Timeout = 10000;
+                client.Timeout = 5000;
                 response = client.Execute(request);
                 content = response.Content;
               
@@ -142,7 +142,7 @@ namespace MDispatch.Service.Net
         {
             Task.Run(() => 
             {
-                Thread.Sleep(3000);
+                Thread.Sleep(5000);
                 isAlRedy = false;
             });
         }
