@@ -2,6 +2,7 @@
 using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
 using MDispatch.Service.Net;
+using MDispatch.Service.Tasks;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection;
@@ -209,7 +210,9 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             {
                 if (videoRecount != null)
                 {
-                    state = managerDispatchMob.SavePay("SaveRecount", token, IdShip, 2, videoRecount, ref description);
+                    //state = managerDispatchMob.SavePay("SaveRecount", token, IdShip, 2, videoRecount, ref description);
+                    state = 3;
+                    TaskManager.CommandToDo("SaveRecount", 1, token, IdShip, 2, VideoRecount);
                 }
                 if (state == 2)
                 {

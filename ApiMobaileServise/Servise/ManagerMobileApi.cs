@@ -371,6 +371,11 @@ namespace ApiMobaileServise.Servise
                     parameter = optionalParameter.Split(',');
                     SaveInspactionDriver(parameter[0], objSave, Convert.ToInt32(parameter[1]));
                 }
+                else if (nameMethod == "SaveRecount")
+                {
+                    parameter = optionalParameter.Split(',');
+                    await SaveRecount(parameter[0], Convert.ToInt32(parameter[1]), objSave);
+                }
             }
             catch
             {

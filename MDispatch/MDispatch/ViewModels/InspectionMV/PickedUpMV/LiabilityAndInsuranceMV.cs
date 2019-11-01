@@ -206,7 +206,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             {
                 if (videoRecount != null)
                 {
-                    state = managerDispatchMob.SavePay("SaveRecount", token, IdShip, 1, VideoRecount, ref description);
+                    //state = managerDispatchMob.SavePay("SaveRecount", token, IdShip, 1, VideoRecount, ref description);
                     state = 3;
                     TaskManager.CommandToDo("SaveRecount", 1, token, IdShip, 1, VideoRecount);
                 }
@@ -235,10 +235,10 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             }
             else
             {
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    DependencyService.Get<IToast>().ShowMessage("Video capture saved successfully");
-                });
+                //Device.BeginInvokeOnMainThread(async () =>
+                //{
+                //    DependencyService.Get<IToast>().ShowMessage("Video capture saved successfully");
+                //});
             }
         }
 
