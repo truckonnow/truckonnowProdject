@@ -881,4 +881,118 @@
   <ItemGroup>
     <BundleResource Include="Resources\BackIconpage.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint19.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint27.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint28.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint33.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint34.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint35.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint37.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint38.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint39.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint9.png" />
+  </ItemGroup>
 </Project>
