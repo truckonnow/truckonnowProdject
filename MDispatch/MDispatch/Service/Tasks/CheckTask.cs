@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MDispatch.Models;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Plugin.Settings;
 using RestSharp;
@@ -57,30 +58,6 @@ namespace MDispatch.Service.Tasks
             //}
         }
 
-        private void GoToCommand(string token, int type, string method, string idTaskNo)
-        {
-            if (method == "SavePhoto")
-            {
-                string obj = CrossSettings.Current.GetValueOrDefault(idTaskNo, "");
-                string vehiclwInformationId = CrossSettings.Current.GetValueOrDefault(idTaskNo + "Param", "");
-                byte[] photoInspectionArray = Convert.FromBase64String(obj);
-                string photoInspectionjson = Encoding.Default.GetString(photoInspectionArray);
-                Models.PhotoInspection photoInspection = JsonConvert.DeserializeObject<Models.PhotoInspection>(photoInspectionjson);
-                TaskManager.CommandToDo("SavePhoto", type, token, vehiclwInformationId, photoInspection);
-            }
-            else if (method == "SaveInspactionDriver")
-            {
-                string obj = CrossSettings.Current.GetValueOrDefault(idTaskNo, "");
-                string[] paramss = CrossSettings.Current.GetValueOrDefault(idTaskNo + "Param", "").Split(',');
-                string IdDriver = paramss[0];
-                string IndexCurent = paramss[1];
-                byte[] photoArray = Convert.FromBase64String(obj);
-                string photojson = Encoding.Default.GetString(photoArray);
-                Models.Photo photo = JsonConvert.DeserializeObject<Models.Photo>(photojson);
-                TaskManager.CommandToDo("SaveInspactionDriver", type, token, IdDriver, photo, IndexCurent);
-            }
-        }
-
         private void GoToCommand1(string token, int type, string method, string idTaskNo)
         {
             if(method == "SavePhoto")
@@ -102,6 +79,17 @@ namespace MDispatch.Service.Tasks
                 string photojson = Encoding.Default.GetString(photoArray);
                 Models.Photo photo = JsonConvert.DeserializeObject<Models.Photo>(photojson);
                 TaskManager.CommandToDo("SaveInspactionDriver", type, token, IdDriver, photo, IndexCurent);
+            }
+            else if (method == "SaveRecount")
+            {
+                string obj = CrossSettings.Current.GetValueOrDefault(idTaskNo, "");
+                string[] paramss = CrossSettings.Current.GetValueOrDefault(idTaskNo + "Param", "").Split(',');
+                string idShip = paramss[0];
+                string typeVideo = paramss[1];
+                byte[] videoArray = Convert.FromBase64String(obj);
+                string videojson = Encoding.Default.GetString(videoArray);
+                Video video = JsonConvert.DeserializeObject<Video>(videojson);
+                TaskManager.CommandToDo("SaveRecount", type, token, idShip, 1, video);
             }
         }
 

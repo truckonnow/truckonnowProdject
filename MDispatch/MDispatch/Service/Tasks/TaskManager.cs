@@ -24,6 +24,11 @@
                         task = new SaveInspactionDriver();
                         break;
                     }
+                case "SaveRecount":
+                    {
+                        task = new SaveRecount();
+                        break;
+                    }
                 case "CheckTask":
                     {
                         task = new CheckTask();

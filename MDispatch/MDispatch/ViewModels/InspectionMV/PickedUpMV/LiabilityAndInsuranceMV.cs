@@ -2,6 +2,7 @@ using MDispatch.Models;
 using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
 using MDispatch.Service.Net;
+using MDispatch.Service.Tasks;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection.PickedUp;
@@ -205,7 +206,9 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             {
                 if (videoRecount != null)
                 {
-                    state = managerDispatchMob.SavePay("SaveRecount", token, IdShip, 1, videoRecount, ref description);
+                    state = managerDispatchMob.SavePay("SaveRecount", token, IdShip, 1, VideoRecount, ref description);
+                    state = 3;
+                    TaskManager.CommandToDo("SaveRecount", 1, token, IdShip, 1, VideoRecount);
                 }
                 if (state == 2)
                 {
@@ -229,6 +232,13 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                         await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
                     });
                 }
+            }
+            else
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    DependencyService.Get<IToast>().ShowMessage("Video capture saved successfully");
+                });
             }
         }
 
