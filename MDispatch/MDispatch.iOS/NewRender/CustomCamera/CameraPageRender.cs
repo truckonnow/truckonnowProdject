@@ -49,7 +49,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
         {
             InvokeOnMainThread(() =>
             {
-                View.Add(takePhotoButton);
+                    View.Add(takePhotoButton);
             });
         }
 

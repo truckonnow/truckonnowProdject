@@ -50,7 +50,7 @@ namespace MDispatch.Service.GeloctionGPS
         {
             await Task.Run(async() =>
             {
-                await Task.Run(() => Net.Utils.CheckNet());
+                //await Task.Run(() => Net.Utils.CheckNet());
                 if (App.isNetwork && isTimeUpdate)
                 {
                     Waite();
