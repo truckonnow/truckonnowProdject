@@ -152,8 +152,8 @@ namespace MDispatch.iOS.NewRender.RebderVideoCamera
                                                  4 * (int)width, CGColorSpace.CreateDeviceRGB(),
                                                  CGImageAlphaInfo.PremultipliedFirst))
             {
-                RectangleF imageRect = new RectangleF(0, 0, width, height);
-                context.DrawImage(imageRect, originalImage.CGImage);
+                //RectangleF imageRect = new RectangleF(0, 0, width, height);
+                //context.DrawImage(imageRect, originalImage.CGImage);
                 UIKit.UIImage resizedImage = UIKit.UIImage.FromImage(context.ToImage(), 0, orientation);
                 return resizedImage.AsJPEG(.5f).ToArray();
             }

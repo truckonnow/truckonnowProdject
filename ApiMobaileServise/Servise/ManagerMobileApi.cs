@@ -61,9 +61,9 @@ namespace ApiMobaileServise.Servise
             return await sqlCommandApiMobile.ChechToDayInspactionInDb(token);
         }
 
-        public async Task<int> GetIndexPhoto(string token)
+        public int GetIndexPhoto(string token)
         {
-            return await sqlCommandApiMobile.GetIndexDb(token);
+            return sqlCommandApiMobile.GetIndexDb(token);
         }
 
         public void SaveGPSLocationData(string token, string longitude, string latitude)
@@ -336,20 +336,20 @@ namespace ApiMobaileServise.Servise
             return sqlCommandApiMobile.CheckTask(token);
         }
 
-        public string StartTask(string nameMethod, string optionalParameter, string token)
+        public async Task<string> StartTask(string nameMethod, string optionalParameter, string token)
         {
-            return sqlCommandApiMobile.StartTaskDb(nameMethod, optionalParameter, token);
+            return await sqlCommandApiMobile.StartTaskDb(nameMethod, optionalParameter, token);
         }
 
-        public string LoadTask(string idTask, string byteBase64)
+        public async Task<string> LoadTask(string idTask, string byteBase64)
         {
             byte[] buffer = Convert.FromBase64String(byteBase64);
-            return sqlCommandApiMobile.LoadTaskDb(idTask, buffer);
+            return await sqlCommandApiMobile.LoadTaskDb(idTask, buffer);
         }
 
-        public void EndTask(string idTask, string nameMethod)
+        public async Task EndTask(string idTask, string nameMethod)
         {
-            string[] objSave = sqlCommandApiMobile.EndTaskDb(idTask);
+            string[] objSave = await sqlCommandApiMobile.EndTaskDb(idTask);
             if (objSave != null)
             {
                 GoToEndTask(objSave[0], nameMethod, objSave[1]);

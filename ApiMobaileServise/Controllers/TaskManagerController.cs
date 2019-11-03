@@ -3,6 +3,7 @@ using ApiMobaileServise.Servise;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Threading.Tasks;
 
 namespace ApiMobaileServise.Controllers
 {
@@ -13,7 +14,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("CheckTask")]
-        public string CheckTask(string token)
+        public async Task<string> CheckTask(string token)
         {
             string respons = null;
             if (token == null || token == "")
@@ -41,7 +42,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("StartTask")]
-        public string StartTask(string token, string nameMethod, string optionalParameter)
+        public async Task<string> StartTask(string token, string nameMethod, string optionalParameter)
         {
             string respons = null;
             if (token == null || token == "")
@@ -53,7 +54,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", managerMobileApi.StartTask(nameMethod, optionalParameter, token)));
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", await managerMobileApi.StartTask(nameMethod, optionalParameter, token)));
                 }
                 else
                 {
@@ -69,7 +70,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("LoadTask")]
-        public string LoadTask(string token, string idTask, string byteBase64)
+        public async Task<string> LoadTask(string token, string idTask, string byteBase64)
         {
             string respons = null;
             if (token == null || token == "")
@@ -81,7 +82,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", managerMobileApi.LoadTask(idTask, byteBase64)));
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", await managerMobileApi.LoadTask(idTask, byteBase64)));
                 }
                 else
                 {

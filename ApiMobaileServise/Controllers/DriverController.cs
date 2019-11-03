@@ -26,7 +26,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", await managerMobileApi.ChechToDayInspaction(token), await managerMobileApi.GetIndexPhoto(token)));
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", await managerMobileApi.ChechToDayInspaction(token), managerMobileApi.GetIndexPhoto(token)));
                 }
                 else
                 {

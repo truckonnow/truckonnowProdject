@@ -77,47 +77,55 @@ namespace ApiMobaileServise.Servise
 
         public async Task SaveInspectionDriverInDb(string idDriver, PhotoDriver photo, int IndexPhoto)
         {
-            //context.Drivers.Include("InspectionDrivers.PhotosTruck").ToList();
-            Driver driver = context.Drivers.Include(d => d.InspectionDrivers)
-                .FirstOrDefault(d => d.Id == Convert.ToInt32(idDriver));
-            if (driver.InspectionDrivers != null && driver.InspectionDrivers.Count != 0)
+            try
             {
-                InspectionDriver inspectionDrivers = driver.InspectionDrivers.FirstOrDefault(i => DateTime.Parse(i.Date).Date == DateTime.Now.Date);
-                if(inspectionDrivers == null)
+                //context.Drivers.Include("InspectionDrivers.PhotosTruck").ToList();
+                Driver driver = context.Drivers.Include(d => d.InspectionDrivers)
+                    .FirstOrDefault(d => d.Id == Convert.ToInt32(idDriver));
+                if (driver.InspectionDrivers != null && driver.InspectionDrivers.Count != 0)
                 {
-                    inspectionDrivers = new InspectionDriver();
-                    inspectionDrivers.Date = DateTime.Now.ToString();
-                    inspectionDrivers.PhotosTruck = new List<PhotoDriver>();
-                    //inspectionDrivers.PhotosTruck.
-                    driver.InspectionDrivers.Add(inspectionDrivers);
-                }
-                await context.SaveChangesAsync();
-                photo.IdInspaction = inspectionDrivers.Id;
-                photo.IndexPhoto = IndexPhoto;
-                inspectionDrivers.PhotosTruck = context.PhotoDrivers.Where(p => p.IdInspaction == inspectionDrivers.Id).ToList();
-                if(inspectionDrivers.PhotosTruck.FirstOrDefault(p => p.IndexPhoto == IndexPhoto) == null)
-                {
-                    inspectionDrivers.CountPhoto++;
-                    inspectionDrivers.PhotosTruck.Add(photo);
+                    InspectionDriver inspectionDrivers = driver.InspectionDrivers.FirstOrDefault(i => DateTime.Parse(i.Date).Date == DateTime.Now.Date);
+                    if (inspectionDrivers == null)
+                    {
+                        inspectionDrivers = new InspectionDriver();
+                        inspectionDrivers.Date = DateTime.Now.ToString();
+                        inspectionDrivers.PhotosTruck = new List<PhotoDriver>();
+                        driver.InspectionDrivers.Add(inspectionDrivers);
+                    }
+                    await context.SaveChangesAsync();
+                    photo.IdInspaction = inspectionDrivers.Id;
+                    photo.IndexPhoto = IndexPhoto;
+                    inspectionDrivers.PhotosTruck = context.PhotoDrivers.Where(p => p.IdInspaction == inspectionDrivers.Id).ToList();
+                    if (inspectionDrivers.PhotosTruck.FirstOrDefault(p => p.IndexPhoto == IndexPhoto) == null)
+                    {
+                        File.WriteAllText("SaveInspectionDriverInDb.txt", " inspectionDrivers.CountPhoto++; inspectionDrivers.PhotosTruck.Add(photo);");
+                        inspectionDrivers.CountPhoto++;
+                        inspectionDrivers.PhotosTruck.Add(photo);
+                    }
+                    else
+                    {
+                        File.WriteAllText("SaveInspectionDriverInDb.txt", ";");
+
+                    }
+                    await context.SaveChangesAsync();
                 }
                 else
                 {
-
+                    InspectionDriver inspectionDrivers = new InspectionDriver();
+                    driver.InspectionDrivers = new List<InspectionDriver>();
+                    inspectionDrivers.Date = DateTime.Now.ToString();
+                    inspectionDrivers.PhotosTruck = new List<PhotoDriver>();
+                    inspectionDrivers.CountPhoto++;
+                    inspectionDrivers.PhotosTruck.Add(photo);
+                    driver.InspectionDrivers.Add(inspectionDrivers);
+                    await context.SaveChangesAsync();
+                    photo.IdInspaction = inspectionDrivers.Id;
+                    await context.SaveChangesAsync();
                 }
-                await context.SaveChangesAsync();
             }
-            else
+            catch(Exception e)
             {
-                InspectionDriver inspectionDrivers = new InspectionDriver();
-                driver.InspectionDrivers = new List<InspectionDriver>();
-                inspectionDrivers.Date = DateTime.Now.ToString();
-                inspectionDrivers.PhotosTruck = new List<PhotoDriver>();
-                inspectionDrivers.CountPhoto++;
-                inspectionDrivers.PhotosTruck.Add(photo);
-                driver.InspectionDrivers.Add(inspectionDrivers);
-                await context.SaveChangesAsync();
-                photo.IdInspaction = inspectionDrivers.Id;
-                await context.SaveChangesAsync();
+                File.WriteAllText("SaveInspectionDriverInDb.txt", e.Message);
             }
         }
 
@@ -162,26 +170,29 @@ namespace ApiMobaileServise.Servise
             return isInspaction;
         }
 
-        public async Task<int> GetIndexDb(string token)
+        public int GetIndexDb(string token)
         {
             int indexPhoto = 0;
-            Driver driver = await context.Drivers.Where(d => d.Token == token)
+            Driver driver = context.Drivers.Where(d => d.Token == token)
                  .Include(d => d.InspectionDrivers)
-                 .FirstOrDefaultAsync();
+                 .FirstOrDefault();
             if (driver.InspectionDrivers != null && driver.InspectionDrivers.Count != 0)
             {
                 InspectionDriver inspectionDrivers = driver.InspectionDrivers.FirstOrDefault(i => DateTime.Parse(i.Date).Date == DateTime.Now.Date);
                 if (inspectionDrivers == null)
                 {
+                    File.WriteAllText("GetIndexDb.txt", "indexPhoto = 1;");
                     indexPhoto = 1;
                 }
                 else
                 {
                     indexPhoto = inspectionDrivers.CountPhoto + 1;
+                    File.WriteAllText("GetIndexDb.txt", $"indexPhoto = inspectionDrivers.CountPhoto + 1;  {inspectionDrivers.CountPhoto + 1}");
                 }
             }
             else
             {
+                File.WriteAllText("GetIndexDb.txt", "indexPhoto = 1;");
                 indexPhoto = 1;
             }
             return indexPhoto;
@@ -345,7 +356,7 @@ namespace ApiMobaileServise.Servise
                 .ToList();
         }
 
-        public string LoadTaskDb(string idTask, byte[] buffer)
+        public async Task<string> LoadTaskDb(string idTask, byte[] buffer)
         {
             TaskLoad taskLoad = context.TaskLoads
                 .FirstOrDefault(l => l.Id.ToString() == idTask);
@@ -360,7 +371,7 @@ namespace ApiMobaileServise.Servise
             return taskLoad.Id.ToString();
         }
 
-        public string[] EndTaskDb(string idTask)
+        public async Task<string[]> EndTaskDb(string idTask)
         {
             LogTask logTask = context.LogTasks
                 .Include(l => l.TaskLoads)
@@ -380,7 +391,7 @@ namespace ApiMobaileServise.Servise
             return new string[] { str, taskLoad.OptionalParameter};
         }
 
-        public string StartTaskDb(string nameMethod, string optionalParameter, string token)
+        public async Task<string> StartTaskDb(string nameMethod, string optionalParameter, string token)
         {
             Driver driver = context.Drivers.First(d => d.Token == token);
             LogTask logTask = context.LogTasks

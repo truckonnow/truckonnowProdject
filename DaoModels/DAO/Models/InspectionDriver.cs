@@ -6,7 +6,7 @@ namespace DaoModels.DAO.Models
     {
         public int Id { get; set; }
         public int CountPhoto { get; set; }
-        public virtual List<PhotoDriver> PhotosTruck { get; set; }
+        public List<PhotoDriver> PhotosTruck { get; set; }
         public string Date { get; set; }
 
         public InspectionDriver()
