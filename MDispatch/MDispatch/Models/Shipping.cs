@@ -141,11 +141,11 @@ namespace MDispatch.Models
         }
         public int CountVehiclw
         {
-            get => VehiclwInformations.Count - 2;
+            get => VehiclwInformations != null && VehiclwInformations.Count != 0 ? VehiclwInformations.Count - 2 : 0;
         }
         public bool IsVehiclw1
         {
-            get => VehiclwInformations[0] != null;
+            get => VehiclwInformations != null && VehiclwInformations.Count != 0 && VehiclwInformations[0] != null;
         }
         public bool IsVehiclw2
         {
@@ -219,19 +219,26 @@ namespace MDispatch.Models
             get
             {
                 bool isStartInspection = false;
-                if(CurrentStatus == "Assigned")
+                if (VehiclwInformations != null && VehiclwInformations.Count != 0)
                 {
-                    if(VehiclwInformations[0].Ask != null)
+                    if (CurrentStatus == "Assigned")
                     {
-                        isStartInspection = true;
+                        if (VehiclwInformations[0].Ask != null)
+                        {
+                            isStartInspection = true;
+                        }
+                    }
+                    else if (CurrentStatus == "Picked up")
+                    {
+                        if (VehiclwInformations[0].AskDelyvery != null)
+                        {
+                            isStartInspection = true;
+                        }
                     }
                 }
-                else if(CurrentStatus == "Picked up")
+                else
                 {
-                    if (VehiclwInformations[0].AskDelyvery != null)
-                    {
-                        isStartInspection = true;
-                    }
+                    isStartInspection = true;
                 }
                 return isStartInspection;
             }

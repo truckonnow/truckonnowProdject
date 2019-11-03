@@ -24,7 +24,7 @@ namespace MDispatch.Vidget.View
             On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
                 .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
             BindingContext = fullPhotoTruckVM;
-            paternPhoto.Source = $"Hint{indexCurrent}.jpg";
+            paternPhoto.Source = $"Hint{indexCurrent}.png";
             InitElement();
         }
 

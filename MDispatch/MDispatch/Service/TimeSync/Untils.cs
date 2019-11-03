@@ -27,7 +27,7 @@ namespace MDispatch.Service.TimeSync
 
         private static async void SyncServer(object state)
         {
-            await Task.Run(() => Utils.CheckNet());
+            //await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
                 DateTime dateTime = new DateTime();

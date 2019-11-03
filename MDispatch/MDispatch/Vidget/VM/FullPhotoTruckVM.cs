@@ -106,8 +106,9 @@ namespace MDispatch.Vidget.VM
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
-                if (navigation.NavigationStack.Count > 2)
+                if (navigation.NavigationStack.Count > 3)
                 {
+                    state = 3;
                     TaskManager.CommandToDo("SaveInspactionDriver", 1, token, IdDriver, Photo, IndexCurent);
                 }
                 else

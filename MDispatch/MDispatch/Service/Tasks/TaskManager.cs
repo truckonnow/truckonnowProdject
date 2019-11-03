@@ -1,12 +1,15 @@
-﻿namespace MDispatch.Service.Tasks
+﻿using System.Threading.Tasks;
+
+namespace MDispatch.Service.Tasks
 {
     public class TaskManager
     {
         public static bool isWorkTask = true;
 
-        public static void CommandToDo(string nameCommand, params object[] tasks)
+        public static async void CommandToDo(string nameCommand, params object[] tasks)
         {
             ITask task = null;
+            await Task.Delay(1000);
             switch(nameCommand)
             {
                 case "DashbordVehicle":
