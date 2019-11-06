@@ -284,11 +284,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Delivery.png" />
     <BundleResource Include="GoogleService-Info.plist" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Aktiv.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\pickedUpOrder1.png" />
@@ -876,9 +872,6 @@
     <BundleResource Include="Resources\Suv27.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Archive.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\BackIconpage.png" />
   </ItemGroup>
   <ItemGroup>
@@ -1015,5 +1008,14 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Hint45.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Aktiv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Archive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Delivery.png" />
   </ItemGroup>
 </Project>
