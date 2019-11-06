@@ -885,6 +885,30 @@
     <BundleResource Include="Resources\Hint1.png" />
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Resources\Hint2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint9.png" />
+  </ItemGroup>
+  <ItemGroup>
     <BundleResource Include="Resources\Hint10.png" />
   </ItemGroup>
   <ItemGroup>
@@ -909,10 +933,10 @@
     <BundleResource Include="Resources\Hint17.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Hint19.png" />
+    <BundleResource Include="Resources\Hint18.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Hint2.png" />
+    <BundleResource Include="Resources\Hint19.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Hint20.png" />
@@ -939,13 +963,10 @@
     <BundleResource Include="Resources\Hint27.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Hint28.png" />
+    <BundleResource Include="Resources\hint28.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Hint29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Hint3.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Hint30.png" />
@@ -975,24 +996,24 @@
     <BundleResource Include="Resources\Hint38.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Hint39.png" />
+    <BundleResource Include="Resources\hint39.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Hint4.png" />
+    <BundleResource Include="Resources\Hint40.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Hint5.png" />
+    <BundleResource Include="Resources\Hint41.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Hint6.png" />
+    <BundleResource Include="Resources\Hint42.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Hint7.png" />
+    <BundleResource Include="Resources\Hint43.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Hint8.png" />
+    <BundleResource Include="Resources\Hint44.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Hint9.png" />
+    <BundleResource Include="Resources\Hint45.png" />
   </ItemGroup>
 </Project>
