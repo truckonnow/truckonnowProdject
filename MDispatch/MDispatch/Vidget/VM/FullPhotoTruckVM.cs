@@ -93,7 +93,7 @@ namespace MDispatch.Vidget.VM
             //}
             string description = null;
             int state = 0;
-            if (IndexCurent < 45)
+            if (IndexCurent < 46)
             {
                 isEndInspection = true;
                 await navigation.PushAsync(new View.CameraPage(managerDispatchMob, IdDriver, IndexCurent + 1, initDasbordDelegate));
