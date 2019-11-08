@@ -46,8 +46,9 @@ namespace ApiMobaileServise.Servise
 
         public async void SaveInspactionDriver(string idDriver, string photoJson, int indexPhoto)
         {
+            photoJson = photoJson.Insert(photoJson.IndexOf(idDriver) + 2, $"{DateTime.Now.ToShortDateString()}/");
             PhotoDriver photo = JsonConvert.DeserializeObject<PhotoDriver>(photoJson);
-            //photo.path = photo.path.Insert(2, $"/{DateTime.Now.ToLongDateString()}");
+            //photo.path = photo.path.Insert(photo.path.IndexOf(idDriver) +2, $"{DateTime.Now.ToShortDateString()}/");
             await sqlCommandApiMobile.SaveInspectionDriverInDb(idDriver, photo, indexPhoto);
         }
 
