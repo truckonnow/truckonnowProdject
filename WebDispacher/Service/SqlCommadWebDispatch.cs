@@ -192,6 +192,21 @@ namespace WebDispacher.Dao
             return shipping;
         }
 
+        public List<InspectionDriver> GetInspectionTruckDb(string idDriver, string date)
+        {
+            DateTime dateTime = Convert.ToDateTime(date);
+            return context.Drivers
+                .Include(d => d.InspectionDrivers)
+                .First(d => d.Id.ToString() == idDriver)
+                .InspectionDrivers
+                .Where(iD => Convert.ToDateTime(iD.Date).Month == dateTime.Month && Convert.ToDateTime(iD.Date).Year == dateTime.Year)
+                .Select(x => new InspectionDriver()
+                {
+                    Id = x.Id,
+                    Date = x.Date.Remove(x.Date.IndexOf(" "))
+                }).ToList();
+        }
+
         private int CreateIdShipping()
         {
             int id = 1;

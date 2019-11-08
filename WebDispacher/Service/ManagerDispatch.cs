@@ -193,6 +193,11 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.AddDriver(driver);
         }
 
+        public List<InspectionDriver> GetInspectionTruck(string idDriver, string date)
+        {
+            return _sqlEntityFramworke.GetInspectionTruckDb(idDriver, date);
+        }
+
         public void RemoveDrive(int id)
         {
             _sqlEntityFramworke.RemoveDriveInDb(id);

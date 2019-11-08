@@ -1,19 +1,21 @@
-﻿<div class="body">
+﻿
+<div class="body">
     <div style="display:flex;">
         <input class="btnCreateoOrder" type="button" value="Add Driver" onclick="window.location.href='@Url.Action("CreateDriver", "Driver")';" />
     </div>
     <div class="contentBody">
         @for (int i = 0; i < ViewBag.Drivers.Count; i++)
         {
-            <div class="contentDriver">
-                <p class="inpData">@ViewBag.Drivers[i].FullName</p>
-                <p2 class="inpData">Trailer capacity: @ViewBag.Drivers[i].TrailerCapacity</p2>
-                <span class="inpData">Email: @ViewBag.Drivers[i].EmailAddress</span>
-                <span class="inpData">, </span>
-                <span class="inpData">Phone: @ViewBag.Drivers[i].PhoneNumber</span><br /> <br />
-                <a href="@ViewBag.BaseUrl/Driver/Drivers/Edit?id=@ViewBag.Drivers[i].Id" class="btnId">Edit</a>
-                <input class="btnId" value="Remove" type="button" onclick="Remove(@ViewBag.Drivers[i].Id)"/>
-            </div>
+        <div class="contentDriver">
+            <p class="inpData">@ViewBag.Drivers[i].FullName</p>
+            <p2 class="inpData">Trailer capacity: @ViewBag.Drivers[i].TrailerCapacity</p2>
+            <span class="inpData">Email: @ViewBag.Drivers[i].EmailAddress</span>
+            <span class="inpData">, </span>
+            <span class="inpData">Phone: @ViewBag.Drivers[i].PhoneNumber</span><br /> <br />
+            <a href="@ViewBag.BaseUrl/Driver/Drivers/Edit?id=@ViewBag.Drivers[i].Id" class="btnId">Edit</a>
+            <input class="btnId" value="Remove" type="button" onclick="Remove(@ViewBag.Drivers[i].Id)" />
+            <a class="btnId" href="~/Driver/InspactionTruck?idDriver=@ViewBag.Drivers[i].Id&nameDriver=@ViewBag.Drivers[i].FullName&date=@DateTime.Now.ToShortDateString()">Inspection</a>
+        </div>
         }
     </div>
 </div>
