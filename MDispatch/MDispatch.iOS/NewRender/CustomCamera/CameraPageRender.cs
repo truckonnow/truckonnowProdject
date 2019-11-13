@@ -150,8 +150,8 @@ namespace MDispatch.iOS.NewRender.CustomCamera
                     if (data != null)
                     {
                         UIImage originalImage = ImageFromByteArray(data.ToArray());
-                        byte[] res = ResizeImageIOS(originalImage, width, height);
-                        (Element as CameraPage).SetPhotoResult(res, width, height);
+                        //byte[] res = ResizeImageIOS(originalImage, width, height);
+                        (Element as CameraPage).SetPhotoResult(originalImage.AsJPEG(.7f).ToArray(), (int)originalImage.Size.Width, (int)originalImage.Size.Height);
                     }
                     isTake = false;
                     takePhotoButton.Enabled = true;
@@ -170,7 +170,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
                 //RectangleF imageRect = new RectangleF(0, 0, width, height);
                 //context.DrawImage(imageRect, originalImage.CGImage);
                 UIKit.UIImage resizedImage = UIKit.UIImage.FromImage(context.ToImage(), 0, orientation);
-                return resizedImage.AsJPEG(.5f).ToArray();
+                return resizedImage.AsJPEG().ToArray();
             }
         }
 
