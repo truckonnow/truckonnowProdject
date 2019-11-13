@@ -1,5 +1,5 @@
 ﻿<div class="body">
-    <input class="backBtn" type="button" value="← Back to Orders" onclick="history.back();" />
+    <input class="backBtn" type="button" value="← Back to Orders" onclick="history.back();" /><br />
     <div>
         <select class="inpContentInspection" onchange="window.location.href = 'InspactionTrucks?IdDriver=@ViewBag.IdDriver&nameDriver=@ViewBag.NameDriver&date=' + this.options[this.selectedIndex].value;">
             @for (DateTime i = DateTime.Now; i >= new DateTime(2019, 10, 1); i = i.AddMonths(-1))

@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
-    <nav class="navst">
-        <span style="margin-right:10px"><a class="linkASt" href="http://truckonnow.com">Truckonnow</a></span>
-        <input class="btn" type="button" value="Order" @ViewData["hidden"] onclick="window.location.href='@Url.Action("NewLoad", "Dashbord")';"/>
-        <input class="btn" type="button" value="GPS Traking" @ViewData["hidden"] onclick="window.location.href='@Url.Action("Map", "Geolcation")';"/>
-        <input class="btn" type="button" value="Contacts" @ViewData["hidden"] onclick="window.location.href='@Url.Action("Contacts", "Contact")';" />
-        <input class="btn" type="button" value="Drivers" @ViewData["hidden"] onclick="window.location.href='@Url.Action("Drivers", "Driver")';"/>
-        <input class="btn" type="button" value="Report" @ViewData["hidden"] />
-    </nav>
+    <div style="background-color: rgba(45,45,45,0.98);display:flex">
+        <img style="margin: 4px" src="~/Icon/MirorR.png" height="40" asp-append-version="true"/>
+        <nav class="navst">
+            <span><a class="linkASt" href="http://truckonnow.com">Truckonnow</a></span>
+            <input class="btn" type="button" value="Order" @ViewData["hidden"] onclick="window.location.href='@Url.Action("NewLoad", "Dashbord")';"/>
+            <input class="btn" type="button" value="GPS Traking" @ViewData["hidden"] onclick="window.location.href='@Url.Action("Map", "Geolcation")';"/>
+            <input class="btn" type="button" value="Contacts" @ViewData["hidden"] onclick="window.location.href='@Url.Action("Contacts", "Contact")';" />
+            <input class="btn" type="button" value="Drivers" @ViewData["hidden"] onclick="window.location.href='@Url.Action("Drivers", "Driver")';"/>
+            <input class="btn" type="button" value="Report" @ViewData["hidden"] />
+        </nav>
+        <img style="margin: 4px" src="~/Icon/MirorL.png" height="40" asp-append-version="true"/>
+    </div>
     <div style="width:99%;height:97vh;">
         @RenderBody()
     </div>
@@ -25,13 +29,14 @@
     }
 
     .navst {
-        background-color: rgba(45,45,45,0.98);
         width: 99%;
         height: 35px;
         margin: 0px;
-        padding: 10px;
+        padding: 8px;
         top: 0px;
         left: 0px;
+        display:flex;
+        justify-content:center;
     }
 
     a {
@@ -42,7 +47,6 @@
     .linkASt {
         font-size: 25px;
         color: #ffffff;
-        margin-left:20px;
         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     }
     
@@ -52,7 +56,7 @@
         height:40px;
         color:white;
         font-size:18px;
-        margin-left:10px;
+        margin-left:80px;
     }
 
         .btn:hover {

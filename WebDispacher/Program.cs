@@ -8,7 +8,9 @@ namespace WebDispacher
     {
         public static void Main(string[] args)
         {
-            WebHost.CreateDefaultBuilder(args).UseIISIntegration();
+            WebHost.CreateDefaultBuilder(args)
+                .UseIISIntegration()
+                .UseContentRoot(Directory.GetCurrentDirectory());
             BuildWebHost(args).Run();
         }
 
