@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using DaoModels.DAO.Models;
 using Microsoft.AspNetCore.Mvc;
 using WebDispacher.Service;
 
@@ -201,7 +203,7 @@ namespace WebDispacher.Controellers
         }
 
         [HttpGet]
-        [Route("Driver/InspactionTruck")]
+        [Route("Driver/InspactionTrucks")]
         public IActionResult ViewAllInspactionDate(string idDriver, string nameDriver, string date)
         {
             IActionResult actionResult = null;
@@ -212,11 +214,47 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
+                    List<Driver> drivers = managerDispatch.GetDrivers();
                     ViewBag.InspectionTruck = managerDispatch.GetInspectionTruck(idDriver, date);
-                    ViewBag.NameDriver = nameDriver;
-                    ViewBag.Date = date;
-                    ViewBag.Drivers = managerDispatch.GetDrivers();
+                    ViewBag.Drivers = drivers;
+                    ViewBag.NameDriver = drivers.Find(d => d.Id.ToString() == idDriver).FullName;
                     ViewBag.IdDriver = idDriver;
+                    ViewBag.SelectData = date;
+                    actionResult = View("AllInspactionTruckData");
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult;
+        }
+
+        [HttpGet]
+        [Route("Driver/InspactionTruck")]
+        public IActionResult ViewnspactionDate(string idInspection)
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    //List<Driver> drivers = managerDispatch.GetDrivers();
+                    //ViewBag.InspectionTruck = managerDispatch.GetInspectionTruck(idDriver, date);
+                    //ViewBag.Drivers = drivers;
+                    //ViewBag.NameDriver = drivers.Find(d => d.Id.ToString() == idDriver).FullName;
+                    //ViewBag.IdDriver = idDriver;
                     ViewBag.selectData = DateTime.Now.ToShortDateString();
                     actionResult = View("AllInspactionTruckData");
                 }

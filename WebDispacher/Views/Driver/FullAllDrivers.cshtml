@@ -14,7 +14,7 @@
             <span class="inpData">Phone: @ViewBag.Drivers[i].PhoneNumber</span><br /> <br />
             <a href="@ViewBag.BaseUrl/Driver/Drivers/Edit?id=@ViewBag.Drivers[i].Id" class="btnId">Edit</a>
             <input class="btnId" value="Remove" type="button" onclick="Remove(@ViewBag.Drivers[i].Id)" />
-            <a class="btnId" href="~/Driver/InspactionTruck?idDriver=@ViewBag.Drivers[i].Id&nameDriver=@ViewBag.Drivers[i].FullName&date=@DateTime.Now.ToShortDateString()">Inspection</a>
+            <a class="btnId" href="~/Driver/InspactionTrucks?idDriver=@ViewBag.Drivers[i].Id&nameDriver=@ViewBag.Drivers[i].FullName&date=@DateTime.Now.ToShortDateString()">Inspection</a>
         </div>
         }
     </div>

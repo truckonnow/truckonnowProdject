@@ -1,23 +1,30 @@
 ﻿<div class="body">
     <input class="backBtn" type="button" value="← Back to Orders" onclick="history.back();" />
     <div>
-        <select class="inpContentInspection" onchange="window.location.href = 'InspactionTruck?idDriver=@ViewBag.IdDriver&nameDriver=@ViewBag.NameDriver&date=' + this.options[this.selectedIndex].value; ViewBag.selectData = this.options[this.selectedIndex].value">
-            @for (DateTime i = DateTime.Now; i >= new DateTime(2019, 9, 1); i = i.AddMonths(-1))
+        <select class="inpContentInspection" onchange="window.location.href = 'InspactionTrucks?IdDriver=@ViewBag.IdDriver&nameDriver=@ViewBag.NameDriver&date=' + this.options[this.selectedIndex].value;">
+            @for (DateTime i = DateTime.Now; i >= new DateTime(2019, 10, 1); i = i.AddMonths(-1))
             {
-                @if (i.ToShortDateString() != @ViewBag.Date)
+                @if (i.ToShortDateString() != @ViewBag.SelectData)
                 {
                     <option>@i.ToShortDateString()</option>
                 }
                 else
                 {
-                    <option selected>@ViewBag.Date</option>
+                    <option selected>@ViewBag.SelectData</option>
                 }
             }
         </select>
-        <select class="inpContentInspection" onchange="window.location.href = 'InspactionTruck?idDriver=' + this.options[this.selectedIndex].value + '&nameDriver=' + @ViewBag.NameDrive + '&date=@ViewBag.selectData'; ViewBag.IdDriver = this.options[this.selectedIndex].value">
-            @for (int i =0; i< ViewBag.Drivers.Count; i++)
+        <select class="inpContentInspection" onchange="window.location.href = 'InspactionTrucks?IdDriver=' + this.options[this.selectedIndex].value + '&nameDriver=' + this.options[this.selectedIndex].value + '&date=@ViewBag.SelectData'">
+            @for (int i = 0; i < ViewBag.Drivers.Count; i++)
             {
-                <option value="@ViewBag.Drivers[i].Id">@ViewBag.Drivers[i].FullName</option>
+                @if (ViewBag.IdDriver.ToString() == ViewBag.Drivers[i].Id.ToString())
+                {
+                    <option selected value="@ViewBag.Drivers[i].Id">@ViewBag.Drivers[i].FullName</option>
+                }
+                else
+                {
+                    <option value="@ViewBag.Drivers[i].Id">@ViewBag.Drivers[i].FullName</option>
+                }
             }
         </select>
     </div>
