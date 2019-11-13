@@ -6,7 +6,7 @@
 </head>
 <body>
     <div style="background-color: rgba(45,45,45,0.98);display:flex">
-        <img style="margin: 4px" src="~/Icon/MirorR.png" height="40" asp-append-version="true"/>
+        <img class="imgMirir" src="~/Icon/MirorR.png" height="40" asp-append-version="true"/>
         <nav class="navst">
             <span><a class="linkASt" href="http://truckonnow.com">Truckonnow</a></span>
             <input class="btn" type="button" value="Order" @ViewData["hidden"] onclick="window.location.href='@Url.Action("NewLoad", "Dashbord")';"/>
@@ -15,7 +15,7 @@
             <input class="btn" type="button" value="Drivers" @ViewData["hidden"] onclick="window.location.href='@Url.Action("Drivers", "Driver")';"/>
             <input class="btn" type="button" value="Report" @ViewData["hidden"] />
         </nav>
-        <img style="margin: 4px" src="~/Icon/MirorL.png" height="40" asp-append-version="true"/>
+        <img class="imgMirir" src="~/Icon/MirorL.png" height="40" asp-append-version="true"/>
     </div>
     <div style="width:99%;height:97vh;">
         @RenderBody()
@@ -37,6 +37,16 @@
         left: 0px;
         display:flex;
         justify-content:center;
+    }
+
+    .imgMirir {
+        margin: 4px;
+        transition: transform .7s;
+    }
+
+    .imgMirir:hover {
+        transform: rotate3d(5, 10.0, 2.00, 40deg);
+        transition: transform .7s ease-in-out;
     }
 
     a {
