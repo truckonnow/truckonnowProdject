@@ -215,7 +215,9 @@ namespace WebDispacher.Controellers
                     ViewBag.InspectionTruck = managerDispatch.GetInspectionTruck(idDriver, date);
                     ViewBag.NameDriver = nameDriver;
                     ViewBag.Date = date;
+                    ViewBag.Drivers = managerDispatch.GetDrivers();
                     ViewBag.IdDriver = idDriver;
+                    ViewBag.selectData = DateTime.Now.ToShortDateString();
                     actionResult = View("AllInspactionTruckData");
                 }
                 else

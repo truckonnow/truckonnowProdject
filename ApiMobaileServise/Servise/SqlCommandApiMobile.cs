@@ -151,7 +151,7 @@ namespace ApiMobaileServise.Servise
             {
                 InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
                 DateTime dateTime = Convert.ToDateTime(inspectionDriver.Date);
-                if(dateTime.Date != DateTime.Now.Date || (inspectionDriver.CountPhoto <= 45))
+                if(dateTime.Date != DateTime.Now.Date || (inspectionDriver.CountPhoto <= 44))
                 {
                     isInspaction = false;
                 }
