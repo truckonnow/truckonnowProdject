@@ -215,7 +215,7 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     List<Driver> drivers = managerDispatch.GetDrivers();
-                    ViewBag.InspectionTruck = managerDispatch.GetInspectionTruck(idDriver, date);
+                    ViewBag.InspectionTruck = managerDispatch.GetInspectionTrucks(idDriver, date);
                     ViewBag.Drivers = drivers;
                     ViewBag.NameDriver = drivers.Find(d => d.Id.ToString() == idDriver).FullName;
                     ViewBag.IdDriver = idDriver;
@@ -240,7 +240,7 @@ namespace WebDispacher.Controellers
 
         [HttpGet]
         [Route("Driver/InspactionTruck")]
-        public IActionResult ViewnspactionDate(string idInspection)
+        public IActionResult ViewInspaction(string idInspection, string idDriver, string date)
         {
             IActionResult actionResult = null;
             try
@@ -250,13 +250,11 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    //List<Driver> drivers = managerDispatch.GetDrivers();
-                    //ViewBag.InspectionTruck = managerDispatch.GetInspectionTruck(idDriver, date);
-                    //ViewBag.Drivers = drivers;
-                    //ViewBag.NameDriver = drivers.Find(d => d.Id.ToString() == idDriver).FullName;
-                    //ViewBag.IdDriver = idDriver;
-                    ViewBag.selectData = DateTime.Now.ToShortDateString();
-                    actionResult = View("AllInspactionTruckData");
+                    Driver drivers = managerDispatch.GetDriver(Convert.ToInt32(idDriver));
+                    ViewBag.InspectionTruck = managerDispatch.GetInspectionTruck(idInspection);
+                    ViewBag.Drivers = drivers;
+                    ViewBag.SelectData = date;
+                    actionResult = View("OneInspektion");
                 }
                 else
                 {

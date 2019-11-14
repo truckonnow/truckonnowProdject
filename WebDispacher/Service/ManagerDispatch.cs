@@ -193,9 +193,9 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.AddDriver(driver);
         }
 
-        public List<InspectionDriver> GetInspectionTruck(string idDriver, string date)
+        public List<InspectionDriver> GetInspectionTrucks(string idDriver, string date)
         {
-            return _sqlEntityFramworke.GetInspectionTruckDb(idDriver, date);
+            return _sqlEntityFramworke.GetInspectionTrucksDb(idDriver, date);
         }
 
         public void RemoveDrive(int id)
@@ -214,6 +214,11 @@ namespace WebDispacher.Service
             driver.TrailerCapacity = trailerCapacity;
             driver.DriversLicenseNumber = driversLicenseNumber;
             _sqlEntityFramworke.UpdateDriver(driver);
+        }
+
+        public InspectionDriver GetInspectionTruck(string idInspection)
+        {
+            return _sqlEntityFramworke.GetInspectionTruck(idInspection);
         }
     }
 }

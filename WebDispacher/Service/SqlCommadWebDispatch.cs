@@ -192,7 +192,7 @@ namespace WebDispacher.Dao
             return shipping;
         }
 
-        public List<InspectionDriver> GetInspectionTruckDb(string idDriver, string date)
+        public List<InspectionDriver> GetInspectionTrucksDb(string idDriver, string date)
         {
             DateTime dateTime = Convert.ToDateTime(date);
             return context.Drivers
@@ -212,6 +212,14 @@ namespace WebDispacher.Dao
             int id = 1;
             while(context.Shipping.FirstOrDefault(s => s.Id == id.ToString()) != null) { id = new Random().Next(0, 100000000); }
             return id;
+        }
+
+        public InspectionDriver GetInspectionTruck(string idInspection)
+        {
+            return context.InspectionDrivers
+                .Where(i => i.Id.ToString() == idInspection)
+                .Include(i => i.PhotosTruck)
+                .First();
         }
 
         public bool ExistsDataUser(string login, string password)
