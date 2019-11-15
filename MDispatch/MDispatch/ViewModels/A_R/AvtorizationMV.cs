@@ -80,6 +80,8 @@ namespace MDispatch.ViewModels
             {
                 App.isAvtorization = true;
                 CrossSettings.Current.AddOrUpdateValue("Token", token);
+                CrossSettings.Current.AddOrUpdateValue("Username", Username);
+                CrossSettings.Current.AddOrUpdateValue("Password", Password);
                 await Task.Run(() =>
                 {
                     DependencyService.Get<IStore>().OnTokenRefresh();

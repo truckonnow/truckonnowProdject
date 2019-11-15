@@ -6,7 +6,6 @@ using MDispatch.Service.Tasks;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection.PickedUp;
-using Newtonsoft.Json;
 using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;

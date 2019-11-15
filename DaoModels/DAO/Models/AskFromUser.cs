@@ -15,5 +15,6 @@ namespace DaoModels.DAO.Models
         public Video VideoRecord { get; set; }
         public string EmailPay { get; set; }
         public string NamePaymment { get; set; }
+        public bool IsProblem { get; set; }
     }
 }

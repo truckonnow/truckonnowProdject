@@ -330,6 +330,10 @@ namespace ApiMobaileServise.Servise
             return token;
         }
 
+        public void SetProplem(string idShiping, string type)
+        {
+            sqlCommandApiMobile.SetProblemDb(idShiping);
+        }
 
         #region Task
         public List<Tasks> CheckTask(string token)

@@ -5,10 +5,12 @@ using MDispatch.View.GlobalDialogView;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
 using MDispatch.ViewModels.InspectionMV.Servise.Paymmant;
 using Newtonsoft.Json;
+using Plugin.Settings;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -338,6 +340,83 @@ namespace MDispatch.View.Inspection.PickedUp
         private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             await PopupNavigation.PushAsync(new ContactInfo());
+        }
+
+        [Obsolete]
+        private async void Entry_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(CrossSettings.Current.GetValueOrDefault("Password", "") == e.NewTextValue)
+            {
+                if (!payBlockSelectPatment.IsVisible)
+                {
+                    if (Paymmant != null)
+                    {
+                        isAsk2 = Paymmant.IsAskPaymmant;
+                    }
+                    if (isSignatureAsk && isAsk2)
+                    {
+                        liabilityAndInsuranceMV.SaveSigAndMethodPay();
+                    }
+                    else
+                    {
+                        ((Entry)sender).Text = "";
+                        ((Entry)sender).IsVisible = false;
+                        await PopupNavigation.PushAsync(new Errror("You did not fill in all the required fields, you can continue the inspection only when filling in the required fields !!", null));
+                        CheckAsk();
+                    }
+                }
+                else
+                {
+                    ((Entry)sender).TextColor = Color.Default;
+                    //btnConntinue.IsVisible = true;
+                    blockAskPay.IsVisible = true;
+                }
+            }
+            else
+            {
+                ((Entry)sender).TextColor = Color.Red;
+                //btnConntinue.IsVisible = false;
+                blockAskPay.IsVisible = false;
+            }
+        }
+
+        bool isAsk3 = false;
+        private async void Button_Clicked_1(object sender, EventArgs e)
+        {
+            isAsk3 = true;
+            if (Paymmant != null)
+            {
+                isAsk2 = Paymmant.IsAskPaymmant;
+            }
+            if (isSignatureAsk && isAsk2)
+            {
+                    bloclThank.IsVisible = true;
+                    blockPsw.IsVisible = true;
+                    blockAsk.IsEnabled = false;
+                    askBlock2.IsEnabled = false;
+                    askBlock2.BorderColor = Color.Silver;
+                    askBlock3.IsEnabled = false;
+                    askBlock3.BorderColor = Color.Silver;
+                    blockAsk.BorderColor = Color.Silver;
+            }
+            else
+            {
+                await PopupNavigation.PushAsync(new Errror("You did not fill in all the required fields, you can continue the inspection only when filling in the required fields !!", null));
+                CheckAsk();
+            }
+
+        }
+
+        private void Button_Clicked_2(object sender, EventArgs e)
+        {
+            btnYesPay.IsVisible = false;
+            btnNoPay.IsVisible = false;
+            btnNumberOffice.IsVisible = true;
+        }
+
+        private void Button_Clicked_3(object sender, EventArgs e)
+        { 
+            PhoneDialer.Open("+17734305155");
         }
     }
 }

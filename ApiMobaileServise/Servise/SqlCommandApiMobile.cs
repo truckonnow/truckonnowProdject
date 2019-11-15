@@ -308,6 +308,13 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
+        public void SetProblemDb(string idShiping)
+        {
+            Shipping shipping = context.Shipping.First(s => s.Id == idShiping);
+            shipping.IsProblem = true;
+            context.SaveChanges();
+        }
+
         public async void SavePayInDb(string idShiping, int type, Photo photo)
         {
             Shipping shipping = context.Shipping.Where(v => v.Id == idShiping)

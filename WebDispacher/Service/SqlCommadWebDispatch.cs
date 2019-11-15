@@ -20,38 +20,45 @@ namespace WebDispacher.Dao
 
         private async void InitUserOne()
         {
-            if (context.User.Count() == 0)
+            try
             {
-                Users users = new Users();
-                users.Login = "DevRoma";
-                users.Password = "polkilo123";
-                context.User.AddAsync(users);
-                users = new Users();
-                users.Login = "ArtemManager";
-                users.Password = "truckon777";
-                context.User.AddAsync(users);
-                users = new Users();
-                users.Login = "Designer";
-                users.Password = "truckon777";
-                context.User.AddAsync(users);
-                users = new Users();
-                users.Login = "Truckonnow";
-                users.Password = "truckon777";
-                context.User.AddAsync(users);
-                users = new Users();
-                users.Login = "Truckonnow1";
-                users.Password = "truckon777";
-                context.User.AddAsync(users);
-                users = new Users();
-                users.Login = "Truckonnow2";
-                users.Password = "truckon777";
-                context.User.AddAsync(users);
-                users = new Users();
-                users.Login = "Truckonnow3";
-                users.Password = "truckon777";
-                context.User.AddAsync(users);
-                await context.SaveChangesAsync();
+                if (context.User.Count() == 0)
+                {
+                    Users users = new Users();
+                    users.Login = "DevRoma";
+                    users.Password = "polkilo123";
+                    context.User.AddAsync(users);
+                    users = new Users();
+                    users.Login = "ArtemManager";
+                    users.Password = "truckon777";
+                    context.User.AddAsync(users);
+                    users = new Users();
+                    users.Login = "Designer";
+                    users.Password = "truckon777";
+                    context.User.AddAsync(users);
+                    users = new Users();
+                    users.Login = "Truckonnow";
+                    users.Password = "truckon777";
+                    context.User.AddAsync(users);
+                    users = new Users();
+                    users.Login = "Truckonnow1";
+                    users.Password = "truckon777";
+                    context.User.AddAsync(users);
+                    users = new Users();
+                    users.Login = "Truckonnow2";
+                    users.Password = "truckon777";
+                    context.User.AddAsync(users);
+                    users = new Users();
+                    users.Login = "Truckonnow3";
+                    users.Password = "truckon777";
+                    context.User.AddAsync(users);
+                    await context.SaveChangesAsync();
+                }
             }
+            catch
+            {
+
+            } 
         }
 
         private void Init()
