@@ -23,12 +23,13 @@ namespace MDispatch.View.Inspection.PickedUp
         public LiabilityAndInsuranceMV liabilityAndInsuranceMV = null;
         private IPaymmant Paymmant = null;
 
-        public LiabilityAndInsurance (ManagerDispatchMob managerDispatchMob, string idVech, string idShip, InitDasbordDelegate initDasbordDelegate, string OnDeliveryToCarrier, string totalPaymentToCarrier)
+        [Obsolete]
+        public LiabilityAndInsurance (ManagerDispatchMob managerDispatchMob, string idVech, string idShip, InitDasbordDelegate initDasbordDelegate, string OnDeliveryToCarrier, string totalPaymentToCarrier, bool isproplem)
 		{
             liabilityAndInsuranceMV = new LiabilityAndInsuranceMV(managerDispatchMob, idVech, idShip, Navigation, initDasbordDelegate);
             InitializeComponent ();
             BindingContext = liabilityAndInsuranceMV;
-            InitElemnt();
+            InitElemnt(isproplem);
             InitPayment(OnDeliveryToCarrier, totalPaymentToCarrier);
         }
 
@@ -72,8 +73,18 @@ namespace MDispatch.View.Inspection.PickedUp
         }
 
         [Obsolete]
-        public async void InitElemnt()
+        public async void InitElemnt(bool isProplem)
         {
+            if (isProplem)
+            {
+                btnSave.IsVisible = false;
+                blockAskPay.IsVisible = true;
+                btnYesPay.IsVisible = false;
+                btnNoPay.IsVisible = false;
+                btnNumberOffice.IsVisible = true;
+                lReport.IsVisible = true;
+                blockAsk.IsVisible = false;
+            }
             await Wait();
             if (liabilityAndInsuranceMV.Shipping != null && liabilityAndInsuranceMV.Shipping.VehiclwInformations != null)
             {
@@ -360,7 +371,7 @@ namespace MDispatch.View.Inspection.PickedUp
                     else
                     {
                         ((Entry)sender).Text = "";
-                        ((Entry)sender).IsVisible = false;
+                        blockAskPay.IsVisible = false;
                         await PopupNavigation.PushAsync(new Errror("You did not fill in all the required fields, you can continue the inspection only when filling in the required fields !!", null));
                         CheckAsk();
                     }
@@ -390,14 +401,15 @@ namespace MDispatch.View.Inspection.PickedUp
             }
             if (isSignatureAsk && isAsk2)
             {
-                    bloclThank.IsVisible = true;
-                    blockPsw.IsVisible = true;
-                    blockAsk.IsEnabled = false;
-                    askBlock2.IsEnabled = false;
-                    askBlock2.BorderColor = Color.Silver;
-                    askBlock3.IsEnabled = false;
-                    askBlock3.BorderColor = Color.Silver;
-                    blockAsk.BorderColor = Color.Silver;
+                btnSave.IsVisible = false;
+                bloclThank.IsVisible = true;
+                blockPsw.IsVisible = true;
+                blockAsk.IsEnabled = false;
+                askBlock2.IsEnabled = false;
+                askBlock2.BorderColor = Color.Silver;
+                askBlock3.IsEnabled = false;
+                askBlock3.BorderColor = Color.Silver;
+                blockAsk.BorderColor = Color.Silver;
             }
             else
             {
@@ -412,6 +424,9 @@ namespace MDispatch.View.Inspection.PickedUp
             btnYesPay.IsVisible = false;
             btnNoPay.IsVisible = false;
             btnNumberOffice.IsVisible = true;
+            lReport.IsVisible = true;
+            blockAsk.IsVisible = false;
+            liabilityAndInsuranceMV.SetProblem();
         }
 
         private void Button_Clicked_3(object sender, EventArgs e)

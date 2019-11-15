@@ -27,6 +27,7 @@ namespace MDispatch.ViewModels.TAbbMV
         public DelegateCommand GoToInspectionDriveCommand { get; set; }
         public InitDasbordDelegate initDasbordDelegate;
 
+        [Obsolete]
         public ActiveMV(ManagerDispatchMob managerDispatchMob, INavigation navigation)
         {
             Navigation = navigation;

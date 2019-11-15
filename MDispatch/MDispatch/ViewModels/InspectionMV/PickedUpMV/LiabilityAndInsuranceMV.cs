@@ -293,5 +293,33 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             await Navigation.PushAsync(new Ask2Page(managerDispatchMob, IdVech, IdShip, initDasbordDelegate));
             Navigation.RemovePage(Navigation.NavigationStack[1]);
         }
+
+        public async void SetProblem()
+        {
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.SetProblem(token, IdShip);
+                    initDasbordDelegate.Invoke();
+                });
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, null));
+                }
+                else if (state == 3)
+                {
+                    DependencyService.Get<IToast>().ShowMessage($"In the near future the dispatcher see the problem");
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
+            }
+        }
     }
 }

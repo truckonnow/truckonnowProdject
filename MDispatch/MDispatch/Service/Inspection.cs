@@ -385,6 +385,37 @@ namespace MDispatch.Service
             }
         }
 
+        internal int SetProblem(string token, string idShiping)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
+                RestRequest request = new RestRequest("Mobile/Problem", Method.POST);
+                request.AddHeader("Accept", "application/json");
+                client.Timeout = 60000;
+                request.AddParameter("token", token);
+                request.AddParameter("idShiping", idShiping);
+                request.AddParameter("type", "");
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                string description = null;
+                return GetData(content, ref description);
+            }
+        }
+
         public int SaveAsk(string token, string id, AskForUserDelyveryM askForUserDelyveryM, ref string description)
         {
             IRestResponse response = null;

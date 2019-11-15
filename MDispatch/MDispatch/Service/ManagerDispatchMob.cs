@@ -321,6 +321,21 @@ namespace MDispatch.Service
             return statePay;
         }
 
+        public int SetProblem(string token, string idShiping)
+        {
+            inspection = new Inspection();
+            //WaiteNoramalReqvestCount();
+            CountReqvest++;
+            int statePay = 1;
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                statePay = inspection.SetProblem(token, idShiping);
+            }
+            inspection = null;
+            CountReqvest--;
+            return statePay;
+        }
+
         private void WaiteNoramalReqvestCount()
         {
             while(CountReqvest >= 2)

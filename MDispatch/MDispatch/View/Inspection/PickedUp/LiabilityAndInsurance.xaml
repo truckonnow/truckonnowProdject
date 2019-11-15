@@ -120,7 +120,7 @@
                         </Frame>
                     </StackLayout>
                 </Frame>
-                <Button  Text="Save" BackgroundColor="BlueViolet" TextColor="White" Clicked="Button_Clicked_1" Margin="10"/>
+                <Button x:Name="btnSave" Text="Save" BackgroundColor="BlueViolet" TextColor="White" Clicked="Button_Clicked_1" Margin="10"/>
                 <Frame IsVisible="False" x:Name="bloclThank" Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6">
                     <StackLayout>
                         <Label Text="Thank you. Please pass the device to the driver." 
@@ -131,18 +131,19 @@
                     <StackLayout>
                         <Label Text="Enter your account password to continue" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Entry Placeholder="Enter password" TextChanged="Entry_TextChanged" IsPassword="True"/>
+                        <Entry x:Name="entryPsw" Placeholder="Enter password" TextChanged="Entry_TextChanged" IsPassword="True"/>
                     </StackLayout>
                 </Frame>
                 <Frame IsVisible="False" Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="blockAskPay">
                     <StackLayout>
                         <Label Text="Did the driver pay for the carriage?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <StackLayout Orientation="Horizontal">
+                        <FlexLayout Wrap="Wrap">
                             <Button x:Name="btnYesPay" Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked"/>
                             <Button x:Name="btnNoPay" Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_2"/>
-                            <Button IsVisible="False" x:Name="btnNumberOffice" Text="+17734305155" BackgroundColor="White" TextColor="Red" Clicked="Button_Clicked_3"/>
-                        </StackLayout>
+                            <Button IsVisible="False" x:Name="btnNumberOffice" Text="+17734305155" BackgroundColor="White" FontSize="19" TextColor="Red" Clicked="Button_Clicked_3"/>
+                            <Label IsVisible="False" x:Name="lReport" Text="In the near future the dispatcher see the problem" Margin="10"/>
+                        </FlexLayout>
                     </StackLayout>
                 </Frame>
                 <!--<Button IsVisible="False" x:Name="btnConntinue" Text="Continue" BackgroundColor="BlueViolet" TextColor="White" Clicked="Button_Clicked" Margin="10"/>-->
