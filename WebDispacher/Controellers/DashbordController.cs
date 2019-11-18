@@ -65,7 +65,6 @@ namespace WebDispacher.Controellers
                     {
                         actionResult = false;
                     }
-                    
                 }
                 else
                 {
@@ -120,6 +119,37 @@ namespace WebDispacher.Controellers
 
             }
             return actionResult.ToString();
+        }
+
+        [Route("Dashbord/Order/Solved")]
+        [HttpGet]
+        public IActionResult Solved(string id, string page)
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                string key = null;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    managerDispatch.Solved(id);
+                    actionResult = Redirect($"{page}");
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult;
         }
 
         [Route("Dashbord/Order/Archived")]

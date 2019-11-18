@@ -281,6 +281,36 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             await PopupNavigation.PushAsync(new EvaluationAndSurveyDialog(this, Navigation));
         }
 
+        public async Task<bool> CheckProplem()
+        {
+            bool isProplem = false;
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.CheckProblem(token, IdShip, ref isProplem);
+                    initDasbordDelegate.Invoke();
+                });
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, null));
+                }
+                else if (state == 3)
+                {
+
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
+            }
+            return isProplem;
+        }
+
         [System.Obsolete]
         private async void GoToFeedBack()
         {

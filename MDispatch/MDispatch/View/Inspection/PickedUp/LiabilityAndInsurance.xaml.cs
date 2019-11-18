@@ -4,11 +4,11 @@ using MDispatch.Service;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
 using MDispatch.ViewModels.InspectionMV.Servise.Paymmant;
-using Newtonsoft.Json;
 using Plugin.Settings;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -22,6 +22,7 @@ namespace MDispatch.View.Inspection.PickedUp
 	{
         public LiabilityAndInsuranceMV liabilityAndInsuranceMV = null;
         private IPaymmant Paymmant = null;
+        private Timer timer = null;
 
         [Obsolete]
         public LiabilityAndInsurance (ManagerDispatchMob managerDispatchMob, string idVech, string idShip, InitDasbordDelegate initDasbordDelegate, string OnDeliveryToCarrier, string totalPaymentToCarrier, bool isproplem)
@@ -54,6 +55,18 @@ namespace MDispatch.View.Inspection.PickedUp
             }
         }
 
+        protected override bool OnBackButtonPressed()
+        {
+            timer.Change(Timeout.Infinite, Timeout.Infinite);
+            return base.OnBackButtonPressed();
+        }
+
+        protected override void OnDisappearing()
+        {
+            timer.Change(Timeout.Infinite, Timeout.Infinite);
+            base.OnDisappearing();
+        }
+
         [Obsolete]
         private async void Button_Clicked(object sender, EventArgs e)
         {
@@ -84,6 +97,7 @@ namespace MDispatch.View.Inspection.PickedUp
                 btnNumberOffice.IsVisible = true;
                 lReport.IsVisible = true;
                 blockAsk.IsVisible = false;
+                timer = new Timer(new TimerCallback(CheckProplem), null, 10000, 10000);
             }
             await Wait();
             if (liabilityAndInsuranceMV.Shipping != null && liabilityAndInsuranceMV.Shipping.VehiclwInformations != null)
@@ -236,6 +250,26 @@ namespace MDispatch.View.Inspection.PickedUp
             liabilityAndInsuranceMV.StataLoadShip = 0;
         }
         
+        private async void CheckProplem(object o)
+        {
+            bool isProplem = await liabilityAndInsuranceMV.CheckProplem();
+            if(!isProplem)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    blockPsw.IsVisible = false;
+                    bloclThank.IsVisible = false;
+                    btnSave.IsVisible = true;
+                    blockAskPay.IsVisible = false;
+                    btnYesPay.IsVisible = true;
+                    btnNoPay.IsVisible = true;
+                    btnNumberOffice.IsVisible = false;
+                    lReport.IsVisible = false;
+                    blockAsk.IsVisible = true;
+                });
+                timer.Change(Timeout.Infinite, Timeout.Infinite);
+            }
+        }
 
         private async void GetPagePhotoInspection(Xamarin.Forms.View v, object s)
         {
@@ -404,12 +438,6 @@ namespace MDispatch.View.Inspection.PickedUp
                 btnSave.IsVisible = false;
                 bloclThank.IsVisible = true;
                 blockPsw.IsVisible = true;
-                blockAsk.IsEnabled = false;
-                askBlock2.IsEnabled = false;
-                askBlock2.BorderColor = Color.Silver;
-                askBlock3.IsEnabled = false;
-                askBlock3.BorderColor = Color.Silver;
-                blockAsk.BorderColor = Color.Silver;
             }
             else
             {
@@ -427,6 +455,7 @@ namespace MDispatch.View.Inspection.PickedUp
             lReport.IsVisible = true;
             blockAsk.IsVisible = false;
             liabilityAndInsuranceMV.SetProblem();
+            timer = new Timer(new TimerCallback(CheckProplem), null, 10000, 10000);
         }
 
         private void Button_Clicked_3(object sender, EventArgs e)

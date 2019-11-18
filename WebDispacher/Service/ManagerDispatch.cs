@@ -130,6 +130,11 @@ namespace WebDispacher.Service
             });
         }
 
+        public void Solved(string idOrder)
+        {
+            _sqlEntityFramworke.Solved(idOrder);
+        }
+
         //public Shipping GetDriver()
         //{
         //    return _sqlEntityFramworke.GetShipping(id);

@@ -308,6 +308,12 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
+        public bool CheckProplemDb(string idShiping)
+        {
+            Shipping shipping = context.Shipping.First(s => s.Id == idShiping);
+            return shipping.IsProblem;
+        }
+
         public void SetProblemDb(string idShiping)
         {
             Shipping shipping = context.Shipping.First(s => s.Id == idShiping);

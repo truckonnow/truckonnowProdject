@@ -1,5 +1,6 @@
 ﻿using MDispatch.Models;
 using Plugin.Connectivity;
+using System;
 using System.Collections.Generic;
 
 namespace MDispatch.Service
@@ -311,14 +312,29 @@ namespace MDispatch.Service
             inspection = new Inspection();
             //WaiteNoramalReqvestCount();
             CountReqvest++;
-            int statePay = 1;
+            int stateProplem = 1;
             if (CrossConnectivity.Current.IsConnected)
             {
-                statePay = inspection.SaveMethodPay(token, idShiping, payMethod, countPay, ref description);
+                stateProplem = inspection.SaveMethodPay(token, idShiping, payMethod, countPay, ref description);
             }
             inspection = null;
             CountReqvest--;
-            return statePay;
+            return stateProplem;
+        }
+
+        public int CheckProblem(string token, string idShiping, ref bool isProplem)
+        {
+            inspection = new Inspection();
+            //WaiteNoramalReqvestCount();
+            CountReqvest++;
+            int stateProplem = 1;
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                stateProplem = inspection.CheckProblem(token, idShiping, ref isProplem);
+            }
+            inspection = null;
+            CountReqvest--;
+            return stateProplem;
         }
 
         public int SetProblem(string token, string idShiping)

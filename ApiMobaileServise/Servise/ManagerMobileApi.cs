@@ -335,6 +335,11 @@ namespace ApiMobaileServise.Servise
             sqlCommandApiMobile.SetProblemDb(idShiping);
         }
 
+        public bool CheckProplem(string idShiping, string type)
+        {
+            return sqlCommandApiMobile.CheckProplemDb(idShiping);
+        }
+
         #region Task
         public List<Tasks> CheckTask(string token)
         {

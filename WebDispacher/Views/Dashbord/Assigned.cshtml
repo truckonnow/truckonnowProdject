@@ -57,6 +57,11 @@
                             <p class="stPData">Assigned to @ViewBag.Orders[i].Driverr.FullName</p>
                             <p class="stPData">Phone: @ViewBag.Orders[i].Driverr.PhoneNumber</p>
                         </div>
+                        @if (ViewBag.Orders[i].IsProblem)
+                        {
+                            <p style="color:red" class="stPData">If the problem is resolved, then click the "Solved" button</p>
+                            <a  href="/Dashbord/Order/Solved?id=@ViewBag.Orders[i].Id&page=Assigned" style="color:red" class="btnId">Solved</a>
+                        }
                     </div>
                 </div>
             </div>

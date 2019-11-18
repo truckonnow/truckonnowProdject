@@ -385,7 +385,38 @@ namespace MDispatch.Service
             }
         }
 
-        internal int SetProblem(string token, string idShiping)
+        public int CheckProblem(string token, string idShiping, ref bool isProplem)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
+                RestRequest request = new RestRequest("Mobile/Check/Problem", Method.POST);
+                request.AddHeader("Accept", "application/json");
+                client.Timeout = 20000;
+                request.AddParameter("token", token);
+                request.AddParameter("idShiping", idShiping);
+                request.AddParameter("type", "");
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                string description = null;
+                return GetData(content, ref isProplem, ref description);
+            }
+        }
+
+        public int SetProblem(string token, string idShiping)
         {
             IRestResponse response = null;
             string content = null;
@@ -654,6 +685,28 @@ namespace MDispatch.Service
             description = responseAppS.Value<string>("Description");
             if (status == "success")
             {
+                return 3;
+            }
+            else
+            {
+                description = responseAppS
+                    .Value<string>("description");
+                return 2;
+            }
+        }
+
+        private int GetData(string respJsonStr, ref bool isProplem, ref string description)
+        {
+            respJsonStr = respJsonStr.Replace("\\", "");
+            respJsonStr = respJsonStr.Remove(0, 1);
+            respJsonStr = respJsonStr.Remove(respJsonStr.Length - 1);
+            var responseAppS = JObject.Parse(respJsonStr);
+            string status = responseAppS.Value<string>("Status");
+            description = responseAppS.Value<string>("Description");
+            if (status == "success")
+            {
+                isProplem = JsonConvert.DeserializeObject<bool>(responseAppS.
+                          SelectToken("ResponseStr").ToString().ToLower());
                 return 3;
             }
             else

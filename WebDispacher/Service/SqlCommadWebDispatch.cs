@@ -149,6 +149,13 @@ namespace WebDispacher.Dao
             return context.Shipping.FirstOrDefault(s => s.VehiclwInformations.FirstOrDefault(v => v == vehiclwInformation) != null);
         }
 
+        public void Solved(string idOrder)
+        {
+            Shipping shipping = context.Shipping.First(s => s.Id == idOrder);
+            shipping.IsProblem = false;
+            context.SaveChanges();
+        }
+
         public Driver GetDriver(int id)
         {
             return context.Drivers.FirstOrDefault(d => d.Id == id);

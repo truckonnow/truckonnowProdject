@@ -419,5 +419,33 @@ namespace ApiMobaileServise.Controllers
             }
             return respons;
         }
+
+        [HttpPost]
+        [Route("Check/Problem")]
+        public string CheckProplem(string token, string idShiping, string type)
+        {
+            string respons = null;
+            if (token == null || token == "")
+            {
+                return JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
+            }
+            try
+            {
+                bool isToken = managerMobileApi.CheckToken(token);
+                if (isToken)
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", managerMobileApi.CheckProplem(idShiping, type)));
+                }
+                else
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "2", null));
+                }
+            }
+            catch (Exception)
+            {
+                respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
+            }
+            return respons;
+        }
     }
 }
