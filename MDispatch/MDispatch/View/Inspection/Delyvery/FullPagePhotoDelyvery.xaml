@@ -10,7 +10,7 @@
             <AbsoluteLayout x:Name="dmla" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" Opacity="0.5"/>
             <StackLayout Orientation="Horizontal" AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" BackgroundColor="#E6E6E6"
                          AbsoluteLayout.LayoutBounds="1, 0, 1, 44" Opacity="0.7" Padding="7">
-                <Image Source="BackIconpage.png" HeightRequest="20" WidthRequest="20">
+                <Image Source="BackIconpage.png" HeightRequest="30" WidthRequest="30">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
                     </Image.GestureRecognizers>

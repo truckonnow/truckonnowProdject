@@ -57,13 +57,19 @@ namespace MDispatch.View.Inspection.PickedUp
 
         protected override bool OnBackButtonPressed()
         {
-            timer.Change(Timeout.Infinite, Timeout.Infinite);
+            if (timer != null)
+            {
+                timer.Change(Timeout.Infinite, Timeout.Infinite);
+            }
             return base.OnBackButtonPressed();
         }
 
         protected override void OnDisappearing()
         {
-            timer.Change(Timeout.Infinite, Timeout.Infinite);
+            if (timer != null)
+            {
+                timer.Change(Timeout.Infinite, Timeout.Infinite);
+            }
             base.OnDisappearing();
         }
 

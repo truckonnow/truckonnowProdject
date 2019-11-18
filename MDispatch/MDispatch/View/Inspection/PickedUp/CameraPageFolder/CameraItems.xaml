@@ -6,7 +6,7 @@
              x:Class="MDispatch.View.AskPhoto.CameraPageFolder.CameraItems">
     <ContentPage.Content>
         <AbsoluteLayout>
-            <Image Source="BackIconpage.png"  HorizontalOptions="Start" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".02, .02, 20, 20">
+            <Image Margin="5" Source="BackIconpage.png"  HorizontalOptions="Start" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".02, .02, 40, 40">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                 </Image.GestureRecognizers>
