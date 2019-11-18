@@ -12,105 +12,133 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock1">
-                    <StackLayout>
-                        <Label Text="Have you inspected the vehicle For any additional imperfections other than listed at the pick up?" 
+                <StackLayout x:Name="blockAsk">
+                    <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock1">
+                        <StackLayout>
+                            <Label Text="Have you inspected the vehicle For any additional imperfections other than listed at the pick up?" 
                                TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
-                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <StackLayout Orientation="Horizontal">
-                            <Button Text="Yes" BackgroundColor="White" TextColor="Silver"  Clicked="Button_Clicked1"/>
-                            <Button Text="Found an issue" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked1"/>
-                        </StackLayout>
-                        <ScrollView x:Name="scrolViewAskPhoto" Orientation="Horizontal" IsVisible="False">
-                            <StackLayout x:Name="blockAskPhoto" Orientation="Horizontal">
-                            </StackLayout>
-                        </ScrollView>
-                    </StackLayout>
-                </Frame>
-                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock2">
-                    <StackLayout>
-                        <StackLayout x:Name="payBlockSelectPatment" IsVisible="False">
-                            <Label Text="What form of payment are you using to pay for transportation?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                             <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                            <OnPlatform x:TypeArguments="View">
-                                <On Platform="Android">
-                                    <input:Dropdown CornerRadius="6" BorderColor="#4fd2c2" Placeholder="Select type pay" SelectedItemChanged="Dropdown_SelectedItemChanged">
-                                        <input:Dropdown.ItemsSource>
-                                            <x:Array Type="{x:Type x:String}">
-                                                <x:String>Check</x:String>
-                                                <x:String>Cash</x:String>
-                                                <x:String>Cradit card</x:String>
-                                            </x:Array>
-                                        </input:Dropdown.ItemsSource>
-                                    </input:Dropdown>
-                                </On>
-                                <On Platform="iOS">
-                                    <Frame Padding="5" CornerRadius="5" BorderColor="#4fd2c2">
-                                        <Picker SelectedIndexChanged="Picker_SelectedIndexChanged">
-                                            <Picker.ItemsSource>
+                            <StackLayout Orientation="Horizontal">
+                                <Button Text="Yes" BackgroundColor="White" TextColor="Silver"  Clicked="Button_Clicked1"/>
+                                <Button Text="Found an issue" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked1"/>
+                            </StackLayout>
+                            <ScrollView x:Name="scrolViewAskPhoto" Orientation="Horizontal" IsVisible="False">
+                                <StackLayout x:Name="blockAskPhoto" Orientation="Horizontal">
+                                </StackLayout>
+                            </ScrollView>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock2">
+                        <StackLayout>
+                            <StackLayout x:Name="payBlockSelectPatment" IsVisible="False">
+                                <Label Text="What form of payment are you using to pay for transportation?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                                <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                                <OnPlatform x:TypeArguments="View">
+                                    <On Platform="Android">
+                                        <input:Dropdown CornerRadius="6" BorderColor="#4fd2c2" Placeholder="Select type pay" SelectedItemChanged="Dropdown_SelectedItemChanged">
+                                            <input:Dropdown.ItemsSource>
                                                 <x:Array Type="{x:Type x:String}">
                                                     <x:String>Check</x:String>
                                                     <x:String>Cash</x:String>
                                                     <x:String>Cradit card</x:String>
                                                 </x:Array>
-                                            </Picker.ItemsSource>
-                                        </Picker>
-                                    </Frame>
-                                </On>
-                            </OnPlatform>
+                                            </input:Dropdown.ItemsSource>
+                                        </input:Dropdown>
+                                    </On>
+                                    <On Platform="iOS">
+                                        <Frame Padding="5" CornerRadius="5" BorderColor="#4fd2c2">
+                                            <Picker SelectedIndexChanged="Picker_SelectedIndexChanged">
+                                                <Picker.ItemsSource>
+                                                    <x:Array Type="{x:Type x:String}">
+                                                        <x:String>Check</x:String>
+                                                        <x:String>Cash</x:String>
+                                                        <x:String>Cradit card</x:String>
+                                                    </x:Array>
+                                                </Picker.ItemsSource>
+                                            </Picker>
+                                        </Frame>
+                                    </On>
+                                </OnPlatform>
+                            </StackLayout>
+                            <StackLayout x:Name="bilingPay" IsVisible="False">
+                                <Label Text="BILING PAY" FontSize="18" Margin="10, 0, 0, 0" TextColor="Black"/>
+                                <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                                <Label x:Name="instructionL" FontSize="15" Margin="10, 0, 0, 0" TextColor="Black"/>
+                            </StackLayout>
                         </StackLayout>
-                        <StackLayout x:Name="bilingPay" IsVisible="False">
-                            <Label Text="BILING PAY" FontSize="18" Margin="10, 0, 0, 0" TextColor="Black"/>
+                    </Frame>
+                    <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock3">
+                        <StackLayout>
+                            <Label Text="App will ask for name and signature of the client signature " TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                             <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                            <Label x:Name="instructionL" FontSize="15" Margin="10, 0, 0, 0" TextColor="Black"/>
+                            <StackLayout>
+                                <Label Text="Customer name" TextColor="Black" FontSize="18"/>
+                                <Entry Placeholder="Name" TextChanged="Entry_TextChanged"/>
+                            </StackLayout>
+                            <StackLayout>
+                                <Label Text="Customer signature" TextColor="Black" FontSize="18"/>
+                                <sig:SignaturePadView x:Name="sign" StrokeColor="Black" StrokeWidth="3" BackgroundColor="White" HeightRequest="100" StrokeCompleted="Sign_StrokeCompleted" Cleared="Sign_Cleared" />
+                            </StackLayout>
                         </StackLayout>
-                    </StackLayout>
-                </Frame>
-                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock3">
-                    <StackLayout>
-                        <Label Text="App will ask for name and signature of the client signature " TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
-                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                    </Frame>
+                    <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock4">
                         <StackLayout>
-                            <Label Text="Customer name" TextColor="Black" FontSize="18"/>
-                            <Entry Placeholder="Name" TextChanged="Entry_TextChanged"/>
-                        </StackLayout>
-                        <StackLayout>
-                            <Label Text="Customer signature" TextColor="Black" FontSize="18"/>
-                            <sig:SignaturePadView x:Name="sign" StrokeColor="Black" StrokeWidth="3" BackgroundColor="White" HeightRequest="100" StrokeCompleted="Sign_StrokeCompleted" Cleared="Sign_Cleared" />
-                        </StackLayout>
-                    </StackLayout>
-                </Frame>
-                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock4">
-                    <StackLayout>
-                        <Label Text="Would you like to recive 20% off from your next car transport?" 
+                            <Label Text="Would you like to recive 20% off from your next car transport?" 
                                TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
-                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <StackLayout Orientation="Horizontal">
-                            <Button Text="Yes" BackgroundColor="White" TextColor="Silver"  Clicked="Button_Clicked_1"/>
-                            <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_1"/>
+                            <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Button Text="Yes" BackgroundColor="White" TextColor="Silver"  Clicked="Button_Clicked_1"/>
+                                <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_1"/>
+                            </StackLayout>
                         </StackLayout>
-                    </StackLayout>
-                </Frame>
-                <!--<Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6">
+                    </Frame>
+                    <!--<Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6">
                     <StackLayout>
                         <Label Text="Would you like to leave a tip to a deriver ? if yes will open credit card info to charge the card , if no will go in to next question." 
                                TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                     </StackLayout>
                 </Frame>-->
-                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock5">
-                    <StackLayout>
-                        <Label Text="Rate driver" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
-                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <input:AdvancedSlider MaxValue="10" MinValue="0" StepValue="1" ValuePrefix="Service - " PropertyChanged="AdvancedSlider_PropertyChanged" />
-                    </StackLayout>
-                </Frame>
-                <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6">
+                    <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock5">
+                        <StackLayout>
+                            <Label Text="Rate driver" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                            <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                            <input:AdvancedSlider MaxValue="10" MinValue="0" StepValue="1" ValuePrefix="Service - " PropertyChanged="AdvancedSlider_PropertyChanged" />
+                        </StackLayout>
+                    </Frame>
+                    <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6">
+                        <StackLayout>
+                            <Label Text="Thank you. Please pass the device to the driver." 
+                               TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+                <Button x:Name="btnSave" Text="Save" BackgroundColor="BlueViolet" TextColor="White" Clicked="Button_Clicked2" Margin="10"/>
+                <Frame IsVisible="False" x:Name="bloclThank" Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6">
                     <StackLayout>
                         <Label Text="Thank you. Please pass the device to the driver." 
                                TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                     </StackLayout>
                 </Frame>
-                <Button Text="Continue" BackgroundColor="BlueViolet" Clicked="ToolbarItem_Clicked" TextColor="White" />
+                <Frame IsVisible="False" Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="blockPsw">
+                    <StackLayout>
+                        <Label Text="Enter your account password to continue" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                        <Entry x:Name="entryPsw" Placeholder="Enter password" TextChanged="Entry_TextChanged1" IsPassword="True"/>
+                    </StackLayout>
+                </Frame>
+                <Frame IsVisible="False" Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="blockAskPay">
+                    <StackLayout>
+                        <Label Text="Did the driver pay for the carriage?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
+                        <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
+                        <FlexLayout Wrap="Wrap">
+                            <Button x:Name="btnYesPay" Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="ToolbarItem_Clicked"/>
+                            <Button x:Name="btnNoPay" Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_2"/>
+                            <Button IsVisible="False" x:Name="btnNumberOffice" Text="+17734305155" BackgroundColor="White" FontSize="19" TextColor="Red" Clicked="Button_Clicked_3"/>
+                            <Label IsVisible="False" x:Name="lReport" Text="In the near future the dispatcher see the problem" Margin="10"/>
+                        </FlexLayout>
+                    </StackLayout>
+                </Frame>
+                <!--<Button Text="Continue" BackgroundColor="BlueViolet" Clicked="ToolbarItem_Clicked" TextColor="White" />-->
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

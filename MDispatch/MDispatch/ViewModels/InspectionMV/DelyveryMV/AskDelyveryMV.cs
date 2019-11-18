@@ -136,7 +136,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             if (vehiclwInformation1s.Count - 1 == indexCurrentVechecle)
             {
                 await PopupNavigation.PushAsync(new TempDialogPage());
-                await Navigation.PushAsync(new ClientStart(managerDispatchMob, IdShip, initDasbordDelegate, OnDeliveryToCarrier, TotalPaymentToCarrier, VehiclwInformation, getShiping, getVechicleDelegate));
+                await Navigation.PushAsync(new ClientStart(managerDispatchMob, IdShip, initDasbordDelegate, OnDeliveryToCarrier, TotalPaymentToCarrier, VehiclwInformation, getShiping, getVechicleDelegate, false));
             }
             else
             {

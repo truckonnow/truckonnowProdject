@@ -56,6 +56,37 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         public string Payment { get; set; }
 
         private VehiclwInformation vehiclwInformation = null;
+
+        internal async Task<bool> CheckProplem()
+        {
+            bool isProplem = false;
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.CheckProblem(token, IdShip, ref isProplem);
+                    initDasbordDelegate.Invoke();
+                });
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, null));
+                }
+                else if (state == 3)
+                {
+
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
+            }
+            return isProplem;
+        }
+
         public VehiclwInformation VehiclwInformation
         {
             get => vehiclwInformation;
@@ -321,6 +352,34 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         {
             await PopupNavigation.PopAllAsync(true);
             await Navigation.PushAsync(new View.Inspection.Feedback(managerDispatchMob, VehiclwInformation, this));
+        }
+
+        internal async void SetProblem()
+        {
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.SetProblem(token, IdShip);
+                    initDasbordDelegate.Invoke();
+                });
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, null));
+                }
+                else if (state == 3)
+                {
+                    DependencyService.Get<IToast>().ShowMessage($"In the near future the dispatcher see the problem");
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
+            }
         }
     }
 }

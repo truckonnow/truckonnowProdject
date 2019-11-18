@@ -43,7 +43,7 @@
                                     <Label Text="{Binding Shipping.CityD}" TextColor="Black" FontSize="16" Margin="0,3,0,3"/>
                                     <Label Text="," TextColor="Black" FontSize="16" Margin="0,3,3,3"/>
                                     <Label Text="{Binding Shipping.StateD}" TextColor="Black" FontSize="16" Margin="3"/>
-                                    <Label Text="{Binding Shipping.ZipD }" TextColor="Black" FontSize="16" Margin="3,3,0,3"/>
+                                    <Label Text="{Binding Shipping.ZipD}" TextColor="Black" FontSize="16" Margin="3,3,0,3"/>
                                 </FlexLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="Contact:" FontSize="16" />

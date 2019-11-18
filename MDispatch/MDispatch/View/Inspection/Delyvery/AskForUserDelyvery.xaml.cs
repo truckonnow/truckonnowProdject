@@ -6,10 +6,13 @@ using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using MDispatch.ViewModels.InspectionMV.Servise.Paymmant;
 using Newtonsoft.Json;
 using Plugin.InputKit.Shared.Controls;
+using Plugin.Settings;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -21,15 +24,53 @@ namespace MDispatch.View.Inspection.Delyvery
 	{
         public AskForUsersDelyveryMW askForUsersDelyveryMW = null;
         private IPaymmant Paymmant = null;
+        private Timer timer = null;
 
         public AskForUserDelyvery (ManagerDispatchMob managerDispatchMob, string idShip, InitDasbordDelegate initDasbordDelegate, string OnDeliveryToCarrier, string totalPaymentToCarrier,
-            VehiclwInformation vehiclwInformation, GetShiping getShiping, GetVechicleDelegate getVechicleDelegate)
+            VehiclwInformation vehiclwInformation, GetShiping getShiping, GetVechicleDelegate getVechicleDelegate, bool isproplem)
 		{
             askForUsersDelyveryMW = new AskForUsersDelyveryMW(managerDispatchMob, idShip, Navigation, getShiping, initDasbordDelegate, getVechicleDelegate, vehiclwInformation, totalPaymentToCarrier);
             askForUsersDelyveryMW.AskForUserDelyveryM = new AskForUserDelyveryM();
             InitializeComponent ();
-            BindingContext = askForUsersDelyveryMW; 
+            BindingContext = askForUsersDelyveryMW;
+            InitElemnt(isproplem);
             InitPayment(OnDeliveryToCarrier, totalPaymentToCarrier);
+        }
+
+        private void InitElemnt(bool isProplem)
+        {
+            if (isProplem)
+            {
+                btnSave.IsVisible = false;
+                blockAskPay.IsVisible = true;
+                btnYesPay.IsVisible = false;
+                btnNoPay.IsVisible = false;
+                btnNumberOffice.IsVisible = true;
+                lReport.IsVisible = true;
+                blockAsk.IsVisible = false;
+                timer = new Timer(new TimerCallback(CheckProplem), null, 10000, 10000);
+            }
+        }
+
+        private async void CheckProplem(object state)
+        {
+            bool isProplem = await askForUsersDelyveryMW.CheckProplem();
+            if (!isProplem)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    blockPsw.IsVisible = false;
+                    bloclThank.IsVisible = false;
+                    btnSave.IsVisible = true;
+                    blockAskPay.IsVisible = false;
+                    btnYesPay.IsVisible = true;
+                    btnNoPay.IsVisible = true;
+                    btnNumberOffice.IsVisible = false;
+                    lReport.IsVisible = false;
+                    blockAsk.IsVisible = true;
+                });
+                timer.Change(Timeout.Infinite, Timeout.Infinite);
+            }
         }
 
         private void InitPayment(string OnDeliveryToCarrier, string totalPaymentToCarrier)
@@ -285,6 +326,80 @@ namespace MDispatch.View.Inspection.Delyvery
         private async void ToolbarItem_Clicked_2(object sender, EventArgs e)
         {
             await PopupNavigation.PushAsync(new ContactInfo());
+        }
+
+        [Obsolete]
+        private async void Entry_TextChanged1(object sender, TextChangedEventArgs e)
+        {
+            if (CrossSettings.Current.GetValueOrDefault("Password", "") == e.NewTextValue)
+            {
+                if (!payBlockSelectPatment.IsVisible)
+                {
+                    if (Paymmant != null)
+                    {
+                        isAsk2 = Paymmant.IsAskPaymmant;
+                    }
+                    if (isAsk1 && isAsk2 && GetIsAsk3() && isAsk4 && isAsk5)
+                    {
+                        askForUsersDelyveryMW.SaveAsk(askForUsersDelyveryMW.AskForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation);
+                    }
+                    else
+                    {
+                        await PopupNavigation.PushAsync(new Errror("You did not fill in all the required fields, you can continue the inspection only when filling in the required fields !!", null));
+                        CheckAsk();
+                    }
+                }
+                else
+                {
+                    ((Entry)sender).TextColor = Color.Default;
+                    //btnConntinue.IsVisible = true;
+                    blockAskPay.IsVisible = true;
+                }
+            }
+            else
+            {
+                ((Entry)sender).TextColor = Color.Red;
+                //btnConntinue.IsVisible = false;
+                blockAskPay.IsVisible = false;
+            }
+        }
+
+        bool isAsk3 = false;
+        private async void Button_Clicked2(object sender, EventArgs e)
+        {
+            isAsk3 = true;
+            if (Paymmant != null)
+            {
+                isAsk2 = Paymmant.IsAskPaymmant;
+            }
+            if (isAsk1 && isAsk2 && GetIsAsk3() && isAsk4 && isAsk5)
+            {
+                btnSave.IsVisible = false;
+                bloclThank.IsVisible = true;
+                blockPsw.IsVisible = true;
+            }
+            else
+            {
+                await PopupNavigation.PushAsync(new Errror("You did not fill in all the required fields, you can continue the inspection only when filling in the required fields !!", null));
+                CheckAsk();
+            }
+
+        }
+
+        private void Button_Clicked_2(object sender, EventArgs e)
+        {
+            btnYesPay.IsVisible = false;
+            btnNoPay.IsVisible = false;
+            btnNumberOffice.IsVisible = true;
+            lReport.IsVisible = true;
+            blockAsk.IsVisible = false;
+            askForUsersDelyveryMW.SetProblem();
+            timer = new Timer(new TimerCallback(CheckProplem), null, 10000, 10000);
+        }
+
+        private void Button_Clicked_3(object sender, EventArgs e)
+        {
+            PhoneDialer.Open("+17734305155");
         }
     }
 }
