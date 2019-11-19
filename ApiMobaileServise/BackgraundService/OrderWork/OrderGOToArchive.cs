@@ -9,7 +9,6 @@ namespace ApiMobaileServise.BackgraundService.OrderWork
 {
     public class OrderGOToArchive : IJob
     {
-
         SqlCommandApiMobile sqlCommandApiMobile = null;
 
         void IJob.Execute()

@@ -44,7 +44,7 @@ namespace ApiMobaileServise.Servise
             await sqlCommandApiMobile.SetInspectionDriverInDb(idDriver, inspectionDriver);
         }
 
-        public async void SaveInspactionDriver(string idDriver, string photoJson, int indexPhoto)
+        public async Task SaveInspactionDriver(string idDriver, string photoJson, int indexPhoto)
         {
             photoJson = photoJson.Insert(photoJson.IndexOf(idDriver) + 2, $"{DateTime.Now.ToShortDateString()}/");
             PhotoDriver photo = JsonConvert.DeserializeObject<PhotoDriver>(photoJson);
@@ -362,11 +362,11 @@ namespace ApiMobaileServise.Servise
             string[] objSave = await sqlCommandApiMobile.EndTaskDb(idTask);
             if (objSave != null)
             {
-                GoToEndTask(objSave[0], nameMethod, objSave[1]);
+                await GoToEndTask(objSave[0], nameMethod, objSave[1]);
             }
         }
 
-        private async void GoToEndTask(string objSave, string nameMethod, string optionalParameter)
+        private async Task GoToEndTask(string objSave, string nameMethod, string optionalParameter)
         {
             string[] parameter = null;
             try
@@ -379,7 +379,7 @@ namespace ApiMobaileServise.Servise
                 else if (nameMethod == "SaveInspactionDriver")
                 {
                     parameter = optionalParameter.Split(',');
-                    SaveInspactionDriver(parameter[0], objSave, Convert.ToInt32(parameter[1]));
+                    await SaveInspactionDriver(parameter[0], objSave, Convert.ToInt32(parameter[1]));
                 }
                 else if (nameMethod == "SaveRecount")
                 {

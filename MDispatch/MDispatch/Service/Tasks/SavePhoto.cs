@@ -211,8 +211,8 @@ namespace MDispatch.Service.Tasks
             string status = responseAppS.Value<string>("Status");
             if (status == "success")
             {
-                res = JsonConvert.DeserializeObject<string>(responseAppS.
-                        SelectToken("ResponseStr").ToString());
+                res =  responseAppS.
+                        SelectToken("ResponseStr").ToString();
             }
             return res;
         }

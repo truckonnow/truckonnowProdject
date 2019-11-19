@@ -371,8 +371,8 @@ namespace ApiMobaileServise.Servise
 
         public async Task<string> LoadTaskDb(string idTask, byte[] buffer)
         {
-            TaskLoad taskLoad = context.TaskLoads
-                .FirstOrDefault(l => l.Id.ToString() == idTask);
+            TaskLoad taskLoad = await context.TaskLoads
+                .FirstOrDefaultAsync(l => l.Id.ToString() == idTask);
             if(taskLoad == null)
             {
                 return "No";
@@ -380,15 +380,15 @@ namespace ApiMobaileServise.Servise
             string str = Encoding.Default.GetString(taskLoad.Array);
             string str1 = Encoding.Default.GetString(buffer);
             taskLoad.Array = Encoding.Default.GetBytes(str + str1);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
             return taskLoad.Id.ToString();
         }
 
         public async Task<string[]> EndTaskDb(string idTask)
         {
-            LogTask logTask = context.LogTasks
+            LogTask logTask = await context.LogTasks
                 .Include(l => l.TaskLoads)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
             if(logTask == null)
             {
                 return null;
@@ -400,7 +400,7 @@ namespace ApiMobaileServise.Servise
             }
             string str = Encoding.Default.GetString(taskLoad.Array);
             context.TaskLoads.Remove(taskLoad);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
             return new string[] { str, taskLoad.OptionalParameter};
         }
 

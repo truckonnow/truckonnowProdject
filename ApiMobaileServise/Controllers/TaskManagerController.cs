@@ -1,4 +1,5 @@
-﻿using ApiMobaileServise.Models;
+﻿using ApiMobaileServise.BackgraundService.Queue;
+using ApiMobaileServise.Models;
 using ApiMobaileServise.Servise;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -73,7 +74,7 @@ namespace ApiMobaileServise.Controllers
         public async Task<string> LoadTask(string token, string idTask, string byteBase64)
         {
             string respons = null;
-            if (token == null || token == "")
+                if (token == null || token == "")
             {
                 return JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
             }
@@ -82,7 +83,9 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", await managerMobileApi.LoadTask(idTask, byteBase64)));
+                    QueueWorker.queues.Add($"Load,{idTask},{byteBase64}");
+                    QueueWorker.countQueues++;
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", "Yes"));
                 }
                 else
                 {
@@ -110,7 +113,8 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    managerMobileApi.EndTask(idTask, nameMethod);
+                    QueueWorker.queues.Add($"End,{idTask},{nameMethod}");
+                    QueueWorker.countQueues++;
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", "3"));
                 }
                 else

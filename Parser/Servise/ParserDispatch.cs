@@ -25,7 +25,7 @@ namespace Parser.Servise
                 string countOrderStr = elementCountPageStr.Remove(0, elementCountPageStr.IndexOf("-")+1);
                 countOrderStr = countOrderStr.Remove(countOrderStr.IndexOf(" "));
                 string fullCountOrderStr = elementCountPageStr.Remove(0, elementCountPageStr.IndexOf("of ") +3);
-                fullCountOrderStr = fullCountOrderStr.Remove(1);
+                fullCountOrderStr = fullCountOrderStr.Remove(2);
                 if(fullCountOrderStr != countOrderStr)
                 {
                     isPageNext = true;
