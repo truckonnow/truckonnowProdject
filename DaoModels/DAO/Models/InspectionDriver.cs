@@ -8,10 +8,5 @@ namespace DaoModels.DAO.Models
         public int CountPhoto { get; set; }
         public List<PhotoDriver> PhotosTruck { get; set; }
         public string Date { get; set; }
-
-        public InspectionDriver()
-        {
-
-        }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DaoModels.DAO.Models;
 using Microsoft.AspNetCore.Mvc;
+using WebDispacher.Mosels.Driver;
 using WebDispacher.Service;
 
 namespace WebDispacher.Controellers
@@ -215,9 +217,18 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     List<Driver> drivers = managerDispatch.GetDrivers();
-                    ViewBag.InspectionTruck = managerDispatch.GetInspectionTrucks(idDriver, date);
+                    ViewBag.InspectionTruck = managerDispatch.GetInspectionTrucks(idDriver, date)
+                        .Select(x => new InspectinView()
+                        {
+                            Id = x.Id,
+                            Date = x.Date,
+                            Trailer = "---------",
+                            Truck = "---------",
+                            NameDriver = drivers.First(d => d.InspectionDrivers.FirstOrDefault(i => i.Id == x.Id) != null).FullName,
+                        })
+                        .OrderBy(x => Convert.ToDateTime(x.Date))
+                        .ToList();
                     ViewBag.Drivers = drivers;
-                    ViewBag.NameDriver = drivers.Find(d => d.Id.ToString() == idDriver).FullName;
                     ViewBag.IdDriver = idDriver;
                     ViewBag.SelectData = date;
                     actionResult = View("AllInspactionTruckData");

@@ -82,6 +82,7 @@ namespace WebDispacher.Dao
         public List<Driver> GetDriversInDb()
         {
             return context.Drivers
+                .Include(d => d.InspectionDrivers)
                 .Include(d => d.geolocations)
                 .ToList();
         }
@@ -208,17 +209,19 @@ namespace WebDispacher.Dao
 
         public List<InspectionDriver> GetInspectionTrucksDb(string idDriver, string date)
         {
-            DateTime dateTime = Convert.ToDateTime(date);
-            return context.Drivers
-                .Include(d => d.InspectionDrivers)
-                .First(d => d.Id.ToString() == idDriver)
-                .InspectionDrivers
-                .Where(iD => Convert.ToDateTime(iD.Date).Month == dateTime.Month && Convert.ToDateTime(iD.Date).Year == dateTime.Year)
-                .Select(x => new InspectionDriver()
+
+            List<InspectionDriver> inspectionDrivers = new List<InspectionDriver>();
+            context.Drivers
+                .Include(d => d.InspectionDrivers).ToList()
+                .Where(d => idDriver == "0" || d.Id.ToString() == idDriver)
+                .ToList()
+                .ForEach((item) =>
                 {
-                    Id = x.Id,
-                    Date = x.Date.Remove(x.Date.IndexOf(" "))
-                }).ToList();
+                    inspectionDrivers.AddRange(item.InspectionDrivers
+                        .Where(iD => date == "0" || (Convert.ToDateTime(iD.Date).Month == Convert.ToDateTime(date).Month && Convert.ToDateTime(iD.Date).Year == Convert.ToDateTime(date).Year)));
+                });
+
+            return inspectionDrivers;
         }
 
         private int CreateIdShipping()

@@ -47,7 +47,7 @@ namespace DaoModels.DAO.Models
                         tmpJson = tmpJson.Replace("\"", "");
                         return tmpJson;
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
                         return "";
                     }
