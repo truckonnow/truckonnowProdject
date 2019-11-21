@@ -54,6 +54,11 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.SavevechInDb(idVech, vehiclwInformation);
         }
 
+        internal List<Trailer> GetTrailers()
+        {
+            return _sqlEntityFramworke.GetTrailersDb();
+        }
+
         internal void RemoveTruck(string id)
         {
             _sqlEntityFramworke.RemoveTruck(id);
@@ -168,6 +173,11 @@ namespace WebDispacher.Service
             return _sqlEntityFramworke.GetCountPageInDb(status);
         }
 
+        internal void RemoveTrailer(string id)
+        {
+            _sqlEntityFramworke.RemoveTrailerDb(id);
+        }
+
         public List<Shipping> GetOrders(string status, int page)
         {
             return _sqlEntityFramworke.GetShippings(status, page);
@@ -199,6 +209,11 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.UpdateorderInDb(idOrder, idLoad, internalLoadID, driver, status, instructions, nameP, contactP, addressP, cityP, stateP, zipP,
                         phoneP, emailP, scheduledPickupDateP, nameD, contactD, addressD, cityD, stateD, zipD, phoneD, emailD, ScheduledPickupDateD, paymentMethod,
                         price, paymentTerms, brokerFee);
+        }
+
+        internal void CreateTrailer(string name, string year, string make, string howLong, string vin, string owner, string color, string plate, string exp, string annualIns)
+        {
+            _sqlEntityFramworke.CreateTrailerDb(name, year, make, howLong, vin, owner, color, plate, exp, annualIns);
         }
 
         public void CreateDriver(string fullName, string emailAddress, string password, string phoneNumbe, string trailerCapacity, string driversLicenseNumber)

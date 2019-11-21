@@ -61,6 +61,11 @@ namespace WebDispacher.Dao
             } 
         }
 
+        internal List<Trailer> GetTrailersDb()
+        {
+            return context.Trailers.ToList();
+        }
+
         internal void RemoveTruck(string id)
         {
             context.Trucks.Remove(context.Trucks.FirstOrDefault(t => t.Id.ToString() == id));
@@ -179,6 +184,12 @@ namespace WebDispacher.Dao
             return context.Shipping.FirstOrDefault(s => s.VehiclwInformations.FirstOrDefault(v => v == vehiclwInformation) != null);
         }
 
+        internal void RemoveTrailerDb(string id)
+        {
+            context.Trailers.Remove(context.Trailers.FirstOrDefault(t => t.Id.ToString() == id));
+            context.SaveChanges();
+        }
+
         public void Solved(string idOrder)
         {
             Shipping shipping = context.Shipping.First(s => s.Id == idOrder);
@@ -202,6 +213,24 @@ namespace WebDispacher.Dao
             vehiclwInformationDb.Color = vehiclwInformation.Color;
             vehiclwInformationDb.Lot = vehiclwInformation.Lot;
             await context.SaveChangesAsync();
+        }
+
+        internal void CreateTrailerDb(string name, string year, string make, string howLong, string vin, string owner, string color, string plate, string exp, string annualIns)
+        {
+            context.Trailers.Add(new Trailer()
+            {
+                AnnualIns = annualIns,
+                Color = color,
+                Exp = exp,
+                HowLong = howLong,
+                Make = make,
+                Name = name,
+                Owner = owner,
+                Plate = plate,
+                Vin = vin,
+                Year = year
+            });
+            context.SaveChanges();
         }
 
         public async void RemoveVechInDb(string idVech)

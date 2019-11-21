@@ -10,7 +10,7 @@ namespace WebDispacher.Controellers
         private ManagerDispatch managerDispatch = new ManagerDispatch();
 
         [Route("Trucks")]
-        public IActionResult Index()
+        public IActionResult Trucks()
         {
             IActionResult actionResult = null;
             try
@@ -22,6 +22,36 @@ namespace WebDispacher.Controellers
                 {
                     ViewBag.Trucks = managerDispatch.GetTrucks();
                     actionResult = View($"AllTruck");
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult;
+        }
+
+        [Route("Trailers")]
+        public IActionResult Index()
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    ViewBag.Trailers = managerDispatch.GetTrailers();
+                    actionResult = View($"AllTrailer");
                 }
                 else
                 {
@@ -114,6 +144,98 @@ namespace WebDispacher.Controellers
                     
                         managerDispatch.CreateTruk(nameTruk, yera, make, model, state, exp, vin, owner, plateTruk, color);
                         actionResult = Redirect($"{Config.BaseReqvesteUrl}/Equipment/Trucks");
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult;
+        }
+
+        [Route("Trailer/Remove")]
+        public IActionResult RemoveTrailer(string id)
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    managerDispatch.RemoveTrailer(id);
+                    actionResult = Redirect($"{Config.BaseReqvesteUrl}/Equipment/Trailers");
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult;
+        }
+
+        [HttpGet]
+        [Route("CreateTrailer")]
+        public IActionResult CreateTrailer()
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    actionResult = View("CreateTraler");
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult;
+        }
+
+        [HttpPost]
+        [Route("CreateTrailer")]
+        public IActionResult CreateTrailer(string name, string year, string make, string howLong, string vin, string owner, string color, string plate, string exp, string annualIns)
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+
+                    managerDispatch.CreateTrailer(name, year, make, howLong, vin, owner, color, plate, exp, annualIns);
+                    actionResult = Redirect($"{Config.BaseReqvesteUrl}/Equipment/Trailers");
                 }
                 else
                 {
