@@ -1,0 +1,111 @@
+﻿
+
+<div class="body">
+    <input class="backBtn" type="button" value="← Back to Orders" onclick="history.back();" />
+    <form action="" method="post">
+        <div class="content">
+            <h2 style="color: rgb(51, 51, 51);margin-bottom:2px;">Add New Truck</h2>
+            <p class="inpLabe">Name Truk*</p>
+            <input name="nameTruk" class="inpText" type="text" />
+            <p class="inpLabe">Yera</p>
+            <input name="yera" class="inpText" type="text" />
+            <p class="inpLabe">Make*</p>
+            <input name="make" class="inpText" type="text" />
+            <p class="inpLabe">Model*</p>
+            <input name="model" class="inpText" type="text" />
+            <p class="inpLabe">State</p>
+            <input name="state" class="inpText" type="text" />
+            <p class="inpLabe">Plate Exp</p>
+            <input name="exp" class="inpText" type="text" />
+            <p class="inpLabe">Vin#</p>
+            <input name="vin" class="inpText" type="text" />
+            <p class="inpLabe">Owner</p>
+            <input name="owner" class="inpText" type="text" />
+            <p class="inpLabe">Plate Truk</p>
+            <input name="plateTruk" class="inpText" type="text" />
+            <p class="inpLabe">Color</p>
+            <input name="color" class="inpText" type="text" />
+        </div>
+        <input class="btnSave" value="Save" type="submit" />
+    </form>
+</div>
+
+
+<style>
+    * {
+        margin: 0px;
+    }
+
+    .btnSave {
+        color: rgba(45,45,45,0.88);
+        background: none;
+        display: inline-block;
+        padding: 7px;
+        font-size: 16px;
+        font-weight: 400;
+        text-align: center;
+        border: 1px solid;
+        border-radius: 4px;
+        width: 130px;
+    }
+
+    btnSave:hover {
+        background-color: rgba(45,45,45,0.98);
+        transition: 0.5s;
+    }
+
+    .btnD:hover {
+        background: rgba(243, 167, 76, 0.29);
+    }
+
+    .inpTextTr {
+        border: none;
+        width: 97%;
+        background-color: rgba(243, 167, 76, 0.09);
+        color: #f3a74c;
+    }
+
+    .inpLabe {
+        font-size: 18px;
+        color: rgb(51, 51, 51);
+        margin-top: 10px;
+        margin-left: 5px;
+    }
+
+    .inpText {
+        width: 100%;
+        height: 25px;
+        border-width: 1px;
+        border-style: double;
+        border-radius: 4px;
+        padding: 2px;
+        font-size: 16px;
+        color: rgb(51, 51, 51);
+        border-color: rgba(51, 51, 51, 0.24);
+        margin-bottom: 15px;
+    }
+
+    .content {
+        width: 40%;
+    }
+
+    .contentBody {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .backBtn {
+        background: none;
+        border: none;
+        font-size: 17px;
+        color: #ffd7a6;
+        margin-bottom: 20px;
+    }
+
+    .body {
+        margin-top: 30px;
+        margin-left: 5px;
+        margin-right: 5px;
+        padding: 10px;
+    }
+</style>

@@ -9,10 +9,11 @@
         <img class="imgMirir" src="~/Icon/MirorR.png" height="40" asp-append-version="true"/>
         <nav class="navst">
             <span><a class="linkASt" href="http://truckonnow.com">Truckonnow</a></span>
-            <input class="btn" type="button" value="Order" @ViewData["hidden"] onclick="window.location.href='@Url.Action("NewLoad", "Dashbord")';"/>
-            <input class="btn" type="button" value="GPS Traking" @ViewData["hidden"] onclick="window.location.href='@Url.Action("Map", "Geolcation")';"/>
+            <input class="btn" type="button" value="Order" @ViewData["hidden"] onclick="window.location.href='@Url.Action("NewLoad", "Dashbord")';" />
+            <input class="btn" type="button" value="GPS Traking" @ViewData["hidden"] onclick="window.location.href='@Url.Action("Map", "Geolcation")';" />
             <input class="btn" type="button" value="Contacts" @ViewData["hidden"] onclick="window.location.href='@Url.Action("Contacts", "Contact")';" />
-            <input class="btn" type="button" value="Drivers" @ViewData["hidden"] onclick="window.location.href='@Url.Action("Drivers", "Driver")';"/>
+            <input class="btn" type="button" value="Drivers" @ViewData["hidden"] onclick="window.location.href='@Url.Action("Drivers", "Driver")';" />
+            <input class="btn" type="button" value="Equipment" @ViewData["hidden"] onclick="window.location.href='@Url.Action("Trucks", "Equipment")';" />
             <input class="btn" type="button" value="Report" @ViewData["hidden"] />
         </nav>
         <img class="imgMirir" src="~/Icon/MirorL.png" height="40" asp-append-version="true"/>

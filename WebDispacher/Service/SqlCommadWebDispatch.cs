@@ -61,6 +61,17 @@ namespace WebDispacher.Dao
             } 
         }
 
+        internal void RemoveTruck(string id)
+        {
+            context.Trucks.Remove(context.Trucks.FirstOrDefault(t => t.Id.ToString() == id));
+            context.SaveChanges();
+        }
+
+        internal List<Truck> GetTrucs()
+        {
+            return context.Trucks.ToList();
+        }
+
         private void Init()
         {
             context.Shipping.Load();
@@ -119,6 +130,24 @@ namespace WebDispacher.Dao
                 }
                 await context.SaveChangesAsync();
             }
+        }
+
+        internal void CreateTrukDb(string nameTruk, string yera, string make, string model, string state, string exp, string vin, string owner, string plateTruk, string color)
+        {
+            context.Trucks.Add(new Truck()
+            {
+                ColorTruk = color,
+                Exp = exp,
+                Make = make,
+                Model = model,
+                NameTruk = nameTruk,
+                Owner = owner,
+                PlateTruk = plateTruk,
+                Satet = state,
+                Vin = vin,
+                Yera = yera
+            });
+            context.SaveChanges();
         }
 
         public Shipping GetShipingCurrentVehiclwInDb(string id)

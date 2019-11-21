@@ -4,14 +4,16 @@ using DaoModels.DAO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DaoModels.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20191120175313_20.11.19v1")]
+    partial class _201119v1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -651,25 +653,11 @@ namespace DaoModels.Migrations
 
                     b.Property<string>("ColorTruk");
 
-                    b.Property<string>("Exp");
-
-                    b.Property<string>("Make");
-
-                    b.Property<string>("Model");
-
                     b.Property<string>("NameTruk");
-
-                    b.Property<string>("Owner");
 
                     b.Property<string>("PlateTruk");
 
-                    b.Property<string>("Satet");
-
                     b.Property<string>("TypeTruk");
-
-                    b.Property<string>("Vin");
-
-                    b.Property<string>("Yera");
 
                     b.HasKey("Id");
 

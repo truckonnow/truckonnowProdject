@@ -31,6 +31,11 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.RecurentOnArchived(id);
         }
 
+        public List<Truck> GetTrucks()
+        {
+            return _sqlEntityFramworke.GetTrucs();
+        }
+
         public List<Contact> GetContacts()
         {
             return _sqlEntityFramworke.GetContactsDB();
@@ -47,6 +52,11 @@ namespace WebDispacher.Service
             vehiclwInformation.Color = Color;
             vehiclwInformation.Lot = LotNumber;
             _sqlEntityFramworke.SavevechInDb(idVech, vehiclwInformation);
+        }
+
+        internal void RemoveTruck(string id)
+        {
+            _sqlEntityFramworke.RemoveTruck(id);
         }
 
         public async void RemoveVechi(string idVech)
@@ -107,6 +117,11 @@ namespace WebDispacher.Service
                     managerNotify.SendNotyfyUnassign(idOrder, tokenShope, vehiclwInformations);
                 }
             });
+        }
+
+        public void CreateTruk(string nameTruk, string yera, string make, string model, string state, string exp, string vin, string owner, string plateTruk, string color)
+        {
+            _sqlEntityFramworke.CreateTrukDb(nameTruk, yera, make, model, state, exp, vin, owner, plateTruk, color);
         }
 
         public void CreateContact(string fullName, string emailAddress, string phoneNumbe)

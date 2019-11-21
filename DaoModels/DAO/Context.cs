@@ -29,6 +29,7 @@ namespace DaoModels.DAO
         public DbSet<Video> Videos { get; set; }
         public DbSet<LogTask> LogTasks { get; set; }
         public DbSet<TaskLoad> TaskLoads { get; set; }
+        public DbSet<Truck> Trucks { get; set; }
 
         public Context()
         {
