@@ -42,10 +42,13 @@
                         ANNUAL INS
                     </th>
                     <th>
-                       🖱
+                        🖱
                     </th>
                     <th>
-                       🖱
+                        🖱
+                    </th>
+                    <th>
+                        🖱
                     </th>
                 </tr>
             </thead>
@@ -83,6 +86,9 @@
                     <td>
                         @ViewBag.Trailers[i].AnnualIns
                     </td>
+                    <td style="cursor:pointer" onclick="ViewInspection(@ViewBag.Trailers[i].Id)">
+                        ⇥
+                    </td>
                     <td style="cursor:pointer">
                         ✎
                     </td>
@@ -99,6 +105,10 @@
 <script>
     function Remove(id) {
         document.location.href = "@ViewBag.BaseUrl/Equipment/Trailer/Remove?id="+id;
+    }
+
+    function ViewInspection(id) {
+        document.location.href =  "@ViewBag.BaseUrl/Driver/InspactionTrucks?idDriver=0&idTruck=0&idTrailer="+id+"0&date=0";;
     }
 </script>
 

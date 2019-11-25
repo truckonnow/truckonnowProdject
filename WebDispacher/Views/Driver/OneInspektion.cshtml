@@ -126,9 +126,9 @@
     <div class="filling">
         <div>
             <p class="idStlP">Driver: @ViewBag.Drivers.FullName</p>
-            <p class="idStlP">Inspection truck: @ViewBag.SelectData</p>
-            <p class="idStlP">Truck: --------------</p>
-            <p class="idStlP">Trailer: --------------</p>
+            <p class="idStlP">Inspection truck: @ViewBag.InspectionTruck.Date</p>
+            <p class="idStlP">Truck: @ViewBag.Truck</p>
+            <p class="idStlP">Trailer: @ViewBag.Trailer</p>
         </div>
         <hr />
         <div class="inspectionBlock">
@@ -137,23 +137,35 @@
 
                 @for (int i = 0; i < ViewBag.InspectionTruck.PhotosTruck.Count; i++)
                 {
-                    byte[] image = Convert.FromBase64String(@ViewBag.InspectionTruck.PhotosTruck[i].Base64);
-                    if (image != null && image.Length != 0)
+                    try
                     {
-                        MemoryStream ms = new MemoryStream(image);
-                        Image img = Image.FromStream(ms);
-                        if (img.Height > img.Width)
+                        byte[] image = Convert.FromBase64String(@ViewBag.InspectionTruck.PhotosTruck[i].Base64);
+                        if (image != null && image.Length != 0)
                         {
-                <img class="img Photove" src="data:image/gif;base64,@ViewBag.InspectionTruck.PhotosTruck[i].Base64" onclick="ClickImg(this)" />
+                            if (i == 27)
+                            {
+
+                            }
+                            MemoryStream ms = new MemoryStream(image);
+                            Image img = Image.FromStream(ms);
+                            if (img.Height > img.Width)
+                            {
+                                <img class="img Photove" src="data:image/gif;base64,@ViewBag.InspectionTruck.PhotosTruck[i].Base64" onclick="ClickImg(this)" />
+                            }
+                            else
+                            {
+                                <img class="img Photola" src="data:image/gif;base64,@ViewBag.InspectionTruck.PhotosTruck[i].Base64" onclick="ClickImg(this)" />
+                            }
                         }
                         else
                         {
-                <img class="img Photola" src="data:image/gif;base64,@ViewBag.InspectionTruck.PhotosTruck[i].Base64" onclick="ClickImg(this)" />
+                            <p class="img Photola">No photo found;</p>
                         }
                     }
-                    else
+                    catch
                     {
-                <p class="img Photola">No photo found;</p>
+
+                        <p class="img Photola">No photo found;</p>
                     }
 
                 }

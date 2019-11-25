@@ -193,6 +193,11 @@ namespace WebDispacher.Service
             return _sqlEntityFramworke.GetDriver(id);
         }
 
+        public Driver GetDriver(string idInspection)
+        {
+            return _sqlEntityFramworke.GetDriver(idInspection);
+        }
+
         public void Updateorder(string idOrder, string idLoad, string internalLoadID, string driver, string status, string instructions, string nameP, string contactP,
             string addressP, string cityP, string stateP, string zipP, string phoneP, string emailP, string scheduledPickupDateP, string nameD, string contactD, string addressD,
             string cityD, string stateD, string zipD, string phoneD, string emailD, string ScheduledPickupDateD, string paymentMethod, string price, string paymentTerms, string brokerFee)
@@ -228,9 +233,9 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.AddDriver(driver);
         }
 
-        public List<InspectionDriver> GetInspectionTrucks(string idDriver, string date)
+        public List<InspectionDriver> GetInspectionTrucks(string idDriver, string idTruck, string idTrailer, string date)
         {
-            return _sqlEntityFramworke.GetInspectionTrucksDb(idDriver, date);
+            return _sqlEntityFramworke.GetInspectionTrucksDb(idDriver, idTruck, idTrailer, date);
         }
 
         public void RemoveDrive(int id)

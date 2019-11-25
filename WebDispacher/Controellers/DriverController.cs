@@ -206,7 +206,7 @@ namespace WebDispacher.Controellers
 
         [HttpGet]
         [Route("Driver/InspactionTrucks")]
-        public IActionResult ViewAllInspactionDate(string idDriver, string nameDriver, string date)
+        public IActionResult ViewAllInspactionDate(string idDriver, string idTruck, string idTrailer, string date)
         {
             IActionResult actionResult = null;
             try
@@ -217,19 +217,25 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     List<Driver> drivers = managerDispatch.GetDrivers();
-                    ViewBag.InspectionTruck = managerDispatch.GetInspectionTrucks(idDriver, date)
+                    List<Truck> trucks = managerDispatch.GetTrucks();
+                    List<Trailer> trailers = managerDispatch.GetTrailers();
+                    ViewBag.InspectionTruck = managerDispatch.GetInspectionTrucks(idDriver, idTruck, idTrailer, date)
                         .Select(x => new InspectinView()
                         {
                             Id = x.Id,
                             Date = x.Date,
-                            Trailer = "---------",
-                            Truck = "---------",
+                            Trailer = trailers.FirstOrDefault(t => t.Id == x.IdITrailer) != null ? $"{trailers.FirstOrDefault(t => t.Id == x.IdITrailer).Make}, Plate: {trailers.FirstOrDefault(t => t.Id == x.IdITrailer).Plate}" : "---------------",
+                            Truck = trucks.FirstOrDefault(t => t.Id == x.IdITruck) != null ? $"{trucks.FirstOrDefault(t => t.Id == x.IdITruck).Make} {trucks.FirstOrDefault(t => t.Id == x.IdITruck).Model}, Plate: {trucks.FirstOrDefault(t => t.Id == x.IdITruck).PlateTruk}" : "---------------",
                             NameDriver = drivers.First(d => d.InspectionDrivers.FirstOrDefault(i => i.Id == x.Id) != null).FullName,
                         })
                         .OrderBy(x => Convert.ToDateTime(x.Date))
                         .ToList();
                     ViewBag.Drivers = drivers;
+                    ViewBag.Trucks = trucks;
+                    ViewBag.Trailers = trailers;
                     ViewBag.IdDriver = idDriver;
+                    ViewBag.IdTruck = idTruck;
+                    ViewBag.IdTrailer = idTrailer;
                     ViewBag.SelectData = date;
                     actionResult = View("AllInspactionTruckData");
                 }
@@ -261,9 +267,14 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    Driver drivers = managerDispatch.GetDriver(Convert.ToInt32(idDriver));
-                    ViewBag.InspectionTruck = managerDispatch.GetInspectionTruck(idInspection);
+                    List<Truck> trucks = managerDispatch.GetTrucks();
+                    List<Trailer> trailers = managerDispatch.GetTrailers();
+                    InspectionDriver inspectionDriver = managerDispatch.GetInspectionTruck(idInspection);
+                    Driver drivers = managerDispatch.GetDriver(inspectionDriver.Id.ToString());
+                    ViewBag.InspectionTruck = inspectionDriver;
                     ViewBag.Drivers = drivers;
+                    ViewBag.Trailer = trailers.FirstOrDefault(t => t.Id == inspectionDriver.IdITrailer) != null ? $"{trailers.FirstOrDefault(t => t.Id == inspectionDriver.IdITrailer).Make}, Plate: {trailers.FirstOrDefault(t => t.Id == inspectionDriver.IdITrailer).Plate}" : "---------------";
+                    ViewBag.Truck = trucks.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck) != null ? $"{trucks.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck).Make} {trucks.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck).Model}, Plate: {trucks.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck).PlateTruk}" : "---------------";
                     ViewBag.SelectData = date;
                     actionResult = View("OneInspektion");
                 }

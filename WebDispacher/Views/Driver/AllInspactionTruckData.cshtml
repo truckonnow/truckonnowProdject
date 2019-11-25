@@ -1,7 +1,7 @@
 ﻿<div class="body">
     <input class="backBtn" type="button" value="← Back to Orders" onclick="history.back();" /><br />
     <div>
-        <select class="inpContentInspection" onchange="window.location.href = 'InspactionTrucks?IdDriver=@ViewBag.IdDriver&nameDriver=@ViewBag.NameDriver&date=' + this.options[this.selectedIndex].value;">
+        <select class="inpContentInspection" onchange="window.location.href = 'InspactionTrucks?IdDriver=@ViewBag.IdDriver&idTruck=@ViewBag.IdTruck&idTrailer=@ViewBag.IdTrailer&date=' + this.options[this.selectedIndex].value;">
             <option selected value="0">All time</option>
             @for (DateTime i = DateTime.Now; i >= new DateTime(2019, 8, 1); i = i.AddMonths(-1))
             {
@@ -15,7 +15,7 @@
                 }
             }
         </select>
-        <select class="inpContentInspection" onchange="window.location.href = 'InspactionTrucks?IdDriver=' + this.options[this.selectedIndex].value + '&nameDriver=' + this.options[this.selectedIndex].value + '&date=@ViewBag.SelectData'">
+        <select class="inpContentInspection" onchange="window.location.href = 'InspactionTrucks?IdDriver=' + this.options[this.selectedIndex].value  + '&idTruck=@ViewBag.IdTruck&idTrailer=@ViewBag.IdTrailer&date=@ViewBag.SelectData'">
             <option selected value="0">All Drivers</option>
             @for (int i = 0; i < ViewBag.Drivers.Count; i++)
             {
@@ -26,6 +26,34 @@
                 else
                 {
                     <option value="@ViewBag.Drivers[i].Id">@ViewBag.Drivers[i].FullName</option>
+                }
+            }
+        </select>
+          <select class="inpContentInspection" onchange="window.location.href = 'InspactionTrucks?IdDriver=@ViewBag.IdDriver&idTruck=' + this.options[this.selectedIndex].value + '&idTrailer=@ViewBag.IdTrailer&date=@ViewBag.SelectData'">
+            <option selected value="0">All Truck</option>
+            @for (int i = 0; i < ViewBag.Trucks.Count; i++)
+            {
+                @if (ViewBag.IdTruck.ToString() == ViewBag.Trucks[i].Id.ToString())
+                {
+          <option selected value="@ViewBag.Trucks[i].Id">@ViewBag.Trucks[i].Make @ViewBag.Trucks[i].Model</option>
+                }
+                else
+                {
+          <option value="@ViewBag.Trucks[i].Id">@ViewBag.Trucks[i].Make @ViewBag.Trucks[i].Model</option>
+                }
+            }
+        </select>
+          <select class="inpContentInspection" onchange="window.location.href = 'InspactionTrucks?IdDriver=@ViewBag.IdDriver&idTruck=@ViewBag.IdTruck&idTrailer='+ this.options[this.selectedIndex].value +'&date=@ViewBag.SelectData'">
+            <option selected value="0">All Trailer</option>
+            @for (int i = 0; i < ViewBag.Trailers.Count; i++)
+            {
+                @if (ViewBag.IdTrailer.ToString() == ViewBag.Trailers[i].Id.ToString())
+                {
+          <option selected value="@ViewBag.Trailers[i].Id">@ViewBag.Trailers[i].Make</option>
+                }
+                else
+                {
+          <option value="@ViewBag.Trailers[i].Id">@ViewBag.Trailers[i].Make</option>
                 }
             }
         </select>

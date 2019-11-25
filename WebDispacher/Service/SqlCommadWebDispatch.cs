@@ -202,6 +202,14 @@ namespace WebDispacher.Dao
             return context.Drivers.FirstOrDefault(d => d.Id == id);
         }
 
+        public Driver GetDriver(string idInspection)
+        {
+            InspectionDriver inspectionDriver = context.InspectionDrivers.First(i => i.Id.ToString() == idInspection);
+            return context.Drivers
+                .Include(d => d.InspectionDrivers)
+                .First(d => d.InspectionDrivers.FirstOrDefault(ii => ii.Id == inspectionDriver.Id) != null);
+        }
+
         public async void SavevechInDb(string idVech, VehiclwInformation vehiclwInformation)
         {
             VehiclwInformation vehiclwInformationDb = await context.VehiclwInformation.FirstOrDefaultAsync(v => v.Id.ToString() == idVech);
@@ -265,7 +273,7 @@ namespace WebDispacher.Dao
             return shipping;
         }
 
-        public List<InspectionDriver> GetInspectionTrucksDb(string idDriver, string date)
+        public List<InspectionDriver> GetInspectionTrucksDb(string idDriver, string idTruck, string idTrailer, string date)
         {
 
             List<InspectionDriver> inspectionDrivers = new List<InspectionDriver>();
@@ -276,7 +284,9 @@ namespace WebDispacher.Dao
                 .ForEach((item) =>
                 {
                     inspectionDrivers.AddRange(item.InspectionDrivers
-                        .Where(iD => date == "0" || (Convert.ToDateTime(iD.Date).Month == Convert.ToDateTime(date).Month && Convert.ToDateTime(iD.Date).Year == Convert.ToDateTime(date).Year)));
+                        .Where(iD => (date == "0" || (Convert.ToDateTime(iD.Date).Month == Convert.ToDateTime(date).Month && Convert.ToDateTime(iD.Date).Year == Convert.ToDateTime(date).Year))
+                        && (idTruck == "0" || iD.IdITruck.ToString() == idTruck)
+                        && (idTrailer == "0" || iD.IdITrailer.ToString() == idTrailer)));
                 });
 
             return inspectionDrivers;
