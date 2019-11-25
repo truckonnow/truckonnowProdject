@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Text;
 
@@ -58,5 +59,8 @@ namespace DaoModels.DAO.Models
                 }
             }
         }
+
+        [NotMapped]
+        public string Base64_1 { get; set; }
     }
 }

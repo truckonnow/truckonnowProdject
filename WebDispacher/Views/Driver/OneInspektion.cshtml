@@ -1,5 +1,7 @@
 ﻿@using System.Drawing;
 @using System.IO;
+@using System.IO.Compression;
+@using System.Drawing.Imaging;
 <style>
     .body {
         margin-top: 30px;
@@ -54,7 +56,7 @@
         width: 10%;
     }
 
-    
+
     .modal {
         display: none; /* Hidden by default */
         position: fixed; /* Stay in place */
@@ -73,7 +75,7 @@
         margin: auto;
         display: block;
         width: 80%;
-        margin-top:50px
+        margin-top: 50px
     }
 
     #caption {
@@ -112,12 +114,12 @@
         transition: 0.3s;
     }
 
-    .close:hover,
-    .close:focus {
-        color: #bbb;
-        text-decoration: none;
-        cursor: pointer;
-    }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
 </style>
 
 
@@ -139,36 +141,49 @@
                 {
                     try
                     {
-                        byte[] image = Convert.FromBase64String(@ViewBag.InspectionTruck.PhotosTruck[i].Base64);
-                        if (image != null && image.Length != 0)
+                        byte[] imageB = Convert.FromBase64String(@ViewBag.InspectionTruck.PhotosTruck[i].Base64_1);
+                        if (imageB != null && imageB.Length != 0)
                         {
-                            if (i == 27)
+                            Byte[] outputBytes = null;
+                            Image image = null;
+                            using (var inputStream = new MemoryStream(imageB))
                             {
-
+                                image = Image.FromStream(inputStream);
+                                Bitmap bitmap = new Bitmap(image, new Size(432, 240));
+                                var jpegEncoder = ImageCodecInfo.GetImageDecoders()
+                                  .First(c => c.FormatID == ImageFormat.Jpeg.Guid);
+                                var encoderParameters = new EncoderParameters(1);
+                                encoderParameters.Param[0] = new EncoderParameter(Encoder.Quality, 20L);
+                                using (var outputStream = new MemoryStream())
+                                {
+                                    bitmap.Save(outputStream, jpegEncoder, encoderParameters);
+                                    outputBytes = outputStream.ToArray();
+                                }
                             }
-                            MemoryStream ms = new MemoryStream(image);
-                            Image img = Image.FromStream(ms);
-                            if (img.Height > img.Width)
+                            
+                            string base64 = Convert.ToBase64String(outputBytes.ToArray());
+
+                            if (image.Height > image.Width)
                             {
-                                <img class="img Photove" src="data:image/gif;base64,@ViewBag.InspectionTruck.PhotosTruck[i].Base64" onclick="ClickImg(this)" />
+                                    <img class="img Photove" src="data:image/gif;base64,@base64" onclick="ClickImg('@ViewBag.InspectionTruck.PhotosTruck[i].Base64')" />
+                                }
+                                else
+                                {
+                                    <img class="img Photola" src="data:image/gif;base64,@base64" onclick="ClickImg('@ViewBag.InspectionTruck.PhotosTruck[i].Base64')" />
+                                }
                             }
                             else
                             {
-                                <img class="img Photola" src="data:image/gif;base64,@ViewBag.InspectionTruck.PhotosTruck[i].Base64" onclick="ClickImg(this)" />
+                                <p class="img Photola">No photo found;</p>
                             }
                         }
-                        else
+                        catch
                         {
+
                             <p class="img Photola">No photo found;</p>
                         }
-                    }
-                    catch
-                    {
 
-                        <p class="img Photola">No photo found;</p>
                     }
-
-                }
             </div>
         </div>
     </div>
@@ -190,6 +205,6 @@
 
     function ClickImg(elm) {
         modal.style.display = "block";
-        img.src = elm.src;
+        img.src = "data:image/gif;base64,"+elm;
     }
 </script>
