@@ -152,6 +152,11 @@ namespace ApiMobaileServise.Servise
             return typeScan;
         }
 
+        internal bool SetTralerAndTruck(string token, string plateTrailer, string plateTruck)
+        {
+            return sqlCommandApiMobile.SetTralerAndTruck(token, plateTrailer, plateTruck);
+        }
+
         public async Task SaveAsk(string id, int type, string jsonStrAsk)
         {
             if(type == 1)

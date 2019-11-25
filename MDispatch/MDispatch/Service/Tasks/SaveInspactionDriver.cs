@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using MDispatch.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -94,7 +96,7 @@ namespace MDispatch.Service.Tasks
             }
         }
 
-        private void LoadTask1(string token, string idTask)
+        private async void LoadTask1(string token, string idTask)
         {
             try
             {
@@ -105,36 +107,45 @@ namespace MDispatch.Service.Tasks
                 {
                     RestClient client = new RestClient(Config.BaseReqvesteUrl);
                     int countReqvest = photoInspectionBase64.Length / 256;
-                    for (int i = 0; countReqvest != 0 && i < countReqvest + 1; i++)
+                    try
                     {
-                        photoInspectionBase64 = CrossSettings.Current.GetValueOrDefault(idTask, null);
-                        string photoInspectionTmp = GetRangeArray(photoInspectionBase64, 256);
-                        RestRequest request = new RestRequest("api.Task/LoadTask", Method.POST);
-                        client.Timeout = 10000;
-                        request.AddHeader("Accept", "application/json");
-                        request.AddParameter("token", token);
-                        request.AddParameter("idTask", idTask);
-                        request.AddParameter("byteBase64", photoInspectionTmp);
-                        response = client.Execute(request);
-                        content = response.Content;
-                        string res = GetData(content);
-                        if (res == null && res == "" && !App.isNetwork)
+                        for (int i = 0; countReqvest != 0 && i < countReqvest + 1; i++)
                         {
-                            TaskManager.isWorkTask = false;
-                            break;
+                            photoInspectionBase64 = CrossSettings.Current.GetValueOrDefault(idTask, null);
+                            string photoInspectionTmp = GetRangeArray(photoInspectionBase64, 256);
+                            RestRequest request = new RestRequest("api.Task/LoadTask", Method.POST);
+                            client.Timeout = 10000;
+                            request.AddHeader("Accept", "application/json");
+                            request.AddParameter("token", token);
+                            request.AddParameter("idTask", idTask);
+                            request.AddParameter("byteBase64", photoInspectionTmp);
+                            response = client.Execute(request);
+                            content = response.Content;
+                            string res = GetData(content);
+                            if (res == null && res == "" && !App.isNetwork)
+                            {
+                                TaskManager.isWorkTask = false;
+                                break;
+                            }
+                            else if (res != "No")
+                            {
+                                CrossSettings.Current.AddOrUpdateValue(idTask, photoInspectionBase64.Remove(0, photoInspectionTmp.Length));
+                            }
+                            else
+                            {
+                                break;
+                                //save Continue
+                                //Wait or Remove, Roma needs to think about it more
+                            }
+                            await Task.Delay(200);
                         }
-                        else if (res != "No")
-                        {
-                            CrossSettings.Current.AddOrUpdateValue(idTask, photoInspectionBase64.Remove(0, photoInspectionTmp.Length));
-                        }
-                        else
-                        {
-                            break;
-                            //save Continue
-                            //Wait or Remove, Roma needs to think about it more
-                        }
+
+                        EndTask1(token, idTask);
                     }
-                    EndTask1(token, idTask);
+                    catch
+                    {
+
+                    }
                 }
                 else
                 {
@@ -199,8 +210,8 @@ namespace MDispatch.Service.Tasks
             string status = responseAppS.Value<string>("Status");
             if (status == "success")
             {
-                res = JsonConvert.DeserializeObject<string>(responseAppS.
-                        SelectToken("ResponseStr").ToString());
+                res = responseAppS.
+                        SelectToken("ResponseStr").ToString();
             }
             return res;
         }

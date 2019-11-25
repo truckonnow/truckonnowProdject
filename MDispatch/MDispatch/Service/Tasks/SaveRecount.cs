@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using MDispatch.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -94,7 +95,7 @@ namespace MDispatch.Service.Tasks
             }
         }
 
-        private void LoadTask1(string token, string idTask)
+        private async void LoadTask1(string token, string idTask)
         {
             try
             {
@@ -133,6 +134,7 @@ namespace MDispatch.Service.Tasks
                             //save Continue
                             //Wait or Remove, Roma needs to think about it more
                         }
+                        await Task.Delay(200);
                     }
                     EndTask1(token, idTask);
                 }
@@ -199,8 +201,8 @@ namespace MDispatch.Service.Tasks
             string status = responseAppS.Value<string>("Status");
             if (status == "success")
             {
-                res = JsonConvert.DeserializeObject<string>(responseAppS.
-                        SelectToken("ResponseStr").ToString());
+                res = responseAppS.
+                        SelectToken("ResponseStr").ToString();
             }
             return res;
         }

@@ -4,9 +4,9 @@ using MDispatch.NewElement.ToastNotify;
 using MDispatch.Service;
 using MDispatch.Service.Net;
 using MDispatch.Service.Tasks;
+using MDispatch.Vidget.View;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
-using Newtonsoft.Json;
 using Plugin.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -22,7 +22,7 @@ namespace MDispatch.Vidget.VM
     public class FullPhotoTruckVM : BindableBase
     {
         private ManagerDispatchMob managerDispatchMob = null;
-        private INavigation navigation = null;
+        private INavigation Navigation = null;
         public TruckCar truckCar = null;
         public DelegateCommand NextCommand { get; set; }
         private InitDasbordDelegate initDasbordDelegate = null;
@@ -32,24 +32,51 @@ namespace MDispatch.Vidget.VM
         {
             this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
-            this.navigation = navigation;
+            this.Navigation = navigation;
             truckCar = new TruckCar();
             IdDriver = idDriver;
             IndexCurent = indexCurent;
             //NextCommand = new DelegateCommand(NextPage);
-            truckCar.GetModalAlert(IndexCurent);
+            //truckCar.GetModalAlert(IndexCurent);
             Init();
         }
 
+        [Obsolete]
         private async void Init()
         {
             NameLayute = truckCar.GetNameTruck(IndexCurent);
+            if(IndexCurent == 44)
+            {
+                await PopupNavigation.PushAsync(new PlateWrite(this));
+            }
             await truckCar.Orinteble(IndexCurent);
         }
 
         public string IdDriver { get; set; }
 
         private int IndexCurent { get; set; }
+
+        private string plateTruck = "";
+        public string PlateTruck
+        {
+            get => plateTruck;
+            set => SetProperty(ref plateTruck, value);
+        }
+
+        private string plateTrailer = "";
+        public string PlateTrailer
+        {
+            get => plateTrailer;
+            set => SetProperty(ref plateTrailer, value);
+        }
+
+        private bool isCorectPlate = false;
+        public bool IsCorectPlate
+        {
+            get => isCorectPlate;
+            set => SetProperty(ref isCorectPlate, value);
+        }
+
         private string nameLayute = null;
         public string NameLayute
         {
@@ -80,23 +107,25 @@ namespace MDispatch.Vidget.VM
             await NextPage();
         }
 
+
+
         [System.Obsolete]
         private async Task NextPage()
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             bool isNavigationMany = false;
             bool isEndInspection = false;
-            //if (navigation.NavigationStack.Count > 2)
-            //{
-            //    //await PopupNavigation.PushAsync(new LoadPage());
-            //    //isNavigationMany = true;
-            //}
             string description = null;
             int state = 0;
             if (IndexCurent < 44)
             {
+
+                if (IndexCurent == 44)
+                {
+                    await PopupNavigation.PushAsync(new PlateWrite(this));
+                }
                 isEndInspection = true;
-                await navigation.PushAsync(new View.CameraPage(managerDispatchMob, IdDriver, IndexCurent + 1, initDasbordDelegate));
+                await Navigation.PushAsync(new View.CameraPage(managerDispatchMob, IdDriver, IndexCurent + 1, initDasbordDelegate));
             }
             else
             {
@@ -106,7 +135,7 @@ namespace MDispatch.Vidget.VM
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
-                if (navigation.NavigationStack.Count > 3)
+                if (Navigation.NavigationStack.Count > 3)
                 {
                     state = 3;
                     TaskManager.CommandToDo("SaveInspactionDriver", 1, token, IdDriver, Photo, IndexCurent);
@@ -125,9 +154,9 @@ namespace MDispatch.Vidget.VM
                         await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
                         isNavigationMany = false;
                     }
-                    if (navigation.NavigationStack.Count > 1)
+                    if (Navigation.NavigationStack.Count > 1)
                     {
-                        await navigation.PopAsync();
+                        await Navigation.PopAsync();
                     }
                     await PopupNavigation.PushAsync(new Errror("Not Network", null));
                 }
@@ -138,9 +167,9 @@ namespace MDispatch.Vidget.VM
                         await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
                         isNavigationMany = false;
                     }
-                    if (navigation.NavigationStack.Count > 1)
+                    if (Navigation.NavigationStack.Count > 1)
                     {
-                        await navigation.PopAsync();
+                        await Navigation.PopAsync();
                     }
                     await PopupNavigation.PushAsync(new Errror(description, null));
                 }
@@ -153,9 +182,9 @@ namespace MDispatch.Vidget.VM
                     }
                     if (isEndInspection)
                     {
-                        if (navigation.NavigationStack.Count > 1)
+                        if (Navigation.NavigationStack.Count > 1)
                         {
-                            navigation.RemovePage(navigation.NavigationStack[1]);
+                            Navigation.RemovePage(Navigation.NavigationStack[1]);
                         }
                     }
                     DependencyService.Get<IToast>().ShowMessage($"Photo {truckCar.GetNameTruck(IndexCurent)} saved");
@@ -167,14 +196,14 @@ namespace MDispatch.Vidget.VM
                         await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
                         isNavigationMany = false;
                     }
-                    if (navigation.NavigationStack.Count > 1)
+                    if (Navigation.NavigationStack.Count > 1)
                     {
-                        await navigation.PopAsync();
+                        await Navigation.PopAsync();
                     }
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
                     if (IndexCurent > 45)
                     {
-                        await navigation.PopToRootAsync();
+                        await Navigation.PopToRootAsync();
                     }
                 }
             }
@@ -187,16 +216,14 @@ namespace MDispatch.Vidget.VM
                 }
                 if (isEndInspection)
                 {
-                    if (navigation.NavigationStack.Count > 1)
+                    if (Navigation.NavigationStack.Count > 1)
                     {
-                        navigation.RemovePage(navigation.NavigationStack[1]);
+                        Navigation.RemovePage(Navigation.NavigationStack[1]);
                     }
                 }
                 TaskManager.CommandToDo("SaveInspactionDriver", 1, token, IdDriver, Photo, IndexCurent);
                 DependencyService.Get<IToast>().ShowMessage($"Photo {truckCar.GetNameTruck(IndexCurent)} saved");
             }
-            //GC.Collect();
-            //GC.WaitForPendingFinalizers();
         }
 
         [System.Obsolete]
@@ -223,10 +250,55 @@ namespace MDispatch.Vidget.VM
                 else if (state == 3)
                 {
                     initDasbordDelegate.Invoke();
-                    await navigation.PopToRootAsync();
+                    await Navigation.PopToRootAsync();
                 }
                 else if (state == 4)
                 {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
+            }
+        }
+
+        [System.Obsolete]
+        internal async void SetPlate()
+        {
+            await PopupNavigation.PushAsync(new LoadPage());
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            bool isPlate = false;
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.SetPlate(token, PlateTruck, PlateTrailer, ref description, ref isPlate);
+                });
+                if (state == 1)
+                {
+                    await PopupNavigation.PopAsync();
+                    await PopupNavigation.PushAsync(new Errror("Not Network", null));
+                }
+                else if (state == 2)
+                {
+                    await PopupNavigation.PopAsync();
+                    await PopupNavigation.PushAsync(new Errror(description, null));
+                }
+                else if (state == 3)
+                {
+                    IsCorectPlate = !isPlate;
+                    if(isPlate)
+                    {
+                        await PopupNavigation.PopAllAsync();
+                    }
+                    else
+                    {
+                        await PopupNavigation.PopAsync();
+                    }
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PopAsync();
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
                 }
             }
@@ -261,6 +333,13 @@ namespace MDispatch.Vidget.VM
             }
             GC.Collect();
             GC.WaitForPendingFinalizers();
+        }
+
+        public async void BackToRootPage()
+        {
+            DependencyService.Get<IOrientationHandler>().ForceSensor();
+            await Navigation.PopToRootAsync();
+            
         }
     }
 }

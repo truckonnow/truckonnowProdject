@@ -6,12 +6,14 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MDispatch.Service.Tasks
 {
     public class CheckTask : ITask
     {
-        public void StartTask(params object[] task)
+        public async void StartTask(params object[] task)
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             List<Model.Tasks> idTasks = GetTaskLoads();
@@ -25,6 +27,7 @@ namespace MDispatch.Service.Tasks
                     {
                         CrossSettings.Current.AddOrUpdateValue("workLoad", workLoad + idTask.IdTask.ToString() + ",");
                     }
+                    await Task.Delay(200);
                     TaskManager.CommandToDo(idTask.Method, 2, token, idTask.IdTask.ToString());
                 }
                 else
@@ -37,6 +40,7 @@ namespace MDispatch.Service.Tasks
             string[] noStartkLoads = noStartkLoad.Split(',');
             for(int i = 0; i < noStartkLoads.Length-1; i++)
             {
+                await Task.Delay(200);
                 noStartkLoad = CrossSettings.Current.GetValueOrDefault("noStartkLoad", "");
                 string method = CrossSettings.Current.GetValueOrDefault(noStartkLoads[i] + "method", "");
                 GoToCommand1(token, 1, method, noStartkLoads[i]);
@@ -46,16 +50,6 @@ namespace MDispatch.Service.Tasks
                 CrossSettings.Current.Remove(noStartkLoads[i] + "Param");
                 CrossSettings.Current.Remove(noStartkLoads[i]);
             }
-            //string noEndkLoad = CrossSettings.Current.GetValueOrDefault("noEndkLoad", "");
-            //string[] noEndkLoads = noEndkLoad.Split(',');
-            //for (int i = 0; i < noEndkLoads.Length - 1; i++)
-            //{
-            //    string obj = CrossSettings.Current.GetValueOrDefault(noEndkLoads[i], "");
-            //    string vehiclwInformationId = CrossSettings.Current.GetValueOrDefault(noEndkLoads[i] + "Param", "");
-            //    string method = CrossSettings.Current.GetValueOrDefault(noEndkLoads[i] + "method", "");
-            //    GoToCommand(token, 3, obj, method, vehiclwInformationId);
-            //    CrossSettings.Current.AddOrUpdateValue("noEndkLoad", noEndkLoad.Replace(noEndkLoads[i] + ",", ""));
-            //}
         }
 
         private void GoToCommand1(string token, int type, string method, string idTaskNo)

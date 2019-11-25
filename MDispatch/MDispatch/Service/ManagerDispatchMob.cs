@@ -255,6 +255,21 @@ namespace MDispatch.Service
             return stateInspection;
         }
 
+        internal int SetPlate(string token, string plateTruck, string plateTrailer, ref string description, ref bool isPlate)
+        {
+            driverInspecktion = new DriverInspecktion();
+            //WaiteNoramalReqvestCount();
+            CountReqvest++;
+            int statePay = 1;
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                statePay = driverInspecktion.SetPlate(token, plateTruck, plateTrailer, ref description, ref isPlate);
+            }
+            driverInspecktion = null;
+            CountReqvest--;
+            return statePay;
+        }
+
         public int GetShipping(string token, string id, ref string description, ref Shipping shipping)
         {
             inspection = new Inspection();

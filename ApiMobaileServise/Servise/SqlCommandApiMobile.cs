@@ -170,6 +170,36 @@ namespace ApiMobaileServise.Servise
             return isInspaction;
         }
 
+        internal bool SetTralerAndTruck(string token, string plateTrailer, string plateTruck)
+        {
+            Truck truck = context.Trucks.FirstOrDefault(t => t.PlateTruk == plateTruck);
+            Trailer trailer = context.Trailers.FirstOrDefault(t => t.Plate == plateTrailer);
+            if (truck == null || trailer == null)
+                return false;
+            Driver driver = context.Drivers
+                .Include(d => d.InspectionDrivers)
+                .First(d => d.Token == token);
+            InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
+            DateTime dateTime = Convert.ToDateTime(inspectionDriver.Date);
+            if (dateTime.Date == DateTime.Now.Date)
+            {
+                inspectionDriver.IdITruck = truck.Id;
+                inspectionDriver.IdITrailer = trailer.Id;
+            }
+            else
+            {
+                driver.InspectionDrivers.Add(new InspectionDriver()
+                {
+                    IdITruck = truck.Id,
+                    IdITrailer = trailer.Id,
+                    Date = DateTime.Now.ToString(),
+                    CountPhoto = 0
+                });
+            }
+            context.SaveChanges();
+            return true;
+        }
+
         public int GetIndexDb(string token)
         {
             int indexPhoto = 0;
@@ -441,27 +471,32 @@ namespace ApiMobaileServise.Servise
 
         public async void ReCurentStatus(string idShip, string status)
         {
-            Shipping shipping = context.Shipping.FirstOrDefault(s => s.Id == idShip);
-            shipping.CurrentStatus = status;
-            if (status == "Delivered,Billed" && shipping.TotalPaymentToCarrier.Contains(" days"))
+            try
             {
-                shipping.DataPaid = DateTime.Now.AddDays(Convert.ToInt32(shipping.TotalPaymentToCarrier.Replace(" days", ""))).ToString();
-                shipping.DataCancelOrder = DateTime.Now.ToString();
-            }
-            else if (status == "Delivered,Paid")
-            {
-                shipping.DataFullArcive = DateTime.Now.AddDays(21).ToString();
-                shipping.DataCancelOrder = DateTime.Now.ToString();
-            }
-            else if (status == "Delivered,Billed")
-            {
+                Shipping shipping = context.Shipping.FirstOrDefault(s => s.Id == idShip);
+                shipping.CurrentStatus = status;
+                if (status == "Delivered,Billed" && shipping.TotalPaymentToCarrier.Contains(" days"))
+                {
+                    shipping.DataPaid = DateTime.Now.AddDays(Convert.ToInt32(shipping.TotalPaymentToCarrier.Replace(" days", ""))).ToString();
+                    shipping.DataCancelOrder = DateTime.Now.ToString();
+                }
+                else if (status == "Delivered,Paid")
+                {
+                    shipping.DataFullArcive = DateTime.Now.AddDays(21).ToString();
+                    shipping.DataCancelOrder = DateTime.Now.ToString();
+                }
+                else if (status == "Delivered,Billed")
+                {
 
+                }
+                else if (shipping.CurrentStatus == "Archived")
+                {
+                    shipping.CurrentStatus = shipping.CurrentStatus.Replace("Delivered", "Archived");
+                }
+                await context.SaveChangesAsync();
             }
-            else if (shipping.CurrentStatus == "Archived")
-            {
-                shipping.CurrentStatus = shipping.CurrentStatus.Replace("Delivered", "Archived");
-            }   
-            await context.SaveChangesAsync();
+            catch
+            { }
         }
 
         public string GerShopTokenForShipping(string idOrder)

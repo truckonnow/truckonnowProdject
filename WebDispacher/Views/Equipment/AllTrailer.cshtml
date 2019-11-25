@@ -5,7 +5,7 @@
     </div>
     <nav>
         <input class="btnSt" type="button" value="Trucks" onclick="window.location.href='@Url.Action("Trucks", "Equipment")';" />
-        <input class="btnSt activeBtn" type="button" value="Tralers" onclick="window.location.href='@Url.Action("Trailers", "Equipment")';" />
+        <input class="btnSt activeBtn" type="button" value="Trailers" onclick="window.location.href='@Url.Action("Trailers", "Equipment")';" />
     </nav>
     <div class="contentBody">
         <table>
@@ -83,10 +83,10 @@
                     <td>
                         @ViewBag.Trailers[i].AnnualIns
                     </td>
-                    <td style="background-color:white;">
+                    <td style="cursor:pointer">
                         ✎
                     </td>
-                    <td style="background-color:white;" onclick="Remove(@ViewBag.Trailers[i].Id)">
+                    <td style="cursor:pointer" onclick="Remove(@ViewBag.Trailers[i].Id)">
                         ✖
                     </td>
                 </tr>

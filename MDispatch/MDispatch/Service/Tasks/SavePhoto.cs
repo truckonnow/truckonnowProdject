@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MDispatch.Service.Tasks
 {
@@ -105,7 +106,7 @@ namespace MDispatch.Service.Tasks
             }
         }
 
-        private void LoadTask1(string token, string idTask)
+        private async void LoadTask1(string token, string idTask)
         {
             try
             {
@@ -144,6 +145,7 @@ namespace MDispatch.Service.Tasks
                             //save Continue
                             //Wait or Remove, Roma needs to think about it more
                         }
+                        await Task.Delay(200);
                     }
                     EndTask1(token, idTask);
                 }

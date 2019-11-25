@@ -44,8 +44,7 @@ namespace MDispatch.Vidget.View
 
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
         {
-            DependencyService.Get<IOrientationHandler>().ForceSensor();
-            await Navigation.PopToRootAsync();
+            BackToRootPage();
         }
 
         [System.Obsolete]
@@ -60,17 +59,15 @@ namespace MDispatch.Vidget.View
 
         protected override bool OnBackButtonPressed()
         {
-            DependencyService.Get<IOrientationHandler>().ForceSensor();
             BackToRootPage();
             return base.OnBackButtonPressed();
         }
 
         private async void BackToRootPage()
         {
-            if (Navigation.NavigationStack.Count > 3)
-            {
-                await Navigation.PopToRootAsync();
-            }
+
+            DependencyService.Get<IOrientationHandler>().ForceSensor();
+            await Navigation.PopToRootAsync();
         }
     }
 }
