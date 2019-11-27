@@ -141,7 +141,7 @@
                 {
                     try
                     {
-                        byte[] imageB = Convert.FromBase64String(@ViewBag.InspectionTruck.PhotosTruck[i].Base64_1);
+                        byte[] imageB = Convert.FromBase64String(@ViewBag.InspectionTruck.PhotosTruck[i].Base64);
                         if (imageB != null && imageB.Length != 0)
                         {
                             Byte[] outputBytes = null;
@@ -149,27 +149,27 @@
                             using (var inputStream = new MemoryStream(imageB))
                             {
                                 image = Image.FromStream(inputStream);
-                                Bitmap bitmap = new Bitmap(image, new Size(432, 240));
-                                var jpegEncoder = ImageCodecInfo.GetImageDecoders()
-                                  .First(c => c.FormatID == ImageFormat.Jpeg.Guid);
-                                var encoderParameters = new EncoderParameters(1);
-                                encoderParameters.Param[0] = new EncoderParameter(Encoder.Quality, 20L);
-                                using (var outputStream = new MemoryStream())
-                                {
-                                    bitmap.Save(outputStream, jpegEncoder, encoderParameters);
-                                    outputBytes = outputStream.ToArray();
-                                }
+                                //Bitmap bitmap = new Bitmap(image, new Size(432, 240));
+                                //var jpegEncoder = ImageCodecInfo.GetImageDecoders()
+                                //  .First(c => c.FormatID == ImageFormat.Jpeg.Guid);
+                                //var encoderParameters = new EncoderParameters(1);
+                                //encoderParameters.Param[0] = new EncoderParameter(Encoder.Quality, 20L);
+                                //using (var outputStream = new MemoryStream())
+                                //{
+                                //    bitmap.Save(outputStream, jpegEncoder, encoderParameters);
+                                //    outputBytes = outputStream.ToArray();
+                                //}
                             }
-                            
-                            string base64 = Convert.ToBase64String(outputBytes.ToArray());
+
+                            //string base64 = Convert.ToBase64String(outputBytes.ToArray());
 
                             if (image.Height > image.Width)
                             {
-                                    <img class="img Photove" src="data:image/gif;base64,@base64" onclick="ClickImg('@ViewBag.InspectionTruck.PhotosTruck[i].Base64')" />
+                                    <img class="img Photove" src="@ViewBag.BaseUrl/Driver/Image?name=@ViewBag.InspectionTruck.PhotosTruck[i].path&type=jpg" onclick="ClickImg('@ViewBag.InspectionTruck.PhotosTruck[i].Base64')" />
                                 }
                                 else
                                 {
-                                    <img class="img Photola" src="data:image/gif;base64,@base64" onclick="ClickImg('@ViewBag.InspectionTruck.PhotosTruck[i].Base64')" />
+                                    <img class="img Photola" src="@ViewBag.BaseUrl/Driver/Image?name=@ViewBag.InspectionTruck.PhotosTruck[i].path&type=jpg" onclick="ClickImg('@ViewBag.InspectionTruck.PhotosTruck[i].Base64')" />
                                 }
                             }
                             else

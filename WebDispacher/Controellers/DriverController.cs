@@ -275,34 +275,33 @@ namespace WebDispacher.Controellers
                     List<Trailer> trailers = managerDispatch.GetTrailers();
                     InspectionDriver inspectionDriver = managerDispatch.GetInspectionTruck(idInspection);
                     Driver drivers = managerDispatch.GetDriver(inspectionDriver.Id.ToString());
-                    inspectionDriver.PhotosTruck.ForEach((item) =>
-                    {
-                        try
-                        {
-                            byte[] imageB = Convert.FromBase64String(item.Base64);
-                            Byte[] outputBytes = null;
-                            Image image = null;
-                            using (var inputStream = new MemoryStream(imageB))
-                            {
-                                image = Image.FromStream(inputStream);
-                                var jpegEncoder = ImageCodecInfo.GetImageDecoders()
-                                  .First(c => c.FormatID == ImageFormat.Jpeg.Guid);
-                                var encoderParameters = new EncoderParameters(1);
-                                encoderParameters.Param[0] = new EncoderParameter(Encoder.Quality, 80L);
-                                using (var outputStream = new MemoryStream())
-                                {
-                                    image.Save(outputStream, jpegEncoder, encoderParameters);
-                                    outputBytes = outputStream.ToArray();
-                                }
-                            }
+                    //inspectionDriver.PhotosTruck.ForEach((item) =>
+                    //{
+                    //    try
+                    //    {
+                    //        byte[] imageB = Convert.FromBase64String(item.Base64);
+                    //        Byte[] outputBytes = null;
+                    //        Image image = null;
+                    //        using (var inputStream = new MemoryStream(imageB))
+                    //        {
+                    //            image = Image.FromStream(inputStream);
+                    //            var jpegEncoder = ImageCodecInfo.GetImageDecoders()
+                    //              .First(c => c.FormatID == ImageFormat.Jpeg.Guid);
+                    //            var encoderParameters = new EncoderParameters(1);
+                    //            encoderParameters.Param[0] = new EncoderParameter(Encoder.Quality, 80L);
+                    //            using (var outputStream = new MemoryStream())
+                    //            {
+                    //                image.Save(outputStream, jpegEncoder, encoderParameters);
+                    //                outputBytes = outputStream.ToArray();
+                    //            }
+                    //        }
+                    //        item.Base64_1 = Convert.ToBase64String(outputBytes.ToArray());
+                    //    }
+                    //    catch
+                    //    {
 
-                            item.Base64_1 = Convert.ToBase64String(outputBytes.ToArray());
-                        }
-                        catch
-                        {
-
-                        }
-                    });
+                    //    }
+                    //});
                     ViewBag.InspectionTruck = inspectionDriver;
                     ViewBag.Drivers = drivers;
                     ViewBag.Trailer = trailers.FirstOrDefault(t => t.Id == inspectionDriver.IdITrailer) != null ? $"{trailers.FirstOrDefault(t => t.Id == inspectionDriver.IdITrailer).Make}, Plate: {trailers.FirstOrDefault(t => t.Id == inspectionDriver.IdITrailer).Plate}" : "---------------";
@@ -324,6 +323,14 @@ namespace WebDispacher.Controellers
 
             }
             return actionResult;
+        }
+
+        [HttpGet]
+        [Route("Driver/Image")]
+        public IActionResult GetShiping(string name, string type)
+        {
+            var imageFileStream = System.IO.File.OpenRead(name);
+            return File(imageFileStream, $"image/{type}");
         }
     }
 }
