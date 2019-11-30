@@ -64,7 +64,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
 
         private void SetupLiveCameraStream()
         {
-            captureSession = new AVCaptureSession();
+               captureSession = new AVCaptureSession();
             videoPreviewLayer = new AVCaptureVideoPreviewLayer(captureSession)
             {
                 Frame = liveCameraStream.Bounds,

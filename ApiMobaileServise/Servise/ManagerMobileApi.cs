@@ -2,6 +2,7 @@
 using ApiMobaileServise.Models;
 using ApiMobaileServise.Notify;
 using ApiMobaileServise.Servise.AddDamage;
+using ApiMobaileServise.Servise.GoogleApi;
 using DaoModels.DAO.Models;
 using Newtonsoft.Json;
 using System;
@@ -50,6 +51,23 @@ namespace ApiMobaileServise.Servise
             PhotoDriver photo = JsonConvert.DeserializeObject<PhotoDriver>(photoJson);
             //photo.path = photo.path.Insert(photo.path.IndexOf(idDriver) +2, $"{DateTime.Now.ToShortDateString()}/");
             await sqlCommandApiMobile.SaveInspectionDriverInDb(idDriver, photo, indexPhoto);
+            await Task.Run(() =>
+            {
+                IDetect detect = null;
+                if(indexPhoto == 1 || indexPhoto == 2 || indexPhoto == 26 || indexPhoto == 13)
+                {
+                    detect = new DerectTruck();
+                }
+                else if(indexPhoto == 34 || indexPhoto == 35 || indexPhoto == 38)
+                {
+                    detect = new DetectTrailers();
+                }
+                if(detect != null)
+                {
+                    detect.AuchGoole(sqlCommandApiMobile);
+                    detect.DetectText(idDriver, photo.path);
+                }
+            });
         }
 
         public async void UpdateInspectionDriver(string idDriver)

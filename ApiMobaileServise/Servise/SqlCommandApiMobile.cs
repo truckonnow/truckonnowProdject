@@ -32,6 +32,16 @@ namespace ApiMobaileServise.Servise
             return context.Drivers.ToList();
         }
 
+        internal List<Trailer> GetTrailers()
+        {
+            return context.Trailers.ToList();
+        }
+
+        internal List<Truck> GetTruck()
+        {
+            return context.Trucks.ToList();
+        }
+
         public Shipping SendBolInDb(string idShip)
         {
             Shipping shipping = context.Shipping.Where(s => s.Id == idShip)
@@ -60,6 +70,34 @@ namespace ApiMobaileServise.Servise
                 driver.IsInspectionToDayDriver = false;
                 await context.SaveChangesAsync();
             }
+        }
+
+        internal void SetPlateTruck(int id, string idDriver)
+        {
+            Driver driver = context.Drivers.Include(d => d.InspectionDrivers)
+                       .FirstOrDefault(d => d.Id == Convert.ToInt32(idDriver));
+            InspectionDriver inspectionDrivers = driver.InspectionDrivers.FirstOrDefault(i => DateTime.Parse(i.Date).Date == DateTime.Now.Date);
+            if (inspectionDrivers != null)
+            {
+                Truck truck = context.Trucks.First(t => t.Id == id);
+                inspectionDrivers.IdITruck = truck.Id;
+                context.SaveChanges();
+            }
+            //truck
+        }
+
+        internal void SetPlateTrailer(int id, string idDriver)
+        {
+            Driver driver = context.Drivers.Include(d => d.InspectionDrivers)
+                       .FirstOrDefault(d => d.Id == Convert.ToInt32(idDriver));
+            InspectionDriver inspectionDrivers = driver.InspectionDrivers.FirstOrDefault(i => DateTime.Parse(i.Date).Date == DateTime.Now.Date);
+            if (inspectionDrivers != null)
+            {
+                Trailer trailer = context.Trailers.First(t => t.Id == id);
+                inspectionDrivers.IdITruck = trailer.Id;
+                context.SaveChanges();
+            }
+            //truck
         }
 
         public async Task SetInspectionDriverInDb(string idDriver, InspectionDriver inspectionDriver)

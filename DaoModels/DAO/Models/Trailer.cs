@@ -1,4 +1,6 @@
-﻿namespace DaoModels.DAO.Models
+﻿using System;
+
+namespace DaoModels.DAO.Models
 {
     public class Trailer
     {
@@ -13,5 +15,10 @@
         public string Plate { get; set; }
         public string Exp { get; set; }
         public string AnnualIns { get; set; }
+
+        public object FirstOrDefault(Func<object, object> p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
