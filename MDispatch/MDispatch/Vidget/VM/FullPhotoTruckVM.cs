@@ -47,7 +47,7 @@ namespace MDispatch.Vidget.VM
             NameLayute = truckCar.GetNameTruck(IndexCurent);
             if(IndexCurent == 44)
             {
-                await PopupNavigation.PushAsync(new PlateWrite(this));
+                CheckPlate();
             }
             await truckCar.Orinteble(IndexCurent);
         }
@@ -122,7 +122,7 @@ namespace MDispatch.Vidget.VM
 
                 if (IndexCurent == 44)
                 {
-                    await PopupNavigation.PushAsync(new PlateWrite(this));
+                    CheckPlate();
                 }
                 isEndInspection = true;
                 await Navigation.PushAsync(new View.CameraPage(managerDispatchMob, IdDriver, IndexCurent + 1, initDasbordDelegate));
@@ -294,6 +294,51 @@ namespace MDispatch.Vidget.VM
                     else
                     {
                         await PopupNavigation.PopAsync();
+                    }
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PopAsync();
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
+            }
+        }
+
+        [System.Obsolete]
+        internal async void CheckPlate()
+        {
+            await PopupNavigation.PushAsync(new LoadPage());
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            string plateTruckAndTrailer = null;
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.CheckPlate(token, ref description, ref plateTruckAndTrailer);
+                });
+                if (state == 1)
+                {
+                    await PopupNavigation.PopAsync();
+                    await PopupNavigation.PushAsync(new Errror("Not Network", null));
+                }
+                else if (state == 2)
+                {
+                    await PopupNavigation.PopAsync();
+                    await PopupNavigation.PushAsync(new Errror(description, null));
+                }
+                else if (state == 3)
+                {
+                    await PopupNavigation.PopAsync();
+                    string plateTruck = plateTruckAndTrailer.Split(',')[0];
+                    string plateTrailer = plateTruckAndTrailer.Split(',')[1];
+                    if(!((plateTruck != null && plateTruck != "") && (plateTrailer != null && plateTrailer != "")))
+                    {
+                        PlateTruck = plateTruck;
+                        PlateTrailer = plateTrailer;
+                        await PopupNavigation.PushAsync(new PlateWrite(this));
                     }
                 }
                 else if (state == 4)

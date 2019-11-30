@@ -285,6 +285,21 @@ namespace MDispatch.Service
             return stateInspection;
         }
 
+        internal int CheckPlate(string token, ref string description, ref string plateTruckAndTrailer)
+        {
+            driverInspecktion = new DriverInspecktion();
+            //WaiteNoramalReqvestCount();
+            CountReqvest++;
+            int statePay = 1;
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                statePay = driverInspecktion.CheckPlate(token, ref description, ref plateTruckAndTrailer);
+            }
+            driverInspecktion = null;
+            CountReqvest--;
+            return statePay;
+        }
+
         public int GetShippingPhoto(string token, string id, ref string description, ref Shipping shipping)
         {
             inspection = new Inspection();

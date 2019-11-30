@@ -158,6 +158,34 @@ namespace MDispatch.Service
             }
         }
 
+        internal int CheckPlate(string token, ref string description, ref string plateTruckAndTrailer)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
+                RestRequest request = new RestRequest("Mobile/Driver/CheckPlateTrackAndPlate", Method.POST);
+                client.Timeout = 10000;
+                request.AddHeader("Accept", "application/json");
+                request.AddParameter("token", token);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref plateTruckAndTrailer, ref description);
+            }
+        }
+
         private int GetData(string respJsonStr, ref bool isPlate, ref string description)
         {
             respJsonStr = respJsonStr.Replace("\\", "");
@@ -169,6 +197,25 @@ namespace MDispatch.Service
             if (status == "success")
             {
                 isPlate = Convert.ToBoolean(responseAppS.Value<bool>("ResponseStr"));
+                return 3;
+            }
+            else
+            {
+                return 2;
+            }
+        }
+
+        private int GetData(string respJsonStr, ref string plateTruckAndTrailer, ref string description)
+        {
+            respJsonStr = respJsonStr.Replace("\\", "");
+            respJsonStr = respJsonStr.Remove(0, 1);
+            respJsonStr = respJsonStr.Remove(respJsonStr.Length - 1);
+            var responseAppS = JObject.Parse(respJsonStr);
+            string status = responseAppS.Value<string>("Status");
+            description = responseAppS.Value<string>("Description");
+            if (status == "success")
+            {
+                plateTruckAndTrailer = responseAppS.Value<string>("ResponseStr").ToString();
                 return 3;
             }
             else
@@ -214,5 +261,7 @@ namespace MDispatch.Service
                 return 2;
             }
         }
+
+        
     }
 }

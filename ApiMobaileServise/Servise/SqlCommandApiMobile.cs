@@ -167,6 +167,31 @@ namespace ApiMobaileServise.Servise
             }
         }
 
+        internal string CheckTralerAndTruckDb(string token)
+        {
+            string plates = null;
+            Driver driver =  context.Drivers.Where(d => d.Token == token)
+                   .Include(d => d.InspectionDrivers)
+                   .FirstOrDefault(); 
+            InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
+            List<Truck> trucks = context.Trucks.ToList();
+            List<Trailer> trailers = context.Trailers.ToList();
+            DateTime dateTime = Convert.ToDateTime(inspectionDriver.Date);
+            if (dateTime.Date == DateTime.Now.Date)
+            {
+                Truck truck = trucks.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck);
+                Trailer trailer = trailers.FirstOrDefault(t => t.Id == inspectionDriver.IdITrailer);
+                string plateTruck = truck != null ? truck.PlateTruk : "";
+                string plateTrailer = trailer != null ? trailer.Plate : "";
+                plates = $"{plateTruck},{plateTrailer}";
+            }
+            else
+            {
+                plates = ",";
+            }
+            return plates;
+        }
+
         public async Task UpdateInspectionDriver(string idDriver)
         {
             Driver driver = await context.Drivers.Where(d => d.Id == Convert.ToUInt32(idDriver))

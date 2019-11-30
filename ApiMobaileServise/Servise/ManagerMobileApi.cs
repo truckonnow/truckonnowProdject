@@ -170,6 +170,11 @@ namespace ApiMobaileServise.Servise
             return typeScan;
         }
 
+        internal string CheckTralerAndTruck(string token)
+        {
+            return sqlCommandApiMobile.CheckTralerAndTruckDb(token);
+        }
+
         internal bool SetTralerAndTruck(string token, string plateTrailer, string plateTruck)
         {
             return sqlCommandApiMobile.SetTralerAndTruck(token, plateTrailer, plateTruck);
