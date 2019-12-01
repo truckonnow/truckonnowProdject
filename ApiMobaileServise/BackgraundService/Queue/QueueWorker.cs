@@ -23,7 +23,7 @@ namespace ApiMobaileServise.BackgraundService.Queue
             if (queues.Count != 0 && !isWork)
             {
                 isWork = true;
-                int tmpCount = queues.Count > 500 ? queues.Count - (countQueues - 500) : queues.Count;
+                int tmpCount = queues.Count > 2000 ? queues.Count - (countQueues - 2000) : queues.Count;
                 for (int i = 0; i < tmpCount; i++)
                 {
                     if(queues[i].Split(',')[0] == "Load")

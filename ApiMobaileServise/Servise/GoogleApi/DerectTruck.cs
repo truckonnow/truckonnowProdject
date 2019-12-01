@@ -17,14 +17,14 @@ namespace ApiMobaileServise.Servise.GoogleApi
         public void AuchGoole(SqlCommandApiMobile sqlCommandApiMobil)
         {
             this.sqlCommandApiMobil = sqlCommandApiMobil;
-            credential = GoogleCredential.FromFile("../../../../AuchConfig/Truckonnow-f3c2a8947784.json");
+            credential = GoogleCredential.FromFile("../AuchConfig/Truckonnow-38b8427a812c.json");
         }
 
         public bool DetectText(params object[] parames)
         {
             List<Truck> trucks = sqlCommandApiMobil.GetTruck();
-            string path = (string)parames[0];
-            string idDriver = (string)parames[1];
+            string path = (string)parames[1];
+            string idDriver = (string)parames[0];
             credential.CreateScoped(ImageAnnotatorClient.DefaultScopes);
             var channel = new Grpc.Core.Channel(
                 ImageAnnotatorClient.DefaultEndpoint.ToString(),

@@ -54,7 +54,7 @@ namespace ApiMobaileServise.Servise
             await Task.Run(() =>
             {
                 IDetect detect = null;
-                if(indexPhoto == 1 || indexPhoto == 2 || indexPhoto == 26 || indexPhoto == 13)
+                if(true /*indexPhoto == 1 || indexPhoto == 2 || indexPhoto == 26 || indexPhoto == 13*/)
                 {
                     detect = new DerectTruck();
                 }
