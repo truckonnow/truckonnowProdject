@@ -247,6 +247,12 @@ namespace WebDispacher.Dao
             context.SaveChanges();
         }
 
+        internal void SavePathDb(string id, string path)
+        {
+            context.Trucks.First(t => t.Id.ToString() == id).PathDoc = path;
+            context.SaveChanges();
+        }
+
         public async void RemoveVechInDb(string idVech)
         {
             context.VehiclwInformation.Remove(await context.VehiclwInformation.FirstOrDefaultAsync(v => v.Id.ToString() == idVech));

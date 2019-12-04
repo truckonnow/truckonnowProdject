@@ -243,6 +243,11 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.AddDriver(driver);
         }
 
+        internal void SavePath(string id, string path)
+        {
+            _sqlEntityFramworke.SavePathDb(id, path);
+        }
+
         public List<InspectionDriver> GetInspectionTrucks(string idDriver, string idTruck, string idTrailer, string date)
         {
             return _sqlEntityFramworke.GetInspectionTrucksDb(idDriver, idTruck, idTrailer, date);

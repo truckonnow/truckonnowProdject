@@ -14,5 +14,6 @@
         public string PlateTruk { get; set; }
         public string ColorTruk { get; set; }
         public string TypeTruk { get; set; }
+        public string PathDoc { get; set; }
     }
 }

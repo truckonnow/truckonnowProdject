@@ -50,6 +50,8 @@
                         <th>
                             🖱
                         </th>
+                        <th>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -95,6 +97,9 @@
                         <td style="cursor:pointer;" onclick="Remove(@ViewBag.Trucks[i].Id)">
                             ✖
                         </td>
+                        <td width="100">
+                            <input id="fileExel" type="file" onchange="CheckSelectExel(this, @ViewBag.Trucks[i].Id)" />
+                        </td>
                     </tr>
                     }
                 </tbody>
@@ -103,6 +108,21 @@
     </div>
 
 <script>
+
+     function CheckSelectExel(fille, id) {
+        
+            let url = "@ViewBag.BaseUrl/Equipment/SaveFile";
+            let xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function () { 
+               
+            }
+            let formData = new FormData();
+            formData.append("uploadedFile", fille.files[0]);
+            formData.append("id", id);
+            xmlHttp.open("POST", url, true);
+            xmlHttp.send(formData);
+       
+    }
 
     function ViewInspection(id) {
         document.location.href =  "@ViewBag.BaseUrl/Driver/InspactionTrucks?idDriver=0&idTruck="+id+"&idTrailer=0&date=0";;

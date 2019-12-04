@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebDispacher.Service;
 
@@ -251,6 +253,43 @@ namespace WebDispacher.Controellers
 
             }
             return actionResult;
+        }
+
+        [HttpPost]
+        [Route("SaveFile")]
+        public string AddFile(IFormFile uploadedFile, string id)
+        {
+            try
+            {
+                string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                Request.Cookies.TryGetValue("KeyAvthoTaxi", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    if (uploadedFile != null)
+                    {
+                        string path = $"../Document/Truck/{id}/" + uploadedFile.FileName;
+                        Directory.CreateDirectory($"../Document/Truck/{id}");
+                        managerDispatch.SavePath(id, path);
+                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        {
+                            uploadedFile.CopyTo(fileStream);
+                        }
+                    }
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvthoTaxi"))
+                    {
+                        Response.Cookies.Delete("KeyAvthoTaxi");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+            return "true";
         }
     }
 }
