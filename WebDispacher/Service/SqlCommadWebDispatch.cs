@@ -184,6 +184,12 @@ namespace WebDispacher.Dao
             return context.Shipping.FirstOrDefault(s => s.VehiclwInformations.FirstOrDefault(v => v == vehiclwInformation) != null);
         }
 
+        internal void CommentDriverDb(int id, string comment)
+        {
+            context.Drivers.FirstOrDefault(d => d.Id == id).Comment = comment;
+            context.SaveChanges();
+        }
+
         internal void RemoveTrailerDb(string id)
         {
             context.Trailers.Remove(context.Trailers.FirstOrDefault(t => t.Id.ToString() == id));
@@ -558,7 +564,13 @@ namespace WebDispacher.Dao
 
         public async void RemoveDriveInDb(int id)
         {
-            context.Drivers.Remove(context.Drivers.FirstOrDefault(d => d.Id == id));
+            context.Drivers.FirstOrDefault(d => d.Id == id).IsFired = true;
+            await context.SaveChangesAsync();
+        }
+
+        public async void RestoreDriveInDb(int id)
+        {
+            context.Drivers.FirstOrDefault(d => d.Id == id).IsFired = false;
             await context.SaveChangesAsync();
         }
     }

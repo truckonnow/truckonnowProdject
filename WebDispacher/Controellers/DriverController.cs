@@ -147,6 +147,68 @@ namespace WebDispacher.Controellers
         }
 
         [HttpGet]
+        [Route("Driver/Drivers/Restore")]
+        public IActionResult RestoreDriver(int id)
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    managerDispatch.RestoreDrive(id);
+                    actionResult = Redirect($"{Config.BaseReqvesteUrl}/Driver/Drivers");
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult;
+        }
+
+        [HttpGet]
+        [Route("Driver/Drivers/Comment")]
+        public IActionResult CommentDriver(int id, string Comment)
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    managerDispatch.CommentDriver(id, Comment);
+                    actionResult = Redirect($"{Config.BaseReqvesteUrl}/Driver/Drivers");
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult;
+        }
+
+        [HttpGet]
         [Route("Driver/Drivers/Edit")]
         public IActionResult EditeDriver(int id)
         {

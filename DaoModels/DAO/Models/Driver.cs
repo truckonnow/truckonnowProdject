@@ -15,6 +15,8 @@ namespace DaoModels.DAO.Models
         public string Password { get; set; }
         public string Token { get; set; }
         public string TokenShope { get; set; }
+        public string Comment { get; set; }
+        public bool IsFired { get; set; }
         public bool IsInspectionDriver { get; set; }
         public bool IsInspectionToDayDriver { get; set; }
         public Geolocations geolocations { get; set; }

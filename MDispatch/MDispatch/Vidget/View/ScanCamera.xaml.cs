@@ -1,13 +1,9 @@
 ﻿using MDispatch.Vidget.VM;
 using Rg.Plugins.Popup.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace MDispatch.Vidget.View
 {
@@ -22,6 +18,9 @@ namespace MDispatch.Vidget.View
             this.typeDetect = typeDetect;
             this.fullPhotoTruckVM = fullPhotoTruckVM;
             InitializeComponent();
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
+               .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
         }
 
         private async void CameraPage_OnScan(NewElement.PhotoResultEventArgs result)

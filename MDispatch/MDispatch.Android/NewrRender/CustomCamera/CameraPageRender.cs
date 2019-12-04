@@ -25,7 +25,9 @@ namespace MDispatch.Droid.NewrRender
     [Obsolete]
     class CameraPageRender : PageRenderer, TextureView.ISurfaceTextureListener, IAutoFocusCallback
     {
+        private string type = "Photo";
         private bool isFocus = false;
+
         public CameraPageRender(Context context) : base(context)
         {
            
@@ -35,6 +37,7 @@ namespace MDispatch.Droid.NewrRender
         TextureView liveView;
         ProgressBar progressBar;
         Button capturePhotoButton;
+        Button scanPhotoButton;
 
         [Obsolete]
         Android.Hardware.Camera camera;
@@ -44,6 +47,7 @@ namespace MDispatch.Droid.NewrRender
         protected override async void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.Page> e)
         {
             base.OnElementChanged(e);
+            type = ((CameraPage)Element).TypeCamera == null ? "Photo" : ((CameraPage)Element).TypeCamera;
             SetupUserInterface();
             SetupEventHandlers();
         }
@@ -58,15 +62,44 @@ namespace MDispatch.Droid.NewrRender
                 RelativeLayout.LayoutParams.MatchParent);
             liveView.LayoutParameters = liveViewParams;
             mainLayout.AddView(liveView);
+
+
             capturePhotoButton = new Button(Context);
-            capturePhotoButton.SetBackgroundDrawable(ContextCompat.GetDrawable(Context, Resource.Drawable.Take));
-            RelativeLayout.LayoutParams captureButtonParams = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WrapContent,
-                RelativeLayout.LayoutParams.WrapContent);
-            captureButtonParams.Height = 120;
-            captureButtonParams.Width = 120;
-            capturePhotoButton.LayoutParameters = captureButtonParams;
-            mainLayout.AddView(capturePhotoButton);
+            scanPhotoButton = new Button(Context);
+            if (((CameraPage)Element).TypeCamera == null || ((CameraPage)Element).TypeCamera == "Photo")
+            {
+                capturePhotoButton.SetBackgroundDrawable(ContextCompat.GetDrawable(Context, Resource.Drawable.Take));
+                RelativeLayout.LayoutParams captureButtonParams = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WrapContent,
+                    RelativeLayout.LayoutParams.WrapContent);
+                captureButtonParams.Height = 120;
+                captureButtonParams.Width = 120;
+                capturePhotoButton.LayoutParameters = captureButtonParams;
+                mainLayout.AddView(capturePhotoButton);
+            }
+            else if (((CameraPage)Element).TypeCamera == "DetectText")
+            {
+                scanPhotoButton.Text = "Scan";
+                RelativeLayout.LayoutParams captureButtonParams = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WrapContent,
+                    RelativeLayout.LayoutParams.WrapContent);
+                captureButtonParams.Height = 120;
+                captureButtonParams.Width = 120;
+                capturePhotoButton.LayoutParameters = captureButtonParams;
+                mainLayout.AddView(scanPhotoButton);
+            }
+            else
+            {
+                capturePhotoButton.SetBackgroundDrawable(ContextCompat.GetDrawable(Context, Resource.Drawable.Take));
+                RelativeLayout.LayoutParams captureButtonParams = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WrapContent,
+                    RelativeLayout.LayoutParams.WrapContent);
+                captureButtonParams.Height = 120;
+                captureButtonParams.Width = 120;
+                capturePhotoButton.LayoutParameters = captureButtonParams;
+                mainLayout.AddView(capturePhotoButton);
+            }
+
 
             progressBar = new ProgressBar(Context);
             RelativeLayout.LayoutParams progresBarParams = new RelativeLayout.LayoutParams(
@@ -104,6 +137,8 @@ namespace MDispatch.Droid.NewrRender
                     int tmpPr = (mainLayout.Width / 100) * 10;
                     capturePhotoButton.SetX(mainLayout.Width / 2 + tmpPr);
                     capturePhotoButton.SetY(mainLayout.Height - 200);
+                    scanPhotoButton.SetX(mainLayout.Width / 2 + tmpPr);
+                    scanPhotoButton.SetY(mainLayout.Height - 200);
                     progressBar.SetX(mainLayout.Width / 2 + tmpPr);
                     progressBar.SetY(mainLayout.Height - 200);
                 }
@@ -116,6 +151,8 @@ namespace MDispatch.Droid.NewrRender
                     int tmpPr = (mainLayout.Width / 100) * 10;
                     capturePhotoButton.SetY(mainLayout.Height / 2 + tmpPr);
                     capturePhotoButton.SetX(mainLayout.Width - 200);
+                    scanPhotoButton.SetY(mainLayout.Height / 2 + tmpPr);
+                    scanPhotoButton.SetX(mainLayout.Width - 200);
                     progressBar.SetY(mainLayout.Height / 2 + tmpPr);
                     progressBar.SetX(mainLayout.Width - 200);
                 }
@@ -124,9 +161,14 @@ namespace MDispatch.Droid.NewrRender
             { }
         }
 
+
         public void SetupEventHandlers()
         {
             capturePhotoButton.Click += async (sender, e) =>
+            {
+                AutoFocus();
+            };
+            scanPhotoButton.Click += async (sender, e) =>
             {
                 AutoFocus();
             };
@@ -275,7 +317,14 @@ namespace MDispatch.Droid.NewrRender
             {
                 bytes = ResizeImage(bytes, 1280, 720);
             }
-            (Element as CameraPage).SetPhotoResult(bytes, liveView.Bitmap.Width, liveView.Bitmap.Height);
+            if (type == "Photo")
+            {
+                (Element as CameraPage).SetPhotoResult(bytes, liveView.Bitmap.Width, liveView.Bitmap.Height);
+            }
+            else if(type == "DetectText")
+            {
+                (Element as CameraPage).SetScan(bytes, liveView.Bitmap.Width, liveView.Bitmap.Height);
+            }
             progressBar.Visibility = Android.Views.ViewStates.Invisible;
             capturePhotoButton.Visibility = Android.Views.ViewStates.Visible;
             isFocus = false;

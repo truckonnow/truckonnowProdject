@@ -1,10 +1,12 @@
 ﻿using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Vision.V1;
 using Grpc.Auth;
+using MDispatch.NewElement.FilleReder;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace MDispatch.Service
 {
@@ -12,10 +14,9 @@ namespace MDispatch.Service
     {
         private GoogleCredential credential = null;
 
-        private void Avtorization()
+        private async void Avtorization()
         {
-            var directories = Directory.EnumerateDirectories("./");
-            credential = GoogleCredential.FromFile("../AuchConfig/Truckonnow-38b8427a812c.json");
+            credential = GoogleCredential.FromJson(await DependencyService.Get<IFileWorker>().LoadTextAsync("Truckonnow-8fb90a135d42.json"));
         }
 
         internal int DetectPlate(byte[] res, List<string> plateTrucks, List<string> plateTrailers, string type, ref string plate)

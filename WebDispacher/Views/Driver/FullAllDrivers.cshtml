@@ -7,14 +7,28 @@
         @for (int i = 0; i < ViewBag.Drivers.Count; i++)
         {
         <div class="contentDriver">
+            <div>
+
             <p class="inpData">@ViewBag.Drivers[i].FullName</p>
             <p2 class="inpData">Trailer capacity: @ViewBag.Drivers[i].TrailerCapacity</p2>
             <span class="inpData">Email: @ViewBag.Drivers[i].EmailAddress</span>
             <span class="inpData">, </span>
             <span class="inpData">Phone: @ViewBag.Drivers[i].PhoneNumber</span><br /> <br />
             <a href="@ViewBag.BaseUrl/Driver/Drivers/Edit?id=@ViewBag.Drivers[i].Id" class="btnId">Edit</a>
-            <input class="btnId" value="Remove" type="button" onclick="Remove(@ViewBag.Drivers[i].Id)" />
+            @if (!ViewBag.Drivers[i].IsFired)
+            {
+                <input class="btnId" value="Remove" type="button" onclick="Remove(@ViewBag.Drivers[i].Id)" />
+            }
+            else
+            {
+
+                <input class="btnId" value="Restore" type="button" onclick="Restore(@ViewBag.Drivers[i].Id)" />
+            }
             <a class="btnId" href="~/Driver/InspactionTrucks?idDriver=@ViewBag.Drivers[i].Id&idTruck=0&idTrailer=0&date=0">Inspection</a>
+            </div>
+            <div>
+                <textarea class="inpData" style="margin:10px;min-width:400px; height:10vh;border:none;background:white; max-width:900px;" onchange="Comment(event, @ViewBag.Drivers[i].Id)">@ViewBag.Drivers[i].Comment</textarea>
+            </div>
         </div>
         }
     </div>
@@ -23,6 +37,14 @@
 <script>
     function Remove(id) {
         document.location.href = "@ViewBag.BaseUrl/Driver/Drivers/Remove?id="+id;
+    }
+
+    function Restore(id) {
+        document.location.href = "@ViewBag.BaseUrl/Driver/Drivers/Restore?id="+id;
+    }
+
+    function Comment(event, id) {
+        document.location.href = "@ViewBag.BaseUrl/Driver/Drivers/Comment?id="+id+"&Comment="+event.currentTarget.value;
     }
 </script>
 
@@ -81,6 +103,7 @@
                 border-color: rgba(45, 45, 45, 0.38);
                 width:80%;
                 margin:10px;
+                display:flex;
             }
 
             .contentBody {

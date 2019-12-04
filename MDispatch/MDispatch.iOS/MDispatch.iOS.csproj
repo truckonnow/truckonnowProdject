@@ -158,7 +158,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <EmbeddedResource Include="Config\Truckonnow-8fb90a135d42.json" />
+    <EmbeddedResource Include="Truckonnow-8fb90a135d42.json" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="NewRender\Labal\CorectLabel.cs" />

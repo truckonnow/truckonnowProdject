@@ -168,6 +168,11 @@ namespace WebDispacher.Service
             return key;
         }
 
+        internal void RestoreDrive(int id)
+        {
+            _sqlEntityFramworke.RestoreDriveInDb(id);
+        }
+
         public int GetCountPage(string status)
         {
             return _sqlEntityFramworke.GetCountPageInDb(status);
@@ -196,6 +201,11 @@ namespace WebDispacher.Service
         public Driver GetDriver(string idInspection)
         {
             return _sqlEntityFramworke.GetDriver(idInspection);
+        }
+
+        internal void CommentDriver(int id, string comment)
+        {
+            _sqlEntityFramworke.CommentDriverDb(id, comment);
         }
 
         public void Updateorder(string idOrder, string idLoad, string internalLoadID, string driver, string status, string instructions, string nameP, string contactP,

@@ -58,10 +58,10 @@ namespace MDispatch.Vidget.VM
             {
                 CheckPlate();
             }
-            if (IndexCurent == 3)
-            {
-                CheckPlate();
-            }
+            //if (IndexCurent == 3)
+            //{
+            //    CheckPlate();
+            //}
             await truckCar.Orinteble(IndexCurent);
         }
 
