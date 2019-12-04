@@ -138,4 +138,7 @@
   <ItemGroup>
     <Folder Include="Service\TimeSync\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\GoogleApiWrapper\GoogleApiWrapper.csproj" />
+  </ItemGroup>
 </Project>
