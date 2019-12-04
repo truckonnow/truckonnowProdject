@@ -12,6 +12,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -28,7 +29,7 @@ namespace MDispatch.Vidget.VM
         private InitDasbordDelegate initDasbordDelegate = null;
 
         [System.Obsolete]
-        public FullPhotoTruckVM(ManagerDispatchMob managerDispatchMob, string idDriver, int indexCurent, INavigation navigation,    InitDasbordDelegate initDasbordDelegate = null)
+        public FullPhotoTruckVM(ManagerDispatchMob managerDispatchMob, string idDriver, int indexCurent, INavigation navigation, List<string> plateTruck, List<string> plateTrailer, InitDasbordDelegate initDasbordDelegate = null)
         {
             this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
@@ -36,10 +37,15 @@ namespace MDispatch.Vidget.VM
             truckCar = new TruckCar();
             IdDriver = idDriver;
             IndexCurent = indexCurent;
+            PlateTrucks = plateTruck;
+            PlateTrailers = plateTrailer;
             //NextCommand = new DelegateCommand(NextPage);
             //truckCar.GetModalAlert(IndexCurent);
             Init();
         }
+
+        public List<string> PlateTrucks { get; set; }
+        public List<string> PlateTrailers { get; set; }
 
         [Obsolete]
         private async void Init()
@@ -49,9 +55,9 @@ namespace MDispatch.Vidget.VM
             {
                 CheckPlate();
             }
-            if (IndexCurent == 2)
+            if (IndexCurent == 3)
             {
-                await PopupNavigation.PushAsync(new PlateTruckWrite(this));
+                CheckPlate();
             }
             await truckCar.Orinteble(IndexCurent);
         }
@@ -128,10 +134,6 @@ namespace MDispatch.Vidget.VM
                 {
                     CheckPlate();
                 }
-                if(IndexCurent == 2)
-                {
-                    await PopupNavigation.PushAsync(new PlateTruckWrite(this));
-                }
                 isEndInspection = true;
                 await Navigation.PushAsync(new View.CameraPage(managerDispatchMob, IdDriver, IndexCurent + 1, initDasbordDelegate));
             }
@@ -143,7 +145,7 @@ namespace MDispatch.Vidget.VM
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
-                if (Navigation.NavigationStack.Count > 3)
+                if (Navigation.NavigationStack.Count > 4)
                 {
                     state = 3;
                     TaskManager.CommandToDo("SaveInspactionDriver", 1, token, IdDriver, Photo, IndexCurent);
@@ -191,6 +193,10 @@ namespace MDispatch.Vidget.VM
                     if (isEndInspection)
                     {
                         if (Navigation.NavigationStack.Count > 1)
+                        {
+                            Navigation.RemovePage(Navigation.NavigationStack[1]);
+                        }
+                        if (Navigation.NavigationStack.Count >= 4)
                         {
                             Navigation.RemovePage(Navigation.NavigationStack[1]);
                         }
@@ -342,11 +348,19 @@ namespace MDispatch.Vidget.VM
                     await PopupNavigation.PopAsync();
                     string plateTruck = plateTruckAndTrailer.Split(',')[0];
                     string plateTrailer = plateTruckAndTrailer.Split(',')[1];
-                    if(!((plateTruck != null && plateTruck != "") && (plateTrailer != null && plateTrailer != "")))
+                    PlateTruck = plateTruck;
+                    PlateTrailer = plateTrailer;
+                    if (!((plateTruck != null && plateTruck != "") && (plateTrailer != null && plateTrailer != "")) && IndexCurent == 44)
                     {
-                        PlateTruck = plateTruck;
-                        PlateTrailer = plateTrailer;
                         await PopupNavigation.PushAsync(new PlateWrite(this));
+                    }
+                    else if(plateTruck == null || plateTruck == "")
+                    {
+                        await PopupNavigation.PushAsync(new PlateTruckWrite(this));
+                    }
+                    else if (plateTrailer == null || plateTrailer == "")
+                    {
+                        //await PopupNavigation.PushAsync(new PlateTruckWrite(this));
                     }
                 }
                 else if (state == 4)

@@ -255,7 +255,7 @@ namespace MDispatch.Service
             {
                 isInspection = Convert.ToBoolean(responseAppS.Value<bool>("ResponseStr"));
                 indexPhoto = Convert.ToInt32(responseAppS.Value<int>("ResponseStr1"));
-                plateTruck = responseAppS.Value<List<string>>("ResponseStr2");
+                plateTruck = responseAppS.Value<List<string>>("ResponseStr2"));
                 plateTrailer = responseAppS.Value<List<string>>("ResponseStr3");
                 return 3;
             }
