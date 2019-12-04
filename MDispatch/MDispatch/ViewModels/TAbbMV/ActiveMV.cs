@@ -140,7 +140,7 @@ namespace MDispatch.ViewModels.TAbbMV
                     }
                     else
                     {
-                        await Navigation.PushAsync(new Vidget.View.CameraPage(managerDispatchMob, UnTimeOfInspection.IdDriver, indexPhoto, initDasbordDelegate));
+                        await Navigation.PushAsync(new Vidget.View.CameraPage(managerDispatchMob, UnTimeOfInspection.IdDriver, indexPhoto, plateTruck, plateTrailer, initDasbordDelegate));
                     }
                 }
                 else if (state == 4)

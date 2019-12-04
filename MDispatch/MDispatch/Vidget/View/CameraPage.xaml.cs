@@ -1,6 +1,7 @@
 ﻿using MDispatch.NewElement;
 using MDispatch.Service;
 using MDispatch.Vidget.VM;
+using System.Collections.Generic;
 using System.Threading;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
@@ -16,9 +17,9 @@ namespace MDispatch.Vidget.View
     {
         private FullPhotoTruckVM fullPhotoTruckVM = null;
 
-        public CameraPage(ManagerDispatchMob managerDispatchMob, string idDriver, int indexCurrent, InitDasbordDelegate initDasbordDelegate)
+        public CameraPage(ManagerDispatchMob managerDispatchMob, string idDriver, int indexCurrent, List<string> plateTruck, List<string> plateTrailer, InitDasbordDelegate initDasbordDelegate)
         {
-            fullPhotoTruckVM = new FullPhotoTruckVM(managerDispatchMob, idDriver, indexCurrent, Navigation, initDasbordDelegate);
+            fullPhotoTruckVM = new FullPhotoTruckVM(managerDispatchMob, idDriver, indexCurrent, Navigation, plateTruck, plateTrailer, initDasbordDelegate);
             InitializeComponent();
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)

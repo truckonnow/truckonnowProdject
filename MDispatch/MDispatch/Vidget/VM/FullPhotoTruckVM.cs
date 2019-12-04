@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using static MDispatch.Service.ManagerDispatchMob;
 
-namespace MDispatch.Vidget.VM
+namespace MDispatch.Vidget.VM   
 {
     public class FullPhotoTruckVM : BindableBase
     {
@@ -138,7 +138,7 @@ namespace MDispatch.Vidget.VM
                     CheckPlate();
                 }
                 isEndInspection = true;
-                await Navigation.PushAsync(new View.CameraPage(managerDispatchMob, IdDriver, IndexCurent + 1, initDasbordDelegate));
+                await Navigation.PushAsync(new View.CameraPage(managerDispatchMob, IdDriver, IndexCurent + 1,  PlateTrucks, PlateTrailers, initDasbordDelegate));
             }
             else
             {
