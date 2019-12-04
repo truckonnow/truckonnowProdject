@@ -23,9 +23,12 @@ namespace MDispatch.Vidget.VM
     public class FullPhotoTruckVM : BindableBase
     {
         private ManagerDispatchMob managerDispatchMob = null;
-        private INavigation Navigation = null;
+        public INavigation Navigation = null;
         public TruckCar truckCar = null;
         public DelegateCommand NextCommand { get; set; }
+
+       
+
         private InitDasbordDelegate initDasbordDelegate = null;
 
         [System.Obsolete]
@@ -64,7 +67,7 @@ namespace MDispatch.Vidget.VM
 
         public string IdDriver { get; set; }
 
-        private int IndexCurent { get; set; }
+        public int IndexCurent { get; set; }
 
         private string plateTruck = "";
         public string PlateTruck
@@ -350,15 +353,15 @@ namespace MDispatch.Vidget.VM
                     string plateTrailer = plateTruckAndTrailer.Split(',')[1];
                     PlateTruck = plateTruck;
                     PlateTrailer = plateTrailer;
-                    if (!((plateTruck != null && plateTruck != "") && (plateTrailer != null && plateTrailer != "")) && IndexCurent == 44)
+                    if (!((PlateTruck != null && PlateTruck != "") && (PlateTrailer != null && PlateTrailer != "")) && IndexCurent == 44)
                     {
                         await PopupNavigation.PushAsync(new PlateWrite(this));
                     }
-                    else if(plateTruck == null || plateTruck == "")
+                    else if(PlateTruck == null || PlateTruck == "")
                     {
                         await PopupNavigation.PushAsync(new PlateTruckWrite(this));
                     }
-                    else if (plateTrailer == null || plateTrailer == "")
+                    else if (PlateTrailer == null || PlateTrailer == "")
                     {
                         //await PopupNavigation.PushAsync(new PlateTruckWrite(this));
                     }
@@ -400,6 +403,44 @@ namespace MDispatch.Vidget.VM
             }
             GC.Collect();
             GC.WaitForPendingFinalizers();
+        }
+
+        internal async void DetectText(byte[] result, string type)
+        {
+            await PopupNavigation.PushAsync(new LoadPage());
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            int state = 0;
+            string plate = null;
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.DetectPlate(result, PlateTrucks, PlateTrailers, type, ref plate);
+                });
+                if (state == 1)
+                {
+                    await PopupNavigation.PopAsync();
+                    await PopupNavigation.PushAsync(new Errror("Not Network", null));
+                }
+                else if (state == 3)
+                {
+                    await PopupNavigation.PopAsync();
+                    if (type == "truck")
+                    {
+                        PlateTrailer = plate;
+                    }
+                    else if(type == "trailer")
+                    {
+                        PlateTrailer = plate;
+                    }
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PopAsync();
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service scan", null));
+                }
+            }
         }
 
         public async void BackToRootPage()

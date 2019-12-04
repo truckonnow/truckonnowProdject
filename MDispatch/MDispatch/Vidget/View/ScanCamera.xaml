@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<camera:CameraPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MDispatch.Vidget.View.ScanCamera"
+             xmlns:camera="clr-namespace:MDispatch.NewElement"
+             TypeCamera="DetectText"
+             OnScan="CameraPage_OnScan">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <Image x:Name="paternPhoto" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"/>
+            <Image Source="BackIconpage.png"  HorizontalOptions="Start" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".02, .02, 40, 40">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Label TextColor="Red" Text="Scan Plate number" FontSize="20" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .08, Autosize, Autosize"/>
+            <Label TextColor="#4fd2c2" Text="" FontSize="15" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5, .98, Autosize, Autosize"/>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</camera:CameraPage>

@@ -15,6 +15,7 @@ namespace MDispatch.Service
         private Photo photo = null;
         private Inspection inspection = null;
         private DriverInspecktion driverInspecktion = null;
+        private GoogleApi googleApi = null;
         private int CountReqvest = 0;
 
         public int DriverWork(string typeDriver, string token, ref string description, ref bool isInspection, ref int indexPhoto, ref List<string> plateTruck, ref List<string> plateTrailer)
@@ -379,6 +380,20 @@ namespace MDispatch.Service
             }
             inspection = null;
             CountReqvest--;
+            return statePay;
+        }
+
+        internal int DetectPlate(byte[] res, List<string> plateTrucks, List<string> plateTrailers, string type, ref string plate)
+        {
+            googleApi = new GoogleApi(); CountReqvest++;
+            int statePay = 1;
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                statePay = googleApi.DetectPlate(res, plateTrucks, plateTrailers, type, ref plate);
+            }
+            inspection = null;
+            CountReqvest--;
+            googleApi = null;
             return statePay;
         }
 

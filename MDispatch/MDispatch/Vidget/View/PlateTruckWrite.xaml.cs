@@ -35,9 +35,10 @@ namespace MDispatch.Vidget.View
             fullPhotoTruckVM.SetPlate();
         }
 
-        private void Button_Clicked_1(object sender, System.EventArgs e)
+        private async void Button_Clicked_1(object sender, System.EventArgs e)
         {
-
+            await PopupNavigation.PopAllAsync();
+            await fullPhotoTruckVM.Navigation.PushAsync(new ScanCamera(fullPhotoTruckVM, "truck"));
         }
     }
 }
