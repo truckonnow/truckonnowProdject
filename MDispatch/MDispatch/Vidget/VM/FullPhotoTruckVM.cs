@@ -49,6 +49,10 @@ namespace MDispatch.Vidget.VM
             {
                 CheckPlate();
             }
+            if (IndexCurent == 2)
+            {
+                await PopupNavigation.PushAsync(new PlateTruckWrite(this));
+            }
             await truckCar.Orinteble(IndexCurent);
         }
 
@@ -123,6 +127,10 @@ namespace MDispatch.Vidget.VM
                 if (IndexCurent == 44)
                 {
                     CheckPlate();
+                }
+                if(IndexCurent == 2)
+                {
+                    await PopupNavigation.PushAsync(new PlateTruckWrite(this));
                 }
                 isEndInspection = true;
                 await Navigation.PushAsync(new View.CameraPage(managerDispatchMob, IdDriver, IndexCurent + 1, initDasbordDelegate));
