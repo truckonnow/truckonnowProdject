@@ -5,6 +5,7 @@ using Grpc.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ApiMobaileServise.Servise.GoogleApi
@@ -20,8 +21,9 @@ namespace ApiMobaileServise.Servise.GoogleApi
             credential = GoogleCredential.FromFile("../AuchConfig/Truckonnow-38b8427a812c.json");
         }
 
-        public bool DetectText(params object[] parames)
+        public void DetectText(params object[] parames)
         {
+            Thread.Sleep(2000);
             List<Trailer> trailers = sqlCommandApiMobil.GetTrailers();
             string path = (string)parames[1];
             string idDriver = (string)parames[0];
@@ -39,6 +41,11 @@ namespace ApiMobaileServise.Servise.GoogleApi
                 Trailer trailer = null;
                 foreach (EntityAnnotation text in response)
                 {
+                    if(text.Description != "" && text.Description[text.Description.Length-1] == '9')
+                    {
+                        text.Description = text.Description.Remove(text.Description.Length - 1);
+                        text.Description += "ST";
+                    }
                     if (trailers.FirstOrDefault(t => t.Plate == text.Description) != null)
                     {
                         trailer = trailers.FirstOrDefault(t => t.Plate == text.Description);
@@ -79,7 +86,7 @@ namespace ApiMobaileServise.Servise.GoogleApi
 
             }
 
-            return true;
+            //return true;
         }
     }
 }

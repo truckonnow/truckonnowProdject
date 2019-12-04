@@ -33,6 +33,16 @@ namespace ApiMobaileServise.Servise
             await new AuthMessageSender().Execute(email, "Truckonnow - BOL", patern, shipping.VehiclwInformations, shipping);
         }
 
+        internal List<Truck> GetTruck()
+        {
+            return sqlCommandApiMobile.GetTruck();
+        }
+
+        internal List<Trailer> GetTrailer()
+        {
+            return sqlCommandApiMobile.GetTrailers();
+        }
+
         public async Task SendCoupon(string email)
         {
             string patern = new PaternSourse().GetPaternCopon();
@@ -53,9 +63,11 @@ namespace ApiMobaileServise.Servise
             await sqlCommandApiMobile.SaveInspectionDriverInDb(idDriver, photo, indexPhoto);
             await Task.Run(() =>
             {
+                File.WriteAllText("3.txt", "3");
                 IDetect detect = null;
-                if(true /*indexPhoto == 1 || indexPhoto == 2 || indexPhoto == 26 || indexPhoto == 13*/)
+                if(indexPhoto == 1 || indexPhoto == 2 || indexPhoto == 26 || indexPhoto == 13)
                 {
+                    File.WriteAllText("4.txt", "4");
                     detect = new DerectTruck();
                 }
                 else if(indexPhoto == 34 || indexPhoto == 35 || indexPhoto == 38)

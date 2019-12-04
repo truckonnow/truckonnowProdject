@@ -28,7 +28,7 @@ namespace MDispatch.Vidget.VM
         private InitDasbordDelegate initDasbordDelegate = null;
 
         [System.Obsolete]
-        public FullPhotoTruckVM(ManagerDispatchMob managerDispatchMob, string idDriver, int indexCurent, INavigation navigation, InitDasbordDelegate initDasbordDelegate = null)
+        public FullPhotoTruckVM(ManagerDispatchMob managerDispatchMob, string idDriver, int indexCurent, INavigation navigation,    InitDasbordDelegate initDasbordDelegate = null)
         {
             this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;

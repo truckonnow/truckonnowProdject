@@ -3,6 +3,7 @@ using ApiMobaileServise.Servise;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ApiMobaileServise.Controllers
@@ -26,7 +27,9 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", await managerMobileApi.ChechToDayInspaction(token), managerMobileApi.GetIndexPhoto(token)));
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", await managerMobileApi.ChechToDayInspaction(token), managerMobileApi.GetIndexPhoto(token), managerMobileApi.GetTruck()
+                        .Select(x => x.PlateTruk).ToList() , managerMobileApi.GetTrailer()
+                        .Select(x => x.Plate).ToList()));
                 }
                 else
                 {

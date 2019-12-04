@@ -17,7 +17,7 @@ namespace MDispatch.Service
         private DriverInspecktion driverInspecktion = null;
         private int CountReqvest = 0;
 
-        public int DriverWork(string typeDriver, string token, ref string description, ref bool isInspection, ref int indexPhoto)
+        public int DriverWork(string typeDriver, string token, ref string description, ref bool isInspection, ref int indexPhoto, ref List<string> plateTruck, ref List<string> plateTrailer)
         {
             driverInspecktion = new DriverInspecktion();
             //WaiteNoramalReqvestCount();
@@ -27,7 +27,7 @@ namespace MDispatch.Service
             {
                 if (typeDriver == "CheckInspeacktion")
                 {
-                    stateDriver = driverInspecktion.CheckInspectionDriver(token, ref description, ref isInspection, ref indexPhoto);
+                    stateDriver = driverInspecktion.CheckInspectionDriver(token, ref description, ref isInspection, ref indexPhoto, ref plateTruck, ref plateTrailer);
                 }
             }
             driverInspecktion = null;

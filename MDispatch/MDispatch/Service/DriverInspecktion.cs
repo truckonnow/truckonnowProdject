@@ -3,12 +3,13 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
+using System.Collections.Generic;
 
 namespace MDispatch.Service
 {
     public class DriverInspecktion
     {
-        public int CheckInspectionDriver(string token, ref string description, ref bool isInspection, ref int indexPhoto)
+        public int CheckInspectionDriver(string token, ref string description, ref bool isInspection, ref int indexPhoto, ref List<string> plateTruck, ref List<string> plateTrailer)
         {
             IRestResponse response = null;
             string content = null;
@@ -32,7 +33,7 @@ namespace MDispatch.Service
             }
             else
             {
-                return GetData(content, ref description, ref isInspection, ref indexPhoto);
+                return GetData(content, ref description, ref isInspection, ref indexPhoto, ref plateTruck, ref plateTrailer);
             }
         }
 
@@ -242,7 +243,7 @@ namespace MDispatch.Service
             }
         }
 
-        private int GetData(string respJsonStr, ref string description, ref bool isInspection, ref int indexPhoto)
+        private int GetData(string respJsonStr, ref string description, ref bool isInspection, ref int indexPhoto, ref List<string> plateTruck, ref List<string> plateTrailer)
         {
             respJsonStr = respJsonStr.Replace("\\", "");
             respJsonStr = respJsonStr.Remove(0, 1);
@@ -254,6 +255,8 @@ namespace MDispatch.Service
             {
                 isInspection = Convert.ToBoolean(responseAppS.Value<bool>("ResponseStr"));
                 indexPhoto = Convert.ToInt32(responseAppS.Value<int>("ResponseStr1"));
+                plateTruck = responseAppS.Value<List<string>>("ResponseStr2"));
+                plateTrailer = responseAppS.Value<List<string>>("ResponseStr3");
                 return 3;
             }
             else

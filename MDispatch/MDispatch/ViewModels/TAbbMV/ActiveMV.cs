@@ -116,6 +116,8 @@ namespace MDispatch.ViewModels.TAbbMV
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             bool isInspection = false;
+            List<string> plateTruck = null;
+            List<string> plateTrailer = null;
             int indexPhoto = 1;
             int state = 0;
             await Task.Run(() => Utils.CheckNet());
@@ -123,7 +125,7 @@ namespace MDispatch.ViewModels.TAbbMV
             {
                 await Task.Run(() =>
                 {
-                    state = managerDispatchMob.DriverWork("CheckInspeacktion", token, ref description, ref isInspection, ref indexPhoto);
+                    state = managerDispatchMob.DriverWork("CheckInspeacktion", token, ref description, ref isInspection, ref indexPhoto, ref plateTruck, ref plateTrailer);
                 });
                 if (state == 2)
                 {
