@@ -967,7 +967,7 @@
     <BundleResource Include="Resources\Suv15.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Suv15--.png" />
+    <BundleResource Include="Resources\Suv15qq.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Suv16.png" />
@@ -997,7 +997,7 @@
     <BundleResource Include="Resources\Suv25.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Suv25--.png" />
+    <BundleResource Include="Resources\Suv25qq.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Suv26.png" />
@@ -1006,7 +1006,7 @@
     <BundleResource Include="Resources\Suv27.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Suv27--.png" />
+    <BundleResource Include="Resources\Suv27qq.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Suv28.png" />
@@ -1015,7 +1015,7 @@
     <BundleResource Include="Resources\Suv29.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Suv29--.png" />
+    <BundleResource Include="Resources\Suv29qq.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Suv30.png" />

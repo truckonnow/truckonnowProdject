@@ -909,16 +909,16 @@
     <AndroidResource Include="Resources\drawable\Hint34.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Suv15--.png" />
+    <AndroidResource Include="Resources\drawable\Suv15qq.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Suv25--.png" />
+    <AndroidResource Include="Resources\drawable\Suv25qq.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Suv27--.png" />
+    <AndroidResource Include="Resources\drawable\Suv27qq.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Suv29--.png" />
+    <AndroidResource Include="Resources\drawable\Suv29qq.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
