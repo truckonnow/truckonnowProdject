@@ -249,7 +249,8 @@ namespace WebDispacher.Dao
 
         internal void SavePathDb(string id, string path)
         {
-            context.Trucks.First(t => t.Id.ToString() == id).PathDoc = path;
+            Truck truck = context.Trucks.First(t => t.Id.ToString() == id);
+            truck.PathDoc = path;
             context.SaveChanges();
         }
 
@@ -621,13 +622,15 @@ namespace WebDispacher.Dao
 
         public async void RemoveDriveInDb(int id)
         {
-            context.Drivers.FirstOrDefault(d => d.Id == id).IsFired = true;
+            Driver driver = context.Drivers.FirstOrDefault(d => d.Id == id);
+            driver.IsFired = true;
             await context.SaveChangesAsync();
         }
 
         public async void RestoreDriveInDb(int id)
         {
-            context.Drivers.FirstOrDefault(d => d.Id == id).IsFired = false;
+            Driver driver = context.Drivers.FirstOrDefault(d => d.Id == id);
+            driver.IsFired = false;
             await context.SaveChangesAsync();
         }
     }
