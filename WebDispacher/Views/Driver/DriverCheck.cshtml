@@ -1,0 +1,149 @@
+﻿<div class="body">
+    <div style="display:flex;padding:10px;">
+        <input class="inpContentInspection" type="text" placeholder="Driver search"/>
+    </div>
+    <nav>
+        <input class="btnSt" type="button" value="Drivers" onclick="window.location.href='@Url.Action("Drivers", "Driver")';" />
+        <input style="width:150px" class="btnSt activeBtn" type="button" value="Driver check" onclick="window.location.href='@Url.Action("Check", "Driver")';" />
+    </nav>
+    <div class="contentBody">
+        @for (int i = 0; i < ViewBag.Drivers.Count; i++)
+        {
+            <div class="contentDriver">
+                <div>
+                    <p class="inpData">@ViewBag.Drivers[i].FullName</p>
+                    <span class="inpData">Trailer capacity: @ViewBag.Drivers[i].TrailerCapacity</span><br /> <br />
+                    <span class="inpData">Email: @ViewBag.Drivers[i].EmailAddress</span> <br /> <br />
+                    <span class="inpData">Phone: @ViewBag.Drivers[i].PhoneNumber</span><br /> <br />
+                    @if (!ViewBag.Drivers[i].IsFired)
+                    {
+                        <span class="inpData">Works in Truckonnow</span>
+                    }
+                    else
+                    {
+                        <a href="" class="btnId">Add Drive my company</a>
+                    }
+                </div>
+                <div style="margin:10px;">
+                    <p class="inpData"><b>Comment:</b></p>
+                    <p class="inpData">@ViewBag.Drivers[i].Comment</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+   
+</script>
+
+<style>
+    * {
+        margin: 0px;
+    }
+
+    .inpContentInspection{
+        display: inline-block ;
+        width: 200px;
+        padding: 5px 10px;
+        border: 1px solid ;
+        border-radius: 10px;
+        border: 1px solid black;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .btnSt {
+        margin-left: 5px;
+        border: none;
+        width: 120px;
+        height: 40px;
+        background-color: white;
+        font-size: 20px;
+        color: rgb(51, 51, 51);
+        border-color: rgba(51, 51, 51, 1);
+    }
+
+    .activeBtn {
+        border-radius: 1px;
+        border-top: solid;
+        border-right: solid;
+        border-left: solid;
+        border-width: 1.3px;
+        position: relative;
+        top: 2px;
+        border-color: rgba(51, 51, 51, 0.3);
+    }
+
+    .btnCreateoOrder {
+        color: white;
+        background-color: darkgray;
+        display: inline-block;
+        padding: 10px;
+        font-size: 14px;
+        font-weight: 400;
+        text-align: center;
+        border: 2px solid;
+        border-radius: 7px;
+        margin-bottom: 10px;
+        margin-left: 14px;
+    }
+
+        .btnCreateoOrder:hover {
+            transition: 0.3s;
+            background-color: rgb(51, 51, 51);
+        }
+
+    .btnId:hover {
+        background-color: rgba(45,45,45,0.98);
+        color: white;
+        transition: 0.5s;
+    }
+
+    .btnId {
+        color: rgba(45,45,45,0.88);
+        background: none;
+        display: inline-block;
+        padding: 6px;
+        font-size: 13px;
+        font-weight: 400;
+        text-align: center;
+        border: 1px solid;
+        border-radius: 4px;
+        margin: 2px;
+    }
+
+    .inpData {
+        font-size: 18px;
+        color: rgb(51, 51, 51);
+    }
+
+    .contentDriver {
+        padding: 20px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgba(45, 45, 45, 0.38);
+        max-width: 800px;
+        min-width: 600px;
+        margin: 10px;
+        display: flex;
+    }
+
+    .contentBody {
+        width: 100%;
+        height: 100px;
+        border-top: solid;
+        border-width: 1px;
+        border-color: rgba(51, 51, 51, 0.3);
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:space-around
+    }
+
+    .body {
+        margin-top: 30px;
+        margin-left: 5px;
+        margin-right: 5px;
+        padding: 10px;
+    }
+</style>

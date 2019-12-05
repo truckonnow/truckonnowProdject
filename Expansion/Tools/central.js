@@ -3,12 +3,13 @@
     for (let i = 0; i < elm.length; i++) {
         var button = document.createElement('button');
         button.onclick = GetOreder;
-        button.style.margin = "20px";
+        button.style.marginTop = "50px";
         button.style.background = "orange";
         button.style.border = "none";
+        button.style.color = "white";
         var br = document.createElement('br');
         button.textContent = "Export Order";
-        let chil = elm[i].children[3];
+        let chil = elm[i].children[2];
         chil.appendChild(br);
         chil.appendChild(button);
     }

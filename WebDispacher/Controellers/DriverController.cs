@@ -46,6 +46,37 @@ namespace WebDispacher.Controellers
             return actionResult;
         }
 
+        [Route("Driver/Check")]
+        public IActionResult CheckDriver(int page)
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    ViewBag.Drivers = managerDispatch.GetDrivers(page);
+                    actionResult = View("DriverCheck");
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult;
+        }
+
+
         [HttpGet]
         [Route("Driver/Drivers/CreateDriver")]
         public IActionResult CreateDriver()

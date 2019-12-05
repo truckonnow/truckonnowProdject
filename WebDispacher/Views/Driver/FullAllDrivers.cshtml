@@ -1,33 +1,34 @@
-﻿
-<div class="body">
+﻿<div class="body">
     <div style="display:flex;">
         <input class="btnCreateoOrder" type="button" value="Add Driver" onclick="window.location.href='@Url.Action("CreateDriver", "Driver")';" />
     </div>
+    <nav>
+        <input class="btnSt activeBtn" type="button" value="Drivers" onclick="window.location.href='@Url.Action("Drivers", "Driver")';" />
+        <input style="width:150px" class="btnSt" type="button" value="Driver check" onclick="window.location.href='@Url.Action("Check", "Driver")';" />
+    </nav>
     <div class="contentBody">
         @for (int i = 0; i < ViewBag.Drivers.Count; i++)
         {
         <div class="contentDriver">
             <div>
 
-            <p class="inpData">@ViewBag.Drivers[i].FullName</p>
-            <p2 class="inpData">Trailer capacity: @ViewBag.Drivers[i].TrailerCapacity</p2>
-            <span class="inpData">Email: @ViewBag.Drivers[i].EmailAddress</span>
-            <span class="inpData">, </span>
-            <span class="inpData">Phone: @ViewBag.Drivers[i].PhoneNumber</span><br /> <br />
-            <a href="@ViewBag.BaseUrl/Driver/Drivers/Edit?id=@ViewBag.Drivers[i].Id" class="btnId">Edit</a>
-            @if (!ViewBag.Drivers[i].IsFired)
-            {
-                <input class="btnId" value="Remove" type="button" onclick="Remove(@ViewBag.Drivers[i].Id)" />
-            }
-            else
-            {
-
-                <input class="btnId" value="Restore" type="button" onclick="Restore(@ViewBag.Drivers[i].Id)" />
-            }
-            <a class="btnId" href="~/Driver/InspactionTrucks?idDriver=@ViewBag.Drivers[i].Id&idTruck=0&idTrailer=0&date=0">Inspection</a>
+                <p class="inpData">@ViewBag.Drivers[i].FullName</p>
+                <p2 class="inpData">Trailer capacity: @ViewBag.Drivers[i].TrailerCapacity</p2>
+                <span class="inpData">Email: @ViewBag.Drivers[i].EmailAddress</span><br /> <br />
+                <span class="inpData">Phone: @ViewBag.Drivers[i].PhoneNumber</span><br /> <br />
+                <a href="@ViewBag.BaseUrl/Driver/Drivers/Edit?id=@ViewBag.Drivers[i].Id" class="btnId">Edit</a>
+                @if (!ViewBag.Drivers[i].IsFired)
+                {
+                    <input class="btnId" value="Remove" type="button" onclick="Remove(@ViewBag.Drivers[i].Id)" />
+                }
+                else
+                {
+                    <input class="btnId" value="Restore" type="button" onclick="Restore(@ViewBag.Drivers[i].Id)" />
+                }
+                <a class="btnId" href="~/Driver/InspactionTrucks?idDriver=@ViewBag.Drivers[i].Id&idTruck=0&idTrailer=0&date=0">Inspection</a>
             </div>
             <div>
-                <textarea class="inpData" style="margin:10px;min-width:400px; height:10vh;border:none;background:white; max-width:900px;" onchange="Comment(event, @ViewBag.Drivers[i].Id)">@ViewBag.Drivers[i].Comment</textarea>
+                <textarea class="inpData" style="margin:10px;max-width:500px; height:10vh;border:none;background:white;min-width:550px; max-width:600px;" onchange="Comment(event, @ViewBag.Drivers[i].Id)">@ViewBag.Drivers[i].Comment</textarea>
             </div>
         </div>
         }
@@ -51,6 +52,28 @@
         <style>
             * {
                 margin: 0px;
+            }
+
+            .btnSt {
+                margin-left: 5px;
+                border: none;
+                width: 120px;
+                height: 40px;
+                background-color: white;
+                font-size: 20px;
+                color: rgb(51, 51, 51);
+                border-color: rgba(51, 51, 51, 1);
+            }
+
+            .activeBtn {
+                border-radius: 1px;
+                border-top: solid;
+                border-right: solid;
+                border-left: solid;
+                border-width: 1.3px;
+                position: relative;
+                top: 2px;
+                border-color: rgba(51, 51, 51, 0.3);
             }
 
             .btnCreateoOrder {
@@ -101,13 +124,21 @@
                 border-width: 1px;
                 border-style: solid;
                 border-color: rgba(45, 45, 45, 0.38);
-                width:80%;
+                max-width: 800px;
+                min-width: 600px;
                 margin:10px;
                 display:flex;
             }
 
             .contentBody {
-                margin: 10px;
+                width: 100%;
+                height: 100px;
+                border-top: solid;
+                border-width: 1px;
+                border-color: rgba(51, 51, 51, 0.3);
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around
             }
 
             .body {
