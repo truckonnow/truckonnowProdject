@@ -192,6 +192,24 @@ namespace ApiMobaileServise.Servise
             return plates;
         }
 
+        internal string GetDocumentDB(string id)
+        {
+            string pathDoc = "";
+            Driver driver = context.Drivers
+                .Include(d => d.InspectionDrivers)
+                .FirstOrDefault(d => d.Id.ToString() == id);
+            if(driver.InspectionDrivers != null)
+            {
+                InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
+                Truck truck = context.Trucks.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck);
+                if(truck != null)
+                {
+                    pathDoc = truck.PathDoc;
+                }
+            }
+            return pathDoc;
+        }
+
         public async Task UpdateInspectionDriver(string idDriver)
         {
             Driver driver = await context.Drivers.Where(d => d.Id == Convert.ToUInt32(idDriver))
@@ -683,11 +701,12 @@ namespace ApiMobaileServise.Servise
             }
         }
 
-        public async void SaveToken(string email, string password, string token)
+        public string SaveToken(string email, string password, string token)
         {
             Driver driver = context.Drivers.FirstOrDefault(d => d.EmailAddress == email && d.Password == password);
             driver.Token = token;
-            await context.SaveChangesAsync();
+            context.SaveChanges();
+            return driver.Id.ToString();
         }
 
         public bool CheckToken(string token)

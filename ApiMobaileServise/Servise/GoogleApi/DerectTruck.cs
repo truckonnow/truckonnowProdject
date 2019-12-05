@@ -36,6 +36,8 @@ namespace ApiMobaileServise.Servise.GoogleApi
             File.WriteAllText("1.txt", "1");
             try
             {
+                var timeout = new TimeSpan(0, 0, 10);
+                CallSettings callSettings = CallSettings.FromCallTiming(CallTiming.FromTimeout(timeout));
                 List<Truck> trucks = sqlCommandApiMobil.GetTruck();
                 string path = (string)parames[1];
                 string idDriver = (string)parames[0];
@@ -43,7 +45,7 @@ namespace ApiMobaileServise.Servise.GoogleApi
                 var channel = new Grpc.Core.Channel(
                     ImageAnnotatorClient.DefaultEndpoint.ToString(),
                     credential.ToChannelCredentials());
-                var client = ImageAnnotatorClient.Create(channel);
+                var client = ImageAnnotatorClient.Create(channel, new ImageAnnotatorSettings() { CallSettings = callSettings });
                 var image = Google.Cloud.Vision.V1.Image.FromFile(path);
                 var response = client.DetectText(image);
                 var response3 = client.DetectLocalizedObjects(image);

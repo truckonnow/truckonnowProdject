@@ -6,6 +6,7 @@
              x:Name="ctp">
     <ContentPage.ToolbarItems>
         <ToolbarItem  Text="Exit" Clicked="ToolbarItem_Clicked"/>
+        <ToolbarItem  Text="Doc" Clicked="ToolbarItem_Clicked_1"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>

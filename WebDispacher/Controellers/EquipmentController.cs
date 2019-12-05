@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebDispacher.Service;
@@ -290,6 +291,23 @@ namespace WebDispacher.Controellers
 
             }
             return "true";
+        }
+
+        [HttpGet]
+        [Route("Document")]
+        public async Task<IActionResult> Get(string id)
+        {
+            FileStream stream = null;
+            try
+            {
+                string docPath = managerDispatch.GetDocument(id);
+                stream = new FileStream(docPath, FileMode.Open);
+            }
+            catch (Exception)
+            {
+                stream = null;
+            }
+            return new FileStreamResult(stream, "application/pdf");
         }
     }
 }

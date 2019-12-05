@@ -79,7 +79,8 @@ namespace MDispatch.ViewModels
             else if(state == 3)
             {
                 App.isAvtorization = true;
-                CrossSettings.Current.AddOrUpdateValue("Token", token);
+                CrossSettings.Current.AddOrUpdateValue("Token", token.Split(',')[0]);
+                CrossSettings.Current.AddOrUpdateValue("IdDriver", token.Split(',')[1]);
                 CrossSettings.Current.AddOrUpdateValue("Username", Username);
                 CrossSettings.Current.AddOrUpdateValue("Password", Password);
                 await Task.Run(() =>

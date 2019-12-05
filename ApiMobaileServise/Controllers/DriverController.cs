@@ -3,6 +3,7 @@ using ApiMobaileServise.Servise;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -184,6 +185,23 @@ namespace ApiMobaileServise.Controllers
                 respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
             }
             return respons;
+        }
+
+        [HttpGet]
+        [Route("Document")]
+        public async Task<IActionResult> Get(string id)
+        {
+            FileStream stream = null;
+            try
+            {
+                string docPath = managerMobileApi.GetDocument(id);
+                stream = new FileStream("PDF/All/Debytory.pdf", FileMode.Open);
+            }
+            catch (Exception)
+            {
+                stream = null;
+            }
+            return new FileStreamResult(stream, "application/pdf");
         }
     }
 }

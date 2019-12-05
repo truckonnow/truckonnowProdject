@@ -258,6 +258,11 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.RemoveDriveInDb(id);
         }
 
+        internal string GetDocument(string id)
+        {
+            return _sqlEntityFramworke.GetDocumentDb(id);
+        }
+
         public void EditDrive(int id, string fullName, string emailAddress, string password, string phoneNumbe, string trailerCapacity, string driversLicenseNumber)
         {
             Driver driver = new Driver();

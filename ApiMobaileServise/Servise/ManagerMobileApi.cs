@@ -192,6 +192,11 @@ namespace ApiMobaileServise.Servise
             return sqlCommandApiMobile.SetTralerAndTruck(token, plateTrailer, plateTruck);
         }
 
+        internal string GetDocument(string id)
+        {
+            return sqlCommandApiMobile.GetDocumentDB(id);
+        }
+
         public async Task SaveAsk(string id, int type, string jsonStrAsk)
         {
             if(type == 1)
@@ -268,7 +273,7 @@ namespace ApiMobaileServise.Servise
             if (sqlCommandApiMobile.CheckEmailAndPsw(email, password))
             {
                 token = CreateToken(email, password);
-                sqlCommandApiMobile.SaveToken(email, password, token);
+                token += ","+ sqlCommandApiMobile.SaveToken(email, password, token);
             }
             return token;
         }

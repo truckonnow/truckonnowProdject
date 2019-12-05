@@ -259,6 +259,24 @@ namespace WebDispacher.Dao
             await context.SaveChangesAsync();
         }
 
+        internal string GetDocumentDb(string id)
+        {
+            string pathDoc = "";
+            Driver driver = context.Drivers
+                .Include(d => d.InspectionDrivers)
+                .FirstOrDefault(d => d.Id.ToString() == id);
+            if (driver.InspectionDrivers != null)
+            {
+                InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
+                Truck truck = context.Trucks.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck);
+                if (truck != null)
+                {
+                    pathDoc = truck.PathDoc;
+                }
+            }
+            return pathDoc;
+        }
+
         public async Task<VehiclwInformation> AddVechInDb(string idOrder)
         {
             Shipping shipping = await context.Shipping

@@ -2,6 +2,7 @@
 using MDispatch.View.PageApp;
 using MDispatch.ViewModels.TAbbMV;
 using MDispatch.ViewModels.TAbbMV.DialogAsk;
+using Plugin.Settings;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Threading;
@@ -125,6 +126,11 @@ namespace MDispatch.View.TabPage.Tab
         {
             base.OnDisappearing();
             timer.Change(Timeout.Infinite, Timeout.Infinite);
+        }
+
+        private void ToolbarItem_Clicked_1(object sender, EventArgs e)
+        {
+            Device.OpenUri(new Uri($"http://truckonnow.com/Equipment/Document?id={CrossSettings.Current.GetValueOrDefault("IdDriver", "0")}"));
         }
     }
 }

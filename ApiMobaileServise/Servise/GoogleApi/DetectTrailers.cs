@@ -1,4 +1,5 @@
 ﻿using DaoModels.DAO.Models;
+using Google.Api.Gax.Grpc;
 using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Vision.V1;
 using Grpc.Auth;
@@ -24,6 +25,8 @@ namespace ApiMobaileServise.Servise.GoogleApi
         public void DetectText(params object[] parames)
         {
             Thread.Sleep(2000);
+            var timeout = new TimeSpan(0, 0, 10);
+            CallSettings callSettings = CallSettings.FromCallTiming(CallTiming.FromTimeout(timeout));
             List<Trailer> trailers = sqlCommandApiMobil.GetTrailers();
             string path = (string)parames[1];
             string idDriver = (string)parames[0];
@@ -31,7 +34,7 @@ namespace ApiMobaileServise.Servise.GoogleApi
             var channel = new Grpc.Core.Channel(
                 ImageAnnotatorClient.DefaultEndpoint.ToString(),
                 credential.ToChannelCredentials());
-            var client = ImageAnnotatorClient.Create(channel);
+            var client = ImageAnnotatorClient.Create(channel, new ImageAnnotatorSettings() { CallSettings = callSettings });
             var image = Google.Cloud.Vision.V1.Image.FromFile(path);
             var response = client.DetectText(image);
             var response3 = client.DetectLocalizedObjects(image);
