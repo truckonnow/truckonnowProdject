@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using ApiMobaileServise.BackgraundService.Queue;
 using ApiMobaileServise.Models;
 using ApiMobaileServise.Servise;
 using DaoModels.DAO.Models;
@@ -27,7 +28,15 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    await managerMobileApi.SaveAsk(idVe, type, jsonStrAsk);
+                    if(type == 1 || type == 2 || type == 3 || type == 4 || type == 5)
+                    {
+                        QueueWorker.queues.Add($"SaveAnsver,{idVe},{type},{jsonStrAsk}");
+                        QueueWorker.countQueues++;
+                    }
+                    else
+                    {
+                        await managerMobileApi.SaveAsk(idVe, type, jsonStrAsk);
+                    }
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else

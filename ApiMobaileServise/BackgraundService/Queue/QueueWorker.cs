@@ -34,6 +34,10 @@ namespace ApiMobaileServise.BackgraundService.Queue
                     {
                         await managerMobileApi.EndTask(queues[i].Split(',')[1], queues[i].Split(',')[2]);
                     }
+                    else if (queues[i].Split(',')[0] == "SaveAnsver")
+                    {
+                        await managerMobileApi.SaveAsk(queues[i].Split(',')[1], Convert.ToInt32(queues[i].Split(',')[2]), queues[i].Split(',')[3]);
+                    }
                     countQueues--;
                 }
                 queues.RemoveRange(0, tmpCount);
