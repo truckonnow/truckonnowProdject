@@ -8,7 +8,7 @@ namespace MDispatch.ViewModels.InspectionMV.Models
     public class CarSuv : ICar
     {
         public string typeIndex { get; set; } = "Suv"; 
-        public int CountCarImg { get; set; } = 36;
+        public int CountCarImg { get; set; } = 33;
 
         public int GetIndexCar(int countPhoto)
         {
@@ -22,7 +22,7 @@ namespace MDispatch.ViewModels.InspectionMV.Models
                     }
                 case 2:
                     {
-                        indecCar = 1;
+                        indecCar = 6;
                         break;
                     }
                 case 3:
@@ -37,12 +37,12 @@ namespace MDispatch.ViewModels.InspectionMV.Models
                     }
                 case 5:
                     {
-                        indecCar = 3;
+                        indecCar = 30;
                         break;
                     }
                 case 6:
                     {
-                        indecCar = 28;
+                        indecCar = 24;
                         break;
                     }
                 default:
@@ -62,12 +62,12 @@ namespace MDispatch.ViewModels.InspectionMV.Models
             {
                 case 1:
                     {
-                        indecCar = 5;
+                        indecCar = 23;
                         break;
                     }
                 case 2:
                     {
-                        indecCar = 23;
+                        indecCar = 7;
                         break;
                     }
                 case 3:
@@ -77,12 +77,12 @@ namespace MDispatch.ViewModels.InspectionMV.Models
                     }
                 case 4:
                     {
-                        indecCar = 28;
+                        indecCar = 24;
                         break;
                     }
                 case 5:
                     {
-                        indecCar = 12;
+                        indecCar = 26;
                         break;
                     }
                 case 6:
@@ -92,7 +92,7 @@ namespace MDispatch.ViewModels.InspectionMV.Models
                     }
                 case 7:
                     {
-                        indecCar = 14;
+                        indecCar = 25;
                         break;
                     }
                 case 8:
@@ -102,22 +102,22 @@ namespace MDispatch.ViewModels.InspectionMV.Models
                     }
                 case 9:
                     {
-                        indecCar = 33;
+                        indecCar = 12;
                         break;
                     }
                 case 10:
                     {
-                        indecCar = 20;
+                        indecCar = 22;
                         break;
                     }
                 case 11:
                     {
-                        indecCar = 21;
+                        indecCar = 32;
                         break;
                     }
                 case 12:
                     {
-                        indecCar = 22;
+                        indecCar = 31;
                         break;
                     }
                 default:
@@ -134,15 +134,15 @@ namespace MDispatch.ViewModels.InspectionMV.Models
         {
 
             string nameLayout = "";
-            if (inderxPhotoInspektion == 1)
+            if (inderxPhotoInspektion == 6)
             {
                 nameLayout = "Vehicle hood";
             }
-            else if (inderxPhotoInspektion == 2)
+            else if (inderxPhotoInspektion == 12)
             {
                 nameLayout = "Left headlight of the vehicle";
             }
-            else if (inderxPhotoInspektion == 3)
+            else if (inderxPhotoInspektion == 10)
             {
                 nameLayout = "Right headlight of the vehicle";
             }
@@ -150,43 +150,43 @@ namespace MDispatch.ViewModels.InspectionMV.Models
             {
                 nameLayout = "Vehicle windshield";
             }
-            else if (inderxPhotoInspektion == 5)
+            else if (inderxPhotoInspektion == 23)
             {
                 nameLayout = "All right part of the vehicle";
             }
-            else if (inderxPhotoInspektion == 6)
+            else if (inderxPhotoInspektion == 28)
             {
                 nameLayout = "All left part of the vehicle";
             }
-            else if (inderxPhotoInspektion == 7)
+            else if (inderxPhotoInspektion == 33)
             {
                 nameLayout = "Front left side of the vehicle";
             }
-            else if (inderxPhotoInspektion == 8)
+            else if (inderxPhotoInspektion == 31)
             {
                 nameLayout = "Front left side of the vehicle";
             }
-            else if (inderxPhotoInspektion == 9)
+            else if (inderxPhotoInspektion == 30)
             {
                 nameLayout = "Front left door of the vehicle";
             }
-            else if (inderxPhotoInspektion == 10)
+            else if (inderxPhotoInspektion == 29)
             {
                 nameLayout = "Rear left door of the vehicle";
             }
-            else if (inderxPhotoInspektion == 11)
+            else if (inderxPhotoInspektion == 21)
             {
                 nameLayout = "Rear left side of the vehicle";
             }
-            else if (inderxPhotoInspektion == 12)
+            else if (inderxPhotoInspektion == 26)
             {
                 nameLayout = "Suv";
             }
-            else if (inderxPhotoInspektion == 13)
+            else if (inderxPhotoInspektion == 27)
             {
                 nameLayout = "Suv";
             }
-            else if (inderxPhotoInspektion == 14)
+            else if (inderxPhotoInspektion == 25)
             {
                 nameLayout = "Suv";
             }
@@ -194,39 +194,39 @@ namespace MDispatch.ViewModels.InspectionMV.Models
             {
                 nameLayout = "Rear right side of the vehicle";
             }
-            else if (inderxPhotoInspektion == 16)
+            else if (inderxPhotoInspektion == 19)
             {
                 nameLayout = "Rear right door of the vehicle";
             }
-            else if (inderxPhotoInspektion == 17)
+            else if (inderxPhotoInspektion == 16)
             {
                 nameLayout = "Front right door of the vehicle";
             }
-            else if (inderxPhotoInspektion == 18)
+            else if (inderxPhotoInspektion == 15)
             {
                 nameLayout = "Front right side of the vehicle";
             }
-            else if (inderxPhotoInspektion == 19)
+            else if (inderxPhotoInspektion == 13)
             {
                 nameLayout = "Front right side of the vehicle";
             }
-            else if (inderxPhotoInspektion == 20)
+            else if (inderxPhotoInspektion == 11)
             {
                 nameLayout = "The left side of the front bumper of the vehicle";
             }
-            else if (inderxPhotoInspektion == 21)
+            else if (inderxPhotoInspektion == 8)
             {
                 nameLayout = "The center of the front bumper of the vehicle";
             }
-            else if (inderxPhotoInspektion == 22)
+            else if (inderxPhotoInspektion == 9)
             {
                 nameLayout = "The right side of the front bumper of the vehicle";
             }
-            else if (inderxPhotoInspektion == 23)
+            else if (inderxPhotoInspektion == 7)
             {
                 nameLayout = "All front part of the vehicle (bumper, headlights and windshield)";
             }
-            else if (inderxPhotoInspektion == 24)
+            else if (inderxPhotoInspektion == 17)
             {
                 nameLayout = "Left rearview mirror of the vehicle (rear)";
             }
@@ -234,7 +234,7 @@ namespace MDispatch.ViewModels.InspectionMV.Models
             {
                 nameLayout = "Rith rearview mirror of the vehicle (rear)";
             }
-            else if (inderxPhotoInspektion == 26)
+            else if (inderxPhotoInspektion == 18)
             {
                 nameLayout = "Right rearview mirror of the vehicle (Bottom)";
             }
@@ -242,15 +242,15 @@ namespace MDispatch.ViewModels.InspectionMV.Models
             {
                 nameLayout = "Left rearview mirror of the vehicle (Bottom)";
             }
-            else if (inderxPhotoInspektion == 28)
+            else if (inderxPhotoInspektion == 24)
             {
                 nameLayout = "Vehicle rear window";
             }
-            else if (inderxPhotoInspektion == 29)
+            else if (inderxPhotoInspektion == 32)
             {
                 nameLayout = "Right rear wheel of the vehicle";
             }
-            else if (inderxPhotoInspektion == 30)
+            else if (inderxPhotoInspektion == 22)
             {
                 nameLayout = "Right front wheel of the vehicle";
             }
@@ -258,23 +258,23 @@ namespace MDispatch.ViewModels.InspectionMV.Models
             {
                 nameLayout = "Left front wheel of the vehicle";
             }
-            else if (inderxPhotoInspektion == 32)
+            else if (inderxPhotoInspektion == 14)
             {
                 nameLayout = "Left rear wheel of the vehicle";
             }
-            else if (inderxPhotoInspektion == 33)
+            else if (inderxPhotoInspektion == 2)
             {
                 nameLayout = "Vehicle interior";
             }
-            else if (inderxPhotoInspektion == 34)
+            else if (inderxPhotoInspektion == 3)
             {
                 nameLayout = "Vehicle interior";
             }
-            else if (inderxPhotoInspektion == 35)
+            else if (inderxPhotoInspektion == 5)
             {
                 nameLayout = "Front door from the inside by the driver of the vehicle";
             }
-            else if (inderxPhotoInspektion == 36)
+            else if (inderxPhotoInspektion == 1)
             {
                 nameLayout = "Vehicle dashboard";
             }
