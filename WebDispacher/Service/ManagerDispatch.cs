@@ -31,6 +31,13 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.RecurentOnArchived(id);
         }
 
+        internal void AddNewOrder(string urlPage)
+        {
+            GetDataCentralDispatch getDataCentralDispatch = new GetDataCentralDispatch();
+            Shipping shipping = getDataCentralDispatch.GetShipping(urlPage);
+            _sqlEntityFramworke.AddOrder(shipping);
+        }
+
         public List<Truck> GetTrucks()
         {
             return _sqlEntityFramworke.GetTrucs();

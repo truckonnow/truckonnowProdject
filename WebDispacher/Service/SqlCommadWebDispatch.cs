@@ -259,6 +259,39 @@ namespace WebDispacher.Dao
             await context.SaveChangesAsync();
         }
 
+        public async void AddOrder(Shipping shipping)
+        {
+            bool isCheckOrder = CheckUrlOrder(shipping);
+            if (CheckOrder(shipping) && !isCheckOrder)
+            {
+                shipping.Id += new Random().Next(0, 1000);
+            }
+            try
+            {
+                if (!isCheckOrder)
+                {
+                    await context.Shipping.AddAsync(shipping);
+                    await context.SaveChangesAsync();
+                }
+                else
+                {
+                }
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
+        public bool CheckUrlOrder(Shipping shipping)
+        {
+            return context.Shipping.FirstOrDefault(s => s.UrlReqvest == shipping.UrlReqvest) != null;
+        }
+
+        private bool CheckOrder(Shipping shipping)
+        {
+            return context.Shipping.FirstOrDefault(s => s.Id == shipping.Id) != null;
+        }
+
         internal string GetDocumentDb(string id)
         {
             string pathDoc = "";

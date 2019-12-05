@@ -12,6 +12,25 @@ namespace WebDispacher.Controellers
         ManagerDispatch managerDispatch = new ManagerDispatch();
         private string Status { get; set; }
 
+        [Route("New")]
+        public IActionResult New(string linck)
+        {
+            string urlPage = linck.Remove(0, linck.IndexOf("'") + 1);
+            urlPage = urlPage.Remove(urlPage.IndexOf("'"));
+            urlPage = $"https://www.centraldispatch.com/{urlPage}";
+            IActionResult actionResult = null;
+            try
+            {
+                managerDispatch.AddNewOrder(urlPage);
+                actionResult = Ok();
+            }
+            catch (Exception)
+            {
+                actionResult = null;
+            }
+            return actionResult;
+        }
+
         [Route("Dashbord/Order/NewLoad")]
         public IActionResult NewLoad(int page)
         {

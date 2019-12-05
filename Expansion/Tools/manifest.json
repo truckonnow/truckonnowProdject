@@ -1,0 +1,27 @@
+{
+  "name": "Truckonnow",
+  "description": "Tools",
+  "version": "1.0",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.centraldispatch.com/*"
+      ],
+      "js": [ "central.js", "Init.js" ],
+      "run_at": "document_end"
+
+    }
+  ],
+  "permissions": [
+    "http://localhost/",
+    "https://localhost/",
+    "https://212.224.113.5/",
+    "http://212.224.113.5/",
+    "http://192.168.0.100/",
+    "https://192.168.0.100/",
+    "http://truckonnow.com/",
+    "https://truckonnow.com/"
+  ]
+
+}
