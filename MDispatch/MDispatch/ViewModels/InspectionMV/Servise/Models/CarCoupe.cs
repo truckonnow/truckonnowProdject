@@ -104,115 +104,115 @@ namespace MDispatch.ViewModels.InspectionMV.Models
             string nameLayout = "";
             if(inderxPhotoInspektion == 1)
             {
-                nameLayout = "Coupe";
+                nameLayout = "Vehicle dashboard";
             }
             else if(inderxPhotoInspektion == 2)
             {
-                nameLayout = "Entire left side of the vehicle";
+                nameLayout = "Driver seat";
             }
             else if (inderxPhotoInspektion == 3)
             {
-                nameLayout = "Left front of the vehicle";
+                nameLayout = "Driver side kit";
             }
             else if (inderxPhotoInspektion == 4)
             {
-                nameLayout = "Bumper on the left side";
+                nameLayout = "Driver's door";
             }
             else if (inderxPhotoInspektion == 5)
             {
-                nameLayout = "Left center of the vehicle";
+                nameLayout = "Driver side kit";
             }
             else if (inderxPhotoInspektion == 6)
             {
-                nameLayout = "Left rear of the vehicle";
+                nameLayout = "Coupe";
             }
             else if (inderxPhotoInspektion == 7)
             {
-                nameLayout = "Entire right side of the vehicle";
+                nameLayout = "Driver's door";
             }
             else if (inderxPhotoInspektion == 8)
             {
-                nameLayout = "Bumper on the right side";
+                nameLayout = "Rearview Mirror Driver's Side";
             }
             else if (inderxPhotoInspektion == 9)
             {
-                nameLayout = "Right front of the vehicle";
+                nameLayout = "Rearview Mirror Driver's Sidee";
             }
             else if (inderxPhotoInspektion == 10)
             {
-                nameLayout = "Right center of the vehicle";
+                nameLayout = "Front of the compartment, driver's side";
             }
             else if (inderxPhotoInspektion == 11)
             {
-                nameLayout = "Right rear of the vehicle";
+                nameLayout = "Front front wheel driver's side";
             }
             else if (inderxPhotoInspektion == 12)
             {
-                nameLayout = "Rear left wheel";
+                nameLayout = "Front bumper, driver's side";
             }
             else if (inderxPhotoInspektion == 13)
             {
-                nameLayout = "Rear right wheel";
+                nameLayout = "Front headlight, driver's side";
             }
             else if (inderxPhotoInspektion == 14)
             {
-                nameLayout = "Front left wheel";
+                nameLayout = "Front headlight, driver's side";
             }
             else if (inderxPhotoInspektion == 15)
             {
-                nameLayout = "Front right wheel";
+                nameLayout = "Front bumper";
             }
             else if (inderxPhotoInspektion == 16)
             {
-                nameLayout = "Vehicle rear (rear bumper with headlights)";
+                nameLayout = "The entire front of the coupe";
             }
             else if (inderxPhotoInspektion == 17)
             {
-                nameLayout = "Left rear vehicle headlight";
+                nameLayout = "Right side of the front bumper";
             }
             else if (inderxPhotoInspektion == 18)
             {
-                nameLayout = "Right rear vehicle headlight";
+                nameLayout = "Central side of the front bumper";
             }
             else if (inderxPhotoInspektion == 19)
             {
-                nameLayout = "Front of the vehicle (front bumper with headlights, hood and windshield)";
+                nameLayout = "Left side of the front bumper";
             }
             else if (inderxPhotoInspektion == 20)
             {
-                nameLayout = "Vehicle front bumper";
+                nameLayout = "Сoupe hood";
             }
             else if (inderxPhotoInspektion == 21)
             {
-                nameLayout = "Front left vehicle headlight";
+                nameLayout = "Windshield Coupe";
             }
             else if (inderxPhotoInspektion == 22)
             {
-                nameLayout = "Front right vehicle headlight";
+                nameLayout = "Front Headlight on the passenger side";
             }
             else if (inderxPhotoInspektion == 23)
             {
-                nameLayout = "Coupe";
+                nameLayout = "Front Headlight on the passenger side";
             }
             else if (inderxPhotoInspektion == 24)
             {
-                nameLayout = "Front left vehicle headlight";
+                nameLayout = "Front bumper, passenger side";
             }
             else if (inderxPhotoInspektion == 25)
             {
-                nameLayout = "Front right vehicle headlight";
+                nameLayout = "Front front wheel passenger side";
             }
             else if (inderxPhotoInspektion == 26)
             {
-                nameLayout = "Left rear view mirror (Rear part)";
+                nameLayout = "Front of the compartment, passenger side";
             }
             else if (inderxPhotoInspektion == 27)
             {
-                nameLayout = "Right rear view mirror (Rear part)";
+                nameLayout = "Passenger door";
             }
             else if (inderxPhotoInspektion == 28)
             {
-                nameLayout = "Left rear view mirror (Front part)";
+                nameLayout = "Rearview Mirror Driver's Side";
             }
             else if (inderxPhotoInspektion == 29)
             {
@@ -220,43 +220,43 @@ namespace MDispatch.ViewModels.InspectionMV.Models
             }
             else if (inderxPhotoInspektion == 30)
             {
-                nameLayout = "Vehicle hood";
+                nameLayout = "Rear of passenger compartment";
             }
             else if (inderxPhotoInspektion == 31)
             {
-                nameLayout = "Windshield with vehicle top";
+                nameLayout = "Rear front wheel passenger side";
             }
             else if (inderxPhotoInspektion == 32)
             {
-                nameLayout = "Coupe";
+                nameLayout = "The entire passenger side of the compartment";
             }
             else if (inderxPhotoInspektion == 33)
             {
-                nameLayout = "Coupe";
+                nameLayout = "Rear Headlight, driver's side";
             }
             else if (inderxPhotoInspektion == 34)
             {
-                nameLayout = "Coupe";
+                nameLayout = "The entire rear of the coupe";
             }
             else if (inderxPhotoInspektion == 35)
             {
-                nameLayout = "Rear upper vehicle";
+                nameLayout = "Rear Headlight, passenger side";
             }
             else if (inderxPhotoInspektion == 36)
             {
-                nameLayout = "Vehicle dashboard";
+                nameLayout = "Rear window coupe";
             }
             else if (inderxPhotoInspektion == 37)
             {
-                nameLayout = "Coupe";
+                nameLayout = "Rear of passenger compartment";
             }
             else if (inderxPhotoInspektion == 38)
             {
-                nameLayout = "Coupe";
+                nameLayout = "Rear front wheel passenger side";
             }
             else if (inderxPhotoInspektion == 39)
             {
-                nameLayout = "Coupe";
+                nameLayout = "The whole driver’s side of the coupe";
             }
             return nameLayout;
         }
