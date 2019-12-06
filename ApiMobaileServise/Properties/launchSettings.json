@@ -21,11 +21,11 @@
     },
     "ApiMobaileServise": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://91.243.220.106:8099"
+      "applicationUrl": "http://46.98.8.14846.98.8.148:8099"
     }
   }
 }

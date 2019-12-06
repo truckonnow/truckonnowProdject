@@ -30,8 +30,8 @@ namespace ApiMobaileServise.Controllers
                 {
                     if(type == 1 || type == 2 || type == 3 || type == 4 || type == 5)
                     {
-                        QueueWorker.queues.Add($"SaveAnsver,{idVe},{type},{jsonStrAsk}");
-                        QueueWorker.countQueues++;
+                        QueueWorkerAsk.queues.Add($"SaveAnsver&,&{idVe}&,&{type}&,&{jsonStrAsk}");
+                        QueueWorkerAsk.countQueues++;
                     }
                     else
                     {

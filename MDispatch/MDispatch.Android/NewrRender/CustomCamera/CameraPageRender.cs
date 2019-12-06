@@ -47,7 +47,7 @@ namespace MDispatch.Droid.NewrRender
         protected override async void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.Page> e)
         {
             base.OnElementChanged(e);
-            type = ((CameraPage)Element).TypeCamera == null ? "Photo" : ((CameraPage)Element).TypeCamera;
+            type = ((CameraPage)Element).TypeCamera == null || ((CameraPage)Element).TypeCamera == "" ? "Photo" : ((CameraPage)Element).TypeCamera;
             SetupUserInterface();
             SetupEventHandlers();
         }

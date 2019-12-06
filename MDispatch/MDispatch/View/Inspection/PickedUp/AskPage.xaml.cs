@@ -127,12 +127,12 @@ namespace MDispatch.View.AskPhoto
             button.TextColor = Color.FromHex("#4fd2c2");
             btnAnswer7 = button.Text;
             askPageMV.Ask.Anyone_Rushing_you_to_perform_the_inspection = $"{btnAnswer7} {txtAnswer7}";
-            if (button1 != null)
+            if (button7 != null)
             {
-                button1.TextColor = Color.Silver;
+                button7.TextColor = Color.Silver;
             }
-            button1 = button;
-            if(button.Text == "Yes" && button.Text == "YES")
+            button7 = button;
+            if(button.Text == "Yes" || button.Text == "YES")
             {
                 askBlock7v2.IsVisible = true;
                 if (txtAnswer7 != "")

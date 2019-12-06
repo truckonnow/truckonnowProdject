@@ -381,6 +381,8 @@ namespace ApiMobaileServise.Servise
                 .Include("VehiclwInformations.PhotoInspections.Damages")
                 .Include("VehiclwInformations.Scan")
                 .FirstOrDefault();
+
+            shipping.UrlReqvest = "";
             return shipping;
         }
 
@@ -391,6 +393,8 @@ namespace ApiMobaileServise.Servise
                 .Include("VehiclwInformations.Scan")
                 .Include("VehiclwInformations.PhotoInspections.Photos")
                 .FirstOrDefault();
+
+            shipping.UrlReqvest = "";
             return shipping;
         }
 
@@ -802,6 +806,7 @@ namespace ApiMobaileServise.Servise
             }
             Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Picked up"));
             Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Assigned"));
+            Shipping1.ForEach((item) => item.UrlReqvest = "");
             //int countFor5 = Shipping1.Count / 5;
             //int ost = Shipping1.Count % 5;
             //int countGet = ost == 0 ? (5 * type) + 5 : (5 * type) + ost;
@@ -821,6 +826,7 @@ namespace ApiMobaileServise.Servise
             }
             Shipping1.AddRange(shippings.FindAll(s => (s.CurrentStatus == "Delivered,Paid" || s.CurrentStatus == "Delivered,Billed" || s.CurrentStatus == "Archived,Billed" || s.CurrentStatus == "Archived,Paid") 
             && s.DataCancelOrder != null && DateTime.Parse(s.DataCancelOrder).AddDays(7) > DateTime.Now));
+            Shipping1.ForEach((item) => item.UrlReqvest = "");
             //int countFor5 = Shipping1.Count / 5;
             //int ost = Shipping1.Count % 5;
             //int countGet = ost == 0 ? (5 * type) + 5 : (5 * type) + ost;
@@ -840,6 +846,7 @@ namespace ApiMobaileServise.Servise
             }
             Shipping1.AddRange(shippings.FindAll(s => (s.CurrentStatus == "Delivered,Paid" || s.CurrentStatus == "Delivered,Billed" || s.CurrentStatus == "Archived,Billed" || s.CurrentStatus == "Archived,Paid") 
             && s.DataCancelOrder != null && DateTime.Parse(s.DataCancelOrder).AddDays(7) < DateTime.Now && DateTime.Parse(s.DataCancelOrder).AddDays(21) > DateTime.Now));
+            Shipping1.ForEach((item) => item.UrlReqvest = "");
             //int countFor5 = Shipping1.Count / 5;
             //int ost = Shipping1.Count % 5;
             //int countGet = ost == 0 ? (5 * type) + 5 : (5 * type) + ost;
