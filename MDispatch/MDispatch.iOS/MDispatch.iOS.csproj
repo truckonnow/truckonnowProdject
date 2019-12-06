@@ -807,4 +807,121 @@
   <ItemGroup>
     <BundleResource Include="Resources\Hint29.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe19.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe27.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe28.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe33.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe34.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe35.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe37.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe38.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe39.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe2.png" />
+  </ItemGroup>
 </Project>
