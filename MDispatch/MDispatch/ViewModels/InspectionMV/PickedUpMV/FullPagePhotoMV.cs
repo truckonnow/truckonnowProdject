@@ -253,7 +253,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             bool isNavigationMany = false;
             bool isTask = false;
             int navigationStack_Count = isNavigWthDamag ? Navigation.NavigationStack.Count - 1 : Navigation.NavigationStack.Count;
-            if (navigationStack_Count > 2)
+            if (navigationStack_Count > 3)
             {
                 //await PopupNavigation.PushAsync(new LoadPage());
                 //isNavigationMany = true;
@@ -274,6 +274,14 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 //await PopupNavigation.PushAsync(new TempPageHint());
                 DependencyService.Get<IOrientationHandler>().ForceSensor();
                 await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate, Car.typeIndex.Replace(" ", ""), OnDeliveryToCarrier, TotalPaymentToCarrier), true);
+            }
+            if(isTask)
+            {
+                if (Navigation.NavigationStack.Count > 2)
+                {
+                    Navigation.RemovePage(Navigation.NavigationStack[1]);
+                }
+                return;
             }
             await Task.Run(() => Utils.CheckNet(true));
             if (App.isNetwork)
@@ -314,7 +322,10 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                         await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
                         isNavigationMany = false;
                     }
-                    Navigation.RemovePage(Navigation.NavigationStack[1]);
+                    if (!isTask && Navigation.NavigationStack.Count > 2)
+                    {
+                        Navigation.RemovePage(Navigation.NavigationStack[1]);
+                    }
                     DependencyService.Get<IToast>().ShowMessage($"Photo {Car.GetNameLayout(InderxPhotoInspektion + 1)} saved");
                 }
                 else if (state == 4)

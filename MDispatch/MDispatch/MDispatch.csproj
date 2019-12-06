@@ -13,14 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Config\Truckonnow-8fb90a135d42.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Config\Truckonnow-8fb90a135d42.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Ansuria.XFGloss" Version="1.1.3" />
     <PackageReference Include="DLToolkit.Forms.Controls.FlowListView" Version="2.0.11" />
     <PackageReference Include="LiveXAML" Version="2.1.45" />

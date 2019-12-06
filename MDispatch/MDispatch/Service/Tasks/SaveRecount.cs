@@ -105,11 +105,11 @@ namespace MDispatch.Service.Tasks
                 if (videoBase64 != null)
                 {
                     RestClient client = new RestClient(Config.BaseReqvesteUrl);
-                    int countReqvest = videoBase64.Length / 2048;
+                    int countReqvest = videoBase64.Length / 5120;
                     for (int i = 0; countReqvest != 0 && i < countReqvest + 1; i++)
                     {
                         videoBase64 = CrossSettings.Current.GetValueOrDefault(idTask, null);
-                        string videoTmp = GetRangeArray(videoBase64, 2048);
+                        string videoTmp = GetRangeArray(videoBase64, 5120);
                         RestRequest request = new RestRequest("api.Task/LoadTask", Method.POST);
                         client.Timeout = 10000;
                         request.AddHeader("Accept", "application/json");

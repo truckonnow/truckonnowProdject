@@ -6,7 +6,7 @@
              x:Class="MDispatch.View.Inspection.Delyvery.CameraPage.IDpersonFace">
     <ContentPage.Content>
         <AbsoluteLayout>
-            <Image Margin="35" Source="BackIconpage.png"  HorizontalOptions="Start" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".02, .02, 40, 40">
+            <Image Margin="5" Source="BackIconpage.png"  HorizontalOptions="Start" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".02, .02, 40, 40">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                 </Image.GestureRecognizers>

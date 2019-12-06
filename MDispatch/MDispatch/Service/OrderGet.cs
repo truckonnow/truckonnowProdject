@@ -199,7 +199,7 @@ namespace MDispatch.Service
                 respJsonStr = respJsonStr.Replace("\\", "");
                 respJsonStr = respJsonStr.Remove(0, 1);
                 respJsonStr = respJsonStr.Remove(respJsonStr.Length - 1);
-                var responseAppS = JObject.Parse(respJsonStr);
+                            var responseAppS = JObject.Parse(respJsonStr);
                 string status = responseAppS.Value<string>("Status");
                 if (status == "success")
                 {
