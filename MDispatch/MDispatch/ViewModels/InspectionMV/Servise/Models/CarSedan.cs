@@ -22,27 +22,42 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
                     }
                 case 2:
                     {
-                        indecCar = 19;
+                        indecCar = 16;
                         break;
                     }
                 case 3:
                     {
-                        indecCar = 2;
+                        indecCar = 19;
                         break;
                     }
                 case 4:
                     {
-                        indecCar = 16;
+                        indecCar = 23;
                         break;
                     }
                 case 5:
                     {
-                        indecCar = 23;
+                        indecCar = 22;
                         break;
                     }
                 case 6:
                     {
+                        indecCar = 21;
+                        break;
+                    }
+                case 7:
+                    {
                         indecCar = 20;
+                        break;
+                    }
+                case 8:
+                    {
+                        indecCar = 2;
+                        break;
+                    }
+                case 9:
+                    {
+                        indecCar = 15;
                         break;
                     }
                 default:

@@ -315,7 +315,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                         isNavigationMany = false;
                     }
                     Navigation.RemovePage(Navigation.NavigationStack[1]);
-                    DependencyService.Get<IToast>().ShowMessage($"Photo {Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion))} saved");
+                    DependencyService.Get<IToast>().ShowMessage($"Photo {Car.GetNameLayout(InderxPhotoInspektion + 1)} saved");
                 }
                 else if (state == 4)
                 {
@@ -342,7 +342,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 {
                     Navigation.RemovePage(Navigation.NavigationStack[1]);
                 }
-                DependencyService.Get<IToast>().ShowMessage($"Photo {Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion))} saved");
+                DependencyService.Get<IToast>().ShowMessage($"Photo {Car.GetNameLayout(InderxPhotoInspektion + 1)} saved");
                 TaskManager.CommandToDo("SavePhoto", 1, token, VehiclwInformation.Id, PhotoInspection);
             }
         }

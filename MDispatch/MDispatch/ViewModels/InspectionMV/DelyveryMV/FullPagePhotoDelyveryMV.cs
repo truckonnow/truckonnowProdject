@@ -53,7 +53,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
 
         private async void Init()
         {
-            await Car.OrintableScreen(Car.GetIndexCarFullPhoto(inderxPhotoInspektion));
+            await Car.OrintableScreen(InderxPhotoInspektion + 1);
         }
 
         public string IdShip { get; set; }
@@ -294,7 +294,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
 
                         }
                     
-                    DependencyService.Get<IToast>().ShowMessage($"Photo {Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion))} saved");
+                    DependencyService.Get<IToast>().ShowMessage($"Photo {Car.GetNameLayout(InderxPhotoInspektion + 1)} saved");
                 }
                 else if (state == 4)
                 {
@@ -322,7 +322,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 {
                     Navigation.RemovePage(Navigation.NavigationStack[1]);
                 }
-                DependencyService.Get<IToast>().ShowMessage($"Photo {Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion))} saved");
+                DependencyService.Get<IToast>().ShowMessage($"Photo {Car.GetNameLayout(InderxPhotoInspektion + 1)} saved");
                 TaskManager.CommandToDo("SavePhoto", 1, token, VehiclwInformation.Id, PhotoInspection);
             }
         }
@@ -378,7 +378,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             {
                 await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Deliveri", vehiclwInformation1s[indexCurrentVechecle + 1]));
                 ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
-                FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", Car.typeIndex.Replace(" ", ""), InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(Car.GetIndexCarFullPhoto(inderxPhotoInspektion + 1)), OnDeliveryToCarrier, TotalPaymentToCarrier);
+                FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", Car.typeIndex.Replace(" ", ""), InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1), OnDeliveryToCarrier, TotalPaymentToCarrier);
                 await Navigation.PushAsync(fullPagePhotoDelyvery);
                 await Navigation.PushAsync(new CameraPagePhoto1($"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", fullPagePhotoDelyvery));
             }
