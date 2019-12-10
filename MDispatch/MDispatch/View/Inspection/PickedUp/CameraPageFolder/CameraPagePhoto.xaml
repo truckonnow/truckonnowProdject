@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MDispatch.View.PageApp.CameraPagePhoto"
              xmlns:camera="clr-namespace:MDispatch.NewElement"
-             OnPhotoResult="CameraPage_OnPhotoResult">
+             OnPhotoResult="CameraPage_OnPhotoResult"
+             OnPhotoinspectionResult="CameraPage_OnPhotoinspectionResult">
     <ContentPage.Content>
         <AbsoluteLayout >
             <Image x:Name="paternPhoto" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" />

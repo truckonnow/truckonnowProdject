@@ -7,6 +7,7 @@ namespace MDispatch.NewElement
         public delegate void PhotoResultEventHandler(PhotoResultEventArgs result);
         public event PhotoResultEventHandler OnPhotoResult;
         public event PhotoResultEventHandler OnScan;
+        public event PhotoResultEventHandler OnPhotoinspectionResult;
 
         public static readonly BindableProperty TextProperty =
            BindableProperty.Create("TypeCamera", typeof(string), typeof(CameraPage), string.Empty);
@@ -32,6 +33,11 @@ namespace MDispatch.NewElement
         public void SetScan(byte[] image, int width = -1, int height = -1)
         {
             OnScan?.Invoke(new PhotoResultEventArgs(image, width, height));
+        }
+
+        public void SetPhotoinspectionResult(byte[] image, int width = -1, int height = -1)
+        {
+            OnPhotoinspectionResult?.Invoke(new PhotoResultEventArgs(image, width, height));
         }
 
         public void Cancel()

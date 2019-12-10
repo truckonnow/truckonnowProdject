@@ -55,7 +55,7 @@ namespace MDispatch.View.Inspection.PickedUp
             if (stateSelect == 0)
             {
                 stateSelect = 1;
-                await Navigation.PushAsync(new CameraPagePhoto(null, fullPagePhoto, this));
+                await Navigation.PushAsync(new CameraPagePhoto(null, fullPagePhoto, null, this));
                 await WaiteSelectDamage();
                 ImgResize image = new ImgResize()
                 {

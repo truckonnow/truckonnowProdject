@@ -15798,10 +15798,13 @@ namespace MDispatch.Droid
 			public const int Take = 2131165753;
 			
 			// aapt resource value: 0x7F07023A
-			public const int tooltip_frame_dark = 2131165754;
+			public const int TakeArow = 2131165754;
 			
 			// aapt resource value: 0x7F07023B
-			public const int tooltip_frame_light = 2131165755;
+			public const int tooltip_frame_dark = 2131165755;
+			
+			// aapt resource value: 0x7F07023C
+			public const int tooltip_frame_light = 2131165756;
 			
 			static Drawable()
 			{

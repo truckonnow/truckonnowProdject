@@ -11,8 +11,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration;
-using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 using static MDispatch.Service.ManagerDispatchMob;
 
@@ -96,7 +94,8 @@ namespace MDispatch.View.PageApp
             }
         }
 
-            private async void Button_Clicked_1(object sender, EventArgs e)
+        [Obsolete]
+        private async void Button_Clicked_1(object sender, EventArgs e)
         {
             if(fullPagePhotoMV.AllSourseImage != null && fullPagePhotoMV.AllSourseImage.Count != 0)
             {

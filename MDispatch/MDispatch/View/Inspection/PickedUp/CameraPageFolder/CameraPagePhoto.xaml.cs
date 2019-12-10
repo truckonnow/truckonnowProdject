@@ -13,8 +13,9 @@ namespace MDispatch.View.PageApp
         private FullPagePhoto fullPagePhoto = null;
         private PageAddDamage pageAddDamage = null;
 
-        public CameraPagePhoto(string pngPaternPhoto, FullPagePhoto fullPagePhoto, PageAddDamage pageAddDamage = null)
+        public CameraPagePhoto(string pngPaternPhoto, FullPagePhoto fullPagePhoto, string typeCamera = null, PageAddDamage pageAddDamage = null)
 		{
+            this.TypeCamera = typeCamera;
             this.pageAddDamage = pageAddDamage;
             this.fullPagePhoto = fullPagePhoto;
             InitializeComponent ();
@@ -50,6 +51,24 @@ namespace MDispatch.View.PageApp
                 pageAddDamage.stateSelect = 0;
             }
             await Navigation.PopAsync();
+        }
+
+        [System.Obsolete]
+        private async void CameraPage_OnPhotoinspectionResult(PhotoResultEventArgs result)
+        {
+            if (!result.Success)
+            {
+                return;
+            }
+            await fullPagePhoto.fullPagePhotoMV.AddNewFotoSourse(result.Result);
+            await fullPagePhoto.fullPagePhotoMV.SetPhoto(result.Result, result.Width, result.Height);
+            await fullPagePhoto.SetbtnVisable();
+            if (pageAddDamage != null)
+            {
+                pageAddDamage.stateSelect = 0;
+            }
+            await Navigation.PopAsync(true);
+            fullPagePhoto.fullPagePhotoMV.SavePhoto();
         }
     }
 }

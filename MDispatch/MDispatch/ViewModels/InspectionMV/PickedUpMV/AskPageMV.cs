@@ -83,7 +83,7 @@ namespace MDispatch.ViewModels.AskPhoto
             DependencyService.Get<IOrientationHandler>().ForceSensor();
             FullPagePhoto fullPagePhoto = new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{indexTypeCar}1.png", indexTypeCar, 1, initDasbordDelegate, getVechicleDelegate, "", OnDeliveryToCarrier, TotalPaymentToCarrier);
             await Navigation.PushAsync(fullPagePhoto);
-            await Navigation.PushAsync(new CameraPagePhoto($"{indexTypeCar}1.png", fullPagePhoto));
+            await Navigation.PushAsync(new CameraPagePhoto($"{indexTypeCar}1.png", fullPagePhoto, "PhotoIspection"));
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
