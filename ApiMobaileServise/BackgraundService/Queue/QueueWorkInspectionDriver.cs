@@ -2,11 +2,12 @@
 using FluentScheduler;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ApiMobaileServise.BackgraundService.Queue
 {
-    public class QueueWorkerAsk : IJob
+    public class QueueWorkInspectionDriver : IJob
     {
         private ManagerMobileApi managerMobileApi = null;
         public static List<string> queues = new List<string>();
@@ -27,9 +28,9 @@ namespace ApiMobaileServise.BackgraundService.Queue
                 int tmpCount = queues.Count > 5000 ? queues.Count - (countQueues - 5000) : queues.Count;
                 for (int i = 0; i < tmpCount; i++)
                 {
-                    if (queues[i].Split("&,&")[0] == "SaveAnsver")
+                    if (queues[i].Split("&,&")[0] == "SaveDriverInspection")
                     {
-                        await managerMobileApi.SaveAsk(queues[i].Split("&,&")[1], Convert.ToInt32(queues[i].Split("&,&")[2]), queues[i].Split("&,&")[3]);
+                        await managerMobileApi.SaveInspactionDriver(queues[i].Split("&,&")[1], queues[i].Split("&,&")[2], Convert.ToInt32(queues[i].Split("&,&")[3]));
                     }
                     countQueues--;
                 }

@@ -269,7 +269,10 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    managerMobileApi.SavePhotoInspection(idVe, jsonStr);
+                   // managerMobileApi.SavePhotoInspection(idVe, jsonStr);
+
+                    QueueWorkSavePhotoInspection.queues.Add($"SavePhotoInspection&,&{idVe}&,&{jsonStr}");
+                    QueueWorkSavePhotoInspection.countQueues++;
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else

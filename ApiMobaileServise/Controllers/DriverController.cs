@@ -1,4 +1,5 @@
-﻿using ApiMobaileServise.Models;
+﻿using ApiMobaileServise.BackgraundService.Queue;
+using ApiMobaileServise.Models;
 using ApiMobaileServise.Servise;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -87,7 +88,9 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    managerMobileApi.SaveInspactionDriver(idDriver, photoJson, indexPhoto);
+                    //managerMobileApi.SaveInspactionDriver(idDriver, photoJson, indexPhoto);
+                    QueueWorkInspectionDriver.queues.Add($"SaveDriverInspection&,&{idDriver}&,&{photoJson}&,&{indexPhoto}");
+                    QueueWorkInspectionDriver.countQueues++;
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else
