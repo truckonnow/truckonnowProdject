@@ -2,6 +2,6 @@
 {
     public static class Config
     {
-        public static string BaseReqvesteUrl { get; private set; } = "http://truckonnow.com/"; //http://truckonnow.com
+        public static string BaseReqvesteUrl { get; private set; } = "http://localhost"; //http://truckonnow.com
     }
 }

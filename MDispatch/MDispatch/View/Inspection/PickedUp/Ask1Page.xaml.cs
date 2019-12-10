@@ -175,7 +175,7 @@ namespace MDispatch.View.Inspection
 
         private async void Button_Clicked_3v2(object sender, EventArgs e)
         {
-            isAsk12 = true;
+            isAsk12 = false;
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
             if (button12 != null)
@@ -350,7 +350,7 @@ namespace MDispatch.View.Inspection
 
         private async void Button_Clicked_4v2(object sender, EventArgs e)
         {
-            isAsk13 = true;
+            isAsk13 = false;
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
             if (button13 != null)

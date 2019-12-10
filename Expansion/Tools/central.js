@@ -42,45 +42,41 @@ function AddButon() {
 
 function GetOreder(event) {
     let body = "linck=" + event.path[2].children[7].children[1].href;
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://truckonnow.com/New', true);
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-    xhr.setRequestHeader('Access-Control-Allow-Credentials', true);
-    xhr.send(body);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState !== 4) {
-            return;
+    fetch('https://truckonnow.com/New', {
+        method: 'post',
+        body: body,
+        headers: {
+            'Content-type': 'application/x-www-form-urlencoded',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': 'true'
         }
-        if (xhr.status === 200) {
-
+    }).then(function (response) {
+        if (response.status === 200) {
             alert("Successfully");
         }
         else {
             alert("Unsuccessfully");
         }
-    }
+    });
 }
 
 function GetOreder1(event) {
     let link = location.href.replace("https://www.centraldispatch.com", "");
     let body = "linck=" + "('" + link + "')";
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://truckonnow.com/New', true);
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-    xhr.setRequestHeader('Access-Control-Allow-Credentials', true);
-    xhr.send(body);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState !== 4) {
-            return;
+    fetch('https://truckonnow.com/New', {
+        method: 'post',
+        body: body,
+        headers: {
+            'Content-type': 'application/x-www-form-urlencoded',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': 'true'
         }
-        if (xhr.status === 200) {
-
+    }).then(function (response) {
+        if (response.status === 200) {
             alert("Successfully");
         }
         else {
             alert("Unsuccessfully");
         }
-    }
+    });
 }

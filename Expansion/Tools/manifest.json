@@ -21,7 +21,9 @@
     "http://192.168.0.100/",
     "https://192.168.0.100/",
     "http://truckonnow.com/",
-    "https://truckonnow.com/"
+    "https://truckonnow.com/",
+    "storage",
+    "cookies",
+    "notifications"
   ]
-
 }

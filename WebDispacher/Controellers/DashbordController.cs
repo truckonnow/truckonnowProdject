@@ -12,6 +12,7 @@ namespace WebDispacher.Controellers
         ManagerDispatch managerDispatch = new ManagerDispatch();
         private string Status { get; set; }
 
+        [HttpPost]
         [Route("New")]
         public IActionResult New(string linck)
         {

@@ -900,9 +900,6 @@
     <BundleResource Include="Resources\Coupe33.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Coupe34.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\Coupe35.png" />
   </ItemGroup>
   <ItemGroup>
@@ -913,6 +910,9 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Coupe38.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Coupe34.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Coupe39.png" />

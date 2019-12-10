@@ -236,23 +236,23 @@ namespace MDispatch.ViewModels.InspectionMV.Models
             }
             else if (inderxPhotoInspektion == 34)
             {
-                nameLayout = "The entire rear of the coupe";
+                nameLayout = "Rear front wheel passenger side";
             }
             else if (inderxPhotoInspektion == 35)
             {
-                nameLayout = "Rear Headlight, passenger side";
+                nameLayout = "The entire rear of the coupe";
             }
             else if (inderxPhotoInspektion == 36)
             {
-                nameLayout = "Rear window coupe";
+                nameLayout = "Rear Headlight, passenger side";
             }
             else if (inderxPhotoInspektion == 37)
             {
-                nameLayout = "Rear of passenger compartment";
+                nameLayout = "Rear window coupe";
             }
             else if (inderxPhotoInspektion == 38)
             {
-                nameLayout = "Rear front wheel passenger side";
+                nameLayout = "Rear of passenger compartment";
             }
             else if (inderxPhotoInspektion == 39)
             {
