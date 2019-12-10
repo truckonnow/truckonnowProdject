@@ -21,6 +21,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
         AVCaptureStillImageOutput stillImageOutput;
         AVCaptureVideoPreviewLayer videoPreviewLayer = null;
         UIPaintCodeButton takePhotoButton;
+        UIPaintCodeButton takePhotoIspectionButton;
         UIButton scanPhotoButton;
         UIView liveCameraStream;
         private Timer timer = null;
@@ -57,6 +58,11 @@ namespace MDispatch.iOS.NewRender.CustomCamera
                 else if(((CameraPage)Element).TypeCamera == "DetectText")
                 {
                     View.Add(scanPhotoButton);
+                }
+                else if(((CameraPage)Element).TypeCamera == "PhotoIspection")
+                {
+                    View.Add(takePhotoIspectionButton);
+                    View.Add(takePhotoButton);
                 }
                 else
                 {
@@ -168,6 +174,24 @@ namespace MDispatch.iOS.NewRender.CustomCamera
                 }
             };
 
+            takePhotoButton.TouchUpInside += async (s, e) =>
+            {
+                if (!isTake)
+                {
+                    takePhotoButton.Enabled = false;
+                    isTake = true;
+                    var data = await CapturePhoto();
+                    if (data != null)
+                    {
+                        UIImage originalImage = ImageFromByteArray(data.ToArray());
+                        //byte[] res = ResizeImageIOS(originalImage, width, height);
+                        (Element as CameraPage).SetPhotoResult(originalImage.AsJPEG(.7f).ToArray(), (int)originalImage.Size.Width, (int)originalImage.Size.Height);
+                    }
+                    isTake = false;
+                    takePhotoButton.Enabled = true;
+                }
+            };
+
             scanPhotoButton.TouchUpInside += async (s, e) =>
             {
                 if (!isTake)
@@ -235,6 +259,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
         {
             var rightButtonX = View.Bounds.Right - 85;
             var bottomButtonY = View.Bounds.Bottom - 85;
+            var bottomButton1Y = View.Bounds.Bottom - 240;
             var buttonWidth = 70;
             var buttonHeight = 70;
             liveCameraStream = new UIView()
@@ -244,6 +269,10 @@ namespace MDispatch.iOS.NewRender.CustomCamera
             takePhotoButton = new UIPaintCodeButton(DrawTakePhotoButton)
             {
                 Frame = new CGRect(rightButtonX, bottomButtonY, buttonWidth, buttonHeight)
+            };
+            takePhotoIspectionButton = new UIPaintCodeButton(DrawTakePhotoButton)
+            {
+                Frame = new CGRect(rightButtonX, bottomButton1Y, buttonWidth, buttonHeight)
             };
             scanPhotoButton = new UIButton()
             {
