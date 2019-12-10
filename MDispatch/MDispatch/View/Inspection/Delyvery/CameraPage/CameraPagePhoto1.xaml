@@ -4,7 +4,8 @@
              x:Class="MDispatch.View.PageApp.CameraPagePhoto1"
              xmlns:camera="clr-namespace:MDispatch.NewElement"
              OnPhotoResult="CameraPage_OnPhotoResult"
-             NavigationPage.HasBackButton ="True">
+             NavigationPage.HasBackButton ="True"
+             OnPhotoinspectionResult="CameraPage_OnPhotoinspectionResult">
     <ContentPage.Content>
         <AbsoluteLayout >
             <Image x:Name="paternPhoto" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" />

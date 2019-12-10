@@ -16,8 +16,9 @@ namespace MDispatch.View.PageApp
         private FullPagePhotoDelyvery fullPagePhotoDelyvery = null;
         private PageAddDamage1 pageAddDamage1 = null;
 
-        public CameraPagePhoto1(string pngPaternPhoto, FullPagePhotoDelyvery fullPagePhotoDelyvery, PageAddDamage1 pageAddDamage1 = null)
-		{
+        public CameraPagePhoto1(string pngPaternPhoto, FullPagePhotoDelyvery fullPagePhotoDelyvery, string typeCamera = null, PageAddDamage1 pageAddDamage1 = null)
+        {
+            this.TypeCamera = typeCamera;
             this.pageAddDamage1 = pageAddDamage1;
             this.fullPagePhotoDelyvery = fullPagePhotoDelyvery;
             this.pngPaternPhoto = pngPaternPhoto;
@@ -63,6 +64,21 @@ namespace MDispatch.View.PageApp
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
         {
             await Navigation.PopAsync();
+        }
+
+        private async void CameraPage_OnPhotoinspectionResult(PhotoResultEventArgs result)
+        {
+            if (!result.Success)
+                return;
+            fullPagePhotoDelyvery.fullPagePhotoDelyveryMV.AddNewFotoSourse(result.Result);
+            fullPagePhotoDelyvery.fullPagePhotoDelyveryMV.SetPhoto(result.Result);
+            fullPagePhotoDelyvery.SetbtnVisable();
+            if (pageAddDamage1 != null)
+            {
+                pageAddDamage1.stateSelect = 0;
+            }
+            await Navigation.PopAsync(true);
+            fullPagePhotoDelyvery.fullPagePhotoDelyveryMV.SavePhoto();
         }
     }
 }
