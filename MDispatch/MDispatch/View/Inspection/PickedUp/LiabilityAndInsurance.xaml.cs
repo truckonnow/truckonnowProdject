@@ -230,32 +230,40 @@ namespace MDispatch.View.Inspection.PickedUp
                     FlexLayout flexLayout = new FlexLayout()
                     {
                         Wrap = FlexWrap.Wrap,
+                        AlignContent = FlexAlignContent.Center,
+                        AlignItems = FlexAlignItems.Center,
                         Opacity = 0.7,
                         BackgroundColor = Color.FromHex("#F3F781"),
                         Children =
                         {
                             new Label()
                             {
-                                HorizontalTextAlignment = TextAlignment.Center,
-                                Text = "See inspection photo:",
-                                FontSize = 16
+                                TextColor = Color.BlueViolet,
+                                Text = "Click ",
+                                FontSize = 16,
+                                VerticalOptions = LayoutOptions.Center,
                             },
                             new Label()
                             {
                                 HorizontalTextAlignment = TextAlignment.Center,
-                                TextColor = Color.Blue,
-                                Text = $"http://192.168.0.100:22929/Photo/BOL/{VehiclwInformation.Id}",
-                                FontSize = 16
+                                Text = "See inspection photo",
+                                FontSize = 16,
+                                VerticalTextAlignment = TextAlignment.Center
                             }
                         }
                     };
-                    flexLayout.GestureRecognizers.Add(new TapGestureRecognizer(GetPagePhotoInspection));
+                    flexLayout.GestureRecognizers.Add(new TapGestureRecognizer(flexLayout_Clicked));
                     VechInfoSt1.Children.Add(flexLayout);
                 }
             }
             liabilityAndInsuranceMV.StataLoadShip = 0;
         }
-        
+
+        private async void flexLayout_Clicked(Xamarin.Forms.View arg1, object arg2)
+        {
+            await Navigation.PushAsync(new BOLPage(liabilityAndInsuranceMV.managerDispatchMob, liabilityAndInsuranceMV.IdShip, liabilityAndInsuranceMV.initDasbordDelegate));
+        }
+
         private async void CheckProplem(object o)
         {
             bool isProplem = await liabilityAndInsuranceMV.CheckProplem();
@@ -275,12 +283,6 @@ namespace MDispatch.View.Inspection.PickedUp
                 });
                 timer.Change(Timeout.Infinite, Timeout.Infinite);
             }
-        }
-
-        private async void GetPagePhotoInspection(Xamarin.Forms.View v, object s)
-        {
-            Label label = (Label)((FlexLayout)v).Children[1];
-            await Navigation.PushAsync(new PhotoInspectionWeb(label.Text));
         }
 
         bool isSignatureAsk = false;

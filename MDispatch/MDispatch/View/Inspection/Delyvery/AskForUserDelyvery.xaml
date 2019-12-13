@@ -7,7 +7,6 @@
              Title="Question inspection">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="BOL" Clicked="ToolbarItem_Clicked_1"/>
-        <ToolbarItem Text="Contact" Clicked="ToolbarItem_Clicked_2"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>
@@ -103,12 +102,6 @@
                             <Label Text="Rate driver" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                             <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
                             <input:AdvancedSlider MaxValue="10" MinValue="0" StepValue="1" ValuePrefix="Service - " PropertyChanged="AdvancedSlider_PropertyChanged" />
-                        </StackLayout>
-                    </Frame>
-                    <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6">
-                        <StackLayout>
-                            <Label Text="Thank you. Please pass the device to the driver." 
-                               TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         </StackLayout>
                     </Frame>
                 </StackLayout>

@@ -24,7 +24,8 @@ namespace MDispatch.View.Inspection.Delyvery.CameraPage
         {
             if (!result.Success)
                 return;
-            askPageDelyvery.AddPhoto(result.Result);
+            askPageDelyvery.AddPhoto(result.Result); 
+            await Navigation.PopAsync(true);
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)

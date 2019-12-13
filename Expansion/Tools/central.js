@@ -70,7 +70,8 @@ function GetOreder1(event) {
             'Content-type': 'application/x-www-form-urlencoded',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Credentials': 'true'
-        }
+        },
+        withCredentials: true
     }).then(function (response) {
         if (response.status === 200) {
             alert("Successfully");

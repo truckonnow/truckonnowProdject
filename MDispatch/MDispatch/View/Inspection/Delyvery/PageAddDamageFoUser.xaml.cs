@@ -30,7 +30,7 @@ namespace MDispatch.View.Inspection.PickedUp
             this.stackLayout = stackLayout;
             this.askForUsersDelyveryMW = askForUsersDelyveryMW;
             InitializeComponent();
-            touchImage.Source = $"scan{askForUsersDelyveryMW.VehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}";
+            touchImage.Source = $"scan{askForUsersDelyveryMW.VehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}.jpg";
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
                 .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
@@ -43,11 +43,11 @@ namespace MDispatch.View.Inspection.PickedUp
             await PopupNavigation.PushAsync(new DamageSelecter1(this, null), true);
             await WaiteSelectDamage();
             await PopupNavigation.PopAsync(true);
-            stateSelect = 1;
-            await Navigation.PushAsync(new CameraAdditionalPhoto(askForUserDelyvery, this));
-            await WaiteSelectDamage();
             if (stateSelect == 0)
             {
+                stateSelect = 1;
+                await Navigation.PushAsync(new CameraAdditionalPhoto(askForUserDelyvery, this));
+                await WaiteSelectDamage();
                 ImgResize image = new ImgResize()
                 {
                     Source = $"DamageD{indexSelectDamage}.png",

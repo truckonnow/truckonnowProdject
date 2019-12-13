@@ -30,11 +30,11 @@ namespace MDispatch.View.Inspection.Delyvery.CameraPage
                 return;
             askForUserDelyvery.AddPhotoAdditional(result.Result);
             pageAddDamageFoUser.stateSelect = 0;
+            await Navigation.PopAsync(true);
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
         {
-            DependencyService.Get<IOrientationHandler>().ForceSensor();
             await Navigation.PopAsync(true);
         }
 

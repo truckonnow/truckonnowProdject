@@ -42,7 +42,14 @@ namespace MDispatch.View.Inspection.PickedUp
 
         protected override bool OnBackgroundClicked()
         {
-            pageAddDamageFoUser.stateSelect = 2;
+            if (pageAddDamageFoUser != null)
+            {
+                pageAddDamageFoUser.stateSelect = 2;
+            }
+            else
+            {
+                pageAddDamage.stateSelect = 2;
+            }
             return true;
         }
 
@@ -77,7 +84,14 @@ namespace MDispatch.View.Inspection.PickedUp
         [System.Obsolete]
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
         {
-            pageAddDamage.stateSelect = 2;
+            if (pageAddDamageFoUser != null)
+            {
+                pageAddDamageFoUser.stateSelect = 2;
+            }
+            else
+            {
+                pageAddDamage.stateSelect = 2;
+            }
             await PopupNavigation.PopAsync(true);
         }
     }

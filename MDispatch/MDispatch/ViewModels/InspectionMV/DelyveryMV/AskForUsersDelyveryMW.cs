@@ -138,7 +138,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             string description = null;
             int state = 0;
             //await PopupNavigation.PushAsync(new TempDialogPage1(this));
-            if (Payment == "COD" || Payment == "COP")
+            if (Payment == "COD" || Payment == "COP" || Payment == "Biling")
             {
                 ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
                 FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", Car.typeIndex.Replace(" ", ""), inderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1), Payment, TotalPaymentToCarrier);
