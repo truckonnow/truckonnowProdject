@@ -32,7 +32,14 @@ namespace MDispatch.View.Inspection.PickedUp
             {
                 await PopupNavigation.PopAllAsync(true);
                 await PopupNavigation.PushAsync(new TempPageHint4());
-                await Navigation1.PushAsync(new CameraPaymmant(liabilityAndInsuranceMV, ""));
+                if (liabilityAndInsuranceMV.What_form_of_payment_are_you_using_to_pay_for_transportation == "Cash")
+                {
+                    await Navigation1.PushAsync(new VideoCameraPage(liabilityAndInsuranceMV, ""));
+                }
+                else
+                {
+                    await Navigation1.PushAsync(new CameraPaymmant(liabilityAndInsuranceMV, ""));
+                }
             }
         }
     }

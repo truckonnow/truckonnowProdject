@@ -1,4 +1,7 @@
-﻿using MDispatch.ViewModels.InspectionMV.Servise.Paymmant;
+﻿using MDispatch.ViewModels.InspectionMV.DelyveryMV;
+using MDispatch.ViewModels.InspectionMV.PickedUpMV;
+using MDispatch.ViewModels.InspectionMV.Servise.Paymmant;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
@@ -9,23 +12,40 @@ namespace MDispatch.View.Inspection
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class VideoCameraPage : NewElement.CustomVideoCam.VideoCameraPage
     {
-        private CashPaymmant cashPaymmant = null;
+        private object paymmant = null;
 
-        public VideoCameraPage(CashPaymmant cashPaymmant)
+        public VideoCameraPage(object paymmant, string instructionAndNamePaymmant)
         {
-            this.cashPaymmant = cashPaymmant;
+            this.paymmant = paymmant;
             InitializeComponent();
-            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
                 .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
         }
 
+        [Obsolete]
         private async void VideoCameraPage_OnPhotoResult(NewElement.PhotoResultEventArgs result)
         {
-            await Navigation.PopAsync();
             if (!result.Success)
                 return;
-            cashPaymmant.SaveVidopRecount(result.Result);
+            if (paymmant is AskForUsersDelyveryMW)
+            {
+                ((AskForUsersDelyveryMW)paymmant).VideoRecount = new Models.Video()
+                {
+                    path = $"../Video/{((AskForUsersDelyveryMW)paymmant).VehiclwInformation.Id}/RecountPay.mp4",
+                    VideoBase64 = Convert.ToBase64String(result.Result)
+                };
+                await ((AskForUsersDelyveryMW)paymmant).SaveRecountVideo();
+            }
+            else
+            {
+                ((LiabilityAndInsuranceMV)paymmant).VideoRecount = new Models.Video()
+                {
+                    path = $"../Video/{((LiabilityAndInsuranceMV)paymmant).IdVech}/RecountPay.mp4",
+                    VideoBase64 = Convert.ToBase64String(result.Result)
+                };
+                await ((LiabilityAndInsuranceMV)paymmant).SaveRecountVideo();
+            }
         }
     }
 }

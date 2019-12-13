@@ -13,7 +13,6 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Paymmant
         public bool IsAskPaymmant { get; set; }
         public AskForUserDelyvery AskForUserDelyvery { get; set; }
         public LiabilityAndInsurance LiabilityAndInsurance { get; set; }
-        Label label1 = new Label();
         StackLayout stackLayout = null;
 
         [Obsolete]
@@ -21,45 +20,19 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Paymmant
         {
             Entry entry = new Entry();
             Button button = new Button();
-            Button buttoт1 = new Button();
-            Label label = new Label();
             FlexLayout flexLayout = new FlexLayout();
-            label.FontSize = 20;
-            label1.FontSize = 18;
-            buttoт1.Margin = new Thickness(5, 0, 0, 0);
-            label1.Margin = new Thickness(5, 0, 0, 0);
-            label1.Text = "Video saved successfully";
             entry.Keyboard = Keyboard.Numeric;
             entry.Placeholder = "$";
             entry.TextChanged += EntryTextChange;
             button.Text = "I am paid";
-            buttoт1.Text = "Record recount";
-            buttoт1.BackgroundColor = Color.BlueViolet;
-            buttoт1.TextColor = Color.White;
-            buttoт1.Clicked += GoToVideoPage;
             button.BackgroundColor = Color.BlueViolet;
             button.TextColor = Color.White;
             button.Clicked += ClickBtn;
-            label.Text = "Record a video report as recalculated shipping fees";
             stackLayout = new StackLayout();
             stackLayout.Children.Add(entry);
             flexLayout.Children.Add(button);
-            flexLayout.Children.Add(buttoт1);
             stackLayout.Children.Add(flexLayout);
-            stackLayout.Children.Add(label);
             return stackLayout; 
-        }
-
-        private async void GoToVideoPage(object sender, EventArgs e)
-        {
-            if (AskForUserDelyvery != null)
-            {
-                await AskForUserDelyvery.Navigation.PushAsync(new View.Inspection.VideoCameraPage(this));
-            }
-            else
-            {
-                await LiabilityAndInsurance.Navigation.PushAsync(new View.Inspection.VideoCameraPage(this));
-            }
         }
 
         bool isReCount = false;
@@ -79,7 +52,6 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Paymmant
             }
             ((FlexLayout)stackLayout.Children[1]).Children.RemoveAt(1);
             stackLayout.Children.RemoveAt(2);
-            ((FlexLayout)stackLayout.Children[1]).Children.Add(label1);
             isReCount = true;
             CheckIsAskPaymmant();
         }
@@ -125,7 +97,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Paymmant
 
         private void CheckIsAskPaymmant()
         {
-            if(isIamPay && isReCount)
+            if(isIamPay)
             {
                 IsAskPaymmant = true;
             }

@@ -103,7 +103,7 @@ namespace MDispatch.View.Inspection.PickedUp
                 btnNumberOffice.IsVisible = true;
                 lReport.IsVisible = true;
                 blockAsk.IsVisible = false;
-                timer = new Timer(new TimerCallback(CheckProplem), null, 10000, 10000);
+                timer = new Timer(new TimerCallback(CheckProplem), null, 5000, 5000);
             }
             await Wait();
             if (liabilityAndInsuranceMV.Shipping != null && liabilityAndInsuranceMV.Shipping.VehiclwInformations != null)

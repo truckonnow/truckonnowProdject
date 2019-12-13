@@ -121,6 +121,46 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         }
 
         [System.Obsolete]
+        public async void SaveSigAndMethodPay()
+        {
+            Isloader = true;
+            await PopupNavigation.PushAsync(new LoadPage());
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            int state = 0;
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                //Task.Run(async () => await SaveRecountVideo());
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.AskWork("AskPikedUpSig", token, IdShip, SigPhoto, ref description);
+                    state = managerDispatchMob.SaveMethodPay(token, IdShip, What_form_of_payment_are_you_using_to_pay_for_transportation, CountPay, ref description);
+                    initDasbordDelegate.Invoke();
+                });
+                await PopupNavigation.Instance.PopAsync();
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror(description, Navigation));
+                }
+                else if (state == 3)
+                {
+                    await PopupNavigation.PushAsync(new CopyLibaryAndInsurance(this));
+                    DependencyService.Get<IToast>().ShowMessage("Paymmant method saved");
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
+                }
+            }
+            else
+            {
+                //await PopupNavigation.PopAsync();
+            }
+            Isloader = true;
+        }
+
+        [System.Obsolete]
         public async void AddPhoto(byte[] photoResult)
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
@@ -155,46 +195,6 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         }
 
         [System.Obsolete]
-        public async void SaveSigAndMethodPay()
-        {
-            Isloader = true;
-            await PopupNavigation.PushAsync(new LoadPage());
-            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
-            string description = null;
-            int state = 0;
-            await Task.Run(() => Utils.CheckNet());
-            if (App.isNetwork)
-            {
-                Task.Run(async () => await SaveRecountVideo());
-                await Task.Run(() =>
-                {
-                    state = managerDispatchMob.AskWork("AskPikedUpSig", token, IdShip, SigPhoto, ref description);
-                    state = managerDispatchMob.SaveMethodPay(token, IdShip, What_form_of_payment_are_you_using_to_pay_for_transportation, CountPay, ref description);
-                    initDasbordDelegate.Invoke();
-                });
-                await PopupNavigation.Instance.PopAsync();
-                if (state == 2)
-                {
-                    await PopupNavigation.PushAsync(new Errror(description, Navigation));
-                }
-                else if (state == 3)
-                {
-                    await PopupNavigation.PushAsync(new CopyLibaryAndInsurance(this));
-                    DependencyService.Get<IToast>().ShowMessage("Paymmant method saved");
-                }
-                else if (state == 4)
-                {
-                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
-                }
-            }
-            else
-            {
-                //await PopupNavigation.PopAsync();
-            }
-            Isloader = true;
-        }
-
-        [System.Obsolete]
         public async Task SaveRecountVideo()
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
@@ -212,32 +212,28 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 if (state == 2)
                 {
 
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
                         await PopupNavigation.PushAsync(new Errror(description, Navigation));
-                    });
+                    
                 }
                 else if (state == 3)
                 {
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
+                        await Navigation.PushAsync(new Ask2Page(managerDispatchMob, IdVech, IdShip, initDasbordDelegate));
+                        if (Navigation.NavigationStack.Count > 2)
+                        {
+                            Navigation.RemovePage(Navigation.NavigationStack[1]);
+                        }
                         DependencyService.Get<IToast>().ShowMessage("Video capture saved successfully");
-                    });
+                    
                 }
                 else if (state == 4)
                 {
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
                         await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
-                    });
+                    
                 }
             }
             else
             {
-                //Device.BeginInvokeOnMainThread(async () =>
-                //{
-                //    DependencyService.Get<IToast>().ShowMessage("Video capture saved successfully");
-                //});
+
             }
         }
 

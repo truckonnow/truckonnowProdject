@@ -13,7 +13,7 @@ namespace MDispatch.View.PageApp
         private FullPagePhoto fullPagePhoto = null;
         private PageAddDamage pageAddDamage = null;
 
-        public CameraPagePhoto(string pngPaternPhoto, FullPagePhoto fullPagePhoto, string typeCamera = null, PageAddDamage pageAddDamage = null)
+        public CameraPagePhoto(string pngPaternPhoto, FullPagePhoto fullPagePhoto, string typeCamera, PageAddDamage pageAddDamage = null)
 		{
             this.TypeCamera = typeCamera;
             this.pageAddDamage = pageAddDamage;

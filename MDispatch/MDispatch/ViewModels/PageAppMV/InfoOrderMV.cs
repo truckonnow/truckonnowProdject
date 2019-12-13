@@ -166,10 +166,17 @@ namespace MDispatch.ViewModels.PageAppMV
                 Navigation.RemovePage(Navigation.NavigationStack[1]);
                 return;
             }
-            else if (Shipping.AskFromUser.PhotoPay == null && Shipping.AskFromUser.What_form_of_payment_are_you_using_to_pay_for_transportation != "Biling" && Shipping.TotalPaymentToCarrier == "COP")
+            else if ((Shipping.AskFromUser.PhotoPay == null || Shipping.AskFromUser.VideoRecord == null) && Shipping.AskFromUser.What_form_of_payment_are_you_using_to_pay_for_transportation != "Biling" && Shipping.TotalPaymentToCarrier == "COP")
             {
-                LiabilityAndInsuranceMV askForUsersDelyveryMW = new LiabilityAndInsuranceMV(managerDispatchMob, vehiclwInformation1.Id, Shipping.Id, Navigation, initDasbordDelegate);
-                await Navigation.PushAsync(new CameraPaymmant(askForUsersDelyveryMW, ""));
+                LiabilityAndInsuranceMV liabilityAndInsuranceMV = new LiabilityAndInsuranceMV(managerDispatchMob, vehiclwInformation1.Id, Shipping.Id, Navigation, initDasbordDelegate);
+                if (Shipping.AskFromUser.What_form_of_payment_are_you_using_to_pay_for_transportation == "Cash")
+                {
+                    await Navigation.PushAsync(new VideoCameraPage(liabilityAndInsuranceMV, ""));
+                }
+                else
+                {
+                    await Navigation.PushAsync(new CameraPaymmant(liabilityAndInsuranceMV, ""));
+                }
                 Navigation.RemovePage(Navigation.NavigationStack[1]);
             }
             else if(Shipping.Ask2 == null)
