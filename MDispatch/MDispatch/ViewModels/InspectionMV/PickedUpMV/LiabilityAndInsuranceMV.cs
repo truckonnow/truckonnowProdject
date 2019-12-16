@@ -183,8 +183,10 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 }
                 else if (state == 3)
                 {
-                    await Navigation.PushAsync(new Ask2Page(managerDispatchMob, IdVech, IdShip, initDasbordDelegate));
-                    Navigation.RemovePage(Navigation.NavigationStack[1]);
+                    if (Navigation.NavigationStack.Count > 2)
+                    {
+                        Navigation.RemovePage(Navigation.NavigationStack[1]);
+                    }
                     DependencyService.Get<IToast>().ShowMessage("Paymmant photo saved");
                 }
                 else if (state == 4)
@@ -195,41 +197,42 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         }
 
         [System.Obsolete]
-        public async Task SaveRecountVideo()
+        public async void SaveRecountVideo()
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
+            await PopupNavigation.PushAsync(new LoadPage());
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
                 if (videoRecount != null)
                 {
-                    //state = managerDispatchMob.SavePay("SaveRecount", token, IdShip, 1, VideoRecount, ref description);
-                    state = 3;
-                    TaskManager.CommandToDo("SaveRecount", 1, token, IdShip, 1, VideoRecount);
+                    await Task.Run(() => 
+                    {
+                        state = managerDispatchMob.SavePay("SaveRecount", token, IdShip, 1, VideoRecount, ref description);
+                    });
+                    //state = 3;
+                    //TaskManager.CommandToDo("SaveRecount", 1, token, IdShip, 1, VideoRecount);
                 }
                 if (state == 2)
                 {
-
-                        await PopupNavigation.PushAsync(new Errror(description, Navigation));
-                    
+                    await PopupNavigation.PushAsync(new Errror(description, Navigation));
                 }
                 else if (state == 3)
                 {
-                        await Navigation.PushAsync(new Ask2Page(managerDispatchMob, IdVech, IdShip, initDasbordDelegate));
-                        if (Navigation.NavigationStack.Count > 2)
-                        {
-                            Navigation.RemovePage(Navigation.NavigationStack[1]);
-                        }
-                        DependencyService.Get<IToast>().ShowMessage("Video capture saved successfully");
-                    
+                    if (Navigation.NavigationStack.Count > 2)
+                    {
+                        Navigation.RemovePage(Navigation.NavigationStack[1]);
+                    }
+                    DependencyService.Get<IToast>().ShowMessage("Video capture saved successfully");
+
                 }
                 else if (state == 4)
                 {
-                        await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
-                    
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
                 }
+                await PopupNavigation.PopAsync();
             }
             else
             {

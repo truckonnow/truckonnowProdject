@@ -30,7 +30,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         public INavigation Navigation { get; set; }
         public InitDasbordDelegate initDasbordDelegate = null;
         private GetShiping getShiping = null; 
-        private GetVechicleDelegate getVechicleDelegate = null;
+        public GetVechicleDelegate getVechicleDelegate = null;
         public DelegateCommand GoToFeedBackCommand { get; set; }
 
         public AskForUsersDelyveryMW(ManagerDispatchMob managerDispatchMob, string idShip, INavigation navigation, GetShiping getShiping, InitDasbordDelegate initDasbordDelegate,
@@ -52,10 +52,10 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         }
 
         public string IdShip { get; set; }
-        private string TotalPaymentToCarrier { get; set; }
+        public string TotalPaymentToCarrier { get; set; }
         public string Payment { get; set; }
 
-        private VehiclwInformation vehiclwInformation = null;
+        public VehiclwInformation vehiclwInformation = null;
 
         internal async Task<bool> CheckProplem()
         {
@@ -148,12 +148,19 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
             else
             {
-                await Navigation.PushAsync(new CameraPaymmant(this, ""));
+                if (askForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation == "Cash")
+                {
+                    await Navigation.PushAsync(new VideoCameraPage(this, ""));
+                }
+                else
+                {
+                    await Navigation.PushAsync(new CameraPaymmant(this, ""));
+                }
             }
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
-                Task.Run(async () => await SaveRecountVideo());
+               // await Task.Run(() => SaveRecountVideo());
                 await Task.Run(() =>
                 {
                     state = managerDispatchMob.AskWork("AskForUserDelyvery", token, IdShip, AskForUserDelyveryM, ref description);
@@ -201,7 +208,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
         }
 
-        private ICar GetTypeCar(string typeCar)
+        public ICar GetTypeCar(string typeCar)
         {
             ICar car = null;
             switch (typeCar)
@@ -231,42 +238,42 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         }
 
         [System.Obsolete]
-        public async Task SaveRecountVideo()
+        public async void SaveRecountVideo()
         {
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
+            await PopupNavigation.PushAsync(new LoadPage());
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
                 if (videoRecount != null)
                 {
-                    //state = managerDispatchMob.SavePay("SaveRecount", token, IdShip, 2, videoRecount, ref description);
-                    state = 3;
-                    TaskManager.CommandToDo("SaveRecount", 1, token, IdShip, 2, VideoRecount);
+                    await Task.Run(() =>
+                    {
+                        state = managerDispatchMob.SavePay("SaveRecount", token, IdShip, 2, videoRecount, ref description);
+                    });
+                    //state = 3;
+                    //TaskManager.CommandToDo("SaveRecount", 1, token, IdShip, 2, VideoRecount);
                 }
                 if (state == 2)
                 {
+                    await PopupNavigation.PushAsync(new Errror(description, Navigation));
 
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
-                        await PopupNavigation.PushAsync(new Errror(description, Navigation));
-                    });
                 }
                 else if (state == 3)
                 {
-                    Device.BeginInvokeOnMainThread(async () =>
+                    if (Navigation.NavigationStack.Count > 2)
                     {
-                        DependencyService.Get<IToast>().ShowMessage("Video capture saved successfully");
-                    });
+                        Navigation.RemovePage(Navigation.NavigationStack[1]);
+                    }
+                    DependencyService.Get<IToast>().ShowMessage("Video capture saved successfully");
                 }
                 else if (state == 4)
                 {
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
-                        await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
-                    });
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", Navigation));
                 }
+                await PopupNavigation.PopAsync();
             }
         }
 
@@ -294,11 +301,10 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 else if (state == 3)
                 {
                     DependencyService.Get<IToast>().ShowMessage("Payment method photo saved");
-                    ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
-                    FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, IdShip, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), inderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(1), Payment, TotalPaymentToCarrier);
-                    await Navigation.PushAsync(fullPagePhotoDelyvery, true);
-                    await Navigation.PushAsync(new CameraPagePhoto1($"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", fullPagePhotoDelyvery, "PhotoIspection"));
-                    Navigation.RemovePage(Navigation.NavigationStack[1]);
+                    if (Navigation.NavigationStack.Count > 2)
+                    {
+                        Navigation.RemovePage(Navigation.NavigationStack[1]);
+                    }
                 }
                 else if (state == 4)
                 {

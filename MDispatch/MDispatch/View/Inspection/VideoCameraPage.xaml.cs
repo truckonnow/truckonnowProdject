@@ -1,4 +1,7 @@
-﻿using MDispatch.ViewModels.InspectionMV.DelyveryMV;
+﻿using MDispatch.View.Inspection.PickedUp;
+using MDispatch.View.PageApp;
+using MDispatch.ViewModels.AskPhoto;
+using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
 using MDispatch.ViewModels.InspectionMV.Servise.Paymmant;
 using System;
@@ -35,7 +38,14 @@ namespace MDispatch.View.Inspection
                     path = $"../Video/{((AskForUsersDelyveryMW)paymmant).VehiclwInformation.Id}/RecountPay.mp4",
                     VideoBase64 = Convert.ToBase64String(result.Result)
                 };
-                await ((AskForUsersDelyveryMW)paymmant).SaveRecountVideo();
+                ICar Car = ((AskForUsersDelyveryMW)paymmant).GetTypeCar(((AskForUsersDelyveryMW)paymmant).vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+                FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(((AskForUsersDelyveryMW)paymmant).managerDispatchMob, ((AskForUsersDelyveryMW)paymmant).vehiclwInformation, ((AskForUsersDelyveryMW)paymmant).IdShip,
+                    $"{((AskForUsersDelyveryMW)paymmant).vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", ((AskForUsersDelyveryMW)paymmant).vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""),
+                    ((AskForUsersDelyveryMW)paymmant).InderxPhotoInspektion + 1, ((AskForUsersDelyveryMW)paymmant).initDasbordDelegate, ((AskForUsersDelyveryMW)paymmant).getVechicleDelegate, Car.GetNameLayout(1),
+                    ((AskForUsersDelyveryMW)paymmant).Payment, ((AskForUsersDelyveryMW)paymmant).TotalPaymentToCarrier);
+                await Navigation.PushAsync(fullPagePhotoDelyvery, true);
+                await Navigation.PushAsync(new CameraPagePhoto1($"{((AskForUsersDelyveryMW)paymmant).vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", fullPagePhotoDelyvery, "PhotoIspection"));
+                ((AskForUsersDelyveryMW)paymmant).SaveRecountVideo();
             }
             else
             {
@@ -44,8 +54,10 @@ namespace MDispatch.View.Inspection
                     path = $"../Video/{((LiabilityAndInsuranceMV)paymmant).IdVech}/RecountPay.mp4",
                     VideoBase64 = Convert.ToBase64String(result.Result)
                 };
-                await ((LiabilityAndInsuranceMV)paymmant).SaveRecountVideo();
+                await Navigation.PushAsync(new Ask2Page(((LiabilityAndInsuranceMV)paymmant).managerDispatchMob, ((LiabilityAndInsuranceMV)paymmant).IdVech, ((LiabilityAndInsuranceMV)paymmant).IdShip, ((LiabilityAndInsuranceMV)paymmant).initDasbordDelegate));
+                ((LiabilityAndInsuranceMV)paymmant).SaveRecountVideo();
             }
+
         }
     }
 }

@@ -225,7 +225,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             bool isNavigationMany = false;
             bool isTask = false;
             int navigationStack_Count = isNavigWthDamag ? Navigation.NavigationStack.Count - 1 : Navigation.NavigationStack.Count;
-            if (navigationStack_Count > 2)
+            if (navigationStack_Count > 3)
             {
                 //await PopupNavigation.PushAsync(new LoadPage());
                 //isNavigationMany = true;
@@ -245,6 +245,14 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", Car.typeIndex.Replace(" ", ""), InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1), OnDeliveryToCarrier, TotalPaymentToCarrier);
                 await Navigation.PushAsync(fullPagePhotoDelyvery);
                 await Navigation.PushAsync(new CameraPagePhoto1($"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", fullPagePhotoDelyvery, "PhotoIspection"));
+            }
+            if (isTask)
+            {
+                if (Navigation.NavigationStack.Count > 2)
+                {
+                    Navigation.RemovePage(Navigation.NavigationStack[1]);
+                }
+                return;
             }
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
@@ -285,15 +293,10 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                         await PopupNavigation.RemovePageAsync(PopupNavigation.PopupStack[0]);
                         isNavigationMany = false;
                     }
-                        try
-                        {
-                            Navigation.RemovePage(Navigation.NavigationStack[1]);
-                        }
-                        catch(ArgumentOutOfRangeException e)
-                        {
-
-                        }
-                    
+                    if (!isTask && Navigation.NavigationStack.Count > 2)
+                    {
+                        Navigation.RemovePage(Navigation.NavigationStack[1]);
+                    }
                     DependencyService.Get<IToast>().ShowMessage($"Photo {Car.GetNameLayout(InderxPhotoInspektion + 1)} saved");
                 }
                 else if (state == 4)

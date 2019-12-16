@@ -1,4 +1,7 @@
 ﻿using MDispatch.NewElement;
+using MDispatch.View.Inspection.PickedUp;
+using MDispatch.View.PageApp;
+using MDispatch.ViewModels.AskPhoto;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
 using Xamarin.Forms.PlatformConfiguration;
@@ -22,16 +25,25 @@ namespace MDispatch.View.Inspection
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
         }
 
+        [System.Obsolete]
         private async void CameraPage_OnPhotoResult(NewElement.PhotoResultEventArgs result)
         {
             if (!result.Success)
                 return;
             if(paymmant is AskForUsersDelyveryMW)
             {
+                ICar Car = ((AskForUsersDelyveryMW)paymmant).GetTypeCar(((AskForUsersDelyveryMW)paymmant).vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+                FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(((AskForUsersDelyveryMW)paymmant).managerDispatchMob, ((AskForUsersDelyveryMW)paymmant).vehiclwInformation, ((AskForUsersDelyveryMW)paymmant).IdShip, 
+                    $"{((AskForUsersDelyveryMW)paymmant).vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", ((AskForUsersDelyveryMW)paymmant).vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 
+                    ((AskForUsersDelyveryMW)paymmant).InderxPhotoInspektion + 1, ((AskForUsersDelyveryMW)paymmant).initDasbordDelegate, ((AskForUsersDelyveryMW)paymmant).getVechicleDelegate, Car.GetNameLayout(1), 
+                    ((AskForUsersDelyveryMW)paymmant).Payment, ((AskForUsersDelyveryMW)paymmant).TotalPaymentToCarrier);
+                await Navigation.PushAsync(fullPagePhotoDelyvery, true);
+                await Navigation.PushAsync(new CameraPagePhoto1($"{((AskForUsersDelyveryMW)paymmant).vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", fullPagePhotoDelyvery, "PhotoIspection"));
                 ((AskForUsersDelyveryMW)paymmant).AddPhoto(result.Result);
             }
             else
             {
+                await Navigation.PushAsync(new Ask2Page(((LiabilityAndInsuranceMV)paymmant).managerDispatchMob, ((LiabilityAndInsuranceMV)paymmant).IdVech, ((LiabilityAndInsuranceMV)paymmant).IdShip, ((LiabilityAndInsuranceMV)paymmant).initDasbordDelegate));
                 ((LiabilityAndInsuranceMV)paymmant).AddPhoto(result.Result);
             }
         }
