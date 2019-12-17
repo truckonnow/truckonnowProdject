@@ -15,143 +15,143 @@ namespace MDispatch.ViewModels.InspectionMV.Models
             string nameLayout = "";
             if(inderxPhotoInspektion == 1)
             {
-                nameLayout = "Vehicle hood";
+                nameLayout = "Pickup dashboard";
             }
             else if(inderxPhotoInspektion == 2)
             {
-                nameLayout = "Left headlight of the vehicle";
+                nameLayout = "Pickup Salon";
             }
             else if (inderxPhotoInspektion == 3)
             {
-                nameLayout = "Right headlight of the vehicle";
+                nameLayout = "Driver seat";
             }
             else if (inderxPhotoInspektion == 4)
             {
-                nameLayout = "Vehicle windshield";
+                nameLayout = "Driver seat";
             }
             else if (inderxPhotoInspektion == 5)
             {
-                nameLayout = "Front left side of the vehicle";
+                nameLayout = "Front driver door";
             }
             else if (inderxPhotoInspektion == 6)
             {
-                nameLayout = "Front left side of the vehicle";
+                nameLayout = "Front of the pickUp, driver's side";
             }
             else if (inderxPhotoInspektion == 7)
             {
-                nameLayout = "Front left vehicle door";
+                nameLayout = "Rear-view mirror of a pickup driver's side";
             }
             else if (inderxPhotoInspektion == 8)
             {
-                nameLayout = "Front left vehicle door";
+                nameLayout = "Rear-view mirror of a pickup driver's side";
             }
             else if (inderxPhotoInspektion == 9)
             {
-                nameLayout = "Rear left vehicle door";
+                nameLayout = "Front of the pickUp, driver's side";
             }
             else if (inderxPhotoInspektion == 10)
             {
-                nameLayout = "Rear left of the vehicle";
+                nameLayout = "The front wheel of a pickup driver's side";
             }
             else if (inderxPhotoInspektion == 11)
             {
-                nameLayout = "Rear left of the vehicle";
+                nameLayout = "The right side of the front bumper of the pickup";
             }
             else if (inderxPhotoInspektion == 12)
             {
-                nameLayout = "Left side of the vehicle's rear bumper";
+                nameLayout = "Right front headlight of a pickup bumper";
             }
             else if (inderxPhotoInspektion == 13)
             {
-                nameLayout = "The central part of the rear bumper of the vehicle";
+                nameLayout = "The center side of the front bumper of the pickup";
             }
             else if (inderxPhotoInspektion == 14)
             {
-                nameLayout = "Right side of the vehicle's rear bumper";
+                nameLayout = "The left side of the front bumper of the pickup";
             }
             else if (inderxPhotoInspektion == 15)
             {
-                nameLayout = "Rear right of the vehicle";
+                nameLayout = "Left front headlight of a pickup bumper";
             }
             else if (inderxPhotoInspektion == 16)
             {
-                nameLayout = "Rear right of the vehicle";
+                nameLayout = "Hood of a pickup";
             }
             else if (inderxPhotoInspektion == 17)
             {
-                nameLayout = "Rear right vehicle door";
+                nameLayout = "Windshield pickup";
             }
             else if (inderxPhotoInspektion == 18)
             {
-                nameLayout = "Front right vehicle door";
+                nameLayout = "Pickup roof";
             }
             else if (inderxPhotoInspektion == 19)
             {
-                nameLayout = "Front right vehicle door";
+                nameLayout = "Front of the Pickup on the passenger side";
             }
             else if (inderxPhotoInspektion == 20)
             {
-                nameLayout = "The right side of the front bumper of the vehicle";
+                nameLayout = "The front wheel of a pickup passenger side";
             }
             else if (inderxPhotoInspektion == 21)
             {
-                nameLayout = "The central side of the front bumper of the vehicle";
+                nameLayout = "Front of the Pickup on the passenger side";
             }
             else if (inderxPhotoInspektion == 22)
             {
-                nameLayout = "The left side of the front bumper of the vehicle";
+                nameLayout = "Rear-view mirror of a pickup passenger side";
             }
             else if (inderxPhotoInspektion == 23)
             {
-                nameLayout = "Right rearview mirror of the vehicle";
+                nameLayout = "Rear-view mirror of a pickup passenger side";
             }
             else if (inderxPhotoInspektion == 24)
             {
-                nameLayout = "Left rearview mirror of the vehicle";
+                nameLayout = "Front passenger door";
             }
             else if (inderxPhotoInspektion == 25)
             {
-                nameLayout = "Right rearview mirror of the vehicle";
+                nameLayout = "Rear passenger door";
             }
             else if (inderxPhotoInspektion == 26)
             {
-                nameLayout = "Left rearview mirror of the vehicle";
+                nameLayout = "Rear of the Pickup on the passenger side";
             }
             else if (inderxPhotoInspektion == 27)
             {
-                nameLayout = "Vehicle roof";
+                nameLayout = "The rear wheel of a pickup passenger side";
             }
             else if (inderxPhotoInspektion == 28)
             {
-                nameLayout = "Left front wheel of the vehicle";
+                nameLayout = "Rear of the Pickup on the passenger side";
             }
             else if (inderxPhotoInspektion == 29)
             {
-                nameLayout = "Left rear wheel of the vehicle";
+                nameLayout = "The right side of the rear bumper";
             }
             else if (inderxPhotoInspektion == 30)
             {
-                nameLayout = "Right rear wheel of the vehicle";
+                nameLayout = "The centr side of the rear bumper";
             }
             else if (inderxPhotoInspektion == 31)
             {
-                nameLayout = "Right front wheel of the vehicle";
+                nameLayout = "The left side of the rear bumper";
             }
             else if (inderxPhotoInspektion == 32)
             {
-                nameLayout = "Vehicle interior";
+                nameLayout = "Rear of the Pickup on the driver's side";
             }
             else if (inderxPhotoInspektion == 33)
             {
-                nameLayout = "Vehicle dashboard";
+                nameLayout = "The rear wheel of a pickup driver's side";
             }
             else if (inderxPhotoInspektion == 34)
             {
-                nameLayout = "Driver's seat";
+                nameLayout = "Rear of the Pickup on the driver's side";
             }
             else if (inderxPhotoInspektion == 35)
             {
-                nameLayout = "Driver's seat";
+                nameLayout = "Rear driver's door";
             }
             return nameLayout;
         }
