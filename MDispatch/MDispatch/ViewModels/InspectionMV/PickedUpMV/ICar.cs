@@ -9,6 +9,6 @@ namespace MDispatch.ViewModels.AskPhoto
         Task OrintableScreen(int inderxPhotoInspektion);
         string GetNameLayout(int inderxPhotoInspektion);
         int GetIndexCar(int countPhoto);
-        int GetIndexCarFullPhoto(int countPhoto);
+        //int GetIndexCarFullPhoto(int countPhoto);
     }
 }

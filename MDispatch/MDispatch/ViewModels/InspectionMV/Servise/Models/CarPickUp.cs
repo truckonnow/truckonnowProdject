@@ -179,47 +179,42 @@ namespace MDispatch.ViewModels.InspectionMV.Models
             {
                 case 1:
                     {
-                        indecCar = 24;
+                        indecCar = 5;
                         break;
                     }
                 case 2:
                     {
-                        indecCar = 34;
+                        indecCar = 7;
                         break;
                     }
                 case 3:
                     {
-                        indecCar = 5;
+                        indecCar = 17;
                         break;
                     }
                 case 4:
                     {
-                        indecCar = 6;
+                        indecCar = 11;
                         break;
                     }
                 case 5:
                     {
-                        indecCar = 7;
+                        indecCar = 13;
                         break;
                     }
                 case 6:
                     {
-                        indecCar = 8;
+                        indecCar = 14;
                         break;
                     }
                 case 7:
                     {
-                        indecCar = 9;
+                        indecCar = 24;
                         break;
                     }
                 case 8:
                     {
-                        indecCar = 10;
-                        break;
-                    }
-                case 9:
-                    {
-                        indecCar = 24;
+                        indecCar = 22;
                         break;
                     }
                 default:
