@@ -2,6 +2,7 @@
 using FluentScheduler;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,7 +31,7 @@ namespace ApiMobaileServise.BackgraundService.Queue
                     {
                         await managerMobileApi.LoadTask(queues[i].Split(',')[1], queues[i].Split(',')[2]);
                     }
-                    else if (queues[i].Split(',')[0] == "End")
+                    else if (queues[i].Split(',')[0] == "End" && queues.FirstOrDefault(q => q.Split(',')[0] == "Load") == null)
                     {
                         await managerMobileApi.EndTask(queues[i].Split(',')[1], queues[i].Split(',')[2]);
                     }
