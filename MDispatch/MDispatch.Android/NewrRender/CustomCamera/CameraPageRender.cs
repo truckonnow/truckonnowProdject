@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Android;
+using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -12,6 +13,7 @@ using Android.Runtime;
 using Android.Support.V4.App;
 using Android.Support.V4.Content;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
 using MDispatch.Droid.NewrRender;
 using MDispatch.NewElement;
@@ -39,6 +41,7 @@ namespace MDispatch.Droid.NewrRender
         Button capturePhotoButton;
         Button scanPhotoButton;
         Button capturePhotoInspectionButton;
+        AnimatorSet animationcapturePhotoInspectionButtonSet = null;
 
         [Obsolete]
         Android.Hardware.Camera camera;
@@ -51,6 +54,7 @@ namespace MDispatch.Droid.NewrRender
             type = ((CameraPage)Element).TypeCamera == null || ((CameraPage)Element).TypeCamera == "" ? "Photo" : ((CameraPage)Element).TypeCamera;
             SetupUserInterface();
             SetupEventHandlers();
+            //SetAnimation();
         }
 
         void SetupUserInterface()
@@ -86,6 +90,7 @@ namespace MDispatch.Droid.NewrRender
                 captureButtonParams.Height = 120;
                 captureButtonParams.Width = 120;
                 capturePhotoButton.LayoutParameters = captureButtonParams;
+
                 mainLayout.AddView(capturePhotoButton);
                 mainLayout.AddView(progressBar);
             }
@@ -137,6 +142,25 @@ namespace MDispatch.Droid.NewrRender
 
 
             AddView(mainLayout);
+        }
+
+        private async void EndAnimation(object sender, EventArgs e)
+        {
+            animationcapturePhotoInspectionButtonSet = new AnimatorSet();
+            if (clickNameBtn == "capturePhotoInspectionButton")
+            {
+                animationcapturePhotoInspectionButtonSet.PlayTogether(
+                    ObjectAnimator.OfFloat(capturePhotoInspectionButton, "scaleX", 0.8f, 1f),
+                    ObjectAnimator.OfFloat(capturePhotoInspectionButton, "scaleY", 0.8f, 1f));
+            }
+            else if (clickNameBtn == "capturePhotoButton")
+            {
+                animationcapturePhotoInspectionButtonSet.PlayTogether(
+                    ObjectAnimator.OfFloat(capturePhotoButton, "scaleX", 0.8f, 1f),
+                    ObjectAnimator.OfFloat(capturePhotoButton, "scaleY", 0.8f, 1f));
+            }
+            animationcapturePhotoInspectionButtonSet.SetDuration(400);
+            animationcapturePhotoInspectionButtonSet.Start();
         }
 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
@@ -197,11 +221,18 @@ namespace MDispatch.Droid.NewrRender
         }
 
         string clickNameBtn = "";
-        public void SetupEventHandlers()
+        public async void SetupEventHandlers()
         {
             capturePhotoButton.Click += async (sender, e) =>
             {
                 clickNameBtn = "capturePhotoButton";
+                animationcapturePhotoInspectionButtonSet = new AnimatorSet();
+                animationcapturePhotoInspectionButtonSet.PlayTogether(
+                    ObjectAnimator.OfFloat(capturePhotoButton, "scaleX", 1, .8f),
+                    ObjectAnimator.OfFloat(capturePhotoButton, "scaleY", 1, .8f));
+                animationcapturePhotoInspectionButtonSet.SetDuration(400);
+                animationcapturePhotoInspectionButtonSet.AnimationEnd += EndAnimation;
+                animationcapturePhotoInspectionButtonSet.Start();
                 AutoFocus();
             };
             scanPhotoButton.Click += async (sender, e) =>
@@ -212,6 +243,13 @@ namespace MDispatch.Droid.NewrRender
             capturePhotoInspectionButton.Click += async (sender, e) =>
             {
                 clickNameBtn = "capturePhotoInspectionButton";
+                animationcapturePhotoInspectionButtonSet = new AnimatorSet();
+                animationcapturePhotoInspectionButtonSet.PlayTogether(
+                    ObjectAnimator.OfFloat(capturePhotoInspectionButton, "scaleX", 1, .8f),
+                    ObjectAnimator.OfFloat(capturePhotoInspectionButton, "scaleY", 1, .8f));
+                animationcapturePhotoInspectionButtonSet.SetDuration(400);
+                animationcapturePhotoInspectionButtonSet.AnimationEnd += EndAnimation;
+                animationcapturePhotoInspectionButtonSet.Start();
                 AutoFocus();
             };
             liveView.SurfaceTextureListener = this;

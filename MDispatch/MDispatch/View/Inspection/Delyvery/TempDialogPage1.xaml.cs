@@ -29,7 +29,7 @@ namespace MDispatch.View.Inspection.Delyvery
             }
             else
             {
-                await askForUsersDelyveryMW.Navigation.PushAsync(new CameraPaymmant(askForUsersDelyveryMW, ""));
+                //await askForUsersDelyveryMW.Navigation.PushAsync(new CameraPaymmant(askForUsersDelyveryMW, ""));
             }
         }
 

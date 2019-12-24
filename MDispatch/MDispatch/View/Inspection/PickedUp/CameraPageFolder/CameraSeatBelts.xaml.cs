@@ -21,7 +21,7 @@ namespace MDispatch.View.Inspection.PickUp.CameraPageFolder
 		{
             this.ask1Page = ask1Page;
 			InitializeComponent ();
-            titlePhoto.Text = $"safety belt {photos.Count + 1}";
+            titlePhoto.Text = $"{photos.Count + 1}";
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
                 .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
@@ -47,7 +47,7 @@ namespace MDispatch.View.Inspection.PickUp.CameraPageFolder
             photo.path = $"../Photo/{ask1Page.ask1PageMV.VehiclwInformation.Id}/PikedUp/CameraSeatBelts/{photos.Count + 1}.jpg";
             photos.Add(photo);
             imagesByte.Add(result.Result);
-            titlePhoto.Text = $"safety belt {photos.Count + 1}";
+            titlePhoto.Text = $"{photos.Count + 1}";
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)

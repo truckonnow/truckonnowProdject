@@ -4,6 +4,7 @@ using MDispatch.View.PageApp;
 using MDispatch.ViewModels.AskPhoto;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
+using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
@@ -15,10 +16,11 @@ namespace MDispatch.View.Inspection
     {
         private object paymmant = null;
 
-        public CameraPaymmant(object paymmant, string instructionAndNamePaymmant)
+        public CameraPaymmant(object paymmant, string instructionAndNamePaymmant, string paymmentpattern)
         {
             this.paymmant = paymmant;
             InitializeComponent();
+            paternPayment.Source = paymmentpattern;
             On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
                 .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
             NamaPayment.Text = instructionAndNamePaymmant;
@@ -46,6 +48,17 @@ namespace MDispatch.View.Inspection
                 await Navigation.PushAsync(new Ask2Page(((LiabilityAndInsuranceMV)paymmant).managerDispatchMob, ((LiabilityAndInsuranceMV)paymmant).IdVech, ((LiabilityAndInsuranceMV)paymmant).IdShip, ((LiabilityAndInsuranceMV)paymmant).initDasbordDelegate));
                 ((LiabilityAndInsuranceMV)paymmant).AddPhoto(result.Result);
             }
+        }
+
+        protected override void OnDisappearing()
+        {
+            DependencyService.Get<IOrientationHandler>().ForceSensor();
+            base.OnDisappearing();
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            await Navigation.PopAsync();
         }
     }
 }

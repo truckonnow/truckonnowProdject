@@ -80,22 +80,24 @@ namespace MDispatch.ViewModels.InspectionMV
                     }
                     else
                     {
-                        //Check Navigation.RemovePage(Navigation.NavigationStack[1]); Emty
-                        if (((LiabilityAndInsuranceMV)paymmpayMVInspactionant).What_form_of_payment_are_you_using_to_pay_for_transportation == "COP" || ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).What_form_of_payment_are_you_using_to_pay_for_transportation == "COD")
+                        if (((LiabilityAndInsuranceMV)paymmpayMVInspactionant).What_form_of_payment_are_you_using_to_pay_for_transportation == "Cash")
                         {
-                            await ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).Navigation.PushAsync(new Ask2Page(managerDispatchMob, ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).IdVech, ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).IdShip, ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).initDasbordDelegate));
-                            Navigation.RemovePage(Navigation.NavigationStack[1]);
+                            await Navigation.PushAsync(new VideoCameraPage(((LiabilityAndInsuranceMV)paymmpayMVInspactionant), ""));
+                        }
+                        else if (((LiabilityAndInsuranceMV)paymmpayMVInspactionant).What_form_of_payment_are_you_using_to_pay_for_transportation == "Check")
+                        {
+                            await Navigation.PushAsync(new CameraPaymmant(((LiabilityAndInsuranceMV)paymmpayMVInspactionant), "", "CheckPaymment.png"));
                         }
                         else
                         {
-                            await ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).Navigation.PushAsync(new CameraPaymmant(((LiabilityAndInsuranceMV)paymmpayMVInspactionant), ""));
+                            await Navigation.PushAsync(new Ask2Page(((LiabilityAndInsuranceMV)paymmpayMVInspactionant).managerDispatchMob, ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).IdVech, ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).IdShip, ((LiabilityAndInsuranceMV)paymmpayMVInspactionant).initDasbordDelegate));
                         }
                     }
                 }
-                else if (state == 4)
-                {
-                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
-                }
+            }
+            else if (state == 4)
+            {
+                await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
             }
         }
     }

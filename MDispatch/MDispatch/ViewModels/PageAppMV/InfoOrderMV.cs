@@ -173,9 +173,13 @@ namespace MDispatch.ViewModels.PageAppMV
                 {
                     await Navigation.PushAsync(new VideoCameraPage(liabilityAndInsuranceMV, ""));
                 }
+                else if (Shipping.AskFromUser.What_form_of_payment_are_you_using_to_pay_for_transportation == "Check")
+                {
+                    await Navigation.PushAsync(new CameraPaymmant(liabilityAndInsuranceMV, "", "CheckPaymment.png"));
+                }
                 else
                 {
-                    await Navigation.PushAsync(new CameraPaymmant(liabilityAndInsuranceMV, ""));
+                    await Navigation.PushAsync(new Ask2Page(liabilityAndInsuranceMV.managerDispatchMob, liabilityAndInsuranceMV.IdVech, liabilityAndInsuranceMV.IdShip, liabilityAndInsuranceMV.initDasbordDelegate));
                 }
                 Navigation.RemovePage(Navigation.NavigationStack[1]);
             }
@@ -215,16 +219,19 @@ namespace MDispatch.ViewModels.PageAppMV
             {
                 AskForUsersDelyveryMW askForUsersDelyveryMW = new AskForUsersDelyveryMW(managerDispatchMob, Shipping.Id, Navigation, GetShiping, initDasbordDelegate, getVechicleDelegate, Shipping.VehiclwInformations[0], Shipping.TotalPaymentToCarrier, Shipping.askForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation);
                 //await Navigation.PushAsync(new CameraPaymmant(askForUsersDelyveryMW, ""));
+
                 if (Shipping.askForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation == "Cash")
                 {
-                    await Navigation.PushAsync(new VideoCameraPage(askForUsersDelyveryMW, ""));
+                    await Navigation.PushAsync(new VideoCameraPage(this, ""));
+                    Navigation.RemovePage(Navigation.NavigationStack[1]);
+                    return;
                 }
-                else
+                else if (Shipping.askForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation == "Check")
                 {
-                    await Navigation.PushAsync(new CameraPaymmant(askForUsersDelyveryMW, ""));
+                    await Navigation.PushAsync(new CameraPaymmant(this, "", "CheckPaymment.png"));
+                    Navigation.RemovePage(Navigation.NavigationStack[1]);
+                    return;
                 }
-                Navigation.RemovePage(Navigation.NavigationStack[1]);
-                return;
             }
             foreach (var vehiclwInformation in Shipping.VehiclwInformations)
             {

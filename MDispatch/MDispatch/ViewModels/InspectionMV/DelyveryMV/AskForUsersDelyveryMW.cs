@@ -152,9 +152,17 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 {
                     await Navigation.PushAsync(new VideoCameraPage(this, ""));
                 }
+                else if (askForUserDelyveryM.What_form_of_payment_are_you_using_to_pay_for_transportation == "Check")
+                {
+                    await Navigation.PushAsync(new CameraPaymmant(this, "", "CheckPaymment.png"));
+                }
                 else
                 {
-                    await Navigation.PushAsync(new CameraPaymmant(this, ""));
+                    ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+                    FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, IdShip, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""),
+                       InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(1), Payment, TotalPaymentToCarrier);
+                    await Navigation.PushAsync(fullPagePhotoDelyvery, true);
+                    await Navigation.PushAsync(new CameraPagePhoto1($"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", fullPagePhotoDelyvery, "PhotoIspection"));
                 }
             }
             await Task.Run(() => Utils.CheckNet());

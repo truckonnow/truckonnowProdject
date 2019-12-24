@@ -6,6 +6,11 @@
              OnPhotoResult="VideoCameraPage_OnPhotoResult">
     <ContentPage.Content>
         <StackLayout>
+            <Image Margin="5" Source="BackIconpage.png"  HorizontalOptions="Start" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".02, .02, 40, 40">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Image.GestureRecognizers>
+            </Image>
         </StackLayout>
     </ContentPage.Content>
 </video:VideoCameraPage>

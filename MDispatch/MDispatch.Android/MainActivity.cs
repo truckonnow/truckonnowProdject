@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.Content.PM;
 using Android.Gms.Common;
 using Android.OS;
@@ -92,5 +93,9 @@ namespace MDispatch.Droid
             return mainActivity;
         }
 
+        internal object GetWindowManager()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

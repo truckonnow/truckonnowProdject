@@ -22,17 +22,17 @@ namespace MDispatch.View.Inspection.PickedUp
         [System.Obsolete]
         private async void Button_Clicked_1(object sender, System.EventArgs e)
         {
-            await PopupNavigation.PopAsync(true);
-            await PopupNavigation.PushAsync(new TempPageHint4());
-            if (askForUsersDelyveryMW.Payment == "COD" || askForUsersDelyveryMW.Payment == "COP" || askForUsersDelyveryMW.Payment == "Biling")
-            {
-                await Navigation.PopToRootAsync(true);
-                //askForUsersDelyveryMW.Continue();
-            }
-            else
-            {
-                await askForUsersDelyveryMW.Navigation.PushAsync(new CameraPaymmant(askForUsersDelyveryMW, ""));
-            }
+            //await PopupNavigation.PopAsync(true);
+            //await PopupNavigation.PushAsync(new TempPageHint4());
+            //if (askForUsersDelyveryMW.Payment == "COD" || askForUsersDelyveryMW.Payment == "COP" || askForUsersDelyveryMW.Payment == "Biling")
+            //{
+            //    await Navigation.PopToRootAsync(true);
+            //    //askForUsersDelyveryMW.Continue();
+            //}
+            //else
+            //{
+            //    await askForUsersDelyveryMW.Navigation.PushAsync(new CameraPaymmant(askForUsersDelyveryMW, "", "CheckPaymment.png"));
+            //}
         }
     }
 }

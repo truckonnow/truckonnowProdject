@@ -923,4 +923,10 @@
   <ItemGroup>
     <BundleResource Include="Resources\PickUp12.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\CheckPaymment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\trup.png" />
+  </ItemGroup>
 </Project>

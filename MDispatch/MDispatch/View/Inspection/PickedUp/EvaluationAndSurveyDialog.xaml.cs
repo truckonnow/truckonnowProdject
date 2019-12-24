@@ -36,9 +36,13 @@ namespace MDispatch.View.Inspection.PickedUp
                 {
                     await Navigation1.PushAsync(new VideoCameraPage(liabilityAndInsuranceMV, ""));
                 }
+                else if(liabilityAndInsuranceMV.What_form_of_payment_are_you_using_to_pay_for_transportation == "Check")
+                {
+                    await Navigation1.PushAsync(new CameraPaymmant(liabilityAndInsuranceMV, "", "CheckPaymment.png"));
+                }
                 else
                 {
-                    await Navigation1.PushAsync(new CameraPaymmant(liabilityAndInsuranceMV, ""));
+                    await Navigation1.PushAsync(new Ask2Page(liabilityAndInsuranceMV.managerDispatchMob, liabilityAndInsuranceMV.IdVech, liabilityAndInsuranceMV.IdShip, liabilityAndInsuranceMV.initDasbordDelegate));
                 }
             }
         }

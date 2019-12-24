@@ -1,4 +1,5 @@
-﻿using MDispatch.View.Inspection.PickedUp;
+﻿using MDispatch.NewElement;
+using MDispatch.View.Inspection.PickedUp;
 using MDispatch.View.PageApp;
 using MDispatch.ViewModels.AskPhoto;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
@@ -24,6 +25,7 @@ namespace MDispatch.View.Inspection
             On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
                 .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            DependencyService.Get<IOrientationHandler>().ForceLandscape();
         }
 
         [Obsolete]
@@ -58,6 +60,17 @@ namespace MDispatch.View.Inspection
                 ((LiabilityAndInsuranceMV)paymmant).SaveRecountVideo();
             }
 
+        }
+
+        protected override void OnDisappearing()
+        {
+            DependencyService.Get<IOrientationHandler>().ForceSensor();
+            base.OnDisappearing();
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
         }
     }
 }

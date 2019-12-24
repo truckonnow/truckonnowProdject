@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Android;
+using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -11,6 +12,7 @@ using Android.Media;
 using Android.Support.V4.App;
 using Android.Support.V4.Content;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
 using Java.Interop;
 using MDispatch.Droid.NewrRender.RebderVideoCamera;
@@ -26,12 +28,17 @@ namespace MDispatch.Droid.NewrRender.RebderVideoCamera
     {
         Android.Widget.RelativeLayout mainLayout;
         TextureView liveView;
-        Button capturePhotoButton;
+        Button capturePhotoButtonSatart;
+        Button capturePhotoButtonStop;
         [Obsolete]
         Android.Hardware.Camera camera;
         MediaRecorder recorder;
         Activity Activity => this.Context as Activity;
+
+
         private bool isFocus = false;
+
+        AnimatorSet animatorSet = null;
 
         public VideoRecorderRenderer(Context context) : base(context)
         {
@@ -46,23 +53,56 @@ namespace MDispatch.Droid.NewrRender.RebderVideoCamera
             SetupEventHandlers();
         }
 
+
+        private string clickTypeBtn = "";
+        [Obsolete]
         private void SetupEventHandlers()
         {
-            capturePhotoButton.Click += async (sender, e) =>
+            capturePhotoButtonSatart.Click += async (sender, e) =>
             {
+                clickTypeBtn = "capturePhotoButtonSatart";
+                capturePhotoButtonStop.Visibility = ViewStates.Visible;
+                animatorSet = new AnimatorSet();
+                animatorSet.PlayTogether(
+                    ObjectAnimator.OfFloat(capturePhotoButtonStop, "alpha", 0f, 1f).SetDuration(2000),
+                    ObjectAnimator.OfFloat(capturePhotoButtonSatart, "alpha", 1f, 0f).SetDuration(2000));
+                animatorSet.SetDuration(500);
+                animatorSet.AnimationEnd += EndAnimation;
+                animatorSet.Start();
                 AutoFocus();
             };
+            capturePhotoButtonStop.Click += async (sender, e) =>
+            {
+                clickTypeBtn = "capturePhotoButtonStop";
+                capturePhotoButtonSatart.Visibility = ViewStates.Visible;
+                animatorSet = new AnimatorSet();
+                animatorSet.PlayTogether(
+                    ObjectAnimator.OfFloat(capturePhotoButtonSatart, "alpha", 0f, 1),
+                    ObjectAnimator.OfFloat(capturePhotoButtonStop, "alpha", 1f, 0f));
+                animatorSet.SetDuration(500);
+                animatorSet.AnimationEnd += EndAnimation;
+                animatorSet.Start();
+                await StopRecorddVideo();
+            };
             liveView.SurfaceTextureListener = this;
+        }
+
+        private void EndAnimation(object sender, EventArgs e)
+        {
+            if(clickTypeBtn == "capturePhotoButtonSatart")
+            {
+                capturePhotoButtonSatart.Visibility = ViewStates.Invisible;
+            }
+            else if(clickTypeBtn == "capturePhotoButtonStop")
+            {
+                capturePhotoButtonStop.Visibility = ViewStates.Invisible;
+            }
         }
 
         [Obsolete]
         private async void AutoFocus()
         {
-            if ((Element as VideoCameraPage).IsRecording)
-            {
-                await StopRecorddVideo();
-            }
-            else
+            if (!(Element as VideoCameraPage).IsRecording)
             {
                 if (!isFocus)
                 {
@@ -75,6 +115,7 @@ namespace MDispatch.Droid.NewrRender.RebderVideoCamera
             }
         }
 
+        [Obsolete]
         private void SetupUserInterface()
         {
             mainLayout = new Android.Widget.RelativeLayout(Context);
@@ -86,14 +127,32 @@ namespace MDispatch.Droid.NewrRender.RebderVideoCamera
             liveView.LayoutParameters = liveViewParams;
             mainLayout.AddView(liveView);
 
-            capturePhotoButton = new Button(Context);
-            Android.Widget.RelativeLayout.LayoutParams captureButtonParams = new Android.Widget.RelativeLayout.LayoutParams(
+            capturePhotoButtonSatart = new Button(Context);
+            capturePhotoButtonSatart.SetBackgroundDrawable(ContextCompat.GetDrawable(Context, Resource.Drawable.startVideo));
+            Android.Widget.RelativeLayout.LayoutParams captureButtonParamsStart = new Android.Widget.RelativeLayout.LayoutParams(
                 LayoutParams.WrapContent,
                 LayoutParams.WrapContent);
-            captureButtonParams.Height = 120;
-            captureButtonParams.Width = 120;
-            capturePhotoButton.LayoutParameters = captureButtonParams;
-            mainLayout.AddView(capturePhotoButton);
+            captureButtonParamsStart.Height = 120;
+            captureButtonParamsStart.Width = 120;
+            capturePhotoButtonSatart.LayoutParameters = captureButtonParamsStart;
+            mainLayout.AddView(capturePhotoButtonSatart);
+
+            capturePhotoButtonStop = new Button(Context);
+            capturePhotoButtonStop.SetBackgroundDrawable(ContextCompat.GetDrawable(Context, Resource.Drawable.stopVideo));
+            Android.Widget.RelativeLayout.LayoutParams captureButtonParamsStop = new Android.Widget.RelativeLayout.LayoutParams(
+                LayoutParams.WrapContent,
+                LayoutParams.WrapContent);
+            captureButtonParamsStop.Height = 120;
+            captureButtonParamsStop.Width = 120;
+            capturePhotoButtonStop.LayoutParameters = captureButtonParamsStop;
+            capturePhotoButtonStop.Visibility = ViewStates.Invisible;
+            animatorSet = new AnimatorSet();
+            animatorSet.PlaySequentially(
+                ObjectAnimator.OfFloat(capturePhotoButtonStop, "alpha", 1, 0));
+            animatorSet.SetDuration(0);
+            //animationcapturePhotoInspectionButtonSet.AnimationEnd += EndAnimation;
+            animatorSet.Start();
+            mainLayout.AddView(capturePhotoButtonStop);
             AddView(mainLayout);
         }
 
@@ -195,8 +254,11 @@ namespace MDispatch.Droid.NewrRender.RebderVideoCamera
 
                     }
                     int tmpPr = (mainLayout.Width / 100) * 10;
-                    capturePhotoButton.SetX(mainLayout.Width / 2 + tmpPr);
-                    capturePhotoButton.SetY(mainLayout.Height - 200);
+                    capturePhotoButtonSatart.SetX(mainLayout.Width / 2 + tmpPr);
+                    capturePhotoButtonSatart.SetY(mainLayout.Height - 200);
+
+                    capturePhotoButtonStop.SetX(mainLayout.Width / 2 + tmpPr);
+                    capturePhotoButtonStop.SetY(mainLayout.Height - 200);
                 }
                 else
                 {
@@ -205,14 +267,18 @@ namespace MDispatch.Droid.NewrRender.RebderVideoCamera
                         camera.SetDisplayOrientation(0);
                     }
                     int tmpPr = (mainLayout.Width / 100) * 10;
-                    capturePhotoButton.SetY(mainLayout.Height / 2 + tmpPr);
-                    capturePhotoButton.SetX(mainLayout.Width - 200);
+                    capturePhotoButtonSatart.SetY(mainLayout.Height / 2 + tmpPr);
+                    capturePhotoButtonSatart.SetX(mainLayout.Width - 200);
+
+                    capturePhotoButtonStop.SetY(mainLayout.Height / 2 + tmpPr);
+                    capturePhotoButtonStop.SetX(mainLayout.Width - 200);
                 }
             }
             catch (NullReferenceException)
             { }
         }
 
+        [Obsolete]
         public bool OnSurfaceTextureDestroyed(SurfaceTexture surface)
         {
             if (camera != null)
@@ -230,6 +296,7 @@ namespace MDispatch.Droid.NewrRender.RebderVideoCamera
         {
         }
 
+        [Obsolete]
         public async void OnAutoFocus(bool success, Android.Hardware.Camera camera)
         {
             if (success)
@@ -248,7 +315,6 @@ namespace MDispatch.Droid.NewrRender.RebderVideoCamera
         {
             if (!(Element as VideoCameraPage).IsRecording)
             {
-                capturePhotoButton.Background.SetColorFilter(Android.Graphics.Color.ParseColor("#FF0040"), PorterDuff.Mode.Add);
                 string filepath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
                 string filename = System.IO.Path.Combine(filepath, "video.mp4");
                 if (File.Exists(filename))
@@ -275,7 +341,6 @@ namespace MDispatch.Droid.NewrRender.RebderVideoCamera
         {
             if ((Element as VideoCameraPage).IsRecording)
             {
-                capturePhotoButton.Background.SetColorFilter(Android.Graphics.Color.ParseColor("#FAFAFA"), PorterDuff.Mode.Add);
                 recorder.Stop();
                 recorder.Release();
                 (Element as VideoCameraPage).IsRecording = false;
