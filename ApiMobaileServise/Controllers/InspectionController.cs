@@ -16,6 +16,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Save/Ansver")]
+        [DisableRequestSizeLimit]
         public async Task<string> SaveAnsver(string token, string idVe, string jsonStrAsk, int type)
         {
             string respons = null;
