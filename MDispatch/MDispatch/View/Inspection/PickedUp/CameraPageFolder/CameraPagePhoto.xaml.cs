@@ -67,8 +67,8 @@ namespace MDispatch.View.PageApp
             {
                 pageAddDamage.stateSelect = 0;
             }
-            await Navigation.PopAsync(true);
-            fullPagePhoto.fullPagePhotoMV.SavePhoto();
+            //await Navigation.PopAsync(true);
+            fullPagePhoto.fullPagePhotoMV.SavePhoto(true);
         }
     }
 }

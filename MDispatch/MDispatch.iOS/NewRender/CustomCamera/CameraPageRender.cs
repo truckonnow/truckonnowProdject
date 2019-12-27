@@ -20,8 +20,8 @@ namespace MDispatch.iOS.NewRender.CustomCamera
         AVCaptureDeviceInput captureDeviceInput;
         AVCaptureStillImageOutput stillImageOutput;
         AVCaptureVideoPreviewLayer videoPreviewLayer = null;
-        UIPaintCodeButton takePhotoButton;
-        UIPaintCodeButton takePhotoIspectionButton;
+        UIButton takePhotoButton;
+        UIButton takePhotoIspectionButton;
         UIButton scanPhotoButton;
         UIView liveCameraStream;
         private Timer timer = null;
@@ -82,7 +82,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
 
         private void SetupLiveCameraStream()
         {
-               captureSession = new AVCaptureSession();
+            captureSession = new AVCaptureSession();
             videoPreviewLayer = new AVCaptureVideoPreviewLayer(captureSession)
             {
                 Frame = liveCameraStream.Bounds,
@@ -158,6 +158,16 @@ namespace MDispatch.iOS.NewRender.CustomCamera
         {
             takePhotoButton.TouchUpInside += async (s, e) =>
             {
+                UIView.Animate(0.2, 0, UIViewAnimationOptions.BeginFromCurrentState, () =>
+                {
+                    takePhotoButton.Transform = CGAffineTransform.MakeScale(0.8f, 0.8f);
+                }, () =>
+                {
+                    UIView.Animate(0.2, 0, UIViewAnimationOptions.BeginFromCurrentState, () =>
+                    {
+                        takePhotoButton.Transform = CGAffineTransform.MakeScale(1f, 1f);
+                    }, null);
+                });
                 if (!isTake)
                 {
                     takePhotoButton.Enabled = false;
@@ -173,9 +183,18 @@ namespace MDispatch.iOS.NewRender.CustomCamera
                     takePhotoButton.Enabled = true;
                 }
             };
-
-            takePhotoButton.TouchUpInside += async (s, e) =>
+            takePhotoIspectionButton.TouchUpInside += async (s, e) =>
             {
+                UIView.Animate(0.2, 0, UIViewAnimationOptions.BeginFromCurrentState, () =>
+                {
+                    takePhotoIspectionButton.Transform = CGAffineTransform.MakeScale(0.8f, 0.8f);
+                }, () =>
+                {
+                    UIView.Animate(0.2, 0, UIViewAnimationOptions.BeginFromCurrentState, () =>
+                    {
+                        takePhotoIspectionButton.Transform = CGAffineTransform.MakeScale(1f, 1f);
+                    }, null);
+                });
                 if (!isTake)
                 {
                     takePhotoButton.Enabled = false;
@@ -185,7 +204,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
                     {
                         UIImage originalImage = ImageFromByteArray(data.ToArray());
                         //byte[] res = ResizeImageIOS(originalImage, width, height);
-                        (Element as CameraPage).SetPhotoResult(originalImage.AsJPEG(.7f).ToArray(), (int)originalImage.Size.Width, (int)originalImage.Size.Height);
+                        (Element as CameraPage).SetPhotoinspectionResult(originalImage.AsJPEG(.7f).ToArray(), (int)originalImage.Size.Width, (int)originalImage.Size.Height);
                     }
                     isTake = false;
                     takePhotoButton.Enabled = true;
@@ -259,25 +278,26 @@ namespace MDispatch.iOS.NewRender.CustomCamera
         {
             var rightButtonX = View.Bounds.Right - 85;
             var bottomButtonY = View.Bounds.Bottom - 85;
-            var bottomButton1Y = View.Bounds.Bottom - 240;
+            var bottomButton1Y = View.Bounds.Bottom - 285;
             var buttonWidth = 70;
             var buttonHeight = 70;
             liveCameraStream = new UIView()
             {
                 Frame = new CGRect(0f, 0f, View.Bounds.Width, View.Bounds.Height)
             };
-            takePhotoButton = new UIPaintCodeButton(DrawTakePhotoButton)
+            takePhotoButton = new UIButton(UIButtonType.Custom)
             {
                 Frame = new CGRect(rightButtonX, bottomButtonY, buttonWidth, buttonHeight)
             };
-            takePhotoIspectionButton = new UIPaintCodeButton(DrawTakePhotoButton)
+            takePhotoButton.SetBackgroundImage(UIImage.FromBundle("Take.png"), UIControlState.Normal);
+            takePhotoIspectionButton = new UIButton(UIButtonType.Custom)
             {
                 Frame = new CGRect(rightButtonX, bottomButton1Y, buttonWidth, buttonHeight)
             };
+            takePhotoIspectionButton.SetBackgroundImage(UIImage.FromBundle("TakeArow.png"), UIControlState.Normal);
             scanPhotoButton = new UIButton()
             {
                 Frame = new CGRect(rightButtonX, bottomButtonY, buttonWidth, buttonHeight),
-               
             };
             scanPhotoButton.SetTitle("Scan", UIControlState.Normal);
             scanPhotoButton.TitleLabel.Text = "Scan";

@@ -299,7 +299,7 @@ namespace MDispatch.Service
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
                 request.AddHeader("Accept", "application/json");
-                client.Timeout = 60000;
+                client.Timeout = 100000;
                 request.AddParameter("token", token);
                 request.AddParameter("idVe", id);
                 request.AddParameter("jsonStrAsk", strJsonAsk);
@@ -307,7 +307,7 @@ namespace MDispatch.Service
                 response = client.Execute(request);
                 content = response.Content;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return 4;
             }
