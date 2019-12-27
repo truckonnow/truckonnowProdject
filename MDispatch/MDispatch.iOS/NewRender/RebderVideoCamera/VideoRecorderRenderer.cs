@@ -54,7 +54,7 @@ namespace MDispatch.iOS.NewRender.RebderVideoCamera
             captureSession.SessionPreset = AVCaptureSession.PresetMedium;
             videoPreviewLayer = new AVCaptureVideoPreviewLayer(captureSession)
             {
-                Frame = liveCameraStream.Bounds,
+                Frame = new CGRect(0f, 0f, View.Bounds.Width+200, View.Bounds.Height),
                 Orientation = GetCameraForOrientation()
             };
             liveCameraStream.Layer.AddSublayer(videoPreviewLayer);
@@ -65,7 +65,7 @@ namespace MDispatch.iOS.NewRender.RebderVideoCamera
 
             var audioDevice = AVCaptureDevice.GetDefaultDevice(AVMediaType.Audio);
             var audioDeviceInput = AVCaptureDeviceInput.FromDevice(audioDevice);
-            
+
 
             captureSession.AddOutput(aVCaptureMovieFileOutput);
             captureSession.AddInput(captureDeviceInput);
@@ -186,7 +186,6 @@ namespace MDispatch.iOS.NewRender.RebderVideoCamera
             videoPreviewLayer.Connection.VideoOrientation = GetCameraForOrientation();
             videoPreviewLayer.Orientation = GetCameraForOrientation(toInterfaceOrientation);
             takePhotoButton.Frame = new CGRect(rightButtonX, bottomButtonY, 70, 70);
-            //stillImageOutput.ConnectionFromMediaType(AVMediaType.Video).VideoOrientation = GetCameraForOrientation();
         }
 
         private void SetupUserInterface()
