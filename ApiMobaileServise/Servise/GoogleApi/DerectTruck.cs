@@ -49,7 +49,6 @@ namespace ApiMobaileServise.Servise.GoogleApi
                 var image = Google.Cloud.Vision.V1.Image.FromFile(path);
                 var response = client.DetectText(image);
                 var response3 = client.DetectLocalizedObjects(image);
-                File.WriteAllText("2.txt", "2");
 
                 foreach (var localizedObject in response3)
                 {

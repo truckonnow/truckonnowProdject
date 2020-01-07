@@ -1,5 +1,9 @@
 ﻿using ApiMobaileServise.Models;
 using ApiMobaileServise.Servise;
+using Google.Apis.Auth.OAuth2;
+using Google.Cloud.Storage.V1;
+using Google.Cloud.Vision.V1;
+using Grpc.Auth;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -10,6 +14,16 @@ namespace ApiMobaileServise.Controllers
     public class A_RController : Controller
     {
         ManagerMobileApi managerMobileApi = new ManagerMobileApi();
+
+        [HttpGet]
+        [Route("Init")]
+        public void Init()
+        {
+            System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "C:/Users/Roma/source/repos/truckonnow/AuchConfig/Truckonnow-38b8427a812c.json");
+            var client = ImageAnnotatorClient.Create();
+            var image = Google.Cloud.Vision.V1.Image.FromFile("123.png");
+            var response = client.DetectText(image);
+        }
 
         [HttpPost]
         [Route("Avtorization")]

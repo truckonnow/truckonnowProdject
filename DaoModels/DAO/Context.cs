@@ -36,8 +36,8 @@ namespace DaoModels.DAO
         {
             try
             {
-                //Database.EnsureCreated();
-                Database.Migrate();
+                Database.EnsureCreated();
+                //Database.Migrate();
             }
             catch (Exception e)
             {

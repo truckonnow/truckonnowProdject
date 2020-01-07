@@ -17,6 +17,7 @@
     <PackageReference Include="DLToolkit.Forms.Controls.FlowListView" Version="2.0.11" />
     <PackageReference Include="LiveXAML" Version="2.1.45" />
     <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="7.14.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Plugin.Badge" Version="2.2.0" />
     <PackageReference Include="Plugin.FirebasePushNotification" Version="2.3.5" />
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
@@ -33,7 +34,6 @@
     <PackageReference Include="Xamarin.Forms.InputKit" Version="2.3.5" />
     <PackageReference Include="Xamarin.Tesseract" Version="0.3.4" />
     <PackageReference Include="XForms.Plugin.AnimationNavigationPage" Version="1.0.7" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="Xam.Plugin.DeviceInfo" Version="4.1.1" />
     <PackageReference Include="NodaTime" Version="2.4.6" />
     <PackageReference Include="NodaTime.Serialization.JsonNet" Version="2.2.0" />
