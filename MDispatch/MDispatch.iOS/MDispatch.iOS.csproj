@@ -930,4 +930,10 @@
   <ItemGroup>
     <BundleResource Include="Resources\trup.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\stopVideo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\startVideo.png" />
+  </ItemGroup>
 </Project>
