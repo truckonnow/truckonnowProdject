@@ -21,7 +21,8 @@ namespace MDispatch.iOS.NewRender.RebderVideoCamera
         AVCaptureMovieFileOutput aVCaptureMovieFileOutput;
 
         AVCaptureVideoPreviewLayer videoPreviewLayer = null;
-        UIPaintCodeButton takePhotoButton;
+        UIButton startViedeo;
+        UIButton stopViedeo;
         UIView liveCameraStream;
 
         public override void WillAnimateRotation(UIInterfaceOrientation toInterfaceOrientation, double duration)
@@ -54,7 +55,7 @@ namespace MDispatch.iOS.NewRender.RebderVideoCamera
             captureSession.SessionPreset = AVCaptureSession.PresetMedium;
             videoPreviewLayer = new AVCaptureVideoPreviewLayer(captureSession)
             {
-                Frame = new CGRect(0f, 0f, View.Bounds.Width+200, View.Bounds.Height),
+                Frame = new CGRect(0f, 0f, View.Bounds.Width, View.Bounds.Height),
                 Orientation = GetCameraForOrientation()
             };
             liveCameraStream.Layer.AddSublayer(videoPreviewLayer);
@@ -108,15 +109,18 @@ namespace MDispatch.iOS.NewRender.RebderVideoCamera
 
         private void SetupEventHandlers()
         {
-            takePhotoButton.TouchUpInside += async (s, e) =>
+            startViedeo.TouchUpInside += async (s, e) =>
+            {
+                if (!(Element as VideoCameraPage).IsRecording)
+                {
+                    await RecordVideo();
+                }
+            };
+            stopViedeo.TouchUpInside += async (s, e) =>
             {
                 if ((Element as VideoCameraPage).IsRecording)
                 {
                     await StopRecorddVideo();
-                }
-                else
-                {
-                    await RecordVideo();
                 }
             };
         }
@@ -185,7 +189,7 @@ namespace MDispatch.iOS.NewRender.RebderVideoCamera
             videoPreviewLayer.Frame = liveCameraStream.Bounds;
             videoPreviewLayer.Connection.VideoOrientation = GetCameraForOrientation();
             videoPreviewLayer.Orientation = GetCameraForOrientation(toInterfaceOrientation);
-            takePhotoButton.Frame = new CGRect(rightButtonX, bottomButtonY, 70, 70);
+            startViedeo.Frame = new CGRect(rightButtonX, bottomButtonY, 70, 70);
         }
 
         private void SetupUserInterface()
@@ -198,12 +202,13 @@ namespace MDispatch.iOS.NewRender.RebderVideoCamera
             {
                 Frame = new CGRect(0f, 0f, View.Bounds.Width, View.Bounds.Height)
             };
-            takePhotoButton = new UIPaintCodeButton(DrawTakePhotoButton)
+            startViedeo = new UIButton(UIButtonType.Custom)
             {
                 Frame = new CGRect(rightButtonX, bottomButtonY, buttonWidth, buttonHeight)
             };
+            startViedeo.SetBackgroundImage(UIImage.FromBundle("Take.png"), UIControlState.Normal));
             View.InsertSubview(liveCameraStream, 0);
-            View.Add(takePhotoButton);
+            View.Add(startViedeo);
         }
 
         public void ConfigureCameraForDevice(AVCaptureDevice device)
