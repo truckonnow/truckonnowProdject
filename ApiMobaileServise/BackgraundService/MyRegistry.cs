@@ -16,6 +16,7 @@ namespace ApiMobaileServise.BackgraundService
             Schedule<QueueWorkerAsk>().ToRunNow().AndEvery(1).Seconds();
             Schedule<QueueWorkSavePhotoInspection>().ToRunNow().AndEvery(1).Seconds();
             Schedule<QueueWorkInspectionDriver>().ToRunNow().AndEvery(1).Seconds();
+            Schedule<VideoSave>().ToRunNow().AndEvery(1).Seconds();
         }
     }
 }

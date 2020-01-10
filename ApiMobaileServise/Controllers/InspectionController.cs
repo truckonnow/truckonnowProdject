@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using ApiMobaileServise.BackgraundService.Queue;
@@ -164,8 +165,9 @@ namespace ApiMobaileServise.Controllers
                     respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "2", null));
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                System.IO.File.WriteAllText("ReCurentStatus.txt", e.Message);
                 respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
             }
             return respons;
@@ -362,7 +364,9 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    await managerMobileApi.SaveRecount(idShiping, type, video);
+                    //await managerMobileApi.SaveRecount(idShiping, type, video);
+                    VideoSave.queues.Add($"SaveRecount&,&{idShiping}&,&{type}&,&{video}");
+                    VideoSave.countQueues++;
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }
                 else

@@ -242,20 +242,24 @@ namespace ApiMobaileServise.Servise
             sqlCommandApiMobile.ReCurentStatus(idShip, status);
             await Task.Run(() =>
             {
-                string tokenShope = sqlCommandApiMobile.GerShopTokenForShipping(idShip);
-                ManagerNotifyMobileApi managerNotifyMobileApi = new ManagerNotifyMobileApi();
-                if (status == "Picked up")
+                try
                 {
-                    managerNotifyMobileApi.SendNotyfyStatusPickup(idShip, tokenShope);
+                    string tokenShope = sqlCommandApiMobile.GerShopTokenForShipping(idShip);
+                    ManagerNotifyMobileApi managerNotifyMobileApi = new ManagerNotifyMobileApi();
+                    if (status == "Picked up")
+                    {
+                        managerNotifyMobileApi.SendNotyfyStatusPickup(idShip, tokenShope);
+                    }
+                    else if (status == "Delivered,Paid")
+                    {
+                        managerNotifyMobileApi.SendNotyfyStatusDelyvery(idShip, tokenShope, "Cars passed inspection, the order is paid");
+                    }
+                    else if (status == "Delivered,Billed")
+                    {
+                        managerNotifyMobileApi.SendNotyfyStatusDelyvery(idShip, tokenShope, "Cars passed inspection, waiting for payment (Billing)");
+                    }
                 }
-                else if (status == "Delivered,Paid")
-                {
-                    managerNotifyMobileApi.SendNotyfyStatusDelyvery(idShip, tokenShope, "Cars passed inspection, the order is paid");
-                }
-                else if (status == "Delivered,Billed")
-                {
-                    managerNotifyMobileApi.SendNotyfyStatusDelyvery(idShip, tokenShope, "Cars passed inspection, waiting for payment (Billing)");
-                }
+                catch { }
             });
         }
 
