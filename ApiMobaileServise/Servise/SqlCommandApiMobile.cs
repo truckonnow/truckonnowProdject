@@ -255,7 +255,7 @@ namespace ApiMobaileServise.Servise
         {
             Truck truck = context.Trucks.FirstOrDefault(t => t.PlateTruk == plateTruck);
             Trailer trailer = context.Trailers.FirstOrDefault(t => t.Plate == plateTrailer);
-            if (truck == null || trailer == null)
+            if (truck == null && trailer == null)
                 return false;
             Driver driver = context.Drivers
                 .Include(d => d.InspectionDrivers)
@@ -264,8 +264,8 @@ namespace ApiMobaileServise.Servise
             DateTime dateTime = Convert.ToDateTime(inspectionDriver.Date);
             if (dateTime.Date == DateTime.Now.Date)
             {
-                inspectionDriver.IdITruck = truck.Id;
-                inspectionDriver.IdITrailer = trailer.Id;
+                inspectionDriver.IdITruck = truck != null ? truck.Id : 0;
+                inspectionDriver.IdITrailer = trailer != null ? trailer.Id : 0;
             }
             else
             {

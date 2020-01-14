@@ -701,12 +701,6 @@
     <BundleResource Include="Resources\Hint44.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Hint1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Hint2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\Hint3.png" />
   </ItemGroup>
   <ItemGroup>
@@ -1020,5 +1014,11 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\startVideo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Hint2.png" />
   </ItemGroup>
 </Project>

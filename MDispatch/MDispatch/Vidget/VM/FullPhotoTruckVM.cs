@@ -54,7 +54,7 @@ namespace MDispatch.Vidget.VM
         private async void Init()
         {
             NameLayute = truckCar.GetNameTruck(IndexCurent);
-            if(IndexCurent == 44)
+            if(IndexCurent == 43)
             {
                 CheckPlate();
             }
@@ -363,7 +363,7 @@ namespace MDispatch.Vidget.VM
                     }
                     else if (PlateTrailer == null || PlateTrailer == "")
                     {
-                        //await PopupNavigation.PushAsync(new PlateTruckWrite(this));
+                        await PopupNavigation.PushAsync(new PlateTrailerWrite(this));
                     }
                 }
                 else if (state == 4)
@@ -434,7 +434,7 @@ namespace MDispatch.Vidget.VM
                     }
                     else if(type == "trailer")
                     {
-                        //await PopupNavigation.PushAsync(new PlateTruckWrite(this));
+                        await PopupNavigation.PushAsync(new PlateTrailerWrite(this));
                         PlateTrailer = plate;
                     }
                 }
