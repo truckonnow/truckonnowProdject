@@ -21,7 +21,8 @@ namespace MDispatch.iOS.NewRender.RebderVideoCamera
         AVCaptureMovieFileOutput aVCaptureMovieFileOutput;
 
         AVCaptureVideoPreviewLayer videoPreviewLayer = null;
-        UIPaintCodeButton takePhotoButton;
+        UIButton startVideo;
+        UIButton stopVideo;
         UIView liveCameraStream;
 
         public override void WillAnimateRotation(UIInterfaceOrientation toInterfaceOrientation, double duration)
@@ -54,7 +55,7 @@ namespace MDispatch.iOS.NewRender.RebderVideoCamera
             captureSession.SessionPreset = AVCaptureSession.PresetMedium;
             videoPreviewLayer = new AVCaptureVideoPreviewLayer(captureSession)
             {
-                Frame = new CGRect(0f, 0f, View.Bounds.Width+200, View.Bounds.Height),
+                Frame = new CGRect(0f, 0f, View.Bounds.Width, View.Bounds.Height),
                 Orientation = GetCameraForOrientation()
             };
             liveCameraStream.Layer.AddSublayer(videoPreviewLayer);
@@ -108,15 +109,42 @@ namespace MDispatch.iOS.NewRender.RebderVideoCamera
 
         private void SetupEventHandlers()
         {
-            takePhotoButton.TouchUpInside += async (s, e) =>
+            startVideo.TouchUpInside += async (s, e) =>
+            {
+                if (!(Element as VideoCameraPage).IsRecording)
+                {
+                    var rightButtonX = View.Bounds.Right - 85;
+                    var bottomButtonY = View.Bounds.Bottom;
+                    var buttonWidth = 70;
+                    var buttonHeight = 70;
+                    UIView.Animate(0, 0, UIViewAnimationOptions.BeginFromCurrentState, () =>
+                    {
+                        stopVideo.Frame = new CGRect(rightButtonX, bottomButtonY - 85, buttonWidth, buttonHeight);
+                    }, () =>
+                    {
+                        UIView.Animate(0.5, 0, UIViewAnimationOptions.BeginFromCurrentState, () =>
+                        {
+                            stopVideo.Enabled = true;
+                            stopVideo.Alpha = 1;
+                            startVideo.Alpha = 0;
+                        }, () =>
+                        {
+                            UIView.Animate(0, 0, UIViewAnimationOptions.BeginFromCurrentState, () =>
+                            {
+                                startVideo.Frame = new CGRect(rightButtonX, bottomButtonY - 200, buttonWidth, buttonHeight);
+                                startVideo.Enabled = false;
+                            }, null);
+                        });
+                    });
+                    await RecordVideo();
+                }
+            };
+
+            stopVideo.TouchUpInside += async (s, e) =>
             {
                 if ((Element as VideoCameraPage).IsRecording)
                 {
                     await StopRecorddVideo();
-                }
-                else
-                {
-                    await RecordVideo();
                 }
             };
         }
@@ -185,7 +213,8 @@ namespace MDispatch.iOS.NewRender.RebderVideoCamera
             videoPreviewLayer.Frame = liveCameraStream.Bounds;
             videoPreviewLayer.Connection.VideoOrientation = GetCameraForOrientation();
             videoPreviewLayer.Orientation = GetCameraForOrientation(toInterfaceOrientation);
-            takePhotoButton.Frame = new CGRect(rightButtonX, bottomButtonY, 70, 70);
+            startVideo.Frame = new CGRect(rightButtonX, bottomButtonY, 70, 70);
+            stopVideo.Frame = new CGRect(rightButtonX, bottomButtonY, 70, 70);
         }
 
         private void SetupUserInterface()
@@ -198,12 +227,21 @@ namespace MDispatch.iOS.NewRender.RebderVideoCamera
             {
                 Frame = new CGRect(0f, 0f, View.Bounds.Width, View.Bounds.Height)
             };
-            takePhotoButton = new UIPaintCodeButton(DrawTakePhotoButton)
+            startVideo = new UIButton(UIButtonType.Custom)
             {
                 Frame = new CGRect(rightButtonX, bottomButtonY, buttonWidth, buttonHeight)
             };
+            startVideo.SetBackgroundImage(UIImage.FromBundle("startVideo.png"), UIControlState.Normal);
+            stopVideo = new UIButton(UIButtonType.Custom)
+            {
+                Frame = new CGRect(rightButtonX, bottomButtonY - 120, buttonWidth, buttonHeight),
+                Alpha = 0,
+                Enabled = false
+            };
+            stopVideo.SetBackgroundImage(UIImage.FromBundle("stopVideo.png"), UIControlState.Normal);
             View.InsertSubview(liveCameraStream, 0);
-            View.Add(takePhotoButton);
+            View.Add(startVideo);
+            View.Add(stopVideo);
         }
 
         public void ConfigureCameraForDevice(AVCaptureDevice device)
