@@ -14,27 +14,19 @@ namespace ApiMobaileServise.Servise.GoogleApi
     public class DetectTrailers : IDetect
     {
         private SqlCommandApiMobile sqlCommandApiMobil = null;
-        private GoogleCredential credential = null;
 
         public void AuchGoole(SqlCommandApiMobile sqlCommandApiMobil)
         {
             this.sqlCommandApiMobil = sqlCommandApiMobil;
-            credential = GoogleCredential.FromFile("../AuchConfig/Truckonnow-38b8427a812c.json");
+            System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "../AuchConfig/Truckonnow-47793e40e0df.json");
         }
 
         public void DetectText(params object[] parames)
         {
-            Thread.Sleep(2000);
-            var timeout = new TimeSpan(0, 0, 10);
-            CallSettings callSettings = CallSettings.FromCallTiming(CallTiming.FromTimeout(timeout));
             List<Trailer> trailers = sqlCommandApiMobil.GetTrailers();
             string path = (string)parames[1];
             string idDriver = (string)parames[0];
-            credential.CreateScoped(ImageAnnotatorClient.DefaultScopes);
-            var channel = new Grpc.Core.Channel(
-                ImageAnnotatorClient.DefaultEndpoint.ToString(),
-                credential.ToChannelCredentials());
-            var client = ImageAnnotatorClient.Create(channel, new ImageAnnotatorSettings() { CallSettings = callSettings });
+            var client = ImageAnnotatorClient.Create();
             var image = Google.Cloud.Vision.V1.Image.FromFile(path);
             var response = client.DetectText(image);
             var response3 = client.DetectLocalizedObjects(image);

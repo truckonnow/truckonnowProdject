@@ -258,25 +258,13 @@ paket-files/
 
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
-*.pyc
-/ApiMobaileServise/Photo/51/Ask
-/ApiMobaileServise/Photo
-/Photo/3/Delyvery
-/Photo/1
-/Photo/1
-/Photo/1
-/Photo/1
-/Photo/1
-/Photo/1/Delyvery/Additional
-/Photo/1
-/Photo/5/PikedUp/PhotoInspection
+*.pyckedUp/PhotoInspection
 /Photo
 /Video
 /ApiMobaileServise/SaveInspectionDriverInDb.txt
 /ApiMobaileServise/GetIndexDb.txt
-/AuchConfig/truckonnow-95df402eaa80.json
-/AuchConfig/trucknow-4182a55a0b2b.json
 /ApiMobaileServise/4.txt
 /ApiMobaileServise/3.txt
 /ApiMobaileServise/1.txt
 /ApiMobaileServise/cc.txt
+/AuchConfig

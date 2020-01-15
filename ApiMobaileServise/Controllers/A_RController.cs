@@ -19,9 +19,9 @@ namespace ApiMobaileServise.Controllers
         [Route("Init")]
         public void Init()
         {
-            System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "C:/Users/Roma/source/repos/truckonnow/AuchConfig/Truckonnow-38b8427a812c.json");
+            System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "../AuchConfig/Truckonnow-47793e40e0df.json");
             var client = ImageAnnotatorClient.Create();
-            var image = Google.Cloud.Vision.V1.Image.FromFile("123.png");
+            var image = Google.Cloud.Vision.V1.Image.FromFile("C:/Users/Roma/source/repos/truckonnow/Photo/1/scan.jpg");
             var response = client.DetectText(image);
         }
 
