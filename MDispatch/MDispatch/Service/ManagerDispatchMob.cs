@@ -383,13 +383,13 @@ namespace MDispatch.Service
             return statePay;
         }
 
-        internal int DetectPlate(byte[] res, List<string> plateTrucks, List<string> plateTrailers, string type, ref string plate)
+        internal int DetectPlate(string token, string image, string idDriver, string type, ref string plate)
         {
             googleApi = new GoogleApi(); CountReqvest++;
             int statePay = 1;
             if (CrossConnectivity.Current.IsConnected)
             {
-                statePay = googleApi.DetectPlate(res, plateTrucks, plateTrailers, type, ref plate);
+                statePay = googleApi.DetectPlate(token, image, idDriver, type, ref plate);
             }
             inspection = null;
             CountReqvest--;

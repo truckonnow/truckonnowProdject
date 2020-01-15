@@ -23,6 +23,7 @@ namespace MDispatch.Vidget.View
                .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
         }
 
+        [Obsolete]
         private async void CameraPage_OnScan(NewElement.PhotoResultEventArgs result)
         {
             if (!result.Success)
@@ -31,18 +32,18 @@ namespace MDispatch.Vidget.View
             }
             fullPhotoTruckVM.DetectText(result.Result, typeDetect);
             await Navigation.PopAsync();
-            if (fullPhotoTruckVM.IndexCurent == 44)
-            {
-                await PopupNavigation.PushAsync(new PlateWrite(fullPhotoTruckVM));
-            }
-            else if(typeDetect == "truck")
-            {
-                await PopupNavigation.PushAsync(new PlateTruckWrite(fullPhotoTruckVM));
-            }
-            else if (typeDetect == "trailer")
-            {
-                //await PopupNavigation.PushAsync(new PlateTruckWrite(fullPhotoTruckVM));
-            }
+            //if (fullPhotoTruckVM.IndexCurent == 44)
+            //{
+            //    await PopupNavigation.PushAsync(new PlateWrite(fullPhotoTruckVM));
+            //}
+            //else if(typeDetect == "truck")
+            //{
+            //    await PopupNavigation.PushAsync(new PlateTruckWrite(fullPhotoTruckVM));
+            //}
+            //else if (typeDetect == "trailer")
+            //{
+            //    await PopupNavigation.PushAsync(new PlateTruckWrite(fullPhotoTruckVM));
+            //}
             //fullPhotoTruckVM
         }
 

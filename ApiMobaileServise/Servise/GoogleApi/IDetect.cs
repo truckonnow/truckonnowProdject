@@ -7,6 +7,6 @@ namespace ApiMobaileServise.Servise.GoogleApi
     public interface IDetect
     {
         void AuchGoole(SqlCommandApiMobile sqlCommandApiMobil);
-        void DetectText(params object[] parames);
+        string DetectText(params object[] parames);
     }
 }

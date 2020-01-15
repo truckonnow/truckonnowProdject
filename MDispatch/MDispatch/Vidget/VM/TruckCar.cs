@@ -239,31 +239,32 @@ namespace MDispatch.Vidget.VM
             return nameTruck;
         }
 
+        [System.Obsolete]
         public async void GetModalAlert(int indexTruckPhoto)
         {
-            //switch(indexTruckPhoto)
-            //{
-            //    case 1:
-            //        {
-            //            await PopupNavigation.PushAsync(new Errror("Please do interior inspection", null));
-            //            break;
-            //        }
-            //    case 3:
-            //        {
-            //            await PopupNavigation.PushAsync(new Errror("Please do exterior inspection", null));
-            //            break;
-            //        }
-            //    case 23:
-            //        {
-            //            await PopupNavigation.PushAsync(new Errror("Please do the inspection under the hood, do the inspection with the engine off for 5 minutes", null));
-            //            break;
-            //        }
-            //    case 28:
-            //        {
-            //            await PopupNavigation.PushAsync(new Errror("Please do еrailer connections inspection", null));
-            //            break;
-            //        }
-            //}
+            switch (indexTruckPhoto)
+            {
+                case 1:
+                    {
+                        await PopupNavigation.PushAsync(new Errror("Please do interior inspection", null));
+                        break;
+                    }
+                case 3:
+                    {
+                        await PopupNavigation.PushAsync(new Errror("Please do exterior inspection", null));
+                        break;
+                    }
+                case 23:
+                    {
+                        await PopupNavigation.PushAsync(new Errror("Please do the inspection under the hood, do the inspection with the engine off for 5 minutes", null));
+                        break;
+                    }
+                case 28:
+                    {
+                        await PopupNavigation.PushAsync(new Errror("Please do еrailer connections inspection", null));
+                        break;
+                    }
+            }
         }
 
         public async Task Orinteble(int indexTruckPhoto)

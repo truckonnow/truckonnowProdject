@@ -58,10 +58,10 @@ namespace MDispatch.Vidget.VM
             {
                 CheckPlate();
             }
-            //if (IndexCurent == 3)
-            //{
-            //    CheckPlate();
-            //}
+            if (IndexCurent == 3)
+            {
+                CheckPlate();
+            }
             await truckCar.Orinteble(IndexCurent);
         }
 
@@ -405,6 +405,7 @@ namespace MDispatch.Vidget.VM
             GC.WaitForPendingFinalizers();
         }
 
+        [Obsolete]
         internal async void DetectText(byte[] result, string type)
         {
             await PopupNavigation.PushAsync(new LoadPage());
@@ -416,7 +417,7 @@ namespace MDispatch.Vidget.VM
             {
                 await Task.Run(() =>
                 {
-                    state = managerDispatchMob.DetectPlate(result, PlateTrucks, PlateTrailers, type, ref plate);
+                    state = managerDispatchMob.DetectPlate(token, Convert.ToBase64String(result), IdDriver, type, ref plate);
                 });
                 if (state == 1)
                 {
@@ -428,10 +429,12 @@ namespace MDispatch.Vidget.VM
                     await PopupNavigation.PopAsync();
                     if (type == "truck")
                     {
+                        await PopupNavigation.PushAsync(new PlateTruckWrite(this));
                         PlateTrailer = plate;
                     }
                     else if(type == "trailer")
                     {
+                        await PopupNavigation.PushAsync(new PlateTruckWrite(this));
                         PlateTrailer = plate;
                     }
                 }

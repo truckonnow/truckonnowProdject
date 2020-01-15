@@ -1,13 +1,7 @@
 ﻿using DaoModels.DAO.Models;
-using Google.Api.Gax.Grpc;
-using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Vision.V1;
-using Grpc.Auth;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace ApiMobaileServise.Servise.GoogleApi
 {
@@ -21,13 +15,14 @@ namespace ApiMobaileServise.Servise.GoogleApi
             System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "../AuchConfig/Truckonnow-47793e40e0df.json");
         }
 
-        public void DetectText(params object[] parames)
+        public string DetectText(params object[] parames)
         {
+            string plate = "";
             List<Trailer> trailers = sqlCommandApiMobil.GetTrailers();
-            string path = (string)parames[1];
+            byte[] imager = (byte[])parames[1];
             string idDriver = (string)parames[0];
             var client = ImageAnnotatorClient.Create();
-            var image = Google.Cloud.Vision.V1.Image.FromFile(path);
+            var image = Google.Cloud.Vision.V1.Image.FromBytes(imager);
             var response = client.DetectText(image);
             var response3 = client.DetectLocalizedObjects(image);
             foreach (var localizedObject in response3)
@@ -44,7 +39,8 @@ namespace ApiMobaileServise.Servise.GoogleApi
                     if (trailers.FirstOrDefault(t => t.Plate == text.Description) != null)
                     {
                         trailer = trailers.FirstOrDefault(t => t.Plate == text.Description);
-                        sqlCommandApiMobil.SetPlateTrailer(trailer.Id, idDriver);
+                        //sqlCommandApiMobil.SetPlateTrailer(trailer.Id, idDriver);
+                        plate = trailer.Plate;
                         break;
                     }
                     else if (trailer != null && trailer.Plate.Contains(text.Description))
@@ -60,14 +56,16 @@ namespace ApiMobaileServise.Servise.GoogleApi
                     {
                         if (trailer != null && trailer.Plate == numPlateTmp)
                         {
-                            sqlCommandApiMobil.SetPlateTrailer(trailer.Id, idDriver);
+                            //sqlCommandApiMobil.SetPlateTrailer(trailer.Id, idDriver);
+                            plate = trailer.Plate;
                             numPlateTmp = "";
                             break;
                         }
                         else if (trailer.Plate.Remove(trailer.Plate.Length - 3) == numPlateTmp || trailer.Plate.Remove(trailer.Plate.Length - 2) == numPlateTmp || trailer.Plate.Remove(trailer.Plate.Length - 1) == numPlateTmp)
                         {
-                            sqlCommandApiMobil.SetPlateTrailer(trailer.Id, idDriver);
-                            numPlateTmp = "";
+                            //sqlCommandApiMobil.SetPlateTrailer(trailer.Id, idDriver);
+
+                            plate = trailer.Plate;
                             break;
                         }
                         else if (numPlateTmp.Length > 7)
@@ -81,7 +79,7 @@ namespace ApiMobaileServise.Servise.GoogleApi
 
             }
 
-            //return true;
+            return plate;
         }
     }
 }

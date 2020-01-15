@@ -7,11 +7,8 @@ using DaoModels.DAO.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.IO;
-using System.Threading;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ApiMobaileServise.Servise
@@ -31,6 +28,26 @@ namespace ApiMobaileServise.Servise
             Shipping shipping = sqlCommandApiMobile.SendBolInDb(idShip);
             string patern = new PaternSourse().GetPaternBol(shipping);
             await new AuthMessageSender().Execute(email, "Truckonnow - BOL", patern, shipping.VehiclwInformations, shipping);
+        }
+
+        public string GetPlateNumber(string image, string idDriver, string type)
+        {
+            string plate = "";
+            IDetect detect = null;
+            if (type == "truck")
+            {
+                detect = new DerectTruck();
+            }
+            else if (type == "trailer")
+            {
+                detect = new DetectTrailers();
+            }
+            if (detect != null)
+            {
+                detect.AuchGoole(sqlCommandApiMobile);
+                plate = detect.DetectText(idDriver, Convert.FromBase64String(image));
+            }
+            return plate;
         }
 
         internal List<Truck> GetTruck()
@@ -59,27 +76,24 @@ namespace ApiMobaileServise.Servise
         {
             photoJson = photoJson.Insert(photoJson.IndexOf(idDriver) + 2, $"{DateTime.Now.ToShortDateString()}/");
             PhotoDriver photo = JsonConvert.DeserializeObject<PhotoDriver>(photoJson);
-            //photo.path = photo.path.Insert(photo.path.IndexOf(idDriver) +2, $"{DateTime.Now.ToShortDateString()}/");
             await sqlCommandApiMobile.SaveInspectionDriverInDb(idDriver, photo, indexPhoto);
-            await Task.Run(() =>
-            {
-                File.WriteAllText("3.txt", "3");
-                IDetect detect = null;
-                if(indexPhoto == 1 || indexPhoto == 2 || indexPhoto == 26 || indexPhoto == 13)
-                {
-                    File.WriteAllText("4.txt", "4");
-                    detect = new DerectTruck();
-                }
-                else if(indexPhoto == 34 || indexPhoto == 35 || indexPhoto == 38)
-                {
-                    detect = new DetectTrailers();
-                }
-                if(detect != null)
-                {
-                    detect.AuchGoole(sqlCommandApiMobile);
-                    detect.DetectText(idDriver, photo.path);
-                }
-            });
+            //await Task.Run(() =>
+            //{
+            //    IDetect detect = null;
+            //    if(indexPhoto == 1 || indexPhoto == 2 || indexPhoto == 26 || indexPhoto == 13)
+            //    {
+            //        detect = new DerectTruck();
+            //    }
+            //    else if(indexPhoto == 34 || indexPhoto == 35 || indexPhoto == 38)
+            //    {
+            //        detect = new DetectTrailers();
+            //    }
+            //    if(detect != null)
+            //    {
+            //        detect.AuchGoole(sqlCommandApiMobile);
+            //        detect.DetectText(idDriver, photo.path);
+            //    }
+            //});
         }
 
         public async void UpdateInspectionDriver(string idDriver)

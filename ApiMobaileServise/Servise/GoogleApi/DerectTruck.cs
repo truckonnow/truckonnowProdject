@@ -23,15 +23,16 @@ namespace ApiMobaileServise.Servise.GoogleApi
             System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "../AuchConfig/Truckonnow-47793e40e0df.json");
         }
 
-        public void DetectText(params object[] parames)
+        public string DetectText(params object[] parames)
         {
+            string plate = "";
             try
             {
                 List<Truck> trucks = sqlCommandApiMobil.GetTruck();
-                string path = (string)parames[1];
+                byte[] photo = (byte[])parames[1];
                 string idDriver = (string)parames[0];
                 var client = ImageAnnotatorClient.Create();
-                var image = Google.Cloud.Vision.V1.Image.FromFile(path);
+                var image = Google.Cloud.Vision.V1.Image.FromBytes(photo);
                 var response = client.DetectText(image);
                 var response3 = client.DetectLocalizedObjects(image);
 
@@ -44,7 +45,8 @@ namespace ApiMobaileServise.Servise.GoogleApi
                         if (trucks.FirstOrDefault(t => t.PlateTruk == text.Description) != null)
                         {
                             truck = trucks.FirstOrDefault(t => t.PlateTruk == text.Description);
-                            sqlCommandApiMobil.SetPlateTruck(truck.Id, idDriver);
+                            //sqlCommandApiMobil.SetPlateTruck(truck.Id, idDriver);
+                            plate = truck.PlateTruk;
                             break;
                         }
                         else if (truck != null && truck.PlateTruk.Contains(text.Description))
@@ -60,13 +62,15 @@ namespace ApiMobaileServise.Servise.GoogleApi
                         {
                             if (truck != null && truck.PlateTruk == numPlateTmp)
                             {
-                                sqlCommandApiMobil.SetPlateTruck(truck.Id, idDriver);
+                                //sqlCommandApiMobil.SetPlateTruck(truck.Id, idDriver);
+                                plate = truck.PlateTruk;
                                 numPlateTmp = "";
                                 break;
                             }
                             else if (truck.PlateTruk.Remove(truck.PlateTruk.Length - 3) == numPlateTmp || truck.PlateTruk.Remove(truck.PlateTruk.Length - 2) == numPlateTmp || truck.PlateTruk.Remove(truck.PlateTruk.Length - 1) == numPlateTmp)
                             {
-                                sqlCommandApiMobil.SetPlateTruck(truck.Id, idDriver);
+                                //sqlCommandApiMobil.SetPlateTruck(truck.Id, idDriver);
+                                plate = truck.PlateTruk;
                                 numPlateTmp = "";
                                 break;
                             }
@@ -83,10 +87,9 @@ namespace ApiMobaileServise.Servise.GoogleApi
             }
             catch (Exception e)
             {
-                File.WriteAllText("cc.txt", e.Message);
             }
 
-            //return true;
+            return plate;
         }
     }
 }
