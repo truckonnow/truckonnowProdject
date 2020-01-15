@@ -30,8 +30,6 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>Truckonnow</string>
-	<key>XSAppIconAssets</key>
-	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>Needs Calendar Permission</key>
 	<string></string>
 	<key>NSCameraUsageDescription</key>
@@ -44,7 +42,7 @@
 		<string>remote-notification</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>0.1.6</string>
+	<string>0.1.7</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Your explanation</string>
 	<key>NSContactsUsageDescription</key>
@@ -56,8 +54,10 @@
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Play using while you are hiking</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.1.6</string>
-	<key>UIStatusBarHidden</key>
-	<false/>
+	<string>0.1.7</string>
+	<key>UIApplicationSceneManifest</key>
+	<dict/>
+	<key>XSAppIconAssets</key>
+	<string>Assets.xcassets/AppIcon.appiconset</string>
 </dict>
 </plist>
