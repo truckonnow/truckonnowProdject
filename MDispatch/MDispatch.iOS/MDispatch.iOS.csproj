@@ -54,11 +54,11 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Distribution: Artsiom Buniashyn (3K8963GCF8)</CodesignKey>
+    <CodesignKey>iPhone Developer: Artsiom Buniashyn (52PD49AATM)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <LangVersion>8.0</LangVersion>
-    <CodesignProvision>Dispatch</CodesignProvision>
+    <CodesignProvision>Roma</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>

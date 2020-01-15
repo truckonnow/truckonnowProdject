@@ -35,11 +35,11 @@ namespace MDispatch.Service
             }
             else
             {
-                return GetData(content, plate);
+                return GetData(content, ref plate);
             }
         }
 
-        private int GetData(string respJsonStr, string plate)
+        private int GetData(string respJsonStr, ref string plate)
         {
             respJsonStr = respJsonStr.Replace("\\", "");
             respJsonStr = respJsonStr.Remove(0, 1);

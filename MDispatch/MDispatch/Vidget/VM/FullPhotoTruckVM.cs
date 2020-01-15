@@ -430,11 +430,11 @@ namespace MDispatch.Vidget.VM
                     if (type == "truck")
                     {
                         await PopupNavigation.PushAsync(new PlateTruckWrite(this));
-                        PlateTrailer = plate;
+                        PlateTruck = plate;
                     }
                     else if(type == "trailer")
                     {
-                        await PopupNavigation.PushAsync(new PlateTruckWrite(this));
+                        //await PopupNavigation.PushAsync(new PlateTruckWrite(this));
                         PlateTrailer = plate;
                     }
                 }
