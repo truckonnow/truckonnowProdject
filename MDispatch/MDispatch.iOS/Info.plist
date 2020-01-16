@@ -21,7 +21,7 @@
 	<key>MinimumOSVersion</key>
 	<string>12.0</string>
 	<key>CFBundleDisplayName</key>
-	<string>MDispatch</string>
+	<string>Truckonnow</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.companyname.MDispatch</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
@@ -36,19 +36,12 @@
 	<string>This app requires contacts access to function properly</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>New Entry</string>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>fetch</string>
-		<string>remote-notification</string>
-	</array>
 	<key>CFBundleVersion</key>
 	<string>0.1.7</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Your explanation</string>
 	<key>NSContactsUsageDescription</key>
 	<string>This app requires contacts access to function properly</string>
-	<key>NSSiriUsageDescription</key>
-	<string>Siri needs to listen for tasks and notes</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>This app need to access your calendar events</string>
 	<key>NSAppleMusicUsageDescription</key>
@@ -59,5 +52,9 @@
 	<dict/>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>Privacy - Photo Libary Usage Descriptio</key>
+	<string>OnePosInventiry wants to access your Gallery</string>
+	<key>Privacy - Camera Usage Descriptio</key>
+	<string>OnePosInventiry wants to access your Camera</string>
 </dict>
 </plist>
