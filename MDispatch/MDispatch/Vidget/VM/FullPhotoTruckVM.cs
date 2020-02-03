@@ -62,6 +62,10 @@ namespace MDispatch.Vidget.VM
             {
                 CheckPlate();
             }
+            if (IndexCurent == 36)
+            {
+                CheckPlate();
+            }
             await truckCar.Orinteble(IndexCurent);
         }
 
@@ -357,11 +361,11 @@ namespace MDispatch.Vidget.VM
                     {
                         await PopupNavigation.PushAsync(new PlateWrite(this));
                     }
-                    else if(PlateTruck == null || PlateTruck == "")
+                    else if(IndexCurent == 3)
                     {
                         await PopupNavigation.PushAsync(new PlateTruckWrite(this));
                     }
-                    else if (PlateTrailer == null || PlateTrailer == "")
+                    else if (IndexCurent == 36)
                     {
                         await PopupNavigation.PushAsync(new PlateTrailerWrite(this));
                     }

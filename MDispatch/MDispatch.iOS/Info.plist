@@ -33,28 +33,28 @@
 	<key>Needs Calendar Permission</key>
 	<string></string>
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires contacts access to function properly</string>
+	<string>This application requires access to the camera for photo inspection of vehicles</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>New Entry</string>
+	<string>This app requires microphon access to function properly</string>
 	<key>CFBundleVersion</key>
-	<string>0.1.7</string>
+	<string>0.2.6</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Your explanation</string>
+	<string>This application requires access to the geolocation of driver tracking in the workplace.</string>
 	<key>NSContactsUsageDescription</key>
 	<string>This app requires contacts access to function properly</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>This app need to access your calendar events</string>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>Play using while you are hiking</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.1.7</string>
+	<string>0.2.6</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict/>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
-	<key>Privacy - Photo Libary Usage Descriptio</key>
-	<string>OnePosInventiry wants to access your Gallery</string>
-	<key>Privacy - Camera Usage Descriptio</key>
-	<string>OnePosInventiry wants to access your Camera</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>This app requires contacts access to function properly</string>
+	<key>NSSiriUsageDescription</key>
+	<string>New Entry</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>This app requires media access to function properly</string>
 </dict>
 </plist>
