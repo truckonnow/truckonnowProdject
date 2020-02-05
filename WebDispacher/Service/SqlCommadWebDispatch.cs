@@ -293,6 +293,16 @@ namespace WebDispacher.Dao
             return context.Shipping.FirstOrDefault(s => s.Id == shipping.Id) != null;
         }
 
+        internal List<DocumentTruckAndTrailers> GetTruckDocDB(string id)
+        {
+            return context.DocumentTruckAndTrailers.Where(d => d.TypeTr == "Truck" && d.IdTr.ToString() == id).ToList();
+        }
+
+        internal List<DocumentTruckAndTrailers> GetTrailerDocDB(string id)
+        {
+            return context.DocumentTruckAndTrailers.Where(d => d.TypeTr == "Trailer" && d.IdTr.ToString() == id).ToList();
+        }
+
         internal string GetDocumentDb(string id)
         {
             //string pathDoc = "";

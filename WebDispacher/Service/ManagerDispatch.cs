@@ -283,6 +283,11 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.UpdateDriver(driver);
         }
 
+        public List<DocumentTruckAndTrailers> GetTruckDoc(string id)
+        {
+            return _sqlEntityFramworke.GetTruckDocDB(id);
+        }
+
         public InspectionDriver GetInspectionTruck(string idInspection)
         {
             return _sqlEntityFramworke.GetInspectionTruck(idInspection);

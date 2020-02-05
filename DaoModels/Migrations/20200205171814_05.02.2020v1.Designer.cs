@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DaoModels.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20200205103646_05.02.2020v2")]
-    partial class _05022020v2
+    [Migration("20200205171814_05.02.2020v1")]
+    partial class _05022020v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
