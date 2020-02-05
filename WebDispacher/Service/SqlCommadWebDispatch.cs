@@ -249,9 +249,9 @@ namespace WebDispacher.Dao
 
         internal void SavePathDb(string id, string path)
         {
-            Truck truck = context.Trucks.First(t => t.Id.ToString() == id);
-            truck.PathDoc = path;
-            context.SaveChanges();
+            //Truck truck = context.Trucks.First(t => t.Id.ToString() == id);
+            //truck.PathDoc = path;
+            //context.SaveChanges();
         }
 
         public async void RemoveVechInDb(string idVech)
@@ -295,20 +295,20 @@ namespace WebDispacher.Dao
 
         internal string GetDocumentDb(string id)
         {
-            string pathDoc = "";
-            Driver driver = context.Drivers
-                .Include(d => d.InspectionDrivers)
-                .FirstOrDefault(d => d.Id.ToString() == id);
-            if (driver.InspectionDrivers != null)
-            {
-                InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
-                Truck truck = context.Trucks.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck);
-                if (truck != null)
-                {
-                    pathDoc = truck.PathDoc;
-                }
-            }
-            return pathDoc;
+            //string pathDoc = "";
+            //Driver driver = context.Drivers
+            //    .Include(d => d.InspectionDrivers)
+            //    .FirstOrDefault(d => d.Id.ToString() == id);
+            //if (driver.InspectionDrivers != null)
+            //{
+            //    InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
+            //    Truck truck = context.Trucks.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck);
+            //    if (truck != null)
+            //    {
+            //        pathDoc = truck.PathDoc;
+            //    }
+            //}
+            return "";
         }
 
         public async Task<VehiclwInformation> AddVechInDb(string idOrder)

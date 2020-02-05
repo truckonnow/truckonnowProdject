@@ -31,28 +31,28 @@ namespace DaoModels.DAO
         public DbSet<TaskLoad> TaskLoads { get; set; }
         public DbSet<Truck> Trucks { get; set; }
         public DbSet<Trailer> Trailers { get; set; }
+        public DbSet<DocumentTruckAndTrailers> DocumentTruckAndTrailers { get; set; }
 
         public Context()
         {
             try
             {
-                Database.EnsureCreated();
-                //Database.Migrate();
+                //Database.EnsureCreated();
+                Database.Migrate();
             }
             catch (Exception e)
             {
                 File.AppendAllText("db.txt", e.Message);
             }
-            
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=WebDispatchDB;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=WebDispatchDB;Trusted_Connection=True;");
                 //optionsBuilder.UseSqlServer("Data Source=212.224.113.5;Initial Catalog=WebDispatch;Integrated Security=False;User ID=roma;Password=123;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
-                optionsBuilder.UseSqlServer("Data Source=127.0.0.1;Initial Catalog=WebDispatch;Integrated Security=False;User ID=roma;Password=123;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
+                //optionsBuilder.UseSqlServer("Data Source=127.0.0.1;Initial Catalog=WebDispatch;Integrated Security=False;User ID=roma;Password=123;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
             }
         }
     }
