@@ -2,9 +2,36 @@
     <div style="display:flex;">
         <input class="btnCreateDoc" type="button" value="New Document Truck" onclick="OpenDialog()" />
     </div>
-    <dialog>
-        <content>
-            213ewasdca 
+    <dialog  @*onclick="HiddenDialog()"*@>
+        <content class="ng-modal-wrapper">
+            <div class="modal-dialog">
+                <div class="modal-dialog-content normal-modal ng-scope multiple">
+                    <h1 class="ng-binding">Adding a new document for a truck</h1>
+                    <div class="modal-dialog-content flex-content ng-scope">
+                        <div class="containScrollTable">
+                            <div class="fieldwrapper">
+                                <span class="spanModal">Name document</span> <br />
+                                <div>
+                                    <input id="docName" type="text" class="modal-inp-text" name="nameDoc" placeholder="Enter name document" style="margin-left:5px;"><br />
+                                    <p id="docNameSp" style="align-self:center;margin-left:5px;color:#ff4614;margin-bottom:10px;" hidden>Enter document name</p>
+                                </div>
+                                <div>
+                                    <label for="docLoad" class="btnModal blue" style="margin-left:5px;">Select document</label>
+                                    <input id="docLoad" style="display:none;" type="file" onchange="LoadFile(this)">
+                                    <p id="nameNoLoadDoc" class="spanModal" style="align-self:center;margin-left:5px;color:#ff4614;" hidden>You can upload files only in pdf, jpg and jepg</p>
+                                    <p id="nameLoadDoc" class="spanModal" style="align-self:center;margin-left:5px;color:#95f816;" hidden></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-buttons flush ng-scope">
+                        <div class="right-buttons">
+                            <button class="btnModal red" onclick="HiddenDialog()">Close</button>
+                            <input class="btnModal green" type="button" value="Save" onclick="SaveDoc()"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </content>
     </dialog>
     </div>
@@ -12,8 +39,84 @@
     <script>
         function OpenDialog() {
             let dialog = document.querySelector('dialog');
-            let body = document.querySelector('body');
             dialog.show();
+        }
+
+        function HiddenDialog() {
+            let dialog = document.querySelector('dialog');
+            dialog.close();
+        }
+
+        function LoadFile(fille) {
+            let pref = fille.files[0].name.substr(fille.files[0].name.lastIndexOf(".") + 1);
+            let nameLoadDocEl = document.getElementById("nameLoadDoc");
+            let nameNoLoadDocEl = document.getElementById("nameNoLoadDoc");
+            if (pref == "pdf" || pref == "jpg" || pref == "jepg") {
+                nameNoLoadDocEl.hidden = "hidden";
+                nameLoadDocEl.hidden = "";
+                nameLoadDocEl.textContent = fille.files[0].name;
+            }
+            else {
+                nameNoLoadDocEl.hidden = "";
+                nameLoadDocEl.hidden = "hidden";
+                fille.value = "";
+            }
+        }
+
+        function SaveDoc() {
+            let nameLoadDocEl = document.getElementById("nameLoadDoc");
+            let nameNoLoadDocEl = document.getElementById("nameNoLoadDoc");
+            let docLoadEl = document.getElementById("docLoad");
+            let docNameEl = document.getElementById("docName");
+            let docNameSpEl = document.getElementById("docNameSp");
+            let isDoc = false;
+            let isName = false;
+            if (docNameEl.value != "") {
+                docNameSpEl.hidden = "hidden";
+                isDoc = true;
+            }
+            else {
+                docNameSpEl.hidden = "";
+            }
+            if (docLoadEl.files.length != 0) {
+                let pref = docLoadEl.files[0].name.substr(docLoadEl.files[0].name.lastIndexOf(".") + 1);
+                if (pref == "pdf" || pref == "jpg" || pref == "jepg") {
+                    isName = true;
+                }
+                else {
+                    nameNoLoadDocEl.hidden = "";
+                    nameLoadDocEl.hidden = "hidden";
+                    docLoadEl.value = "";
+                }
+            }
+            else {
+                nameNoLoadDocEl.hidden = "";
+                nameLoadDocEl.hidden = "hidden";
+                docLoadEl.value = "";
+            }
+            if (isDoc && isName) {
+                let url = "@ViewBag.BaseUrl/Equipment/Truck/SaveDoc";
+                let xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function () {
+                    if (xmlHttp.status == 200) {
+                        delay(500);
+                        window.location.reload();
+                    }
+                    else if (xmlHttp.status == 0) {
+
+                    }
+                    else {
+                        loadExel.style.visibility = "hidden";
+                        errorExel.style.visibility = "visible";
+                    }
+                }
+                let formData = new FormData();
+                formData.append("uploadedFile", docLoadEl.files[0]);
+                formData.append("nameDoc", docNameEl.value);
+                formData.append("id", @ViewBag.TruckId);
+                xmlHttp.open("POST", url, true);
+                xmlHttp.send(formData);
+            }
         }
     </script>
 
@@ -23,22 +126,201 @@
             -webkit-appearance: none;
         }
 
+        .modal-dialog .modal-dialog-content.multiple {
+            padding-bottom: 0;
+        }
+
+        .modal-dialog .modal-dialog-content {
+            padding: 30px 30px 15px 30px;
+            font-size: 15px;
+        }
+
+        .modal-dialog .modal-dialog-content {
+            transition: height 0.25s linear;
+        }
 
         dialog {
-            position: absolute;
-            background: rgba(107, 107, 107, 0.24);
+            position: fixed;
+            z-index: 9500;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 100vh;
-            left: 0%;
-            top: 0%;
-            border:none;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            font-size: 0;
+            text-align: center;
         }
 
-        content {
+        .modal-dialog {
             position: absolute;
-            left: 45%;
-            top: 45%;
+            left: 40%;
+            top: 50px;
+            width: 500px;
+            text-align: left;
+            background-color: #fff;
+            -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15), 0px 0px 1px 1px rgba(0, 0, 0, 0.05);
+            -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15), 0px 0px 1px 1px rgba(0, 0, 0, 0.05);
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15), 0px 0px 1px 1px rgba(0, 0, 0, 0.05);
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            transition: height 0.25s linear;
         }
+
+        .green {
+            border: 1px solid #95f816;
+            outline: none;
+            color: #95f816;
+        }
+
+        .red {
+            border: 1px solid #ff4614;
+            outline: none;
+            color: #ff4614;
+        }
+
+        .blue {
+            border: 1px solid #3df;
+            outline: none;
+            color: #3df;
+        }
+
+        .modal-dialog .modal-dialog-content h1 {
+            font-size: 19px;
+            line-height: 22px;
+            letter-spacing: -.026em;
+            font-family: 'SF UI Text Medium', 'SF UI Text Light', 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, Verdana, sans-serif;
+            font-weight: 500;
+            margin-bottom: 14px;
+        }
+
+        .ng-modal-wrapper {
+            display: inline-block;
+            vertical-align: middle;
+            padding: 50px 0;
+            width: 100%;
+            position: relative;
+        }
+
+        .modal-dialog .modal-dialog-content h1 {
+            font-size: 19px;
+            line-height: 22px;
+            letter-spacing: -.026em;
+            font-family: 'SF UI Text Medium', 'SF UI Text Light', 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, Verdana, sans-serif;
+            font-weight: 500;
+            margin-bottom: 14px;
+        }
+
+        .modal-dialog .modal-dialog-content + .modal-dialog-content {
+            padding-top: 0;
+        }
+
+        .modal-dialog .modal-dialog-content {
+            padding: 30px 30px 15px 30px;
+            font-size: 15px;
+        }
+
+        .modal-dialog .modal-dialog-content {
+            transition: height 0.25s linear;
+        }
+
+        .tb-modal__body {
+            box-sizing: border-box;
+            padding: 18px 30px 31px;
+        }
+
+        .fieldwrapper {
+            float: left;
+            width: 100%;
+            font-size: 15px;
+            line-height: 19px;
+            letter-spacing: -.016em;
+            margin-bottom: 20px;
+        }
+
+        .modal-buttons {
+            border-top: 1px solid #e5e5e5;
+            padding: 15px;
+            display: inline-block;
+            width: 100%;
+            zoom: 1;
+        }
+
+        .spanModal {
+            float: left;
+            font-family: 'SF UI Text Medium', 'SF UI Text Light', 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, Verdana, sans-serif;
+            font-weight: 500;
+            font-size: 13px;
+            line-height: 16px;
+            letter-spacing: -.006em;
+            margin-right: 4px;
+            clear: right;
+        }   
+
+            .modal-buttons button, input {
+                margin-top: 0;
+            }
+
+            button.btnModal, a.btn.btnModal, .modal-buttons > ul li a.btnModal {
+                font-family: 'SF UI Text Medium', 'SF UI Text Light', 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, Verdana, sans-serif;
+                font-weight: 500;
+            }
+
+        .modal-dialog button, .modal-dialog input, .modal-dialog label, a.btn, .modal-buttons > ul li a {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+            cursor: pointer;
+            padding: 3px 10px 4px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            margin-top: 2px;
+            background: none;
+            font-size: 15px;
+            line-height: 19px;
+            letter-spacing: -.016em;
+            -moz-transition-property: all;
+            -o-transition-property: all;
+            -webkit-transition-property: all;
+            transition-property: all;
+            -moz-transition-duration: 300ms;
+            -o-transition-duration: 300ms;
+            -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
+        }
+
+        .modal-buttons .right-buttons {
+            float: right;
+        }
+
+        .modal-inp-text {
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: 1px solid #d9d9d9;
+            padding: 5px 8px;
+            width: 245px;
+            line-height: 22px;
+        }
+
+        .uploadButton {
+            display: block;
+            width: 200px;
+            background: #3df;
+            padding: 10px;
+            color: #FFF;
+            font-size: 16px;
+            font-weight: bold;
+            font-family: Tahoma;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+            .uploadButton:hover {
+                background: #3ce;
+            }
 
         .btnCreateDoc {
             color: white;

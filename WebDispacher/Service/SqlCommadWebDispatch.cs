@@ -321,6 +321,21 @@ namespace WebDispacher.Dao
             return "";
         }
 
+        internal void SaveDocTruckDb(string path, string id, string nameDoc)
+        {
+            string pref = path.Remove(0, path.LastIndexOf(".") + 1);
+            DocumentTruckAndTrailers documentTruckAndTrailers = new DocumentTruckAndTrailers()
+            {
+                DocPath = path,
+                IdTr = Convert.ToInt32(id),
+                NameDoc = nameDoc,
+                TypeTr = "Truck",
+                TypeDoc = pref
+            };
+            context.DocumentTruckAndTrailers.Add(documentTruckAndTrailers);
+            context.SaveChanges();
+        }
+
         public async Task<VehiclwInformation> AddVechInDb(string idOrder)
         {
             Shipping shipping = await context.Shipping

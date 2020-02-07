@@ -1,6 +1,8 @@
 ﻿using DaoModels.DAO.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using WebDispacher.Dao;
 using WebDispacher.Notify;
@@ -291,6 +293,24 @@ namespace WebDispacher.Service
         public InspectionDriver GetInspectionTruck(string idInspection)
         {
             return _sqlEntityFramworke.GetInspectionTruck(idInspection);
+        }
+
+        internal void SaveDocTruck(IFormFile uploadedFile, string nameDoc, string id)
+        {
+            string path = $"../Document/Truck/{id}/" + uploadedFile.FileName;
+            if(!Directory.Exists("../Document/Truck"))
+            {
+                Directory.CreateDirectory($"../Document/Truck");
+            }
+            if (!Directory.Exists($"../Document/Truck/{id}"))
+            {
+                Directory.CreateDirectory($"../Document/Truck/{id}");
+            }
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                uploadedFile.CopyTo(fileStream);
+            }
+            _sqlEntityFramworke.SaveDocTruckDb(path, id, nameDoc);
         }
     }
 }
