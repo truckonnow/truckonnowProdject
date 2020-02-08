@@ -32,7 +32,7 @@
                 <Label Text="Plate# truck" FontSize="15" TextColor="Black"/>
                 <FlexLayout>
                     <Entry Placeholder="Enter Plate# truck" Text="{Binding PlateTrailer}" />
-                    <Button Clicked="Button_Clicked_1" Text="G"/>
+                    <Button Clicked="Button_Clicked_1" Text="G" IsVisible="false"/>
                 </FlexLayout>
                 <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
                 <Button BackgroundColor="#4fd2c2" Text="Send Plate" TextColor="White" Clicked="Button_Clicked"/>
