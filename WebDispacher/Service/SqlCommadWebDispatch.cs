@@ -61,6 +61,33 @@ namespace WebDispacher.Dao
             } 
         }
 
+        internal Truck GetTruckDb(string idDriver)
+        {
+            InspectionDriver inspectionDriver = context.InspectionDrivers.Last();
+            return context.Trucks.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck);
+        }
+
+        internal Trailer GetTrailerDb(string idDriver)
+        {
+            InspectionDriver inspectionDriver = context.InspectionDrivers.Last();
+            return context.Trailers.FirstOrDefault(t => t.Id == inspectionDriver.IdITrailer);
+        }
+
+        internal int[] GetIdTruckAdnTrailarDb(string idDriver)
+        {
+            int[] idTruckAdnTrailar = null;
+            InspectionDriver inspectionDriver = context.InspectionDrivers.Last();
+            if(inspectionDriver != null)
+            {
+                idTruckAdnTrailar = new int[] { inspectionDriver.IdITruck, inspectionDriver.IdITrailer };
+            }
+            else
+            {
+                idTruckAdnTrailar = new int[0];
+            }
+            return idTruckAdnTrailar;
+        }
+
         internal List<Trailer> GetTrailersDb()
         {
             return context.Trailers.ToList();

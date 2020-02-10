@@ -50,6 +50,21 @@ namespace WebDispacher.Service
             return _sqlEntityFramworke.GetContactsDB();
         }
 
+        internal int[] GetIdTruckAdnTrailar(string idDriver)
+        {
+            return _sqlEntityFramworke.GetIdTruckAdnTrailarDb(idDriver);
+        }
+
+        internal Trailer GetTrailer(string idDriver)
+        {
+            return _sqlEntityFramworke.GetTrailerDb(idDriver);
+        }
+
+        internal Truck GetTruck(string idDriver)
+        {
+            return _sqlEntityFramworke.GetTruckDb(idDriver);
+        }
+
         public async void SaveVechi(string idVech, string VIN, string Year, string Make, string Model, string Type, string Color, string LotNumber)
         {
             VehiclwInformation vehiclwInformation = new VehiclwInformation();

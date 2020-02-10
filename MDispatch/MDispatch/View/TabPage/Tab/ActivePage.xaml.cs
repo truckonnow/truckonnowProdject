@@ -130,7 +130,7 @@ namespace MDispatch.View.TabPage.Tab
 
         private void ToolbarItem_Clicked_1(object sender, EventArgs e)
         {
-            Device.OpenUri(new Uri($"http://truckonnow.com/Equipment/Document?id={CrossSettings.Current.GetValueOrDefault("IdDriver", "0")}"));
+            Device.OpenUri(new Uri($"http://truckonnow.com/Doc/{CrossSettings.Current.GetValueOrDefault("IdDriver", "0")}"));
         }
     }
 }

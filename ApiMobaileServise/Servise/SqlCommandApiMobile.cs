@@ -136,13 +136,13 @@ namespace ApiMobaileServise.Servise
                     inspectionDrivers.PhotosTruck = context.PhotoDrivers.Where(p => p.IdInspaction == inspectionDrivers.Id).ToList();
                     if (inspectionDrivers.PhotosTruck.FirstOrDefault(p => p.IndexPhoto == IndexPhoto) == null)
                     {
-                        File.WriteAllText("SaveInspectionDriverInDb.txt", " inspectionDrivers.CountPhoto++; inspectionDrivers.PhotosTruck.Add(photo);");
+                        //File.WriteAllText("SaveInspectionDriverInDb.txt", " inspectionDrivers.CountPhoto++; inspectionDrivers.PhotosTruck.Add(photo);");
                         inspectionDrivers.CountPhoto++;
                         inspectionDrivers.PhotosTruck.Add(photo);
                     }
                     else
                     {
-                        File.WriteAllText("SaveInspectionDriverInDb.txt", ";");
+                        //File.WriteAllText("SaveInspectionDriverInDb.txt", ";");
 
                     }
                     await context.SaveChangesAsync();
@@ -163,7 +163,7 @@ namespace ApiMobaileServise.Servise
             }
             catch(Exception e)
             {
-                File.WriteAllText("SaveInspectionDriverInDb.txt", e.Message);
+                //File.WriteAllText("SaveInspectionDriverInDb.txt", e.Message);
             }
         }
 
@@ -264,18 +264,35 @@ namespace ApiMobaileServise.Servise
             DateTime dateTime = Convert.ToDateTime(inspectionDriver.Date);
             if (dateTime.Date == DateTime.Now.Date)
             {
-                inspectionDriver.IdITruck = truck != null ? truck.Id : 0;
-                inspectionDriver.IdITrailer = trailer != null ? trailer.Id : 0;
+                if (truck != null)
+                {
+                    inspectionDriver.IdITruck = truck.Id;
+                }
+                if (trailer != null)
+                {
+                    inspectionDriver.IdITrailer = trailer.Id;
+                }
             }
             else
             {
-                driver.InspectionDrivers.Add(new InspectionDriver()
+                if (truck != null)
                 {
-                    IdITruck = truck.Id,
-                    IdITrailer = trailer.Id,
-                    Date = DateTime.Now.ToString(),
-                    CountPhoto = 0
-                });
+                    driver.InspectionDrivers.Add(new InspectionDriver()
+                    {
+                        IdITruck = truck.Id,
+                        Date = DateTime.Now.ToString(),
+                        CountPhoto = 0
+                    });
+                }
+                if (trailer != null)
+                {
+                    driver.InspectionDrivers.Add(new InspectionDriver()
+                    {
+                        IdITrailer = trailer.Id,
+                        Date = DateTime.Now.ToString(),
+                        CountPhoto = 0
+                    });
+                }
             }
             context.SaveChanges();
             return true;

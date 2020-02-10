@@ -352,8 +352,8 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    ViewBag.TruckDoc = managerDispatch.GetTraileDoc(id);
-                    ViewBag.TruckId = id;
+                    ViewBag.TrailerDoc = managerDispatch.GetTraileDoc(id);
+                    ViewBag.TrailerId = id;
                     actionResult = View($"DocTrailer");
                 }
                 else
@@ -462,7 +462,7 @@ namespace WebDispacher.Controellers
 
 
 
-        [Route("Truck/GetDock")]
+        [Route("GetDock")]
         public IActionResult GetDock(string docPath, string type)
         {
             IActionResult actionResult = null;
@@ -471,7 +471,7 @@ namespace WebDispacher.Controellers
             return actionResult;
         }
 
-        [Route("Truck/GetDockPDF")]
+        [Route("GetDockPDF")]
         public IActionResult GetDockPDF(string docPath)
         {
             IActionResult actionResult = null;
