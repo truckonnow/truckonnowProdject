@@ -179,135 +179,135 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             string nameLayout = "";
             if (inderxPhotoInspektion == 1)
             {
-                nameLayout = "Front left side of the vehicle";
+                nameLayout = "Vehicle(Sedan) dashboard";
             }
             else if (inderxPhotoInspektion == 2)
             {
-                nameLayout = "Front left vehicle door";
+                nameLayout = "Vehicle(Sedan) driver's seat";
             }
             else if (inderxPhotoInspektion == 3)
             {
-                nameLayout = "Rear left vehicle door";
+                nameLayout = "Vehicle(Sedan) interior";
             }
             else if (inderxPhotoInspektion == 4)
             {
-                nameLayout = "Rear left of the vehicle";
+                nameLayout = "Driving door from inside the vehicle(Sedan)";
             }
             else if (inderxPhotoInspektion == 5)
             {
-                nameLayout = "Rear right side of the vehicle";
+                nameLayout = "Front door on the driver’s side of the vehicle(Sedan)";
             }
             else if (inderxPhotoInspektion == 6)
             {
-                nameLayout = "Rear right door of the vehicle";
+                nameLayout = "Rear view mirror on the driver’s side of the vehicle(Sedan)";
             }
             else if (inderxPhotoInspektion == 7)
             {
-                nameLayout = "Front right door of the vehicle";
+                nameLayout = "Rear view mirror on the driver’s side of the vehicle(Sedan)";
             }
             else if (inderxPhotoInspektion == 8)
             {
-                nameLayout = "Front right side of the vehicle";
+                nameLayout = "Front of the vehicle(Sedan), driver's side";
             }
             else if (inderxPhotoInspektion == 9)
             {
-                nameLayout = "Front right wheel of the vehicle";
+                nameLayout = "Front wheel of the vehicle(Sedan), driver's side";
             }
             else if (inderxPhotoInspektion == 10)
             {
-                nameLayout = "Rear right wheel of the vehicle";
+                nameLayout = "Right side of the front bumper of the vehicle(Sedan)";
             }
             else if (inderxPhotoInspektion == 11)
             {
-                nameLayout = "Rear left wheel of the vehicle";
+                nameLayout = "Right front headlight of the vehicle(Sedan)";
             }
             else if (inderxPhotoInspektion == 12)
             {
-                nameLayout = "Front left wheel of the vehicle";
+                nameLayout = "Center side of the front bumper of the vehicle(Sedan)";
             }
             else if (inderxPhotoInspektion == 13)
             {
-                nameLayout = "Right headlight of the vehicle";
+                nameLayout = "Left side of the front bumper of the vehicle(Sedan)";
             }
             else if (inderxPhotoInspektion == 14)
             {
-                nameLayout = "Left headlight of the vehicle";
+                nameLayout = "Left front headlight of the vehicle(Sedan)";
             }
             else if (inderxPhotoInspektion == 15)
             {
-                nameLayout = "Right rearview mirror vehicle";
+                nameLayout = "Vehicle(Sedan) hood";
             }
             else if (inderxPhotoInspektion == 16)
             {
-                nameLayout = "Left rearview mirror of the vehicle";
+                nameLayout = "Vehicle(Sedan) Windshield";
             }
             else if (inderxPhotoInspektion == 17)
             {
-                nameLayout = "Left rearview mirror of the vehicle (From the bottom)";
+                nameLayout = "----------(Sedan)";
             }
             else if (inderxPhotoInspektion == 18)
             {
-                nameLayout = "Right rearview mirror of the vehicle (From the bottom)";
+                nameLayout = "Front of the vehicle(Sedan), passenger side";
             }
             else if (inderxPhotoInspektion == 19)
             {
-                nameLayout = "Vehicle front windshield";
+                nameLayout = "Front wheel of the vehicle(Sedan), passenger side";
             }
             else if (inderxPhotoInspektion == 20)
             {
-                nameLayout = "The right side of the front bumper of the vehicle";
+                nameLayout = "Front door on the passenger side of the vehicle(Sedan)";
             }
             else if (inderxPhotoInspektion == 21)
             {
-                nameLayout = "The center side of the front bumper of the vehicle";
+                nameLayout = "Rear view mirror on the passenger side of the vehicle(Sedan)";
             }
             else if (inderxPhotoInspektion == 22)
             {
-                nameLayout = "The left side of the front bumper of the vehicle";
+                nameLayout = "Rear view mirror on the passenger side of the vehicle(Sedan)";
             }
             else if (inderxPhotoInspektion == 23)
             {
-                nameLayout = "Vehicle hood";
+                nameLayout = "The rear door of the vehicle(Sedan) on the passenger side";
             }
             else if (inderxPhotoInspektion == 24)
             {
-                nameLayout = "Roof behind the vehicle";
+                nameLayout = "Rear wheel of the vehicle(Sedan), passenger side";
             }
             else if (inderxPhotoInspektion == 25)
             {
-                nameLayout = "The left side of the rear bumper of the vehicle";
+                nameLayout = "Rear of the vehicle(Sedan) on the passenger side";
             }
             else if (inderxPhotoInspektion == 26)
             {
-                nameLayout = "The center side of the rear bumper of the vehicle";
+                nameLayout = "All part of the vehicle(Sedan) on the passenger side";
             }
             else if (inderxPhotoInspektion == 27)
             {
-                nameLayout = "The right side of the rear bumper of the vehicle";
+                nameLayout = "The right side of the rear bumper of the vehicle(Sedan)";
             }
             else if (inderxPhotoInspektion == 28)
             {
-                nameLayout = "Vehicle dashboard";
+                nameLayout = "The center side of the rear bumper of the vehicle(Sedan)";
             }
             else if (inderxPhotoInspektion == 29)
             {
-                nameLayout = "Rear left corner of the vehicle";
+                nameLayout = "The left side of the rear bumper of the vehicle";
             }
             else if (inderxPhotoInspektion == 30)
             {
-                nameLayout = "Rear right corner of the vehicle";
+                nameLayout = "All part of the vehicle(Sedan) on the driver's side";
             }
             else if (inderxPhotoInspektion == 31)
             {
-                nameLayout = "Driver's door from inside the vehiclee";
+                nameLayout = "Rear of the vehicle(Sedan) on the driver's side";
             }
             else if (inderxPhotoInspektion == 32)
             {
-                nameLayout = "The driver's seat of the vehicle";
+                nameLayout = "Rear wheel of the vehicle(Sedan), driver's side";
             }
             else if (inderxPhotoInspektion == 33)
             {
-                nameLayout = "Vehicle interior";
+                nameLayout = "The rear door of the vehicle(Sedan) on the driver's side";
             }
             return nameLayout;
         }
