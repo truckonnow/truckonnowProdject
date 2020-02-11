@@ -370,5 +370,22 @@ namespace WebDispacher.Controellers
             //return actionResult;
         }
 
+        [Route("Truck/GetDock")]
+        public IActionResult GetDock(string docPath, string type)
+        {
+            IActionResult actionResult = null;
+            var imageFileStream = System.IO.File.OpenRead(docPath);
+            actionResult = File(imageFileStream, type);
+            return actionResult;
+        }
+
+        [Route("Truck/GetDockPDF")]
+        public IActionResult GetDockPDF(string docPath)
+        {
+            IActionResult actionResult = null;
+            var imageFileStream = System.IO.File.OpenRead(docPath);
+            actionResult = File(imageFileStream, "application/pdf");
+            return actionResult;
+        }
     }
 }

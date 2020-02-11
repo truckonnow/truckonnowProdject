@@ -2,6 +2,23 @@
     <div style="display:flex;">
         <input class="btnCreateDoc" type="button" value="New Document Truck" onclick="OpenDialog()" />
     </div>
+    <div class="contentBody">
+        @for (int i = 0; i < ViewBag.TruckDoc.Count; i++)
+        {
+            string pref = @ViewBag.TruckDoc[i].DocPath.Remove(0, @ViewBag.TruckDoc[i].DocPath.LastIndexOf('.') + 1);
+            <p class="headPhoto">@ViewBag.TruckDoc[i].NameDoc</p>
+            if (pref == "pdf")
+            {
+
+                <embed style="margin-left:30%;" src="@ViewBag.BaseUrl/Equipment/Truck/GetDockPDF?docPath=@ViewBag.TruckDoc[i].DocPath" width="900" height="1200"/>
+            }
+            else
+            {
+                <img style="margin-left:30%;" src="@ViewBag.BaseUrl/Equipment/Truck/GetDock?docPath=@ViewBag.TruckDoc[i].DocPath&type=image/@pref" width="900" />
+            }
+            <hr />
+        }
+    </div>
     <dialog  @*onclick="HiddenDialog()"*@>
         <content class="ng-modal-wrapper">
             <div class="modal-dialog">
@@ -17,7 +34,8 @@
                                 </div>
                                 <div>
                                     <label for="docLoad" class="btnModal blue" style="margin-left:5px;">Select document</label>
-                                    <input id="docLoad" style="display:none;" type="file" onchange="LoadFile(this)">
+                                    <input id="docLoad" style="        display: none;
+" type="file" onchange="LoadFile(this)">
                                     <p id="nameNoLoadDoc" class="spanModal" style="align-self:center;margin-left:5px;color:#ff4614;" hidden>You can upload files only in pdf, jpg and jepg</p>
                                     <p id="nameLoadDoc" class="spanModal" style="align-self:center;margin-left:5px;color:#95f816;" hidden></p>
                                 </div>
@@ -99,7 +117,6 @@
                 let xmlHttp = new XMLHttpRequest();
                 xmlHttp.onreadystatechange = function () {
                     if (xmlHttp.status == 200) {
-                        delay(500);
                         window.location.reload();
                     }
                     else if (xmlHttp.status == 0) {
@@ -360,6 +377,11 @@
             margin: 2px;
         }
 
+        .headPhoto {
+            color: rgba(59, 51, 51, 0.87);
+            font-size: 23px;
+        }
+
         .inpData {
             font-size: 18px;
             color: rgb(51, 51, 51);
@@ -367,10 +389,6 @@
 
         .contentBody {
             width: 100%;
-            height: 100px;
-            border-top: solid;
-            border-width: 1px;
-            border-color: rgba(51, 51, 51, 0.3);
         }
 
         .body {
