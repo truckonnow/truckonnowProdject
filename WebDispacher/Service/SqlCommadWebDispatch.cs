@@ -321,6 +321,12 @@ namespace WebDispacher.Dao
             return "";
         }
 
+        internal void RemoveDocDb(string idDock)
+        {
+            context.DocumentTruckAndTrailers.Remove(context.DocumentTruckAndTrailers.First(d => d.Id.ToString() == idDock));
+            context.SaveChanges();
+        }
+
         internal void SaveDocTruckDb(string path, string id, string nameDoc)
         {
             string pref = path.Remove(0, path.LastIndexOf(".") + 1);

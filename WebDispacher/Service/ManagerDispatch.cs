@@ -312,5 +312,10 @@ namespace WebDispacher.Service
             }
             _sqlEntityFramworke.SaveDocTruckDb(path, id, nameDoc);
         }
+
+        internal void RemoveDoc(string idDock)
+        {
+            _sqlEntityFramworke.RemoveDocDb(idDock);
+        }
     }
 }

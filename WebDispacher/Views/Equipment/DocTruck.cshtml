@@ -6,7 +6,8 @@
         @for (int i = 0; i < ViewBag.TruckDoc.Count; i++)
         {
             string pref = @ViewBag.TruckDoc[i].DocPath.Remove(0, @ViewBag.TruckDoc[i].DocPath.LastIndexOf('.') + 1);
-            <p class="headPhoto">@ViewBag.TruckDoc[i].NameDoc</p>
+            <span class="headPhoto">@ViewBag.TruckDoc[i].NameDoc</span>
+            <span style="float:right" class="headPhoto" onclick="RemovDoc(@ViewBag.TruckDoc[i].Id)">✖</span><br />
             if (pref == "pdf")
             {
 
@@ -34,8 +35,7 @@
                                 </div>
                                 <div>
                                     <label for="docLoad" class="btnModal blue" style="margin-left:5px;">Select document</label>
-                                    <input id="docLoad" style="        display: none;
-" type="file" onchange="LoadFile(this)">
+                                    <input id="docLoad" style="display: none;" type="file" onchange="LoadFile(this)">
                                     <p id="nameNoLoadDoc" class="spanModal" style="align-self:center;margin-left:5px;color:#ff4614;" hidden>You can upload files only in pdf, jpg and jepg</p>
                                     <p id="nameLoadDoc" class="spanModal" style="align-self:center;margin-left:5px;color:#95f816;" hidden></p>
                                 </div>
@@ -55,6 +55,10 @@
     </div>
 
     <script>
+        function RemovDoc(idDock) {
+            location.href = "@ViewBag.BaseUrl/Equipment/RemoveDoc?idDock="+idDock+"&id=@ViewBag.TruckId";
+        }
+
         function OpenDialog() {
             let dialog = document.querySelector('dialog');
             dialog.show();

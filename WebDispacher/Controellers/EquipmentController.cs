@@ -370,6 +370,36 @@ namespace WebDispacher.Controellers
             //return actionResult;
         }
 
+        [Route("RemoveDoc")]
+        public IActionResult RemoveDoc(string idDock, string id)
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                   managerDispatch.RemoveDoc(idDock);
+                    actionResult = Redirect($"Truck/Doc?id={id}");
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+            return actionResult;
+        }   
+
         [Route("Truck/GetDock")]
         public IActionResult GetDock(string docPath, string type)
         {
