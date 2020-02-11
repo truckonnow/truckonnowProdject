@@ -321,6 +321,11 @@ namespace WebDispacher.Dao
             return "";
         }
 
+        internal List<DocumentTruckAndTrailers> GetTraileDocDb(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         internal void RemoveDocDb(string idDock)
         {
             context.DocumentTruckAndTrailers.Remove(context.DocumentTruckAndTrailers.First(d => d.Id.ToString() == idDock));
@@ -336,6 +341,21 @@ namespace WebDispacher.Dao
                 IdTr = Convert.ToInt32(id),
                 NameDoc = nameDoc,
                 TypeTr = "Truck",
+                TypeDoc = pref
+            };
+            context.DocumentTruckAndTrailers.Add(documentTruckAndTrailers);
+            context.SaveChanges();
+        }
+
+        internal void SaveDocTrailekDb(string path, string id, string nameDoc)
+        {
+            string pref = path.Remove(0, path.LastIndexOf(".") + 1);
+            DocumentTruckAndTrailers documentTruckAndTrailers = new DocumentTruckAndTrailers()
+            {
+                DocPath = path,
+                IdTr = Convert.ToInt32(id),
+                NameDoc = nameDoc,
+                TypeTr = "Trailer",
                 TypeDoc = pref
             };
             context.DocumentTruckAndTrailers.Add(documentTruckAndTrailers);

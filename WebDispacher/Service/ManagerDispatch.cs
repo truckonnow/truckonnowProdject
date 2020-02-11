@@ -313,6 +313,29 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.SaveDocTruckDb(path, id, nameDoc);
         }
 
+        internal void SaveDocTrailer(IFormFile uploadedFile, string nameDoc, string id)
+        {
+            string path = $"../Document/Traile/{id}/" + uploadedFile.FileName;
+            if (!Directory.Exists("../Document/Traile"))
+            {
+                Directory.CreateDirectory($"../Document/Traile");
+            }
+            if (!Directory.Exists($"../Document/Traile/{id}"))
+            {
+                Directory.CreateDirectory($"../Document/Traile/{id}");
+            }
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                uploadedFile.CopyTo(fileStream);
+            }
+            _sqlEntityFramworke.SaveDocTrailekDb(path, id, nameDoc);
+        }
+
+        internal List<DocumentTruckAndTrailers> GetTraileDoc(string id)
+        {
+            return _sqlEntityFramworke.GetTrailerDocDB(id);
+        }
+
         internal void RemoveDoc(string idDock)
         {
             _sqlEntityFramworke.RemoveDocDb(idDock);

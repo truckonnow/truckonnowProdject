@@ -341,6 +341,37 @@ namespace WebDispacher.Controellers
             return actionResult;
         }
 
+        [Route("Trailer/Doc")]
+        public IActionResult GoToViewTraileDoc(string id)
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    ViewBag.TruckDoc = managerDispatch.GetTraileDoc(id);
+                    ViewBag.TruckId = id;
+                    actionResult = View($"DocTrailer");
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+            return actionResult;
+        }
+
         [Route("Truck/SaveDoc")]
         public void SaveDoc(IFormFile uploadedFile, string nameDoc, string id)
         {
@@ -370,8 +401,37 @@ namespace WebDispacher.Controellers
             //return actionResult;
         }
 
+        [Route("Trailer/SaveDoc")]
+        public void SaveDoc1(IFormFile uploadedFile, string nameDoc, string id)
+        {
+            //IActionResult actionResult = null;
+            try
+            {
+                string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    managerDispatch.SaveDocTrailer(uploadedFile, nameDoc, id);
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    //actionResult = Redirect(Config.BaseReqvesteUrl);
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+            //return actionResult;
+        }
+
         [Route("RemoveDoc")]
-        public IActionResult RemoveDoc(string idDock, string id)
+        public IActionResult RemoveDoc(string idDock, string id, string type)
         {
             IActionResult actionResult = null;
             try
@@ -381,8 +441,8 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                   managerDispatch.RemoveDoc(idDock);
-                    actionResult = Redirect($"Truck/Doc?id={id}");
+                    managerDispatch.RemoveDoc(idDock);
+                    actionResult = Redirect($"{type}/Doc?id={id}");
                 }
                 else
                 {
@@ -398,7 +458,9 @@ namespace WebDispacher.Controellers
 
             }
             return actionResult;
-        }   
+        }
+
+
 
         [Route("Truck/GetDock")]
         public IActionResult GetDock(string docPath, string type)

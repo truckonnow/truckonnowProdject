@@ -95,7 +95,7 @@
                     <td style="cursor:pointer">
                         ✎
                     </td>
-                    <td>
+                    <td onclick="GoToTrailerDoc(@ViewBag.Trailers[i].Id)">
                         🖺
                     </td>
                     <td style="cursor:pointer" onclick="Remove(@ViewBag.Trailers[i].Id)">
@@ -109,6 +109,10 @@
 </div>
 
 <script>
+     function GoToTrailerDoc(id) {
+        document.location.href = "@ViewBag.BaseUrl/Equipment/Trailer/Doc?id="+id;
+    }
+
     function Remove(id) {
         document.location.href = "@ViewBag.BaseUrl/Equipment/Trailer/Remove?id="+id;
     }
