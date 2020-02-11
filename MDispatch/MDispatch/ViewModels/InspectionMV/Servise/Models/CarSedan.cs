@@ -17,32 +17,32 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             {
                 case 1:
                     {
-                        indecCar = 7;
+                        indecCar = 5;
                         break;
                     }
                 case 2:
                     {
-                        indecCar = 16;
+                        indecCar = 6;
                         break;
                     }
                 case 3:
                     {
-                        indecCar = 19;
+                        indecCar = 16;
                         break;
                     }
                 case 4:
                     {
-                        indecCar = 23;
+                        indecCar = 10;
                         break;
                     }
                 case 5:
                     {
-                        indecCar = 22;
+                        indecCar = 12;
                         break;
                     }
                 case 6:
                     {
-                        indecCar = 21;
+                        indecCar = 13;
                         break;
                     }
                 case 7:
@@ -52,12 +52,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
                     }
                 case 8:
                     {
-                        indecCar = 2;
-                        break;
-                    }
-                case 9:
-                    {
-                        indecCar = 15;
+                        indecCar = 21;
                         break;
                     }
                 default:
@@ -76,93 +71,47 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             {
                 case 1:
                     {
-                        indecCar = 4;
+                        indecCar = 5;
                         break;
                     }
                 case 2:
                     {
-                        indecCar = 3;
+                        indecCar = 2;
                         break;
                     }
                 case 3:
                     {
-                        indecCar = 2;
+                        indecCar = 10;
                         break;
                     }
                 case 4:
                     {
-                        indecCar = 1;
+                        indecCar = 11;
                         break;
                     }
                 case 5:
                     {
-                        indecCar = 19;
+                        indecCar = 11;
                         break;
                     }
-
                 case 6:
                     {
-                        indecCar = 23;
+                        indecCar = 13;
                         break;
                     }
                 case 7:
                     {
-                        indecCar = 20;
+                        indecCar = 14;
                         break;
                     }
                 case 8:
                     {
-                        indecCar = 21;
+                        indecCar = 15;
                         break;
                     }
                 case 9:
                     {
-                        indecCar = 22;
-                        break;
-                    }
-                case 10:
-                    {
-                        indecCar = 5;
-                        break;
-                    }
-                case 11:
-                    {
-                        indecCar = 6;
-                        break;
-                    }
-                case 12:
-                    {
-                        indecCar = 7;
-                        break;
-                    }
-                case 13:
-                    {
-                        indecCar = 8;
-                        break;
-                    }
-                case 14:
-                    {
-                        indecCar = 25;
-                        break;
-                    }
-                case 15:
-                    {
-                        indecCar = 26;
-                        break;
-                    }
-                case 16:
-                    {
-                        indecCar = 27;
-                        break;
-                    }
-                case 17:
-                    {
-                        indecCar = 33;
-                        break;
-                    }
-                case 18:
-                    {
-                        indecCar = 31;
+                        indecCar = 16;
                         break;
                     }
                 default:
