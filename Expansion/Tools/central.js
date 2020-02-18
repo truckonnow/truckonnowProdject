@@ -1,24 +1,5 @@
 ﻿function Init() {
-    if (location.href.includes("https://www.centraldispatch.com/protected/cargo/dispatched-to-me")) {
-        let elm = document.getElementById("dispatch-table").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
-        for (let i = 0; i < elm.length; i++) {
-            var button = document.createElement('button');
-            button.onclick = GetOreder;
-            button.style.marginTop = "50px";
-            button.style.background = "orange";
-            button.style.border = "none";
-            button.style.color = "white";
-
-
-            var br = document.createElement('br');
-            button.textContent = "Export Order";
-            let chil = elm[i].children[2];
-            chil.appendChild(br);
-            chil.appendChild(button);
-        }
-    }
-    else {
-
+    if (location.href.includes("https://www.centraldispatch.com/protected/dispatch/view")) {
         AddButon();
     }
 }
