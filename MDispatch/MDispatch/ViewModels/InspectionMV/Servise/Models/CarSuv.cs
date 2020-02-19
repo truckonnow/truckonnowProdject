@@ -134,149 +134,149 @@ namespace MDispatch.ViewModels.InspectionMV.Models
         {
 
             string nameLayout = "";
-            if (inderxPhotoInspektion == 6)
+            if (inderxPhotoInspektion == 1)
             {
-                nameLayout = "Vehicle hood";
-            }
-            else if (inderxPhotoInspektion == 12)
-            {
-                nameLayout = "Left headlight of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 10)
-            {
-                nameLayout = "Right headlight of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 4)
-            {
-                nameLayout = "Vehicle windshield";
-            }
-            else if (inderxPhotoInspektion == 23)
-            {
-                nameLayout = "All right part of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 28)
-            {
-                nameLayout = "All left part of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 33)
-            {
-                nameLayout = "Front left side of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 31)
-            {
-                nameLayout = "Front left side of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 30)
-            {
-                nameLayout = "Front left door of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 29)
-            {
-                nameLayout = "Rear left door of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 21)
-            {
-                nameLayout = "Rear left side of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 26)
-            {
-                nameLayout = "Suv";
-            }
-            else if (inderxPhotoInspektion == 27)
-            {
-                nameLayout = "Suv";
-            }
-            else if (inderxPhotoInspektion == 25)
-            {
-                nameLayout = "Suv";
-            }
-            else if (inderxPhotoInspektion == 15)
-            {
-                nameLayout = "Rear right side of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 19)
-            {
-                nameLayout = "Rear right door of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 16)
-            {
-                nameLayout = "Front right door of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 15)
-            {
-                nameLayout = "Front right side of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 13)
-            {
-                nameLayout = "Front right side of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 11)
-            {
-                nameLayout = "The left side of the front bumper of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 8)
-            {
-                nameLayout = "The center of the front bumper of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 9)
-            {
-                nameLayout = "The right side of the front bumper of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 7)
-            {
-                nameLayout = "All front part of the vehicle (bumper, headlights and windshield)";
-            }
-            else if (inderxPhotoInspektion == 17)
-            {
-                nameLayout = "Left rearview mirror of the vehicle (rear)";
-            }
-            else if (inderxPhotoInspektion == 25)
-            {
-                nameLayout = "Rith rearview mirror of the vehicle (rear)";
-            }
-            else if (inderxPhotoInspektion == 18)
-            {
-                nameLayout = "Right rearview mirror of the vehicle (Bottom)";
-            }
-            else if (inderxPhotoInspektion == 27)
-            {
-                nameLayout = "Left rearview mirror of the vehicle (Bottom)";
-            }
-            else if (inderxPhotoInspektion == 24)
-            {
-                nameLayout = "Vehicle rear window";
-            }
-            else if (inderxPhotoInspektion == 32)
-            {
-                nameLayout = "Right rear wheel of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 22)
-            {
-                nameLayout = "Right front wheel of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 31)
-            {
-                nameLayout = "Left front wheel of the vehicle";
-            }
-            else if (inderxPhotoInspektion == 14)
-            {
-                nameLayout = "Left rear wheel of the vehicle";
+                nameLayout = "Vehicle(SUV) dashboard";
             }
             else if (inderxPhotoInspektion == 2)
             {
-                nameLayout = "Vehicle interior";
+                nameLayout = "Vehicle(SUV) interior";
             }
             else if (inderxPhotoInspektion == 3)
             {
-                nameLayout = "Vehicle interior";
+                nameLayout = "Vehicle(SUV) interior";
+            }
+            else if (inderxPhotoInspektion == 4)
+            {
+                nameLayout = "Driving door from inside the vehicle(SUV)";
             }
             else if (inderxPhotoInspektion == 5)
             {
-                nameLayout = "Front door from the inside by the driver of the vehicle";
+                nameLayout = "Front door from inside the vehicle(SUV) on the driver's side";
             }
-            else if (inderxPhotoInspektion == 1)
+            else if (inderxPhotoInspektion == 6)
             {
-                nameLayout = "Vehicle dashboard";
+                nameLayout = "Rearview mirror vehicle(SUV) on the driver's side";
+            }
+            else if (inderxPhotoInspektion == 7)
+            {
+                nameLayout = "Rearview mirror vehicle(SUV) on the driver's side";
+            }
+            else if (inderxPhotoInspektion == 8)
+            {
+                nameLayout = "Front of the vehicle(SUV) on the driver's side";
+            }
+            else if (inderxPhotoInspektion == 9)
+            {
+                nameLayout = "Front wheel of the vehicle(SUV) on the driver's side";
+            }
+            else if (inderxPhotoInspektion == 10)
+            {
+                nameLayout = "Front of the vehicle(SUV) on the driver's side";
+            }
+            else if (inderxPhotoInspektion == 11)
+            {
+                nameLayout = "Right front headlight of the vehicle(SUV)";
+            }
+            else if (inderxPhotoInspektion == 12)
+            {
+                nameLayout = "The right side of the front bumper of the vehicle(SUV)";
+            }
+            else if (inderxPhotoInspektion == 13)
+            {
+                nameLayout = "The centr side of the front bumper of the vehicle(SUV)";
+            }
+            else if (inderxPhotoInspektion == 14)
+            {
+                nameLayout = "The left side of the front bumper of the vehicle(SUV)";
+            }
+            else if (inderxPhotoInspektion == 15)
+            {
+                nameLayout = "Left front headlight of the vehicle(SUV)";
+            }
+            else if (inderxPhotoInspektion == 16)
+            {
+                nameLayout = "Vehicle(SUV) hood";
+            }
+            else if (inderxPhotoInspektion == 17)
+            {
+                nameLayout = "Vehicle(SUV) Windshield";
+            }
+            else if (inderxPhotoInspektion == 18)
+            {
+                nameLayout = "The entire front of the vehicle(SUV)";
+            }
+            else if (inderxPhotoInspektion == 19)
+            {
+                nameLayout = "Front of the vehicle(SUV) on the passenger side";
+            }
+            else if (inderxPhotoInspektion == 20)
+            {
+                nameLayout = "Front of the vehicle(SUV) on the passenger side";
+            }
+            else if (inderxPhotoInspektion == 21)
+            {
+                nameLayout = "Front wheel of the vehicle(SUV) on the passenger side";
+            }
+            else if (inderxPhotoInspektion == 22)
+            {
+                nameLayout = "Front door from inside the vehicle(SUV) on the passenger side";
+            }
+            else if (inderxPhotoInspektion == 23)
+            {
+                nameLayout = "Rearview mirror vehicle(SUV) on the passenger side";
+            }
+            else if (inderxPhotoInspektion == 24)
+            {
+                nameLayout = "Rearview mirror vehicle(SUV) on the passenger side";
+            }
+            else if (inderxPhotoInspektion == 25)
+            {
+                nameLayout = "Rear door of the vehicle(SUV) on the passenger side";
+            }
+            else if (inderxPhotoInspektion == 26)
+            {
+                nameLayout = "Rear of the vehicle(SUV) on the passenger side";
+            }
+            else if (inderxPhotoInspektion == 27)
+            {
+                nameLayout = "Rear wheel of the vehicle(SUV) on the passenger side";
+            }
+            else if (inderxPhotoInspektion == 28)
+            {
+                nameLayout = "All part of the vehicle(SUV) on the passenger side";
+            }
+            else if (inderxPhotoInspektion == 29)
+            {
+                nameLayout = "The right side of the rear bumper of the vehicle(SUV)";
+            }
+            else if (inderxPhotoInspektion == 30)
+            {
+                nameLayout = "The center side of the rear bumper of the vehicle(SUV)";
+            }
+            else if (inderxPhotoInspektion == 31)
+            {
+                nameLayout = "Vehicle(SUV) Rear Window";
+            }
+            else if (inderxPhotoInspektion == 32)
+            {
+                nameLayout = "The left side of the rear bumper of the vehicle(SUV)";
+            }
+            else if (inderxPhotoInspektion == 33)
+            {
+                nameLayout = "Rear of the vehicle(SUV) on the driver's side";
+            }
+            else if (inderxPhotoInspektion == 34)
+            {
+                nameLayout = "Rear wheel of the vehicle(SUV) on the driver's side";
+            }
+            else if (inderxPhotoInspektion == 35)
+            {
+                nameLayout = "Rear door of the vehicle(SUV) on the driver's side";
+            }
+            else if (inderxPhotoInspektion == 36)
+            {
+                nameLayout = "All part of the vehicle(SUV) on the driver's side";
             }
             return nameLayout;
         }
