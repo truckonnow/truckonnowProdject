@@ -952,4 +952,112 @@
   <ItemGroup>
     <BundleResource Include="Resources\Sedan23.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv19.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv27.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv28.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv33.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv34.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv35.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Suv18.png" />
+  </ItemGroup>
 </Project>
