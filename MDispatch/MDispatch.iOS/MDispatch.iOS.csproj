@@ -854,102 +854,102 @@
     <BundleResource Include="Resources\Hint2.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\24.png" />
+    <BundleResource Include="Resources\Sedan24.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\25.png" />
+    <BundleResource Include="Resources\Sedan25.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\26.png" />
+    <BundleResource Include="Resources\Sedan26.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\27.png" />
+    <BundleResource Include="Resources\Sedan27.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\28.png" />
+    <BundleResource Include="Resources\Sedan28.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\29.png" />
+    <BundleResource Include="Resources\Sedan29.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\30.png" />
+    <BundleResource Include="Resources\Sedan30.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\31.png" />
+    <BundleResource Include="Resources\Sedan31.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\32.png" />
+    <BundleResource Include="Resources\Sedan32.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\33.png" />
+    <BundleResource Include="Resources\Sedan33.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\1.png" />
+    <BundleResource Include="Resources\Sedan1.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\2.png" />
+    <BundleResource Include="Resources\Sedan2.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\3.png" />
+    <BundleResource Include="Resources\Sedan3.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\4.png" />
+    <BundleResource Include="Resources\Sedan4.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\5.png" />
+    <BundleResource Include="Resources\Sedan5.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\6.png" />
+    <BundleResource Include="Resources\Sedan6.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\7.png" />
+    <BundleResource Include="Resources\Sedan7.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\8.png" />
+    <BundleResource Include="Resources\Sedan8.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\9.png" />
+    <BundleResource Include="Resources\Sedan9.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\10.png" />
+    <BundleResource Include="Resources\Sedan10.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\11.png" />
+    <BundleResource Include="Resources\Sedan11.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\12.png" />
+    <BundleResource Include="Resources\Sedan12.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\13.png" />
+    <BundleResource Include="Resources\Sedan13.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\14.png" />
+    <BundleResource Include="Resources\Sedan14.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\15.png" />
+    <BundleResource Include="Resources\Sedan15.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\16.png" />
+    <BundleResource Include="Resources\Sedan16.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\17.png" />
+    <BundleResource Include="Resources\Sedan17.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\18.png" />
+    <BundleResource Include="Resources\Sedan18.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\19.png" />
+    <BundleResource Include="Resources\Sedan19.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\20.png" />
+    <BundleResource Include="Resources\Sedan20.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\21.png" />
+    <BundleResource Include="Resources\Sedan21.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\22.png" />
+    <BundleResource Include="Resources\Sedan22.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\23.png" />
+    <BundleResource Include="Resources\Sedan23.png" />
   </ItemGroup>
 </Project>

@@ -845,103 +845,103 @@
     <AndroidResource Include="Resources\drawable\Hint2.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\10.png" />
+    <AndroidResource Include="Resources\drawable\Sedan10.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\11.png" />
+    <AndroidResource Include="Resources\drawable\Sedan11.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\12.png" />
+    <AndroidResource Include="Resources\drawable\Sedan12.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\13.png" />
+    <AndroidResource Include="Resources\drawable\Sedan13.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\14.png" />
+    <AndroidResource Include="Resources\drawable\Sedan14.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\15.png" />
+    <AndroidResource Include="Resources\drawable\Sedan15.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\16.png" />
+    <AndroidResource Include="Resources\drawable\Sedan16.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\17.png" />
+    <AndroidResource Include="Resources\drawable\Sedan17.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\18.png" />
+    <AndroidResource Include="Resources\drawable\Sedan18.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\19.png" />
+    <AndroidResource Include="Resources\drawable\Sedan19.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\20.png" />
+    <AndroidResource Include="Resources\drawable\Sedan20.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\21.png" />
+    <AndroidResource Include="Resources\drawable\Sedan21.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\22.png" />
+    <AndroidResource Include="Resources\drawable\Sedan22.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\23.png" />
+    <AndroidResource Include="Resources\drawable\Sedan23.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\24.png" />
+    <AndroidResource Include="Resources\drawable\Sedan24.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\25.png" />
+    <AndroidResource Include="Resources\drawable\Sedan25.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\26.png" />
+    <AndroidResource Include="Resources\drawable\Sedan26.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\27.png" />
+    <AndroidResource Include="Resources\drawable\Sedan27.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\28.png" />
+    <AndroidResource Include="Resources\drawable\Sedan28.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\29.png" />
+    <AndroidResource Include="Resources\drawable\Sedan29.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\30.png" />
+    <AndroidResource Include="Resources\drawable\Sedan30.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\31.png" />
+    <AndroidResource Include="Resources\drawable\Sedan31.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\32.png" />
+    <AndroidResource Include="Resources\drawable\Sedan32.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\33.png" />
+    <AndroidResource Include="Resources\drawable\Sedan33.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\1.png" />
+    <AndroidResource Include="Resources\drawable\Sedan1.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\2.png" />
+    <AndroidResource Include="Resources\drawable\Sedan2.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\3.png" />
+    <AndroidResource Include="Resources\drawable\Sedan3.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\4.png" />
+    <AndroidResource Include="Resources\drawable\Sedan4.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\5.png" />
+    <AndroidResource Include="Resources\drawable\Sedan5.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\6.png" />
+    <AndroidResource Include="Resources\drawable\Sedan6.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\7.png" />
+    <AndroidResource Include="Resources\drawable\Sedan7.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\8.png" />
+    <AndroidResource Include="Resources\drawable\Sedan8.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\9.png" />
+    <AndroidResource Include="Resources\drawable\Sedan9.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
