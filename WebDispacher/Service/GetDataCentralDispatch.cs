@@ -30,15 +30,7 @@ namespace WebDispacher.Service
             };
             proxyCloction = new List<string>()
             {
-                "118.99.113.14:3128",
-                "62.109.27.110:3128",
-                "51.255.132.59:3128",
-                "51.75.75.193:3128",
-                "176.9.192.215:3128",
-                "46.4.115.48:3128",
-                "84.16.227.128:3128",
-                "207.180.253.113:3128",
-                "209.97.191.169:3128",
+                "54.37.131.252:3128",
             };
         }
 
@@ -67,7 +59,7 @@ namespace WebDispacher.Service
             {
                 Init(isProxt);
                 var htm = httpRequest.Get("https://www.centraldispatch.com/login?uri=%2Fprotected%2F").ToString();
-                Tokene = Regex.Match(htm, @"CSRFToken.{4}lue\W\W(\w+)").Groups[1].Value;
+                Tokene = httpRequest.Cookies.GetValueOrDefault("CSRF_TOKEN", ""); //Regex.Match(htm, @"CSRFToken.{4}lue\W\W(\w+)").Groups[1].Value;
                 httpRequest.AddParam("Username", "ATS2019");
                 httpRequest.AddParam("Password", "Dispatch35221!");
                 httpRequest.AddParam("r", "");
@@ -91,15 +83,38 @@ namespace WebDispacher.Service
             }
         }
 
+        private void GetToken()
+        {
+            while(true)
+            {
+                var s = httpRequest.EnumerateHeaders().Current;
+                
+                //if (httpRequest.EnumerateHeaders().Current.Value == null)
+                //{
+                //    break;
+                //}
+                //else
+                if(httpRequest.EnumerateHeaders().Current.Key != "CSRF_TOKEN")
+                {
+
+                }
+                else
+                {
+                    httpRequest.EnumerateHeaders().MoveNext();
+                }
+                      
+            }
+        }
+
         public Shipping GetShipping(string urlPage)
         {
-            if (new Random().Next(1, 10) == 5)
+            if (new Random().Next(1, 5) == 3)
             {
                 Avthorization(false);
             }
             else
             {
-                Avthorization(false);
+                Avthorization(true);
             }
             string sourseUrl = httpRequest.Get(urlPage).ToString();
             return ParseDataInUrl(sourseUrl, sourseUrl);

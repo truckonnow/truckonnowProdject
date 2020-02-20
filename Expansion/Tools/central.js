@@ -21,25 +21,7 @@ function AddButon() {
     elm.appendChild(button);
 }
 
-function GetOreder(event) {
-    let body = "linck=" + event.path[2].children[7].children[1].href;
-    fetch('https://truckonnow.com/New', {
-        method: 'post',
-        body: body,
-        headers: {
-            'Content-type': 'application/x-www-form-urlencoded',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Credentials': 'true'
-        }
-    }).then(function (response) {
-        if (response.status === 200) {
-            alert("Successfully");
-        }
-        else {
-            alert("Unsuccessfully");
-        }
-    });
-}
+
 
 function GetOreder1(event) {
     let link = location.href.replace("https://www.centraldispatch.com", "");
