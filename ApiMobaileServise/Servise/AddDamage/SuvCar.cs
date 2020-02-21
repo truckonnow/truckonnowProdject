@@ -36,83 +36,83 @@ namespace ApiMobaileServise.Servise.AddDamage
         public int[] GetMaxMinForYAndX(string indexPhoto)
         {
             int[] maxMinForYAndX = null;
-            if (indexPhoto == "6")
+            if (indexPhoto == "5")
             {
-                maxMinForYAndX = new int[] { 630, 680, 280, 880 };
+                maxMinForYAndX = new int[] { 245, 23, 328, 160 };
+            }
+            else if (indexPhoto == "6")
+            {
+                maxMinForYAndX = new int[] { 310, 93, 325, 115 };
+            }
+            else if (indexPhoto == "7")
+            {
+                maxMinForYAndX = new int[] { 310, 93, 325, 115 };
+            }
+            else if (indexPhoto == "8")
+            {
+                maxMinForYAndX = new int[] { 328, 23, 382, 105 };
+            }
+            else if (indexPhoto == "9")
+            {
+                maxMinForYAndX = new int[] { 350, 1, 412, 64 };
             }
             else if (indexPhoto == "10")
             {
-                maxMinForYAndX = new int[] { 320, 915, 355, 880 };
+                maxMinForYAndX = new int[] { 382, 23, 432, 102 };
+            }
+            else if (indexPhoto == "11")
+            {
+                maxMinForYAndX = new int[] { 164, 445, 182, 460 };
             }
             else if (indexPhoto == "12")
             {
-                maxMinForYAndX = new int[] { 555, 915, 590, 880 };
-            }
-            else if (indexPhoto == "4")
-            {
-                maxMinForYAndX = new int[] { 555, 370, 705, 705 };
-            }
-            else if (indexPhoto == "23")
-            {
-                maxMinForYAndX = new int[] { 125, 595, 855, 910 };
-            }
-            else if (indexPhoto == "28")
-            {
-                maxMinForYAndX = new int[] { 855, 310, 125, 1 };
-            }
-            else if (indexPhoto == "33")
-            {
-                maxMinForYAndX = new int[] { 860, 190, 775, 65 };
-            }
-            else if (indexPhoto == "31")
-            {
-                maxMinForYAndX = new int[] { 775, 190, 635, 70 };
-            }
-            else if (indexPhoto == "30")
-            {
-                maxMinForYAndX = new int[] { 635, 310, 485, 70 };
-            }
-            else if (indexPhoto == "29")
-            {
-                maxMinForYAndX = new int[] { 485, 310, 350, 70 };
-            }
-            else if (indexPhoto == "21")
-            {
-                maxMinForYAndX = new int[] { 350, 310, 130, 70 };
-            }
-            else if (indexPhoto == "26")
-            {
-                maxMinForYAndX = new int[] { 295, 150, 390, 1 };
-            }
-            else if (indexPhoto == "27")
-            {
-                maxMinForYAndX = new int[] { 390, 150, 520, 1 };
-            }
-            else if (indexPhoto == "25")
-            {
-                maxMinForYAndX = new int[] { 520, 150, 615, 1 };
-            }
-            else if (indexPhoto == "15")
-            {
-                maxMinForYAndX = new int[] { 130, 605, 350, 860 };
-            }
-            else if (indexPhoto == "19")
-            {
-                maxMinForYAndX = new int[] { 340, 605, 480, 860 };
-            }
-            else if (indexPhoto == "16")
-            {
-                maxMinForYAndX = new int[] { 480, 605, 640, 860 };
-            }
-            else if (indexPhoto == "15")
-            {
-                maxMinForYAndX = new int[] { 640, 690, 780, 860 };
+                maxMinForYAndX = new int[] { 148, 435, 187, 498 };
             }
             else if (indexPhoto == "13")
             {
+                maxMinForYAndX = new int[] { 187, 435, 278, 498 };
+            }
+            else if (indexPhoto == "14")
+            {
+                maxMinForYAndX = new int[] { 278, 435, 315, 498 };
+            }
+            else if (indexPhoto == "15")
+            {
+                maxMinForYAndX = new int[] { 281, 445, 299, 460 };
+            }
+            else if (indexPhoto == "16")
+            {
+                maxMinForYAndX = new int[] { 148, 350, 315, 435 };
+            }
+            else if (indexPhoto == "17")
+            {
+                maxMinForYAndX = new int[] { 390, 150, 520, 1 };
+            }
+            else if (indexPhoto == "18")
+            {
+                maxMinForYAndX = new int[] { 520, 150, 615, 1 };
+            }
+            else if (indexPhoto == "19")
+            {
+                maxMinForYAndX = new int[] { 130, 605, 350, 860 };
+            }
+            else if (indexPhoto == "20")
+            {
+                maxMinForYAndX = new int[] { 340, 605, 480, 860 };
+            }
+            else if (indexPhoto == "21")
+            {
+                maxMinForYAndX = new int[] { 480, 605, 640, 860 };
+            }
+            else if (indexPhoto == "22")
+            {
+                maxMinForYAndX = new int[] { 640, 690, 780, 860 };
+            }
+            else if (indexPhoto == "23")
+            {
                 maxMinForYAndX = new int[] { 780, 690, 855, 860 };
             }
-            else if (indexPhoto == "11")
+            else if (indexPhoto == "24`")
             {
                 maxMinForYAndX = new int[] { 865, 620, 995, 530 };
             }
@@ -181,17 +181,12 @@ namespace ApiMobaileServise.Servise.AddDamage
                     int x = GetCordinatX(photoInspection.IndexPhoto.ToString(), damage.XInterest);
                     int y = GetCordinatY(photoInspection.IndexPhoto.ToString(), damage.YInterest);
                     g.DrawImage(img1, 0, 0);
-                    if (photoInspection.IndexPhoto == 5 || photoInspection.IndexPhoto == 28 || photoInspection.IndexPhoto == 33 || photoInspection.IndexPhoto == 31 || photoInspection.IndexPhoto == 30
-                        || photoInspection.IndexPhoto == 29 || photoInspection.IndexPhoto == 22 || photoInspection.IndexPhoto == 24 || photoInspection.IndexPhoto == 25 || photoInspection.IndexPhoto == 18
-                        || photoInspection.IndexPhoto == 27 || photoInspection.IndexPhoto == 15 || photoInspection.IndexPhoto == 19 || photoInspection.IndexPhoto == 16
-                        || photoInspection.IndexPhoto == 15 || photoInspection.IndexPhoto == 13 || photoInspection.IndexPhoto == 21 || photoInspection.IndexPhoto ==  9 || photoInspection.IndexPhoto == 28
-                        || photoInspection.IndexPhoto == 33 || photoInspection.IndexPhoto == 22 || photoInspection.IndexPhoto == 20 || photoInspection.IndexPhoto == 14)
+                    if (photoInspection.IndexPhoto == 5 || photoInspection.IndexPhoto == 6 || photoInspection.IndexPhoto == 7 || photoInspection.IndexPhoto == 8 || photoInspection.IndexPhoto == 9
+                        || photoInspection.IndexPhoto == 10)
                     {
                         g.DrawImage(img2, x, y);
                     }
-                    else if (photoInspection.IndexPhoto == 6 || photoInspection.IndexPhoto == 12 || photoInspection.IndexPhoto == 10 || photoInspection.IndexPhoto == 4 || photoInspection.IndexPhoto == 26
-                         || photoInspection.IndexPhoto == 27 || photoInspection.IndexPhoto == 25 || photoInspection.IndexPhoto == 20 || photoInspection.IndexPhoto == 8 
-                         || photoInspection.IndexPhoto == 7 || photoInspection.IndexPhoto == 24)
+                    else if (photoInspection.IndexPhoto == 11)
                     {
                         g.DrawImage(img2, y, x);
                     }
