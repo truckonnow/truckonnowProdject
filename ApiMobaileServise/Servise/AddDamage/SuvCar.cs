@@ -38,11 +38,11 @@ namespace ApiMobaileServise.Servise.AddDamage
             int[] maxMinForYAndX = null;
             if (indexPhoto == "5")
             {
-                maxMinForYAndX = new int[] { 245, 23, 328, 160 };
+                maxMinForYAndX = new int[] { 245, 160, 328, 23 };
             }
             else if (indexPhoto == "6")
             {
-                maxMinForYAndX = new int[] { 310, 93, 325, 115 };
+                maxMinForYAndX = new int[] { 310, 115, 325, 93 };
             }
             else if (indexPhoto == "7")
             {
@@ -50,15 +50,15 @@ namespace ApiMobaileServise.Servise.AddDamage
             }
             else if (indexPhoto == "8")
             {
-                maxMinForYAndX = new int[] { 328, 23, 382, 105 };
+                maxMinForYAndX = new int[] { 328, 105, 382, 23 };
             }
             else if (indexPhoto == "9")
             {
-                maxMinForYAndX = new int[] { 350, 1, 412, 64 };
+                maxMinForYAndX = new int[] { 350, 64, 412, 1 };
             }
             else if (indexPhoto == "10")
             {
-                maxMinForYAndX = new int[] { 382, 23, 432, 102 };
+                maxMinForYAndX = new int[] { 432, 102, 382, 23 };
             }
             else if (indexPhoto == "11")
             {
@@ -66,15 +66,15 @@ namespace ApiMobaileServise.Servise.AddDamage
             }
             else if (indexPhoto == "12")
             {
-                maxMinForYAndX = new int[] { 148, 435, 187, 498 };
+                maxMinForYAndX = new int[] { 187, 435, 148, 498 };
             }
             else if (indexPhoto == "13")
             {
-                maxMinForYAndX = new int[] { 187, 435, 278, 498 };
+                maxMinForYAndX = new int[] { 197, 498, 265, 435 };
             }
             else if (indexPhoto == "14")
             {
-                maxMinForYAndX = new int[] { 278, 435, 315, 498 };
+                maxMinForYAndX = new int[] { 265, 498, 315, 435 };
             }
             else if (indexPhoto == "15")
             {
@@ -82,15 +82,15 @@ namespace ApiMobaileServise.Servise.AddDamage
             }
             else if (indexPhoto == "16")
             {
-                maxMinForYAndX = new int[] { 148, 350, 315, 435 };
+                maxMinForYAndX = new int[] { 315, 350, 148, 435 };
             }
             else if (indexPhoto == "17")
             {
-                maxMinForYAndX = new int[] { 148, 300, 315, 350 };
+                maxMinForYAndX = new int[] { 315, 300, 148, 350 };
             }
             else if (indexPhoto == "18")
             {
-                maxMinForYAndX = new int[] { 148, 300, 315, 498 };
+                maxMinForYAndX = new int[] { 315, 300, 148, 498 };
             }
             else if (indexPhoto == "19")
             {
@@ -134,35 +134,35 @@ namespace ApiMobaileServise.Servise.AddDamage
             }
             else if (indexPhoto == "29")
             {
-                maxMinForYAndX = new int[] { 260, 1, 312, 75 };
+                maxMinForYAndX = new int[] { 260, 75, 312, 1 };
             }
             else if (indexPhoto == "30")
             {
-                maxMinForYAndX = new int[] { 204, 1, 260, 75 };
+                maxMinForYAndX = new int[] { 204, 75, 260, 1 };
             }
             else if (indexPhoto == "31")
             {
-                maxMinForYAndX = new int[] { 152, 50, 312, 102 };
+                maxMinForYAndX = new int[] { 152, 102, 312, 50 };
             }
             else if (indexPhoto == "32")
             {
-                maxMinForYAndX = new int[] { 152, 1, 204, 75 };
+                maxMinForYAndX = new int[] { 204, 75, 152, 1 };
             }
             else if (indexPhoto == "33")
             {
-                maxMinForYAndX = new int[] { 70, 23, 175, 160 };
+                maxMinForYAndX = new int[] { 175, 160, 70, 23 };
             }
             else if (indexPhoto == "34")
             {
-                maxMinForYAndX = new int[] { 119, 1, 181, 64 };
+                maxMinForYAndX = new int[] { 181, 64, 119, 1 };
             }
             else if (indexPhoto == "35")
             {
-                maxMinForYAndX = new int[] { 175, 23, 245, 160 };
+                maxMinForYAndX = new int[] { 245, 160, 175, 23 };
             }
             else if (indexPhoto == "36")
             {
-                maxMinForYAndX = new int[] { 70, 23, 432, 160 };
+                maxMinForYAndX = new int[] { 432, 160, 70, 23 };
             }
             return maxMinForYAndX;
         }
