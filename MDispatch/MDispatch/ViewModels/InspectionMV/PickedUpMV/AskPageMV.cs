@@ -37,6 +37,15 @@ namespace MDispatch.ViewModels.AskPhoto
             OnDeliveryToCarrier = onDeliveryToCarrier;
             TotalPaymentToCarrier = totalPaymentToCarrier;
             IdShip = idShip;
+            Init();
+        }
+
+        private void Init()
+        {
+            if(vehiclwInformation.Type == "Coupe" || vehiclwInformation.Type == "SUV" || vehiclwInformation.Type == "Pickeup" || vehiclwInformation.Type == "Sedan")
+            {
+                Ask.TypeVehicle = VehiclwInformation.Type;
+            }
         }
 
         public string IdShip { get; set; }
