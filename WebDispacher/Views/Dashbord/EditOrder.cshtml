@@ -82,18 +82,26 @@
                     {
                         @for (int i = 0; i < ViewBag.Order.VehiclwInformations.Count; i++)
                         {
-                            <tr id="@ViewBag.Order.VehiclwInformations[i].Id">
-                                <td>@i</td>
-                                <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].VIN" /></td>
-                                <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Year" /></td>
-                                <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Make" /></td>
-                                <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Model" /></td>
-                                <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Type" /></td>
-                                <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Color" /></td>
-                                <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Lot" /></td>
-                                <td><input class="inpTextTr btnD" type="button" value="-" onclick="RemoveVech(this)" /></td>
-                                <td><input class="inpTextTr btnD" type="button" value="S" onclick="SaveVech(this)" /></td>
-                            </tr>
+                    <tr id="@ViewBag.Order.VehiclwInformations[i].Id">
+                        <td>@i</td>
+                        <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].VIN" /></td>
+                        <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Year" /></td>
+                        <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Make" /></td>
+                        <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Model" /></td>
+                        <td>
+                            <select>
+                                <option>@ViewBag.Order.VehiclwInformations[i].Type</option>
+                                <option>Coupe</option>
+                                <option>Sedan</option>
+                                <option>SUV</option>
+                                <option>Pickup</option>
+                            </select>
+                        </td>
+                        <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Color" /></td>
+                        <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Lot" /></td>
+                        <td><input class="inpTextTr btnD" type="button" value="-" onclick="RemoveVech(this)" /></td>
+                        <td><input class="inpTextTr btnD" type="button" value="S" onclick="SaveVech(this)" /></td>
+                    </tr>
                         }
                     }
                 </tbody>
