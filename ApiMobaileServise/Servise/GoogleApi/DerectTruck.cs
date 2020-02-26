@@ -20,7 +20,7 @@ namespace ApiMobaileServise.Servise.GoogleApi
         public void AuchGoole(SqlCommandApiMobile sqlCommandApiMobil)
         {  
             this.sqlCommandApiMobil = sqlCommandApiMobil;
-            System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "../AuchConfig/Truckonnow-4953cb51a7ed.json");
+            System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "../AuchConfig/Truckonnow-3fe51d144964.json");
         }
 
         public string DetectText(params object[] parames)
@@ -51,11 +51,11 @@ namespace ApiMobaileServise.Servise.GoogleApi
                         }
                         else if (truck != null && truck.PlateTruk.Contains(text.Description))
                         {
-                            numPlateTmp += text.Description;
+                            numPlateTmp += " " + text.Description;
                         }
                         else if (truck == null && trucks.FirstOrDefault(t => t.PlateTruk.Contains(text.Description)) != null)
                         {
-                            numPlateTmp += text.Description;
+                            numPlateTmp +=  text.Description;
                             truck = trucks.FirstOrDefault(t => t.PlateTruk.Contains(text.Description));
                         }
                         if (numPlateTmp.Length >= 6)
@@ -82,7 +82,10 @@ namespace ApiMobaileServise.Servise.GoogleApi
                         }
 
                     }
-
+                    if (plate == "")
+                    {
+                        plate = numPlateTmp;
+                    }
                 }
             }
             catch (Exception e)

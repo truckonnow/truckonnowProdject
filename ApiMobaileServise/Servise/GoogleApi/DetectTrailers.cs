@@ -74,7 +74,10 @@ namespace ApiMobaileServise.Servise.GoogleApi
                             numPlateTmp = "";
                         }
                     }
-
+                }
+                if (plate == "")
+                {
+                    plate = numPlateTmp;
                 }
 
             }

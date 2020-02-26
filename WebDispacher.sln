@@ -7,13 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDispatch.Android", "MDispa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDispatch.iOS", "MDispatch\MDispatch.iOS\MDispatch.iOS.csproj", "{FFE941D5-E279-4090-AEEA-9A32BE01D3D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDispatch", "MDispatch\MDispatch\MDispatch.csproj", "{D6CD94AD-B4AF-4C31-B29D-789E2FBD7D48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDispatch", "MDispatch\MDispatch\MDispatch.csproj", "{D6CD94AD-B4AF-4C31-B29D-789E2FBD7D48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDispacher", "WebDispacher\WebDispacher.csproj", "{35FC1CEB-A315-4FF6-8F04-F91A39678080}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebDispacher", "WebDispacher\WebDispacher.csproj", "{35FC1CEB-A315-4FF6-8F04-F91A39678080}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaoModels", "DaoModels\DaoModels.csproj", "{E8470368-35B1-4718-8EB0-5A9E4DFD9799}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaoModels", "DaoModels\DaoModels.csproj", "{E8470368-35B1-4718-8EB0-5A9E4DFD9799}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiMobaileServise", "ApiMobaileServise\ApiMobaileServise.csproj", "{0E93D730-8119-4535-804F-38D247953C37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiMobaileServise", "ApiMobaileServise\ApiMobaileServise.csproj", "{0E93D730-8119-4535-804F-38D247953C37}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser", "Parser\Parser.csproj", "{7755E01D-7F6F-46E6-99EF-0FBC73DEF5F9}"
 EndProject
