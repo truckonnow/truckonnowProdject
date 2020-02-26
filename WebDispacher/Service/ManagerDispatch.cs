@@ -78,6 +78,11 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.SavevechInDb(idVech, vehiclwInformation);
         }
 
+        internal List<Driver> GetDrivers(string commpanyID, string nameDriver, string numberPhone, string driversLicense, string emailDriver)
+        {
+            return _sqlEntityFramworke.GetDrivers(commpanyID, nameDriver, numberPhone, driversLicense, emailDriver);
+        }
+
         internal List<Trailer> GetTrailers()
         {
             return _sqlEntityFramworke.GetTrailersDb();

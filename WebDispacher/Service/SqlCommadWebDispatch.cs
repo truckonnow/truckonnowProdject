@@ -73,6 +73,20 @@ namespace WebDispacher.Dao
             return context.Trailers.FirstOrDefault(t => t.Id == inspectionDriver.IdITrailer);
         }
 
+        internal List<Driver> GetDrivers(string commpanyID, string nameDriver, string numberPhone, string driversLicense, string emailDriver)
+        {
+            List<Driver> drivers = new List<Driver>();
+            if (nameDriver != null || numberPhone != null || driversLicense != null || emailDriver != null)
+            {
+                drivers.AddRange(context.Drivers.Where(d =>
+                (nameDriver == null || (nameDriver != null && d.FullName.Contains(nameDriver)))
+                && (numberPhone == null || (numberPhone != null && d.PhoneNumber.Contains(numberPhone)))
+                && (driversLicense == null || (driversLicense != null && d.DriversLicenseNumber.Contains(driversLicense)))
+                && (emailDriver == null || (emailDriver != null && d.EmailAddress.Contains(emailDriver)))).ToList());
+            }
+            return drivers;
+        }
+
         internal int[] GetIdTruckAdnTrailarDb(string idDriver)
         {
             int[] idTruckAdnTrailar = null;

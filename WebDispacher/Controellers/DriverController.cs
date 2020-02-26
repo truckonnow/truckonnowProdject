@@ -47,7 +47,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Driver/Check")]
-        public IActionResult CheckDriver(int page)
+        public IActionResult CheckDriver(string commpanyID, string nameDriver, string numberPhone, string driversLicense, string emailDriver)
         {
             IActionResult actionResult = null;
             try
@@ -57,7 +57,11 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    ViewBag.Drivers = managerDispatch.GetDrivers(page);
+                    ViewBag.NumberPhone = numberPhone;
+                    ViewBag.DriversLicense = driversLicense;
+                    ViewBag.NameDriver = nameDriver;
+                    ViewBag.EmailDriver = emailDriver;
+                    ViewBag.Drivers = managerDispatch.GetDrivers(commpanyID, nameDriver, numberPhone, driversLicense, emailDriver);
                     actionResult = View("DriverCheck");
                 }
                 else

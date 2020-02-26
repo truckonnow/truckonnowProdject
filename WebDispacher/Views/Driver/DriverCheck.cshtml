@@ -1,6 +1,12 @@
 ﻿<div class="body">
     <div style="display:flex;padding:10px;">
-        <input class="inpContentInspection" type="text" placeholder="Driver search"/>
+        <form method="get" action="">
+            <input class="inpContentInspection" type="text" placeholder="Name Driver" name="nameDriver" value="@ViewBag.NameDriver" />
+            <input class="inpContentInspection" type="text" placeholder="Phone" name="numberPhone" value="@ViewBag.NumberPhone" />
+            <input class="inpContentInspection" type="text" placeholder="Drivers License" name="driversLicense" value="@ViewBag.DriversLicense" />
+            <input class="inpContentInspection" type="text" placeholder="Email" name="emailDriver" value="@ViewBag.EmailDriver" />
+            <input class="btnCreateoOrder" type="submit" value="Search" />
+        </form>
     </div>
     <nav>
         <input class="btnSt" type="button" value="Drivers" onclick="window.location.href='@Url.Action("Drivers", "Driver")';" />
