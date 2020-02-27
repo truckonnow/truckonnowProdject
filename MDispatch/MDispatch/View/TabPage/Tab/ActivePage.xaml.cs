@@ -1,5 +1,6 @@
 ﻿using MDispatch.Service;
 using MDispatch.View.PageApp;
+using MDispatch.View.PageApp.Settings;
 using MDispatch.ViewModels.TAbbMV;
 using MDispatch.ViewModels.TAbbMV.DialogAsk;
 using Plugin.Settings;
@@ -120,7 +121,7 @@ namespace MDispatch.View.TabPage.Tab
         [Obsolete]
         protected override void OnAppearing()
         {
-            //activeMV.Init();
+            activeMV.Init();
             base.OnAppearing();
             timer = new Timer(new TimerCallback(ReminderTrackInspaction), null, 5000, 5000);
         }
@@ -136,6 +137,11 @@ namespace MDispatch.View.TabPage.Tab
         private void ToolbarItem_Clicked_1(object sender, EventArgs e)
         {
             Device.OpenUri(new Uri($"http://truckonnow.com/Doc/{CrossSettings.Current.GetValueOrDefault("IdDriver", "0")}"));
+        }
+
+        private async void ToolbarItem_Clicked_2(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new Settings(activeMV.managerDispatchMob));
         }
     }
 }

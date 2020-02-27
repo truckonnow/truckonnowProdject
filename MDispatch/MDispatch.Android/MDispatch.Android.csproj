@@ -130,6 +130,7 @@
     <Compile Include="NewrRender\ImageRender\ImageSizeRender.cs" />
     <Compile Include="NewrRender\ImageRender\RezizeImgRender.cs" />
     <Compile Include="NewrRender\Label\CorectLabel.cs" />
+    <Compile Include="NewrRender\Label\LabalStandartRender.cs" />
     <Compile Include="NewrRender\Orientation\OrientationHandler.cs" />
     <Compile Include="NewrRender\ORS\ORCReader.cs" />
     <Compile Include="NewrRender\RebderVideoCamera\VideoRecorderRenderer.cs" />
@@ -154,6 +155,9 @@
     <AndroidAsset Include="Assets\tessdata\eng.tesseract_cube.nn" />
     <AndroidAsset Include="Assets\tessdata\eng.traineddata" />
     <AndroidAsset Include="Assets\Truckonnow-8fb90a135d42.json" />
+    <None Include="..\MDispatch\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -717,12 +721,6 @@
     <AndroidResource Include="Resources\drawable\stopVideo.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\startVideo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\stopVideo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\CheckPaymment.png" />
   </ItemGroup>
   <ItemGroup>
@@ -940,6 +938,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Suv12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\settings.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

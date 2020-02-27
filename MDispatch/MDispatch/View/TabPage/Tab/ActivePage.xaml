@@ -5,8 +5,9 @@
              Title="Active"
              x:Name="ctp">
     <ContentPage.ToolbarItems>
-        <ToolbarItem  Text="Doc" Clicked="ToolbarItem_Clicked_1"/>
-        <ToolbarItem  Text="Exit" Clicked="ToolbarItem_Clicked"/>
+        <!--<ToolbarItem  Text="Doc" Clicked="ToolbarItem_Clicked_1"/>
+        <ToolbarItem  Text="Exit" Clicked="ToolbarItem_Clicked"/>-->
+        <ToolbarItem  IconImageSource="settings.png" Clicked="ToolbarItem_Clicked_2"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
