@@ -31,7 +31,6 @@ namespace MDispatch.ViewModels.TAbbMV
             initDasbordDelegate = Init;
             this.managerDispatchMob = managerDispatchMob;
             RefreshCommand = new DelegateCommand(PreVibartionLoad);
-            Init();
         }
 
         private List<Shipping> shippings = null;
@@ -57,7 +56,7 @@ namespace MDispatch.ViewModels.TAbbMV
             Init();
         }
 
-        private async void Init()
+        public async void Init()
         {
             IsRefr = true;
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");

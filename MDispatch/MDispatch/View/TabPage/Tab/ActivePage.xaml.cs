@@ -5,6 +5,7 @@ using MDispatch.ViewModels.TAbbMV.DialogAsk;
 using Plugin.Settings;
 using Rg.Plugins.Popup.Services;
 using System;
+using System.ComponentModel;
 using System.Threading;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -116,14 +117,18 @@ namespace MDispatch.View.TabPage.Tab
             activeMV.OutAccount();
         }
 
+        [Obsolete]
         protected override void OnAppearing()
         {
+            //activeMV.Init();
             base.OnAppearing();
             timer = new Timer(new TimerCallback(ReminderTrackInspaction), null, 5000, 5000);
         }
 
+        [Obsolete]
         protected override void OnDisappearing()
         {
+            activeMV.Init();
             base.OnDisappearing();
             timer.Change(Timeout.Infinite, Timeout.Infinite);
         }

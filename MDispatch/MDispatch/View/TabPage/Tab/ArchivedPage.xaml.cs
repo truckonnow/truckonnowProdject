@@ -67,5 +67,11 @@ namespace MDispatch.View.TabPage.Tab
         {
             TapGestureRecognizer_Tapped_1(sender, e);
         }
+
+        [Obsolete]
+        protected override void OnAppearing()
+        {
+            archiveMV.Init();
+        }
     }
 }

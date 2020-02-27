@@ -17,7 +17,7 @@ namespace MDispatch.View.TabPage
     {
         private TablePageMV tablePageMV = null;
 
-        public TabPage (ManagerDispatchMob managerDispatchMob)
+        public TabPage (ManagerDispatchMob managerDispatchMob)  : base()
         {
             tablePageMV = new TablePageMV(managerDispatchMob);
             InitializeComponent();

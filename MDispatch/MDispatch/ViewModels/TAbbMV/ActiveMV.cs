@@ -37,7 +37,6 @@ namespace MDispatch.ViewModels.TAbbMV
             RefreshCommand = new DelegateCommand(PreVibartionLoad);
             UnTimeOfInspection = new UnTimeOfInspection();
             GoToInspectionDriveCommand = new DelegateCommand(GoToInspectionDrive);
-            Init();
         }
 
         private List<Shipping> shippings = null;

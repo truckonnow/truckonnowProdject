@@ -30,7 +30,6 @@ namespace MDispatch.ViewModels.TAbbMV
             initDasbordDelegate = Init;
             this.managerDispatchMob = managerDispatchMob;
             RefreshCommand = new DelegateCommand(PreVibartionLoad);
-            Init();
         }
 
         private List<Shipping> shippings = null;
