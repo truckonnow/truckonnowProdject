@@ -1,6 +1,7 @@
 ﻿using MDispatch.Service;
 using MDispatch.Service.Net;
 using MDispatch.View;
+using MDispatch.View.A_R;
 using MDispatch.View.GlobalDialogView;
 using Plugin.Settings;
 using Prism.Mvvm;
@@ -55,7 +56,43 @@ namespace MDispatch.ViewModels.PageAppMV.Settings
         public string PlateTrailer1
         {
             get { return plateTrailer1; }
-            set { SetProperty(ref plateTrailer1, value); }
+            set
+            { 
+                SetProperty(ref plateTrailer1, value);
+                IsUpdateVersion = default;
+            }
+        }
+
+        private string currentVersion = "0.3.2";
+        public string CurrentVersion
+        {
+            get { return currentVersion; }
+            set 
+            { 
+                SetProperty(ref currentVersion, value);
+                IsUpdateVersion = default;
+            }
+        }
+
+        private string lastUpdateAvailable = "0.3.3";
+        public string LastUpdateAvailable
+        {
+            get { return lastUpdateAvailable; }
+            set { SetProperty(ref lastUpdateAvailable, value); }
+        }
+
+        private string сlosedTestVersion = "0.3.3";
+        public string СlosedTestVersion
+        {
+            get { return сlosedTestVersion; }
+            set { SetProperty(ref сlosedTestVersion, value); }
+        }
+
+        private bool isUpdateVersion = false;
+        public bool IsUpdateVersion
+        {
+            get { return isUpdateVersion; }
+            set { SetProperty(ref isUpdateVersion, LastUpdateAvailable != CurrentVersion); }
         }
 
         [System.Obsolete]
@@ -90,6 +127,40 @@ namespace MDispatch.ViewModels.PageAppMV.Settings
                     LatsInspection = latsInspection;
                     PlateTruck = plateTruck;
                     PlateTrailer = plateTrailer;
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
+            }
+        }
+
+        public async void OutAccount()
+        {
+            await PopupNavigation.PushAsync(new LoadPage());
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            string description = null;
+            bool isInspection = false;
+            int state = 0;
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.A_RWork("Clear", null, null, ref description, ref token);
+                });
+
+                await PopupNavigation.PopAsync();
+                if (state == 2)
+                {
+                    await PopupNavigation.PushAsync(new Errror("Error", null));
+                }
+                else if (state == 3)
+                {
+                    await Navigation.PopModalAsync();
+                    CrossSettings.Current.Remove("Token");
+                    App.isAvtorization = false;
+                    App.Current.MainPage = new NavigationPage(new Avtorization());
                 }
                 else if (state == 4)
                 {

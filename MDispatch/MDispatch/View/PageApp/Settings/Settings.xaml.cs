@@ -38,5 +38,10 @@ namespace MDispatch.View.PageApp.Settings
         {
             Device.OpenUri(new Uri($"http://192.168.31.44/Doc?truckPlate={settingsMV.PlateTruck1}&trailerPlate={settingsMV.PlateTrailer1}"));
         }
+
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+            settingsMV.OutAccount();
+        }
     }
 }
