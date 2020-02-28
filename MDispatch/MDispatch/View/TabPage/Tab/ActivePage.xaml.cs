@@ -129,7 +129,6 @@ namespace MDispatch.View.TabPage.Tab
         [Obsolete]
         protected override void OnDisappearing()
         {
-            activeMV.Init();
             base.OnDisappearing();
             timer.Change(Timeout.Infinite, Timeout.Infinite);
         }

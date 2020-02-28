@@ -159,6 +159,35 @@ namespace MDispatch.Service
             }
         }
 
+        internal int GetLastInspaction(string token, string idDriver, ref string latsInspection, ref string plateTruck, ref string plateTrailer, ref string description)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
+                RestRequest request = new RestRequest("Mobile/Driver/LastInspaction", Method.POST);
+                client.Timeout = 10000;
+                request.AddHeader("Accept", "application/json");
+                request.AddParameter("token", token);
+                request.AddParameter("idDriver", idDriver);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref latsInspection, ref plateTruck, ref plateTrailer, ref description);
+            }
+        }
+
         internal int CheckPlate(string token, ref string description, ref string plateTruckAndTrailer)
         {
             IRestResponse response = null;
@@ -198,6 +227,35 @@ namespace MDispatch.Service
             if (status == "success")
             {
                 isPlate = Convert.ToBoolean(responseAppS.Value<bool>("ResponseStr"));
+                return 3;
+            }
+            else
+            {
+                return 2;
+            }
+        }
+
+        private int GetData(string respJsonStr, ref string latsInspection, ref string plateTruck, ref string plateTrailer, ref string description)
+        {
+            respJsonStr = respJsonStr.Replace("\\", "");
+            respJsonStr = respJsonStr.Remove(0, 1);
+            respJsonStr = respJsonStr.Remove(respJsonStr.Length - 1);
+            var responseAppS = JObject.Parse(respJsonStr);
+            string status = responseAppS.Value<string>("Status");
+            description = responseAppS.Value<string>("Description");
+            if (status == "success")
+            {
+                string res = responseAppS.Value<string>("ResponseStr");
+                if(res != null)
+                {
+                    string[] arrRes = res.Split(',');
+                    if(arrRes.Length == 3)
+                    {
+                        latsInspection = arrRes[0];
+                        plateTruck = arrRes[1];
+                        plateTrailer = arrRes[2];
+                    }
+                }
                 return 3;
             }
             else

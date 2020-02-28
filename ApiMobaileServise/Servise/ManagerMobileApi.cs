@@ -245,6 +245,11 @@ namespace ApiMobaileServise.Servise
             }
         }
 
+        internal string GetLastInspaction(string idDriver)
+        {
+            return sqlCommandApiMobile.GetLastInspaction(idDriver);
+        }
+
         public async Task SaveFeedBack(string jsonStrAsk)
         {
             Feedback feedback = JsonConvert.DeserializeObject<Feedback>(jsonStrAsk);

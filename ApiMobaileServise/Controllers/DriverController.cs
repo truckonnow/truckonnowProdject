@@ -1,6 +1,7 @@
 ﻿using ApiMobaileServise.BackgraundService.Queue;
 using ApiMobaileServise.Models;
 using ApiMobaileServise.Servise;
+using DaoModels.DAO.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -88,7 +89,6 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    //managerMobileApi.SaveInspactionDriver(idDriver, photoJson, indexPhoto);
                     QueueWorkInspectionDriver.queues.Add($"SaveDriverInspection&,&{idDriver}&,&{photoJson}&,&{indexPhoto}");
                     QueueWorkInspectionDriver.countQueues++;
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
@@ -205,6 +205,35 @@ namespace ApiMobaileServise.Controllers
                 stream = null;
             }
             return new FileStreamResult(stream, "application/pdf");
+        }
+
+        [HttpPost]
+        [Route("LastInspaction")]
+        public string GetLastInspaction(string token, string idDriver)
+        {
+            string respons = null;
+            if (token == null || token == "")
+            {
+                return JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
+            }
+            try
+            {
+                bool isToken = managerMobileApi.CheckToken(token);
+                if (isToken)
+                {
+                    string lastInspectionDriver = managerMobileApi.GetLastInspaction(idDriver);
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", lastInspectionDriver));
+                }
+                else
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "", null));
+                }
+            }
+            catch (Exception)
+            {
+                respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
+            }
+            return respons;
         }
     }
 }

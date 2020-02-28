@@ -78,6 +78,16 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.SavevechInDb(idVech, vehiclwInformation);
         }
 
+        internal Truck GetTruckByPlate(string truckPlate)
+        {
+            return _sqlEntityFramworke.GetTruckByPlateDb(truckPlate);
+        }
+
+        internal Trailer GetTrailerkByPlate(string trailerPlate)
+        {
+            return _sqlEntityFramworke.GetTrailerByPlateDb(trailerPlate);
+        }
+
         internal List<Driver> GetDrivers(string commpanyID, string nameDriver, string numberPhone, string driversLicense, string emailDriver)
         {
             return _sqlEntityFramworke.GetDrivers(commpanyID, nameDriver, numberPhone, driversLicense, emailDriver);

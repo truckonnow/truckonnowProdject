@@ -63,14 +63,36 @@ namespace WebDispacher.Dao
 
         internal Truck GetTruckDb(string idDriver)
         {
-            InspectionDriver inspectionDriver = context.InspectionDrivers.Last();
-            return context.Trucks.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck);
+            Truck truck = null;
+            Driver driver = context.Drivers.Include(d => d.InspectionDrivers).FirstOrDefault(d => d.Id.ToString() == idDriver);
+            if (driver != null && driver.InspectionDrivers != null && driver.InspectionDrivers.Count != 0)
+            {
+                InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
+                truck = context.Trucks.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck);
+            }
+            return truck; 
         }
 
         internal Trailer GetTrailerDb(string idDriver)
         {
-            InspectionDriver inspectionDriver = context.InspectionDrivers.Last();
-            return context.Trailers.FirstOrDefault(t => t.Id == inspectionDriver.IdITrailer);
+            Trailer trailer = null;
+            Driver driver = context.Drivers.Include(d => d.InspectionDrivers).FirstOrDefault(d => d.Id.ToString() == idDriver);
+            if (driver != null && driver.InspectionDrivers != null && driver.InspectionDrivers.Count != 0)
+            {
+                InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
+                trailer = context.Trailers.FirstOrDefault(t => t.Id == inspectionDriver.IdITrailer);
+            }
+            return trailer;
+        }
+
+        internal Truck GetTruckByPlateDb(string truckPlate)
+        {
+            return context.Trucks.FirstOrDefault(t => t.PlateTruk == truckPlate);
+        }
+
+        internal Trailer GetTrailerByPlateDb(string trailerPlate)
+        {
+            return context.Trailers.FirstOrDefault(t => t.Plate == trailerPlate);
         }
 
         internal List<Driver> GetDrivers(string commpanyID, string nameDriver, string numberPhone, string driversLicense, string emailDriver)

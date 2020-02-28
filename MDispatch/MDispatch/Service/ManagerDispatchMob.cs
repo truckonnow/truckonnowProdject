@@ -58,6 +58,20 @@ namespace MDispatch.Service
             return stateDriver;
         }
 
+        internal int GetLastInspaction(string token, string idDriver, ref string latsInspection, ref string plateTruck, ref string plateTrailer, ref string description)
+        {
+            driverInspecktion = new DriverInspecktion();
+            //CountReqvest++;
+            int statePay = 1;
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                statePay = driverInspecktion.GetLastInspaction(token, idDriver, ref latsInspection, ref plateTruck, ref plateTrailer, ref description);
+            }
+            driverInspecktion = null;
+            CountReqvest--;
+            return statePay;
+        }
+
         public int A_RWork(string typeR_A, string login, string password, ref string description, ref string token)
         {
             a_R = new A_R();
@@ -385,7 +399,8 @@ namespace MDispatch.Service
 
         internal int DetectPlate(string token, string image, string idDriver, string type, ref string plate)
         {
-            googleApi = new GoogleApi(); CountReqvest++;
+            googleApi = new GoogleApi(); 
+            //CountReqvest++;
             int statePay = 1;
             if (CrossConnectivity.Current.IsConnected)
             {

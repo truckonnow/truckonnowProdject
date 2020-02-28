@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:labalStandart="clr-namespace:MDispatch.NewElement.Labal"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              mc:Ignorable="d"
              x:Class="MDispatch.View.PageApp.Settings.Settings">
     <ContentPage.Content>
@@ -31,17 +32,34 @@
             <ScrollView>
                 <StackLayout Margin="0, 10, 0, 0">
                     <labalStandart:LabalStandart Text="Documents" Margin="10, 0, 0, 0" FontSize="18" TextColor="Black"/>
-                    <StackLayout BackgroundColor="White" Margin="0, 0, 0, 10">
+                    <StackLayout BackgroundColor="White" Margin="0, 0, 0, 20">
                         <StackLayout>
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
                             </StackLayout.GestureRecognizers>
                             <labalStandart:LabalStandart Text="Click to show documents" Margin="10" FontSize="16" TextColor="Black" VerticalTextAlignment="Center"/>
-                            <FlexLayout JustifyContent="SpaceBetween">
-                                <labalStandart:LabalStandart Text="{Binding LatsInspection, StringFormat='Last inspection: {0:1}'}" Margin="10" FontSize="12" TextColor="Black" VerticalTextAlignment="Center"/>
-                                <labalStandart:LabalStandart Text="{Binding PlateTruck, StringFormat='Truck plate: {0:1}'}" Margin="10" FontSize="12" TextColor="Black" VerticalTextAlignment="Center"/>
-                                <labalStandart:LabalStandart Text="{Binding PlateTrailer, StringFormat='Trailer plate: {0:1}'}" Margin="10" FontSize="12" TextColor="Black" VerticalTextAlignment="Center"/>
+                            <FlexLayout JustifyContent="SpaceBetween" Wrap="Wrap">
+                                <labalStandart:LabalStandart Text="{Binding LatsInspection, StringFormat='Last inspection: {0:1}'}" Margin="10, 0, 0, 0" FontSize="12" TextColor="Black" VerticalTextAlignment="Center"/>
+                                <labalStandart:LabalStandart Text="{Binding PlateTruck, StringFormat='Truck plate: {0:1}'}" FontSize="12" TextColor="Black" VerticalTextAlignment="Center"/>
+                                <labalStandart:LabalStandart Text="{Binding PlateTrailer, StringFormat='Trailer plate: {0:1}'}" Margin="0, 0, 10, 0" FontSize="12" TextColor="Black" VerticalTextAlignment="Center"/>
                             </FlexLayout>
+                            <BoxView HeightRequest="1" BackgroundColor="#e5e5e5"/>
+                            <StackLayout>
+                                <labalStandart:LabalStandart Text="Documents by trailer and truck number" Margin="10" FontSize="16" TextColor="Black" VerticalTextAlignment="Center"/>
+                                <FlexLayout JustifyContent="SpaceBetween" Wrap="Wrap">
+                                    <StackLayout Orientation="Horizontal"  Margin="10, 0, 0, 0">
+                                        <labalStandart:LabalStandart Text="Plate# truck:" VerticalTextAlignment="Center" FontSize="14" TextColor="Black"/>
+                                        <Entry Placeholder="Enter Plate# truck" FontSize="12" Text="{Binding PlateTruck1}" />
+                                        <Button WidthRequest="50" BackgroundColor="White" Text="s"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Margin="10, 0, 0, 0">
+                                        <labalStandart:LabalStandart Text="Plate# trailer:" FontSize="14" TextColor="Black" VerticalTextAlignment="Center" />
+                                        <Entry Placeholder="Enter Plate# trailer"  FontSize="12" Text="{Binding PlateTrailer1}"/>
+                                        <Button WidthRequest="50" BackgroundColor="White" Text="s"/>
+                                    </StackLayout>
+                                    <Button Text="Show documents" BackgroundColor="White" TextColor="Black" Margin="10, 0, 10, 10" FontSize="12" Padding="0" Clicked="Button_Clicked"/>
+                                </FlexLayout>
+                            </StackLayout>
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>

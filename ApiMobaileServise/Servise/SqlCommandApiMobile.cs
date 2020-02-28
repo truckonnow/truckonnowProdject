@@ -83,7 +83,6 @@ namespace ApiMobaileServise.Servise
                 inspectionDrivers.IdITruck = truck.Id;
                 context.SaveChanges();
             }
-            //truck
         }
 
         internal void SetPlateTrailer(int id, string idDriver)
@@ -97,7 +96,6 @@ namespace ApiMobaileServise.Servise
                 inspectionDrivers.IdITruck = trailer.Id;
                 context.SaveChanges();
             }
-            //truck
         }
 
         public async Task SetInspectionDriverInDb(string idDriver, InspectionDriver inspectionDriver)
@@ -249,6 +247,31 @@ namespace ApiMobaileServise.Servise
             }
             await context.SaveChangesAsync();
             return isInspaction;
+        }
+
+        internal string GetLastInspaction(string idDriver)
+        {
+            string lastInspectionDriver = null;
+            Driver driver = context.Drivers.Where(d => d.Id.ToString() == idDriver)
+                 .Include(d => d.InspectionDrivers)
+                 .FirstOrDefault();
+            if(driver.InspectionDrivers != null && driver.InspectionDrivers.Count != 0)
+            {
+                InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
+                Truck truck = context.Trucks.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck);
+                Trailer trailer = context.Trailers.FirstOrDefault(t => t.Id == inspectionDriver.IdITrailer);
+                lastInspectionDriver = inspectionDriver.Date.Remove(inspectionDriver.Date.IndexOf(" ") + 1);
+                if(truck != null)
+                {
+                    lastInspectionDriver += $",{truck.PlateTruk}";
+                }
+                if (trailer != null)
+                {
+                    lastInspectionDriver += $",{trailer.Plate}";
+                }
+
+            }
+            return lastInspectionDriver;
         }
 
         internal bool SetTralerAndTruck(string token, string plateTrailer, string plateTruck)
