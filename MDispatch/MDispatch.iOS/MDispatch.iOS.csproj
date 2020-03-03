@@ -1073,4 +1073,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\scanPlate.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\inScan.png" />
+  </ItemGroup>
 </Project>

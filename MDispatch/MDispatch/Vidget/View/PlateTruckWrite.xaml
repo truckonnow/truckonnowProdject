@@ -32,7 +32,11 @@
                 <Label Text="Plate# truck" FontSize="15" TextColor="Black"/>
                 <FlexLayout>
                     <Entry Placeholder="Enter Plate# truck" Text="{Binding PlateTruck}" />
-                    <Button Clicked="Button_Clicked_1" Text="G"/>
+                    <Image Source="inScan.png" HeightRequest="30" WidthRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Button_Clicked_1"/>
+                        </Image.GestureRecognizers>
+                    </Image>
                 </FlexLayout>
                 <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
                 <Button BackgroundColor="#4fd2c2" Text="Send Plate" TextColor="White" Clicked="Button_Clicked"/>
