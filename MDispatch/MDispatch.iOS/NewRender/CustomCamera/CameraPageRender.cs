@@ -210,9 +210,18 @@ namespace MDispatch.iOS.NewRender.CustomCamera
                     takePhotoButton.Enabled = true;
                 }
             };
-
             scanPhotoButton.TouchUpInside += async (s, e) =>
             {
+                UIView.Animate(0.2, 0, UIViewAnimationOptions.BeginFromCurrentState, () =>
+                {
+                    scanPhotoButton.Transform = CGAffineTransform.MakeScale(0.8f, 0.8f);
+                }, () =>
+                {
+                    UIView.Animate(0.2, 0, UIViewAnimationOptions.BeginFromCurrentState, () =>
+                    {
+                        scanPhotoButton.Transform = CGAffineTransform.MakeScale(1f, 1f);
+                    }, null);
+                });
                 if (!isTake)
                 {
                     scanPhotoButton.Enabled = false;
@@ -299,8 +308,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
             {
                 Frame = new CGRect(rightButtonX, bottomButtonY, buttonWidth, buttonHeight),
             };
-            scanPhotoButton.SetTitle("Scan", UIControlState.Normal);
-            scanPhotoButton.TitleLabel.Text = "Scan";
+            takePhotoIspectionButton.SetBackgroundImage(UIImage.FromBundle("scanPlate.png"), UIControlState.Normal);
             View.InsertSubview(liveCameraStream, 0);
         }
 

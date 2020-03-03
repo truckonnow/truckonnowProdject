@@ -96,13 +96,14 @@ namespace MDispatch.Droid.NewrRender
             }
             else if (((CameraPage)Element).TypeCamera == "DetectText")
             {
-                scanPhotoButton.Text = "Scan";
+                //scanPlate.png
+                scanPhotoButton.SetBackgroundDrawable(ContextCompat.GetDrawable(Context, Resource.Drawable.scanPlate));
                 RelativeLayout.LayoutParams captureButtonParams = new RelativeLayout.LayoutParams(
                     RelativeLayout.LayoutParams.WrapContent,
                     RelativeLayout.LayoutParams.WrapContent);
                 captureButtonParams.Height = 120;
                 captureButtonParams.Width = 120;
-                capturePhotoButton.LayoutParameters = captureButtonParams;
+                scanPhotoButton.LayoutParameters = captureButtonParams;
                 mainLayout.AddView(scanPhotoButton);
             }
             else if(type == "PhotoIspection")
@@ -152,6 +153,12 @@ namespace MDispatch.Droid.NewrRender
                 animationcapturePhotoInspectionButtonSet.PlayTogether(
                     ObjectAnimator.OfFloat(capturePhotoInspectionButton, "scaleX", 0.8f, 1f),
                     ObjectAnimator.OfFloat(capturePhotoInspectionButton, "scaleY", 0.8f, 1f));
+            }
+            else if (clickNameBtn == "capturePhotoButton")
+            {
+                animationcapturePhotoInspectionButtonSet.PlayTogether(
+                    ObjectAnimator.OfFloat(scanPhotoButton, "scaleX", 0.8f, 1f),
+                    ObjectAnimator.OfFloat(scanPhotoButton, "scaleY", 0.8f, 1f));
             }
             else if (clickNameBtn == "capturePhotoButton")
             {
@@ -238,6 +245,13 @@ namespace MDispatch.Droid.NewrRender
             scanPhotoButton.Click += async (sender, e) =>
             {
                 clickNameBtn = "scanPhotoButton";
+                animationcapturePhotoInspectionButtonSet = new AnimatorSet();
+                animationcapturePhotoInspectionButtonSet.PlayTogether(
+                    ObjectAnimator.OfFloat(scanPhotoButton, "scaleX", 1, .8f),
+                    ObjectAnimator.OfFloat(scanPhotoButton, "scaleY", 1, .8f));
+                animationcapturePhotoInspectionButtonSet.SetDuration(400);
+                animationcapturePhotoInspectionButtonSet.AnimationEnd += EndAnimation;
+                animationcapturePhotoInspectionButtonSet.Start();
                 AutoFocus();
             }; 
             capturePhotoInspectionButton.Click += async (sender, e) =>
