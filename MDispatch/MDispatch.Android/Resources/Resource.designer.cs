@@ -15735,7 +15735,11 @@ namespace MDispatch.Droid
 			public const int Suv14 = 2131165728;
 			
 			// aapt resource value: 0x7F070221
+<<<<<<< HEAD
 			public const int Suv15 = 2131165729;
+=======
+			public const int suv15qq = 2131165729;
+>>>>>>> 5e94607... 123
 			
 			// aapt resource value: 0x7F070222
 			public const int Suv16 = 2131165730;
@@ -15771,6 +15775,7 @@ namespace MDispatch.Droid
 			public const int Suv25 = 2131165740;
 			
 			// aapt resource value: 0x7F07022D
+<<<<<<< HEAD
 			public const int Suv26 = 2131165741;
 			
 			// aapt resource value: 0x7F07022E
@@ -15805,6 +15810,42 @@ namespace MDispatch.Droid
 			
 			// aapt resource value: 0x7F070238
 			public const int Suv36 = 2131165752;
+=======
+			public const int suv25qq = 2131165741;
+			
+			// aapt resource value: 0x7F07022E
+			public const int Suv26 = 2131165742;
+			
+			// aapt resource value: 0x7F07022F
+			public const int Suv27 = 2131165743;
+			
+			// aapt resource value: 0x7F070230
+			public const int suv27qq = 2131165744;
+			
+			// aapt resource value: 0x7F070231
+			public const int Suv28 = 2131165745;
+			
+			// aapt resource value: 0x7F070232
+			public const int Suv29 = 2131165746;
+			
+			// aapt resource value: 0x7F070233
+			public const int suv29qq = 2131165747;
+			
+			// aapt resource value: 0x7F070234
+			public const int Suv3 = 2131165748;
+			
+			// aapt resource value: 0x7F070235
+			public const int Suv30 = 2131165749;
+			
+			// aapt resource value: 0x7F070236
+			public const int Suv31 = 2131165750;
+			
+			// aapt resource value: 0x7F070237
+			public const int Suv32 = 2131165751;
+			
+			// aapt resource value: 0x7F070238
+			public const int Suv33 = 2131165752;
+>>>>>>> 5e94607... 123
 			
 			// aapt resource value: 0x7F070239
 			public const int Suv4 = 2131165753;

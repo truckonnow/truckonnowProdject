@@ -37,7 +37,7 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app requires microphon access to function properly</string>
 	<key>CFBundleVersion</key>
-	<string>0.2.8</string>
+	<string>0.3.1</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>This application requires access to the geolocation of driver tracking in the workplace.</string>
 	<key>NSContactsUsageDescription</key>
@@ -45,7 +45,7 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>This app need to access your calendar events</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.2.8</string>
+	<string>0.3.1</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict/>
 	<key>XSAppIconAssets</key>

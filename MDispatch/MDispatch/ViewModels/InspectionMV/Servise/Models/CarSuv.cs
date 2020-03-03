@@ -8,7 +8,7 @@ namespace MDispatch.ViewModels.InspectionMV.Models
     public class CarSuv : ICar
     {
         public string typeIndex { get; set; } = "Suv"; 
-        public int CountCarImg { get; set; } = 33;
+        public int CountCarImg { get; set; } = 36;
 
         public int GetIndexCar(int countPhoto)
         {
