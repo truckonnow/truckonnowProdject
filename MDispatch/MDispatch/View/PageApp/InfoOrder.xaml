@@ -34,9 +34,10 @@
                                                 <Label Text="VIN#:" FontSize="18"/>
                                                 <Label Text="{Binding VIN}" FontSize="18"/>
                                             </StackLayout>
-                                            <StackLayout Orientation="Horizontal">
+                                            <BoxView HeightRequest="1" BackgroundColor="#BDBDBD"/>
+                                            <!--<StackLayout Orientation="Horizontal">
                                                 <Button Text="Order details"  BackgroundColor="#4fd2c2" FontSize="12" TextColor="White" Clicked="Button_Clicked_1"/>
-                                            </StackLayout>
+                                            </StackLayout>-->
                                         </StackLayout>
                                     </ViewCell.View>
                                 </ViewCell>

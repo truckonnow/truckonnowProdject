@@ -10,7 +10,6 @@ using MDispatch.View.Inspection.PickedUp;
 using MDispatch.View.PageApp;
 using MDispatch.View.ServiceView.ResizeImage;
 using MDispatch.ViewModels.InspectionMV;
-using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -38,7 +37,6 @@ namespace MDispatch.View.Inspection
             foreach (VehiclwInformation vehiclwInformation in vehiclwInformations)
             {
                 AddBlocInspectionPhoto(vehiclwInformation);
-                //AddBlocInspectionPhoto1(vehiclwInformation);
             }
             bOLMV.IsLoad = false;
         }
@@ -61,7 +59,7 @@ namespace MDispatch.View.Inspection
                                 WidthRequest = 70,
                                 Margin = 3
                             };
-                            image.GestureRecognizers.Add(new TapGestureRecognizer(VievFull));
+                            //image.GestureRecognizers.Add(new TapGestureRecognizer(VievFull));
                             blockPhotoInspection.Children.Add(image);
                         }
                     }
@@ -266,7 +264,7 @@ namespace MDispatch.View.Inspection
             }
             int width = DependencyService.Get<IResizeImage>().GetWidthImage(imageData);
             int heigth = DependencyService.Get<IResizeImage>().GetHeigthImage(imageData);
-            return DependencyService.Get<IResizeImage>().ResizeImage(imageData, (width / 100) * 44, (heigth / 100) * 44);
+            return DependencyService.Get<IResizeImage>().ResizeImage(imageData, (width / 100) * 40, (heigth / 100) * 40);
         }
 
         [Obsolete]

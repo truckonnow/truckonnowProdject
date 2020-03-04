@@ -9,7 +9,10 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <ActivityIndicator IsRunning="{Binding IsLoad}" IsVisible="{Binding IsLoad}" HeightRequest="40" WidthRequest="40"/>
+                <FlexLayout JustifyContent="Center" IsVisible="{Binding IsLoad}">
+                    <ActivityIndicator IsRunning="{Binding IsLoad}" IsVisible="{Binding IsLoad}" HeightRequest="40" WidthRequest="40"/>
+                    <Label Text="Loading..." TextColor="Black" FontSize="16" Margin="3" VerticalTextAlignment="Center"/>
+                 </FlexLayout>
                 <Frame Padding="5" BorderColor="BlueViolet" Margin="5" CornerRadius="6">
                     <StackLayout>
                         <Label Text="ORIGIN" FontSize="16" TextColor="Black" HorizontalTextAlignment="Center"/>

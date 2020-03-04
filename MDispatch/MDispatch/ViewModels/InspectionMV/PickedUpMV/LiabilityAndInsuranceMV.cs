@@ -24,13 +24,16 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
         public INavigation Navigation { get; set; }
         public DelegateCommand GoToFeedBackCommand { get; set; }
         public InitDasbordDelegate initDasbordDelegate = null;
+        public LiabilityAndInsurance liabilityAndInsurance = null;
 
-        public LiabilityAndInsuranceMV(ManagerDispatchMob managerDispatchMob, string idVech, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate)
+        public LiabilityAndInsuranceMV(ManagerDispatchMob managerDispatchMob, string idVech, string idShip, INavigation navigation, InitDasbordDelegate initDasbordDelegate,
+            LiabilityAndInsurance liabilityAndInsurance)
         {
             this.managerDispatchMob = managerDispatchMob;
             Navigation = navigation;
             IdShip = idShip;
             IdVech = idVech;
+            this.liabilityAndInsurance = liabilityAndInsurance;
             GoToFeedBackCommand = new DelegateCommand(GoToFeedBack);
             this.initDasbordDelegate = initDasbordDelegate;
             InitShipping();
@@ -145,7 +148,6 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 }
                 else if (state == 3)
                 {
-                    await PopupNavigation.PushAsync(new CopyLibaryAndInsurance(this));
                     DependencyService.Get<IToast>().ShowMessage("Paymmant method saved");
                 }
                 else if (state == 4)

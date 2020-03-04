@@ -56,7 +56,9 @@ namespace MDispatch.View.Inspection.PickedUp
         {
             if(IsValidEmail(emailE.Text))
             {
+                liabilityAndInsuranceMV.GoEvaluationAndSurvey();
                 await liabilityAndInsuranceMV.SendLiabilityAndInsuranceEmaile();
+
             }
         }
     }

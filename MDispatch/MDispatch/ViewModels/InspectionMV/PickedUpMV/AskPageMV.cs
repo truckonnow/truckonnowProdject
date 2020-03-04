@@ -37,6 +37,7 @@ namespace MDispatch.ViewModels.AskPhoto
             OnDeliveryToCarrier = onDeliveryToCarrier;
             TotalPaymentToCarrier = totalPaymentToCarrier;
             IdShip = idShip;
+            Ask = new Ask();
             Init();
         }
 

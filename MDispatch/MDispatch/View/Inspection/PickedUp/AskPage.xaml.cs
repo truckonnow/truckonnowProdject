@@ -25,7 +25,6 @@ namespace MDispatch.View.AskPhoto
             string onDeliveryToCarrier, string totalPaymentToCarrier)
         {
             askPageMV = new AskPageMV(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate, getVechicleDelegate, onDeliveryToCarrier, totalPaymentToCarrier);
-            askPageMV.Ask = new Ask();
             InitializeComponent();
             BindingContext = askPageMV;
         }

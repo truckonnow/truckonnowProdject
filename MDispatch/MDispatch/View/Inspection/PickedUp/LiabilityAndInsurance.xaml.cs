@@ -27,7 +27,7 @@ namespace MDispatch.View.Inspection.PickedUp
         [Obsolete]
         public LiabilityAndInsurance (ManagerDispatchMob managerDispatchMob, string idVech, string idShip, InitDasbordDelegate initDasbordDelegate, string OnDeliveryToCarrier, string totalPaymentToCarrier, bool isproplem)
 		{
-            liabilityAndInsuranceMV = new LiabilityAndInsuranceMV(managerDispatchMob, idVech, idShip, Navigation, initDasbordDelegate);
+            liabilityAndInsuranceMV = new LiabilityAndInsuranceMV(managerDispatchMob, idVech, idShip, Navigation, initDasbordDelegate, this);
             InitializeComponent ();
             BindingContext = liabilityAndInsuranceMV;
             InitElemnt(isproplem);
@@ -409,6 +409,28 @@ namespace MDispatch.View.Inspection.PickedUp
                     if (isSignatureAsk && isAsk2)
                     {
                         liabilityAndInsuranceMV.SaveSigAndMethodPay();
+                        if (liabilityAndInsuranceMV.What_form_of_payment_are_you_using_to_pay_for_transportation == "COD" || liabilityAndInsuranceMV.What_form_of_payment_are_you_using_to_pay_for_transportation == "COP" || liabilityAndInsuranceMV.What_form_of_payment_are_you_using_to_pay_for_transportation == "Biling")
+                        {
+                            liabilityAndInsuranceMV.GoToContinue();
+                            //await PopupNavigation.PopAllAsync(true);
+                        }
+                        else
+                        {
+                            await PopupNavigation.PopAllAsync(true);
+                            await PopupNavigation.PushAsync(new TempPageHint4());
+                            if (liabilityAndInsuranceMV.What_form_of_payment_are_you_using_to_pay_for_transportation == "Cash")
+                            {
+                                await Navigation.PushAsync(new VideoCameraPage(liabilityAndInsuranceMV, ""));
+                            }
+                            else if (liabilityAndInsuranceMV.What_form_of_payment_are_you_using_to_pay_for_transportation == "Check")
+                            {
+                                await Navigation.PushAsync(new CameraPaymmant(liabilityAndInsuranceMV, "", "CheckPaymment.png"));
+                            }
+                            else
+                            {
+                                await Navigation.PushAsync(new Ask2Page(liabilityAndInsuranceMV.managerDispatchMob, liabilityAndInsuranceMV.IdVech, liabilityAndInsuranceMV.IdShip, liabilityAndInsuranceMV.initDasbordDelegate));
+                            }
+                        }
                     }
                     else
                     {
@@ -434,6 +456,8 @@ namespace MDispatch.View.Inspection.PickedUp
         }
 
         bool isAsk3 = false;
+
+        [Obsolete]
         private async void Button_Clicked_1(object sender, EventArgs e)
         {
             isAsk3 = true;
@@ -444,8 +468,10 @@ namespace MDispatch.View.Inspection.PickedUp
             if (isSignatureAsk && isAsk2)
             {
                 btnSave.IsVisible = false;
-                bloclThank.IsVisible = true;
-                blockPsw.IsVisible = true;
+                //bloclThank.IsVisible = true;
+                //blockPsw.IsVisible = true;
+                await PopupNavigation.PushAsync(new CopyLibaryAndInsurance(liabilityAndInsuranceMV));
+
             }
             else
             {
