@@ -315,7 +315,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
         {
             var rightButtonX = View.Bounds.Right - 85;
             var bottomButtonY = View.Bounds.Bottom - 85;
-            var bottomButton1Y = View.Bounds.Bottom - 285;
+            var bottomButton1Y = 20;
             var buttonWidth = 70;
             var buttonHeight = 70;
             liveCameraStream = new UIView()
@@ -331,7 +331,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
             {
                 Frame = new CGRect(rightButtonX, bottomButtonY, buttonWidth, buttonHeight)
             };
-            takePhotoIspectionButton1.SetBackgroundImage(UIImage.FromBundle("TAddDamege.png"), UIControlState.Normal);
+            takePhotoIspectionButton1.SetBackgroundImage(UIImage.FromBundle("AddDamege.png"), UIControlState.Normal);
             takePhotoIspectionButton = new UIButton(UIButtonType.Custom)
             {
                 Frame = new CGRect(rightButtonX, bottomButton1Y, buttonWidth, buttonHeight)
@@ -341,7 +341,7 @@ namespace MDispatch.iOS.NewRender.CustomCamera
             {
                 Frame = new CGRect(rightButtonX, bottomButtonY, buttonWidth, buttonHeight),
             };
-            takePhotoIspectionButton.SetBackgroundImage(UIImage.FromBundle("scanPlate.png"), UIControlState.Normal);
+            scanPhotoButton.SetBackgroundImage(UIImage.FromBundle("scanPlate.png"), UIControlState.Normal);
             View.InsertSubview(liveCameraStream, 0);
         }
 
