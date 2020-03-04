@@ -77,10 +77,8 @@
                             <BoxView HeightRequest="1" BackgroundColor="#e5e5e5"/>
                             <FlexLayout>
                                 <labalStandart:LabalStandart Text="{Binding LastUpdateAvailable, StringFormat='Last update available: {0:1}'}" Margin="10, 0, 0, 0" FontSize="14" TextColor="Black" VerticalTextAlignment="Center"/>
-                                <Button Text="{Binding LastUpdateAvailable, StringFormat='Upgrade to {0:1} version'}" BackgroundColor="White" TextColor="Red"  Margin="10, 0, 10, 0" FontSize="11" Padding="0" IsVisible="{Binding IsUpdateVersion}" />
+                                <Button Text="{Binding LastUpdateAvailable, StringFormat='Upgrade to {0:1} version'}" BackgroundColor="White" TextColor="Red"  Margin="10, 0, 10, 0" FontSize="11" Padding="0" IsVisible="{Binding IsUpdateVersion}" Clicked="Button_Clicked_2" />
                             </FlexLayout>
-                            <BoxView HeightRequest="1" BackgroundColor="#e5e5e5"/>
-                            <labalStandart:LabalStandart Text="{Binding СlosedTestVersion, StringFormat='Closed Test Version: {0:1}'}" Margin="10, 0, 0, 10" FontSize="14" TextColor="Black" VerticalTextAlignment="Center"/>
                         </StackLayout>
                         <BoxView HeightRequest="1" BackgroundColor="#e5e5e5"/>
                         <Button Text="Sign out" BackgroundColor="White" TextColor="Red"  Margin="10, 0, 10, 0" FontSize="13" Padding="0" Clicked="Button_Clicked_1" />

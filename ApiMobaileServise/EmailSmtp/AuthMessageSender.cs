@@ -50,7 +50,7 @@ namespace ApiMobaileServise.EmailSmtp
                 }
                 using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                 {
-                    smtp.Credentials = new NetworkCredential("chuprina.r.v@gmail.com", "zwhyuebwesopuhmj");
+                    smtp.Credentials = new NetworkCredential("truckonnow.info@gmail.com", "flcasipusazpzfdo");
                     smtp.EnableSsl = true;
                     await smtp.SendMailAsync(mail);
                 }

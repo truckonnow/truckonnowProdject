@@ -3,6 +3,7 @@ using MDispatch.Service.Net;
 using MDispatch.View;
 using MDispatch.View.A_R;
 using MDispatch.View.GlobalDialogView;
+using Plugin.LatestVersion;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
@@ -20,6 +21,8 @@ namespace MDispatch.ViewModels.PageAppMV.Settings
         {
             this.managerDispatchMob = managerDispatchMob;
             Init();
+            SetCurrentVersion();
+            SetLatestVersionNumber();
         }
         
         public INavigation Navigation { get; set; }
@@ -59,40 +62,50 @@ namespace MDispatch.ViewModels.PageAppMV.Settings
             set
             { 
                 SetProperty(ref plateTrailer1, value);
-                IsUpdateVersion = default;
             }
         }
 
-        private string currentVersion = "0.3.2";
         public string CurrentVersion
         {
-            get { return currentVersion; }
-            set 
-            { 
-                SetProperty(ref currentVersion, value);
-                IsUpdateVersion = default;
-            }
+            get { return CrossLatestVersion.Current.InstalledVersionNumber; }
         }
 
-        private string lastUpdateAvailable = "0.3.3";
+        private string lastUpdateAvailable = "";
         public string LastUpdateAvailable
         {
             get { return lastUpdateAvailable; }
             set { SetProperty(ref lastUpdateAvailable, value); }
         }
 
-        private string сlosedTestVersion = "0.3.3";
-        public string СlosedTestVersion
-        {
-            get { return сlosedTestVersion; }
-            set { SetProperty(ref сlosedTestVersion, value); }
-        }
-
-        private bool isUpdateVersion = false;
+        private bool isUpdateVersion = default;
         public bool IsUpdateVersion
         {
             get { return isUpdateVersion; }
-            set { SetProperty(ref isUpdateVersion, LastUpdateAvailable != CurrentVersion); }
+            set { SetProperty(ref isUpdateVersion, value); }
+        }
+
+        private async void SetCurrentVersion()
+        {
+            try
+            {
+                IsUpdateVersion = await CrossLatestVersion.Current.IsUsingLatestVersion();
+            }
+            catch
+            {
+                IsUpdateVersion = true;
+            }
+        }
+
+        private async void SetLatestVersionNumber()
+        {
+            try
+            {
+                LastUpdateAvailable = await CrossLatestVersion.Current.GetLatestVersionNumber();
+            }
+            catch
+            {
+                LastUpdateAvailable = "Check stor app";
+            }
         }
 
         [System.Obsolete]
