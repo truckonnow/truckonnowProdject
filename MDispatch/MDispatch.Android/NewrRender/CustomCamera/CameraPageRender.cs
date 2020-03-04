@@ -41,6 +41,7 @@ namespace MDispatch.Droid.NewrRender
         Button capturePhotoButton;
         Button scanPhotoButton;
         Button capturePhotoInspectionButton;
+        Button capturePhotoInspectionButton1;
         AnimatorSet animationcapturePhotoInspectionButtonSet = null;
 
         [Obsolete]
@@ -108,16 +109,16 @@ namespace MDispatch.Droid.NewrRender
             }
             else if(type == "PhotoIspection")
             {
-                capturePhotoButton.SetBackgroundDrawable(ContextCompat.GetDrawable(Context, Resource.Drawable.Take));
+                capturePhotoInspectionButton1.SetBackgroundDrawable(ContextCompat.GetDrawable(Context, Resource.Drawable.AddDamege));
                 RelativeLayout.LayoutParams captureButtonParams1 = new RelativeLayout.LayoutParams(
                     RelativeLayout.LayoutParams.WrapContent,
                     RelativeLayout.LayoutParams.WrapContent);
                 captureButtonParams1.Height = 120;
                 captureButtonParams1.Width = 120;
-                capturePhotoButton.LayoutParameters = captureButtonParams1;
-                mainLayout.AddView(capturePhotoButton);
+                capturePhotoInspectionButton1.LayoutParameters = captureButtonParams1;
+                mainLayout.AddView(capturePhotoInspectionButton1);
 
-                capturePhotoInspectionButton.SetBackgroundDrawable(ContextCompat.GetDrawable(Context, Resource.Drawable.TakeArow));
+                capturePhotoInspectionButton.SetBackgroundDrawable(ContextCompat.GetDrawable(Context, Resource.Drawable.NotDamage));
                 RelativeLayout.LayoutParams captureButtonParams = new RelativeLayout.LayoutParams(
                     RelativeLayout.LayoutParams.WrapContent,
                     RelativeLayout.LayoutParams.WrapContent);
@@ -166,6 +167,12 @@ namespace MDispatch.Droid.NewrRender
                     ObjectAnimator.OfFloat(capturePhotoButton, "scaleX", 0.8f, 1f),
                     ObjectAnimator.OfFloat(capturePhotoButton, "scaleY", 0.8f, 1f));
             }
+            else if (clickNameBtn == "capturePhotoInspectionButton")
+            {
+                animationcapturePhotoInspectionButtonSet.PlayTogether(
+                    ObjectAnimator.OfFloat(capturePhotoInspectionButton, "scaleX", 0.8f, 1f),
+                    ObjectAnimator.OfFloat(capturePhotoInspectionButton, "scaleY", 0.8f, 1f));
+            }
             animationcapturePhotoInspectionButtonSet.SetDuration(400);
             animationcapturePhotoInspectionButtonSet.Start();
         }
@@ -186,7 +193,7 @@ namespace MDispatch.Droid.NewrRender
                 {
                     if (camera != null)
                     {
-                        //camera.SetDisplayOrientation(90);
+                        camera.SetDisplayOrientation(90);
 
                     }
                     int tmpPr = (mainLayout.Width / 100) * 10;
@@ -261,6 +268,18 @@ namespace MDispatch.Droid.NewrRender
                 animationcapturePhotoInspectionButtonSet.PlayTogether(
                     ObjectAnimator.OfFloat(capturePhotoInspectionButton, "scaleX", 1, .8f),
                     ObjectAnimator.OfFloat(capturePhotoInspectionButton, "scaleY", 1, .8f));
+                animationcapturePhotoInspectionButtonSet.SetDuration(400);
+                animationcapturePhotoInspectionButtonSet.AnimationEnd += EndAnimation;
+                animationcapturePhotoInspectionButtonSet.Start();
+                AutoFocus();
+            };
+            capturePhotoInspectionButton1.Click += async (sender, e) =>
+            {
+                clickNameBtn = "capturePhotoInspectionButton1";
+                animationcapturePhotoInspectionButtonSet = new AnimatorSet();
+                animationcapturePhotoInspectionButtonSet.PlayTogether(
+                    ObjectAnimator.OfFloat(capturePhotoInspectionButton1, "scaleX", 1, .8f),
+                    ObjectAnimator.OfFloat(capturePhotoInspectionButton1, "scaleY", 1, .8f));
                 animationcapturePhotoInspectionButtonSet.SetDuration(400);
                 animationcapturePhotoInspectionButtonSet.AnimationEnd += EndAnimation;
                 animationcapturePhotoInspectionButtonSet.Start();
@@ -425,7 +444,7 @@ namespace MDispatch.Droid.NewrRender
                 {
                     (Element as CameraPage).SetPhotoinspectionResult(bytes, liveView.Bitmap.Width, liveView.Bitmap.Height);
                 }
-                else if(clickNameBtn == "capturePhotoButton")
+                else if(clickNameBtn == "capturePhotoInspectionButton1")
                 {
                     (Element as CameraPage).SetPhotoResult(bytes, liveView.Bitmap.Width, liveView.Bitmap.Height);
                 }
