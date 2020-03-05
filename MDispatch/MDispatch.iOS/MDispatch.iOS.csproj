@@ -1080,4 +1080,61 @@
   <ItemGroup>
     <BundleResource Include="Resources\inScan.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sportbike11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sportbike12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sportbike13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sportbike14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sportbike15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sportbike16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sportbike17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sportbike18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sportbike19.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sportbike1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sportbike2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sportbike3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sportbike4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sportbike5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sportbike6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sportbike7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sportbike8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sportbike9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sportbike10.png" />
+  </ItemGroup>
 </Project>

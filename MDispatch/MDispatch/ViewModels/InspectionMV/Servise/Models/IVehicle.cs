@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
 
-namespace MDispatch.ViewModels.AskPhoto
+namespace MDispatch.ViewModels.InspectionMV.Servise.Models
 {
-    public interface ICar
+    public interface IVehicle
     {
-        string typeIndex { get; set; }
+        string TypeIndex { get; set; }
         int CountCarImg { get; set; }
         Task OrintableScreen(int inderxPhotoInspektion);
         string GetNameLayout(int inderxPhotoInspektion);

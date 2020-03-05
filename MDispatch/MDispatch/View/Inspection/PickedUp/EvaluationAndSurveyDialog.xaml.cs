@@ -23,8 +23,8 @@ namespace MDispatch.View.Inspection.PickedUp
         [System.Obsolete]
         private async void Button_Clicked_1(object sender, System.EventArgs e)
         {
-            liabilityAndInsuranceMV.liabilityAndInsurance.bloclThank.IsVisible = true;
-            liabilityAndInsuranceMV.liabilityAndInsurance.blockPsw.IsVisible = true;
+            //liabilityAndInsuranceMV.liabilityAndInsurance.bloclThank.IsVisible = true;
+            //liabilityAndInsuranceMV.liabilityAndInsurance.blockPsw.IsVisible = true;
             await PopupNavigation.PopAllAsync(true);
 
             //if (liabilityAndInsuranceMV.What_form_of_payment_are_you_using_to_pay_for_transportation == "COD" || liabilityAndInsuranceMV.What_form_of_payment_are_you_using_to_pay_for_transportation == "COP" || liabilityAndInsuranceMV.What_form_of_payment_are_you_using_to_pay_for_transportation == "Biling")

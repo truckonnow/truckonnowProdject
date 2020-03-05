@@ -1,13 +1,12 @@
 ﻿using MDispatch.NewElement;
-using MDispatch.ViewModels.AskPhoto;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace MDispatch.ViewModels.InspectionMV.Models
+namespace MDispatch.ViewModels.InspectionMV.Servise.Models
 {
-    public class CarSuv : ICar
+    public class CarSuv : IVehicle
     {
-        public string typeIndex { get; set; } = "Suv"; 
+        public string TypeIndex { get; set; } = "Suv";
         public int CountCarImg { get; set; } = 36;
 
         public int GetIndexCar(int countPhoto)
