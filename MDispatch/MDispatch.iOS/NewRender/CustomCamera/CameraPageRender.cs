@@ -354,16 +354,34 @@ namespace MDispatch.iOS.NewRender.CustomCamera
                 device.FocusMode = AVCaptureFocusMode.ContinuousAutoFocus;
                 device.UnlockForConfiguration();
             }
-            else if (device.IsExposureModeSupported(AVCaptureExposureMode.ContinuousAutoExposure))
+            else if (device.IsFocusModeSupported(AVCaptureFocusMode.AutoFocus))
+            {
+                device.LockForConfiguration(out error);
+                device.FocusMode = AVCaptureFocusMode.AutoFocus;
+                device.UnlockForConfiguration();
+            }
+            if (device.IsExposureModeSupported(AVCaptureExposureMode.ContinuousAutoExposure))
             {
                 device.LockForConfiguration(out error);
                 device.ExposureMode = AVCaptureExposureMode.ContinuousAutoExposure;
                 device.UnlockForConfiguration();
             }
-            else if (device.IsWhiteBalanceModeSupported(AVCaptureWhiteBalanceMode.ContinuousAutoWhiteBalance))
+            else if (device.IsExposureModeSupported(AVCaptureExposureMode.AutoExpose))
+            {
+                device.LockForConfiguration(out error);
+                device.ExposureMode = AVCaptureExposureMode.AutoExpose;
+                device.UnlockForConfiguration();
+            }
+            if (device.IsWhiteBalanceModeSupported(AVCaptureWhiteBalanceMode.ContinuousAutoWhiteBalance))
             {
                 device.LockForConfiguration(out error);
                 device.WhiteBalanceMode = AVCaptureWhiteBalanceMode.ContinuousAutoWhiteBalance;
+                device.UnlockForConfiguration();
+            }
+            else if (device.IsWhiteBalanceModeSupported(AVCaptureWhiteBalanceMode.AutoWhiteBalance))
+            {
+                device.LockForConfiguration(out error);
+                device.WhiteBalanceMode = AVCaptureWhiteBalanceMode.AutoWhiteBalance;
                 device.UnlockForConfiguration();
             }
         }
