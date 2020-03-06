@@ -1006,5 +1006,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Sportbike3.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\scanSportbike.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

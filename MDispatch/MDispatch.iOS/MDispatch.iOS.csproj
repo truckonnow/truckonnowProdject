@@ -1137,4 +1137,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\Sportbike10.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\scanSportbike.jpg" />
+  </ItemGroup>
 </Project>
