@@ -1087,7 +1087,7 @@
     <BundleResource Include="Resources\Sportbike12.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Sportbike13.png" />
+    <BundleResource Include="Resources\Sportbike4.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Sportbike14.png" />
@@ -1117,7 +1117,7 @@
     <BundleResource Include="Resources\Sportbike3.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Sportbike4.png" />
+    <BundleResource Include="Resources\Sportbike13.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Sportbike5.png" />

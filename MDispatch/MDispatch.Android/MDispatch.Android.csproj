@@ -950,7 +950,7 @@
     <AndroidResource Include="Resources\drawable\inScan.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Sportbike4.png" />
+    <AndroidResource Include="Resources\drawable\Sportbike13.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Sportbike5.png" />
@@ -977,7 +977,7 @@
     <AndroidResource Include="Resources\drawable\Sportbike12.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Sportbike13.png" />
+    <AndroidResource Include="Resources\drawable\Sportbike4.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Sportbike14.png" />

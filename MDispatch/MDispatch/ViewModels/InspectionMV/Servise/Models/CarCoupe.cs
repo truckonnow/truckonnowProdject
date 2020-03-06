@@ -54,49 +54,6 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             return indecCar;
         }
 
-        public int GetIndexCarFullPhoto(int countPhoto)
-        {
-            int indecCar = 0;
-            switch (countPhoto)
-            {
-                case 1:
-                    {
-                        indecCar = 7;
-                        break;
-                    }
-                case 2:
-                    {
-                        indecCar = 19;
-                        break;
-                    }
-                case 3:
-                    {
-                        indecCar = 2;
-                        break;
-                    }
-                case 4:
-                    {
-                        indecCar = 16;
-                        break;
-                    }
-                case 5:
-                    {
-                        indecCar = 23;
-                        break;
-                    }
-                case 6:
-                    {
-                        indecCar = 20;
-                        break;
-                    }
-                default:
-                    {
-                        indecCar = 0;
-                        break;
-                    }
-            }
-            return indecCar;
-        }
 
         public string GetNameLayout(int inderxPhotoInspektion)
         {
