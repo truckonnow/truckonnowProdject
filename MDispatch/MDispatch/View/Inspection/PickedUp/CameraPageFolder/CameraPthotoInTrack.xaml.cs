@@ -1,7 +1,6 @@
 ﻿using MDispatch.Models;
 using MDispatch.NewElement;
 using MDispatch.ViewModels.AskPhoto;
-using MDispatch.ViewModels.InspectionMV.Models;
 using MDispatch.ViewModels.InspectionMV.Servise.Models;
 using Newtonsoft.Json;
 using System;
@@ -21,7 +20,7 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
         private List<byte[]> imagesByte = new List<byte[]>();
         private int countPhoto = 1;
         private string nameVech = null;
-        private ICar car = null;
+        private IVehicle car = null;
 
         public CameraPthotoInTrack (Ask1Page ask1Page, string nameVech)
 		{
@@ -33,7 +32,7 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
             On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
                 .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
             car.OrintableScreen(car.GetIndexCar(countPhoto));
-            paternPhoto.Source = $"{car.typeIndex.Replace(" ", "")}{car.GetIndexCar(countPhoto)}.png";
+            paternPhoto.Source = $"{car.TypeIndex.Replace(" ", "")}{car.GetIndexCar(countPhoto)}.png";
             titlePhoto.Text = car.GetNameLayout(car.GetIndexCar(countPhoto));
         }
 
@@ -57,14 +56,14 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
             else
             {
                 car.OrintableScreen(car.GetIndexCar(countPhoto));
-                paternPhoto.Source = $"{car.typeIndex.Replace(" ", "")}{car.GetIndexCar(countPhoto)}.png";
+                paternPhoto.Source = $"{car.TypeIndex.Replace(" ", "")}{car.GetIndexCar(countPhoto)}.png";
                 titlePhoto.Text = car.GetNameLayout(car.GetIndexCar(countPhoto));
             }
         }
 
-        private ICar GetTypeCar(string typeCar)
+        private IVehicle GetTypeCar(string typeCar)
         {
-            ICar car = null;
+            IVehicle car = null;
             switch (typeCar)
             {
                 case "PickUp":
@@ -85,6 +84,11 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
                 case "Sedan":
                     {
                         car = new CarSedan();
+                        break;
+                    }
+                case "Sportbike":
+                    {
+                        car = new BikeSport();
                         break;
                     }
             }

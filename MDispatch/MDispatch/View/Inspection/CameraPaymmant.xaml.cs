@@ -4,6 +4,7 @@ using MDispatch.View.PageApp;
 using MDispatch.ViewModels.AskPhoto;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
+using MDispatch.ViewModels.InspectionMV.Servise.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
@@ -34,7 +35,7 @@ namespace MDispatch.View.Inspection
                 return;
             if(paymmant is AskForUsersDelyveryMW)
             {
-                ICar Car = ((AskForUsersDelyveryMW)paymmant).GetTypeCar(((AskForUsersDelyveryMW)paymmant).vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+                IVehicle Car = ((AskForUsersDelyveryMW)paymmant).GetTypeCar(((AskForUsersDelyveryMW)paymmant).vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
                 FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(((AskForUsersDelyveryMW)paymmant).managerDispatchMob, ((AskForUsersDelyveryMW)paymmant).vehiclwInformation, ((AskForUsersDelyveryMW)paymmant).IdShip, 
                     $"{((AskForUsersDelyveryMW)paymmant).vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", ((AskForUsersDelyveryMW)paymmant).vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""), 
                     ((AskForUsersDelyveryMW)paymmant).InderxPhotoInspektion + 1, ((AskForUsersDelyveryMW)paymmant).initDasbordDelegate, ((AskForUsersDelyveryMW)paymmant).getVechicleDelegate, Car.GetNameLayout(1), 

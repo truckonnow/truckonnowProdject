@@ -32,7 +32,7 @@ namespace MDispatch.View.PageApp
             paternPhoto.Source = pngPaternPhoto;
             dmla.IsVisible = false;
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-            if (fullPagePhotoMV.Car.typeIndex != null && fullPagePhotoMV.Car.typeIndex != "")
+            if (fullPagePhotoMV.Car.TypeIndex != null && fullPagePhotoMV.Car.TypeIndex != "")
             {
                 NameSelectPhoto.Text = $"{nameLayoute} - {photoIndex}/{fullPagePhotoMV.Car.CountCarImg}";
             }

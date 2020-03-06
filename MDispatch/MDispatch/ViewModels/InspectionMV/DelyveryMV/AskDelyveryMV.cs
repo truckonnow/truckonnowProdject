@@ -8,7 +8,6 @@ using MDispatch.View.Inspection;
 using MDispatch.View.Inspection.Delyvery;
 using MDispatch.View.PageApp;
 using MDispatch.ViewModels.AskPhoto;
-using MDispatch.ViewModels.InspectionMV.Models;
 using MDispatch.ViewModels.InspectionMV.Servise.Models;
 using Plugin.Settings;
 using Prism.Mvvm;
@@ -69,7 +68,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 await PopupNavigation.PushAsync(new LoadPage());
                 isNavigationMany = true;
             }
-            ICar car = GetTypeCar(VehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+            IVehicle car = GetTypeCar(VehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
             string description = null;
             int state = 0;
@@ -145,9 +144,9 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
         }
 
-        private ICar GetTypeCar(string typeCar)
+        private IVehicle GetTypeCar(string typeCar)
         {
-            ICar car = null;
+            IVehicle car = null;
             switch (typeCar)
             {
                 case "PickUp":

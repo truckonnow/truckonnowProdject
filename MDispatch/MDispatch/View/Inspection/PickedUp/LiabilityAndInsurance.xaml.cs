@@ -468,8 +468,8 @@ namespace MDispatch.View.Inspection.PickedUp
             if (isSignatureAsk && isAsk2)
             {
                 btnSave.IsVisible = false;
-                //bloclthank.isvisible = true;
-                //blockpsw.isvisible = true;
+                bloclThank.IsVisible = true;
+                blockPsw.IsVisible = true;
                 await PopupNavigation.PushAsync(new CopyLibaryAndInsurance(liabilityAndInsuranceMV));
 
             }

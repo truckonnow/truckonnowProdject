@@ -10,7 +10,6 @@ using MDispatch.View.Inspection;
 using MDispatch.View.Inspection.PickedUp;
 using MDispatch.View.PageApp;
 using MDispatch.ViewModels.AskPhoto;
-using MDispatch.ViewModels.InspectionMV.Models;
 using MDispatch.ViewModels.InspectionMV.Servise.Models;
 using Plugin.Settings;
 using Prism.Mvvm;
@@ -29,7 +28,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
     {
         public ManagerDispatchMob managerDispatchMob = null;
         public INavigation Navigation { get; set; }
-        public ICar Car = null;
+        public IVehicle Car = null;
         private InitDasbordDelegate initDasbordDelegate = null;
         private GetVechicleDelegate getVechicleDelegate = null;
 
@@ -93,9 +92,9 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             set => SetProperty(ref photoInspection, value);
         }
 
-        private ICar GetTypeCar(string typeCar)
+        private IVehicle GetTypeCar(string typeCar)
         {
-            ICar car = null;
+            IVehicle car = null;
             switch(typeCar)
             {
                 case "PickUp":
@@ -116,6 +115,11 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 case "Sedan":
                     {
                         car = new CarSedan();
+                        break;
+                    }
+                case "Sportbike":
+                    {
+                        car = new BikeSport();
                         break;
                     }
             }
@@ -265,15 +269,15 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             if (InderxPhotoInspektion < Car.CountCarImg)
             {
                 Car.OrintableScreen(InderxPhotoInspektion);
-                FullPagePhoto fullPagePhoto = new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", Car.typeIndex.Replace(" ", ""), InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1), OnDeliveryToCarrier, TotalPaymentToCarrier);
+                FullPagePhoto fullPagePhoto = new FullPagePhoto(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.TypeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", Car.TypeIndex.Replace(" ", ""), InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1), OnDeliveryToCarrier, TotalPaymentToCarrier);
                 await Navigation.PushAsync(fullPagePhoto);
-                await Navigation.PushAsync(new CameraPagePhoto($"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", fullPagePhoto, "PhotoIspection"));
+                await Navigation.PushAsync(new CameraPagePhoto($"{Car.TypeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", fullPagePhoto, "PhotoIspection"));
             }
             else
             {
                 //await PopupNavigation.PushAsync(new TempPageHint());
                 DependencyService.Get<IOrientationHandler>().ForceSensor();
-                await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate, Car.typeIndex.Replace(" ", ""), OnDeliveryToCarrier, TotalPaymentToCarrier), true);
+                await Navigation.PushAsync(new Ask1Page(managerDispatchMob, VehiclwInformation, IdShip, initDasbordDelegate, getVechicleDelegate, Car.TypeIndex.Replace(" ", ""), OnDeliveryToCarrier, TotalPaymentToCarrier), true);
             }
             if(isTask)
             {

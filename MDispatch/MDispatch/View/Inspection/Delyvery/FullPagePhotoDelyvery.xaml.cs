@@ -34,7 +34,7 @@ namespace MDispatch.View.PageApp
             BindingContext = fullPagePhotoDelyveryMV;
             paternPhoto.Source = pngPaternPhoto;
             dmla.IsVisible = false;
-            if (fullPagePhotoDelyveryMV.Car.typeIndex != null && fullPagePhotoDelyveryMV.Car.typeIndex != "")
+            if (fullPagePhotoDelyveryMV.Car.TypeIndex != null && fullPagePhotoDelyveryMV.Car.TypeIndex != "")
             {
                 NameSelectPhoto.Text = $"{nameLayoute} - {photoIndex}/{fullPagePhotoDelyveryMV.Car.CountCarImg}";
             }

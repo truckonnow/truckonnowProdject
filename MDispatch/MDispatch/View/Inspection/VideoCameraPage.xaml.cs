@@ -4,6 +4,7 @@ using MDispatch.View.PageApp;
 using MDispatch.ViewModels.AskPhoto;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
+using MDispatch.ViewModels.InspectionMV.Servise.Models;
 using MDispatch.ViewModels.InspectionMV.Servise.Paymmant;
 using System;
 using Xamarin.Forms;
@@ -40,7 +41,7 @@ namespace MDispatch.View.Inspection
                     path = $"../Video/{((AskForUsersDelyveryMW)paymmant).VehiclwInformation.Id}/RecountPay.mp4",
                     VideoBase64 = Convert.ToBase64String(result.Result)
                 };
-                ICar Car = ((AskForUsersDelyveryMW)paymmant).GetTypeCar(((AskForUsersDelyveryMW)paymmant).vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+                IVehicle Car = ((AskForUsersDelyveryMW)paymmant).GetTypeCar(((AskForUsersDelyveryMW)paymmant).vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
                 FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(((AskForUsersDelyveryMW)paymmant).managerDispatchMob, ((AskForUsersDelyveryMW)paymmant).vehiclwInformation, ((AskForUsersDelyveryMW)paymmant).IdShip,
                     $"{((AskForUsersDelyveryMW)paymmant).vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", ((AskForUsersDelyveryMW)paymmant).vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""),
                     ((AskForUsersDelyveryMW)paymmant).InderxPhotoInspektion + 1, ((AskForUsersDelyveryMW)paymmant).initDasbordDelegate, ((AskForUsersDelyveryMW)paymmant).getVechicleDelegate, Car.GetNameLayout(1),
