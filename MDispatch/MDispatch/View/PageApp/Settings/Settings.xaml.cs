@@ -39,7 +39,7 @@ namespace MDispatch.View.PageApp.Settings
         [Obsolete]
         private void Button_Clicked(object sender, EventArgs e)
         {
-            Device.OpenUri(new Uri($"{Config.BaseSiteUrl}Doc?truckPlate={settingsMV.PlateTruck1}&trailerPlate={settingsMV.PlateTrailer1}"));
+            Device.OpenUri(new Uri($"{Config.BaseSiteUrl}/Doc?truckPlate={settingsMV.PlateTruck1}&trailerPlate={settingsMV.PlateTrailer1}"));
         }
 
         private void Button_Clicked_1(object sender, EventArgs e)
