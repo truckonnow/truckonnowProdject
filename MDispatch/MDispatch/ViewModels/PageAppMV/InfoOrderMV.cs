@@ -7,7 +7,6 @@ using MDispatch.View.Inspection.PickedUp;
 using MDispatch.View.PageApp;
 using MDispatch.View.PageApp.DialogPage;
 using MDispatch.ViewModels.AskPhoto;
-using MDispatch.ViewModels.InspectionMV.Models;
 using Prism.Commands;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
@@ -107,7 +106,7 @@ namespace MDispatch.ViewModels.PageAppMV
             VehiclwInformation vehiclwInformation1 = Shipping.VehiclwInformations[0];
             foreach (var vehiclwInformation in Shipping.VehiclwInformations)
             {
-                ICar car = null;
+                IVehicle car = null;
                 if (vehiclwInformation.Ask != null && vehiclwInformation.Ask.TypeVehicle != null)
                 {
                     car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
@@ -235,7 +234,7 @@ namespace MDispatch.ViewModels.PageAppMV
             }
             foreach (var vehiclwInformation in Shipping.VehiclwInformations)
             {
-                ICar car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+                IVehicle car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
                 List<PhotoInspection> photoInspections = null;
                 if (vehiclwInformation.PhotoInspections != null)
                 {
@@ -337,9 +336,9 @@ namespace MDispatch.ViewModels.PageAppMV
             await PopupNavigation.PopAsync();
         }
 
-        private ICar GetTypeCar(string typeCar)
+        private IVehicle GetTypeCar(string typeCar)
         {
-            ICar car = null;
+            IVehicle car = null;
             switch (typeCar)
             {
                 case "PickUp":
@@ -360,6 +359,11 @@ namespace MDispatch.ViewModels.PageAppMV
                 case "Sedan":
                     {
                         car = new CarSedan();
+                        break;
+                    }
+                case "Sportbike":
+                    {
+                        car = new BikeSport();
                         break;
                     }
             }

@@ -7,8 +7,6 @@ using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.Inspection;
 using MDispatch.View.PageApp;
-using MDispatch.ViewModels.AskPhoto;
-using MDispatch.ViewModels.InspectionMV.Models;
 using MDispatch.ViewModels.InspectionMV.Servise.Models;
 using Newtonsoft.Json;
 using Plugin.Settings;
@@ -140,10 +138,10 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             //await PopupNavigation.PushAsync(new TempDialogPage1(this));
             if (Payment == "COD" || Payment == "COP" || Payment == "Biling")
             {
-                ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
-                FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", Car.typeIndex.Replace(" ", ""), inderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1), Payment, TotalPaymentToCarrier);
+                IVehicle Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+                FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.TypeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", Car.TypeIndex.Replace(" ", ""), inderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1), Payment, TotalPaymentToCarrier);
                 await Navigation.PushAsync(fullPagePhotoDelyvery);
-                await Navigation.PushAsync(new CameraPagePhoto1($"{Car.typeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", fullPagePhotoDelyvery, "PhotoIspection"));
+                await Navigation.PushAsync(new CameraPagePhoto1($"{Car.TypeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", fullPagePhotoDelyvery, "PhotoIspection"));
                 isPaymantPhoto = true;
             }
             else
@@ -158,7 +156,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 }
                 else
                 {
-                    ICar Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
+                    IVehicle Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
                     FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, vehiclwInformation, IdShip, $"{vehiclwInformation.Ask.TypeVehicle.Replace(" ", "")}1.png", vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""),
                        InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(1), Payment, TotalPaymentToCarrier);
                     await Navigation.PushAsync(fullPagePhotoDelyvery, true);
@@ -216,9 +214,9 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             }
         }
 
-        public ICar GetTypeCar(string typeCar)
+        public IVehicle GetTypeCar(string typeCar)
         {
-            ICar car = null;
+            IVehicle car = null;
             switch (typeCar)
             {
                 case "PickUp":
@@ -239,6 +237,11 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                 case "Sedan":
                     {
                         car = new CarSedan();
+                        break;
+                    }
+                case "Sportbicke":
+                    {
+                        car = new BikeSport();
                         break;
                     }
             }
