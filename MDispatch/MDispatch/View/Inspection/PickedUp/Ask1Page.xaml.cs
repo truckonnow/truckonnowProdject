@@ -1,14 +1,9 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.View.GlobalDialogView;
-using MDispatch.View.Inspection.PickedUp.CameraPageFolder;
-using MDispatch.View.Inspection.PickUp.CameraPageFolder;
 using MDispatch.ViewModels.InspectionMV;
-using Newtonsoft.Json;
 using Rg.Plugins.Popup.Services;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -19,13 +14,11 @@ namespace MDispatch.View.Inspection
 	public partial class Ask1Page : ContentPage
 	{
         public Ask1PageMV ask1PageMV = null;
-        private string typeCar = null;
 
         public Ask1Page(ManagerDispatchMob managerDispatchMob, VehiclwInformation vehiclwInformation, string idShip, InitDasbordDelegate initDasbordDelegate, GetVechicleDelegate getVechicleDelegate, string typeCar,
             string onDeliveryToCarrier, string totalPaymentToCarrier)
         {
-            this.typeCar = typeCar;
-            ask1PageMV = new Ask1PageMV(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate, getVechicleDelegate, onDeliveryToCarrier, totalPaymentToCarrier);
+            ask1PageMV = new Ask1PageMV(managerDispatchMob, vehiclwInformation, idShip, Navigation, initDasbordDelegate, getVechicleDelegate, onDeliveryToCarrier, totalPaymentToCarrier, typeCar);
             ask1PageMV.Ask1 = new Ask1();
             InitializeComponent();
             BindingContext = ask1PageMV;
@@ -46,8 +39,6 @@ namespace MDispatch.View.Inspection
             ask1PageMV.Ask1.Exact_Mileage = e.NewTextValue;
         }
         #endregion
-
-        
 
         #region Ask3
         Button button3 = null;
@@ -158,87 +149,10 @@ namespace MDispatch.View.Inspection
         }
         #endregion
 
-        #region Ask12
-        bool isAsk12 = false;
-        Button button12 = null;
-        private async void Button_Clicked_3(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new CameraSeatBelts(this));
-            Button button = (Button)sender;
-            button.TextColor = Color.FromHex("#4fd2c2");
-            if (button12 != null)
-            {
-                button12.TextColor = Color.Silver;
-            }
-            button12 = button;
-        }
-
-        private async void Button_Clicked_3v2(object sender, EventArgs e)
-        {
-            isAsk12 = false;
-            Button button = (Button)sender;
-            button.TextColor = Color.FromHex("#4fd2c2");
-            if (button12 != null)
-            {
-                button12.TextColor = Color.Silver;
-            }
-            button12 = button;
-
-        }
-
-        public void AddPhotoSeatBelts(List<Photo> photos, List<byte[]> imagesByte)
-        {
-            if(photos != null && photos.Count == 4)
-            {
-                isAsk12 = true;
-                ask1PageMV.Ask1.App_will_force_driver_to_take_pictures_of_each_strap = new List<Photo>(photos);
-                foreach (var imageByte in imagesByte)
-                {
-                    Image image = new Image()
-                    {
-                        Source = ImageSource.FromStream(() => new MemoryStream(imageByte)),
-                        HeightRequest = 50,
-                        WidthRequest = 50
-
-                    };
-                    image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke2));
-                    blockAskPhotoSeatBelts.Children.Add(image);
-                }
-            }
-            else
-            {
-                isAsk12 = false;
-            }
-        }
-
-        private async void ViewPhotoForRetacke2(Xamarin.Forms.View v, object s)
-        {
-            if (v != null && blockAskPhotoSeatBelts.Children.Contains(v))
-            {
-                await Navigation.PushAsync(new ViewPhotForAsk(v, this, "Ask5"));
-            }
-        }
-
-        public void ReSetPhoto2(Xamarin.Forms.View view, byte[] newRetake)
-        {
-            byte[] r = GetImageBytes(((Image)view).Source);
-            ask1PageMV.ResetAskSeatBelts(r, newRetake);
-            blockAskPhotoSeatBelts.Children.Remove((Image)view);
-            Image image = new Image()
-            {
-                Source = ImageSource.FromStream(() => new MemoryStream(newRetake)),
-                HeightRequest = 50,
-                WidthRequest = 50,
-            };
-            image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke2));
-            blockAskPhotoSeatBelts.Children.Add(image);
-        }
-        #endregion
-
         [Obsolete]
         private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-            if (isAsk1 && isAsk14 && isAsk3 && isAsk4 && isAsk5 && isAsk6 && isAsk7 && isAsk8  && isAsk12 && isAsk13)
+            if (isAsk1 && isAsk14 && isAsk3 && isAsk4 && isAsk5 && isAsk6 && isAsk7 && isAsk8)
             {
                 ask1PageMV.SaveAsk();
             }
@@ -315,98 +229,7 @@ namespace MDispatch.View.Inspection
             {
                 askBlock8.BorderColor = Color.BlueViolet;
             }
-            if (!isAsk12)
-            {
-                askBlock12.BorderColor = Color.Red;
-            }
-            else
-            {
-                askBlock12.BorderColor = Color.BlueViolet;
-            }
-            if (!isAsk13)
-            {
-                askBlock13.BorderColor = Color.Red;
-            }
-            else
-            {
-                askBlock13.BorderColor = Color.BlueViolet;
-            }
         }
-        
-        #region Ask13
-        bool isAsk13 = false;
-        Button button13 = null;
-        private async void Button_Clicked_4(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new CameraPthotoInTrack(this, typeCar.Replace(" ", "")));
-            Button button = (Button)sender;
-            button.TextColor = Color.FromHex("#4fd2c2");
-            if (button13 != null)
-            {
-                button13.TextColor = Color.Silver;
-            }
-            button13 = button;
-        }
-
-        private async void Button_Clicked_4v2(object sender, EventArgs e)
-        {
-            isAsk13 = false;
-            Button button = (Button)sender;
-            button.TextColor = Color.FromHex("#4fd2c2");
-            if (button13 != null)
-            {
-                button13.TextColor = Color.Silver;
-            }
-            button13 = button;
-        }
-
-        public void AddPhotoInTrack(List<Photo> photos, List<byte[]> imagesByte)
-        {
-            if (photos != null)
-            {
-                isAsk13 = true;
-                ask1PageMV.Ask1.Photo_after_loading_in_the_truck = new List<Photo>(photos);
-                foreach (var imageByte in imagesByte)
-                {
-                    Image image = new Image()
-                    {
-                        Source = ImageSource.FromStream(() => new MemoryStream(imageByte)),
-                        HeightRequest = 50,
-                        WidthRequest = 50
-                    };
-                    image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke3));
-                    blockPhotoInTrack.Children.Add(image);
-                }
-            }
-            else
-            {
-                isAsk13 = false;
-            }
-        }
-
-        private async void ViewPhotoForRetacke3(Xamarin.Forms.View v, object s)
-        {
-            if (v != null && blockPhotoInTrack.Children.Contains(v))
-            {
-                await Navigation.PushAsync(new ViewPhotForAsk(v, this, "Ask6"));
-            }
-        }
-
-        public void ReSetPhoto3(Xamarin.Forms.View view, byte[] newRetake)
-        {
-            byte[] r = GetImageBytes(((Image)view).Source);
-            ask1PageMV.ResetAskInTrack(r, newRetake);
-            blockPhotoInTrack.Children.Remove((Image)view);
-            Image image = new Image()
-            {
-                Source = ImageSource.FromStream(() => new MemoryStream(newRetake)),
-                HeightRequest = 50,
-                WidthRequest = 50,
-            };
-            image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke3));
-            blockPhotoInTrack.Children.Add(image);
-        }
-        #endregion
 
         private byte[] GetImageBytes(ImageSource imagesource)
         {

@@ -149,6 +149,10 @@ namespace MDispatch.ViewModels.PageAppMV
                     Navigation.RemovePage(Navigation.NavigationStack[1]);
                     return;
                 }
+                else if(vehiclwInformation.Ask1.App_will_force_driver_to_take_pictures_of_each_strap == null || vehiclwInformation.Ask1.Photo_after_loading_in_the_truck == null)
+                {
+                    await Navigation.PushAsync(new CameraStrapAndTrack(managerDispatchMob, vehiclwInformation, Shipping.Id, initDasbordDelegate, getVechicleDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier, vehiclwInformation.Ask.TypeVehicle), true);
+                }
             }
             if (Shipping.AskFromUser == null)
             {
