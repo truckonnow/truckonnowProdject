@@ -243,6 +243,16 @@ namespace ApiMobaileServise.Servise
                 Ask2 ask2 = JsonConvert.DeserializeObject<Ask2>(jsonStrAsk);
                 sqlCommandApiMobile.SaveAsk2InDb(id, ask2);
             }
+            else if (type == 7)
+            {
+                List<Photo> photo = JsonConvert.DeserializeObject<List<Photo>>(jsonStrAsk);
+                sqlCommandApiMobile.SavePhotoinTruckInDb(id, photo);
+            }
+            else if (type == 8)
+            {
+                List<Photo> photo = JsonConvert.DeserializeObject<List<Photo>>(jsonStrAsk);
+                sqlCommandApiMobile.SavePhotoStrapInDb(id, photo);
+            }
         }
 
         internal string GetLastInspaction(string idDriver)

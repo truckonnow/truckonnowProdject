@@ -249,6 +249,26 @@ namespace ApiMobaileServise.Servise
             return isInspaction;
         }
 
+        internal void SavePhotoStrapInDb(string id, List<Photo> photos)
+        {
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == id);
+            if (vehiclwInformation != null)
+            {
+                vehiclwInformation.Ask1.App_will_force_driver_to_take_pictures_of_each_strap = photos;
+                context.SaveChanges();
+            }
+        }
+
+        internal void SavePhotoinTruckInDb(string id, List<Photo> photos)
+        {
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == id);
+            if(vehiclwInformation != null)
+            {
+                vehiclwInformation.Ask1.Photo_after_loading_in_the_truck = photos;
+                context.SaveChanges();
+            }
+        }
+
         internal string GetLastInspaction(string idDriver)
         {
             string lastInspectionDriver = null;

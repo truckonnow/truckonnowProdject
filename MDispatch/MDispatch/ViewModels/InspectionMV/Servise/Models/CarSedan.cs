@@ -16,40 +16,60 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             {
                 case 1:
                     {
-                        indecCar = 5;
+                        indecCar = -1;
                         break;
                     }
                 case 2:
                     {
-                        indecCar = 6;
+                        indecCar = 5;
                         break;
                     }
                 case 3:
                     {
-                        indecCar = 16;
+                        indecCar = 6;
                         break;
                     }
                 case 4:
                     {
-                        indecCar = 10;
+                        indecCar = -1;
                         break;
                     }
                 case 5:
                     {
-                        indecCar = 12;
+                        indecCar = 16;
                         break;
                     }
                 case 6:
                     {
-                        indecCar = 13;
+                        indecCar = 10;
                         break;
                     }
                 case 7:
                     {
-                        indecCar = 20;
+                        indecCar = 12;
                         break;
                     }
                 case 8:
+                    {
+                        indecCar = 13;
+                        break;
+                    }
+                case 9:
+                    {
+                        indecCar = -3;
+                        break;
+                    }
+                case 10:
+                    {
+                        indecCar = 20;
+                        break;
+                    }
+                case 11:
+                    {
+                        indecCar = 21;
+                        break;
+                    }
+                case 12:
                     {
                         indecCar = 21;
                         break;
@@ -63,65 +83,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             return indecCar;
         }
 
-        public int GetIndexCarFullPhoto(int countPhoto)
-        {
-            int indecCar = 0;
-            switch (countPhoto)
-            {
-                case 1:
-                    {
-                        indecCar = 5;
-                        break;
-                    }
-                case 2:
-                    {
-                        indecCar = 2;
-                        break;
-                    }
-                case 3:
-                    {
-                        indecCar = 10;
-                        break;
-                    }
-                case 4:
-                    {
-                        indecCar = 11;
-                        break;
-                    }
-                case 5:
-                    {
-                        indecCar = 11;
-                        break;
-                    }
-                case 6:
-                    {
-                        indecCar = 13;
-                        break;
-                    }
-                case 7:
-                    {
-                        indecCar = 14;
-                        break;
-                    }
-                case 8:
-                    {
-                        indecCar = 15;
-                        break;
-                    }
-                case 9:
-                    {
-                        indecCar = 16;
-                        break;
-                    }
-                default:
-                    {
-                        indecCar = 0;
-                        break;
-                    }
-            }
-            return indecCar;
-        }
-
+       
         public string GetNameLayout(int inderxPhotoInspektion)
         {
             string nameLayout = "";
@@ -256,6 +218,22 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             else if (inderxPhotoInspektion == 33)
             {
                 nameLayout = "The rear door of the vehicle(Sedan) on the driver's side";
+            }
+            else if (inderxPhotoInspektion == -1)
+            {
+                nameLayout = "Rear belt mount vehicle on the driver's side";
+            }
+            else if (inderxPhotoInspektion == -2)
+            {
+                nameLayout = "Front belt mount vehicle on the driver's side";
+            }
+            else if (inderxPhotoInspektion == -3)
+            {
+                nameLayout = "Front belt mount vehicle on the passenger side";
+            }
+            else if (inderxPhotoInspektion == -4)
+            {
+                nameLayout = "Rear belt mount vehicle on the passenger side";
             }
             return nameLayout;
         }

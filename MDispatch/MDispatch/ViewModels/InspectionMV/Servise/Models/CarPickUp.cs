@@ -152,6 +152,22 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             {
                 nameLayout = "Rear driver's door";
             }
+            else if (inderxPhotoInspektion == -1)
+            {
+                nameLayout = "Rear belt mount vehicle on the driver's side";
+            }
+            else if (inderxPhotoInspektion == -2)
+            {
+                nameLayout = "Front belt mount vehicle on the driver's side";
+            }
+            else if (inderxPhotoInspektion == -3)
+            {
+                nameLayout = "Front belt mount vehicle on the passenger side";
+            }
+            else if (inderxPhotoInspektion == -4)
+            {
+                nameLayout = "Rear belt mount vehicle on the passenger side";
+            }
             return nameLayout;
         }
 

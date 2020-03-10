@@ -32,7 +32,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    if(type == 1 || type == 2 || type == 3 || type == 4 || type == 5)
+                    if(type == 1 || type == 2 || type == 3 || type == 4 || type == 5 || type == 7 || type == 8)
                     {
                         QueueWorkerAsk.queues.Add($"SaveAnsver&,&{idVe}&,&{type}&,&{jsonStrAsk}");
                         QueueWorkerAsk.countQueues++;
