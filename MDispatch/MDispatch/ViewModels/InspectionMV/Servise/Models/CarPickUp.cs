@@ -194,42 +194,62 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             {
                 case 1:
                     {
-                        indecCar = 5;
+                        indecCar = -1;
                         break;
                     }
                 case 2:
                     {
-                        indecCar = 7;
+                        indecCar = 5;
                         break;
                     }
                 case 3:
                     {
-                        indecCar = 17;
+                        indecCar = 7;
                         break;
                     }
                 case 4:
                     {
-                        indecCar = 11;
+                        indecCar = -2;
                         break;
                     }
                 case 5:
                     {
-                        indecCar = 13;
+                        indecCar = 17;
                         break;
                     }
                 case 6:
                     {
-                        indecCar = 14;
+                        indecCar = 11;
                         break;
                     }
                 case 7:
                     {
-                        indecCar = 24;
+                        indecCar = 13;
                         break;
                     }
                 case 8:
                     {
+                        indecCar = 14;
+                        break;
+                    }
+                case 9:
+                    {
+                        indecCar = -3;
+                        break;
+                    }
+                case 10:
+                    {
+                        indecCar = 24;
+                        break;
+                    }
+                case 11:
+                    {
                         indecCar = 22;
+                        break;
+                    }
+                case 12:
+                    {
+                        indecCar = -4;
                         break;
                     }
                 default:
