@@ -94,8 +94,10 @@
                     <StackLayout>
                         <Label Text="Did you Damage anything at the pick up" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_1"/>
-                        <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_1"/>
+                        <FlexLayout>
+                            <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_1"/>
+                            <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_1" />
+                        </FlexLayout>
                         <Entry x:Name="entDamage" IsVisible="False" Placeholder="Enter damage, if any" TextChanged="Entry_TextChanged3" />
                     </StackLayout>
                 </Frame>
