@@ -122,6 +122,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             {
                 await Task.Run(() =>
                 {
+                    state = 3;
                     //state = managerDispatchMob.AskWork("SaveAsk1", token, VehiclwInformation.Id, Ask1, ref description);
                     //SaveStrap
                     //SaveInTruck

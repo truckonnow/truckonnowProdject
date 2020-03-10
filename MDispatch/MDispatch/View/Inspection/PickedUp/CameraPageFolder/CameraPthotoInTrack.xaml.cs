@@ -49,7 +49,7 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
             if (car.GetIndexCar(countPhoto) == 0)
             {
                 await Navigation.PopAsync(true);
-                ask1Page.AddPhotoInTrack(photos, imagesByte);
+                //ask1Page.AddPhotoInTrack(photos, imagesByte);
                 DependencyService.Get<IOrientationHandler>().ForceSensor();
                 return;
             }

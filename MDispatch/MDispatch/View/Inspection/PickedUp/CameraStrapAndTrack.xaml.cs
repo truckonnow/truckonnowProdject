@@ -30,6 +30,8 @@ namespace MDispatch.View.Inspection.PickedUp
             On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
                 .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
             DependencyService.Get<IOrientationHandler>().ForceSensor();
+            paternPhoto.Source = $"trup.png";
+            titlePhoto.Text = cameraStrapAndTrackMV.Car.GetNameLayout(cameraStrapAndTrackMV.Car.GetIndexCar(countPhoto));
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)

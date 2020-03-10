@@ -6,13 +6,11 @@ using MDispatch.View.Inspection.Delyvery;
 using MDispatch.View.Inspection.PickedUp;
 using MDispatch.View.PageApp;
 using MDispatch.View.PageApp.DialogPage;
-using MDispatch.ViewModels.AskPhoto;
 using Prism.Commands;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
 using System.Collections.Generic;
 using Xamarin.Forms;
-using System.Linq;
 using static MDispatch.Service.ManagerDispatchMob;
 using MDispatch.ViewModels.InspectionMV.DelyveryMV;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
@@ -152,6 +150,7 @@ namespace MDispatch.ViewModels.PageAppMV
                 else if(vehiclwInformation.Ask1.App_will_force_driver_to_take_pictures_of_each_strap == null || vehiclwInformation.Ask1.Photo_after_loading_in_the_truck == null)
                 {
                     await Navigation.PushAsync(new CameraStrapAndTrack(managerDispatchMob, vehiclwInformation, Shipping.Id, initDasbordDelegate, getVechicleDelegate, Shipping.OnDeliveryToCarrier, Shipping.TotalPaymentToCarrier, vehiclwInformation.Ask.TypeVehicle), true);
+                    return;
                 }
             }
             if (Shipping.AskFromUser == null)

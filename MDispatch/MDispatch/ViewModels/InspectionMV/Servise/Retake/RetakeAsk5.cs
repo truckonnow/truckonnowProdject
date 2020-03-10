@@ -18,7 +18,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Retake
 
         public void SetRetakePhoto(byte[] photo)
         {
-            ask1Page.ReSetPhoto2(view, photo);
+            //ask1Page.ReSetPhoto2(view, photo);
         }
     }
 }
