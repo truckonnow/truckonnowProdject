@@ -71,7 +71,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
                     }
                 case 12:
                     {
-                        indecCar = 21;
+                        indecCar = -4;
                         break;
                     }
                 default:

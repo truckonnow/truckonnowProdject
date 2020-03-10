@@ -46,27 +46,25 @@ namespace MDispatch.View.Inspection.PickedUp
                 return;
             Photo photo1 = new Photo();
             photo1.Base64 = Convert.ToBase64String(result.Result);
-
+            countPhoto++;
             if (cameraStrapAndTrackMV.Car.GetIndexCar(countPhoto) == 0)
             {
-                photo1.path = $"../Photo/{cameraStrapAndTrackMV.VehiclwInformation.Id}/PikedUp/CameraSeatBelts/{countPhoto + 1}.jpg";
+                photo1.path = $"../Photo/{cameraStrapAndTrackMV.VehiclwInformation.Id}/PikedUp/CameraSeatBelts/{countPhoto}.jpg";
                 cameraStrapAndTrackMV.straps.Add(photo1);
                 cameraStrapAndTrackMV.SavePhotoInTruck();
                 return;
             }
             else if(cameraStrapAndTrackMV.Car.GetIndexCar(countPhoto) < 0)
             {
-                photo1.path = $"../Photo/{cameraStrapAndTrackMV.VehiclwInformation.Id}/PikedUp/CameraSeatBelts/{countPhoto + 1}.jpg";
+                photo1.path = $"../Photo/{cameraStrapAndTrackMV.VehiclwInformation.Id}/PikedUp/CameraSeatBelts/{countPhoto}.jpg";
                 cameraStrapAndTrackMV.straps.Add(photo1);
-                countPhoto++;
                 paternPhoto.Source = $"trup.png";
                 titlePhoto.Text = cameraStrapAndTrackMV.Car.GetNameLayout(cameraStrapAndTrackMV.Car.GetIndexCar(countPhoto));
             }
             else if (cameraStrapAndTrackMV.Car.GetIndexCar(countPhoto) > 0)
             {
-                photo1.path = $"../Photo/{cameraStrapAndTrackMV.VehiclwInformation.Id}/PikedUp/CameraTrack/{countPhoto + 1}.jpg";
+                photo1.path = $"../Photo/{cameraStrapAndTrackMV.VehiclwInformation.Id}/PikedUp/CameraTrack/{countPhoto}.jpg";
                 cameraStrapAndTrackMV.inTruck.Add(photo1);
-                countPhoto++;
                 paternPhoto.Source = $"{cameraStrapAndTrackMV.Car.TypeIndex.Replace(" ", "")}{cameraStrapAndTrackMV.Car.GetIndexCar(countPhoto)}.png";
                 titlePhoto.Text = cameraStrapAndTrackMV.Car.GetNameLayout(cameraStrapAndTrackMV.Car.GetIndexCar(countPhoto));
             }

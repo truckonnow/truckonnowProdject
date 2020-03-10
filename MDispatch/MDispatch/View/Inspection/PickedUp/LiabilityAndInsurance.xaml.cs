@@ -488,6 +488,8 @@ namespace MDispatch.View.Inspection.PickedUp
             btnNumberOffice.IsVisible = true;
             lReport.IsVisible = true;
             blockAsk.IsVisible = false;
+            bloclThank.IsVisible = false;
+            blockPsw.IsVisible = false;
             liabilityAndInsuranceMV.SetProblem();
             timer = new Timer(new TimerCallback(CheckProplem), null, 10000, 10000);
         }

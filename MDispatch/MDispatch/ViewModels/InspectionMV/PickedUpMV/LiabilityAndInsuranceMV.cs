@@ -5,6 +5,7 @@ using MDispatch.Service.Net;
 using MDispatch.Service.Tasks;
 using MDispatch.View;
 using MDispatch.View.GlobalDialogView;
+using MDispatch.View.Inspection;
 using MDispatch.View.Inspection.PickedUp;
 using Plugin.Settings;
 using Prism.Commands;
@@ -148,6 +149,20 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                 }
                 else if (state == 3)
                 {
+                    LiabilityAndInsuranceMV liabilityAndInsuranceMV = new LiabilityAndInsuranceMV(managerDispatchMob, IdVech, Shipping.Id, Navigation, initDasbordDelegate, null);
+                    if (Shipping.AskFromUser.What_form_of_payment_are_you_using_to_pay_for_transportation == "Cash")
+                    {
+                        await Navigation.PushAsync(new VideoCameraPage(liabilityAndInsuranceMV, ""));
+                    }
+                    else if (Shipping.AskFromUser.What_form_of_payment_are_you_using_to_pay_for_transportation == "Check")
+                    {
+                        await Navigation.PushAsync(new CameraPaymmant(liabilityAndInsuranceMV, "", "CheckPaymment.png"));
+                    }
+                    else
+                    {
+                        await Navigation.PushAsync(new Ask2Page(liabilityAndInsuranceMV.managerDispatchMob, liabilityAndInsuranceMV.IdVech, liabilityAndInsuranceMV.IdShip, liabilityAndInsuranceMV.initDasbordDelegate));
+                    }
+                    Navigation.RemovePage(Navigation.NavigationStack[1]);
                     DependencyService.Get<IToast>().ShowMessage("Paymmant method saved");
                 }
                 else if (state == 4)

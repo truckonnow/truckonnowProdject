@@ -266,12 +266,12 @@ namespace MDispatch.Service
                 else if (typeInspection == "SaveInTruck")
                 {
                     inspection = new Inspection();
-                    stateInspection = inspection.SaveInTruck(token, id, (Photo)obj, ref description);
+                    stateInspection = inspection.SaveInTruck(token, id, (List<Photo>)obj, ref description);
                 }
                 else if (typeInspection == "SaveStrap")
                 {
                     inspection = new Inspection();
-                    stateInspection = inspection.SaveStrap(token, id, (Photo)obj, ref description);
+                    stateInspection = inspection.SaveStrap(token, id, (List<Photo>)obj, ref description);
                 }
             }
             driverInspecktion = null;

@@ -255,7 +255,7 @@ namespace MDispatch.Service
             }
         }
 
-        public int SaveInTruck(string token, string idVe, Photo photo, ref string description)
+        public int SaveInTruck(string token, string idVe, List<Photo> photo, ref string description)
         {
             IRestResponse response = null;
             string content = null;
@@ -269,7 +269,7 @@ namespace MDispatch.Service
                 request.AddParameter("token", token);
                 request.AddParameter("idVe", idVe);
                 request.AddParameter("jsonStrAsk", strJsonPhoto);
-                request.AddParameter("type", 8);
+                request.AddParameter("type", 7);
                 response = client.Execute(request);
                 content = response.Content;
             }
@@ -287,7 +287,7 @@ namespace MDispatch.Service
             }
         }
 
-        public int SaveStrap(string token, string id, Photo photo, ref string description)
+        public int SaveStrap(string token, string id, List<Photo> photo, ref string description)
         {
             IRestResponse response = null;
             string content = null;
