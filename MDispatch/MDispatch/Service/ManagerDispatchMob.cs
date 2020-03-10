@@ -263,6 +263,16 @@ namespace MDispatch.Service
                     inspection = new Inspection();
                     stateInspection = inspection.SendCouponEmaile(token, ref description, (string)obj);
                 }
+                else if (typeInspection == "SaveInTruck")
+                {
+                    inspection = new Inspection();
+                    stateInspection = inspection.SaveInTruck(token, id, (Photo)obj, ref description);
+                }
+                else if (typeInspection == "SaveStrap")
+                {
+                    inspection = new Inspection();
+                    stateInspection = inspection.SaveStrap(token, id, (Photo)obj, ref description);
+                }
             }
             driverInspecktion = null;
             inspection = null;

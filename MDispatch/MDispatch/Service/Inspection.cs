@@ -255,6 +255,70 @@ namespace MDispatch.Service
             }
         }
 
+        public int SaveInTruck(string token, string idVe, Photo photo, ref string description)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                string strJsonPhoto = JsonConvert.SerializeObject(photo);
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
+                RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
+                client.Timeout = 60000;
+                request.AddHeader("Accept", "application/json");
+                request.AddParameter("token", token);
+                request.AddParameter("idVe", idVe);
+                request.AddParameter("jsonStrAsk", strJsonPhoto);
+                request.AddParameter("type", 8);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception e)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description);
+            }
+        }
+
+        public int SaveStrap(string token, string id, Photo photo, ref string description)
+        {
+            IRestResponse response = null;
+            string content = null;
+            try
+            {
+                string strJsonPhoto = JsonConvert.SerializeObject(photo);
+                RestClient client = new RestClient(Config.BaseReqvesteUrl);
+                RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
+                client.Timeout = 60000;
+                request.AddHeader("Accept", "application/json");
+                request.AddParameter("token", token);
+                request.AddParameter("idVe", id);
+                request.AddParameter("jsonStrAsk", strJsonPhoto);
+                request.AddParameter("type", 8);
+                response = client.Execute(request);
+                content = response.Content;
+            }
+            catch (Exception e)
+            {
+                return 4;
+            }
+            if (content == "" || response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return 4;
+            }
+            else
+            {
+                return GetData(content, ref description);
+            }
+        }
+
         public int SaveAsk(string token, Feedback feedback, ref string description)
         {
             IRestResponse response = null;
