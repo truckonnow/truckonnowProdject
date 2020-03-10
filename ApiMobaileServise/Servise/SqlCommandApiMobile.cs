@@ -854,6 +854,7 @@ namespace ApiMobaileServise.Servise
             List<Shipping> shippings = context.Shipping.Where(s => s.Driverr != null && s.Driverr.Id == driver.Id)
                 .Include("VehiclwInformations.Ask")
                 .Include("VehiclwInformations.Ask1")
+                .Include("VehiclwInformations.Ask1.App_will_force_driver_to_take_pictures_of_each_strap")
                 .Include("VehiclwInformations.PhotoInspections.Damages")
                 .Include(s => s.AskFromUser.App_will_ask_for_signature_of_the_client_signature)
                 .Include(s => s.AskFromUser.PhotoPay)

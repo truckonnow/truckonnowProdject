@@ -210,14 +210,18 @@
                     <StackLayout>
                         <Label Text="Anyone helping you unload?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Entry Placeholder="Name" TextChanged="Entry_TextChanged_11" />
+                        <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_13"/>
+                        <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_13"/>
+                        <Entry x:Name="entUnload" Placeholder="Name" IsVisible="False" TextChanged="Entry_TextChanged_11" />
                     </StackLayout>
                 </Frame>
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock17">
                     <StackLayout>
                         <Label Text="Did someone else unloaded the vehicle for you?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Entry Placeholder="Name" TextChanged="Entry_TextChanged_12"/>
+                        <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_14"/>
+                        <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_14"/>
+                        <Entry x:Name="entUnloaded" Placeholder="Name" TextChanged="Entry_TextChanged_12" IsVisible="False"/>
                     </StackLayout>
                 </Frame>
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock18">

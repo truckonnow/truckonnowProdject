@@ -205,7 +205,6 @@ namespace MDispatch.View.Inspection.Delyvery
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
             txtAnswer = button.Text;
-            askDelyveryMV.AskDelyvery.Anyone_Rushing_you_to_perform_the_delivery = $"{btnAnswer}, {txtAnswer}";
             if (button9 != null)
             {
                 button9.TextColor = Color.Silver;
@@ -214,7 +213,8 @@ namespace MDispatch.View.Inspection.Delyvery
             if (button.Text == "Yes" || button.Text == "YES")
             {
                 askBlock9v2.IsVisible = true;
-                if(txtAnswer != "")
+                askDelyveryMV.AskDelyvery.Anyone_Rushing_you_to_perform_the_delivery = $"{btnAnswer}, {txtAnswer}";
+                if (txtAnswer != "")
                 {
                     isAsk9 = true;
                 }
@@ -225,6 +225,7 @@ namespace MDispatch.View.Inspection.Delyvery
             }
             else
             {
+                askDelyveryMV.AskDelyvery.Anyone_Rushing_you_to_perform_the_delivery = $"{btnAnswer}";
                 askBlock9v2.IsVisible = false;
                 isAsk9 = true;
             }
@@ -390,33 +391,92 @@ namespace MDispatch.View.Inspection.Delyvery
 
         #region Ask16
         bool isAsk16 = false;
+        string txtAnswer16 = "";
+        string btnAnswer16 = "";
+        Button button16 = null;
         private void Entry_TextChanged_11(object sender, TextChangedEventArgs e)
         {
-            if (e.NewTextValue != "")
+            txtAnswer = e.NewTextValue;
+            askDelyveryMV.AskDelyvery.Anyone_helping_you_unload = $"{btnAnswer16}, {txtAnswer16}";
+            isAsk16 = true;
+        }
+
+        private void Button_Clicked_13(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            txtAnswer = button.Text;
+            if (button16 != null)
             {
-                isAsk16 = true;
+                button16.TextColor = Color.Silver;
+            }
+            button16 = button;
+            if (button.Text == "Yes" || button.Text == "YES")
+            {
+                entUnload.IsVisible = true;
+                askDelyveryMV.AskDelyvery.Anyone_helping_you_unload = $"{btnAnswer16}, {txtAnswer16}";
+                if (txtAnswer16 != "")
+                {
+                    isAsk16 = true;
+                }
+                else
+                {
+                    isAsk16 = false;
+                }
             }
             else
             {
-                isAsk16 = false;
+                askDelyveryMV.AskDelyvery.Anyone_helping_you_unload = $"{btnAnswer16}";
+                entUnload.IsVisible = false;
+                isAsk16 = true;
             }
-            askDelyveryMV.AskDelyvery.Anyone_helping_you_unload = e.NewTextValue;
         }
         #endregion
 
         #region Ask17
         bool isAsk17 = false;
+        string txtAnswer17 = "";
+        string btnAnswer17 = "";
+        Button button17 = null;
         private void Entry_TextChanged_12(object sender, TextChangedEventArgs e)
         {
-            if (e.NewTextValue != "")
+
+            txtAnswer = e.NewTextValue;
+            askDelyveryMV.AskDelyvery.Did_someone_else_unloaded_the_vehicle_for_you = $"{btnAnswer17}, {txtAnswer17}";
+            isAsk17 = true;
+        }
+
+
+
+        private void Button_Clicked_14(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            txtAnswer17 = button.Text;
+            if (button17 != null)
             {
-                isAsk17 = true;
+                button17.TextColor = Color.Silver;
+            }
+            button17 = button;
+            if (button.Text == "Yes" || button.Text == "YES")
+            {
+                entUnloaded.IsVisible = true;
+                askDelyveryMV.AskDelyvery.Did_someone_else_unloaded_the_vehicle_for_you = $"{btnAnswer17}, {txtAnswer17}";
+                if (txtAnswer17 != "")
+                {
+                    isAsk17 = true;
+                }
+                else
+                {
+                    isAsk17 = false;
+                }
             }
             else
             {
-                isAsk17 = false;
+                askDelyveryMV.AskDelyvery.Did_someone_else_unloaded_the_vehicle_for_you = $"{btnAnswer17}";
+                entUnloaded.IsVisible = false;
+                isAsk17 = true;
             }
-            askDelyveryMV.AskDelyvery.Did_someone_else_unloaded_the_vehicle_for_you = e.NewTextValue;
         }
         #endregion
 
@@ -615,6 +675,11 @@ namespace MDispatch.View.Inspection.Delyvery
         private async void ToolbarItem_Clicked_2(object sender, EventArgs e)
         {
             await PopupNavigation.PushAsync(new ContactInfo());
+        }
+
+        private void Button_Clicked_14(object sender, EventArgs e)
+        {
+
         }
     }
 }

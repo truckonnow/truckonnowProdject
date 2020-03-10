@@ -92,17 +92,55 @@ namespace MDispatch.View.Inspection
 
         #region Ask5
         bool isAsk5 = false;
+        bool isTypeText5 = false;
+        string btnText5 = "";
+        string entryText5 = "";
+        Button button5 = null;
         private void Entry_TextChanged3(object sender, TextChangedEventArgs e)
         {
             if (e.NewTextValue != "")
             {
                 isAsk5 = true;
+                isTypeText5 = true;
             }
             else
             {
                 isAsk5 = false;
+                isTypeText5 = false;
             }
-            ask1PageMV.Ask1.Did_someone_load_the_vehicle_for_you = e.NewTextValue;
+            entryText = e.NewTextValue;
+            ask1PageMV.Ask1.Did_you_notice_any_mechanical_imperfections_wile_loading = $"{btnText5}, {entryText5}";
+        }
+
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            btnText = button.Text;
+            if (button5 != null)
+            {
+                button5.TextColor = Color.Silver;
+            }
+            if (button.Text == "Yes" && button.Text == "YES")
+            {
+                if (isTypeText5)
+                {
+                    isAsk5 = true;
+                }
+                else
+                {
+                    isAsk5 = false;
+                }
+                nameE.IsVisible = true;
+            }
+            else
+            {
+                isAsk5 = true;
+                nameE.IsVisible = false;
+            }
+            button14 = button;
+
+            ask1PageMV.Ask1.Did_you_notice_any_mechanical_imperfections_wile_loading = $"{btnText5}, {entryText5}";
         }
         #endregion
 
