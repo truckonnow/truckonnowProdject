@@ -179,7 +179,11 @@
                     <StackLayout>
                         <Label Text="Did you notice any imperfections on body while vehicle being transported?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Entry Placeholder="What kind" TextChanged="Entry_TextChanged_13"/>
+                        <FlexLayout>
+                            <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_15"/>
+                            <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_15"/>
+                        </FlexLayout>
+                        <Entry x:Name="entFlaws" Placeholder="Enter body flaws" TextChanged="Entry_TextChanged_13"/>
                     </StackLayout>
                 </Frame>
                 <!--13-->

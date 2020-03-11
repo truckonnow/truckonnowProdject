@@ -440,13 +440,10 @@ namespace MDispatch.View.Inspection.Delyvery
         Button button17 = null;
         private void Entry_TextChanged_12(object sender, TextChangedEventArgs e)
         {
-
             txtAnswer = e.NewTextValue;
             askDelyveryMV.AskDelyvery.Did_someone_else_unloaded_the_vehicle_for_you = $"{btnAnswer17}, {txtAnswer17}";
             isAsk17 = true;
         }
-
-
 
         private void Button_Clicked_14(object sender, EventArgs e)
         {
@@ -482,21 +479,49 @@ namespace MDispatch.View.Inspection.Delyvery
 
         #region Ask12
         bool isAsk12 = false;
+        string txtAnswer12 = "";
+        string btnAnswer12 = "";
+        Button button12 = null;
         private void Entry_TextChanged_13(object sender, TextChangedEventArgs e)
         {
-            if (e.NewTextValue != "")
+            txtAnswer12 = e.NewTextValue;
+            askDelyveryMV.AskDelyvery.Did_you_notice_any_imperfections_on_body_wile_vehicle_been_transported = $"{btnAnswer12}, {txtAnswer12}";
+            isAsk12 = true;
+        }
+
+        private void Button_Clicked_15(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            btnAnswer12 = button.Text;
+            if (button12 != null)
             {
-                isAsk12 = true;
+                button12.TextColor = Color.Silver;
+            }
+            button12 = button;
+            if (button.Text == "Yes" || button.Text == "YES")
+            {
+                entFlaws.IsVisible = true;
+                askDelyveryMV.AskDelyvery.Did_you_notice_any_imperfections_on_body_wile_vehicle_been_transported = $"{btnAnswer12}, {txtAnswer12}";
+                if (txtAnswer17 != "")
+                {
+                    isAsk12 = true;
+                }
+                else
+                {
+                    isAsk12 = false;
+                }
             }
             else
             {
-                isAsk12 = false;
+                askDelyveryMV.AskDelyvery.Did_you_notice_any_imperfections_on_body_wile_vehicle_been_transported = $"{btnAnswer12}";
+                entFlaws.IsVisible = false;
+                isAsk12 = true;
             }
-            askDelyveryMV.AskDelyvery.Did_you_notice_any_imperfections_on_body_wile_vehicle_been_transported = e.NewTextValue;
         }
         #endregion
 
-       
+
         [Obsolete]
         private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
