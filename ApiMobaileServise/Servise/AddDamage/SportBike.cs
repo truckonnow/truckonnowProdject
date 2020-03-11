@@ -35,7 +35,52 @@ namespace ApiMobaileServise.Servise.AddDamage
 
         public int[] GetMaxMinForYAndX(string indexPhoto)
         {
-            return null;
+            int[] maxMinForYAndX = null;
+            if (indexPhoto == "3")
+            {
+                maxMinForYAndX = new int[] { 480, 10, 690, 295 };
+            }
+            else if (indexPhoto == "4")
+            {
+                maxMinForYAndX = new int[] { 610, 293, 655, 375 };
+            }
+            else if (indexPhoto == "5")
+            {
+                maxMinForYAndX = new int[] { 560, 10, 730, 170 };
+            }
+            else if (indexPhoto == "6")
+            {
+                maxMinForYAndX = new int[] { 337, 670, 465, 750 };
+            }
+            else if (indexPhoto == "7")
+            {
+                maxMinForYAndX = new int[] { 337, 600, 465, 690 };
+            }
+            else if (indexPhoto == "8")
+            {
+                maxMinForYAndX = new int[] { 293, 600, 510, 907 };
+            }
+            else if (indexPhoto == "9")
+            {
+                maxMinForYAndX = new int[] { 340, 705, 400, 740 };
+            }
+            else if (indexPhoto == "10")
+            {
+                maxMinForYAndX = new int[] { 400, 705, 460, 740 };
+            }
+            else if (indexPhoto == "11")
+            {
+                maxMinForYAndX = new int[] { 560, 630, 730, 790 };
+            }
+            else if (indexPhoto == "12")
+            {
+                maxMinForYAndX = new int[] { 480, 505, 690, 790 };
+            }
+            else if (indexPhoto == "13")
+            {
+                maxMinForYAndX = new int[] { 610, 428, 655, 510 };
+            }
+            return maxMinForYAndX;
         }
 
         public async Task SetDamage(PhotoInspection photoInspection, string typrCar, string pathScan)
@@ -52,11 +97,11 @@ namespace ApiMobaileServise.Servise.AddDamage
                     int x = GetCordinatX(photoInspection.IndexPhoto.ToString(), damage.XInterest);
                     int y = GetCordinatY(photoInspection.IndexPhoto.ToString(), damage.YInterest);
                     g.DrawImage(img1, 0, 0);
-                    if (photoInspection.IndexPhoto == 0)
+                    if (photoInspection.IndexPhoto == 3 || photoInspection.IndexPhoto == 4 || photoInspection.IndexPhoto == 5)
                     {
                         g.DrawImage(img2, x, y);
                     }
-                    else if (photoInspection.IndexPhoto == 0)
+                    else if (photoInspection.IndexPhoto == 6 || photoInspection.IndexPhoto == 7 || photoInspection.IndexPhoto == 8 || photoInspection.IndexPhoto == 9 || photoInspection.IndexPhoto == 10)
                     {
                         g.DrawImage(img2, y, x);
                     }
