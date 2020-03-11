@@ -36,7 +36,7 @@
                             <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_5"/>
                             <Button Text="No" BackgroundColor="White" TextColor="Silver"  Clicked="Button_Clicked_5"/>
                         </StackLayout>
-                        <Entry x:Name="nameE" Placeholder="Mileage" TextChanged="Entry_TextChanged_1" IsVisible="False"/>
+                        <Entry x:Name="nameE" Placeholder="" TextChanged="Entry_TextChanged_1" IsVisible="False"/>
                     </StackLayout>
                 </Frame>
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock6">

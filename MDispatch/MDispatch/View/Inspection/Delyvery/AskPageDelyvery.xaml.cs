@@ -204,7 +204,7 @@ namespace MDispatch.View.Inspection.Delyvery
         {
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
-            txtAnswer = button.Text;
+            btnAnswer = button.Text;
             if (button9 != null)
             {
                 button9.TextColor = Color.Silver;
@@ -405,7 +405,7 @@ namespace MDispatch.View.Inspection.Delyvery
         {
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
-            txtAnswer = button.Text;
+            btnAnswer16 = button.Text;
             if (button16 != null)
             {
                 button16.TextColor = Color.Silver;
@@ -452,7 +452,7 @@ namespace MDispatch.View.Inspection.Delyvery
         {
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
-            txtAnswer17 = button.Text;
+            btnAnswer17 = button.Text;
             if (button17 != null)
             {
                 button17.TextColor = Color.Silver;
@@ -675,11 +675,6 @@ namespace MDispatch.View.Inspection.Delyvery
         private async void ToolbarItem_Clicked_2(object sender, EventArgs e)
         {
             await PopupNavigation.PushAsync(new ContactInfo());
-        }
-
-        private void Button_Clicked_14(object sender, EventArgs e)
-        {
-
         }
     }
 }

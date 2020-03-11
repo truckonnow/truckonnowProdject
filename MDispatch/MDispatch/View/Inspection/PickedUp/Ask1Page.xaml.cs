@@ -109,7 +109,7 @@ namespace MDispatch.View.Inspection
                 isTypeText5 = false;
             }
             entryText = e.NewTextValue;
-            ask1PageMV.Ask1.Did_you_notice_any_mechanical_imperfections_wile_loading = $"{btnText5}, {entryText5}";
+            ask1PageMV.Ask1.Did_you_Damage_anything_at_the_pick_up = $"{btnText5}, {entryText5}";
         }
 
         private void Button_Clicked_1(object sender, EventArgs e)
@@ -121,8 +121,9 @@ namespace MDispatch.View.Inspection
             {
                 button5.TextColor = Color.Silver;
             }
-            if (button.Text == "Yes" && button.Text == "YES")
+            if (button.Text == "Yes" || button.Text == "YES")
             {
+                entDamage.IsVisible = true;
                 if (isTypeText5)
                 {
                     isAsk5 = true;
@@ -131,16 +132,15 @@ namespace MDispatch.View.Inspection
                 {
                     isAsk5 = false;
                 }
-                nameE.IsVisible = true;
             }
             else
             {
                 isAsk5 = true;
-                nameE.IsVisible = false;
+                entDamage.IsVisible = false;
             }
-            button14 = button;
+            button5 = button;
 
-            ask1PageMV.Ask1.Did_you_notice_any_mechanical_imperfections_wile_loading = $"{btnText5}, {entryText5}";
+            ask1PageMV.Ask1.Did_you_Damage_anything_at_the_pick_up = $"{btnText5}, {entryText5}";
         }
         #endregion
 
@@ -320,7 +320,7 @@ namespace MDispatch.View.Inspection
             {
                 button14.TextColor = Color.Silver;
             }
-            if(button.Text == "Yes" && button.Text == "YES")
+            if(button.Text == "Yes" || button.Text == "YES")
             {
                 if(isTypeText)
                 {

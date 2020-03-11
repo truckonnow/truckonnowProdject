@@ -226,8 +226,10 @@
                     <StackLayout>
                         <Label Text="Anyone helping you unload?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_13"/>
-                        <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_13"/>
+                        <FlexLayout>
+                            <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_13"/>
+                            <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_13"/>
+                        </FlexLayout>
                         <Entry x:Name="entUnload" Placeholder="Name" IsVisible="False" TextChanged="Entry_TextChanged_11" />
                     </StackLayout>
                 </Frame>
@@ -236,8 +238,10 @@
                     <StackLayout>
                         <Label Text="Did someone else unloaded the vehicle for you?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_14"/>
-                        <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_14"/>
+                        <FlexLayout>
+                            <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_14"/>
+                            <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_14"/>
+                        </FlexLayout>
                         <Entry x:Name="entUnloaded" Placeholder="Name" TextChanged="Entry_TextChanged_12" IsVisible="False"/>
                     </StackLayout>
                 </Frame>
