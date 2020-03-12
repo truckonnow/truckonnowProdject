@@ -1,10 +1,13 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.View.GlobalDialogView;
+using MDispatch.View.Inspection.PickedUp.CameraPageFolder;
 using MDispatch.ViewModels.InspectionMV.PickedUpMV;
 using Plugin.InputKit.Shared.Controls;
 using Rg.Plugins.Popup.Services;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static MDispatch.Service.ManagerDispatchMob;
@@ -42,33 +45,99 @@ namespace MDispatch.View.Inspection.PickedUp
 
         #region Ask2
         bool isAsk2 = false;
-        private void Entry_TextChanged1(object sender, TextChangedEventArgs e)
+        Button button2 = null;
+        private void Button_Clicked_1(object sender, EventArgs e)
         {
-            if (e.NewTextValue != "")
+            isAsk2 = true;
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            if (button2 != null)
             {
-                isAsk2 = true;
+                button2.TextColor = Color.Silver;
             }
-            else
+            button2 = button;
+        }
+
+        private async void Button_Clicked_2(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            if (button2 != null)
             {
-                isAsk2 = false;
+                button2.TextColor = Color.Silver;
             }
-            ask2PageMW.Ask2.Any_additional_documentation_been_given_after_loading = e.NewTextValue;
+            button2 = button;
+            await Navigation.PushAsync(new CameraDocumment(this));
+        }
+
+        internal void AddPhotoDocumments(byte[] result)
+        {
+            isAsk2 = true;
+            if (ask2PageMW.Ask2.Any_additional_documentation_been_given_after_loading == null)
+            {
+                ask2PageMW.Ask2.Any_additional_documentation_been_given_after_loading = new List<Models.Photo>();
+            }
+            Models.Photo photo = new Models.Photo();
+            photo.Base64 = Convert.ToBase64String(result);
+            photo.path = $"../Photo/{ask2PageMW.VehiclwInformation.Id}/PikedUp/Documment/{ask2PageMW.Ask2.Any_additional_documentation_been_given_after_loading.Count + 1}.jpg";
+            ask2PageMW.Ask2.Any_additional_documentation_been_given_after_loading.Add(photo);
+            Image image = new Image()
+            {
+                Source = ImageSource.FromStream(() => new MemoryStream(result)),
+                HeightRequest = 50,
+                WidthRequest = 50,
+            };
+            //image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke1));
+            blockAskPhotoDocumments.Children.Add(image);
         }
         #endregion
 
         #region Ask3
         bool isAsk3 = false;
-        private void Entry_TextChanged2(object sender, TextChangedEventArgs e)
+        Button button3 = null;
+        private void Button_Clicked_3(object sender, EventArgs e)
         {
-            if (e.NewTextValue != "")
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            if (button3 != null)
             {
-                isAsk3 = true;
+                button3.TextColor = Color.Silver;
             }
-            else
+            button3 = button;
+
+        }
+
+        private void Button_Clicked_4(object sender, EventArgs e)
+        {
+            isAsk3 = true;
+            Button button = (Button)sender;
+            button.TextColor = Color.FromHex("#4fd2c2");
+            if (button3 != null)
             {
-                isAsk3 = false;
+                button3.TextColor = Color.Silver;
             }
-            ask2PageMW.Ask2.Any_additional_parts_been_given_to_you = e.NewTextValue;
+            button3 = button;
+        }
+
+        internal void AddPhotoPartsBeen(byte[] result)
+        {
+            isAsk2 = true;
+            if (ask2PageMW.Ask2.Any_additional_parts_been_given_to_you == null)
+            {
+                ask2PageMW.Ask2.Any_additional_parts_been_given_to_you = new List<Models.Photo>();
+            }
+            Models.Photo photo = new Models.Photo();
+            photo.Base64 = Convert.ToBase64String(result);
+            photo.path = $"../Photo/{ask2PageMW.VehiclwInformation.Id}/PikedUp/Documment/{ask2PageMW.Ask2.Any_additional_parts_been_given_to_you.Count + 1}.jpg";
+            ask2PageMW.Ask2.Any_additional_parts_been_given_to_you.Add(photo);
+            Image image = new Image()
+            {
+                Source = ImageSource.FromStream(() => new MemoryStream(result)),
+                HeightRequest = 50,
+                WidthRequest = 50,
+            };
+            //image.GestureRecognizers.Add(new TapGestureRecognizer(ViewPhotoForRetacke1));
+            blockAskPhotoPartsBeen.Children.Add(image);
         }
         #endregion
 

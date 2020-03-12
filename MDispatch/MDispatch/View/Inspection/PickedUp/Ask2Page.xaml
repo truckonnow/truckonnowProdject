@@ -20,20 +20,36 @@
                         <Entry Placeholder="Enter the number of keys" TextChanged="Entry_TextChanged" Keyboard="Numeric"/>
                     </StackLayout>
                 </Frame>
+                <!---->
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock2">
                     <StackLayout>
                         <Label Text="Any additional documentation been given after loading" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Entry Placeholder="Enter what documentation you were given" TextChanged="Entry_TextChanged1" Keyboard="Numeric"/>
+                        <FlexLayout>
+                            <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_1" />
+                            <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_2"/>
+                        </FlexLayout>
+                        <ScrollView Orientation="Horizontal">
+                            <StackLayout x:Name="blockAskPhotoDocumments" Orientation="Horizontal">
+                            </StackLayout>
+                        </ScrollView>
                     </StackLayout>
                 </Frame>
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock3">
                     <StackLayout>
                         <Label Text="Any additional parts been given to you" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>
                         <BoxView HeightRequest="1" BackgroundColor="BlueViolet"/>
-                        <Entry Placeholder="Enter what details you were given" TextChanged="Entry_TextChanged2" Keyboard="Numeric"/>
+                        <FlexLayout>
+                            <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_3" />
+                            <Button Text="No" BackgroundColor="White" TextColor="Silver"  Clicked="Button_Clicked_4"/>
+                        </FlexLayout>
+                        <ScrollView Orientation="Horizontal">
+                            <StackLayout x:Name="blockAskPhotoPartsBeen" Orientation="Horizontal">
+                            </StackLayout>
+                        </ScrollView>
                     </StackLayout>
                 </Frame>
+                <!---->
                 <Frame Padding="10" Margin="10" BorderColor="BlueViolet" CornerRadius="6" x:Name="askBlock4">
                     <StackLayout>
                         <Label Text="Car locked?" TextColor="Black" FontSize="18" Margin="10, 0, 0, 0"/>

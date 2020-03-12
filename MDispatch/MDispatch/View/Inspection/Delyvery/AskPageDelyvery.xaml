@@ -183,7 +183,7 @@
                             <Button Text="Yes" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_15"/>
                             <Button Text="No" BackgroundColor="White" TextColor="Silver" Clicked="Button_Clicked_15"/>
                         </FlexLayout>
-                        <Entry x:Name="entFlaws" Placeholder="Enter body flaws" TextChanged="Entry_TextChanged_13"/>
+                        <Entry IsVisible="False" x:Name="entFlaws" Placeholder="Enter body flaws" TextChanged="Entry_TextChanged_13"/>
                     </StackLayout>
                 </Frame>
                 <!--13-->
