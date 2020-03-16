@@ -112,11 +112,11 @@ namespace ApiMobaileServise.Servise.AddDamage
                     Image img1 = Bitmap.FromFile(pathScan);
                     Image img2 = Bitmap.FromFile($"../Damages/Damage{damage.TypeCurrentStatus}{damage.IndexDamage}.png");
                     img2 = img2.GetThumbnailImage((int)((double)damage.WidthDamage * 0.30), (int)((double)damage.HeightDamage * 0.30), null, IntPtr.Zero);
-                    Bitmap res = new Bitmap(img1.Width, img1.Height);
+                    Bitmap res = new Bitmap(img1);
                     Graphics g = Graphics.FromImage(res);
                     int x = GetCordinatX(photoInspection.IndexPhoto.ToString(), damage.XInterest);
                     int y = GetCordinatY(photoInspection.IndexPhoto.ToString(), damage.YInterest);
-                    g.DrawImage(img1, 0, 0);
+                    //g.DrawImage(img1, 0, 0);
                     if (photoInspection.IndexPhoto == 3 || photoInspection.IndexPhoto == 4 || photoInspection.IndexPhoto == 5 || photoInspection.IndexPhoto == 11 || photoInspection.IndexPhoto == 12 || photoInspection.IndexPhoto == 13 || photoInspection.IndexPhoto == 14 || photoInspection.IndexPhoto == 16
                          || photoInspection.IndexPhoto == 17 || photoInspection.IndexPhoto == 18 || photoInspection.IndexPhoto == 19)
                     {

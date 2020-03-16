@@ -273,7 +273,7 @@ namespace ApiMobaileServise.Servise.AddDamage
                     Graphics g = Graphics.FromImage(res);
                     int x = GetCordinatX(photoInspection.IndexPhoto.ToString(), damage.XInterest);
                     int y = GetCordinatY(photoInspection.IndexPhoto.ToString(), damage.YInterest);
-                    g.DrawImage(img1, 0, 0);
+                    //g.DrawImage(img1, 0, 0);
                     if (photoInspection.IndexPhoto == 4 || photoInspection.IndexPhoto == 5 || photoInspection.IndexPhoto == 6 || photoInspection.IndexPhoto == 7 || photoInspection.IndexPhoto == 8 || photoInspection.IndexPhoto == 9 || photoInspection.IndexPhoto == 18
                         || photoInspection.IndexPhoto == 19 || photoInspection.IndexPhoto == 20 || photoInspection.IndexPhoto == 21 || photoInspection.IndexPhoto == 22 || photoInspection.IndexPhoto == 23 || photoInspection.IndexPhoto == 24 || photoInspection.IndexPhoto == 25
                         || photoInspection.IndexPhoto == 31 || photoInspection.IndexPhoto == 32 || photoInspection.IndexPhoto == 33)
