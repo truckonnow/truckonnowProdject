@@ -27,13 +27,13 @@
                 <p class="inpLabe">Contact</p>
                 <input name="contactP" class="inpText" type="text" value="@ViewBag.Order.ContactNameP" />
                 <p class="inpLabe">Address</p>
-                <input name="addressP" class="inpText" type="text" value="@ViewBag.Order.AddresP" />
+                <input name="addressP" class="inpText validation" type="text" value="@ViewBag.Order.AddresP" required/>
                 <p class="inpLabe">City</p>
-                <input name="cityP" class="inpText" type="text" value="@ViewBag.Order.CityP" />
+                <input name="cityP" class="inpText validation" type="text" value="@ViewBag.Order.CityP" required/>
                 <p class="inpLabe">State</p>
-                <input name="stateP" class="inpText" type="text" value="@ViewBag.Order.StateP" />
+                <input name="stateP" class="inpText validation" type="text" value="@ViewBag.Order.StateP" required/>
                 <p class="inpLabe">Zip</p>
-                <input name="zipP" class="inpText" type="text" value="@ViewBag.Order.ZipP" />
+                <input name="zipP" class="inpText validation" type="text" value="@ViewBag.Order.ZipP" required/>
                 <p class="inpLabe">Phone</p>
                 <input name="phoneP" class="inpText" type="text" value="@ViewBag.Order.PhoneP" />
                 <p class="inpLabe">Email</p>
@@ -48,13 +48,13 @@
                 <p class="inpLabe">Contact</p>
                 <input name="contactD" class="inpText" type="text" value="@ViewBag.Order.ContactNameD" />
                 <p class="inpLabe">Address</p>
-                <input name="addressD" class="inpText" type="text" value="@ViewBag.Order.AddresD" />
+                <input name="addressD" class="inpText validation" type="text" value="@ViewBag.Order.AddresD" required/>
                 <p class="inpLabe">City</p>
-                <input name="cityD" class="inpText" type="text" value="@ViewBag.Order.CityD" />
+                <input name="cityD" class="inpText validation" type="text" value="@ViewBag.Order.CityD" required/>
                 <p class="inpLabe">State</p>
-                <input name="stateD" class="inpText" type="text" value="@ViewBag.Order.StateD" />
+                <input name="stateD" class="inpText validation" type="text" value="@ViewBag.Order.StateD" required/>
                 <p class="inpLabe">Zip</p>
-                <input name="zipD" class="inpText" type="text" value="@ViewBag.Order.ZipD" />
+                <input name="zipD" class="inpText validation" type="text" value="@ViewBag.Order.ZipD" required/>
                 <p class="inpLabe">Phone</p>
                 <input name="phoneD" class="inpText" type="text" value="@ViewBag.Order.PhoneD" />
                 <p class="inpLabe">Email</p>
@@ -125,7 +125,7 @@
                     <option value="15 days">15 days</option>
                 </select>
                 <p class="inpLabe">Price</p>
-                <input name="price" class="inpText" type="text" value="@ViewBag.Order.PriceListed" />
+                <input name="price" class="inpText validation" type="text" value="@ViewBag.Order.PriceListed" required/>
             </div>
             <div class="content">
                 <p class="inpLabe">Broker Fee</p>
@@ -206,6 +206,14 @@
         <style>
             * {
                 margin: 0px;
+            }
+
+            .validation:invalid {
+                border-color: red;
+            }
+
+            .validation:valid {
+                border-color: #4ad73b;
             }
 
             .btnAddandRevoveVech {

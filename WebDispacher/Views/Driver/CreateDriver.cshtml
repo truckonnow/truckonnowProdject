@@ -3,18 +3,18 @@
     <form action="" method="post">
         <div class="content">
             <h2 style="color: rgb(51, 51, 51);margin-bottom:2px;">Add New Driver</h2>
-            <p class="inpLabe">Full Name*</p>
-            <input name="fullName" class="inpText" type="text" />
-            <p class="inpLabe">Email Address*</p>
-            <input name="emailAddress" class="inpText" type="text" />
-            <p class="inpLabe">Password*</p>
-            <input name="password" class="inpText" type="text" />
-            <p class="inpLabe">Phone Number*</p>
+            <p class="inpLabe">Full Name</p>
+            <input name="fullName" class="inpText validation" type="text" required/>
+            <p class="inpLabe">Email Address</p>
+            <input name="emailAddress" class="inpText validation" type="text" required />
+            <p class="inpLabe">Password</p>
+            <input name="password" class="inpText validation" type="text" required/>
+            <p class="inpLabe">Phone Number</p>
             <input name="phoneNumbe" class="inpText" type="text" />
-            <p class="inpLabe">Trailer Capacity*</p>
+            <p class="inpLabe">Trailer Capacity</p>
             <input name="trailerCapacity" class="inpText" type="text" />
             <p class="inpLabe">Driver's License Number</p>
-            <input name="driversLicenseNumber" class="inpText" type="text" />
+            <input name="driversLicenseNumber" class="inpText validation" type="text" required/>
         </div>
         <input class="btnSave" value="Save" type="submit" />
     </form>
@@ -24,6 +24,14 @@
 <style>
     * {
         margin: 0px;
+    }
+
+    .validation:invalid {
+        border-color: red;
+    }
+
+    .validation:valid {
+        border-color: #4ad73b;
     }
 
     .btnSave {

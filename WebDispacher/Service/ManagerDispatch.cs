@@ -163,9 +163,12 @@ namespace WebDispacher.Service
             });
         }
 
-        public void CreateTruk(string nameTruk, string yera, string make, string model, string state, string exp, string vin, string owner, string plateTruk, string color)
+        public void CreateTruk(string nameTruk, string yera, string make, string model, string state, string exp, string vin, string owner, string plateTruk, string color, IFormFile registrationDoc, IFormFile ensuresDoc, IFormFile _3Doc)
         {
-            _sqlEntityFramworke.CreateTrukDb(nameTruk, yera, make, model, state, exp, vin, owner, plateTruk, color);
+            int id = _sqlEntityFramworke.CreateTrukDb(nameTruk, yera, make, model, state, exp, vin, owner, plateTruk, color);
+            SaveDocTruck(registrationDoc, "Registration", id.ToString());
+            SaveDocTruck(ensuresDoc, "Ensures", id.ToString());
+            SaveDocTruck(_3Doc, "3", id.ToString());
         }
 
         public void CreateContact(string fullName, string emailAddress, string phoneNumbe)
@@ -265,9 +268,12 @@ namespace WebDispacher.Service
                         price, paymentTerms, brokerFee);
         }
 
-        internal void CreateTrailer(string name, string year, string make, string howLong, string vin, string owner, string color, string plate, string exp, string annualIns)
+        internal void CreateTrailer(string name, string year, string make, string howLong, string vin, string owner, string color, string plate, string exp, string annualIns, IFormFile registrationDoc, IFormFile ensuresDoc, IFormFile _3Doc)
         {
-            _sqlEntityFramworke.CreateTrailerDb(name, year, make, howLong, vin, owner, color, plate, exp, annualIns);
+            int id = _sqlEntityFramworke.CreateTrailerDb(name, year, make, howLong, vin, owner, color, plate, exp, annualIns);
+            SaveDocTrailer(registrationDoc, "Registration", id.ToString());
+            SaveDocTrailer(ensuresDoc, "Ensures", id.ToString());
+            SaveDocTrailer(_3Doc, "3", id.ToString());
         }
 
         public void CreateDriver(string fullName, string emailAddress, string password, string phoneNumbe, string trailerCapacity, string driversLicenseNumber)

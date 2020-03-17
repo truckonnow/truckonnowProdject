@@ -200,9 +200,9 @@ namespace WebDispacher.Dao
             }
         }
 
-        internal void CreateTrukDb(string nameTruk, string yera, string make, string model, string state, string exp, string vin, string owner, string plateTruk, string color)
+        internal int CreateTrukDb(string nameTruk, string yera, string make, string model, string state, string exp, string vin, string owner, string plateTruk, string color)
         {
-            context.Trucks.Add(new Truck()
+            Truck truck = new Truck()
             {
                 ColorTruk = color,
                 Exp = exp,
@@ -214,8 +214,10 @@ namespace WebDispacher.Dao
                 Satet = state,
                 Vin = vin,
                 Yera = yera
-            });
+            };
+            context.Trucks.Add(truck);
             context.SaveChanges();
+            return truck.Id;
         }
 
         public Shipping GetShipingCurrentVehiclwInDb(string id)
@@ -292,9 +294,9 @@ namespace WebDispacher.Dao
             await context.SaveChangesAsync();
         }
 
-        internal void CreateTrailerDb(string name, string year, string make, string howLong, string vin, string owner, string color, string plate, string exp, string annualIns)
+        internal int CreateTrailerDb(string name, string year, string make, string howLong, string vin, string owner, string color, string plate, string exp, string annualIns)
         {
-            context.Trailers.Add(new Trailer()
+            Trailer trailer = new Trailer()
             {
                 AnnualIns = annualIns,
                 Color = color,
@@ -306,8 +308,10 @@ namespace WebDispacher.Dao
                 Plate = plate,
                 Vin = vin,
                 Year = year
-            });
+            };
+            context.Trailers.Add(trailer);
             context.SaveChanges();
+            return trailer.Id;
         }
 
         internal void SavePathDb(string id, string path)

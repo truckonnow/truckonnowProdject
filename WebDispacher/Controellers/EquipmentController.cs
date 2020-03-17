@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -134,7 +135,8 @@ namespace WebDispacher.Controellers
 
         [HttpPost]
         [Route("CreateTruck")]
-        public IActionResult CreateDriver(string nameTruk, string yera, string make, string model, string state, string exp, string vin, string owner, string plateTruk, string color)
+        [DisableRequestSizeLimit]
+        public IActionResult CreateDriver(string nameTruk, string yera, string make, string model, string state, string exp, string vin, string owner, string plateTruk, string color, List<IFormFile> registrationDoc, List<IFormFile> ensuresDoc, List<IFormFile> _3Doc)
         {
             IActionResult actionResult = null;
             try
@@ -145,7 +147,7 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     
-                        managerDispatch.CreateTruk(nameTruk, yera, make, model, state, exp, vin, owner, plateTruk, color);
+                       managerDispatch.CreateTruk(nameTruk, yera, make, model, state, exp, vin, owner, plateTruk, color, registrationDoc[0], ensuresDoc[0], _3Doc[0]);
                         actionResult = Redirect($"{Config.BaseReqvesteUrl}/Equipment/Trucks");
                 }
                 else
@@ -226,7 +228,8 @@ namespace WebDispacher.Controellers
 
         [HttpPost]
         [Route("CreateTrailer")]
-        public IActionResult CreateTrailer(string name, string year, string make, string howLong, string vin, string owner, string color, string plate, string exp, string annualIns)
+        [DisableRequestSizeLimit]
+        public IActionResult CreateTrailer(string name, string year, string make, string howLong, string vin, string owner, string color, string plate, string exp, string annualIns, List<IFormFile> registrationDoc, List<IFormFile> ensuresDoc, List<IFormFile> _3Doc)
         {
             IActionResult actionResult = null;
             try
@@ -237,7 +240,7 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
 
-                    managerDispatch.CreateTrailer(name, year, make, howLong, vin, owner, color, plate, exp, annualIns);
+                    managerDispatch.CreateTrailer(name, year, make, howLong, vin, owner, color, plate, exp, annualIns, registrationDoc[0], ensuresDoc[0], _3Doc[0]);
                     actionResult = Redirect($"{Config.BaseReqvesteUrl}/Equipment/Trailers");
                 }
                 else
