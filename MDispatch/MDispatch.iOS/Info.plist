@@ -25,7 +25,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.companyname.MDispatch</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app needs access to location when open.</string>
+	<string>This application requires access to the geolocation of driver tracking in the workplace.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
@@ -37,7 +37,7 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app requires microphon access to function properly</string>
 	<key>CFBundleVersion</key>
-	<string>0.3.4</string>
+	<string>0.3.8</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>This application requires access to the geolocation of driver tracking in the workplace.</string>
 	<key>NSContactsUsageDescription</key>
@@ -45,7 +45,7 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>This app need to access your calendar events</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.3.4</string>
+	<string>0.3.8</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict/>
 	<key>XSAppIconAssets</key>

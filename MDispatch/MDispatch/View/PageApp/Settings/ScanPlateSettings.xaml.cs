@@ -1,6 +1,7 @@
 ﻿using MDispatch.NewElement;
 using MDispatch.ViewModels.PageAppMV.Settings;
 using System;
+using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
@@ -31,12 +32,14 @@ namespace MDispatch.View.PageApp.Settings
                 return;
             }
             settingsMV.DetectText(result.Result, typeDetect);
-            await Navigation.PopAsync();
+            DependencyService.Get<IOrientationHandler>().ForceSensor();
+            await Navigation.PopModalAsync();
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            await Navigation.PopAsync();
+            DependencyService.Get<IOrientationHandler>().ForceSensor();
+            await Navigation.PopModalAsync();
         }
     }
 }

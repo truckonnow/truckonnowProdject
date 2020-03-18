@@ -1,4 +1,5 @@
-﻿using MDispatch.Service;
+﻿using MDispatch.NewElement;
+using MDispatch.Service;
 using MDispatch.ViewModels.PageAppMV.Settings;
 using Plugin.LatestVersion;
 using Plugin.Settings;
@@ -49,12 +50,14 @@ namespace MDispatch.View.PageApp.Settings
 
         private async void TapGestureRecognizer_Tapped_3(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ScanPlateSettings(settingsMV, "truck"));
+            DependencyService.Get<IOrientationHandler>().ForceLandscape();
+            await Navigation.PushModalAsync(new ScanPlateSettings(settingsMV, "truck"));
         }
 
         private async void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ScanPlateSettings(settingsMV, "trailer"));
+            DependencyService.Get<IOrientationHandler>().ForceLandscape();
+            await Navigation.PushModalAsync(new ScanPlateSettings(settingsMV, "trailer"));
         }
     }
 }

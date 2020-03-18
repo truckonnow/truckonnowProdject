@@ -1,4 +1,6 @@
 ﻿using MDispatch.NewElement;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
@@ -11,6 +13,9 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
         public CameraPartsBeen(Ask2Page ask2Page)
         {
             InitializeComponent();
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
+                .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
             this.ask2Page = ask2Page;
         }
 

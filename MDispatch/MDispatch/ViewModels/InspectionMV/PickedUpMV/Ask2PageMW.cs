@@ -26,19 +26,12 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
             this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
             Navigation = navigation;
-            VehiclwInformation = vehiclwInformation;
             IdShip = idShip;
+            IdVech = idVech;
         }
 
         public string IdShip { get; set; }
         public string IdVech { get; set; }
-
-        private VehiclwInformation vehiclwInformation = null;
-        public VehiclwInformation VehiclwInformation
-        {
-            get => vehiclwInformation;
-            set => SetProperty(ref vehiclwInformation, value);
-        }
 
         private Ask2 ask2 = null;
         public Ask2 Ask2

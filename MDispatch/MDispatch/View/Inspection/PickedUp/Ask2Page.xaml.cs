@@ -46,7 +46,7 @@ namespace MDispatch.View.Inspection.PickedUp
         #region Ask2
         bool isAsk2 = false;
         Button button2 = null;
-        private void Button_Clicked_1(object sender, EventArgs e)
+        private void Button_Clicked_2(object sender, EventArgs e)
         {
             isAsk2 = true;
             Button button = (Button)sender;
@@ -58,7 +58,7 @@ namespace MDispatch.View.Inspection.PickedUp
             button2 = button;
         }
 
-        private async void Button_Clicked_2(object sender, EventArgs e)
+        private async void Button_Clicked_1(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
@@ -79,7 +79,7 @@ namespace MDispatch.View.Inspection.PickedUp
             }
             Models.Photo photo = new Models.Photo();
             photo.Base64 = Convert.ToBase64String(result);
-            photo.path = $"../Photo/{ask2PageMW.VehiclwInformation.Id}/PikedUp/Documment/{ask2PageMW.Ask2.Any_additional_documentation_been_given_after_loading.Count + 1}.jpg";
+            photo.path = $"../Photo/{ask2PageMW.IdVech}/PikedUp/Documment/{ask2PageMW.Ask2.Any_additional_documentation_been_given_after_loading.Count + 1}.jpg";
             ask2PageMW.Ask2.Any_additional_documentation_been_given_after_loading.Add(photo);
             Image image = new Image()
             {
@@ -95,7 +95,7 @@ namespace MDispatch.View.Inspection.PickedUp
         #region Ask3
         bool isAsk3 = false;
         Button button3 = null;
-        private void Button_Clicked_3(object sender, EventArgs e)
+        private async void Button_Clicked_3(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             button.TextColor = Color.FromHex("#4fd2c2");
@@ -104,10 +104,11 @@ namespace MDispatch.View.Inspection.PickedUp
                 button3.TextColor = Color.Silver;
             }
             button3 = button;
+            await Navigation.PushAsync(new CameraPartsBeen(this));
 
         }
 
-        private void Button_Clicked_4(object sender, EventArgs e)
+        private async void Button_Clicked_4(object sender, EventArgs e)
         {
             isAsk3 = true;
             Button button = (Button)sender;
@@ -121,14 +122,14 @@ namespace MDispatch.View.Inspection.PickedUp
 
         internal void AddPhotoPartsBeen(byte[] result)
         {
-            isAsk2 = true;
+            isAsk3 = true;
             if (ask2PageMW.Ask2.Any_additional_parts_been_given_to_you == null)
             {
                 ask2PageMW.Ask2.Any_additional_parts_been_given_to_you = new List<Models.Photo>();
             }
             Models.Photo photo = new Models.Photo();
             photo.Base64 = Convert.ToBase64String(result);
-            photo.path = $"../Photo/{ask2PageMW.VehiclwInformation.Id}/PikedUp/Documment/{ask2PageMW.Ask2.Any_additional_parts_been_given_to_you.Count + 1}.jpg";
+            photo.path = $"../Photo/{ask2PageMW.IdVech}/PikedUp/Documment/{ask2PageMW.Ask2.Any_additional_parts_been_given_to_you.Count + 1}.jpg";
             ask2PageMW.Ask2.Any_additional_parts_been_given_to_you.Add(photo);
             Image image = new Image()
             {

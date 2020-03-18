@@ -47,7 +47,7 @@ namespace MDispatch.Vidget.View
             }
             else if (fullPhotoTruckVM.PlateTrailer == null || fullPhotoTruckVM.PlateTrailer == "")
             {
-                await PopupNavigation.PushAsync(new PlateTruckWrite(this));
+                await PopupNavigation.PushAsync(new PlateTrailerWrite(fullPhotoTruckVM));
             }
         }
     }
