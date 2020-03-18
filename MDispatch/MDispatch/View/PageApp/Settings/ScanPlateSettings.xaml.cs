@@ -1,0 +1,42 @@
+﻿using MDispatch.NewElement;
+using MDispatch.ViewModels.PageAppMV.Settings;
+using System;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
+using Xamarin.Forms.Xaml;
+
+namespace MDispatch.View.PageApp.Settings
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class ScanPlateSettings : CameraPage
+    {
+        private SettingsMV settingsMV = null;
+        private string typeDetect = null;
+
+        public ScanPlateSettings(SettingsMV settingsMV, string typeDetect)
+        {
+            this.typeDetect = typeDetect;
+            this.settingsMV = settingsMV;
+            InitializeComponent();
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
+               .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
+        }
+
+        [Obsolete]
+        private async void CameraPage_OnScan(PhotoResultEventArgs result)
+        {
+            if (!result.Success)
+            {
+                return;
+            }
+            settingsMV.DetectText(result.Result, typeDetect);
+            await Navigation.PopAsync();
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
+    }
+}

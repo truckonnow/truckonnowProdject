@@ -31,11 +31,6 @@ namespace MDispatch.View.PageApp.Settings
             Device.OpenUri(new Uri($"{Config.BaseSiteUrl}/Doc/{CrossSettings.Current.GetValueOrDefault("IdDriver", "0")}"));
         }
 
-        private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
-        {
-
-        }
-
         [Obsolete]
         private void Button_Clicked(object sender, EventArgs e)
         {
@@ -50,6 +45,16 @@ namespace MDispatch.View.PageApp.Settings
         private async void Button_Clicked_2(object sender, EventArgs e)
         {
             await CrossLatestVersion.Current.OpenAppInStore();
+        }
+
+        private async void TapGestureRecognizer_Tapped_3(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ScanPlateSettings(settingsMV, "truck"));
+        }
+
+        private async void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ScanPlateSettings(settingsMV, "trailer"));
         }
     }
 }

@@ -7,6 +7,7 @@ using Plugin.LatestVersion;
 using Plugin.Settings;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -178,6 +179,46 @@ namespace MDispatch.ViewModels.PageAppMV.Settings
                 else if (state == 4)
                 {
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
+                }
+            }
+        }
+
+        [Obsolete]
+        internal async void DetectText(byte[] result, string type)
+        {
+            await PopupNavigation.PushAsync(new LoadPage());
+            string idDriver = CrossSettings.Current.GetValueOrDefault("IdDriver", "");
+            string token = CrossSettings.Current.GetValueOrDefault("Token", "");
+            int state = 0;
+            string plate = null;
+            await Task.Run(() => Utils.CheckNet());
+            if (App.isNetwork)
+            {
+                await Task.Run(() =>
+                {
+                    state = managerDispatchMob.DetectPlate(token, Convert.ToBase64String(result), idDriver, type, ref plate);
+                });
+                if (state == 1)
+                {
+                    await PopupNavigation.PopAsync();
+                    await PopupNavigation.PushAsync(new Errror("Not Network", null));
+                }
+                else if (state == 3)
+                {
+                    await PopupNavigation.PopAsync();
+                    if (type == "truck")
+                    {
+                        PlateTruck1 = plate;
+                    }
+                    else if (type == "trailer")
+                    {
+                        PlateTrailer1 = plate;
+                    }
+                }
+                else if (state == 4)
+                {
+                    await PopupNavigation.PopAsync();
+                    await PopupNavigation.PushAsync(new Errror("Technical work on the service scan", null));
                 }
             }
         }

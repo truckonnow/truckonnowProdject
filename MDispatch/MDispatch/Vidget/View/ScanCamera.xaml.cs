@@ -32,19 +32,6 @@ namespace MDispatch.Vidget.View
             }
             fullPhotoTruckVM.DetectText(result.Result, typeDetect);
             await Navigation.PopAsync();
-            //if (fullPhotoTruckVM.IndexCurent == 44)
-            //{
-            //    await PopupNavigation.PushAsync(new PlateWrite(fullPhotoTruckVM));
-            //}
-            //else if(typeDetect == "truck")
-            //{
-            //    await PopupNavigation.PushAsync(new PlateTruckWrite(fullPhotoTruckVM));
-            //}
-            //else if (typeDetect == "trailer")
-            //{
-            //    await PopupNavigation.PushAsync(new PlateTruckWrite(fullPhotoTruckVM));
-            //}
-            //fullPhotoTruckVM
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
@@ -60,7 +47,7 @@ namespace MDispatch.Vidget.View
             }
             else if (fullPhotoTruckVM.PlateTrailer == null || fullPhotoTruckVM.PlateTrailer == "")
             {
-                //await PopupNavigation.PushAsync(new PlateTruckWrite(this));
+                await PopupNavigation.PushAsync(new PlateTruckWrite(this));
             }
         }
     }
