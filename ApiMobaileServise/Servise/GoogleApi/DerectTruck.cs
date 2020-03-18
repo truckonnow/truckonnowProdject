@@ -20,7 +20,7 @@ namespace ApiMobaileServise.Servise.GoogleApi
         public void AuchGoole(SqlCommandApiMobile sqlCommandApiMobil)
         {  
             this.sqlCommandApiMobil = sqlCommandApiMobil;
-            System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "../AuchConfig/Truckonnow-3fe51d144964.json");
+            System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", Config.AuchGoogleCloud);
         }
 
         public string DetectText(params object[] parames)
