@@ -16,7 +16,7 @@ using Xamarin.Forms;
 
 namespace MDispatch.ViewModels
 {
-    class AvtorizationMV : BindableBase
+    public class AvtorizationMV : BindableBase
     {
         private ManagerDispatchMob managerDispatchMob = null;
         public DelegateCommand AvtorizationCommand { get; set; }
@@ -34,6 +34,13 @@ namespace MDispatch.ViewModels
             set => SetProperty(ref username, value);
         }
 
+        private string fullName;
+        public string FullName
+        {
+            get => fullName;
+            set => SetProperty(ref fullName, value);
+        }
+
         private string password;
         public string Password
         {
@@ -44,6 +51,16 @@ namespace MDispatch.ViewModels
             }
         }
 
+        private string passwordForgot;
+        public string PasswordForgot
+        {
+            get { return passwordForgot; }
+            set
+            {
+                SetProperty(ref passwordForgot, value);
+            }
+        }
+
         private string feedBack;
         public string FeedBack
         {
@@ -51,6 +68,16 @@ namespace MDispatch.ViewModels
             set
             {
                 SetProperty(ref feedBack, value);
+            }
+        }
+
+        private string feedBack1 = "";
+        public string FeedBack1
+        {
+            get { return feedBack1; }
+            set
+            {
+                SetProperty(ref feedBack1, value);
             }
         }
 
@@ -68,12 +95,12 @@ namespace MDispatch.ViewModels
             await PopupNavigation.PopAsync(true);
             if (state == 1)
             {
-                await PopupNavigation.PushAsync(new Errror(FeedBack, null));
+                await PopupNavigation.PushAsync(new Errror(description, null));
                 FeedBack = "Not Network";
             }
             else if(state == 2)
             {
-                await PopupNavigation.PushAsync(new Errror(FeedBack, null));
+                await PopupNavigation.PushAsync(new Errror(description, null));
                 FeedBack = description;
             }
             else if(state == 3)
@@ -93,11 +120,44 @@ namespace MDispatch.ViewModels
             }
             else if(state == 4)
             {
-                await PopupNavigation.PushAsync(new Errror(FeedBack, null));
+                await PopupNavigation.PushAsync(new Errror(description, null));
                 FeedBack = "Technical work on the service";
             }
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+        }
+
+        
+        [Obsolete]
+        public async void RequestPasswordChanges()
+        {
+            await PopupNavigation.PushAsync(new LoadPage(), true);
+            string token = null;
+            string description = null;
+            int state = 3;
+            await Task.Run(() =>
+            {
+                state = managerDispatchMob.A_RWork("RequestPasswordChanges", FullName, PasswordForgot, ref description, ref token);
+            });
+            await PopupNavigation.PopAsync(true);
+            if (state == 1)
+            {
+                await PopupNavigation.PushAsync(new Errror(description, null));
+                FeedBack1 = "Not Network";
+            }
+            else if (state == 2)
+            {
+                await PopupNavigation.PushAsync(new Errror(description, null));
+                FeedBack1 = description;
+            }
+            else if (state == 3)
+            {
+                await PopupNavigation.PopAllAsync();
+                FeedBack1 = "";
+            }
+            else if (state == 4)
+            {
+                await PopupNavigation.PushAsync(new Errror(description, null));
+                FeedBack1 = "Technical work on the service";
+            }
         }
     }
 }

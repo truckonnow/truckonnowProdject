@@ -111,11 +111,21 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
+        internal bool CheckFullNameAndPasswrodDB(string email, string fullName)
+        {
+            bool isCheckFullNameAdnPassword = false;
+            Driver driver = context.Drivers.FirstOrDefault(d => d.EmailAddress == email && d.FullName == fullName);
+            if(driver != null)
+            {
+                isCheckFullNameAdnPassword = true;
+            }
+            return isCheckFullNameAdnPassword;
+        }
+
         public async Task SaveInspectionDriverInDb(string idDriver, PhotoDriver photo, int IndexPhoto)
         {
             try
             {
-                //context.Drivers.Include("InspectionDrivers.PhotosTruck").ToList();
                 Driver driver = context.Drivers.Include(d => d.InspectionDrivers)
                     .FirstOrDefault(d => d.Id == Convert.ToInt32(idDriver));
                 if (driver.InspectionDrivers != null && driver.InspectionDrivers.Count != 0)
@@ -134,13 +144,11 @@ namespace ApiMobaileServise.Servise
                     inspectionDrivers.PhotosTruck = context.PhotoDrivers.Where(p => p.IdInspaction == inspectionDrivers.Id).ToList();
                     if (inspectionDrivers.PhotosTruck.FirstOrDefault(p => p.IndexPhoto == IndexPhoto) == null)
                     {
-                        //File.WriteAllText("SaveInspectionDriverInDb.txt", " inspectionDrivers.CountPhoto++; inspectionDrivers.PhotosTruck.Add(photo);");
                         inspectionDrivers.CountPhoto++;
                         inspectionDrivers.PhotosTruck.Add(photo);
                     }
                     else
                     {
-                        //File.WriteAllText("SaveInspectionDriverInDb.txt", ";");
 
                     }
                     await context.SaveChangesAsync();
@@ -161,7 +169,7 @@ namespace ApiMobaileServise.Servise
             }
             catch(Exception e)
             {
-                //File.WriteAllText("SaveInspectionDriverInDb.txt", e.Message);
+
             }
         }
 

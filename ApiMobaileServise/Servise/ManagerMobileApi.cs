@@ -96,6 +96,16 @@ namespace ApiMobaileServise.Servise
             //});
         }
 
+        internal bool CheckFullNameAndPasswrod(string email, string fullName)
+        {
+            bool isFullNamePassword = sqlCommandApiMobile.CheckFullNameAndPasswrodDB(email, fullName);
+            if(isFullNamePassword)
+            {
+                //Send email changa psw
+            }
+            return isFullNamePassword;
+        }
+
         public async void UpdateInspectionDriver(string idDriver)
         {
             await sqlCommandApiMobile.UpdateInspectionDriver(idDriver);

@@ -88,6 +88,10 @@ namespace MDispatch.Service
                 {
                     stateA_R = a_R.ClearAvt(token);
                 }
+                else if (typeR_A == "RequestPasswordChanges")
+                {
+                    stateA_R = a_R.RequestPasswordChanges(login, password, ref description);
+                }
             }
             a_R = null;
             CountReqvest--;

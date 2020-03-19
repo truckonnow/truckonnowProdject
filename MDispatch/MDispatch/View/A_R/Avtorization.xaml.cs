@@ -1,4 +1,5 @@
 ﻿using MDispatch.ViewModels;
+using Rg.Plugins.Popup.Services;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -8,7 +9,7 @@ namespace MDispatch.View.A_R
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Avtorization : ContentPage
 	{
-        private  AvtorizationMV avtorizationMV = null;
+        private AvtorizationMV avtorizationMV = null;
 
         public Avtorization ()
 		{
@@ -89,6 +90,12 @@ namespace MDispatch.View.A_R
             {
                 return false;
             }
+        }
+
+        [System.Obsolete]
+        private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            await PopupNavigation.PushAsync(new ForgotPassword(avtorizationMV));
         }
     }
 }
