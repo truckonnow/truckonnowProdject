@@ -3,6 +3,7 @@ using ApiMobaileServise.Servise;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Threading.Tasks;
 
 namespace ApiMobaileServise.Controllers
 {
@@ -74,12 +75,12 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("RequestPassword")]
-        public string RequestPassword(string email, string fullName)
+        public async Task<string> RequestPassword(string email, string fullName)
         {
             string respons = null;
             try
             {
-                bool isFullNamePassword = managerMobileApi.CheckFullNameAndPasswrod(email, fullName);
+                bool isFullNamePassword = await managerMobileApi.CheckFullNameAndPasswrod(email, fullName);
                 if(isFullNamePassword)
                 {
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", ""));

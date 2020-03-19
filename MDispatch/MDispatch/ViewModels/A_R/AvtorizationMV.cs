@@ -4,6 +4,7 @@ using MDispatch.Service.GeloctionGPS;
 using MDispatch.Service.Tasks;
 using MDispatch.StoreNotify;
 using MDispatch.View;
+using MDispatch.View.A_R;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.View.TabPage;
 using Plugin.Settings;
@@ -51,13 +52,13 @@ namespace MDispatch.ViewModels
             }
         }
 
-        private string passwordForgot;
-        public string PasswordForgot
+        private string email;
+        public string Email
         {
-            get { return passwordForgot; }
+            get { return email; }
             set
             {
-                SetProperty(ref passwordForgot, value);
+                SetProperty(ref email, value);
             }
         }
 
@@ -135,7 +136,7 @@ namespace MDispatch.ViewModels
             int state = 3;
             await Task.Run(() =>
             {
-                state = managerDispatchMob.A_RWork("RequestPasswordChanges", FullName, PasswordForgot, ref description, ref token);
+                state = managerDispatchMob.A_RWork("RequestPasswordChanges", email, FullName, ref description, ref token);
             });
             await PopupNavigation.PopAsync(true);
             if (state == 1)
@@ -152,6 +153,7 @@ namespace MDispatch.ViewModels
             {
                 await PopupNavigation.PopAllAsync();
                 FeedBack1 = "";
+                await PopupNavigation.PushAsync(new InfoRecovery(this));
             }
             else if (state == 4)
             {

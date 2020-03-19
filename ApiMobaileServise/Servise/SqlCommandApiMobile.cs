@@ -2,7 +2,6 @@
 using DaoModels.DAO;
 using DaoModels.DAO.Models;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,9 +21,20 @@ namespace ApiMobaileServise.Servise
             context = new Context();
         }
 
+        internal List<PasswordRecovery> GetPasswordRecovery()
+        {
+            return context.PasswordRecoveries.ToList();
+        }
+
         public List<Shipping> GetShipingPayd()
         {
             return context.Shipping.Where(s => s.CurrentStatus == "Delivered,Paid").ToList();
+        }
+
+        internal void RemovePasswordRecoveriesRange(List<PasswordRecovery> passwordRecoveries)
+        {
+            context.PasswordRecoveries.RemoveRange(passwordRecoveries);
+            context.SaveChanges();
         }
 
         internal List<Driver> GetDriverInDb()
@@ -109,6 +119,29 @@ namespace ApiMobaileServise.Servise
             }
             driver.InspectionDrivers.Add(inspectionDriver);
             await context.SaveChangesAsync();
+        }
+
+        internal int AddRecoveryPassword(string email, string fullName, string token)
+        {
+            Driver driver = context.Drivers.FirstOrDefault(d => d.EmailAddress == email && d.FullName == fullName);
+
+            PasswordRecovery passwordRecovery1 = context.PasswordRecoveries.FirstOrDefault(p => p.IdDriver == driver.Id);
+            if (passwordRecovery1 == null)
+            {
+                PasswordRecovery passwordRecovery = new PasswordRecovery()
+                {
+                    Date = DateTime.Now.ToString(),
+                    IdDriver = driver.Id,
+                    Token = token
+                };
+                context.PasswordRecoveries.Add(passwordRecovery);
+            }
+            else
+            {
+                passwordRecovery1.Token = token;
+            }
+            context.SaveChanges();
+            return driver.Id;
         }
 
         internal bool CheckFullNameAndPasswrodDB(string email, string fullName)

@@ -32,6 +32,7 @@ namespace DaoModels.DAO
         public DbSet<Truck> Trucks { get; set; }
         public DbSet<Trailer> Trailers { get; set; }
         public DbSet<DocumentTruckAndTrailers> DocumentTruckAndTrailers { get; set; }
+        public DbSet<PasswordRecovery> PasswordRecoveries { get; set; }
 
         public Context()
         {

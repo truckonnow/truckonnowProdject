@@ -21,7 +21,7 @@ namespace ApiMobaileServise.BackgraundService.InspactionDrive
             InitReqvest();
             sqlCommandApiMobile = new SqlCommandApiMobile();
             List<Driver> drivers = sqlCommandApiMobile.GetDriverInDb();
-            Task.Run(() => RefreshInspectionTimeDriver(drivers));
+            RefreshInspectionTimeDriver(drivers);
         }
 
         private async void RefreshInspectionTimeDriver(List<Driver> drivers)

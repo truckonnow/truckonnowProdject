@@ -115,5 +115,11 @@ namespace ApiMobaileServise.EmailSmtp
             string patern = "<p>Thank you for using our company, here is your 10% discount coupon.</p>";
             return patern;
         }
+
+        public string GetPaternRecoveryPassword(string link)
+        {
+            string patern =  $"<p>Your password reset link - {link}</p>";
+            return patern;
+        }
     }
 }

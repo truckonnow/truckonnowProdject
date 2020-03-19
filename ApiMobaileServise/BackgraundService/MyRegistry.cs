@@ -1,4 +1,5 @@
-﻿using ApiMobaileServise.BackgraundService.InspactionDrive;
+﻿using ApiMobaileServise.BackgraundService.AccontDriver;
+using ApiMobaileServise.BackgraundService.InspactionDrive;
 using ApiMobaileServise.BackgraundService.OrderWork;
 using ApiMobaileServise.BackgraundService.Queue;
 using FluentScheduler;
@@ -17,6 +18,7 @@ namespace ApiMobaileServise.BackgraundService
             Schedule<QueueWorkSavePhotoInspection>().ToRunNow().AndEvery(1).Seconds();
             Schedule<QueueWorkInspectionDriver>().ToRunNow().AndEvery(1).Seconds();
             Schedule<VideoSave>().ToRunNow().AndEvery(1).Seconds();
+            Schedule<RecoveryClear>().ToRunNow().AndEvery(1).Hours();
         }
     }
 }

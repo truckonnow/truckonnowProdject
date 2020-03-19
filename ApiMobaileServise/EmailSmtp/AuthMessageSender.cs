@@ -17,7 +17,7 @@ namespace ApiMobaileServise.EmailSmtp
                 int cId = 1;
                 MailMessage mail = new MailMessage()
                 {
-                    From = new MailAddress("chuprina.r.v@gmail.com")
+                    From = new MailAddress("truckonnow.info@gmail.com")
                 };
                 mail.To.Add(new MailAddress(email));
                 mail.Subject = subject;
@@ -34,19 +34,22 @@ namespace ApiMobaileServise.EmailSmtp
                         cId++;
                     }
                 }
-                if (shipping.AskFromUser != null && shipping.AskFromUser.App_will_ask_for_signature_of_the_client_signature != null)
+                if (shipping != null)
                 {
-                    Attachment attachment = new Attachment(shipping.AskFromUser.App_will_ask_for_signature_of_the_client_signature.path);
-                    attachment.ContentId = cId.ToString();
-                    mail.Attachments.Add(attachment);
-                    cId++;
-                }
-                if (shipping.askForUserDelyveryM != null && shipping.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature != null)
-                {
-                    Attachment attachment = new Attachment(shipping.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.path);
-                    attachment.ContentId = cId.ToString();
-                    mail.Attachments.Add(attachment);
-                    cId++;
+                    if (shipping.AskFromUser != null && shipping.AskFromUser.App_will_ask_for_signature_of_the_client_signature != null)
+                    {
+                        Attachment attachment = new Attachment(shipping.AskFromUser.App_will_ask_for_signature_of_the_client_signature.path);
+                        attachment.ContentId = cId.ToString();
+                        mail.Attachments.Add(attachment);
+                        cId++;
+                    }
+                    if (shipping.askForUserDelyveryM != null && shipping.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature != null)
+                    {
+                        Attachment attachment = new Attachment(shipping.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.path);
+                        attachment.ContentId = cId.ToString();
+                        mail.Attachments.Add(attachment);
+                        cId++;
+                    }
                 }
                 using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                 {
