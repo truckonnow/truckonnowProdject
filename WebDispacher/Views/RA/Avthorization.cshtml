@@ -6,7 +6,7 @@
         <label class="labelSt">
             Email
         </label><br/>
-        <input class="textInpSt" type="text" name="Email" /> <br>
+        <input class="textInpSt validation" type="email" name="Email" required/> <br>
         <label class="labelSt">
             Password
         </label> <br/>
@@ -23,6 +23,14 @@
         position:absolute;
         top:35%;
         left:35%;
+    }
+
+    .validation:invalid {
+        border-color: red;
+    }
+
+    .validation:valid {
+        border-color: #4ad73b;
     }
 
     .textInpSt {

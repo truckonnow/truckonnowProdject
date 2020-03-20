@@ -31,13 +31,13 @@
                 <p class="inpLabe">City</p>
                 <input name="cityP" class="inpText validation" type="text" value="@ViewBag.Order.CityP" required/>
                 <p class="inpLabe">State</p>
-                <input name="stateP" class="inpText validation" type="text" value="@ViewBag.Order.StateP" required/>
+                <input name="stateP" class="inpText validation" type="text" value="@ViewBag.Order.StateP" pattern="[A-Z]{2}" placeholder="XXXXX" required/>
                 <p class="inpLabe">Zip</p>
-                <input name="zipP" class="inpText validation" type="text" value="@ViewBag.Order.ZipP" required/>
+                <input name="zipP" class="inpText validation" type="text" value="@ViewBag.Order.ZipP" pattern="[0-9]{5}" placeholder="XXXXX" required/>
                 <p class="inpLabe">Phone</p>
-                <input name="phoneP" class="inpText" type="text" value="@ViewBag.Order.PhoneP" />
+                <input name="phoneP" class="inpText validation" type="tel" placeholder="XXX-XXX-XXXX" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="@ViewBag.Order.PhoneP" required/>
                 <p class="inpLabe">Email</p>
-                <input name="emailP" class="inpText" type="text" value="@ViewBag.Order.EmailP" />
+                <input name="emailP" class="inpText validation" type="email" value="@ViewBag.Order.EmailP"  required/>
                 <p class="inpLabe">Scheduled Pickup Date</p>
                 <input name="scheduledPickupDateP" class="inpText" type="text" value="@ViewBag.Order.PickupExactly" />
             </div>
@@ -52,13 +52,13 @@
                 <p class="inpLabe">City</p>
                 <input name="cityD" class="inpText validation" type="text" value="@ViewBag.Order.CityD" required/>
                 <p class="inpLabe">State</p>
-                <input name="stateD" class="inpText validation" type="text" value="@ViewBag.Order.StateD" required/>
+                <input name="stateD" class="inpText validation" pattern="[A-Z]{2}" type="text" value="@ViewBag.Order.StateD" placeholder="XX" required/>
                 <p class="inpLabe">Zip</p>
-                <input name="zipD" class="inpText validation" type="text" value="@ViewBag.Order.ZipD" required/>
+                <input name="zipD" class="inpText validation" type="text" value="@ViewBag.Order.ZipD" pattern="[0-9]{5}" placeholder="XXXXX" required/>
                 <p class="inpLabe">Phone</p>
-                <input name="phoneD" class="inpText" type="text" value="@ViewBag.Order.PhoneD" />
+                <input name="phoneD" class="inpText validation" placeholder="XXX-XXX-XXXX" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="@ViewBag.Order.PhoneD" required/>
                 <p class="inpLabe">Email</p>
-                <input name="emailD" class="inpText" type="text" value="@ViewBag.Order.EmailD" />
+                <input name="emailD" class="inpText" type="email" value="@ViewBag.Order.EmailD" required/>
             </div>
         </div>
         <div class="bodyTable">
