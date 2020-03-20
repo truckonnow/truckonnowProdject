@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 using WebDispacher.Dao;
 using WebDispacher.Notify;
+using WebDispacher.Service.EmailSmtp;
 
 namespace WebDispacher.Service
 {
@@ -81,6 +82,29 @@ namespace WebDispacher.Service
         internal Truck GetTruckByPlate(string truckPlate)
         {
             return _sqlEntityFramworke.GetTruckByPlateDb(truckPlate);
+        }
+
+        internal int CheckTokenFoDriver(string idDriver, string token)
+        {
+            return _sqlEntityFramworke.CheckTokenFoDriverDb(idDriver, token);
+        }
+
+        internal async Task<int> ResetPasswordFoDriver(string newPassword, string idDriver, string token)
+        {
+            int isStateActual = _sqlEntityFramworke.ResetPasswordFoDriver(newPassword, idDriver, token);
+            if(isStateActual == 2)
+            {
+                string emailDriver = _sqlEntityFramworke.GetEmailDriverDb(idDriver);
+                string patern = new PaternSourse().GetPaternDataAccountDriver(emailDriver, newPassword);
+                await new AuthMessageSender().Execute(emailDriver, "Password changed successfully", patern);
+            }
+            else
+            {
+                string emailDriver = _sqlEntityFramworke.GetEmailDriverDb(idDriver);
+                string patern = new PaternSourse().GetPaternNoRestoreDataAccountDriver();
+                await new AuthMessageSender().Execute(emailDriver, "Password reset attempt failed", patern);
+            }
+            return isStateActual;
         }
 
         internal Trailer GetTrailerkByPlate(string trailerPlate)

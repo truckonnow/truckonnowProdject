@@ -21,7 +21,7 @@ namespace ApiMobaileServise.BackgraundService.AccontDriver
         {
             try
             {
-                List<PasswordRecovery> passwordRecoveries = sqlCommandApiMobile.GetPasswordRecovery().Where(p => Convert.ToDateTime(p.Date) > DateTime.Now).ToList();
+                List<PasswordRecovery> passwordRecoveries = sqlCommandApiMobile.GetPasswordRecovery().Where(p => Convert.ToDateTime(p.Date) < DateTime.Now.AddHours(-2)).ToList();
                 sqlCommandApiMobile.RemovePasswordRecoveriesRange(passwordRecoveries);
             }
             catch

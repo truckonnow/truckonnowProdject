@@ -139,6 +139,7 @@ namespace ApiMobaileServise.Servise
             else
             {
                 passwordRecovery1.Token = token;
+                passwordRecovery1.Date = DateTime.Now.ToString();
             }
             context.SaveChanges();
             return driver.Id;

@@ -103,7 +103,7 @@ namespace ApiMobaileServise.Servise
             {
                 string token = CreateToken(email, fullName);
                 int idDriver = sqlCommandApiMobile.AddRecoveryPassword(email, fullName, token);
-                string patern = new PaternSourse().GetPaternRecoveryPassword($"{Config.Url}/Recovery/Password?idDriver={idDriver}&token={token}");
+                string patern = new PaternSourse().GetPaternRecoveryPassword($"{Config.UrlAdmin}/Recovery/Password?idDriver={idDriver}&token={token}");
                 await new AuthMessageSender().Execute(email, "Password recovery", patern);
             }
             return isFullNamePassword;

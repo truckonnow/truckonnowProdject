@@ -85,6 +85,46 @@ namespace WebDispacher.Dao
             return trailer;
         }
 
+        internal int ResetPasswordFoDriver(string newPassword, string idDriver, string token)
+        {
+            int isStateActual = 0;
+            PasswordRecovery passwordRecovery = context.PasswordRecoveries.ToList().FirstOrDefault(p => p.IdDriver.ToString() == idDriver && p.Token == token);
+            if (passwordRecovery != null && Convert.ToDateTime(passwordRecovery.Date) > DateTime.Now.AddHours(-2))
+            {
+                Driver driver = context.Drivers.FirstOrDefault(d => d.Id.ToString() == idDriver);
+                driver.Password = newPassword;
+                isStateActual = 2;
+            }
+            if(passwordRecovery != null)
+            {
+                context.PasswordRecoveries.Remove(passwordRecovery);
+            }
+            context.SaveChanges();
+            return isStateActual;
+        }
+
+        internal string GetEmailDriverDb(string idDriver)
+        {
+            string emailDriver = "";
+            Driver driver = context.Drivers.FirstOrDefault(d => d.Id.ToString() == idDriver);
+            if (driver != null)
+            {
+                emailDriver = driver.EmailAddress;
+            }
+            return emailDriver;
+        }
+
+        internal int CheckTokenFoDriverDb(string idDriver, string token)
+        {
+            int isStateActual = 0;
+            PasswordRecovery passwordRecovery = context.PasswordRecoveries.ToList().FirstOrDefault(p => p.IdDriver.ToString() == idDriver && p.Token == token);
+            if(passwordRecovery != null && Convert.ToDateTime(passwordRecovery.Date) > DateTime.Now.AddHours(-2))
+            {
+                isStateActual = 1;
+            }
+            return isStateActual;
+        }
+
         internal Truck GetTruckByPlateDb(string truckPlate)
         {
             return context.Trucks.FirstOrDefault(t => t.PlateTruk == truckPlate);

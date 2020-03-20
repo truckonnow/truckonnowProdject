@@ -60,5 +60,45 @@ namespace WebDispacher.Controellers
             }
             return actionResult;
         }
+
+        [HttpGet]
+        [Route("Recovery/Password")]
+        public IActionResult RecoveryPassword(string idDriver, string token)
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                ViewBag.IdDriver = idDriver;
+                ViewBag.Token = token;
+                ViewBag.isStateActual = managerDispatch.CheckTokenFoDriver(idDriver, token);
+                ViewData["hidden"] = "hidden";
+                actionResult = View("RecoveryPassword");
+            }
+            catch (Exception)
+            {
+            }
+            return actionResult;
+        }
+
+        [HttpPost]
+        [Route("Restore/Password")]
+        public async Task<IActionResult> RestorePassword(string newPassword, string idDriver, string token)
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                ViewBag.IdDriver = idDriver;
+                ViewBag.Token = token;
+                ViewBag.isStateActual = await managerDispatch.ResetPasswordFoDriver(newPassword, idDriver, token);
+                ViewData["hidden"] = "hidden";
+                actionResult = View("RecoveryPassword");
+            }
+            catch (Exception)
+            {
+            }
+            return actionResult;
+        }
     }
 }
