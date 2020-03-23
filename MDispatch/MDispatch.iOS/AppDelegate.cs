@@ -21,9 +21,12 @@ namespace MDispatch.iOS
             Rg.Plugins.Popup.Popup.Init();
             global::Xamarin.Forms.Forms.Init();
             FormsControls.Touch.Main.Init();
-            UIApplication.SharedApplication.StatusBarHidden = false;
-            UINavigationBar.Appearance.BarTintColor = Color.FromHex("#4fd2c2").ToUIColor();
+            UIApplication.SharedApplication.StatusBarHidden = true;
+            UINavigationBar.Appearance.TintColor = Color.FromHex("7f2ed2").ToUIColor();
+            UITabBar.Appearance.BarTintColor = Color.FromHex("95e3da").ToUIColor();
+            UITabBar.Appearance.TintColor = Color.FromHex("7f2ed2").ToUIColor();
             LoadApplication(new App());
+
             Firebase.Core.App.Configure();
             Messaging.SharedInstance.Delegate = this;
 			if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
