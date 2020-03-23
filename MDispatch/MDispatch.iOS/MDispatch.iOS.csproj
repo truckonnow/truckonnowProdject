@@ -1140,4 +1140,49 @@
   <ItemGroup>
     <BundleResource Include="Resources\scanSportbike.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Touring motorcycle11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Touring motorcycle12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Touring motorcycle13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Touring motorcycle14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\scanTouring motorcycle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Touring motorcycle1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Touring motorcycle2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Touring motorcycle3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Touring motorcycle4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Touring motorcycle5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Touring motorcycle6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Touring motorcycle7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Touring motorcycle8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Touring motorcycle9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Touring motorcycle10.png" />
+  </ItemGroup>
 </Project>
