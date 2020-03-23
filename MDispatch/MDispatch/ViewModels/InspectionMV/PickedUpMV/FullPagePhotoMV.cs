@@ -119,7 +119,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                     }
                 case "Sportbike":
                     {
-                        car = new BikeSport();
+                        car = new MotorcycleSport();
                         break;
                     }
             }

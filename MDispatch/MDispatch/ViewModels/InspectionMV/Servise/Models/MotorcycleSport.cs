@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace MDispatch.ViewModels.InspectionMV.Servise.Models
 {
-    public class BikeSport : IVehicle
+    public class MotorcycleSport : IVehicle
     {
         public string TypeIndex { get; set; } = "Sportbike";
         public int CountCarImg { get; set; } = 19;

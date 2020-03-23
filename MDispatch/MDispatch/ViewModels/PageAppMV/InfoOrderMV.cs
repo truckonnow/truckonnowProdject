@@ -366,7 +366,7 @@ namespace MDispatch.ViewModels.PageAppMV
                     }
                 case "Sportbike":
                     {
-                        car = new BikeSport();
+                        car = new MotorcycleSport();
                         break;
                     }
             }

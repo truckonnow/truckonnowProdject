@@ -241,7 +241,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                     }
                 case "Sportbicke":
                     {
-                        car = new BikeSport();
+                        car = new MotorcycleSport();
                         break;
                     }
             }

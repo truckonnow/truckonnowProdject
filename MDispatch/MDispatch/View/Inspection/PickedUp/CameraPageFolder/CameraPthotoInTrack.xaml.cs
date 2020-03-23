@@ -88,7 +88,7 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
                     }
                 case "Sportbike":
                     {
-                        car = new BikeSport();
+                        car = new MotorcycleSport();
                         break;
                     }
             }

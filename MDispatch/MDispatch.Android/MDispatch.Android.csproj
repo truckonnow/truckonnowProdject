@@ -1010,49 +1010,49 @@
     <AndroidResource Include="Resources\drawable\scanSportbike.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Touring motorcycle7.png" />
+    <AndroidResource Include="Resources\drawable\Touringmotorcycle7.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Touring motorcycle8.png" />
+    <AndroidResource Include="Resources\drawable\Touringmotorcycle8.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Touring motorcycle9.png" />
+    <AndroidResource Include="Resources\drawable\Touringmotorcycle9.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Touring motorcycle10.png" />
+    <AndroidResource Include="Resources\drawable\Touringmotorcycle10.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Touring motorcycle11.png" />
+    <AndroidResource Include="Resources\drawable\Touringmotorcycle11.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Touring motorcycle12.png" />
+    <AndroidResource Include="Resources\drawable\Touringmotorcycle12.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Touring motorcycle13.png" />
+    <AndroidResource Include="Resources\drawable\Touringmotorcycle13.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Touring motorcycle14.png" />
+    <AndroidResource Include="Resources\drawable\Touringmotorcycle14.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\scanTouring motorcycle.png" />
+    <AndroidResource Include="Resources\drawable\scanTouringmotorcycle.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Touring motorcycle1.png" />
+    <AndroidResource Include="Resources\drawable\Touringmotorcycle1.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Touring motorcycle2.png" />
+    <AndroidResource Include="Resources\drawable\Touringmotorcycle2.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Touring motorcycle3.png" />
+    <AndroidResource Include="Resources\drawable\Touringmotorcycle3.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Touring motorcycle4.png" />
+    <AndroidResource Include="Resources\drawable\Touringmotorcycle4.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Touring motorcycle5.png" />
+    <AndroidResource Include="Resources\drawable\Touringmotorcycle5.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Touring motorcycle6.png" />
+    <AndroidResource Include="Resources\drawable\Touringmotorcycle6.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
