@@ -74,8 +74,8 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodesignProvision>Dispatch</CodesignProvision>
     <LangVersion>8.0</LangVersion>
-<MtouchLink>None</MtouchLink>
-<DeviceSpecificBuild>true</DeviceSpecificBuild>
+    <MtouchLink>None</MtouchLink>
+    <DeviceSpecificBuild>true</DeviceSpecificBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
@@ -120,7 +120,8 @@
     <CodesignProvision>Roma</CodesignProvision>
     <CodesignKey>iPhone Developer: Artsiom Buniashyn (52PD49AATM)</CodesignKey>
     <LangVersion>8.0</LangVersion>
-    <IntermediateOutputPath></IntermediateOutputPath>
+    <IntermediateOutputPath>
+    </IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -133,9 +134,12 @@
     <CodesignProvision>VS: WildCard Development</CodesignProvision>
     <CodesignKey>iPhone Developer: Artsiom Buniashyn (52PD49AATM)</CodesignKey>
     <LangVersion>8.0</LangVersion>
-    <IOSDebugOverWiFi></IOSDebugOverWiFi>
-    <MtouchExtraArgs></MtouchExtraArgs>
-    <IOSDebuggerPort></IOSDebuggerPort>
+    <IOSDebugOverWiFi>
+    </IOSDebugOverWiFi>
+    <MtouchExtraArgs>
+    </MtouchExtraArgs>
+    <IOSDebuggerPort>
+    </IOSDebuggerPort>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Ad-Hoc|x64'">
     <OutputPath>bin\x64\Ad-Hoc\</OutputPath>
@@ -148,7 +152,8 @@
     <CodesignProvision>VS: WildCard Development</CodesignProvision>
     <CodesignKey>iPhone Developer: Artsiom Buniashyn (52PD49AATM)</CodesignKey>
     <LangVersion>8.0</LangVersion>
-    <OnDemandResourcesInitialInstallTags></OnDemandResourcesInitialInstallTags>
+    <OnDemandResourcesInitialInstallTags>
+    </OnDemandResourcesInitialInstallTags>
     <MtouchLink>None</MtouchLink>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>ARM64</MtouchArch>
@@ -1170,9 +1175,6 @@
     <BundleResource Include="Resources\Touring motorcycle14.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\scanTouring motorcycle.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\Touring motorcycle1.png" />
   </ItemGroup>
   <ItemGroup>
@@ -1215,9 +1217,6 @@
     <BundleResource Include="Resources\Touringmotorcycle14.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\scanTouringmotorcycle.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\Touringmotorcycle1.png" />
   </ItemGroup>
   <ItemGroup>
@@ -1246,5 +1245,8 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Touringmotorcycle10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\scanTouringmotorcycle.jpg" />
   </ItemGroup>
 </Project>
