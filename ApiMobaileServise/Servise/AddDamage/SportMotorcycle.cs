@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApiMobaileServise.Servise.AddDamage
 {
-    public class SportBike : ITypeScan
+    public class SportMotorcycle : ITypeScan
     {
         public int GetCordinatX(string indexPhoto, double x)
         {

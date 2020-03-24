@@ -369,6 +369,11 @@ namespace MDispatch.ViewModels.PageAppMV
                         car = new MotorcycleSport();
                         break;
                     }
+                case "Touringmotorcycle":
+                    {
+                        car = new MotorcycleTouring();
+                        break;
+                    }
             }
             return car;
         }
