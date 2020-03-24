@@ -207,7 +207,7 @@ namespace ApiMobaileServise.Servise
                     }
                 case "Sportbike":
                     {
-                        typeScan = new SportBike();
+                        typeScan = new SportMotorcycle();
                         break;
                     }
             }
