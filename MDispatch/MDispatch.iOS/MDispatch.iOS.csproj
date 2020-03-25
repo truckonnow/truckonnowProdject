@@ -1249,4 +1249,37 @@
   <ItemGroup>
     <BundleResource Include="Resources\scanTouringmotorcycle.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Сruisingmotorcycle3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Сruisingmotorcycle4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Сruisingmotorcycle5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Сruisingmotorcycle6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Сruisingmotorcycle7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Сruisingmotorcycle8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Сruisingmotorcycle9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Сruisingmotorcycle10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Сruisingmotorcycle11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Сruisingmotorcycle1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Сruisingmotorcycle2.png" />
+  </ItemGroup>
 </Project>
