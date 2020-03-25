@@ -75,13 +75,13 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("RequestPassword")]
-        public async Task<string> RequestPassword(string email, string fullName)
+        public string RequestPassword(string email, string fullName)
         {
             string respons = null;
             try
             {
-                bool isFullNamePassword = await managerMobileApi.CheckFullNameAndPasswrod(email, fullName);
-                if(isFullNamePassword)
+                bool isFullNamePassword = managerMobileApi.CheckFullNameAndPasswrod(email, fullName);
+                if (isFullNamePassword)
                 {
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", ""));
                 }
@@ -90,7 +90,7 @@ namespace ApiMobaileServise.Controllers
                     respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "There is no such bunch of almost and full name", ""));
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
             }

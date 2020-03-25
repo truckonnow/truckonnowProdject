@@ -96,15 +96,15 @@ namespace ApiMobaileServise.Servise
             //});
         }
 
-        internal async  Task<bool> CheckFullNameAndPasswrod(string email, string fullName)
+        internal bool CheckFullNameAndPasswrod(string email, string fullName)
         {
             bool isFullNamePassword = sqlCommandApiMobile.CheckFullNameAndPasswrodDB(email, fullName);
-            if(isFullNamePassword)
+            if (isFullNamePassword)
             {
                 string token = CreateToken(email, fullName);
                 int idDriver = sqlCommandApiMobile.AddRecoveryPassword(email, fullName, token);
                 string patern = new PaternSourse().GetPaternRecoveryPassword($"{Config.UrlAdmin}/Recovery/Password?idDriver={idDriver}&token={token}");
-                await new AuthMessageSender().Execute(email, "Password recovery", patern);
+                Task.Run(async () => await new AuthMessageSender().Execute(email, "Password recovery", patern));
             }
             return isFullNamePassword;
         }

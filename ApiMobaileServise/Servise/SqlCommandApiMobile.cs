@@ -124,7 +124,6 @@ namespace ApiMobaileServise.Servise
         internal int AddRecoveryPassword(string email, string fullName, string token)
         {
             Driver driver = context.Drivers.FirstOrDefault(d => d.EmailAddress == email && d.FullName == fullName);
-
             PasswordRecovery passwordRecovery1 = context.PasswordRecoveries.FirstOrDefault(p => p.IdDriver == driver.Id);
             if (passwordRecovery1 == null)
             {
@@ -149,7 +148,7 @@ namespace ApiMobaileServise.Servise
         {
             bool isCheckFullNameAdnPassword = false;
             Driver driver = context.Drivers.FirstOrDefault(d => d.EmailAddress == email && d.FullName == fullName);
-            if(driver != null)
+            if (driver != null)
             {
                 isCheckFullNameAdnPassword = true;
             }
