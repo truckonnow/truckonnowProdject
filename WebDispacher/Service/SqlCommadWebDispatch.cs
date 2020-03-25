@@ -363,8 +363,8 @@ namespace WebDispacher.Dao
 
         public async void RemoveVechInDb(string idVech)
         {
-            context.VehiclwInformation.Remove(await context.VehiclwInformation.FirstOrDefaultAsync(v => v.Id.ToString() == idVech));
-            await context.SaveChangesAsync();
+            context.VehiclwInformation.Remove(context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == idVech));
+            context.SaveChanges();
         }
 
         public async void AddOrder(Shipping shipping)

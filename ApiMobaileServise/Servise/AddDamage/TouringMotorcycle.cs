@@ -38,18 +38,17 @@ namespace ApiMobaileServise.Servise.AddDamage
             int[] maxMinForYAndX = null;
             switch(indexPhoto)
             {
-                case "2": maxMinForYAndX = new int[] { 255, 0, 845, 310 }; break;
-                case "3": maxMinForYAndX = new int[] { 255, 55, 460, 215 }; break;
-                case "4": maxMinForYAndX = new int[] { 460, 45, 700, 240 }; break;
-                case "5": maxMinForYAndX = new int[] { 465, 40, 685, 110 }; break;
-                case "6": maxMinForYAndX = new int[] { 650, 0, 845, 170 }; break;
+                case "2": maxMinForYAndX = new int[] { 845, 310, 255, 0 }; break;
+                case "3": maxMinForYAndX = new int[] { 460, 215, 255, 55 }; break;
+                case "4": maxMinForYAndX = new int[] { 700, 240, 460, 45 }; break;
+                case "5": maxMinForYAndX = new int[] { 685, 110, 465, 40 }; break;
+                case "6": maxMinForYAndX = new int[] { 845, 170, 650, 0 }; break;
                 case "9": maxMinForYAndX = new int[] { 650, 630, 845, 800 }; break;
                 case "10": maxMinForYAndX = new int[] { 465, 690, 685, 760 }; break;
                 case "11": maxMinForYAndX = new int[] { 460, 555, 700, 750 }; break;
                 case "12": maxMinForYAndX = new int[] { 255, 585, 460, 745 }; break;
                 case "13": maxMinForYAndX = new int[] { 255, 490, 845, 800 }; break;
-                case "14": maxMinForYAndX = new int[] { 255, 490, 845, 800 }; break;
-                //case "14": maxMinForYAndX = new int[] { 490, 255, 800, 845 }; break;
+                case "14": maxMinForYAndX = new int[] { 300, 303, 490, 182 }; break;
             }
             return maxMinForYAndX;
         }

@@ -25,15 +25,20 @@ namespace ApiMobaileServise.BackgraundService.Queue
             {
                 isWork = true;
                 int tmpCount = queues.Count > 5000 ? queues.Count - (countQueues - 5000) : queues.Count;
-                for (int i = 0; i < tmpCount; i++)
+                try
                 {
-                    if (queues[i].Split("&,&")[0] == "SaveAnsver")
+                    for (int i = 0; i < tmpCount; i++)
                     {
-                        await managerMobileApi.SaveAsk(queues[i].Split("&,&")[1], Convert.ToInt32(queues[i].Split("&,&")[2]), queues[i].Split("&,&")[3]);
+                        if (queues[i].Split("&,&")[0] == "SaveAnsver")
+                        {
+                            await managerMobileApi.SaveAsk(queues[i].Split("&,&")[1], Convert.ToInt32(queues[i].Split("&,&")[2]), queues[i].Split("&,&")[3]);
+                        }
+                        countQueues--;
                     }
-                    countQueues--;
+                    queues.RemoveRange(0, tmpCount);
                 }
-                queues.RemoveRange(0, tmpCount);
+                catch
+                { }
                 isWork = false;
             }
         }
