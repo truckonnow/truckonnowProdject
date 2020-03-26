@@ -249,6 +249,11 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                         car = new MotorcycleTouring();
                         break;
                     }
+                case "Сruisingmotorcycle":
+                    {
+                        car = new MotorcycleСruising();
+                        break;
+                    }
             }
             return car;
         }

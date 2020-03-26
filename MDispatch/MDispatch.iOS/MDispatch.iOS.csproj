@@ -1282,4 +1282,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\Сruisingmotorcycle2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\scanСruisingmotorcycle12.jpg" />
+  </ItemGroup>
 </Project>
