@@ -38,7 +38,15 @@ namespace ApiMobaileServise.Servise.AddDamage
             int[] maxMinForYAndX = null;
             switch(indexPhoto)
             {
-
+                case "3": maxMinForYAndX = new int[] { 240, 0, 790, 300 }; break;
+                case "4": maxMinForYAndX = new int[] { 615, 0, 790, 180 }; break;
+                case "5": maxMinForYAndX = new int[] { 410, 40, 615, 250 }; break;
+                case "6": maxMinForYAndX = new int[] { 240, 0, 410, 210 }; break;
+                case "7": maxMinForYAndX = new int[] { 360, 240, 420, 300 }; break;
+                case "8": maxMinForYAndX = new int[] { 240, 590, 410, 800 }; break;
+                case "9": maxMinForYAndX = new int[] { 410, 550, 615, 760 }; break;
+                case "10": maxMinForYAndX = new int[] { 615, 590, 790, 800 }; break;
+                case "11": maxMinForYAndX = new int[] { 240, 500, 790, 800 }; break;
             }
             return maxMinForYAndX;
         }
@@ -56,11 +64,12 @@ namespace ApiMobaileServise.Servise.AddDamage
                     Graphics g = Graphics.FromImage(res);
                     int x = GetCordinatX(photoInspection.IndexPhoto.ToString(), damage.XInterest);
                     int y = GetCordinatY(photoInspection.IndexPhoto.ToString(), damage.YInterest);
-                    if (photoInspection.IndexPhoto == 0)
+                    if (photoInspection.IndexPhoto == 3 || photoInspection.IndexPhoto == 4 || photoInspection.IndexPhoto == 5 || photoInspection.IndexPhoto == 6 || photoInspection.IndexPhoto == 8 || photoInspection.IndexPhoto == 9 || photoInspection.IndexPhoto == 10
+                        || photoInspection.IndexPhoto == 11)
                     {
                         g.DrawImage(img2, x, y);
                     }
-                    else if (photoInspection.IndexPhoto == 0)
+                    else if (photoInspection.IndexPhoto == 7)
                     {
                         g.DrawImage(img2, y, x);
                     }
