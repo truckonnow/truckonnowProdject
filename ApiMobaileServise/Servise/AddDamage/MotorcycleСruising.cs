@@ -38,11 +38,11 @@ namespace ApiMobaileServise.Servise.AddDamage
             int[] maxMinForYAndX = null;
             switch(indexPhoto)
             {
-                case "3": maxMinForYAndX = new int[] { 240, 0, 790, 300 }; break;
-                case "4": maxMinForYAndX = new int[] { 615, 0, 790, 180 }; break;
-                case "5": maxMinForYAndX = new int[] { 410, 40, 615, 250 }; break;
-                case "6": maxMinForYAndX = new int[] { 240, 0, 410, 210 }; break;
-                case "7": maxMinForYAndX = new int[] { 360, 240, 420, 300 }; break;
+                case "3": maxMinForYAndX = new int[] { 790, 300, 240, 0 }; break;
+                case "4": maxMinForYAndX = new int[] { 790, 180, 615, 0 }; break;
+                case "5": maxMinForYAndX = new int[] { 615, 250, 410, 40 }; break;
+                case "6": maxMinForYAndX = new int[] { 410, 210, 240, 0 }; break;
+                case "7": maxMinForYAndX = new int[] { 360, 300, 420, 240 }; break;
                 case "8": maxMinForYAndX = new int[] { 240, 590, 410, 800 }; break;
                 case "9": maxMinForYAndX = new int[] { 410, 550, 615, 760 }; break;
                 case "10": maxMinForYAndX = new int[] { 615, 590, 790, 800 }; break;
