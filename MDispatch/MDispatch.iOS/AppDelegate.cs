@@ -13,7 +13,7 @@ using Xamarin.Forms.Platform.iOS;
 namespace MDispatch.iOS
 {
     [Register("AppDelegate")]
-    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate, IUNUserNotificationCenterDelegate, IMessagingDelegate, IStore
+    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate, IUNUserNotificationCenterDelegate, IMessagingDelegate
     {
         [System.Obsolete]
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
@@ -28,28 +28,28 @@ namespace MDispatch.iOS
             LoadApplication(new App());
 
             Firebase.Core.App.Configure();
+            if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
+            {
+
+                // For iOS 10 display notification (sent via APNS)
+                UNUserNotificationCenter.Current.Delegate = this;
+
+                var authOptions = UNAuthorizationOptions.Alert | UNAuthorizationOptions.Badge | UNAuthorizationOptions.Sound;
+                UNUserNotificationCenter.Current.RequestAuthorization(authOptions, (granted, error) => {
+                    Console.WriteLine(granted);
+                });
+            }
+            else
+            {
+                // iOS 9 or before
+                var allNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound;
+                var settings = UIUserNotificationSettings.GetSettingsForTypes(allNotificationTypes, null);
+                UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
+            }
             Messaging.SharedInstance.Delegate = this;
-			if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
-			{
-
-				// For iOS 10 display notification (sent via APNS)
-				UNUserNotificationCenter.Current.Delegate = this;
-
-				var authOptions = UNAuthorizationOptions.Alert | UNAuthorizationOptions.Badge | UNAuthorizationOptions.Sound;
-				UNUserNotificationCenter.Current.RequestAuthorization(authOptions, (granted, error) => {
-					Console.WriteLine(granted);
-				});
-			}
-			else
-			{
-				// iOS 9 or before
-				var allNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound;
-				var settings = UIUserNotificationSettings.GetSettingsForTypes(allNotificationTypes, null);
-				UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
-			}
-            Messaging.SharedInstance.ShouldEstablishDirectChannel = false;
+            Messaging.SharedInstance.AutoInitEnabled = true;
             UIApplication.SharedApplication.RegisterForRemoteNotifications();
-			return base.FinishedLaunching(app, options);
+            return base.FinishedLaunching(app, options);
         }
 
         public UIInterfaceOrientationMask CurrentOrientation = UIInterfaceOrientationMask.All;
@@ -60,47 +60,36 @@ namespace MDispatch.iOS
         }
 
         [Export("messaging:didReceiveRegistrationToken:")]
-		public void DidReceiveRegistrationToken(Messaging messaging, string fcmToken)
-		{
-
-		}
-
-		public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
-		{
-			Messaging.SharedInstance.ApnsToken = deviceToken;
-        }
-
-		public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
-		{
-		}
-
-		public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
-		{
-			completionHandler(UIBackgroundFetchResult.NewData);
-		}
-
-       
-
-        [Export("userNotificationCenter:willPresentNotification:withCompletionHandler:")]
-        public void WillPresentNotification(UNUserNotificationCenter center, UNNotification notification, Action<UNNotificationPresentationOptions> completionHandler)
-        {
-            var userInfo = notification.Request.Content.UserInfo;
-            completionHandler(UNNotificationPresentationOptions.None);
-        }
-
-        [Export("userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:")]
-        public void DidReceiveNotificationResponse(UNUserNotificationCenter center, UNNotificationResponse response, Action completionHandler)
-        {
-            var userInfo = response.Notification.Request.Content.UserInfo;
-
-            completionHandler();
-        }
-
-        public void OnTokenRefresh()
+        public void DidReceiveRegistrationToken(Messaging messaging, string fcmToken)
         {
             ManagerStore managerStore = new ManagerStore();
-            var newToken = Firebase.InstanceID.InstanceId.SharedInstance.Token;
-            managerStore.SendTokenStore(newToken);
+            managerStore.SendTokenStore(fcmToken);
+        }
+
+        public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
+        {
+            // If you are receiving a notification message while your app is in the background,
+            // this callback will not be fired till the user taps on the notification launching the application.
+            // TODO: Handle data of notification
+
+            // With swizzling disabled you must let Messaging know about the message, for Analytics
+            //Messaging.SharedInstance.AppDidReceiveMessage (userInfo);
+
+            // Print full message.
+        }
+
+        public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
+        {
+            // If you are receiving a notification message while your app is in the background,
+            // this callback will not be fired till the user taps on the notification launching the application.
+            // TODO: Handle data of notification
+
+            // With swizzling disabled you must let Messaging know about the message, for Analytics
+            //Messaging.SharedInstance.AppDidReceiveMessage (userInfo);
+
+            // Print full message.
+
+            completionHandler(UIBackgroundFetchResult.NewData);
         }
     }
 }
