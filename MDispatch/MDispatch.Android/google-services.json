@@ -1,35 +1,42 @@
 {
   "project_info": {
-    "project_number": "41568683293",
-    "firebase_url": "https://truckonnow.firebaseio.com",
-    "project_id": "truckonnow",
-    "storage_bucket": "truckonnow.appspot.com"
+    "project_number": "832957432544",
+    "firebase_url": "https://truckonnow1.firebaseio.com",
+    "project_id": "truckonnow1",
+    "storage_bucket": "truckonnow1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:41568683293:android:8680c862731e06a9",
+        "mobilesdk_app_id": "1:832957432544:android:77f06b3990272d96d30685",
         "android_client_info": {
           "package_name": "com.companyname.MDispatch"
         }
       },
       "oauth_client": [
         {
-          "client_id": "41568683293-p1h8669ia8euqtv9ltc7c82qo62hg72s.apps.googleusercontent.com",
+          "client_id": "832957432544-riul477s37c1ibjtcapplos8v5886nir.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDiYIzSpRpfQdNcDVW3i6Za3O5pQRruI6I"
+          "current_key": "AIzaSyAQJJdV3AHOyNIMkcqgx_jMRX2V_kx33-M"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "41568683293-p1h8669ia8euqtv9ltc7c82qo62hg72s.apps.googleusercontent.com",
+              "client_id": "832957432544-riul477s37c1ibjtcapplos8v5886nir.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "832957432544-fnriub2h2218lm7epomkk7mpmuhbof43.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.companyname.MDispatch"
+              }
             }
           ]
         }
