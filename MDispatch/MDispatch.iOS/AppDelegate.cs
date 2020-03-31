@@ -1,7 +1,12 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
+using AudioToolbox;
+using AVFoundation;
 using Firebase.CloudMessaging;
 using Foundation;
 using MDispatch.iOS;
+using MDispatch.iOS.StoreService;
 using MDispatch.StoreNotify;
 using UIKit;
 using UserNotifications;
@@ -34,9 +39,9 @@ namespace MDispatch.iOS
                 // For iOS 10 display notification (sent via APNS)
                 UNUserNotificationCenter.Current.Delegate = this;
 
-                var authOptions = UNAuthorizationOptions.Alert | UNAuthorizationOptions.Badge | UNAuthorizationOptions.Sound;
+                var authOptions = UNAuthorizationOptions.Alert | UNAuthorizationOptions.Badge | UNAuthorizationOptions.Sound | UNAuthorizationOptions.CriticalAlert;
                 UNUserNotificationCenter.Current.RequestAuthorization(authOptions, (granted, error) => {
-                    Console.WriteLine(granted);
+                    
                 });
             }
             else
@@ -58,38 +63,29 @@ namespace MDispatch.iOS
         {
             return CurrentOrientation;
         }
-
+            
         [Export("messaging:didReceiveRegistrationToken:")]
         public void DidReceiveRegistrationToken(Messaging messaging, string fcmToken)
         {
-            ManagerStore managerStore = new ManagerStore();
-            managerStore.SendTokenStore(fcmToken);
-        }
-
-        public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
-        {
-            // If you are receiving a notification message while your app is in the background,
-            // this callback will not be fired till the user taps on the notification launching the application.
-            // TODO: Handle data of notification
-
-            // With swizzling disabled you must let Messaging know about the message, for Analytics
-            //Messaging.SharedInstance.AppDidReceiveMessage (userInfo);
-
-            // Print full message.
+            FirebaseIIDService firebaseIIDService = new FirebaseIIDService();
+            firebaseIIDService.OnTokenRefresh();
         }
 
         public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
         {
-            // If you are receiving a notification message while your app is in the background,
-            // this callback will not be fired till the user taps on the notification launching the application.
-            // TODO: Handle data of notification
-
-            // With swizzling disabled you must let Messaging know about the message, for Analytics
-            //Messaging.SharedInstance.AppDidReceiveMessage (userInfo);
-
-            // Print full message.
-
+            UIApplicationState state = UIApplication.SharedApplication.ApplicationState;
+            if (state == UIApplicationState.Background)
+            {
+                SystemSound systemSound = new SystemSound(1003);
+                systemSound.PlayAlertSound();
+            }
             completionHandler(UIBackgroundFetchResult.NewData);
+        }
+
+        [Export("userNotificationCenter:willPresentNotification:withCompletionHandler:")]
+        public void WillPresentNotification(UNUserNotificationCenter center, UNNotification notification, Action<UNNotificationPresentationOptions> completionHandler)
+        {
+            completionHandler(UNNotificationPresentationOptions.Sound | UNNotificationPresentationOptions.Alert);
         }
     }
 }

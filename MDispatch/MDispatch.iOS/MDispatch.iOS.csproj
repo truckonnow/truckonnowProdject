@@ -200,11 +200,11 @@
     <Compile Include="NewRender\CustomCamera\UIPaintCodeButton.cs" />
     <Compile Include="NewRender\Orientation\OrientationHandler.cs" />
     <Compile Include="NewRender\ContextPage\RenderContextPage.cs" />
-    <Compile Include="Alert\MyFirebaseMessagingService.cs" />
     <Compile Include="NewRender\ImageRender\RezizeImgRender.cs" />
     <Compile Include="NewRender\TouchCordinateRender\TouchImageRender.cs" />
     <Compile Include="NewRender\RebderVideoCamera\VideoRecorderRenderer.cs" />
     <Compile Include="NewRender\RebderVideoCamera\UIPaintCodeButton.cs" />
+    <Compile Include="StoreService\FirebaseIIDService.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -1278,5 +1278,8 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\scanСruisingmotorcycle12.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="StoreService\" />
   </ItemGroup>
 </Project>
