@@ -87,7 +87,7 @@ namespace ApiMobaileServise.Controllers
                 }
                 else
                 {
-                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "There is no such bunch of almost and full name", ""));
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "All fields must be filled ", ""));
                 }
             }
             catch (Exception e)
