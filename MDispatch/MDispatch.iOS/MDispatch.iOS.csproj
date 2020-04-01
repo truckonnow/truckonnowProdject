@@ -316,6 +316,9 @@
     <PackageReference Include="Xamarin.Forms.InputKit">
       <Version>3.2.2</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Forms.Pages">
+      <Version>4.5.0.495</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Tesseract">
       <Version>0.3.4</Version>
     </PackageReference>
@@ -1279,7 +1282,5 @@
   <ItemGroup>
     <BundleResource Include="Resources\scanСruisingmotorcycle12.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="StoreService\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
