@@ -58,7 +58,7 @@
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <LangVersion>8.0</LangVersion>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <CodesignProvision>Roma</CodesignProvision>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
   </PropertyGroup>
@@ -74,7 +74,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodesignProvision>Dispatch</CodesignProvision>
     <LangVersion>8.0</LangVersion>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
@@ -90,7 +90,7 @@
     <CodesignKey>iPhone Distribution: Artsiom Buniashyn (3K8963GCF8)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <LangVersion>8.0</LangVersion>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
@@ -105,7 +105,7 @@
     <CodesignKey>iPhone Distribution: Artsiom Buniashyn (3K8963GCF8)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <LangVersion>8.0</LangVersion>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
@@ -1160,48 +1160,6 @@
     <BundleResource Include="Resources\scanSportbike.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Touring motorcycle11.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Touring motorcycle12.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Touring motorcycle13.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Touring motorcycle14.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Touring motorcycle1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Touring motorcycle2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Touring motorcycle3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Touring motorcycle4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Touring motorcycle5.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Touring motorcycle6.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Touring motorcycle7.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Touring motorcycle8.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Touring motorcycle9.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Touring motorcycle10.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\Touringmotorcycle11.png" />
   </ItemGroup>
   <ItemGroup>
@@ -1247,40 +1205,40 @@
     <BundleResource Include="Resources\scanTouringmotorcycle.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Сruisingmotorcycle3.png" />
+    <BundleResource Include="Resources\Cruisemotorcycle3.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Сruisingmotorcycle4.png" />
+    <BundleResource Include="Resources\Cruisemotorcycle4.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Сruisingmotorcycle5.png" />
+    <BundleResource Include="Resources\Cruisemotorcycle5.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Сruisingmotorcycle6.png" />
+    <BundleResource Include="Resources\Cruisemotorcycle6.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Сruisingmotorcycle7.png" />
+    <BundleResource Include="Resources\Cruisemotorcycle7.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Сruisingmotorcycle8.png" />
+    <BundleResource Include="Resources\Cruisemotorcycle8.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Сruisingmotorcycle9.png" />
+    <BundleResource Include="Resources\Cruisemotorcycle9.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Сruisingmotorcycle10.png" />
+    <BundleResource Include="Resources\Cruisemotorcycle10.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Сruisingmotorcycle11.png" />
+    <BundleResource Include="Resources\Cruisemotorcycle11.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Сruisingmotorcycle1.png" />
+    <BundleResource Include="Resources\Cruisemotorcycle1.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Сruisingmotorcycle2.png" />
+    <BundleResource Include="Resources\Cruisemotorcycle2.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\scanСruisingmotorcycle12.jpg" />
+    <BundleResource Include="Resources\scanCruisemotorcycle.jpg" />
   </ItemGroup>
   <ItemGroup />
 </Project>

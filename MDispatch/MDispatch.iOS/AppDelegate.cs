@@ -1,13 +1,9 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using AudioToolbox;
-using AVFoundation;
 using Firebase.CloudMessaging;
 using Foundation;
 using MDispatch.iOS;
 using MDispatch.iOS.StoreService;
-using MDispatch.StoreNotify;
 using UIKit;
 using UserNotifications;
 using Xamarin.Forms;
