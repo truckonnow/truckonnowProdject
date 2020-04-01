@@ -1062,40 +1062,40 @@
     <AndroidResource Include="Resources\drawable\scanTouringmotorcycle.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Сruisingmotorcycle1.png" />
+    <AndroidResource Include="Resources\drawable\Cruisemotorcycle1.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Сruisingmotorcycle2.png" />
+    <AndroidResource Include="Resources\drawable\Cruisemotorcycle2.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Сruisingmotorcycle3.png" />
+    <AndroidResource Include="Resources\drawable\Cruisemotorcycle3.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Сruisingmotorcycle4.png" />
+    <AndroidResource Include="Resources\drawable\Cruisemotorcycle4.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Сruisingmotorcycle5.png" />
+    <AndroidResource Include="Resources\drawable\Cruisemotorcycle5.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Сruisingmotorcycle6.png" />
+    <AndroidResource Include="Resources\drawable\Cruisemotorcycle6.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Сruisingmotorcycle7.png" />
+    <AndroidResource Include="Resources\drawable\Cruisemotorcycle7.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Сruisingmotorcycle8.png" />
+    <AndroidResource Include="Resources\drawable\Cruisemotorcycle8.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Сruisingmotorcycle9.png" />
+    <AndroidResource Include="Resources\drawable\Cruisemotorcycle9.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Сruisingmotorcycle10.png" />
+    <AndroidResource Include="Resources\drawable\Cruisemotorcycle10.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Сruisingmotorcycle11.png" />
+    <AndroidResource Include="Resources\drawable\Cruisemotorcycle11.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\scanСruisingmotorcycle.jpg" />
+    <AndroidResource Include="Resources\drawable\scanCruisemotorcycle.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

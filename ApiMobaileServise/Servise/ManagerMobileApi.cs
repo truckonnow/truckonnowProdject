@@ -316,7 +316,10 @@ namespace ApiMobaileServise.Servise
                         managerNotifyMobileApi.SendNotyfyStatusDelyvery(idShip, tokenShope, "Cars passed inspection, waiting for payment (Billing)");
                     }
                 }
-                catch { }
+                catch(Exception e)
+                {
+                    File.WriteAllText("ReCurentStatus1.txt", e.Message);
+                }
             });
         }
 

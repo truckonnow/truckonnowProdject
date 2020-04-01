@@ -657,12 +657,12 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
-        public async void ReCurentStatus(string idShip, string status)
+        public void ReCurentStatus(string idShip, string status)
         {
+            Shipping shipping = context.Shipping.FirstOrDefault(s => s.Id == idShip);
+            shipping.CurrentStatus = status;
             try
             {
-                Shipping shipping = context.Shipping.FirstOrDefault(s => s.Id == idShip);
-                shipping.CurrentStatus = status;
                 if (status == "Delivered,Billed" && shipping.TotalPaymentToCarrier.Contains(" days"))
                 {
                     shipping.DataPaid = DateTime.Now.AddDays(Convert.ToInt32(shipping.TotalPaymentToCarrier.Replace(" days", ""))).ToString();
@@ -673,18 +673,16 @@ namespace ApiMobaileServise.Servise
                     shipping.DataFullArcive = DateTime.Now.AddDays(21).ToString();
                     shipping.DataCancelOrder = DateTime.Now.ToString();
                 }
-                else if (status == "Delivered,Billed")
-                {
-
-                }
                 else if (shipping.CurrentStatus == "Archived")
                 {
                     shipping.CurrentStatus = shipping.CurrentStatus.Replace("Delivered", "Archived");
                 }
-                await context.SaveChangesAsync();
+                context.SaveChanges();
             }
-            catch
-            { }
+            catch(Exception e)
+            {
+                File.WriteAllText("ReCurentStatus.txt", shipping.TotalPaymentToCarrier.ToString());
+            }
         }
 
         public string GerShopTokenForShipping(string idOrder)
