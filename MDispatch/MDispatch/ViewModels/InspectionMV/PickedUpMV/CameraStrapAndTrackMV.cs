@@ -105,7 +105,7 @@ namespace MDispatch.ViewModels.InspectionMV.PickedUpMV
                         car = new MotorcycleTouring();
                         break;
                     }
-                case "Сruisingmotorcycle":
+                case "Cruisemotorcycle":
                     {
                         car = new MotorcycleСruising();
                         break;

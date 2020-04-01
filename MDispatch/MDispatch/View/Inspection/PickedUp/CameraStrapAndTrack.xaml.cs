@@ -30,7 +30,14 @@ namespace MDispatch.View.Inspection.PickedUp
             On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
                 .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
             DependencyService.Get<IOrientationHandler>().ForceSensor();
-            paternPhoto.Source = $"trup.png";
+            if (cameraStrapAndTrackMV.Car.TypeVehicle == "car")
+            {
+                paternPhoto.Source = $"trup.png";
+            }
+            else if(cameraStrapAndTrackMV.Car.TypeVehicle == "motorcycle")
+            {
+                paternPhoto.Source = $"{cameraStrapAndTrackMV.Car.TypeIndex.Replace(" ", "")}{cameraStrapAndTrackMV.Car.GetIndexCar(countPhoto)}.png";
+            }
             titlePhoto.Text = cameraStrapAndTrackMV.Car.GetNameLayout(cameraStrapAndTrackMV.Car.GetIndexCar(countPhoto));
         }
 

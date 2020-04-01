@@ -1,8 +1,6 @@
 ﻿using MDispatch.Models;
 using MDispatch.NewElement;
-using MDispatch.ViewModels.AskPhoto;
 using MDispatch.ViewModels.InspectionMV.Servise.Models;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
@@ -29,9 +27,7 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
             this.ask1Page = ask1Page;
             this.nameVech = nameVech;
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
-            On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
-                .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
-            car.OrintableScreen(car.GetIndexCar(countPhoto));
+            On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True);
             paternPhoto.Source = $"{car.TypeIndex.Replace(" ", "")}{car.GetIndexCar(countPhoto)}.png";
             titlePhoto.Text = car.GetNameLayout(car.GetIndexCar(countPhoto));
         }
@@ -96,7 +92,7 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
                         car = new MotorcycleTouring();
                         break;
                     }
-                case "Сruisingmotorcycle":
+                case "Cruisemotorcycle":
                     {
                         car = new MotorcycleСruising();
                         break;

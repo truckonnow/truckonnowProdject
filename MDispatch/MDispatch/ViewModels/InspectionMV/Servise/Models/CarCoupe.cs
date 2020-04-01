@@ -8,6 +8,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
     {
         public string TypeIndex { get; set; } = "Coupe";
         public int CountCarImg { get; set; } = 39;
+        public string TypeVehicle { get; set; } = "car";
 
         public int GetIndexCar(int countPhoto)
         {

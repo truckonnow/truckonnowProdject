@@ -8,6 +8,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
     {
         public string TypeIndex { get; set; } = "Sportbike";
         public int CountCarImg { get; set; } = 19;
+        public string TypeVehicle { get; set; } = "motorcycle";
 
         public int GetIndexCar(int countPhoto)
         {
@@ -16,57 +17,37 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             {
                 case 1:
                     {
-                        indecCar = -1;
+                        indecCar = 3;
                         break;
                     }
                 case 2:
                     {
-                        indecCar = 3;
+                        indecCar = 4;
                         break;
                     }
                 case 3:
                     {
-                        indecCar = -2;
+                        indecCar = 7;
                         break;
                     }
                 case 4:
                     {
-                        indecCar = 4;
+                        indecCar = 6;
                         break;
                     }
                 case 5:
                     {
-                        indecCar = 7;
+                        indecCar = 8;
                         break;
                     }
                 case 6:
                     {
-                        indecCar = 6;
+                        indecCar = 12;
                         break;
                     }
                 case 7:
                     {
-                        indecCar = 8;
-                        break;
-                    }
-                case 8:
-                    {
-                        indecCar = 12;
-                        break;
-                    }
-                case 9:
-                    {
-                        indecCar = -3;
-                        break;
-                    }
-                case 13:
-                    {
                         indecCar = 13;
-                        break;
-                    }
-                case 14:
-                    {
-                        indecCar = -4;
                         break;
                     }
                 default:

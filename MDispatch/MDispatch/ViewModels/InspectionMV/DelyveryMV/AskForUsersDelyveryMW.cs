@@ -239,7 +239,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                         car = new CarSedan();
                         break;
                     }
-                case "Sportbicke":
+                case "Sportbike":
                     {
                         car = new MotorcycleSport();
                         break;
@@ -249,7 +249,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
                         car = new MotorcycleTouring();
                         break;
                     }
-                case "Сruisingmotorcycle":
+                case "Cruisemotorcycle":
                     {
                         car = new MotorcycleСruising();
                         break;

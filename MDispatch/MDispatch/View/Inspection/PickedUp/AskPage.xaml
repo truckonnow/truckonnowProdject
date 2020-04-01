@@ -98,7 +98,7 @@
                                             <x:String>Pickup</x:String>
                                             <x:String>Sport bike</x:String>
                                             <x:String>Touring motorcycle</x:String>
-                                            <x:String>Cruising motorcycle</x:String>
+                                            <x:String>Cruise motorcycle</x:String>
                                         </x:Array>
                                     </input:Dropdown.ItemsSource>
                                 </input:Dropdown>
@@ -114,7 +114,7 @@
                                                 <x:String>Pickup</x:String>
                                                 <x:String>Sport bike</x:String>
                                                 <x:String>Touring motorcycle</x:String>
-                                                <x:String>Cruising motorcycle</x:String>
+                                                <x:String>Cruise motorcycle</x:String>
                                             </x:Array>
                                         </Picker.ItemsSource>
                                     </Picker>

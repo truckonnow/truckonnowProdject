@@ -8,6 +8,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
     {
         public string TypeIndex { get; set; } = "Touringmotorcycle";
         public int CountCarImg { get; set; } = 14;
+        public string TypeVehicle { get; set; } = "motorcycle";
 
         public int GetIndexCar(int countPhoto)
         {
@@ -16,52 +17,32 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             {
                 case 1:
                     {
-                        indecCar = -1;
+                        indecCar = 4;
                         break;
                     }
                 case 2:
                     {
-                        indecCar = 4;
+                        indecCar = 6;
                         break;
                     }
                 case 3:
                     {
-                        indecCar = 6;
+                        indecCar = 7;
                         break;
                     }
                 case 4:
                     {
-                        indecCar = -2;
+                        indecCar = 8;
                         break;
                     }
                 case 5:
                     {
-                        indecCar = 7;
+                        indecCar = 9;
                         break;
                     }
                 case 6:
                     {
-                        indecCar = 8;
-                        break;
-                    }
-                case 7:
-                    {
-                        indecCar = 9;
-                        break;
-                    }
-                case 8:
-                    {
-                        indecCar = -3;
-                        break;
-                    }
-                case 9:
-                    {
                         indecCar = 11;
-                        break;
-                    }
-                case 10:
-                    {
-                        indecCar = -4;
                         break;
                     }
                 default:
