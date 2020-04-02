@@ -39,7 +39,7 @@ namespace ApiMobaileServise.Servise
 
         internal List<Driver> GetDriverInDb()
         {
-            return context.Drivers.ToList();
+            return context.Drivers.Where(d => !d.IsFired).ToList();
         }
 
         internal List<Trailer> GetTrailers()

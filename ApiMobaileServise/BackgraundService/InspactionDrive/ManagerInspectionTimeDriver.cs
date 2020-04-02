@@ -57,7 +57,9 @@ namespace ApiMobaileServise.BackgraundService.InspactionDrive
                     {
                         click_action = "Driver",
                         body = body,
-                        title = title
+                        title = title,
+                        sound = "default",
+                        badge = 1,
                     },
                 };
                 string postbody = JsonConvert.SerializeObject(payload).ToString();

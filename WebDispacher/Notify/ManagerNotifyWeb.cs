@@ -48,6 +48,8 @@ namespace WebDispacher.Notify
                         click_action = "Oreder",
                         body = $"{body}",
                         title = $"New Load Order Id: {idShip} Assign",
+                        sound = "default",
+                        badge = 1,
                     },
                 };
                 string postbody = JsonConvert.SerializeObject(payload).ToString();
@@ -89,6 +91,8 @@ namespace WebDispacher.Notify
                         click_action = "Oreder",
                         body = $"{body}",
                         title = $"Unassign Load Order Id: {idShip}",
+                        sound = "default",
+                        badge = 1,
                     },
                 };
                 string postbody = JsonConvert.SerializeObject(payload).ToString();

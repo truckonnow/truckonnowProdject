@@ -43,6 +43,8 @@ namespace ApiMobaileServise.Notify
                         click_action = "No Action",
                         body = "After delivery, write down the time of arrival, then to indicate this in the inspection",
                         title = $"Orede Id: {idShip} on my way",
+                        sound = "default",
+                        badge = 1,
                     },
                 };
                 string postbody = JsonConvert.SerializeObject(payload).ToString();
@@ -78,7 +80,9 @@ namespace ApiMobaileServise.Notify
                     {
                         click_action = "No Action",
                         body = body,
-                        title = $"Orede Id: {idShip} вelivered",
+                        title = $"Orede Id: {idShip} delivered",
+                        sound = "default",
+                        badge = 1,
                     },
                 };
                 string postbody = JsonConvert.SerializeObject(payload).ToString();
