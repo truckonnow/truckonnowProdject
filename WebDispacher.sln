@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDispatch.Android", "MDispa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDispatch.iOS", "MDispatch\MDispatch.iOS\MDispatch.iOS.csproj", "{FFE941D5-E279-4090-AEEA-9A32BE01D3D7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDispatch", "MDispatch\MDispatch\MDispatch.csproj", "{D6CD94AD-B4AF-4C31-B29D-789E2FBD7D48}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDispatch", "MDispatch\MDispatch\MDispatch.csproj", "{D6CD94AD-B4AF-4C31-B29D-789E2FBD7D48}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDispacher", "WebDispacher\WebDispacher.csproj", "{0333DA3D-9557-4996-B863-B8678B8965B9}"
 EndProject

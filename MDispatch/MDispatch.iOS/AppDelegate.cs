@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 using AudioToolbox;
 using Firebase.CloudMessaging;
 using Foundation;
 using MDispatch.iOS;
-using MDispatch.iOS.StoreService;
+using MDispatch.iOS.StoreService1;
 using UIKit;
 using UserNotifications;
 using Xamarin.Forms;
@@ -63,8 +64,11 @@ namespace MDispatch.iOS
         [Export("messaging:didReceiveRegistrationToken:")]
         public void DidReceiveRegistrationToken(Messaging messaging, string fcmToken)
         {
-            FirebaseIIDService firebaseIIDService = new FirebaseIIDService();
-            firebaseIIDService.OnTokenRefresh();
+            Task.Run(() =>
+            {
+                FirebaseIIDService firebaseIIDService = new FirebaseIIDService();
+                firebaseIIDService.OnTokenRefresh();
+            });
         }
 
         public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
