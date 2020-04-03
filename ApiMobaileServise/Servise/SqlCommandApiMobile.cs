@@ -419,11 +419,11 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
-        internal async void SaveAsk2InDb(string idShiping, Ask2 ask2)
+        internal void SaveAsk2InDb(string idShiping, Ask2 ask2)
         {
             Shipping shipping = context.Shipping.FirstOrDefault(s => s.Id == idShiping);
             shipping.Ask2 = ask2;
-            await context.SaveChangesAsync();
+            context.SaveChanges();
         }
 
         public async void SaveTokenStoreinDb(string token, string tokenStore)
@@ -499,15 +499,11 @@ namespace ApiMobaileServise.Servise
             return shipping;
         }
 
-        public async void SaveAskInDb(string idve, Ask ask)
+        public  void SaveAskInDb(string idve, Ask ask)
         {
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
-            if (vehiclwInformation.Ask == null)
-            {
-                vehiclwInformation.Ask = new Ask();
-            }
             vehiclwInformation.Ask = ask;
-            await context.SaveChangesAsync();
+            context.SaveChanges();
         }
 
         public async void SavePayMethotInDb(string idShiping, string payMethod, string countPay)
@@ -707,51 +703,33 @@ namespace ApiMobaileServise.Servise
             await context.SaveChangesAsync();
         }
 
-        public async void SaveAsk1InDb(string idve, Ask1 ask1)
+        public void SaveAsk1InDb(string idve, Ask1 ask1)
         {
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
-            if (vehiclwInformation.Ask1 == null)
-            {
-                vehiclwInformation.Ask1 = new Ask1();
-            }
             vehiclwInformation.Ask1 = ask1;
-            await context.SaveChangesAsync();
+            context.SaveChangesAsync();
         }
 
         public void SaveAskFromUserInDb(string idShip, AskFromUser askFromUser)
         {
-            Shipping shipping = context.Shipping.Where(s => s.Id == idShip)
-                .FirstOrDefault();
-            if (shipping.AskFromUser == null)
-            {
-                shipping.AskFromUser = new AskFromUser();
-            }
+            Shipping shipping = context.Shipping.Where(s => s.Id == idShip).FirstOrDefault();
             shipping.AskFromUser = askFromUser;
-            context.SaveChangesAsync();
+            context.SaveChanges();
         }
 
         public void SaveAskDelyveryInDb(string idve, AskDelyvery askDelyvery)
         {
             VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id == Convert.ToInt32(idve));
-            if (vehiclwInformation.Ask1 == null)
-            {
-                vehiclwInformation.AskDelyvery = new AskDelyvery();
-            }
             vehiclwInformation.AskDelyvery = askDelyvery;
-            context.SaveChangesAsync();
+            context.SaveChanges();
         }
 
-        public async void SaveAskForUserDelyveryInDb(string idShiping, AskForUserDelyveryM askForUserDelyveryM)
+        public void SaveAskForUserDelyveryInDb(string idShiping, AskForUserDelyveryM askForUserDelyveryM)
         {
 
-            Shipping shipping = context.Shipping.Where(v => v.Id == idShiping)
-                .FirstOrDefault();
-            if (shipping.askForUserDelyveryM == null)
-            {
-                shipping.askForUserDelyveryM = new AskForUserDelyveryM();
-            }
+            Shipping shipping = context.Shipping.Where(v => v.Id == idShiping).FirstOrDefault();
             shipping.askForUserDelyveryM = askForUserDelyveryM;
-            await context.SaveChangesAsync();
+            context.SaveChanges();
         }
 
         public bool CheckEmailAndPsw(string email, string password)
@@ -759,7 +737,7 @@ namespace ApiMobaileServise.Servise
             return context.Drivers.FirstOrDefault(d => d.EmailAddress == email && d.Password == password) != null ? true : false;
         }
 
-        public async void SavePikedUpInDb(string id, string idOrder, string name, string contactName, string address, string city, string state, string zip, string phone, string email)
+        public void SavePikedUpInDb(string id, string idOrder, string name, string contactName, string address, string city, string state, string zip, string phone, string email)
         {
             Shipping shipping = context.Shipping.FirstOrDefault(s => s.Id == id);
             if(shipping != null)
@@ -773,7 +751,7 @@ namespace ApiMobaileServise.Servise
                 shipping.ZipP = zip;
                 shipping.PhoneP = phone;
                 shipping.EmailP = email;
-                await context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
 
@@ -887,10 +865,9 @@ namespace ApiMobaileServise.Servise
 
         public List<Shipping> GetOrdersForToken(string token)
         {
-
-            List<Shipping> Shipping1 = new List<Shipping>();
             Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
-            List<Shipping> shippings = context.Shipping.Where(s => s.Driverr != null && s.Driverr.Id == driver.Id)
+
+            List<Shipping> shippings = context.Shipping.Where(s => s.Driverr != null && s.Driverr.Id == driver.Id && s.CurrentStatus == "Picked up" || s.CurrentStatus == "Assigned")
                 .Include("VehiclwInformations.Ask")
                 .Include("VehiclwInformations.Ask1")
                 .Include("VehiclwInformations.Ask1.App_will_force_driver_to_take_pictures_of_each_strap")
@@ -908,13 +885,11 @@ namespace ApiMobaileServise.Servise
             {
                 return new List<Shipping>();
             }
-            Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Picked up"));
-            Shipping1.AddRange(shippings.FindAll(s => s.CurrentStatus == "Assigned"));
-            Shipping1.ForEach((item) => item.UrlReqvest = "");
+            shippings.ForEach((item) => item.UrlReqvest = "");
             //int countFor5 = Shipping1.Count / 5;
             //int ost = Shipping1.Count % 5;
             //int countGet = ost == 0 ? (5 * type) + 5 : (5 * type) + ost;
-            return Shipping1; //.GetRange(5 * type, countGet);
+            return shippings; //.GetRange(5 * type, countGet);
         }
 
         public List<Shipping> GetOrdersDelyveryForToken(string token, int type)
