@@ -60,6 +60,11 @@ namespace ApiMobaileServise.Servise
             return sqlCommandApiMobile.GetStatusInspectionDeliveryDb(idShipping);
         }
 
+        internal Shipping GetStatusInspectionEnd(string idShipping)
+        {
+            return sqlCommandApiMobile.GetStatusInspectionEndDb(idShipping);
+        }
+
         internal List<Truck> GetTruck()
         {
             return sqlCommandApiMobile.GetTruck();

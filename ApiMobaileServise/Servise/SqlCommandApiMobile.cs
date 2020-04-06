@@ -81,12 +81,21 @@ namespace ApiMobaileServise.Servise
         {
             Shipping shipping = context.Shipping
                 .Where(s => s.Id == idShipping)
+                .Include("VehiclwInformations.Ask")
                 .Include("VehiclwInformations.AskDelyvery")
                 .Include(s => s.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature)
                 .Include(s => s.askForUserDelyveryM.PhotoPay)
                 .Include(s => s.askForUserDelyveryM.VideoRecord)
                 .Include(s => s.Ask2)
                 .FirstOrDefault();
+            return shipping;
+        }
+
+        internal Shipping GetStatusInspectionEndDb(string idShipping)
+        {
+            Shipping shipping = context.Shipping
+                  .Where(s => s.Id == idShipping)
+                  .FirstOrDefault();
             return shipping;
         }
 
@@ -320,7 +329,10 @@ namespace ApiMobaileServise.Servise
 
         internal void SavePhotoStrapInDb(string id, List<Photo> photos)
         {
-            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == id);
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation
+                .Where(v => v.Id.ToString() == id)
+                .Include(v => v.Ask1)
+                .FirstOrDefault();
             if (vehiclwInformation != null)
             {
                 vehiclwInformation.Ask1.App_will_force_driver_to_take_pictures_of_each_strap = photos;
@@ -330,7 +342,10 @@ namespace ApiMobaileServise.Servise
 
         internal void SavePhotoinTruckInDb(string id, List<Photo> photos)
         {
-            VehiclwInformation vehiclwInformation = context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == id);
+            VehiclwInformation vehiclwInformation = context.VehiclwInformation
+                .Where(v => v.Id.ToString() == id)
+                .Include(v => v.Ask1)
+                .FirstOrDefault();
             if(vehiclwInformation != null)
             {
                 vehiclwInformation.Ask1.Photo_after_loading_in_the_truck = photos;

@@ -18,7 +18,7 @@ namespace ApiMobaileServise.Controllers
         ManagerMobileApi managerMobileApi = new ManagerMobileApi();
 
         [HttpPost]
-        [Route("Status/Inspection/PickedUp")]
+        [Route("Status/Inspection/Assigned")]
         public string GetStatusInspectionPikedUp(string token, string idShipping)
         {
             string respons = null;
@@ -47,7 +47,7 @@ namespace ApiMobaileServise.Controllers
         }
 
         [HttpPost]
-        [Route("Status/Inspection/PickedUp")]
+        [Route("Status/Inspection/Picked up")]
         public string GetStatusInspectionDelyvery(string token, string idShipping)
         {
             string respons = null;
@@ -61,6 +61,35 @@ namespace ApiMobaileServise.Controllers
                 if (isToken)
                 {
                     Shipping shipping = managerMobileApi.GetStatusInspectionDelivery(idShipping);
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", shipping));
+                }
+                else
+                {
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "2", null));
+                }
+            }
+            catch (Exception)
+            {
+                respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
+            }
+            return respons;
+        }
+
+        [HttpPost]
+        [Route("Status/Inspection/Delivered")]
+        public string GetStatusInspectionEnd(string token, string idShipping)
+        {
+            string respons = null;
+            if (token == null || token == "")
+            {
+                return JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
+            }
+            try
+            {
+                bool isToken = managerMobileApi.CheckToken(token);
+                if (isToken)
+                {
+                    Shipping shipping = managerMobileApi.GetStatusInspectionEnd(idShipping);
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", shipping));
                 }
                 else
