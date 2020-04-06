@@ -154,7 +154,7 @@ namespace WebDispacher.Service
 
         public bool CheckKey(string key)
         {
-            return _sqlEntityFramworke.CheckKeyDb(key);
+            return key != null && _sqlEntityFramworke.CheckKeyDb(key);
         }
 
         public List<Driver> GetDrivers(int pag)
