@@ -99,7 +99,8 @@ namespace MDispatch.View.TabPage.Tab
                 {
                     idOrder = stackLayout.Parent.Parent.FindByName<Label>("idOrder").Text;
                 }
-                await activeMV.Navigation.PushAsync(new InfoOrder(activeMV.managerDispatchMob, activeMV.initDasbordDelegate, activeMV.Shippings.Find(s => s.Id == idOrder).CurrentStatus));
+                await activeMV.Navigation.PushAsync(new InfoOrder(activeMV.managerDispatchMob, activeMV.initDasbordDelegate,
+                    activeMV.Shippings.Find(s => s.Id == idOrder).CurrentStatus, activeMV.Shippings.Find(s => s.Id == idOrder).Id));
             }
         }
 

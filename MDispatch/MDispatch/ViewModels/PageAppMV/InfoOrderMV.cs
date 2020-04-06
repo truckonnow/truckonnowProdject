@@ -35,7 +35,7 @@ namespace MDispatch.ViewModels.PageAppMV
         private GetVechicleDelegate getVechicleDelegate = null;
         private GetShiping GetShiping = null;
 
-        public InfoOrderMV(ManagerDispatchMob managerDispatchMob, InitDasbordDelegate initDasbordDelegate, string statusInspection)
+        public InfoOrderMV(ManagerDispatchMob managerDispatchMob, InitDasbordDelegate initDasbordDelegate, string statusInspection, string idShipping)
         {
             this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
@@ -43,6 +43,7 @@ namespace MDispatch.ViewModels.PageAppMV
             getVechicleDelegate = GetVehiclwInformations;
             GetShiping = GetShipings;
             StatusInspection = statusInspection;
+            IdShipping = idShipping;
             ToInstructionComand = new DelegateCommand(ToInstruction);
             ToEditPikedUpCommand = new DelegateCommand(ToEditPikedUp);
             ToEditDeliveryCommand = new DelegateCommand(ToEditDelivery);
@@ -55,6 +56,13 @@ namespace MDispatch.ViewModels.PageAppMV
         {
             get => shipping;
             set => SetProperty(ref shipping, value);
+        }
+
+        private string idShipping = "";
+        public string IdShipping
+        {
+            get => idShipping;
+            set => SetProperty(ref idShipping, value);
         }
 
         private int count = 0;
@@ -85,6 +93,13 @@ namespace MDispatch.ViewModels.PageAppMV
         {
             get => statusInspection;
             set => SetProperty(ref statusInspection, value);
+        }
+
+        private string statusInspectionView = "";
+        public string StatusInspectionView
+        {
+            get => statusInspectionView;
+            set => SetProperty(ref statusInspectionView, value);
         }
 
         private bool isInspection = false;
@@ -126,14 +141,20 @@ namespace MDispatch.ViewModels.PageAppMV
             int state = 0;
             Shipping shipping = null;
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
-            if(StatusInspection == "Assigen" || StatusInspection == "Piked Up")
+            if (StatusInspection == "Assigned")
             {
+                StatusInspectionView = "Vehicle inspection: Piked Up";
+                IsInspection = true;
+            }
+            else if (StatusInspection == "Picked up")
+            {
+                StatusInspectionView = "Vehicle inspection: Delivery";
                 IsInspection = true;
             }
             else
             {
+                StatusInspection = "Delivered";
                 IsInspection = false;
-                return;
             }
             await PopupNavigation.PushAsync(new LoadPage());
             await Task.Run(() => Utils.CheckNet());
@@ -141,7 +162,7 @@ namespace MDispatch.ViewModels.PageAppMV
             {
                 await Task.Run(() =>
                 {
-                    state = managerDispatchMob.InspectionStatus(token, StatusInspection, ref description, ref shipping);
+                    state = managerDispatchMob.InspectionStatus(token, IdShipping, StatusInspection, ref description, ref shipping);
                 });
                 if (state == 2)
                 {
@@ -156,6 +177,7 @@ namespace MDispatch.ViewModels.PageAppMV
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
                 }
             }
+            await PopupNavigation.PopAsync();
         }
 
         [System.Obsolete]

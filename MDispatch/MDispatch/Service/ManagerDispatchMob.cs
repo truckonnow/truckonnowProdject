@@ -124,14 +124,14 @@ namespace MDispatch.Service
             return stateOrder;
         }
 
-        internal int InspectionStatus(string token, string statusInspection, ref string description, ref Shipping shipping)
+        internal int InspectionStatus(string token, string idShipping, string statusInspection, ref string description, ref Shipping shipping)
         {
             inspection = new Inspection();
             //CountReqvest++;
             int stateOrder = 1;
             if (CrossConnectivity.Current.IsConnected)
             {
-                stateOrder = inspection.InspectionStatus(token, statusInspection, ref description, ref shipping);
+                stateOrder = inspection.InspectionStatus(token, idShipping, statusInspection, ref description, ref shipping);
             }
             inspection = null;
            // CountReqvest--;

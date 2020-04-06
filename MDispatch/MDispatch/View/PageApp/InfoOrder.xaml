@@ -119,7 +119,7 @@
                 <FlexLayout>
                     <Button Text="Instructions" BackgroundColor="#4fd2c2" FontSize="12" Margin="5"
                         TextColor="White" Command="{Binding ToInstructionComand}"/>
-                    <Button Text="{Binding StatusInspection, StringFormat='Start vehicle inspection: {0:1}'}" BackgroundColor="BlueViolet" FontSize="12" Margin="5"
+                    <Button Text="{Binding StatusInspectionView}" BackgroundColor="BlueViolet" FontSize="12" Margin="5"
                         TextColor="White" Clicked="Button_Clicked_2" IsVisible="{Binding IsInspection}"/>
                 </FlexLayout>
             </StackLayout>

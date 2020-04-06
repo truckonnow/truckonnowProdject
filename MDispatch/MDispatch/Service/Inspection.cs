@@ -162,7 +162,7 @@ namespace MDispatch.Service
             }
         }
 
-        internal int InspectionStatus(string token, string statusInspection, ref string description, ref Shipping shipping)
+        internal int InspectionStatus(string token, string idShipping, string statusInspection, ref string description, ref Shipping shipping)
         {
             IRestResponse response = null;
             string content = null;
@@ -173,6 +173,7 @@ namespace MDispatch.Service
                 client.Timeout = 60000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
+                request.AddParameter("idShipping", idShipping);
                 response = client.Execute(request);
                 content = response.Content;
             }

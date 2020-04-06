@@ -22,16 +22,23 @@ namespace MDispatch.View.PageApp
         private InitDasbordDelegate initDasbordDelegate;
         private string currentStatus;
 
-        public InfoOrder(ManagerDispatchMob managerDispatchMob, InitDasbordDelegate initDasbordDelegate, string statusInspection)
+        public InfoOrder(ManagerDispatchMob managerDispatchMob, InitDasbordDelegate initDasbordDelegate, string statusInspection, string idShipping)
         {
-            this.infoOrderMV = new InfoOrderMV(managerDispatchMob, initDasbordDelegate, statusInspection) { Navigation = this.Navigation} ;
+            this.infoOrderMV = new InfoOrderMV(managerDispatchMob, initDasbordDelegate, statusInspection, idShipping) { Navigation = this.Navigation} ;
             InitializeComponent();
             BindingContext = this.infoOrderMV;
         }
 
         private void StackLayout_SizeChanged(object sender, EventArgs e)
         {
-            listVehic.HeightRequest = Convert.ToInt32(infoOrderMV.Shipping.VehiclwInformations.Count * 120);
+            if(infoOrderMV.Shipping != null && infoOrderMV.Shipping.VehiclwInformations != null && infoOrderMV.Shipping.VehiclwInformations.Count != 0)
+            {
+                listVehic.HeightRequest = Convert.ToInt32(infoOrderMV.Shipping.VehiclwInformations.Count * 120);
+            }
+            else
+            {
+                listVehic.HeightRequest = 0;
+            }
         }
 
         private void Button_Clicked_1(object sender, EventArgs e)
