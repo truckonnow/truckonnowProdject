@@ -62,6 +62,34 @@ namespace ApiMobaileServise.Servise
             return shipping;
         }
 
+        internal Shipping GetStatusInspectionPickedUpDb(string idShipping)
+        {
+            Shipping shipping = context.Shipping
+                .Where(s => s.Id == idShipping)
+                .Include("VehiclwInformations.Ask")
+                .Include("VehiclwInformations.Ask1")
+                .Include("VehiclwInformations.Ask1.App_will_force_driver_to_take_pictures_of_each_strap")
+                .Include("VehiclwInformations.PhotoInspections.Damages")
+                .Include(s => s.AskFromUser.App_will_ask_for_signature_of_the_client_signature)
+                .Include(s => s.AskFromUser.PhotoPay)
+                .Include(s => s.AskFromUser.VideoRecord)
+                .FirstOrDefault();
+            return shipping;
+        }
+
+        internal Shipping GetStatusInspectionDeliveryDb(string idShipping)
+        {
+            Shipping shipping = context.Shipping
+                .Where(s => s.Id == idShipping)
+                .Include("VehiclwInformations.AskDelyvery")
+                .Include(s => s.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature)
+                .Include(s => s.askForUserDelyveryM.PhotoPay)
+                .Include(s => s.askForUserDelyveryM.VideoRecord)
+                .Include(s => s.Ask2)
+                .FirstOrDefault();
+            return shipping;
+        }
+
         public async Task RefreshInspectionDriverInDb(int idDriver)
         {
             Driver driver = context.Drivers.FirstOrDefault(d => d.Id == idDriver);
@@ -869,17 +897,17 @@ namespace ApiMobaileServise.Servise
 
             List<Shipping> shippings = context.Shipping.Where(s => s.Driverr != null && s.Driverr.Id == driver.Id && s.CurrentStatus == "Picked up" || s.CurrentStatus == "Assigned")
                 .Include("VehiclwInformations.Ask")
-                .Include("VehiclwInformations.Ask1")
-                .Include("VehiclwInformations.Ask1.App_will_force_driver_to_take_pictures_of_each_strap")
-                .Include("VehiclwInformations.PhotoInspections.Damages")
-                .Include(s => s.AskFromUser.App_will_ask_for_signature_of_the_client_signature)
-                .Include(s => s.AskFromUser.PhotoPay)
-                .Include(s => s.AskFromUser.VideoRecord)
+                //.Include("VehiclwInformations.Ask1")
+                //.Include("VehiclwInformations.Ask1.App_will_force_driver_to_take_pictures_of_each_strap")
+                //.Include("VehiclwInformations.PhotoInspections.Damages")
+                //.Include(s => s.AskFromUser.App_will_ask_for_signature_of_the_client_signature)
+                //.Include(s => s.AskFromUser.PhotoPay)
+                //.Include(s => s.AskFromUser.VideoRecord)
                 .Include("VehiclwInformations.AskDelyvery")
-                .Include(s => s.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature)
-                .Include(s => s.askForUserDelyveryM.PhotoPay)
-                .Include(s => s.askForUserDelyveryM.VideoRecord)
-                .Include(s => s.Ask2)
+                //.Include(s => s.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature)
+                //.Include(s => s.askForUserDelyveryM.PhotoPay)
+                //.Include(s => s.askForUserDelyveryM.VideoRecord)
+                //.Include(s => s.Ask2)
                 .ToList();
             if (shippings == null)
             {

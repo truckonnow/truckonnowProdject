@@ -50,6 +50,16 @@ namespace ApiMobaileServise.Servise
             return plate;
         }
 
+        internal Shipping GetStatusInspectionPickedUp(string idShipping)
+        {
+            return sqlCommandApiMobile.GetStatusInspectionPickedUpDb(idShipping);
+        }
+
+        internal Shipping GetStatusInspectionDelivery(string idShipping)
+        {
+            return sqlCommandApiMobile.GetStatusInspectionDeliveryDb(idShipping);
+        }
+
         internal List<Truck> GetTruck()
         {
             return sqlCommandApiMobile.GetTruck();

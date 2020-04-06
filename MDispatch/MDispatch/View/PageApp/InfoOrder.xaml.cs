@@ -18,10 +18,13 @@ namespace MDispatch.View.PageApp
     {
         private InfoOrderMV infoOrderMV = null;
         private bool isNextPage = false;
+        private ManagerDispatchMob managerDispatchMob;
+        private InitDasbordDelegate initDasbordDelegate;
+        private string currentStatus;
 
-        public InfoOrder(ManagerDispatchMob managerDispatchMob, Shipping shipping, InitDasbordDelegate initDasbordDelegate)
+        public InfoOrder(ManagerDispatchMob managerDispatchMob, InitDasbordDelegate initDasbordDelegate, string statusInspection)
         {
-            this.infoOrderMV = new InfoOrderMV(managerDispatchMob, shipping, initDasbordDelegate) { Navigation = this.Navigation} ;
+            this.infoOrderMV = new InfoOrderMV(managerDispatchMob, initDasbordDelegate, statusInspection) { Navigation = this.Navigation} ;
             InitializeComponent();
             BindingContext = this.infoOrderMV;
         }

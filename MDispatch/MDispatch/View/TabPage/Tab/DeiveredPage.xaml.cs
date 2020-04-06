@@ -57,7 +57,7 @@ namespace MDispatch.View.TabPage.Tab
             {
                 idOrder = stackLayout.Parent.Parent.FindByName<Label>("idOrder").Text;
             }
-            await delyveryMV.Navigation.PushAsync(new InfoOrder(delyveryMV.managerDispatchMob, delyveryMV.Shippings.Find(s => s.Id == idOrder), delyveryMV.initDasbordDelegate));
+            await delyveryMV.Navigation.PushAsync(new InfoOrder(delyveryMV.managerDispatchMob, delyveryMV.initDasbordDelegate, delyveryMV.Shippings.Find(s => s.Id == idOrder).CurrentStatus));
         }
 
         private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
