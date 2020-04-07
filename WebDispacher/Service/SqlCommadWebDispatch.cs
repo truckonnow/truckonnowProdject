@@ -135,18 +135,16 @@ namespace WebDispacher.Dao
             return context.Trailers.FirstOrDefault(t => t.Plate == trailerPlate);
         }
 
-        internal List<Driver> GetDrivers(string commpanyID, string nameDriver, string numberPhone, string driversLicense, string emailDriver)
+        internal List<DriverReport> GetDriversReportsDb(string commpanyID, string nameDriver, string driversLicense)
         {
-            List<Driver> drivers = new List<Driver>();
-            if (nameDriver != null || numberPhone != null || driversLicense != null || emailDriver != null)
+            List<DriverReport> driverReports = new List<DriverReport>();
+            if (nameDriver != null || driversLicense != null)
             {
-                drivers.AddRange(context.Drivers.Where(d =>
+                driverReports.AddRange(context.DriverReports.Where(d => 
                 (nameDriver == null || (nameDriver != null && d.FullName.Contains(nameDriver)))
-                && (numberPhone == null || (numberPhone != null && d.PhoneNumber.Contains(numberPhone)))
-                && (driversLicense == null || (driversLicense != null && d.DriversLicenseNumber.Contains(driversLicense)))
-                && (emailDriver == null || (emailDriver != null && d.EmailAddress.Contains(emailDriver)))).ToList());
+                && (driversLicense == null || (driversLicense != null && d.DriversLicenseNumber.Contains(driversLicense)))));
             }
-            return drivers;
+            return driverReports;
         }
 
         internal int[] GetIdTruckAdnTrailarDb(string idDriver)
@@ -287,12 +285,6 @@ namespace WebDispacher.Dao
                 .Include(v => v.Ask2)
                 .FirstOrDefault();
             return context.Shipping.FirstOrDefault(s => s.VehiclwInformations.FirstOrDefault(v => v == vehiclwInformation) != null);
-        }
-
-        internal void CommentDriverDb(int id, string comment)
-        {
-            context.Drivers.FirstOrDefault(d => d.Id == id).Comment = comment;
-            context.SaveChanges();
         }
 
         internal void RemoveTrailerDb(string id)
@@ -597,7 +589,7 @@ namespace WebDispacher.Dao
         public List<Driver> GetDrivers(int page)
         {
             List<Driver> drivers = null;
-            drivers = context.Drivers.ToList();
+            drivers = context.Drivers.Where(d => !d.IsFired).ToList();
             if (page == -1)
             {
             }
@@ -778,11 +770,20 @@ namespace WebDispacher.Dao
             await context.SaveChangesAsync();
         }
 
-        public async void RemoveDriveInDb(int id)
+        public void RemoveDriveInDb(int id, string comment)
         {
-            Driver driver = context.Drivers.FirstOrDefault(d => d.Id == id);
+            Driver driver = context.Drivers
+                .FirstOrDefault(d => d.Id == id);
             driver.IsFired = true;
-            await context.SaveChangesAsync();
+            DriverReport driverReport = new DriverReport()
+            {
+                Comment = comment,
+                DriversLicenseNumber = driver.DriversLicenseNumber,
+                FullName = driver.FullName,
+                IdDriver = driver.Id
+            };
+            context.DriverReports.Add(driverReport);
+            context.SaveChanges();
         }
 
         public async void RestoreDriveInDb(int id)

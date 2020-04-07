@@ -33,6 +33,7 @@ namespace DaoModels.DAO
         public DbSet<Trailer> Trailers { get; set; }
         public DbSet<DocumentTruckAndTrailers> DocumentTruckAndTrailers { get; set; }
         public DbSet<PasswordRecovery> PasswordRecoveries { get; set; }
+        public DbSet<DriverReport> DriverReports { get; set; }
 
         public Context()
         {

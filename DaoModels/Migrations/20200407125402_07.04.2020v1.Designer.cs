@@ -4,14 +4,16 @@ using DaoModels.DAO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DaoModels.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20200407125402_07.04.2020v1")]
+    partial class _07042020v1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -372,25 +374,6 @@ namespace DaoModels.Migrations
                     b.HasIndex("geolocationsID");
 
                     b.ToTable("Drivers");
-                });
-
-            modelBuilder.Entity("DaoModels.DAO.Models.DriverReport", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Comment");
-
-                    b.Property<string>("DriversLicenseNumber");
-
-                    b.Property<string>("FullName");
-
-                    b.Property<int>("IdDriver");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DriverReports");
                 });
 
             modelBuilder.Entity("DaoModels.DAO.Models.Feedback", b =>

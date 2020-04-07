@@ -112,9 +112,9 @@ namespace WebDispacher.Service
             return _sqlEntityFramworke.GetTrailerByPlateDb(trailerPlate);
         }
 
-        internal List<Driver> GetDrivers(string commpanyID, string nameDriver, string numberPhone, string driversLicense, string emailDriver)
+        internal List<DriverReport> GetDriversReport(string commpanyID, string nameDriver, string driversLicense)
         {
-            return _sqlEntityFramworke.GetDrivers(commpanyID, nameDriver, numberPhone, driversLicense, emailDriver);
+            return _sqlEntityFramworke.GetDriversReportsDb(commpanyID, nameDriver, driversLicense);
         }
 
         internal List<Trailer> GetTrailers()
@@ -269,10 +269,6 @@ namespace WebDispacher.Service
             return _sqlEntityFramworke.GetDriver(idInspection);
         }
 
-        internal void CommentDriver(int id, string comment)
-        {
-            _sqlEntityFramworke.CommentDriverDb(id, comment);
-        }
 
         public void Updateorder(string idOrder, string idLoad, string internalLoadID, string driver, string status, string instructions, string nameP, string contactP,
             string addressP, string cityP, string stateP, string zipP, string phoneP, string emailP, string scheduledPickupDateP, string nameD, string contactD, string addressD,
@@ -322,9 +318,9 @@ namespace WebDispacher.Service
             return _sqlEntityFramworke.GetInspectionTrucksDb(idDriver, idTruck, idTrailer, date);
         }
 
-        public void RemoveDrive(int id)
+        public void RemoveDrive(int id, string comment)
         {
-            _sqlEntityFramworke.RemoveDriveInDb(id);
+            _sqlEntityFramworke.RemoveDriveInDb(id, comment);
         }
 
         internal string GetDocument(string id)

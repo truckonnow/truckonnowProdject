@@ -3,6 +3,7 @@ using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms.Xaml;
 
+
 namespace MDispatch.Vidget.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]

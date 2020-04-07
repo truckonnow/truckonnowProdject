@@ -1,13 +1,11 @@
-﻿
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace MDispatch.NewElement.GradientBoxView
 {
     public class Gradient : Xamarin.Forms.View
     {
         
-             public static readonly BindableProperty GradientColorsProperty = BindableProperty.Create<Gradient, Color[]>(p => p.GradientColors, new Color[] { Color.White });
+       public static readonly BindableProperty GradientColorsProperty = BindableProperty.Create<Gradient, Color[]>(p => p.GradientColors, new Color[] { Color.White });
 
         public Color[] GradientColors
         {

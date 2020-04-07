@@ -47,7 +47,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Driver/Check")]
-        public IActionResult CheckDriver(string commpanyID, string nameDriver, string numberPhone, string driversLicense, string emailDriver)
+        public IActionResult CheckDriver(string commpanyID, string nameDriver, string driversLicense, string comment)
         {
             IActionResult actionResult = null;
             try
@@ -57,11 +57,9 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    ViewBag.NumberPhone = numberPhone;
                     ViewBag.DriversLicense = driversLicense;
                     ViewBag.NameDriver = nameDriver;
-                    ViewBag.EmailDriver = emailDriver;
-                    ViewBag.Drivers = managerDispatch.GetDrivers(commpanyID, nameDriver, numberPhone, driversLicense, emailDriver);
+                    ViewBag.DriverReports = managerDispatch.GetDriversReport(commpanyID, nameDriver, driversLicense);
                     actionResult = View("DriverCheck");
                 }
                 else
@@ -152,7 +150,7 @@ namespace WebDispacher.Controellers
 
         [HttpGet]
         [Route("Driver/Drivers/Remove")]
-        public IActionResult RemoveDriver(int id)
+        public IActionResult RemoveDriver(int id, string comment)
         {
             IActionResult actionResult = null;
             try
@@ -162,7 +160,7 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    managerDispatch.RemoveDrive(id);
+                    managerDispatch.RemoveDrive(id, comment);
                     actionResult = Redirect($"{Config.BaseReqvesteUrl}/Driver/Drivers");
                 }
                 else
@@ -181,67 +179,67 @@ namespace WebDispacher.Controellers
             return actionResult;
         }
 
-        [HttpGet]
-        [Route("Driver/Drivers/Restore")]
-        public IActionResult RestoreDriver(int id)
-        {
-            IActionResult actionResult = null;
-            try
-            {
-                string key = null;
-                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
-                Request.Cookies.TryGetValue("KeyAvtho", out key);
-                if (managerDispatch.CheckKey(key))
-                {
-                    managerDispatch.RestoreDrive(id);
-                    actionResult = Redirect($"{Config.BaseReqvesteUrl}/Driver/Drivers");
-                }
-                else
-                {
-                    if (Request.Cookies.ContainsKey("KeyAvtho"))
-                    {
-                        Response.Cookies.Delete("KeyAvtho");
-                    }
-                    actionResult = Redirect(Config.BaseReqvesteUrl);
-                }
-            }
-            catch (Exception)
-            {
+        //[HttpGet]
+        //[Route("Driver/Drivers/Restore")]
+        //public IActionResult RestoreDriver(int id)
+        //{
+        //    IActionResult actionResult = null;
+        //    try
+        //    {
+        //        string key = null;
+        //        ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+        //        Request.Cookies.TryGetValue("KeyAvtho", out key);
+        //        if (managerDispatch.CheckKey(key))
+        //        {
+        //            managerDispatch.RestoreDrive(id);
+        //            actionResult = Redirect($"{Config.BaseReqvesteUrl}/Driver/Drivers");
+        //        }
+        //        else
+        //        {
+        //            if (Request.Cookies.ContainsKey("KeyAvtho"))
+        //            {
+        //                Response.Cookies.Delete("KeyAvtho");
+        //            }
+        //            actionResult = Redirect(Config.BaseReqvesteUrl);
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
 
-            }
-            return actionResult;
-        }
+        //    }
+        //    return actionResult;
+        //}
 
-        [HttpGet]
-        [Route("Driver/Drivers/Comment")]
-        public IActionResult CommentDriver(int id, string Comment)
-        {
-            IActionResult actionResult = null;
-            try
-            {
-                string key = null;
-                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
-                Request.Cookies.TryGetValue("KeyAvtho", out key);
-                if (managerDispatch.CheckKey(key))
-                {
-                    managerDispatch.CommentDriver(id, Comment);
-                    actionResult = Redirect($"{Config.BaseReqvesteUrl}/Driver/Drivers");
-                }
-                else
-                {
-                    if (Request.Cookies.ContainsKey("KeyAvtho"))
-                    {
-                        Response.Cookies.Delete("KeyAvtho");
-                    }
-                    actionResult = Redirect(Config.BaseReqvesteUrl);
-                }
-            }
-            catch (Exception)
-            {
+        //[HttpGet]
+        //[Route("Driver/Drivers/Comment")]
+        //public IActionResult CommentDriver(int id, string Comment)
+        //{
+        //    IActionResult actionResult = null;
+        //    try
+        //    {
+        //        string key = null;
+        //        ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+        //        Request.Cookies.TryGetValue("KeyAvtho", out key);
+        //        if (managerDispatch.CheckKey(key))
+        //        {
+        //            managerDispatch.CommentDriver(id, Comment);
+        //            actionResult = Redirect($"{Config.BaseReqvesteUrl}/Driver/Drivers");
+        //        }
+        //        else
+        //        {
+        //            if (Request.Cookies.ContainsKey("KeyAvtho"))
+        //            {
+        //                Response.Cookies.Delete("KeyAvtho");
+        //            }
+        //            actionResult = Redirect(Config.BaseReqvesteUrl);
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
 
-            }
-            return actionResult;
-        }
+        //    }
+        //    return actionResult;
+        //}
 
         [HttpGet]
         [Route("Driver/Drivers/Edit")]

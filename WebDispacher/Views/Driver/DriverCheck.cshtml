@@ -1,10 +1,8 @@
-﻿<div class="body">
+﻿ <div class="body">
     <div style="display:flex;padding:10px;">
         <form method="get" action="">
             <input class="inpContentInspection" type="text" placeholder="Name Driver" name="nameDriver" value="@ViewBag.NameDriver" />
-            <input class="inpContentInspection" type="text" placeholder="Phone" name="numberPhone" value="@ViewBag.NumberPhone" />
             <input class="inpContentInspection" type="text" placeholder="Drivers License" name="driversLicense" value="@ViewBag.DriversLicense" />
-            <input class="inpContentInspection" type="text" placeholder="Email" name="emailDriver" value="@ViewBag.EmailDriver" />
             <input class="btnCreateoOrder" type="submit" value="Search" />
         </form>
     </div>
@@ -13,26 +11,17 @@
         <input style="width:150px" class="btnSt activeBtn" type="button" value="Driver check" onclick="window.location.href='@Url.Action("Check", "Driver")';" />
     </nav>
     <div class="contentBody">
-        @for (int i = 0; i < ViewBag.Drivers.Count; i++)
+        @for (int i = 0; i < ViewBag.DriverReports.Count; i++)
         {
             <div class="contentDriver">
                 <div>
-                    <p class="inpData">@ViewBag.Drivers[i].FullName</p>
-                    <span class="inpData">Trailer capacity: @ViewBag.Drivers[i].TrailerCapacity</span><br /> <br />
-                    <span class="inpData">Email: @ViewBag.Drivers[i].EmailAddress</span> <br /> <br />
-                    <span class="inpData">Phone: @ViewBag.Drivers[i].PhoneNumber</span><br /> <br />
-                    @if (!ViewBag.Drivers[i].IsFired)
-                    {
-                        <span class="inpData">Works in Truckonnow</span>
-                    }
-                    else
-                    {
-                        <a href="" class="btnId">Add Drive my company</a>
-                    }
+                    <p class="inpData">@ViewBag.DriverReports[i].FullName</p>
+                    <span class="inpData"><b>Driver's License:</b> @ViewBag.DriverReports[i].DriversLicenseNumber</span>
+
                 </div>
                 <div style="margin:10px;">
                     <p class="inpData"><b>Comment:</b></p>
-                    <p class="inpData">@ViewBag.Drivers[i].Comment</p>
+                    <p class="inpData">@ViewBag.DriverReports[i].Comment</p>
                 </div>
             </div>
         }

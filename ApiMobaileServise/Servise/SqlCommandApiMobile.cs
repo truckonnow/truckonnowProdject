@@ -777,7 +777,7 @@ namespace ApiMobaileServise.Servise
 
         public bool CheckEmailAndPsw(string email, string password)
         {
-            return context.Drivers.FirstOrDefault(d => d.EmailAddress == email && d.Password == password) != null ? true : false;
+            return context.Drivers.FirstOrDefault(d => d.EmailAddress == email && d.Password == password && !d.IsFired) != null ? true : false;
         }
 
         public void SavePikedUpInDb(string id, string idOrder, string name, string contactName, string address, string city, string state, string zip, string phone, string email)
@@ -910,19 +910,20 @@ namespace ApiMobaileServise.Servise
         {
             Driver driver = context.Drivers.FirstOrDefault(d => d.Token == token);
 
-            List<Shipping> shippings = context.Shipping.Where(s => s.Driverr != null && s.Driverr.Id == driver.Id && s.CurrentStatus == "Picked up" || s.CurrentStatus == "Assigned")
+            List<Shipping> shippings = context.Shipping.Where(s => s.Driverr != null && s.Driverr.Id == driver.Id)
                 .Include("VehiclwInformations.Ask")
-                //.Include("VehiclwInformations.Ask1")
-                //.Include("VehiclwInformations.Ask1.App_will_force_driver_to_take_pictures_of_each_strap")
-                //.Include("VehiclwInformations.PhotoInspections.Damages")
-                //.Include(s => s.AskFromUser.App_will_ask_for_signature_of_the_client_signature)
-                //.Include(s => s.AskFromUser.PhotoPay)
-                //.Include(s => s.AskFromUser.VideoRecord)
+                .Include("VehiclwInformations.Ask1")
+                .Include("VehiclwInformations.Ask1.App_will_force_driver_to_take_pictures_of_each_strap")
+                .Include("VehiclwInformations.PhotoInspections.Damages")
+                .Include(s => s.AskFromUser.App_will_ask_for_signature_of_the_client_signature)
+                .Include(s => s.AskFromUser.PhotoPay)
+                .Include(s => s.AskFromUser.VideoRecord)
                 .Include("VehiclwInformations.AskDelyvery")
-                //.Include(s => s.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature)
-                //.Include(s => s.askForUserDelyveryM.PhotoPay)
-                //.Include(s => s.askForUserDelyveryM.VideoRecord)
-                //.Include(s => s.Ask2)
+                .Include(s => s.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature)
+                .Include(s => s.askForUserDelyveryM.PhotoPay)
+                .Include(s => s.askForUserDelyveryM.VideoRecord)
+                .Include(s => s.Ask2)
+                .Where(s => s.CurrentStatus == "Picked up" || s.CurrentStatus == "Assigned")
                 .ToList();
             if (shippings == null)
             {

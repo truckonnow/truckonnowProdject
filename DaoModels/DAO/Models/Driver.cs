@@ -20,6 +20,5 @@ namespace DaoModels.DAO.Models
         public Geolocations geolocations { get; set; }
         public virtual List<InspectionDriver> InspectionDrivers { get; set; }
         public bool IsFired { get; set; }
-        public string Comment { get; set; }
     }
 }
