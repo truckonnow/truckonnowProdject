@@ -121,7 +121,7 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     managerDispatch.AddNewReportDriver(fullName, driversLicenseNumber, description);
-                    actionResult = Redirect("Driver/Check");
+                    actionResult = Redirect("Check");
                 }
                 else
                 {

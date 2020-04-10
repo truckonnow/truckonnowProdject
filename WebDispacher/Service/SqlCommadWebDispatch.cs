@@ -152,8 +152,8 @@ namespace WebDispacher.Dao
             if (nameDriver != null || driversLicense != null)
             {
                 driverReports.AddRange(context.DriverReports.Where(d => 
-                (nameDriver == null || (nameDriver != null && d.FullName.Contains(nameDriver)))
-                && (driversLicense == null || (driversLicense != null && d.DriversLicenseNumber.Contains(driversLicense)))));
+                (nameDriver == null || nameDriver == d.FullName)
+                && (driversLicense == null || driversLicense == d.DriversLicenseNumber)));
             }
             return driverReports;
         }
