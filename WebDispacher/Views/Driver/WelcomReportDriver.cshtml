@@ -1,0 +1,89 @@
+﻿<div class="body">
+        <form action="" method="post">
+            <div class="content">
+                <h2 style="color: rgb(51, 51, 51);margin:15px;">Add New Report Driver</h2>
+                <p class="inpLabe">Full Name</p>
+                <input name="fullName" class="inpText validation" type="text" required />
+                <p class="inpLabe">Driver's License Number</p>
+                <input name="driversLicenseNumber" class="inpText validation" type="text" required />
+                <p class="inpLabe">Description</p>
+                <textarea name="description" class="textareaSt validation" required></textarea>
+            </div>
+            <input class="btnSave" value="Add report driver" type="submit" />
+        </form>
+    </div>
+<style>
+    * {
+        margin: 0px;
+    }
+
+    .content {
+        width: 40%;
+    }
+
+    .btnSave {
+        color: rgba(45,45,45,0.88);
+        background: none;
+        display: inline-block;
+        padding: 7px;
+        font-size: 16px;
+        font-weight: 400;
+        text-align: center;
+        border: 1px solid;
+        border-radius: 4px;
+        width: 130px;
+    }
+
+    btnSave:hover {
+        background-color: rgba(45,45,45,0.98);
+        transition: 0.5s;
+    }
+
+    .validation:invalid {
+        border-color: red;
+    }
+
+    .validation:valid {
+        border-color: #4ad73b;
+    }
+
+    .inpLabe {
+        font-size: 18px;
+        color: rgb(51, 51, 51);
+        margin-top: 10px;
+        margin-left: 5px;
+    }
+
+    .inpText {
+        width: 100%;
+        height: 25px;
+        border-width: 1px;
+        border-style: double;
+        border-radius: 4px;
+        padding: 2px;
+        font-size: 16px;
+        color: rgb(51, 51, 51);
+        border-color: rgba(51, 51, 51, 0.24);
+        margin-bottom: 15px;
+    }
+
+    .textareaSt {
+        width: 100%;
+        height: 125px;
+        border-width: 1px;
+        border-style: double;
+        border-radius: 4px;
+        padding: 2px;
+        font-size: 16px;
+        color: rgb(51, 51, 51);
+        border-color: rgba(51, 51, 51, 0.24);
+        margin-bottom: 15px;
+    }
+
+    .body {
+        margin-top: 30px;
+        margin-left: 5px;
+        margin-right: 5px;
+        padding: 10px;
+    }
+</style>

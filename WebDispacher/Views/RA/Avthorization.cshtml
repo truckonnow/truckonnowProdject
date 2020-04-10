@@ -1,37 +1,296 @@
-﻿<div class="bodySt">
-    <label class="labelHeadSt">
-        Sign in to Dashboard
-    </label><br /><br />
-    <form method="post" action="~/RA/Avthorization">
-        <label class="labelSt">
-            Login
-        </label><br/>
-        <input class="textInpSt" type="text" name="Email"/> <br>
-        <label class="labelSt">
-            Password
-        </label> <br/>
-        <input class="textInpSt" type="password" name="Password" /> <br>
-        <input class="btnInpSt" type="submit" value="Sign In" />
-    </form>
-    <span class="errSpanSt">
-        @ViewData["TextError"]
-    </span>
+﻿<div>
+    <div style="display:flex;margin:30px;">
+        <input class="btnInpSt" type="button" value="Driver report" onclick="ShowAlert()"/>
+    </div>
+    <div class="bodySt">
+        <label class="labelHeadSt">
+            Sign in to Dashboard
+        </label><br /><br />
+        <form method="post" action="~/RA/Avthorization">
+            <label class="labelSt">
+                Login
+            </label><br />
+            <input class="textInpSt" type="text" name="Email" /> <br>
+            <label class="labelSt">
+                Password
+            </label> <br />
+            <input class="textInpSt" type="password" name="Password" /> <br>
+            <input class="btnInpSt" type="submit" value="Sign In" />
+        </form>
+        <span class="errSpanSt">
+            @ViewData["TextError"]
+        </span>
+    </div>
+    <dialog @*onclick="HiddenDialog()"*@>
+        <content class="ng-modal-wrapper">
+            <div class="modal-dialog">
+                <div class="modal-dialog-content ng-scope multiple">
+                    <h1 class="ng-binding">Report Driver</h1>
+                    <div class="modal-dialog-content">
+                        <div>
+                            <p class="spanModal">Full Name</p>
+                            <input id="fullNameInp" type="text" class="modal-inp-text validation" required />
+                            <p class="spanModal">Driver's License Number</p>
+                            <input id="driversLicenseNumberInp" type="text" class="modal-inp-text validation" required />
+                            <p class="spanModal">Description</p><br />
+                            <textarea id="descriptionTA" type="text" class="modal-texAr-text validation" name="nameDoc" placeholder="Enter description" style="margin-left:5px;" required></textarea><br />
+                        </div>
+                    </div>
+                    <div class="modal-buttons flush ng-scope">
+                        <div class="right-buttons">
+                            <button class="btnModal red" onclick="HiddenDialog()">Close</button>
+                            <input class="btnModal green" type="button" value="Send Report" onclick="SendReport()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </content>
+    </dialog>
+
 </div>
 
+<script>
+    function SendReport() {
+        let xhr = new XMLHttpRequest();
+        let url = "@ViewBag.BaseUrl/Welcome/AddReport";
+        let fullNameInp = document.getElementById("fullNameInp");
+        let driversLicenseNumberInp = document.getElementById("driversLicenseNumberInp");
+        let descriptionTA = document.getElementById("descriptionTA");
+        if (descriptionTA.validity.valid && fullNameInp.validity.valid && driversLicenseNumberInp.validity.valid) {
+            let body = "fullName=" + encodeURIComponent(fullNameInp.value)
+                + "&driversLicenseNumber=" + encodeURIComponent(driversLicenseNumberInp.value)
+                + "&description=" + encodeURIComponent(descriptionTA.value);
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            let dialog = document.querySelector('dialog');
+            dialog.close();
+            xhr.onreadystatechange = function () {
+                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                    alert("Report submission Successful");
+                }
+                else if (this.status !== 200) {
+                    alert("Report submission failed");
+                }
+            }
+            xhr.send(body);
+        }
+    }
+
+    function ShowAlert() {
+        let dialog = document.querySelector('dialog');
+        dialog.show();
+    }
+
+    function HiddenDialog() {
+        let dialog = document.querySelector('dialog');
+        dialog.close();
+    }
+</script>
+
 <style>
+    p{
+        margin-bottom:2px;
+    }
+
+    modal-dialog .modal-dialog-content.multiple {
+        padding-bottom: 0;
+    }
+
+    .modal-dialog .modal-dialog-content {
+        padding: 10px 10px 10px 10px;
+        font-size: 15px;
+    }
+
+    .modal-dialog .modal-dialog-content {
+        transition: height 0.25s linear;
+    }
+
+    dialog {
+        position: fixed;
+        z-index: 9500;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+        font-size: 0;
+        text-align: center;
+    }
+
+    .modal-dialog {
+        position: absolute;
+        left: 30%;
+        top: 80px;
+        width: 700px;
+        text-align: left;
+        background-color: #fff;
+        -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15), 0px 0px 1px 1px rgba(0, 0, 0, 0.05);
+        -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15), 0px 0px 1px 1px rgba(0, 0, 0, 0.05);
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15), 0px 0px 1px 1px rgba(0, 0, 0, 0.05);
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        transition: height 0.25s linear;
+    }
+
+        .modal-dialog .modal-dialog-content h1 {
+            font-size: 19px;
+            line-height: 22px;
+            letter-spacing: -.026em;
+            font-family: 'SF UI Text Medium', 'SF UI Text Light', 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, Verdana, sans-serif;
+            font-weight: 500;
+            margin-bottom: 14px;
+        }
+
+    .ng-modal-wrapper {
+        display: inline-block;
+        vertical-align: middle;
+        padding: 50px 0;
+        width: 100%;
+        position: relative;
+    }
+
+    .modal-dialog .modal-dialog-content h1 {
+        font-size: 19px;
+        line-height: 22px;
+        letter-spacing: -.026em;
+        font-family: 'SF UI Text Medium', 'SF UI Text Light', 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, Verdana, sans-serif;
+        font-weight: 500;
+        margin-bottom: 14px;
+    }
+
+    .modal-dialog .modal-dialog-content + .modal-dialog-content {
+        padding-top: 0;
+    }
+
+    .modal-dialog .modal-dialog-content {
+        padding: 20px 30px 20px 10px;
+        font-size: 15px;
+    }
+
+    .modal-dialog .modal-dialog-content {
+        transition: height 0.25s linear;
+    }
+
+    .tb-modal__body {
+        box-sizing: border-box;
+        padding: 18px 30px 31px;
+    }
+
+    .modal-buttons {
+        border-top: 1px solid #e5e5e5;
+        padding: 15px;
+        display: inline-block;
+        width: 100%;
+        zoom: 1;
+    }
+
+        .modal-buttons button, input {
+            margin-top: 0;
+        }
+
+        button.btnModal, a.btn.btnModal, .modal-buttons > ul li a.btnModal {
+            font-family: 'SF UI Text Medium', 'SF UI Text Light', 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, Verdana, sans-serif;
+            font-weight: 500;
+        }
+
+        .modal-dialog button, .modal-dialog input, .modal-dialog label, a.btn, .modal-buttons > ul li a {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+            cursor: pointer;
+            padding: 3px 10px 4px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            margin-top: 2px;
+            background: none;
+            font-size: 15px;
+            line-height: 19px;
+            letter-spacing: -.016em;
+            -moz-transition-property: all;
+            -o-transition-property: all;
+            -webkit-transition-property: all;
+            transition-property: all;
+            -moz-transition-duration: 300ms;
+            -o-transition-duration: 300ms;
+            -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
+        }
+
+        .modal-buttons .right-buttons {
+            float: right;
+        }
+
+    .spanModal {
+        float: left;
+        font-family: 'SF UI Text Medium', 'SF UI Text Light', 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, Verdana, sans-serif;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 16px;
+        letter-spacing: -.006em;
+        margin-right: 4px;
+        clear: right;
+    }
+
+    .modal-texAr-text {
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        border: 1px solid #d9d9d9;
+        padding: 5px 8px;
+        width: 630px;
+        max-width: 630px;
+        min-width: 630px;
+        height: 200px;
+        max-height: 400px;
+        min-height: 150px;
+        line-height: 22px;
+    }
+
+    .modal-inp-text {
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        border: 1px solid #d9d9d9;
+        padding: 5px 8px;
+        width: 630px;
+        max-width: 630px;
+        min-width: 630px;
+    }
+
+    .green {
+        border: 1px solid #95f816;
+        outline: none;
+        color: #95f816;
+    }
+
+    .red {
+        border: 1px solid #ff4614;
+        outline: none;
+        color: #ff4614;
+    }
+
+    .blue {
+        border: 1px solid #3df;
+        outline: none;
+        color: #3df;
+    }
+
     .bodySt {
         position:absolute;
         top:35%;
         left:35%;
     }
 
-    /*.validation:invalid {
+    .validation:invalid {
         border-color: red;
     }
 
     .validation:valid {
         border-color: #4ad73b;
-    }*/
+    }
 
     .textInpSt {
         margin: 5px;
@@ -89,5 +348,13 @@
         color: red;
         font-size: 16px;
         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .ng-modal-wrapper {
+        display: inline-block;
+        vertical-align: middle;
+        padding: 50px 0;
+        width: 100%;
+        position: relative;
     }
 </style>

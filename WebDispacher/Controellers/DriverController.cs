@@ -140,6 +140,43 @@ namespace WebDispacher.Controellers
         }
 
         [HttpGet]
+        [Route("Welcome/AddReport")]
+        public IActionResult WelcomeAddReport()
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                ViewData["hidden"] = "hidden";
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                actionResult = View("WelcomReportDriver");
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult;
+        }
+
+        [HttpPost]
+        [Route("Welcome/AddReport")]
+        public IActionResult WelcomeAddReport(string fullName, string driversLicenseNumber, string description)
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                ViewData["hidden"] = "hidden";
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                managerDispatch.AddNewReportDriver(fullName, driversLicenseNumber, description);
+                actionResult = Redirect(Config.BaseReqvesteUrl);
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult;
+        }
+
+        [HttpGet]
         [Route("Driver/Drivers/CreateDriver")]
         public IActionResult CreateDriver()
         {
