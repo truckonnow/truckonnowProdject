@@ -5,6 +5,7 @@
     <nav>
         <input class="btnSt activeBtn" type="button" value="Drivers" onclick="window.location.href='@Url.Action("Drivers", "Driver")';" />
         <input style="width:150px" class="btnSt" type="button" value="Driver check" onclick="window.location.href='@Url.Action("Check", "Driver")';" />
+        <input style="width:150px" class="btnSt" type="button" value="Report driver" onclick="window.location.href='@Url.Action("AddReport", "Driver")';" />
     </nav>
     <div class="contentBody">
         @for (int i = 0; i < ViewBag.Drivers.Count; i++)

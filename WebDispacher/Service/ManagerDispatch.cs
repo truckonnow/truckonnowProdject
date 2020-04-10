@@ -117,6 +117,11 @@ namespace WebDispacher.Service
             return _sqlEntityFramworke.GetDriversReportsDb(commpanyID, nameDriver, driversLicense);
         }
 
+        internal void AddNewReportDriver(string fullName, string driversLicenseNumber, string description)
+        {
+            _sqlEntityFramworke.AddNewReportDriverDb(fullName, driversLicenseNumber, description);
+        }
+
         internal List<Trailer> GetTrailers()
         {
             return _sqlEntityFramworke.GetTrailersDb();

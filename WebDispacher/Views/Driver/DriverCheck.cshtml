@@ -9,29 +9,24 @@
     <nav>
         <input class="btnSt" type="button" value="Drivers" onclick="window.location.href='@Url.Action("Drivers", "Driver")';" />
         <input style="width:150px" class="btnSt activeBtn" type="button" value="Driver check" onclick="window.location.href='@Url.Action("Check", "Driver")';" />
+        <input style="width:150px" class="btnSt" type="button" value="Report driver" onclick="window.location.href='@Url.Action("AddReport", "Driver")';" />
     </nav>
     <div class="contentBody">
         @for (int i = 0; i < ViewBag.DriverReports.Count; i++)
         {
             <div class="contentDriver">
                 <div>
-                    <p class="inpData">@ViewBag.DriverReports[i].FullName</p>
-                    <span class="inpData"><b>Driver's License:</b> @ViewBag.DriverReports[i].DriversLicenseNumber</span>
+                    <p class="inpData" style="white-space:nowrap;"><b>Full name:</b> @ViewBag.DriverReports[i].FullName</p>
+                    <span class="inpData" style="white-space:nowrap;"><b>Driver's License:</b> @ViewBag.DriverReports[i].DriversLicenseNumber</span>
 
                 </div>
-                <div style="margin:10px;">
-                    <p class="inpData"><b>Comment:</b></p>
+                <div style="margin:10px;border-width:1px;border-top:solid;border-left:solid;border-color:darkblue;padding:5px;">
                     <p class="inpData">@ViewBag.DriverReports[i].Comment</p>
                 </div>
             </div>
         }
     </div>
 </div>
-
-<script>
-   
-</script>
-
 <style>
     * {
         margin: 0px;

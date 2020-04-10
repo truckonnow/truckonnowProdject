@@ -78,6 +78,66 @@ namespace WebDispacher.Controellers
             return actionResult;
         }
 
+        [HttpGet]
+        [Route("Driver/AddReport")]
+        public IActionResult AddReport()
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    actionResult = View("ReportDriver");
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult;
+        }
+
+        [HttpPost]
+        [Route("Driver/AddReport")]
+        public IActionResult AddReport(string fullName, string driversLicenseNumber, string description)
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                string key = null;
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                Request.Cookies.TryGetValue("KeyAvtho", out key);
+                if (managerDispatch.CheckKey(key))
+                {
+                    managerDispatch.AddNewReportDriver(fullName, driversLicenseNumber, description);
+                    actionResult = Redirect("Driver/Check");
+                }
+                else
+                {
+                    if (Request.Cookies.ContainsKey("KeyAvtho"))
+                    {
+                        Response.Cookies.Delete("KeyAvtho");
+                    }
+                    actionResult = Redirect(Config.BaseReqvesteUrl);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult;
+        }
 
         [HttpGet]
         [Route("Driver/Drivers/CreateDriver")]

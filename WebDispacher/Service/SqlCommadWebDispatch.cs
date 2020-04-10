@@ -114,6 +114,17 @@ namespace WebDispacher.Dao
             return emailDriver;
         }
 
+        internal void AddNewReportDriverDb(string fullName, string driversLicenseNumber, string description)
+        {
+            context.DriverReports.Add(new DriverReport()
+            {
+                Comment = description,
+                DriversLicenseNumber = driversLicenseNumber,
+                FullName = fullName
+            });
+            context.SaveChanges();
+        }
+
         internal int CheckTokenFoDriverDb(string idDriver, string token)
         {
             int isStateActual = 0;
