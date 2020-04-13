@@ -107,6 +107,11 @@ namespace WebDispacher.Service
             return isStateActual;
         }
 
+        internal int CheckReportDriver(string fullName, string driversLicenseNumber)
+        {
+            return _sqlEntityFramworke.CheckReportDriverDb(fullName, driversLicenseNumber);
+        }
+
         internal Trailer GetTrailerkByPlate(string trailerPlate)
         {
             return _sqlEntityFramworke.GetTrailerByPlateDb(trailerPlate);

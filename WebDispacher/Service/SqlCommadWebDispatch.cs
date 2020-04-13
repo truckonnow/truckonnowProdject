@@ -103,6 +103,16 @@ namespace WebDispacher.Dao
             return isStateActual;
         }
 
+        internal int CheckReportDriverDb(string nameDriver, string driversLicense)
+        {
+            List<DriverReport> driverReports = new List<DriverReport>();
+            if (nameDriver != null || driversLicense != null)
+            {
+                driverReports.AddRange(context.DriverReports.Where(d => nameDriver == d.FullName && driversLicense == d.DriversLicenseNumber));
+            }
+            return driverReports.Count;
+        }
+
         internal string GetEmailDriverDb(string idDriver)
         {
             string emailDriver = "";

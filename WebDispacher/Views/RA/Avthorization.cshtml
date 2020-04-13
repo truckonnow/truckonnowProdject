@@ -1,6 +1,7 @@
 ﻿<div>
     <div style="display:flex;margin:30px;">
-        <input class="btnInpSt" type="button" value="Driver report" onclick="ShowAlert()"/>
+        <input class="btnInpSt" type="button" value="Driver report" onclick="ShowAlert(0)" />
+        <input class="btnInpSt" type="button" value="Check driver" onclick="ShowAlert(1)" />
     </div>
     <div class="bodySt">
         <label class="labelHeadSt">
@@ -21,7 +22,7 @@
             @ViewData["TextError"]
         </span>
     </div>
-    <dialog @*onclick="HiddenDialog()"*@>
+    <dialog id="dialog0">
         <content class="ng-modal-wrapper">
             <div class="modal-dialog">
                 <div class="modal-dialog-content ng-scope multiple">
@@ -38,7 +39,7 @@
                     </div>
                     <div class="modal-buttons flush ng-scope">
                         <div class="right-buttons">
-                            <button class="btnModal red" onclick="HiddenDialog()">Close</button>
+                            <button class="btnModal red" onclick="HiddenDialog(0)">Close</button>
                             <input class="btnModal green" type="button" value="Send Report" onclick="SendReport()" />
                         </div>
                     </div>
@@ -46,7 +47,30 @@
             </div>
         </content>
     </dialog>
-
+    <dialog id="dialog1">
+        <content class="ng-modal-wrapper">
+            <div class="modal-dialog">
+                <div class="modal-dialog-content ng-scope multiple">
+                    <h1 class="ng-binding">Check driver report</h1>
+                    <div class="modal-dialog-content">
+                        <div>
+                            <p class="spanModal">Full Name</p>
+                            <input id="fullNameInp1" type="text" class="modal-inp-text validation" required />
+                            <p class="spanModal">Driver's License Number</p>
+                            <input id="driversLicenseNumberInp1" type="text" class="modal-inp-text validation" required />
+                            <span id="noReport" style="color:red;" hidden>According to such driver data, there are no reports</span>
+                        </div>
+                    </div>
+                    <div class="modal-buttons flush ng-scope">
+                        <div class="right-buttons">
+                            <button class="btnModal red" onclick="HiddenDialog(1)">Close</button>
+                            <input class="btnModal green" type="button" value="Check Report" onclick="CheckReport()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </content>
+    </dialog>
 </div>
 
 <script>
@@ -62,8 +86,7 @@
                 + "&description=" + encodeURIComponent(descriptionTA.value);
             xhr.open("POST", url, true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            let dialog = document.querySelector('dialog');
-            dialog.close();
+            HiddenDialog(0);
             xhr.onreadystatechange = function () {
                 if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                     alert("Report submission Successful");
@@ -76,13 +99,42 @@
         }
     }
 
-    function ShowAlert() {
-        let dialog = document.querySelector('dialog');
+    function CheckReport() {
+        let xhr = new XMLHttpRequest();
+        let url = "@ViewBag.BaseUrl/Welcome/Driver/Check/Report";
+        let fullNameInp = document.getElementById("fullNameInp1");
+        let driversLicenseNumberInp = document.getElementById("driversLicenseNumberInp1");
+        if (fullNameInp.validity.valid && driversLicenseNumberInp.validity.valid) {
+            let body = "fullName=" + encodeURIComponent(fullNameInp.value)
+                + "&driversLicenseNumber=" + encodeURIComponent(driversLicenseNumberInp.value);
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            HiddenDialog(0);
+            xhr.onreadystatechange = function () {
+                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                    let responsArr = this.responseText.split(',');
+                    if (responsArr[0] == "true") {
+                        document.location.href = "@ViewBag.BaseUrl/Welcome/Driver/Check?nameDriver=" + responsArr[1] + "&driversLicense=" + responsArr[2] + "&countDriverReports=" + responsArr[3];
+                    }
+                    else if (responsArr[0] == "false") {
+                        noReport.hidden = "";
+                    }
+                }
+                else if (this.status !== 200) {
+                    alert("Server error");
+                }
+            }
+            xhr.send(body);
+        }
+    }
+
+    function ShowAlert(numAlert) {
+        let dialog = document.getElementById('dialog' + numAlert);
         dialog.show();
     }
 
-    function HiddenDialog() {
-        let dialog = document.querySelector('dialog');
+    function HiddenDialog(numAlert) {
+        let dialog = document.getElementById('dialog' + numAlert);
         dialog.close();
     }
 </script>

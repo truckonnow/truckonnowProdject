@@ -79,6 +79,55 @@ namespace WebDispacher.Controellers
         }
 
         [HttpGet]
+        [Route("Welcome/Driver/Check")]
+        public IActionResult WelcomeDriverCheckReport(string commpanyID, string nameDriver, string driversLicense, string countDriverReports)
+        {
+            IActionResult actionResult = null;
+            try
+            {
+                ViewData["hidden"] = "hidden";
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                ViewBag.DriversLicense = driversLicense;
+                ViewBag.NameDriver = nameDriver;
+                ViewBag.CountDriverReports = countDriverReports;
+                ViewBag.DriverReports = managerDispatch.GetDriversReport(commpanyID, nameDriver, driversLicense);
+                actionResult = View("WelcomDriverCheck");
+
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult;
+        }
+
+        [HttpPost]
+        [Route("Welcome/Driver/Check/Report")]
+        public string WelcomeAddReport(string fullName, string driversLicenseNumber)
+        {
+            string actionResult = null;
+            try
+            {
+                ViewData["hidden"] = "hidden";
+                ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                int countDriverReports = managerDispatch.CheckReportDriver(fullName, driversLicenseNumber);
+                if (countDriverReports > 0)
+                {
+                    actionResult = $"true,{fullName},{driversLicenseNumber},{countDriverReports}";
+                }
+                else
+                {
+                    actionResult = "false";
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return actionResult;
+        }
+
+        [HttpGet]
         [Route("Driver/AddReport")]
         public IActionResult AddReport()
         {
