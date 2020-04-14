@@ -1247,6 +1247,76 @@
   <ItemGroup>
     <BundleResource Include="Resources\scanCruisemotorcycle.jpg" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup />
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle19.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\scanTricycle.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Tricycle15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\tricycle16.png" />
+  </ItemGroup>
 </Project>
