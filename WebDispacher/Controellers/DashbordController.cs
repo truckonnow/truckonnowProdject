@@ -33,7 +33,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/NewLoad")]
-        public IActionResult NewLoad(int page)
+        public async Task<IActionResult> NewLoad(int page)
         {
             IActionResult actionResult = null;
             try
@@ -43,9 +43,19 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    ViewBag.Orders = managerDispatch.GetOrders("NewLoad", page);
-                    ViewBag.Drivers = managerDispatch.GetDrivers();
-                    ViewBag.count = managerDispatch.GetCountPage("NewLoad");
+                    await Task.WhenAll(
+                    Task.Run(async() =>
+                    {
+                        ViewBag.Orders = await managerDispatch.GetOrders("NewLoad", page);
+                    }),
+                    Task.Run(async() =>
+                    {
+                        ViewBag.Drivers = await managerDispatch.GetDrivers();
+                    }),
+                    Task.Run(async() =>
+                    {
+                        ViewBag.count = await managerDispatch.GetCountPage("NewLoad");
+                    }));
                     actionResult = View("NewLoad");
                 }
                 else
@@ -173,30 +183,47 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Archived")]
-        public IActionResult Archived(int page)
+        public async Task<IActionResult> Archived(int page)
         {
             IActionResult actionResult = null;
             try
             {
                 string key = null;
                 ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                List<Shipping> shippings = null;
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                     List<Shipping> shippings = managerDispatch.GetOrders("Archived,Billed", page);
-                    if (shippings.Count < 20)
+                    await Task.WhenAll(
+                    Task.Run(async() =>
                     {
-                        shippings.AddRange(managerDispatch.GetOrders("Archived,Paid", page));
-                    }
-                    if (shippings.Count < 20)
+                        shippings = await managerDispatch.GetOrders("Archived,Billed", page);
+                        if (shippings.Count < 20)
+                        {
+                            shippings.AddRange(await managerDispatch.GetOrders("Archived,Paid", page));
+                        }
+                        if (shippings.Count < 20)
+                        {
+                            shippings.AddRange(await managerDispatch.GetOrders("Archived", page));
+                        }
+                        ViewBag.Orders = shippings;
+                    }),
+                    Task.Run(async () =>
                     {
-                        shippings.AddRange(managerDispatch.GetOrders("Archived", page));
-                    }
-                    ViewBag.Orders = shippings;
-                    ViewBag.Drivers = managerDispatch.GetDrivers();
-                    ViewBag.count = managerDispatch.GetCountPage("Archived");
-                    ViewBag.count =+ managerDispatch.GetCountPage("Archived,Billed");
-                    ViewBag.count =+ managerDispatch.GetCountPage("Archived,Paid");
+                        ViewBag.count = await managerDispatch.GetCountPage("Archived");
+                    }),
+                    Task.Run(async() =>
+                    {
+                        ViewBag.count = await managerDispatch.GetCountPage("Archived,Billed");
+                    }),
+                    Task.Run(async() =>
+                    {
+                        ViewBag.count = await managerDispatch.GetCountPage("Archived,Paid");
+                    }),
+                    Task.Run(async() =>
+                    {
+                        ViewBag.Drivers = await managerDispatch.GetDrivers();
+                    }));
                     actionResult = View("Archived");
                 }
                 else
@@ -216,7 +243,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Assigned")]
-        public IActionResult Assigned(int page)
+        public async Task<IActionResult> Assigned(int page)
         {
             IActionResult actionResult = null;
             try
@@ -226,9 +253,19 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    ViewBag.Orders = managerDispatch.GetOrders("Assigned", page);
-                    ViewBag.Drivers = managerDispatch.GetDrivers();
-                    ViewBag.count = managerDispatch.GetCountPage("Assigned");
+                    await Task.WhenAll(
+                    Task.Run(async () =>
+                    {
+                        ViewBag.Orders = await managerDispatch.GetOrders("Assigned", page);
+                    }),
+                    Task.Run(async () =>
+                    {
+                        ViewBag.Drivers = await managerDispatch.GetDrivers();
+                    }),
+                    Task.Run(async () =>
+                    {
+                        ViewBag.count = await managerDispatch.GetCountPage("Assigned");
+                    }));
                     actionResult = View("Assigned");
                 }
                 else
@@ -248,7 +285,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Billed")]
-        public IActionResult Billed(int page)
+        public async Task<IActionResult> Billed(int page)
         {
             IActionResult actionResult = null;
             try
@@ -258,9 +295,19 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    ViewBag.Orders = managerDispatch.GetOrders("Delivered,Billed", page);
-                    ViewBag.Drivers = managerDispatch.GetDrivers();
-                    ViewBag.count = managerDispatch.GetCountPage("Delivered,Billed");
+                    await Task.WhenAll(
+                    Task.Run(async () =>
+                    {
+                        ViewBag.Orders = await managerDispatch.GetOrders("Delivered,Billed", page);
+                    }),
+                    Task.Run(async () =>
+                    {
+                        ViewBag.Drivers = await managerDispatch.GetDrivers();
+                    }),
+                    Task.Run(async () =>
+                    {
+                        ViewBag.count = await managerDispatch.GetCountPage("Delivered,Billed");
+                    }));
                     actionResult = View("Billed");
                 }
                 else
@@ -280,7 +327,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Deleted")]
-        public IActionResult Deleted(int page)
+        public async Task<IActionResult> Deleted(int page)
         {
             IActionResult actionResult = null;
             try
@@ -290,20 +337,37 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    List<Shipping> shippings = managerDispatch.GetOrders("Deleted,Billed", page);
-                    if (shippings.Count < 20)
+                    List<Shipping> shippings = null;
+                    await Task.WhenAll(
+                    Task.Run(async () =>
                     {
-                        shippings.AddRange(managerDispatch.GetOrders("Deleted,Paid", page));
-                    }
-                    if (shippings.Count < 20)
+                        shippings = await managerDispatch.GetOrders("Deleted,Billed", page);
+                        if (shippings.Count < 20)
+                        {
+                            shippings.AddRange(await managerDispatch.GetOrders("Deleted,Paid", page));
+                        }
+                        if (shippings.Count < 20)
+                        {
+                            shippings.AddRange(await managerDispatch.GetOrders("Deleted", page));
+                        }
+                        ViewBag.Orders = shippings;
+                    }),
+                    Task.Run(async() =>
                     {
-                        shippings.AddRange(managerDispatch.GetOrders("Deleted", page));
-                    }
-                    ViewBag.Orders = shippings;
-                    //ViewBag.Drivers = managerDispatch.GetDrivers();
-                    ViewBag.count = managerDispatch.GetCountPage("Deleted");
-                    ViewBag.count =+ managerDispatch.GetCountPage("Deleted,Billed");
-                    ViewBag.count =+ managerDispatch.GetCountPage("Deleted,Paid");
+                        ViewBag.count = await managerDispatch.GetCountPage("Deleted");
+                    }),
+                    Task.Run(async() =>
+                    {
+                        ViewBag.count = await managerDispatch.GetCountPage("Deleted,Billed");
+                    }),
+                    Task.Run(async() =>
+                    {
+                        ViewBag.count = await managerDispatch.GetCountPage("Deleted,Paid");
+                    }),
+                    Task.Run(async() =>
+                    {
+                        ViewBag.Drivers = await managerDispatch.GetDrivers();
+                    }));
                     actionResult = View("Deleted");
                 }
                 else
@@ -323,7 +387,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Delivered")]
-        public IActionResult Delivered(int page)
+        public async Task<IActionResult> Delivered(int page)
         {
             IActionResult actionResult = null;
             try
@@ -334,15 +398,29 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     List<Shipping> shippings = new List<Shipping>();
-                    shippings.AddRange(managerDispatch.GetOrders("Delivered,Paid", page));
-                    if (shippings.Count < 20)
+
+                    await Task.WhenAll(
+                    Task.Run(async () =>
                     {
-                        shippings.AddRange(managerDispatch.GetOrders("Delivered,Billed", page));
-                    }
-                    ViewBag.Orders = shippings;
-                    ViewBag.Drivers = managerDispatch.GetDrivers();
-                    ViewBag.count += managerDispatch.GetCountPage("Delivered,Paid");
-                    ViewBag.count += managerDispatch.GetCountPage("Delivered,Billed");
+                        shippings.AddRange(await managerDispatch.GetOrders("Delivered,Paid", page));
+                        if (shippings.Count < 20)
+                        {
+                            shippings.AddRange(await managerDispatch.GetOrders("Delivered,Billed", page));
+                        }
+                        ViewBag.Orders = shippings;
+                    }),
+                    Task.Run(async() =>
+                    {
+                        ViewBag.count = await managerDispatch.GetCountPage("Delivered,Billed");
+                    }),
+                    Task.Run(async() =>
+                    {
+                        ViewBag.count = await managerDispatch.GetCountPage("Delivered,Paid");
+                    }),
+                    Task.Run(async() =>
+                    {
+                        ViewBag.Drivers = await managerDispatch.GetDrivers();
+                    }));
                     actionResult = View("Delivered");
                 }
                 else
@@ -362,7 +440,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Paid")]
-        public IActionResult Paid(int page)
+        public async Task<IActionResult> Paid(int page)
         {
             IActionResult actionResult = null;
             try
@@ -372,9 +450,19 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    ViewBag.Orders = managerDispatch.GetOrders("Delivered,Paid", page);
-                    ViewBag.Drivers = managerDispatch.GetDrivers();
-                    ViewBag.count = managerDispatch.GetCountPage("Delivered,Paid");
+                    await Task.WhenAll(
+                    Task.Run(async () =>
+                    {
+                        ViewBag.Orders = await managerDispatch.GetOrders("Delivered,Paid", page);
+                    }),
+                    Task.Run(async () =>
+                    {
+                        ViewBag.Drivers = await managerDispatch.GetDrivers();
+                    }),
+                    Task.Run(async () =>
+                    {
+                        ViewBag.count = await managerDispatch.GetCountPage("Delivered,Paid");
+                    }));
                     actionResult = View("Paid");
                 }
                 else
@@ -394,7 +482,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Pickedup")]
-        public IActionResult Pickedup(int page)
+        public async Task<IActionResult> Pickedup(int page)
         {
             IActionResult actionResult = null;
             try
@@ -404,9 +492,19 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    ViewBag.Orders = managerDispatch.GetOrders("Picked up", page);
-                    ViewBag.Drivers = managerDispatch.GetDrivers();
-                    ViewBag.count = managerDispatch.GetCountPage("Pickedup");
+                    await Task.WhenAll(
+                    Task.Run(async () =>
+                    {
+                        ViewBag.Orders = await managerDispatch.GetOrders("Picked up", page);
+                    }),
+                    Task.Run(async () =>
+                    {
+                        ViewBag.Drivers = await managerDispatch.GetDrivers();
+                    }),
+                    Task.Run(async () =>
+                    {
+                        ViewBag.count = await managerDispatch.GetCountPage("Picked up");
+                    }));
                     actionResult = View("Pickedup");
                 }
                 else

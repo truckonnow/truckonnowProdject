@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using WebDispacher.Service;
 
 namespace WebDispacher.Controellers
@@ -31,19 +32,27 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Doc/{idDriver}")]
-        public IActionResult GoToViewTruckDoc(string idDriver)
+        public async Task<IActionResult> GoToViewTruckDoc(string idDriver)
         {
             IActionResult actionResult = null;
             ViewData["hidden"] = "hidden";
 
-            Truck truck = managerDispatch.GetTruck(idDriver);
-            ViewBag.Truck = truck;
+            Truck truck = null;
+            Trailer trailer = null;
 
-            Trailer trailer = managerDispatch.GetTrailer(idDriver);
-            ViewBag.Trailer = trailer;
-
-            ViewBag.TruckDoc = managerDispatch.GetTruckDoc((truck != null ? truck.Id : 0).ToString());
-            ViewBag.TrailerDoc = managerDispatch.GetTraileDoc((trailer != null ? trailer.Id : 0).ToString());
+            await Task.WhenAll(
+            Task.Run(async() => 
+            {
+                truck = await managerDispatch.GetTruck(idDriver); 
+                ViewBag.Truck = truck;
+                ViewBag.TruckDoc = await managerDispatch.GetTruckDoc((truck != null ? truck.Id : 0).ToString());
+            }),
+            Task.Run(async() =>
+            {
+                trailer = await managerDispatch.GetTrailer(idDriver);
+                ViewBag.Trailer = trailer;
+                ViewBag.TrailerDoc = await managerDispatch.GetTraileDoc((trailer != null ? trailer.Id : 0).ToString());
+            }));
 
             actionResult = View($"DocDriver");
             return actionResult;
@@ -51,19 +60,27 @@ namespace WebDispacher.Controellers
 
         [Route("Doc")]
         [HttpGet]
-        public IActionResult GoToViewTruckDoc(string truckPlate, string trailerPlate)
+        public async Task<IActionResult> GoToViewTruckDoc(string truckPlate, string trailerPlate)
         {
             IActionResult actionResult = null;
-            //ViewData["hidden"] = "hidden";
+            ViewData["hidden"] = "hidden";
 
-            Truck truck = managerDispatch.GetTruckByPlate(truckPlate);
-            ViewBag.Truck = truck;
+            Truck truck = null;
+            Trailer trailer = null;
 
-            Trailer trailer = managerDispatch.GetTrailerkByPlate(trailerPlate);
-            ViewBag.Trailer = trailer;
-
-            ViewBag.TruckDoc = managerDispatch.GetTruckDoc((truck != null ? truck.Id : 0).ToString());
-            ViewBag.TrailerDoc = managerDispatch.GetTraileDoc((trailer != null ? trailer.Id : 0).ToString());
+            await Task.WhenAll(
+            Task.Run(async () =>
+            {
+                truck = await managerDispatch.GetTruckByPlate(truckPlate);
+                ViewBag.Truck = truck;
+                ViewBag.TruckDoc = await managerDispatch.GetTruckDoc((truck != null ? truck.Id : 0).ToString());
+            }),
+            Task.Run(async () =>
+            {
+                trailer = await managerDispatch.GetTrailerkByPlate(trailerPlate);
+                ViewBag.Trailer = trailer;
+                ViewBag.TrailerDoc = await managerDispatch.GetTraileDoc((trailer != null ? trailer.Id : 0).ToString());
+            }));
 
             actionResult = View($"DocDriver");
             return actionResult;

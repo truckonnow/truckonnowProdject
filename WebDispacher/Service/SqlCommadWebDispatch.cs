@@ -61,26 +61,26 @@ namespace WebDispacher.Dao
             } 
         }
 
-        internal Truck GetTruckDb(string idDriver)
+        internal async Task<Truck> GetTruckDb(string idDriver)
         {
             Truck truck = null;
-            Driver driver = context.Drivers.Include(d => d.InspectionDrivers).FirstOrDefault(d => d.Id.ToString() == idDriver);
+            Driver driver = await context.Drivers.Include(d => d.InspectionDrivers).FirstOrDefaultAsync(d => d.Id.ToString() == idDriver);
             if (driver != null && driver.InspectionDrivers != null && driver.InspectionDrivers.Count != 0)
             {
                 InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
-                truck = context.Trucks.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck);
+                truck = await context.Trucks.FirstOrDefaultAsync(t => t.Id == inspectionDriver.IdITruck);
             }
             return truck; 
         }
 
-        internal Trailer GetTrailerDb(string idDriver)
+        internal async Task<Trailer> GetTrailerDb(string idDriver)
         {
             Trailer trailer = null;
-            Driver driver = context.Drivers.Include(d => d.InspectionDrivers).FirstOrDefault(d => d.Id.ToString() == idDriver);
+            Driver driver = await context.Drivers.Include(d => d.InspectionDrivers).FirstOrDefaultAsync(d => d.Id.ToString() == idDriver);
             if (driver != null && driver.InspectionDrivers != null && driver.InspectionDrivers.Count != 0)
             {
                 InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
-                trailer = context.Trailers.FirstOrDefault(t => t.Id == inspectionDriver.IdITrailer);
+                trailer = await context.Trailers.FirstOrDefaultAsync(t => t.Id == inspectionDriver.IdITrailer);
             }
             return trailer;
         }
@@ -146,14 +146,14 @@ namespace WebDispacher.Dao
             return isStateActual;
         }
 
-        internal Truck GetTruckByPlateDb(string truckPlate)
+        internal async Task<Truck> GetTruckByPlateDb(string truckPlate)
         {
-            return context.Trucks.FirstOrDefault(t => t.PlateTruk == truckPlate);
+            return await context.Trucks.FirstOrDefaultAsync(t => t.PlateTruk == truckPlate);
         }
 
-        internal Trailer GetTrailerByPlateDb(string trailerPlate)
+        internal async Task<Trailer> GetTrailerByPlateDb(string trailerPlate)
         {
-            return context.Trailers.FirstOrDefault(t => t.Plate == trailerPlate);
+            return await context.Trailers.FirstOrDefaultAsync(t => t.Plate == trailerPlate);
         }
 
         internal List<DriverReport> GetDriversReportsDb(string commpanyID, string nameDriver, string driversLicense)
@@ -217,12 +217,12 @@ namespace WebDispacher.Dao
             return context.Contacts.ToList();
         }
 
-        public List<Driver> GetDriversInDb()
+        public async Task<List<Driver>> GetDriversInDb()
         {
-            return context.Drivers
+            return await context.Drivers
                 .Include(d => d.InspectionDrivers)
                 .Include(d => d.geolocations)
-                .ToList();
+                .ToListAsync();
         }
 
         public async void RecurentOnDeleted(string id)
@@ -413,14 +413,14 @@ namespace WebDispacher.Dao
             return context.Shipping.FirstOrDefault(s => s.Id == shipping.Id) != null;
         }
 
-        internal List<DocumentTruckAndTrailers> GetTruckDocDB(string id)
+        internal async Task<List<DocumentTruckAndTrailers>> GetTruckDocDB(string id)
         {
-            return context.DocumentTruckAndTrailers.Where(d => d.TypeTr == "Truck" && d.IdTr.ToString() == id).ToList();
+            return await context.DocumentTruckAndTrailers.Where(d => d.TypeTr == "Truck" && d.IdTr.ToString() == id).ToListAsync();
         }
 
-        internal List<DocumentTruckAndTrailers> GetTrailerDocDB(string id)
+        internal async Task<List<DocumentTruckAndTrailers>> GetTrailerDocDB(string id)
         {
-            return context.DocumentTruckAndTrailers.Where(d => d.TypeTr == "Trailer" && d.IdTr.ToString() == id).ToList();
+            return await context.DocumentTruckAndTrailers.Where(d => d.TypeTr == "Trailer" && d.IdTr.ToString() == id).ToListAsync();
         }
 
         internal string GetDocumentDb(string id)
@@ -567,10 +567,10 @@ namespace WebDispacher.Dao
             return context.User.FirstOrDefault(u => u.KeyAuthorized == key) != null;
         }
 
-        public List<Shipping> GetShippings(string status, int page)
+        public async Task<List<Shipping>> GetShippings(string status, int page)
         {
             List<Shipping> shipping = null;
-            shipping = context.Shipping.Where(s => s.CurrentStatus == status).ToList();
+            shipping = await context.Shipping.Where(s => s.CurrentStatus == status).ToListAsync();
             
             if (page != 0)
             {
@@ -597,10 +597,10 @@ namespace WebDispacher.Dao
             return shipping;
         }
 
-        public int GetCountPageInDb(string status)
+        public async Task<int> GetCountPageInDb(string status)
         {
             int countPage = 0;
-            List<Shipping> shipping = context.Shipping.Where(s => s.CurrentStatus == status).ToList();
+            List<Shipping> shipping = await context.Shipping.Where(s => s.CurrentStatus == status).ToListAsync();
             countPage = shipping.Count / 20;
             int remainderPage = shipping.Count % 20;
             countPage = remainderPage > 0 ? countPage + 1 : countPage;

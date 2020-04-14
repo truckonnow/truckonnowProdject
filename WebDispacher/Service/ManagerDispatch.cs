@@ -19,9 +19,9 @@ namespace WebDispacher.Service
             _sqlEntityFramworke = new SqlCommadWebDispatch();
         }
         
-        public List<Driver> GetDrivers()
+        public async Task<List<Driver>> GetDrivers()
         {
-            return _sqlEntityFramworke.GetDriversInDb();
+            return await _sqlEntityFramworke.GetDriversInDb();
         }
 
         public void DeletedOrder(string id)
@@ -34,10 +34,10 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.RecurentOnArchived(id);
         }
 
-        internal void AddNewOrder(string urlPage)
+        internal async Task AddNewOrder(string urlPage)
         {
             GetDataCentralDispatch getDataCentralDispatch = new GetDataCentralDispatch();
-            Shipping shipping = getDataCentralDispatch.GetShipping(urlPage);
+            Shipping shipping = await getDataCentralDispatch.GetShipping(urlPage);
             _sqlEntityFramworke.AddOrder(shipping);
         }
 
@@ -56,14 +56,14 @@ namespace WebDispacher.Service
             return _sqlEntityFramworke.GetIdTruckAdnTrailarDb(idDriver);
         }
 
-        internal Trailer GetTrailer(string idDriver)
+        internal async Task<Trailer> GetTrailer(string idDriver)
         {
-            return _sqlEntityFramworke.GetTrailerDb(idDriver);
+            return await _sqlEntityFramworke.GetTrailerDb(idDriver);
         }
 
-        internal Truck GetTruck(string idDriver)
+        internal async Task<Truck> GetTruck(string idDriver)
         {
-            return _sqlEntityFramworke.GetTruckDb(idDriver);
+            return await _sqlEntityFramworke.GetTruckDb(idDriver);
         }
 
         public async void SaveVechi(string idVech, string VIN, string Year, string Make, string Model, string Type, string Color, string LotNumber)
@@ -79,9 +79,9 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.SavevechInDb(idVech, vehiclwInformation);
         }
 
-        internal Truck GetTruckByPlate(string truckPlate)
+        internal async Task<Truck> GetTruckByPlate(string truckPlate)
         {
-            return _sqlEntityFramworke.GetTruckByPlateDb(truckPlate);
+            return await _sqlEntityFramworke.GetTruckByPlateDb(truckPlate);
         }
 
         internal int CheckTokenFoDriver(string idDriver, string token)
@@ -112,9 +112,9 @@ namespace WebDispacher.Service
             return _sqlEntityFramworke.CheckReportDriverDb(fullName, driversLicenseNumber);
         }
 
-        internal Trailer GetTrailerkByPlate(string trailerPlate)
+        internal async Task<Trailer> GetTrailerkByPlate(string trailerPlate)
         {
-            return _sqlEntityFramworke.GetTrailerByPlateDb(trailerPlate);
+            return await _sqlEntityFramworke.GetTrailerByPlateDb(trailerPlate);
         }
 
         internal List<DriverReport> GetDriversReport(string commpanyID, string nameDriver, string driversLicense)
@@ -174,7 +174,6 @@ namespace WebDispacher.Service
 
         public async void Assign(string idOrder, string idDriver)
         {
-            ManagerNotifyWeb managerNotify = new ManagerNotifyWeb();
             bool isDriverAssign = _sqlEntityFramworke.CheckDriverOnShipping(idOrder);
             string tokenShope = null;
             if (isDriverAssign)
@@ -184,6 +183,7 @@ namespace WebDispacher.Service
             List<VehiclwInformation> vehiclwInformations = await _sqlEntityFramworke.AddDriversInOrder(idOrder, idDriver);
             Task.Run(() =>
             {
+                ManagerNotifyWeb managerNotify = new ManagerNotifyWeb();
                 string tokenShope1 = _sqlEntityFramworke.GerShopTokenForShipping(idOrder);
                 if (!isDriverAssign)
                 {
@@ -200,9 +200,12 @@ namespace WebDispacher.Service
         public void CreateTruk(string nameTruk, string yera, string make, string model, string state, string exp, string vin, string owner, string plateTruk, string color, IFormFile registrationDoc, IFormFile ensuresDoc, IFormFile _3Doc)
         {
             int id = _sqlEntityFramworke.CreateTrukDb(nameTruk, yera, make, model, state, exp, vin, owner, plateTruk, color);
-            SaveDocTruck(registrationDoc, "Registration", id.ToString());
-            SaveDocTruck(ensuresDoc, "Ensures", id.ToString());
-            SaveDocTruck(_3Doc, "3", id.ToString());
+            Task.Run(() =>
+            {
+                SaveDocTruck(registrationDoc, "Registration", id.ToString());
+                SaveDocTruck(ensuresDoc, "Inshurance", id.ToString());
+                SaveDocTruck(_3Doc, "3", id.ToString());
+            });
         }
 
         public void CreateContact(string fullName, string emailAddress, string phoneNumbe)
@@ -249,9 +252,9 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.RestoreDriveInDb(id);
         }
 
-        public int GetCountPage(string status)
+        public async Task<int> GetCountPage(string status)
         {
-            return _sqlEntityFramworke.GetCountPageInDb(status);
+            return await _sqlEntityFramworke.GetCountPageInDb(status);
         }
 
         internal void RemoveTrailer(string id)
@@ -259,9 +262,9 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.RemoveTrailerDb(id);
         }
 
-        public List<Shipping> GetOrders(string status, int page)
+        public async Task<List<Shipping>> GetOrders(string status, int page)
         {
-            return _sqlEntityFramworke.GetShippings(status, page);
+            return await _sqlEntityFramworke.GetShippings(status, page);
         }
 
         public Shipping GetOrder(string id)
@@ -301,9 +304,12 @@ namespace WebDispacher.Service
         internal void CreateTrailer(string name, string year, string make, string howLong, string vin, string owner, string color, string plate, string exp, string annualIns, IFormFile registrationDoc, IFormFile ensuresDoc, IFormFile _3Doc)
         {
             int id = _sqlEntityFramworke.CreateTrailerDb(name, year, make, howLong, vin, owner, color, plate, exp, annualIns);
-            SaveDocTrailer(registrationDoc, "Registration", id.ToString());
-            SaveDocTrailer(ensuresDoc, "Ensures", id.ToString());
-            SaveDocTrailer(_3Doc, "3", id.ToString());
+            Task.Run(() =>
+            {
+                SaveDocTrailer(registrationDoc, "Registration", id.ToString());
+                SaveDocTrailer(ensuresDoc, "Inshurance", id.ToString());
+                SaveDocTrailer(_3Doc, "3", id.ToString());
+            });
         }
 
         public void CreateDriver(string fullName, string emailAddress, string password, string phoneNumbe, string trailerCapacity, string driversLicenseNumber)
@@ -351,9 +357,9 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.UpdateDriver(driver);
         }
 
-        public List<DocumentTruckAndTrailers> GetTruckDoc(string id)
+        public async Task<List<DocumentTruckAndTrailers>> GetTruckDoc(string id)
         {
-            return _sqlEntityFramworke.GetTruckDocDB(id);
+            return await _sqlEntityFramworke.GetTruckDocDB(id);
         }
 
         public InspectionDriver GetInspectionTruck(string idInspection)
@@ -397,9 +403,9 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.SaveDocTrailekDb(path, id, nameDoc);
         }
 
-        internal List<DocumentTruckAndTrailers> GetTraileDoc(string id)
+        internal async Task<List<DocumentTruckAndTrailers>> GetTraileDoc(string id)
         {
-            return _sqlEntityFramworke.GetTrailerDocDB(id);
+            return await _sqlEntityFramworke.GetTrailerDocDB(id);
         }
 
         internal void RemoveDoc(string idDock)

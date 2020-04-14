@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Threading.Tasks;
 using DaoModels.DAO.Models;
 using Microsoft.AspNetCore.Mvc;
 using WebDispacher.Mosels.Driver;
@@ -451,7 +452,7 @@ namespace WebDispacher.Controellers
 
         [HttpGet]
         [Route("Driver/InspactionTrucks")]
-        public IActionResult ViewAllInspactionDate(string idDriver, string idTruck, string idTrailer, string date)
+        public async Task<IActionResult> ViewAllInspactionDate(string idDriver, string idTruck, string idTrailer, string date)
         {
             IActionResult actionResult = null;
             try
@@ -461,7 +462,7 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    List<Driver> drivers = managerDispatch.GetDrivers();
+                    List<Driver> drivers = await managerDispatch.GetDrivers();
                     List<Truck> trucks = managerDispatch.GetTrucks();
                     List<Trailer> trailers = managerDispatch.GetTrailers();
                     ViewBag.InspectionTruck = managerDispatch.GetInspectionTrucks(idDriver, idTruck, idTrailer, date)

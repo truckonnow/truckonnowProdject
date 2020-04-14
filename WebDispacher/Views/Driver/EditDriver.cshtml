@@ -10,7 +10,7 @@
             <p class="inpLabe">Password</p>
             <input name="password" class="inpText validation" type="text" value="@ViewBag.Driver.Password" required/>
             <p class="inpLabe">Phone Number</p>
-            <input name="phoneNumbe" class="inpText validation" type="tel" placeholder="XXX-XXX-XXXX"  value="@ViewBag.Driver.PhoneNumber" required/>
+            <input name="phoneNumbe" class="inpText validation" type="tel" placeholder="XXXXXXXXXX" pattern="[0-9]{4,12}"  value="@ViewBag.Driver.PhoneNumber" required/>
             <p class="inpLabe">Trailer Capacity</p>
             <input name="trailerCapacity" class="inpText" type="text" value="@ViewBag.Driver.TrailerCapacity" />
             <p class="inpLabe">Driver's License Number</p>

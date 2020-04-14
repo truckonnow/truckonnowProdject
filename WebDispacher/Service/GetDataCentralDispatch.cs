@@ -4,6 +4,7 @@ using DaoModels.DAO.Models;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using xNet;
 //using xNet;
 
@@ -106,7 +107,7 @@ namespace WebDispacher.Service
             }
         }
 
-        public Shipping GetShipping(string urlPage)
+        public async Task<Shipping> GetShipping(string urlPage)
         {
             if (new Random().Next(1, 5) == 3)
             {
@@ -117,10 +118,10 @@ namespace WebDispacher.Service
                 Avthorization(true);
             }
             string sourseUrl = httpRequest.Get(urlPage).ToString();
-            return ParseDataInUrl(sourseUrl, sourseUrl);
+            return await ParseDataInUrl(sourseUrl, sourseUrl);
         }
 
-        private Shipping ParseDataInUrl(string sourse, string sourseUrl2)
+        private async Task<Shipping> ParseDataInUrl(string sourse, string sourseUrl2)
         {
             Shipping shipping = new Shipping();
             shipping.UrlReqvest = sourseUrl2;
