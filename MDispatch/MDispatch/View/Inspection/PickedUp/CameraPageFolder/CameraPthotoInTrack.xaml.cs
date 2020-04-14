@@ -97,6 +97,11 @@ namespace MDispatch.View.Inspection.PickedUp.CameraPageFolder
                         car = new MotorcycleСruising();
                         break;
                     }
+                case "Tricycle":
+                    {
+                        car = new MotorcycleTricycle();
+                        break;
+                    }
             }
             return car;
         }
