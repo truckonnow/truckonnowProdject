@@ -230,7 +230,7 @@ namespace ApiMobaileServise.Servise
                         typeScan = new TouringMotorcycle();
                         break;
                     }
-                case "Сruisingmotorcycle":
+                case "Cruisemotorcycle":
                     {
                         typeScan = new MotorcycleСruising();
                         break;
