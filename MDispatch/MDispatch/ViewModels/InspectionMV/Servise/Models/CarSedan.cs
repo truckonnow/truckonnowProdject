@@ -17,7 +17,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             {
                 case 1:
                     {
-                        indecCar = -1;
+                        indecCar = 34;
                         break;
                     }
                 case 2:
@@ -32,7 +32,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
                     }
                 case 4:
                     {
-                        indecCar = -1;
+                        indecCar = 35;
                         break;
                     }
                 case 5:
@@ -57,7 +57,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
                     }
                 case 9:
                     {
-                        indecCar = -3;
+                        indecCar = 36;
                         break;
                     }
                 case 10:
@@ -72,7 +72,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
                     }
                 case 12:
                     {
-                        indecCar = -4;
+                        indecCar = 37;
                         break;
                     }
                 default:
@@ -220,19 +220,19 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             {
                 nameLayout = "The rear door of the vehicle(Sedan) on the driver's side";
             }
-            else if (inderxPhotoInspektion == -1)
+            else if (inderxPhotoInspektion == 34)
             {
                 nameLayout = "Rear belt mount vehicle on the driver's side";
             }
-            else if (inderxPhotoInspektion == -2)
+            else if (inderxPhotoInspektion == 35)
             {
                 nameLayout = "Front belt mount vehicle on the driver's side";
             }
-            else if (inderxPhotoInspektion == -3)
+            else if (inderxPhotoInspektion == 36)
             {
                 nameLayout = "Front belt mount vehicle on the passenger side";
             }
-            else if (inderxPhotoInspektion == -4)
+            else if (inderxPhotoInspektion == 37)
             {
                 nameLayout = "Rear belt mount vehicle on the passenger side";
             }

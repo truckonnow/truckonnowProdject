@@ -96,6 +96,7 @@
                                             <x:String>Suv</x:String>
                                             <x:String>Coupe</x:String>
                                             <x:String>Pickup</x:String>
+                                            <x:String>Tricycle</x:String>
                                             <x:String>Sport bike</x:String>
                                             <x:String>Touring motorcycle</x:String>
                                             <x:String>Cruise motorcycle</x:String>
@@ -112,6 +113,7 @@
                                                 <x:String>Suv</x:String>
                                                 <x:String>Coupe</x:String>
                                                 <x:String>Pickup</x:String>
+                                                <x:String>Tricycle</x:String>
                                                 <x:String>Sport bike</x:String>
                                                 <x:String>Touring motorcycle</x:String>
                                                 <x:String>Cruise motorcycle</x:String>

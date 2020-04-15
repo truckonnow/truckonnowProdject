@@ -17,7 +17,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             {
                 case 1:
                     {
-                        indecCar = -1;
+                        indecCar = 12;
                         break;
                     }
                 case 2:
@@ -27,32 +27,22 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
                     }
                 case 3:
                     {
-                        indecCar = 4;
+                        indecCar = 13;
                         break;
                     }
                 case 4:
                     {
-                        indecCar = -2;
+                        indecCar = 14;
                         break;
                     }
                 case 5:
                     {
-                        indecCar = 10;
+                        indecCar = 9;
                         break;
                     }
                 case 6:
                     {
-                        indecCar = -3;
-                        break;
-                    }
-                case 7:
-                    {
-                        indecCar = 9;
-                        break;
-                    }
-                case 8:
-                    {
-                        indecCar = -4;
+                        indecCar = 15;
                         break;
                     }
                 default:
@@ -80,10 +70,10 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
                 case 9: nameLayout = "Central Left of the Vehicle(Cruise Motorcycle)"; break;
                 case 10: nameLayout = "Front wheel on the left of the vehicle (Cruise motorcycle)"; break;
                 case 11: nameLayout = "All Left Side of the Vehicle(Cruise Motorcycle)"; break;
-                case -1: nameLayout = "Rear belt mount vehicle on the driver's side"; break;
-                case -2: nameLayout = "Front belt mount vehicle on the driver's side"; break;
-                case -3: nameLayout = "Front belt mount vehicle on the passenger side"; break;
-                case -4: nameLayout = "Rear belt mount vehicle on the passenger side"; break;
+                case 12: nameLayout = "Rear belt mount vehicle on the driver's side"; break;
+                case 13: nameLayout = "Front belt mount vehicle on the driver's side"; break;
+                case 14: nameLayout = "Front belt mount vehicle on the passenger side"; break;
+                case 15: nameLayout = "Rear belt mount vehicle on the passenger side"; break;
             }
             return nameLayout;
         }

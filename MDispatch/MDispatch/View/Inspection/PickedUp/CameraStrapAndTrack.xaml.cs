@@ -30,14 +30,7 @@ namespace MDispatch.View.Inspection.PickedUp
             On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
                 .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);
             DependencyService.Get<IOrientationHandler>().ForceSensor();
-            if (cameraStrapAndTrackMV.Car.TypeVehicle == "car")
-            {
-                paternPhoto.Source = $"trup.png";
-            }
-            else if(cameraStrapAndTrackMV.Car.TypeVehicle == "motorcycle")
-            {
-                paternPhoto.Source = $"{cameraStrapAndTrackMV.Car.TypeIndex.Replace(" ", "")}{cameraStrapAndTrackMV.Car.GetIndexCar(countPhoto)}.png";
-            }
+            paternPhoto.Source = $"{cameraStrapAndTrackMV.Car.TypeIndex.Replace(" ", "")}{cameraStrapAndTrackMV.Car.GetIndexCar(countPhoto)}.png";
             titlePhoto.Text = cameraStrapAndTrackMV.Car.GetNameLayout(cameraStrapAndTrackMV.Car.GetIndexCar(countPhoto));
         }
 
@@ -60,13 +53,6 @@ namespace MDispatch.View.Inspection.PickedUp
                 cameraStrapAndTrackMV.straps.Add(photo1);
                 cameraStrapAndTrackMV.SavePhotoInTruck();
                 return;
-            }
-            else if(cameraStrapAndTrackMV.Car.GetIndexCar(countPhoto) < 0)
-            {
-                photo1.path = $"../Photo/{cameraStrapAndTrackMV.VehiclwInformation.Id}/PikedUp/CameraSeatBelts/{countPhoto}.jpg";
-                cameraStrapAndTrackMV.straps.Add(photo1);
-                paternPhoto.Source = $"trup.png";
-                titlePhoto.Text = cameraStrapAndTrackMV.Car.GetNameLayout(cameraStrapAndTrackMV.Car.GetIndexCar(countPhoto));
             }
             else if (cameraStrapAndTrackMV.Car.GetIndexCar(countPhoto) > 0)
             {

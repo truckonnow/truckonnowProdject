@@ -17,37 +17,57 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             {
                 case 1:
                     {
-                        indecCar = 3;
+                        indecCar = 20;
                         break;
                     }
                 case 2:
                     {
-                        indecCar = 4;
+                        indecCar = 3;
                         break;
                     }
                 case 3:
                     {
-                        indecCar = 7;
+                        indecCar = 4;
                         break;
                     }
                 case 4:
                     {
-                        indecCar = 6;
+                        indecCar = 21;
                         break;
                     }
                 case 5:
                     {
-                        indecCar = 8;
+                        indecCar = 7;
                         break;
                     }
                 case 6:
                     {
-                        indecCar = 12;
+                        indecCar = 6;
                         break;
                     }
                 case 7:
                     {
+                        indecCar = 8;
+                        break;
+                    }
+                case 8:
+                    {
+                        indecCar = 22;
+                        break;
+                    }
+                case 9:
+                    {
+                        indecCar = 12;
+                        break;
+                    }
+                case 10:
+                    {
                         indecCar = 13;
+                        break;
+                    }
+                case 11:
+                    {
+                        indecCar = 23;
                         break;
                     }
                 default:
@@ -139,19 +159,19 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             {
                 nameLayout = "The back of the sports bike on the right";
             }
-            else if (inderxPhotoInspektion == -1)
+            else if (inderxPhotoInspektion == 20)
             {
                 nameLayout = "Rear belt mount vehicle on the driver's side";
             }
-            else if (inderxPhotoInspektion == -2)
+            else if (inderxPhotoInspektion == 21)
             {
                 nameLayout = "Front belt mount vehicle on the driver's side";
             }
-            else if (inderxPhotoInspektion == -3)
+            else if (inderxPhotoInspektion == 22)
             {
                 nameLayout = "Front belt mount vehicle on the passenger side";
             }
-            else if (inderxPhotoInspektion == -4)
+            else if (inderxPhotoInspektion == 23)
             {
                 nameLayout = "Rear belt mount vehicle on the passenger side";
             }

@@ -15,6 +15,71 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             int indecCar = 0;
             switch (countPhoto)
             {
+                case 1:
+                    {
+                        indecCar = 24;
+                        break;
+                    }
+                case 2:
+                    {
+                        indecCar = 4;
+                        break;
+                    }
+                case 3:
+                    {
+                        indecCar = 5;
+                        break;
+                    }
+                case 4:
+                    {
+                        indecCar = 25;
+                        break;
+                    }
+                case 5:
+                    {
+                        indecCar = 10;
+                        break;
+                    }
+                case 6:
+                    {
+                        indecCar = 8;
+                        break;
+                    }
+                case 7:
+                    {
+                        indecCar = 9;
+                        break;
+                    }
+                case 8:
+                    {
+                        indecCar = 11;
+                        break;
+                    }
+                case 9:
+                    {
+                        indecCar = 12;
+                        break;
+                    }
+                case 10:
+                    {
+                        indecCar = 26;
+                        break;
+                    }
+                case 11:
+                    {
+                        indecCar = 16;
+                        break;
+                    }
+                case 12:
+                    {
+                        indecCar = 15;
+                        break;
+                    }
+                case 13:
+                    {
+                        indecCar = 27;
+                        break;
+                    }
                 default:
                     {
                         indecCar = 0;
@@ -54,10 +119,10 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
                 case 22: nameLayout = "The rear wheel of the vehicle(Tricycle) from the driver’s side"; break;
                 case 23: nameLayout = "Rear of the vehicle(Tricycle) on the driver’s side"; break;
 
-                case -1: nameLayout = "Rear belt mount vehicle on the driver's side"; break;
-                case -2: nameLayout = "Front belt mount vehicle on the driver's side"; break;
-                case -3: nameLayout = "Front belt mount vehicle on the passenger side"; break;
-                case -4: nameLayout = "Rear belt mount vehicle on the passenger side"; break;
+                case 24: nameLayout = "Rear belt mount vehicle on the driver's side"; break;
+                case 25: nameLayout = "Front belt mount vehicle on the driver's side"; break;
+                case 26: nameLayout = "Front belt mount vehicle on the passenger side"; break;
+                case 27: nameLayout = "Rear belt mount vehicle on the passenger side"; break;
             }
             return nameLayout;
         }

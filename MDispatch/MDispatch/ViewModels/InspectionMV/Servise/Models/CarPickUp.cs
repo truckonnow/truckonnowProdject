@@ -153,19 +153,19 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             {
                 nameLayout = "Rear driver's door";
             }
-            else if (inderxPhotoInspektion == -1)
+            else if (inderxPhotoInspektion == 36)
             {
                 nameLayout = "Rear belt mount vehicle on the driver's side";
             }
-            else if (inderxPhotoInspektion == -2)
+            else if (inderxPhotoInspektion == 37)
             {
                 nameLayout = "Front belt mount vehicle on the driver's side";
             }
-            else if (inderxPhotoInspektion == -3)
+            else if (inderxPhotoInspektion == 38)
             {
                 nameLayout = "Front belt mount vehicle on the passenger side";
             }
-            else if (inderxPhotoInspektion == -4)
+            else if (inderxPhotoInspektion == 39)
             {
                 nameLayout = "Rear belt mount vehicle on the passenger side";
             }
@@ -195,7 +195,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
             {
                 case 1:
                     {
-                        indecCar = -1;
+                        indecCar = 36;
                         break;
                     }
                 case 2:
@@ -210,7 +210,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
                     }
                 case 4:
                     {
-                        indecCar = -2;
+                        indecCar = 37;
                         break;
                     }
                 case 5:
@@ -235,7 +235,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
                     }
                 case 9:
                     {
-                        indecCar = -3;
+                        indecCar = 38;
                         break;
                     }
                 case 10:
@@ -250,92 +250,7 @@ namespace MDispatch.ViewModels.InspectionMV.Servise.Models
                     }
                 case 12:
                     {
-                        indecCar = -4;
-                        break;
-                    }
-                default:
-                    {
-                        indecCar = 0;
-                        break;
-                    }
-
-            }
-            return indecCar;
-        }
-
-        public int GetIndexCarFullPhoto(int countPhoto)
-        {
-            int indecCar = 0;
-            switch (countPhoto)
-            {
-                case 1:
-                    {
-                        indecCar = 7;
-                        break;
-                    }
-                case 2:
-                    {
-                        indecCar = 32;
-                        break;
-                    }
-                case 3:
-                    {
-                        indecCar = 9;
-                        break;
-                    }
-                case 4:
-                    {
-                        indecCar = 10;
-                        break;
-                    }
-                case 5:
-                    {
-                        indecCar = 24;
-                        break;
-                    }
-                case 6:
-                    {
-                        indecCar = 28;
-                        break;
-                    }
-                case 7:
-                    {
-                        indecCar = 29;
-                        break;
-                    }
-                case 8:
-                    {
-                        indecCar = 30;
-                        break;
-                    }
-                case 9:
-                    {
-                        indecCar = 12;
-                        break;
-                    }
-                case 10:
-                    {
-                        indecCar = 20;
-                        break;
-                    }
-                case 11:
-                    {
-                        indecCar = 21;
-                        break;
-                    }
-                case 12:
-                    {
-                        indecCar = 22;
-                        break;
-                    }
-                case 13:
-                    {
-                        indecCar = 2;
-                        break;
-                    }
-                case 14:
-                    {
-                        indecCar = 3;
+                        indecCar = 39;
                         break;
                     }
                 default:
