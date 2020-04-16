@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using DaoModels.DAO.Models;
@@ -18,6 +14,7 @@ namespace WebDispacher.Controellers
         ManagerDispatch managerDispatch = new ManagerDispatch();
 
         [Route("Driver/Drivers")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult Drivers(int page)
         {
             IActionResult actionResult = null;
@@ -48,6 +45,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Driver/Check")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult CheckDriver(string commpanyID, string nameDriver, string driversLicense, string comment)
         {
             IActionResult actionResult = null;
@@ -81,6 +79,7 @@ namespace WebDispacher.Controellers
 
         [HttpGet]
         [Route("Welcome/Driver/Check")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult WelcomeDriverCheckReport(string commpanyID, string nameDriver, string driversLicense, string countDriverReports)
         {
             IActionResult actionResult = null;
@@ -104,6 +103,7 @@ namespace WebDispacher.Controellers
 
         [HttpPost]
         [Route("Welcome/Driver/Check/Report")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public string WelcomeAddReport(string fullName, string driversLicenseNumber)
         {
             string actionResult = null;
@@ -130,6 +130,7 @@ namespace WebDispacher.Controellers
 
         [HttpGet]
         [Route("Driver/AddReport")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult AddReport()
         {
             IActionResult actionResult = null;
@@ -160,6 +161,7 @@ namespace WebDispacher.Controellers
 
         [HttpPost]
         [Route("Driver/AddReport")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult AddReport(string fullName, string driversLicenseNumber, string description)
         {
             IActionResult actionResult = null;
@@ -191,6 +193,7 @@ namespace WebDispacher.Controellers
 
         [HttpGet]
         [Route("Welcome/AddReport")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult WelcomeAddReport()
         {
             IActionResult actionResult = null;
@@ -209,6 +212,7 @@ namespace WebDispacher.Controellers
 
         [HttpPost]
         [Route("Welcome/AddReport")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult WelcomeAddReport(string fullName, string driversLicenseNumber, string description)
         {
             IActionResult actionResult = null;
@@ -228,6 +232,7 @@ namespace WebDispacher.Controellers
 
         [HttpGet]
         [Route("Driver/Drivers/CreateDriver")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult CreateDriver()
         {
             IActionResult actionResult = null;
@@ -258,6 +263,7 @@ namespace WebDispacher.Controellers
 
         [HttpPost]
         [Route("Driver/Drivers/CreateDriver")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult CreateDriver(string fullName, string emailAddress, string password, string phoneNumbe, string trailerCapacity, string driversLicenseNumber)
         {
             IActionResult actionResult = null;
@@ -297,6 +303,7 @@ namespace WebDispacher.Controellers
 
         [HttpGet]
         [Route("Driver/Drivers/Remove")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult RemoveDriver(int id, string comment)
         {
             IActionResult actionResult = null;
@@ -390,6 +397,7 @@ namespace WebDispacher.Controellers
 
         [HttpGet]
         [Route("Driver/Drivers/Edit")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult EditeDriver(int id)
         {
             IActionResult actionResult = null;
@@ -421,6 +429,7 @@ namespace WebDispacher.Controellers
 
         [HttpPost]
         [Route("Driver/Drivers/Edit")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult EditeDriver(int id, string fullName, string emailAddress, string password, string phoneNumbe, string trailerCapacity, string driversLicenseNumber)
         {
             IActionResult actionResult = null;
@@ -452,6 +461,7 @@ namespace WebDispacher.Controellers
 
         [HttpGet]
         [Route("Driver/InspactionTrucks")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public async Task<IActionResult> ViewAllInspactionDate(string idDriver, string idTruck, string idTrailer, string date)
         {
             IActionResult actionResult = null;
@@ -503,6 +513,7 @@ namespace WebDispacher.Controellers
 
         [HttpGet]
         [Route("Driver/InspactionTruck")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult ViewInspaction(string idInspection, string idDriver, string date)
         {
             IActionResult actionResult = null;
@@ -569,6 +580,7 @@ namespace WebDispacher.Controellers
 
         [HttpGet]
         [Route("Driver/Image")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult GetShiping(string name, string type)
         {
             var imageFileStream = System.IO.File.OpenRead(name);

@@ -1,14 +1,14 @@
 ﻿<span class="metadata-marker" style="display: none;" data-region_tag="html-body"></span>
 <div id="map"></div>
 <div id="dataDriverGPS" style="display:none">
-    @foreach (var drive in ViewBag.Driver)
+    @foreach (var driver in ViewBag.Drivers)
     {
-        @if (drive.geolocations != null)
+        @if (driver.geolocations != null)
         {
     <div>
-        <input type="text" value=@drive.geolocations.Longitude />
-        <input type="text" value=@drive.geolocations.Latitude />
-        <input type="text" value=@drive.FullName />
+        <input type="text" value=@driver.geolocations.Longitude />
+        <input type="text" value=@driver.geolocations.Latitude />
+        <input type="text" value=@driver.FullName />
     </div>
             }
         }

@@ -339,7 +339,7 @@ namespace WebDispacher.Service
             _sqlEntityFramworke.RemoveDriveInDb(id, comment);
         }
 
-        internal string GetDocument(string id)
+        internal async Task<string> GetDocument(string id)
         {
             return _sqlEntityFramworke.GetDocumentDb(id);
         }

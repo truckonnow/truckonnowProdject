@@ -15,6 +15,7 @@ namespace WebDispacher.Controellers
         ManagerDispatch managerDispatch = new ManagerDispatch();
 
         [Route("Photo/BOL/{idVech}")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult GetPhotoInspection(int idVech)
         {
             IActionResult actionResult = null; 
@@ -32,6 +33,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Doc/{idDriver}")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public async Task<IActionResult> GoToViewTruckDoc(string idDriver)
         {
             IActionResult actionResult = null;
@@ -60,6 +62,7 @@ namespace WebDispacher.Controellers
 
         [Route("Doc")]
         [HttpGet]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public async Task<IActionResult> GoToViewTruckDoc(string truckPlate, string trailerPlate)
         {
             IActionResult actionResult = null;

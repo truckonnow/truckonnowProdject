@@ -33,6 +33,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/NewLoad")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public async Task<IActionResult> NewLoad(int page)
         {
             IActionResult actionResult = null;
@@ -183,6 +184,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Archived")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public async Task<IActionResult> Archived(int page)
         {
             IActionResult actionResult = null;
@@ -243,6 +245,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Assigned")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public async Task<IActionResult> Assigned(int page)
         {
             IActionResult actionResult = null;
@@ -285,6 +288,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Billed")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public async Task<IActionResult> Billed(int page)
         {
             IActionResult actionResult = null;
@@ -327,6 +331,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Deleted")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public async Task<IActionResult> Deleted(int page)
         {
             IActionResult actionResult = null;
@@ -387,6 +392,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Delivered")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public async Task<IActionResult> Delivered(int page)
         {
             IActionResult actionResult = null;
@@ -440,6 +446,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Paid")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public async Task<IActionResult> Paid(int page)
         {
             IActionResult actionResult = null;
@@ -482,6 +489,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Pickedup")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public async Task<IActionResult> Pickedup(int page)
         {
             IActionResult actionResult = null;
@@ -524,6 +532,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/ArchivedOrder")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult DeletedOrder(string id)
         {
             IActionResult actionResult = null;
@@ -554,6 +563,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/DeletedOrder")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult DeletedOrder(string id, string status)
         {
             IActionResult actionResult = null;
@@ -584,6 +594,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/FullInfoOrder")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult FullInfoOrder(string id, string stasus)
         {
             IActionResult actionResult = null;
@@ -621,6 +632,7 @@ namespace WebDispacher.Controellers
         }
         
         [Route("Dashbord/Order/Edit")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult EditOrder(string id, string stasus)
         {
             IActionResult actionResult = null;
@@ -659,6 +671,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Creat")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public async Task<IActionResult> CreatOrderpage()
         {
             IActionResult actionResult = null;

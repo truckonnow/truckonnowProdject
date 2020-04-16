@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebDispacher.Service;
 
@@ -10,7 +11,8 @@ namespace WebDispacher.Controellers
         ManagerDispatch managerDispatch = new ManagerDispatch();
 
         [Route("Map")]
-        public IActionResult GeolocationPageGet()
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
+        public async Task<IActionResult> GeolocationPageGet()
         {
             IActionResult actionResult = null;
             try
@@ -20,7 +22,7 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
-                    ViewBag.Driver = managerDispatch.GetDrivers();
+                    ViewBag.Drivers = await managerDispatch.GetDrivers();
                     actionResult = View("MapsGeoDriver");
                 }
                 else

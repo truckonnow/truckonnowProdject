@@ -9,6 +9,7 @@ namespace WebDispacher.Controellers
         ManagerDispatch managerDispatch = new ManagerDispatch();
 
         [Route("Contact/Contacts")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult NewLoad(int page)
         {
             IActionResult actionResult = null;
@@ -41,6 +42,7 @@ namespace WebDispacher.Controellers
 
         [HttpGet]
         [Route("Contact/CreateContact")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult CreateContact()
         {
             IActionResult actionResult = null;
@@ -71,6 +73,7 @@ namespace WebDispacher.Controellers
 
         [HttpPost]
         [Route("Contact/CreateContact")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult CreateDriver(string fullName, string emailAddress, string phoneNumbe)
         {
             IActionResult actionResult = null;

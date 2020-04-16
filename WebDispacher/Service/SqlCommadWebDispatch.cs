@@ -219,10 +219,11 @@ namespace WebDispacher.Dao
 
         public async Task<List<Driver>> GetDriversInDb()
         {
-            return await context.Drivers
+            List<Driver> drivers = await context.Drivers
                 .Include(d => d.InspectionDrivers)
                 .Include(d => d.geolocations)
                 .ToListAsync();
+            return drivers;
         }
 
         public async void RecurentOnDeleted(string id)

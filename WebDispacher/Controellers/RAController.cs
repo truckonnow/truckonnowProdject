@@ -11,6 +11,7 @@ namespace WebDispacher.Controellers
     {
         ManagerDispatch managerDispatch = new ManagerDispatch();
 
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult Index()
         {
             IActionResult actionResult = null;
@@ -29,6 +30,7 @@ namespace WebDispacher.Controellers
         }
 
         [HttpPost]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult Avthorization(string Email, string Password)
         {
             IActionResult actionResult = null;
@@ -63,6 +65,7 @@ namespace WebDispacher.Controellers
 
         [HttpGet]
         [Route("Recovery/Password")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult RecoveryPassword(string idDriver, string token)
         {
             IActionResult actionResult = null;
@@ -83,6 +86,7 @@ namespace WebDispacher.Controellers
 
         [HttpPost]
         [Route("Restore/Password")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public async Task<IActionResult> RestorePassword(string newPassword, string idDriver, string token)
         {
             IActionResult actionResult = null;
