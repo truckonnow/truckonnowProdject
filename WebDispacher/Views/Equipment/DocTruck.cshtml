@@ -136,6 +136,7 @@
                 formData.append("nameDoc", docNameEl.value);
                 formData.append("id", @ViewBag.TruckId);
                 xmlHttp.open("POST", url, true);
+                xmlHttp.setRequestHeader('Accept-Encoding', 'br');
                 xmlHttp.send(formData);
             }
         }

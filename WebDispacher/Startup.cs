@@ -3,7 +3,10 @@ using FluentScheduler;
 using Microsoft.AspNetCore.Builder;         
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
+using System.IO.Compression;
 
 namespace WebDispacher
 {
@@ -23,17 +26,45 @@ namespace WebDispacher
             {
                 options.ForwardClientCertificate = false;
             });
+            services.AddResponseCompression(options => 
+            {
+                IEnumerable<string> MimeTypes = new[]
+                {
+                    "text/plain",
+                    "text/css",
+                    "application/javascript",
+                    "text/html",
+                    "application/xml",
+                    "text/xml",
+                    "application/json",
+                    "text/json"
+                };
+                options.EnableForHttps = true;
+                options.ExcludedMimeTypes = MimeTypes;
+                options.Providers.Add<GzipCompressionProvider>();
+                options.Providers.Add<BrotliCompressionProvider>();
+            });
+            services.Configure<BrotliCompressionProviderOptions>(options =>
+            {
+                options.Level = CompressionLevel.Optimal;
+            });
+            services.Configure<GzipCompressionProviderOptions>(options =>
+            {
+                options.Level = CompressionLevel.Optimal;
+            });
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseStaticFiles();
+            app.UseResponseCompression();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=RA}/{action=Index}/{id?}");
+                
             });
+            app.UseStaticFiles();
         }
     }
 }

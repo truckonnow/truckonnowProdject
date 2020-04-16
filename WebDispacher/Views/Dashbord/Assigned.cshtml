@@ -89,6 +89,7 @@
             var body = 'idOrder=' + encodeURIComponent(idOrder);
             xmlHttp.open("POST", url, false);
             xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xmlHttp.setRequestHeader('Accept-Encoding', 'br');
             xmlHttp.send(body);
             statusResponse = xmlHttp.responseText;
         }
@@ -101,6 +102,7 @@
                 '&idDriver=' + encodeURIComponent(idDriver);
             xmlHttp.open("POST", url, false);
             xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xmlHttp.setRequestHeader('Accept-Encoding', 'br');
             xmlHttp.send(body);
             statusResponse = xmlHttp.responseText;
         }

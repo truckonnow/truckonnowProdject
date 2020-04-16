@@ -160,6 +160,7 @@
         };
         xhttp.open("POST", "@ViewBag.BaseUrl/Dashbord/Order/SavaVech", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlHttp.setRequestHeader('Accept-Encoding', 'br');
         xhttp.send(Req);
     }
 
@@ -175,6 +176,7 @@
         };
         xhttp.open("POST", "@ViewBag.BaseUrl/Dashbord/Order/RemoveVech", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlHttp.setRequestHeader('Accept-Encoding', 'br');
         xhttp.send(Req);
         tdElms.removeChild(FindId(tdElms.children, idVech));
     }
@@ -202,6 +204,7 @@
         };
         xhttp.open("POST", "@ViewBag.BaseUrl/Dashbord/Order/AddVech", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlHttp.setRequestHeader('Accept-Encoding', 'br');
         xhttp.send(Req);
     }
 </script>

@@ -13,7 +13,8 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "http://192.168.31.44;http://localhost;https://localhost"
     },
     "WebDispacher": {
       "commandName": "Project",

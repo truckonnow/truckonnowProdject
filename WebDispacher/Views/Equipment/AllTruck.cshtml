@@ -121,6 +121,7 @@
             formData.append("uploadedFile", fille.files[0]);
             formData.append("id", id);
             xmlHttp.open("POST", url, true);
+            xmlHttp.setRequestHeader('Accept-Encoding', 'br');
             xmlHttp.send(formData);
        
     }
