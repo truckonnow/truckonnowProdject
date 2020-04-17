@@ -10,7 +10,7 @@ namespace WebDispacher.Controellers
 
         [Route("Contact/Contacts")]
         [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
-        public IActionResult NewLoad(int page)
+        public IActionResult Contacts(int page)
         {
             IActionResult actionResult = null;
             try
@@ -73,7 +73,6 @@ namespace WebDispacher.Controellers
 
         [HttpPost]
         [Route("Contact/CreateContact")]
-        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult CreateDriver(string fullName, string emailAddress, string phoneNumbe)
         {
             IActionResult actionResult = null;

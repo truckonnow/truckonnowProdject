@@ -563,7 +563,6 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/DeletedOrder")]
-        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult DeletedOrder(string id, string status)
         {
             IActionResult actionResult = null;

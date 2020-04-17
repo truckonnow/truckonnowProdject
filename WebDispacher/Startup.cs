@@ -3,6 +3,7 @@ using FluentScheduler;
 using Microsoft.AspNetCore.Builder;         
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
@@ -21,7 +22,12 @@ namespace WebDispacher
                 options.ValueLengthLimit = 1024 * 1024 * 500; // 100MB max len form data
             });
             System.Net.ServicePointManager.DefaultConnectionLimit = 50;
-            services.AddMvc();
+
+            services.AddMvc(options =>
+            {
+                options.RespectBrowserAcceptHeader = true;
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.Configure<IISOptions>(options =>
             {
                 options.ForwardClientCertificate = false;
@@ -52,6 +58,7 @@ namespace WebDispacher
             {
                 options.Level = CompressionLevel.Optimal;
             });
+            services.AddMemoryCache();
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

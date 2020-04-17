@@ -1,6 +1,8 @@
 ﻿using DaoModels.DAO;
 using DaoModels.DAO.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,12 @@ namespace WebDispacher.Dao
     public class SqlCommadWebDispatch
     {
         private Context context = null;
-       
+        private static IMemoryCache _cache = null;
+
         public SqlCommadWebDispatch()
         {
             context = new Context();
+            if (_cache == null) { _cache = new MemoryCache(new MemoryCacheOptions()); }
             InitUserOne();
         }
 
@@ -27,31 +31,31 @@ namespace WebDispacher.Dao
                     Users users = new Users();
                     users.Login = "DevRoma";
                     users.Password = "polkilo123";
-                    context.User.AddAsync(users);
+                    await context.User.AddAsync(users);
                     users = new Users();
                     users.Login = "ArtemManager";
                     users.Password = "truckon777";
-                    context.User.AddAsync(users);
+                    await context.User.AddAsync(users);
                     users = new Users();
                     users.Login = "Designer";
                     users.Password = "truckon777";
-                    context.User.AddAsync(users);
+                    await context.User.AddAsync(users);
                     users = new Users();
                     users.Login = "Truckonnow";
                     users.Password = "truckon777";
-                    context.User.AddAsync(users);
+                    await context.User.AddAsync(users);
                     users = new Users();
                     users.Login = "Truckonnow1";
                     users.Password = "truckon777";
-                    context.User.AddAsync(users);
+                    await context.User.AddAsync(users);
                     users = new Users();
                     users.Login = "Truckonnow2";
                     users.Password = "truckon777";
-                    context.User.AddAsync(users);
+                    await context.User.AddAsync(users);
                     users = new Users();
                     users.Login = "Truckonnow3";
                     users.Password = "truckon777";
-                    context.User.AddAsync(users);
+                    await context.User.AddAsync(users);
                     await context.SaveChangesAsync();
                 }
             }
@@ -219,7 +223,9 @@ namespace WebDispacher.Dao
 
         public async Task<List<Driver>> GetDriversInDb()
         {
-            List<Driver> drivers = await context.Drivers
+            List<Driver> drivers = null;
+            drivers = await context.Drivers
+                .Where(d => !d.IsFired)
                 .Include(d => d.InspectionDrivers)
                 .Include(d => d.geolocations)
                 .ToListAsync();
