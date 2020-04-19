@@ -3,6 +3,7 @@ using FluentScheduler;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,7 +29,15 @@ namespace ApiMobaileServise
                 options.ValueLengthLimit = 1024 * 1024 * 500; // 100MB max len form data
             });
             System.Net.ServicePointManager.DefaultConnectionLimit = 50;
-            services.AddMvc(); 
+            services.AddMvc(options =>
+            {
+                options.RespectBrowserAcceptHeader = true;
+            })
+           .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.Configure<IISOptions>(options =>
+            {
+                options.ForwardClientCertificate = false;
+            });
             services.AddResponseCompression(options =>
             {
                 IEnumerable<string> MimeTypes = new[]
@@ -40,10 +49,12 @@ namespace ApiMobaileServise
                     "application/xml",
                     "text/xml",
                     "application/json",
-                    "text/json"
+                    "text/json",
+                    "image/png",
+                    "image/jpg"
                 };
                 options.EnableForHttps = true;
-                options.ExcludedMimeTypes = MimeTypes;
+                options.MimeTypes = MimeTypes;
                 options.Providers.Add<GzipCompressionProvider>();
                 options.Providers.Add<BrotliCompressionProvider>();
             });

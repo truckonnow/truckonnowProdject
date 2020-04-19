@@ -43,10 +43,12 @@ namespace WebDispacher
                     "application/xml",
                     "text/xml",
                     "application/json",
-                    "text/json"
+                    "text/json",
+                    "image/png",
+                    "image/jpg"
                 };
                 options.EnableForHttps = true;
-                options.ExcludedMimeTypes = MimeTypes;
+                options.MimeTypes = MimeTypes;
                 options.Providers.Add<GzipCompressionProvider>();
                 options.Providers.Add<BrotliCompressionProvider>();
             });

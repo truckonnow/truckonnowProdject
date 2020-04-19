@@ -1,5 +1,6 @@
 ﻿using DaoModels.DAO.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.IO;
 
@@ -7,6 +8,8 @@ namespace DaoModels.DAO
 {
     public class Context : DbContext
     {
+        public static IMemoryCache _cache = null;
+
         public DbSet<Shipping> Shipping { get; set; }
         public DbSet<Users> User { get; set; }
         public DbSet<VehiclwInformation> VehiclwInformation { get; set; }

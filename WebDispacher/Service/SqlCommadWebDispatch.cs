@@ -2,7 +2,6 @@
 using DaoModels.DAO.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +12,11 @@ namespace WebDispacher.Dao
     public class SqlCommadWebDispatch
     {
         private Context context = null;
-        private static IMemoryCache _cache = null;
 
         public SqlCommadWebDispatch()
         {
             context = new Context();
-            if (_cache == null) { _cache = new MemoryCache(new MemoryCacheOptions()); }
+            if (Context._cache == null) { Context._cache = new MemoryCache(new MemoryCacheOptions()); }
             InitUserOne();
         }
 

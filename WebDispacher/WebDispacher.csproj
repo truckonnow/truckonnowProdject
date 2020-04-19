@@ -34,6 +34,10 @@
     <ProjectReference Include="..\DaoModels\DaoModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Attribute\" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

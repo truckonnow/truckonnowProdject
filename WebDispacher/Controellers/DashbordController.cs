@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
+using System.Text;
 using System.Threading.Tasks;
 using DaoModels.DAO.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using WebDispacher.Attribute;
 using WebDispacher.Service;
 
 namespace WebDispacher.Controellers
@@ -29,11 +34,44 @@ namespace WebDispacher.Controellers
             {
                 actionResult = null;
             }
+
             return actionResult;
+        }
+
+        public byte[] Zip(string str)
+        {
+            var bytes = Encoding.UTF8.GetBytes(str);
+
+            using (var msi = new MemoryStream(bytes))
+            using (var mso = new MemoryStream())
+            {
+                using (var gs = new GZipStream(mso, CompressionLevel.Optimal, true))
+                {
+                    msi.CopyTo(gs);
+                }
+
+                return mso.ToArray();
+            }
+        }
+
+        public string Unzip(byte[] bytes)
+        {
+            using (var msi = new MemoryStream(bytes))
+            using (var mso = new MemoryStream())
+            {
+                using (var gs = new GZipStream(msi, CompressionMode.Decompress))
+                {
+                    gs.CopyTo(mso);
+                }
+
+                return Encoding.UTF8.GetString(mso.ToArray());
+            }
         }
 
         [Route("Dashbord/Order/NewLoad")]
         [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
+        [HttpGet]
+        //[GZipOrDeflate]
         public async Task<IActionResult> NewLoad(int page)
         {
             IActionResult actionResult = null;
@@ -72,6 +110,7 @@ namespace WebDispacher.Controellers
             {
 
             }
+
             return actionResult;
         }
 

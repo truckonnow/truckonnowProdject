@@ -2,6 +2,7 @@
 using DaoModels.DAO;
 using DaoModels.DAO.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,6 +20,7 @@ namespace ApiMobaileServise.Servise
         public SqlCommandApiMobile()
         {
             context = new Context();
+            if (Context._cache == null) { Context._cache = new MemoryCache(new MemoryCacheOptions()); }
         }
 
         internal List<PasswordRecovery> GetPasswordRecovery()

@@ -16,12 +16,12 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("ActiveOreder")]
-        public string GetActiveOrder(string token)
+        public IActionResult GetActiveOrder(string token)
         {
             string respons = null;
             if(token == null || token == "")
             {
-                return JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
+                return null; //JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
             }
             try
             {
@@ -40,7 +40,7 @@ namespace ApiMobaileServise.Controllers
             {
                 respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
             }
-            return respons;
+            return Json(respons);
         }
 
         [HttpPost]
