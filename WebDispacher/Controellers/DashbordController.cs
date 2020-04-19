@@ -824,5 +824,14 @@ namespace WebDispacher.Controellers
             }
             return actionResult;
         }
+
+        [HttpGet]
+        [Route("Dashbord/Image")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
+        public IActionResult GetShiping(string name, string type)
+        {
+            var imageFileStream = System.IO.File.OpenRead(name);
+            return File(imageFileStream, $"image/{type}");
+        }
     }
 }
