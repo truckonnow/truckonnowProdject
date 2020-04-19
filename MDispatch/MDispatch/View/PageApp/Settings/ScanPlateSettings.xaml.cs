@@ -19,6 +19,7 @@ namespace MDispatch.View.PageApp.Settings
             this.typeDetect = typeDetect;
             this.settingsMV = settingsMV;
             InitializeComponent();
+            On<iOS>().SetUseSafeArea(true);
             Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
             On<iOS>().SetPrefersStatusBarHidden(StatusBarHiddenMode.True)
                .SetPreferredStatusBarUpdateAnimation(UIStatusBarAnimation.Fade);

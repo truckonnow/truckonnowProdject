@@ -5,6 +5,8 @@ using Plugin.LatestVersion;
 using Plugin.Settings;
 using System;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace MDispatch.View.PageApp.Settings
@@ -18,6 +20,7 @@ namespace MDispatch.View.PageApp.Settings
         {
             settingsMV = new SettingsMV(managerDispatchMob) { Navigation = this.Navigation };
             InitializeComponent();
+            On<iOS>().SetUseSafeArea(true);
             BindingContext = settingsMV;
         }
 

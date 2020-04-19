@@ -8,6 +8,8 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.IO.Compression;
+using System.Text;
 
 namespace MDispatch.Service
 {
@@ -142,7 +144,9 @@ namespace MDispatch.Service
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Shipping", Method.POST);
                 client.Timeout = 600000;
-                request.AddHeader("Accept", "application/json");
+                request.AddHeader("Accept", "*/*");
+                request.AddHeader("Accept-Encoding", "gzip");
+                request.AddHeader("Accept", "*/*");
                 request.AddParameter("token", token);
                 request.AddParameter("idShip", id);
                 response = client.Execute(request);
@@ -158,7 +162,7 @@ namespace MDispatch.Service
             }
             else
             {
-                return GetData(content, ref description, ref shipping);
+                return GetData(UnCompress(content), ref description, ref shipping);
             }
         }
 
@@ -886,6 +890,22 @@ namespace MDispatch.Service
                     dm.Base64 = Convert.ToBase64String(memoryStream.ToArray());
                 });
             }
+        }
+
+        private string UnCompress(string dataStr)
+        {
+            dataStr = dataStr.Replace("\"", "");
+            byte[] data = Convert.FromBase64String(dataStr);
+            string res = null;
+            using (var compressedStream = new MemoryStream(data))
+            using (var zipStream = new GZipStream(compressedStream, CompressionMode.Decompress))
+            using (var resultStream = new MemoryStream())
+            {
+                zipStream.CopyTo(resultStream);
+
+                res = Encoding.UTF8.GetString(resultStream.ToArray());
+            }
+            return res;
         }
     }
 }

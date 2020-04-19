@@ -4,6 +4,9 @@ using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
+using System.Text;
 
 namespace MDispatch.Service
 {
@@ -22,6 +25,8 @@ namespace MDispatch.Service
                 request.AddParameter("token", token);
                 response = client.Execute(request);
                 content = response.Content;
+                byte[] s = Encoding.UTF8.GetBytes(content);
+                
             }
             catch (Exception)
             {
@@ -33,7 +38,7 @@ namespace MDispatch.Service
             }
             else
             {
-                return GetData(content, ref description, ref shippings);
+                return GetData(UnCompress(content), ref description, ref shippings);
             }
         }
 
@@ -61,7 +66,7 @@ namespace MDispatch.Service
             }
             else
             {
-                return GetData(content, ref description, ref shippings);
+                return GetData(UnCompress(content), ref description, ref shippings);
             }
         }
 
@@ -89,7 +94,7 @@ namespace MDispatch.Service
             }
             else
             {
-                return GetData(content, ref description, ref shippings);
+                return GetData(UnCompress(content), ref description, ref shippings);
             }
         }
 
@@ -196,10 +201,7 @@ namespace MDispatch.Service
 
         private int GetData(string respJsonStr, ref string description, ref List<Shipping> shippings)
         {
-                respJsonStr = respJsonStr.Replace("\\", "");
-                respJsonStr = respJsonStr.Remove(0, 1);
-                respJsonStr = respJsonStr.Remove(respJsonStr.Length - 1);
-                            var responseAppS = JObject.Parse(respJsonStr);
+                var responseAppS = JObject.Parse(respJsonStr);
                 string status = responseAppS.Value<string>("Status");
                 if (status == "success")
                 {
@@ -256,6 +258,22 @@ namespace MDispatch.Service
                     .Value<string>("Description");
                 return 2;
             }
+        }
+
+        private string UnCompress(string dataStr)
+        {
+            dataStr = dataStr.Replace("\"", "");
+            byte[] data = Convert.FromBase64String(dataStr);
+            string res = null;
+            using (var compressedStream = new MemoryStream(data))
+            using (var zipStream = new GZipStream(compressedStream, CompressionMode.Decompress))
+            using (var resultStream = new MemoryStream())
+            {
+                zipStream.CopyTo(resultStream);
+
+                res = Encoding.UTF8.GetString(resultStream.ToArray());
+            }
+            return res;
         }
     }
 }
