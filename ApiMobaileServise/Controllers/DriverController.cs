@@ -1,4 +1,5 @@
-﻿using ApiMobaileServise.BackgraundService.Queue;
+﻿using ApiMobaileServise.Attribute;
+using ApiMobaileServise.BackgraundService.Queue;
 using ApiMobaileServise.Models;
 using ApiMobaileServise.Servise;
 using DaoModels.DAO.Models;
@@ -233,6 +234,141 @@ namespace ApiMobaileServise.Controllers
             {
                 respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
             }
+            return respons;
+        }
+
+        [HttpGet]
+        [Route("Test")]
+        [CompressGzip]
+        public string Test()
+        {
+            string respons = null;
+            respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", new Shipping()
+            {
+                VehiclwInformations = new System.Collections.Generic.List<VehiclwInformation>
+                {
+                    new VehiclwInformation()
+                    {
+                        PhotoInspections = new System.Collections.Generic.List<PhotoInspection>()
+                        {
+                            new PhotoInspection()
+                            {
+                                Photos = new System.Collections.Generic.List<Photo>()
+                                {
+                                    new Photo()
+                                    {
+                                        Base64 = "sadf axscpjsdo fisdfu idhsfuiydsghufyds uidsugugfu8ygsdufygdsytfysdefguydsgfdiew309i0398r98 uyeedhsiuhfciudshfiuhd",
+                                        Height =25,
+                                        path ="sssss",
+                                        Width =25,
+                                        Id = 1
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    new VehiclwInformation()
+                    {
+                        PhotoInspections = new System.Collections.Generic.List<PhotoInspection>()
+                        {
+                            new PhotoInspection()
+                            {
+                                Photos = new System.Collections.Generic.List<Photo>()
+                                {
+                                    new Photo()
+                                    {
+                                        Base64 = "sadf axscpjsdo fisdfu idhsfuiydsghufyds uidsugugfu8ygsdufygdsytfysdefguydsgfdiew309i0398r98 uyeedhsiuhfciudshfiuhd",
+                                        Height =25,
+                                        path ="sssss",
+                                        Width =25,
+                                        Id = 1
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    new VehiclwInformation()
+                    {
+                        PhotoInspections = new System.Collections.Generic.List<PhotoInspection>()
+                        {
+                            new PhotoInspection()
+                            {
+                                Photos = new System.Collections.Generic.List<Photo>()
+                                {
+                                    new Photo()
+                                    {
+                                        Base64 = "sadf axscpjsdo fisdfu idhsfuiydsghufyds uidsugugfu8ygsdufygdsytfysdefguydsgfdiew309i0398r98 uyeedhsiuhfciudshfiuhd",
+                                        Height =25,
+                                        path ="sssss",
+                                        Width =25,
+                                        Id = 1
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    new VehiclwInformation()
+                    {
+                        PhotoInspections = new System.Collections.Generic.List<PhotoInspection>()
+                        {
+                            new PhotoInspection()
+                            {
+                                Photos = new System.Collections.Generic.List<Photo>()
+                                {
+                                    new Photo()
+                                    {
+                                        Base64 = "sadf axscpjsdo fisdfu idhsfuiydsghufyds uidsugugfu8ygsdufygdsytfysdefguydsgfdiew309i0398r98 uyeedhsiuhfciudshfiuhd",
+                                        Height =25,
+                                        path ="sssss",
+                                        Width =25,
+                                        Id = 1
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    new VehiclwInformation()
+                    {
+                        PhotoInspections = new System.Collections.Generic.List<PhotoInspection>()
+                        {
+                            new PhotoInspection()
+                            {
+                                Photos = new System.Collections.Generic.List<Photo>()
+                                {
+                                    new Photo()
+                                    {
+                                        Base64 = "sadf axscpjsdo fisdfu idhsfuiydsghufyds uidsugugfu8ygsdufygdsytfysdefguydsgfdiew309i0398r98 uyeedhsiuhfciudshfiuhd",
+                                        Height =25,
+                                        path ="sssss",
+                                        Width =25,
+                                        Id = 1
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    new VehiclwInformation()
+                    {
+                        PhotoInspections = new System.Collections.Generic.List<PhotoInspection>()
+                        {
+                            new PhotoInspection()
+                            {
+                                Photos = new System.Collections.Generic.List<Photo>()
+                                {
+                                    new Photo()
+                                    {
+                                        Base64 = "sadf axscpjsdo fisdfu idhsfuiydsghufyds uidsugugfu8ygsdufygdsytfysdefguydsgfdiew309i0398r98 uyeedhsiuhfciudshfiuhd",
+                                        Height =25,
+                                        path ="sssss",
+                                        Width =25,
+                                        Id = 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }));
             return respons;
         }
     }

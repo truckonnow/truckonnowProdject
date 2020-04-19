@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ApiMobaileServise.Attribute;
 using ApiMobaileServise.Models;
 using ApiMobaileServise.Servise;
 using DaoModels.DAO.Models;
@@ -16,12 +17,13 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("ActiveOreder")]
-        public IActionResult GetActiveOrder(string token)
+        [CompressGzip]
+        public string GetActiveOrder(string token)
         {
             string respons = null;
             if(token == null || token == "")
             {
-                return null; //JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
+                return JsonConvert.SerializeObject(new ResponseAppS("failed", "1", null));
             }
             try
             {
@@ -40,11 +42,12 @@ namespace ApiMobaileServise.Controllers
             {
                 respons = JsonConvert.SerializeObject(new ResponseAppS("failed", "Technical work on the service", null));
             }
-            return Json(respons);
+            return respons;
         }
 
         [HttpPost]
         [Route("DelyveryOreder")]
+        [CompressGzip]
         public string GetDeliveryOrder(string token)
         {
             string respons = null;
@@ -74,6 +77,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("ArchiveOreder")]
+        [CompressGzip]
         public string GetArchiveOrder(string token)
         {
             string respons = null;

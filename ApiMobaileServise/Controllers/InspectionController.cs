@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
+using ApiMobaileServise.Attribute;
 using ApiMobaileServise.BackgraundService.Queue;
 using ApiMobaileServise.Models;
 using ApiMobaileServise.Servise;
@@ -174,6 +175,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Shipping")]
+        //[CompressGzip]
         public string GetShipping(string token, string idShip)
         {
             string respons = null;

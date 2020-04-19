@@ -29,10 +29,7 @@ namespace ApiMobaileServise
                 options.ValueLengthLimit = 1024 * 1024 * 500; // 100MB max len form data
             });
             System.Net.ServicePointManager.DefaultConnectionLimit = 50;
-            services.AddMvc(options =>
-            {
-                options.RespectBrowserAcceptHeader = true;
-            })
+            services.AddMvc()
            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.Configure<IISOptions>(options =>
             {
@@ -71,11 +68,8 @@ namespace ApiMobaileServise
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseResponseCompression();
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
             app.UseMvc();
+            app.UseStaticFiles();
             JobManager.Initialize(new MyRegistry());
         }
     }

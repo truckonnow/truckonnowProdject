@@ -38,36 +38,6 @@ namespace WebDispacher.Controellers
             return actionResult;
         }
 
-        public byte[] Zip(string str)
-        {
-            var bytes = Encoding.UTF8.GetBytes(str);
-
-            using (var msi = new MemoryStream(bytes))
-            using (var mso = new MemoryStream())
-            {
-                using (var gs = new GZipStream(mso, CompressionLevel.Optimal, true))
-                {
-                    msi.CopyTo(gs);
-                }
-
-                return mso.ToArray();
-            }
-        }
-
-        public string Unzip(byte[] bytes)
-        {
-            using (var msi = new MemoryStream(bytes))
-            using (var mso = new MemoryStream())
-            {
-                using (var gs = new GZipStream(msi, CompressionMode.Decompress))
-                {
-                    gs.CopyTo(mso);
-                }
-
-                return Encoding.UTF8.GetString(mso.ToArray());
-            }
-        }
-
         [Route("Dashbord/Order/NewLoad")]
         [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         [HttpGet]
