@@ -42,11 +42,11 @@ namespace ApiMobaileServise.Servise.AddDamage
                 case "5": maxMinForYAndX = new int[] { 578, 174, 622, 233 }; break;
                 case "6": maxMinForYAndX = new int[] { 635, 25, 880, 220 }; break;
                 case "7": maxMinForYAndX = new int[] { 700, 25, 853, 178 }; break;
-                case "8": maxMinForYAndX = new int[] { 235, 815, 372, 995 }; break;
-                case "9": maxMinForYAndX = new int[] { 315, 875, 480, 995 }; break;
-                case "10": maxMinForYAndX = new int[] { 300, 775, 495, 895 }; break;
-                case "11": maxMinForYAndX = new int[] { 423, 815, 560, 995 }; break;
-                case "12": maxMinForYAndX = new int[] { 235, 945, 560, 995 }; break;
+                case "8": maxMinForYAndX = new int[] { 372, 815, 235, 995 }; break;
+                case "9": maxMinForYAndX = new int[] { 480, 875, 315, 995 }; break;
+                case "10": maxMinForYAndX = new int[] { 495, 775, 300, 895 }; break;
+                case "11": maxMinForYAndX = new int[] { 560, 815, 423, 995 }; break;
+                case "12": maxMinForYAndX = new int[] { 560, 945, 235, 995 }; break;
                 case "13": maxMinForYAndX = new int[] { 635, 582, 880, 777 }; break;
                 case "14": maxMinForYAndX = new int[] { 700, 619, 853, 777 }; break;
                 case "15": maxMinForYAndX = new int[] { 578, 564, 622, 625 }; break;

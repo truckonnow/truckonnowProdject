@@ -235,6 +235,11 @@ namespace ApiMobaileServise.Servise
                         typeScan = new MotorcycleСruising();
                         break;
                     }
+                case "Tricycle":
+                    {
+                        typeScan = new TricycleMotorcycle();
+                        break;
+                    }
             }
             return typeScan;
         }

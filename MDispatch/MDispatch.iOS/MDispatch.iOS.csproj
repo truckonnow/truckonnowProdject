@@ -1314,6 +1314,6 @@
     <BundleResource Include="Resources\Tricycle15.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\tricycle16.png" />
+    <BundleResource Include="Resources\Tricycle16.png" />
   </ItemGroup>
 </Project>

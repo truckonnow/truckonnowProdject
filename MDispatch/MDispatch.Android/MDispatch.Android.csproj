@@ -1133,7 +1133,7 @@
     <AndroidResource Include="Resources\drawable\Tricycle15.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tricycle16.png" />
+    <AndroidResource Include="Resources\drawable\Tricycle16.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Tricycle17.png" />

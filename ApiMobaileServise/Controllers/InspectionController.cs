@@ -20,6 +20,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Status/Inspection/Assigned")]
+        [CompressGzip(IsCompresRespons = true)]
         public string GetStatusInspectionPikedUp(string token, string idShipping)
         {
             string respons = null;
@@ -49,6 +50,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Status/Inspection/Picked up")]
+        [CompressGzip(IsCompresRespons = true)]
         public string GetStatusInspectionDelyvery(string token, string idShipping)
         {
             string respons = null;
