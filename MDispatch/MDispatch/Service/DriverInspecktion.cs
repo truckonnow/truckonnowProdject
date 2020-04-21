@@ -46,7 +46,7 @@ namespace MDispatch.Service
             string content = null;
             try
             {
-                string photoJson = JsonConvert.SerializeObject(photo);
+                string photoJson = Compress(JsonConvert.SerializeObject(photo));
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Driver/SaveInspactionDriver", Method.POST);
                 client.Timeout = 60000;
@@ -249,10 +249,10 @@ namespace MDispatch.Service
             if (status == "success")
             {
                 string res = responseAppS.Value<string>("ResponseStr");
-                if(res != null)
+                if (res != null)
                 {
                     string[] arrRes = res.Split(',');
-                    if(arrRes.Length == 3)
+                    if (arrRes.Length == 3)
                     {
                         latsInspection = arrRes[0];
                         plateTruck = arrRes[1];
@@ -338,6 +338,21 @@ namespace MDispatch.Service
                 zipStream.CopyTo(resultStream);
 
                 res = Encoding.UTF8.GetString(resultStream.ToArray());
+            }
+            return res;
+        }
+
+        private string Compress(string dataStr)
+        {
+            string res = null;
+            byte[] data = Encoding.UTF8.GetBytes(dataStr);
+            using (MemoryStream ms = new MemoryStream())
+            {
+                using (GZipStream gz = new GZipStream(ms, CompressionLevel.Optimal, true))
+                {
+                    gz.Write(data, 0, data.Length);
+                }
+                res = Convert.ToBase64String(ms.ToArray());
             }
             return res;
         }

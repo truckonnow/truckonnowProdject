@@ -117,7 +117,7 @@ namespace MDispatch.Service
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 request.AddParameter("idShip", idShip);
-                request.AddParameter("jsonSigPhoto", sigPhoto);
+                request.AddParameter("jsonSigPhoto", Compress(sigPhoto));
                 response = client.Execute(request);
                 content = response.Content;
             }
@@ -145,7 +145,6 @@ namespace MDispatch.Service
                 RestRequest request = new RestRequest("Mobile/Shipping", Method.POST);
                 client.Timeout = 600000;
                 request.AddHeader("Accept", "application/json");
-                request.AddHeader("Accept-Encoding", "gzip");
                 request.AddParameter("token", token);
                 request.AddParameter("idShip", id);
                 response = client.Execute(request);
@@ -236,7 +235,7 @@ namespace MDispatch.Service
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 request.AddParameter("idVe", id);
-                request.AddParameter("jsonStrAsk", strJsonAsk);
+                request.AddParameter("jsonStrAsk", Compress(strJsonAsk));
                 request.AddParameter("type", 1);
                 response = client.Execute(request);
                 content = response.Content;
@@ -268,7 +267,7 @@ namespace MDispatch.Service
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 request.AddParameter("idVe", id);
-                request.AddParameter("jsonStrAsk", strJsonAsk);
+                request.AddParameter("jsonStrAsk", Compress(strJsonAsk));
                 request.AddParameter("type", 6);
                 response = client.Execute(request);
                 content = response.Content;
@@ -300,7 +299,7 @@ namespace MDispatch.Service
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 request.AddParameter("idVe", idVe);
-                request.AddParameter("jsonStrAsk", strJsonPhoto);
+                request.AddParameter("jsonStrAsk", Compress(strJsonPhoto));
                 request.AddParameter("type", 7);
                 response = client.Execute(request);
                 content = response.Content;
@@ -332,7 +331,7 @@ namespace MDispatch.Service
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 request.AddParameter("idVe", id);
-                request.AddParameter("jsonStrAsk", strJsonPhoto);
+                request.AddParameter("jsonStrAsk", Compress(strJsonPhoto));
                 request.AddParameter("type", 8);
                 response = client.Execute(request);
                 content = response.Content;
@@ -363,7 +362,7 @@ namespace MDispatch.Service
                 client.Timeout = 60000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
-                request.AddParameter("jsonStrAsk", strJsonAsk);
+                request.AddParameter("jsonStrAsk", Compress(strJsonAsk));
                 response = client.Execute(request);
                 content = response.Content;
             }
@@ -394,7 +393,7 @@ namespace MDispatch.Service
                 client.Timeout = 100000;
                 request.AddParameter("token", token);
                 request.AddParameter("idVe", id);
-                request.AddParameter("jsonStrAsk", strJsonAsk);
+                request.AddParameter("jsonStrAsk", Compress(strJsonAsk));
                 request.AddParameter("type", 2);
                 response = client.Execute(request);
                 content = response.Content;
@@ -426,7 +425,7 @@ namespace MDispatch.Service
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 request.AddParameter("idVe", id);
-                request.AddParameter("jsonStrAsk", strJsonAsk);
+                request.AddParameter("jsonStrAsk", Compress(strJsonAsk));
                 request.AddParameter("type", 3);
                 response = client.Execute(request);
                 content = response.Content;
@@ -458,7 +457,7 @@ namespace MDispatch.Service
                 client.Timeout = 60000;
                 request.AddParameter("token", token);
                 request.AddParameter("idVe", id);
-                request.AddParameter("jsonStrAsk", strJsonAsk);
+                request.AddParameter("jsonStrAsk", Compress(strJsonAsk));
                 request.AddParameter("type", 4);
                 response = client.Execute(request);
                 content = response.Content;
@@ -552,7 +551,7 @@ namespace MDispatch.Service
                 client.Timeout = 60000;
                 request.AddParameter("token", token);
                 request.AddParameter("idVe", id);
-                request.AddParameter("jsonStrAsk", strJsonAsk);
+                request.AddParameter("jsonStrAsk", Compress(strJsonAsk));
                 request.AddParameter("type", 5);
                 response = client.Execute(request);
                 content = response.Content;
@@ -593,7 +592,7 @@ namespace MDispatch.Service
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
                 request.AddParameter("idVe", id);
-                request.AddParameter("jsonStr", strPhotoInspection);
+                request.AddParameter("jsonStr", Compress(strPhotoInspection));
                 response = client.Execute(request);
                 content = response.Content;
             }
@@ -653,7 +652,7 @@ namespace MDispatch.Service
                 request.AddParameter("token", token);
                 request.AddParameter("idVech", idVech);
                 request.AddParameter("idShiping", idShiping);
-                request.AddParameter("damageForUserJson", strDamageForUsers);
+                request.AddParameter("damageForUserJson", Compress(strDamageForUsers));
                 response = client.Execute(request);
                 content = response.Content;
             }
@@ -685,7 +684,7 @@ namespace MDispatch.Service
                 request.AddParameter("token", token);
                 request.AddParameter("idShiping", idShiping);
                 request.AddParameter("type", type);
-                request.AddParameter("Photo", photojson);
+                request.AddParameter("Photo", Compress(photojson));
                 response = client.Execute(request);
                 content = response.Content;
             }
@@ -717,7 +716,7 @@ namespace MDispatch.Service
                 request.AddParameter("token", token);
                 request.AddParameter("idShiping", idShiping);
                 request.AddParameter("type", type);
-                request.AddParameter("video", videojson);
+                request.AddParameter("video", Compress(videojson));
                 response = client.Execute(request);
                 content = response.Content;
             }
@@ -895,6 +894,21 @@ namespace MDispatch.Service
                 zipStream.CopyTo(resultStream);
 
                 res = Encoding.UTF8.GetString(resultStream.ToArray());
+            }
+            return res;
+        }
+
+        private string Compress(string dataStr)
+        {
+            string res = null;
+            byte[] data = Encoding.UTF8.GetBytes(dataStr);
+            using (MemoryStream ms = new MemoryStream())
+            {
+                using (GZipStream gz = new GZipStream(ms, CompressionLevel.Optimal, true))
+                {
+                    gz.Write(data, 0, data.Length);
+                }
+                res = Convert.ToBase64String(ms.ToArray());
             }
             return res;
         }

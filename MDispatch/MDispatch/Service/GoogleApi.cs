@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
-using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
+using System.Text;
 
 namespace MDispatch.Service
 {
@@ -19,7 +21,7 @@ namespace MDispatch.Service
                 client.Timeout = 60000;
                 request.AddHeader("Accept", "application/json");
                 request.AddParameter("token", token);
-                request.AddParameter("image", image);
+                request.AddParameter("image", Compress(image));
                 request.AddParameter("idDriver", idDriver);
                 request.AddParameter("type", type);
                 response = client.Execute(request);
@@ -56,6 +58,21 @@ namespace MDispatch.Service
             {
                 return 2;
             }
+        }
+
+        private string Compress(string dataStr)
+        {
+            string res = null;
+            byte[] data = Encoding.UTF8.GetBytes(dataStr);
+            using (MemoryStream ms = new MemoryStream())
+            {
+                using (GZipStream gz = new GZipStream(ms, CompressionLevel.Optimal, true))
+                {
+                    gz.Write(data, 0, data.Length);
+                }
+                res = Convert.ToBase64String(ms.ToArray());
+            }
+            return res;
         }
     }
 }
