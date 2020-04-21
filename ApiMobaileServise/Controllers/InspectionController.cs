@@ -108,6 +108,7 @@ namespace ApiMobaileServise.Controllers
         [HttpPost]
         [Route("Save/Ansver")]
         [DisableRequestSizeLimit]
+        [CompressGzip(IsCompresReqvest = true, ParamUnZip = "jsonStrAsk")]
         public async Task<string> SaveAnsver(string token, string idVe, string jsonStrAsk, int type)
         {
             string respons = null;
@@ -146,6 +147,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("SaveSigPikedUp")]
+        [CompressGzip(IsCompresReqvest = true, ParamUnZip = "jsonSigPhoto")]
         public async Task<string> SaveSigPikedUp(string token, string idShip, string jsonSigPhoto)
         {
             string respons = null;
@@ -175,7 +177,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Shipping")]
-        //[CompressGzip]
+        [CompressGzip(IsCompresRespons = true)]
         public string GetShipping(string token, string idShip)
         {
             string respons = null;
@@ -205,7 +207,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("ShippingPhoto")]
-        [CompressGzip]
+        [CompressGzip(IsCompresRespons = true)]
         public string GetShippingPhoto(string token, string idShip)
         {
             string respons = null;
@@ -352,6 +354,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Save/Photo")]
+        [CompressGzip(IsCompresReqvest = true, ParamUnZip = "jsonStr")]
         public async Task<string> SavePhoto(string token, string idVe, string jsonStr)
         {
             string respons = null;
@@ -384,6 +387,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Damages/User")]
+        [CompressGzip(IsCompresReqvest = true, ParamUnZip = "damageForUserJson")]
         public async Task<string> AddDamageForUser(string token, string idVech, string idShiping, string damageForUserJson)
         {
             string respons = null;
@@ -413,6 +417,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Save/Pay")]
+        [CompressGzip(IsCompresReqvest = true, ParamUnZip = "Photo")]
         public async Task<string> SavePay(string token, string idShiping, int type, string Photo)
         {
             string respons = null;
@@ -442,6 +447,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Save/Recount")]
+        [CompressGzip(IsCompresReqvest = true, ParamUnZip = "video")]
         public async Task<string> SaveRecount(string token, string idShiping, int type, string video)
         {
             string respons = null;

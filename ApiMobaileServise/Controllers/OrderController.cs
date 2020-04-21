@@ -17,7 +17,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("ActiveOreder")]
-        [CompressGzip]
+        [CompressGzip(IsCompresRespons = true)]
         public string GetActiveOrder(string token)
         {
             string respons = null;
@@ -47,7 +47,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("DelyveryOreder")]
-        [CompressGzip]
+        [CompressGzip(IsCompresRespons = true)]
         public string GetDeliveryOrder(string token)
         {
             string respons = null;
@@ -77,7 +77,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("ArchiveOreder")]
-        [CompressGzip]
+        [CompressGzip(IsCompresRespons = true)]
         public string GetArchiveOrder(string token)
         {
             string respons = null;

@@ -1,45 +1,61 @@
-﻿using iTextSharp.tool.xml.parser.io;
-using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
 namespace ApiMobaileServise.Attribute
 {
-    public class CompressGzipAttribute : ResultFilterAttribute
+    public class CompressGzipAttribute : ResultFilterAttribute, IActionFilter
     {
+        public string ParamUnZip { get; set; }
+        public bool IsCompresReqvest { get; set; }
+        public bool IsCompresRespons { get; set; }
+
+        public void OnActionExecuted(ActionExecutedContext context)
+        {
+
+        }
+
+        public void OnActionExecuting(ActionExecutingContext context)
+        {
+            object paramReqvest = null;
+            if(IsCompresReqvest && ParamUnZip != null)
+            {
+                context.HttpContext.Response.Headers.Add("CompresReqvest", "Yes");
+                string[] paramsUnZip = ParamUnZip.Split(',');
+                foreach(string paramUnZip in paramsUnZip)
+                {
+                    paramReqvest = context.ActionArguments[paramUnZip] = UnCompress(context.ActionArguments[paramUnZip].ToString());
+                    if (context.HttpContext.Response.Headers.ContainsKey("CompresReqvestParam"))
+                    {
+                        context.HttpContext.Response.Headers.Add("CompresReqvestParam", paramUnZip);
+                    }
+                    else
+                    {
+                        context.HttpContext.Response.Headers["CompresReqvestParam"] += $", {paramUnZip}";
+                    }
+                }
+            }
+            else
+            {
+                context.HttpContext.Response.Headers.Add("CompresReqvest", "No");
+            }
+        }
+
         public override void OnResultExecuting(ResultExecutingContext context)
         {
             base.OnResultExecuting(context);
-            //PropertyInfo propertyInfo = context.Result.GetType().GetProperty("Value");
-            //string acceptEncoding = context.HttpContext.Response.Headers["Accept-Encoding"];
-            //if (acceptEncoding == null)
-            //{
-            //    return;
-            //}
-
-            //acceptEncoding = acceptEncoding.ToLower();
-
-            //if (acceptEncoding.Contains("gzip"))
-            //{
-            //    propertyInfo.SetValue(context.Result, Compress(Encoding.UTF8.GetBytes((string)propertyInfo.GetValue(context.Result, null)), CompressionLevel.Optimal));
-            //    //context.HttpContext.Response.Headers.Add("Content-Encoding", "gzip");
-            //}
-            //else if (acceptEncoding.Contains("deflate"))
-            //{
-            //    propertyInfo.SetValue(context.Result, Compress(Encoding.UTF8.GetBytes((string)propertyInfo.GetValue(context.Result, null)), CompressionLevel.Optimal));
-            //    //context.HttpContext.Response.Headers.Add("Content-Encoding", "deflate");
-            //}
-            PropertyInfo propertyInfo = context.Result.GetType().GetProperty("Value");
-            propertyInfo.SetValue(context.Result, Compress(Encoding.UTF8.GetBytes((string)propertyInfo.GetValue(context.Result, null)), CompressionLevel.Optimal));
+            if (IsCompresRespons)
+            {
+                PropertyInfo propertyInfo = context.Result.GetType().GetProperty("Value");
+                propertyInfo.SetValue(context.Result, Compress(Encoding.UTF8.GetBytes((string)propertyInfo.GetValue(context.Result, null)), CompressionLevel.Optimal));
+                context.HttpContext.Response.Headers.Add("CompresRespons", "gzip; Compression Level=Optimal");
+            }
         }
 
-        public override void OnResultExecuted(ResultExecutedContext context)
-        {
-            base.OnResultExecuted(context);
-        }
 
         private string Compress(byte[] data, CompressionLevel level)
         {
@@ -51,6 +67,22 @@ namespace ApiMobaileServise.Attribute
                     gz.Write(data, 0, data.Length);
                 }
                 res = Convert.ToBase64String(ms.ToArray());
+            }
+            return res;
+        }
+
+        private string UnCompress(string dataStr)
+        {
+            dataStr = dataStr.Replace("\"", "");
+            byte[] data = Convert.FromBase64String(dataStr);
+            string res = null;
+            using (var compressedStream = new MemoryStream(data))
+            using (var zipStream = new GZipStream(compressedStream, CompressionMode.Decompress))
+            using (var resultStream = new MemoryStream())
+            {
+                zipStream.CopyTo(resultStream);
+
+                res = Encoding.UTF8.GetString(resultStream.ToArray());
             }
             return res;
         }

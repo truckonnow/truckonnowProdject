@@ -1,4 +1,5 @@
-﻿using ApiMobaileServise.Models;
+﻿using ApiMobaileServise.Attribute;
+using ApiMobaileServise.Models;
 using ApiMobaileServise.Servise;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -13,6 +14,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("plate")]
+        [CompressGzip(IsCompresReqvest = true, ParamUnZip = "image")]
         public string CheckInspecktionDriver(string token, string image, string idDriver, string type)
         {
             string respons = null;

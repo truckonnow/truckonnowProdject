@@ -49,6 +49,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("SetInspectionDriver")]
+        [CompressGzip(IsCompresReqvest = true, ParamUnZip = "inspectionDriverStr")]
         public string SetInspectionDriver(string token, string idDriver, string inspectionDriverStr)
         {
             string respons = null;
@@ -78,6 +79,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("SaveInspactionDriver")]
+        [CompressGzip(IsCompresReqvest = true, ParamUnZip = "photoJson")]
         public string SaveInspactionDriver(string token, string idDriver, string photoJson, int indexPhoto)
         {
             string respons = null;
@@ -239,7 +241,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpGet]
         [Route("Test")]
-        [CompressGzip]
+        [CompressGzip(IsCompresRespons = true)]
         public string Test()
         {
             string respons = null;
