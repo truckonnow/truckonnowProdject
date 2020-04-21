@@ -144,9 +144,8 @@ namespace MDispatch.Service
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Shipping", Method.POST);
                 client.Timeout = 600000;
-                request.AddHeader("Accept", "*/*");
+                request.AddHeader("Accept", "application/json");
                 request.AddHeader("Accept-Encoding", "gzip");
-                request.AddHeader("Accept", "*/*");
                 request.AddParameter("token", token);
                 request.AddParameter("idShip", id);
                 response = client.Execute(request);
@@ -220,7 +219,7 @@ namespace MDispatch.Service
             }
             else
             {
-                return GetData(content, ref description, ref shipping);
+                return GetData(UnCompress(content), ref description, ref shipping);
             }
         }
 
@@ -388,10 +387,6 @@ namespace MDispatch.Service
             string content = null;
             try
             {
-                //EncodeJPEG(ask1.Any_additional_documentation_been_given_after_loading);
-                //EncodeJPEG(ask1.Any_additional_parts_been_given_to_you);
-                //EncodeJPEG(ask1.App_will_force_driver_to_take_pictures_of_each_strap);
-                //EncodeJPEG(ask1.Photo_after_loading_in_the_truck);
                 string strJsonAsk = JsonConvert.SerializeObject(ask1);
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Ansver", Method.POST);
@@ -591,7 +586,6 @@ namespace MDispatch.Service
                         dm.ImageSource = null;
                     });
                 }
-                //EncodeJPEG(photoInspection.Photos);
                 string strPhotoInspection = JsonConvert.SerializeObject(photoInspection);
                 RestClient client = new RestClient(Config.BaseReqvesteUrl);
                 RestRequest request = new RestRequest("Mobile/Save/Photo", Method.POST);
@@ -816,9 +810,6 @@ namespace MDispatch.Service
 
         private int GetData(string respJsonStr, ref string description, ref Shipping shipping)
         {
-            respJsonStr = respJsonStr.Replace("\\", "");
-            respJsonStr = respJsonStr.Remove(0, 1);
-            respJsonStr = respJsonStr.Remove(respJsonStr.Length - 1);
             var responseAppS = JObject.Parse(respJsonStr);
             string status = responseAppS.Value<string>("Status");
             description = responseAppS.Value<string>("Description");

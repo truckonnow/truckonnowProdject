@@ -323,6 +323,20 @@ namespace MDispatch.Service
             }
         }
 
-        
+        private string UnCompress(string dataStr)
+        {
+            dataStr = dataStr.Replace("\"", "");
+            byte[] data = Convert.FromBase64String(dataStr);
+            string res = null;
+            using (var compressedStream = new MemoryStream(data))
+            using (var zipStream = new GZipStream(compressedStream, CompressionMode.Decompress))
+            using (var resultStream = new MemoryStream())
+            {
+                zipStream.CopyTo(resultStream);
+
+                res = Encoding.UTF8.GetString(resultStream.ToArray());
+            }
+            return res;
+        }
     }
 }
