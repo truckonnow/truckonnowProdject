@@ -1,5 +1,4 @@
-﻿using ApiMobaileServise.BackgraundService;
-using FluentScheduler;
+﻿
 using Microsoft.AspNetCore.Builder;         
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Features;
@@ -26,8 +25,7 @@ namespace WebDispacher
             services.AddMvc(options =>
             {
                 options.RespectBrowserAcceptHeader = true;
-            })
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            });
             services.Configure<IISOptions>(options =>
             {
                 options.ForwardClientCertificate = false;

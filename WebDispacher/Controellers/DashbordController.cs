@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using DaoModels.DAO.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using WebDispacher.Attribute;
 using WebDispacher.Service;
 
 namespace WebDispacher.Controellers
@@ -40,8 +39,6 @@ namespace WebDispacher.Controellers
 
         [Route("Dashbord/Order/NewLoad")]
         [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
-        [HttpGet]
-        //[GZipOrDeflate]
         public async Task<IActionResult> NewLoad(int page)
         {
             IActionResult actionResult = null;

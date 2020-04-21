@@ -205,6 +205,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("ShippingPhoto")]
+        [CompressGzip]
         public string GetShippingPhoto(string token, string idShip)
         {
             string respons = null;
