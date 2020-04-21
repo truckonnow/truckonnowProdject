@@ -14,7 +14,7 @@ namespace ApiMobaileServise.Attribute
         {
             base.OnResultExecuting(context);
             //PropertyInfo propertyInfo = context.Result.GetType().GetProperty("Value");
-            string acceptEncoding = context.HttpContext.Response.Headers["Accept-Encoding"];
+            //string acceptEncoding = context.HttpContext.Response.Headers["Accept-Encoding"];
             //if (acceptEncoding == null)
             //{
             //    return;
@@ -34,6 +34,11 @@ namespace ApiMobaileServise.Attribute
             //}
             PropertyInfo propertyInfo = context.Result.GetType().GetProperty("Value");
             propertyInfo.SetValue(context.Result, Compress(Encoding.UTF8.GetBytes((string)propertyInfo.GetValue(context.Result, null)), CompressionLevel.Optimal));
+        }
+
+        public override void OnResultExecuted(ResultExecutedContext context)
+        {
+            base.OnResultExecuted(context);
         }
 
         private string Compress(byte[] data, CompressionLevel level)
