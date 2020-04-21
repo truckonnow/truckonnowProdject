@@ -189,7 +189,7 @@ namespace MDispatch.Service
             }
             else
             {
-                return GetData(content, ref description, ref shipping);
+                return GetData(UnCompress(content), ref description, ref shipping);
             }
         }
 
