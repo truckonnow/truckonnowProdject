@@ -327,6 +327,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("Save/FeedBack")]
+        [CompressGzip(IsCompresReqvest = true, ParamUnZip = "jsonStrAsk")]
         public async Task<string> SaveFeedBack(string token,string jsonStrAsk)
         {
             string respons = null;

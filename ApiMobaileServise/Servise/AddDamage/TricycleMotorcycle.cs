@@ -38,10 +38,10 @@ namespace ApiMobaileServise.Servise.AddDamage
             int[] maxMinForYAndX = null;
             switch (indexPhoto)
             {
-                case "4": maxMinForYAndX = new int[] { 430, 55, 695, 233 }; break;
-                case "5": maxMinForYAndX = new int[] { 578, 174, 622, 233 }; break;
-                case "6": maxMinForYAndX = new int[] { 635, 25, 880, 220 }; break;
-                case "7": maxMinForYAndX = new int[] { 700, 25, 853, 178 }; break;
+                case "4": maxMinForYAndX = new int[] { 695, 233, 430, 55 }; break;
+                case "5": maxMinForYAndX = new int[] { 622, 233, 578, 174 }; break;
+                case "6": maxMinForYAndX = new int[] { 880, 220, 635, 25 }; break;
+                case "7": maxMinForYAndX = new int[] { 853, 178, 700, 25 }; break;
                 case "8": maxMinForYAndX = new int[] { 372, 815, 235, 995 }; break;
                 case "9": maxMinForYAndX = new int[] { 480, 875, 315, 995 }; break;
                 case "10": maxMinForYAndX = new int[] { 495, 775, 300, 895 }; break;
@@ -53,10 +53,10 @@ namespace ApiMobaileServise.Servise.AddDamage
                 case "16": maxMinForYAndX = new int[] { 430, 569, 695, 747 }; break;
                 case "17": maxMinForYAndX = new int[] { 220, 560, 490, 740 }; break;
                 case "18": maxMinForYAndX = new int[] { 190, 615, 340, 765 }; break;
-                case "19": maxMinForYAndX = new int[] { 430, 90, 515, 155 }; break;
-                case "20": maxMinForYAndX = new int[] { 252, 100, 555, 255 }; break;
-                case "22": maxMinForYAndX = new int[] { 190, 35, 340, 185 }; break;
-                case "23": maxMinForYAndX = new int[] { 220, 62, 490, 242 }; break;
+                case "19": maxMinForYAndX = new int[] { 430, 155, 515, 90 }; break;
+                case "20": maxMinForYAndX = new int[] { 252, 255, 555, 100 }; break;
+                case "22": maxMinForYAndX = new int[] { 340, 185, 190, 35 }; break;
+                case "23": maxMinForYAndX = new int[] { 490, 242, 220, 62 }; break;
             }
             return maxMinForYAndX;
         }

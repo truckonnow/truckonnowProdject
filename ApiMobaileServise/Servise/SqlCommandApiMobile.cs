@@ -68,6 +68,7 @@ namespace ApiMobaileServise.Servise
         {
             Shipping shipping = context.Shipping
                 .Where(s => s.Id == idShipping)
+                .Include(s => s.VehiclwInformations)
                 .Include("VehiclwInformations.Ask")
                 .Include("VehiclwInformations.Ask1")
                 .Include("VehiclwInformations.Ask1.App_will_force_driver_to_take_pictures_of_each_strap")
@@ -83,8 +84,10 @@ namespace ApiMobaileServise.Servise
         {
             Shipping shipping = context.Shipping
                 .Where(s => s.Id == idShipping)
+                .Include(s => s.VehiclwInformations)
                 .Include("VehiclwInformations.Ask")
                 .Include("VehiclwInformations.AskDelyvery")
+                .Include("VehiclwInformations.PhotoInspections.Damages")
                 .Include(s => s.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature)
                 .Include(s => s.askForUserDelyveryM.PhotoPay)
                 .Include(s => s.askForUserDelyveryM.VideoRecord)
