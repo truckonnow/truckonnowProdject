@@ -18,16 +18,46 @@ namespace WebDispacher.Controellers
         [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult GetPhotoInspection(int idVech)
         {
-            IActionResult actionResult = null; 
+            IActionResult actionResult = null; string key = null;
+            ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+            Request.Cookies.TryGetValue("KeyAvtho", out key); 
+            if (managerDispatch.CheckKey(key))
+            {
+                Shipping shipping = managerDispatch.GetShipingCurrentVehiclwIn(idVech.ToString());
+                VehiclwInformation vehiclwInformation = shipping.VehiclwInformations.FirstOrDefault(v => v.Id == idVech);
+                if (shipping != null)
+                {
+                    ViewBag.BaseUrl = Config.BaseReqvesteUrl;
+                    ViewBag.Shipp = shipping;
+                    ViewBag.Vehiclw = vehiclwInformation;
+                    actionResult = View("InspectionVech");
+                }
+            }
+            else
+            {
+                if (Request.Cookies.ContainsKey("KeyAvtho"))
+                {
+                    Response.Cookies.Delete("KeyAvtho");
+                }
+                actionResult = Redirect(Config.BaseReqvesteUrl);
+            }
+            return actionResult;
+        }
+
+        [Route("Welcome/Photo/BOL/{idVech}")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
+        public IActionResult GetWelcomePhotoInspection(int idVech)
+        {
+            IActionResult actionResult = null;
             ViewData["hidden"] = "hidden";
             Shipping shipping = managerDispatch.GetShipingCurrentVehiclwIn(idVech.ToString());
             VehiclwInformation vehiclwInformation = shipping.VehiclwInformations.FirstOrDefault(v => v.Id == idVech);
-            if(shipping != null)
+            if (shipping != null)
             {
                 ViewBag.BaseUrl = Config.BaseReqvesteUrl;
                 ViewBag.Shipp = shipping;
                 ViewBag.Vehiclw = vehiclwInformation;
-                actionResult = View("InspectionVech");
+                actionResult = View("WelcomeInspectionVech");
             }
             return actionResult;
         }

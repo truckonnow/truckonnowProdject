@@ -1,0 +1,435 @@
+﻿@using System.Drawing;
+@using System.IO;
+
+<div class="body">
+    <div class="filling">
+        <div>
+            <p class="idStlP">Load ID: @ViewBag.Shipp.Id</p>
+            <div class="routeBlock">
+                <p class="routeInfP">@ViewBag.Shipp.AddresP, @ViewBag.Shipp.CityP, @ViewBag.Shipp.StateP, @ViewBag.Shipp.ZipP </p>
+                <p class="routeInfP">@ViewBag.Shipp.AddresD, @ViewBag.Shipp.CityD, @ViewBag.Shipp.StateD, @ViewBag.Shipp.ZipD </p>
+            </div>
+            <p class="nameVehStlP">@ViewBag.Vehiclw.Year @ViewBag.Vehiclw.Make @ViewBag.Vehiclw.Model</p>
+            @if (ViewBag.Vehiclw.Ask != null)
+            {
+                <p class="typeVehStlP">Type: @ViewBag.Vehiclw.Ask.TypeVehicle</p>
+            }
+        </div>
+        <hr />
+        <div class="inspectionBlock">
+            @if (@ViewBag.Vehiclw.Scan != null)
+            {
+                <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.Scan.Base64" onclick="ClickImg(this)" />
+            }
+            <p class="headStlP">Pickup Inspection</p>
+            <br />
+            <p class="headPhoto">Photo inspection</p>
+            @if (ViewBag.Vehiclw.PhotoInspections != null)
+            {
+                <div class="blockAllPhoto">
+
+                    @for (int i = 0; i < ViewBag.Vehiclw.PhotoInspections.Count; i++)
+                    {
+                        if (ViewBag.Vehiclw.PhotoInspections[i].CurrentStatusPhoto == "PikedUp")
+                        {
+                            @for (int j = 0; j < ViewBag.Vehiclw.PhotoInspections[i].Photos.Count; j++)
+                            {
+                                byte[] image = Convert.FromBase64String(@ViewBag.Vehiclw.PhotoInspections[i].Photos[j].Base64);
+                                MemoryStream ms = new MemoryStream(image);
+                                Image img = Image.FromStream(ms);
+                                if (img.Height > img.Width)
+                                {
+                                    <img class="img Photove" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Vehiclw.PhotoInspections[i].Photos[j].path&type=jpg" onclick="ClickImg(this)" />
+                                }
+                                else
+                                {
+                                    <img class="img Photola" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Vehiclw.PhotoInspections[i].Photos[j].path&type=jpg" onclick="ClickImg(this)" />
+                                }
+                            }
+                        }
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="noPhotoP">No Photo</p>
+            }
+            <hr />  
+            <p class="headPhoto">Photo after loading in the truck</p>
+            @if (ViewBag.Vehiclw.Ask1 != null)
+            {
+                <div class="blockAllPhoto">
+                    @if (ViewBag.Vehiclw.Ask1.Photo_after_loading_in_the_truck != null && ViewBag.Vehiclw.Ask1.Photo_after_loading_in_the_truck.Count != 0)
+                    {
+                        for (int i = 0; i < ViewBag.Vehiclw.Ask1.Photo_after_loading_in_the_truck.Count; i++)
+                        {
+                            byte[] image = Convert.FromBase64String(ViewBag.Vehiclw.Ask1.Photo_after_loading_in_the_truck[i].Base64);
+                            if (image != null && image.Length != 0)
+                            {
+                                MemoryStream ms = new MemoryStream(image);
+                                Image img = Image.FromStream(ms);
+                                if (img.Height > img.Width)
+                                {
+                                    <img class="img Photove" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Vehiclw.Ask1.Photo_after_loading_in_the_truck[i].path&type=jpg" @*src="data:image/gif;base64,@ViewBag.Vehiclw.Ask1.Photo_after_loading_in_the_truck[i].Base64"*@ onclick="ClickImg(this)" />
+                                }
+                                else
+                                {
+                                    <img class="img Photola" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Vehiclw.Ask1.Photo_after_loading_in_the_truck[i].path&type=jpg" @*src="data:image/gif;base64,@ViewBag.Vehiclw.Ask1.Photo_after_loading_in_the_truck[i].Base64"*@ onclick="ClickImg(this)" />
+                                }
+                            }
+                            else
+                            {
+                                <p>No photo found;</p>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <p class="noPhotoP">No Photo</p>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="noPhotoP">No Photo</p>
+            }
+            <hr />
+            <p class="headPhoto">Customer painting Pickup</p>
+            @if (ViewBag.Shipp.AskFromUser != null)
+            {
+                <div class="blockAllPhoto">
+                    @if (ViewBag.Shipp.AskFromUser.App_will_ask_for_signature_of_the_client_signature != null)
+                    {
+                        byte[] image = Convert.FromBase64String(ViewBag.Shipp.AskFromUser.App_will_ask_for_signature_of_the_client_signature.Base64);
+                        if (image != null && image.Length != 0)
+                        {
+                            MemoryStream ms = new MemoryStream(image);
+                            Image img = Image.FromStream(ms);
+                            if (img.Height > img.Width)
+                            {
+                                <img class="img Photove" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Shipp.AskFromUser.App_will_ask_for_signature_of_the_client_signature.path&type=jpg" @*src="data:image/gif;base64,@ViewBag.Shipp.AskFromUser.App_will_ask_for_signature_of_the_client_signature.Base64"*@ onclick="ClickImg(this)" />
+                            }
+                            else
+                            {
+                                <img class="img Photola" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Shipp.AskFromUser.App_will_ask_for_signature_of_the_client_signature.path&type=jpg" @*src="data:image/gif;base64,@ViewBag.Shipp.AskFromUser.App_will_ask_for_signature_of_the_client_signature.Base64"*@ onclick="ClickImg(this)" />
+                            }
+                        }
+                        else
+                        {
+                            <p>No photo found;</p>
+                        }
+
+                    }
+                    else
+                    {
+                        <p class="noPhotoP">No Photo</p>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="noPhotoP">No Photo</p>
+            }
+            <hr />
+            <hr />
+            <p class="headStlP">Delivery Inspection</p>
+            <br />
+            <p class="headPhoto">Photo inspection</p>
+            @if (ViewBag.Vehiclw.PhotoInspections != null)
+            {
+                <div class="blockAllPhoto">
+                    @for (int i = 0; i < ViewBag.Vehiclw.PhotoInspections.Count; i++)
+                    {
+                        if (ViewBag.Vehiclw.PhotoInspections[i].CurrentStatusPhoto == "Delyvery")
+                        {
+                            @for (int j = 0; j < ViewBag.Vehiclw.PhotoInspections[i].Photos.Count; j++)
+                            {
+                                byte[] image = Convert.FromBase64String(@ViewBag.Vehiclw.PhotoInspections[i].Photos[j].Base64);
+                                MemoryStream ms = new MemoryStream(image);
+                                Image img = Image.FromStream(ms);
+                                if (img.Height > img.Width)
+                                {
+                                    <img class="img Photove" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Vehiclw.PhotoInspections[i].Photos[j].path&type=jpg" @*src="data:image/gif;base64,@ViewBag.Vehiclw.PhotoInspections[i].Photos[j].Base64"*@ onclick="ClickImg(this)" />
+                                }
+                                else
+                                {
+                                    <img class="img Photola" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Vehiclw.PhotoInspections[i].Photos[j].path&type=jpg" @*src="data:image/gif;base64,@ViewBag.Vehiclw.PhotoInspections[i].Photos[j].Base64"*@ onclick="ClickImg(this)" />
+                                }
+                            }
+                        }
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="noPhotoP">No Photo</p>
+            }
+            <hr />
+            <p class="headPhoto">Customer Vehicle Inspection</p>
+            @if (ViewBag.Shipp.askForUserDelyveryM != null)
+            {
+                <div class="blockAllPhoto">
+                    @if (ViewBag.Shipp.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo != null && ViewBag.Shipp.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo.Count != 0)
+                    {
+                        for (int i = 0; i < ViewBag.Shipp.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo.Count; i++)
+                        {
+                            byte[] image = Convert.FromBase64String(ViewBag.Shipp.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo[i].Base64);
+                            if (image != null && image.Length != 0)
+                            {
+                                MemoryStream ms = new MemoryStream(image);
+                                Image img = Image.FromStream(ms);
+                                if (img.Height > img.Width)
+                                {
+                                    <img class="img Photove" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Shipp.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo[i].path&type=jpg" @*src="data:image/gif;base64,@ViewBag.Shipp.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo[i].Base64"*@ onclick="ClickImg(this)" />
+                                }
+                                else
+                                {
+                                    <img class="img Photola" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Shipp.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo[i].path&type=jpg" @*src="data:image/gif;base64,@ViewBag.Shipp.askForUserDelyveryM.Have_you_inspected_the_vehicle_For_any_additional_imperfections_other_than_listed_at_the_pick_up_photo[i].Base64"*@ onclick="ClickImg(this)" />
+                                }
+                            }
+                            else
+                            {
+                                <p>No photo found;</p>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <p class="noPhotoP">No Photo</p>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="noPhotoP">No Photo</p>
+            }
+            <hr />
+            <p class="headPhoto">Customer painting Delivery</p>
+            @if (ViewBag.Shipp.askForUserDelyveryM != null)
+            {
+                <div class="blockAllPhoto">
+                    @if (ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature != null)
+                    {
+                        byte[] image = Convert.FromBase64String(ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.Base64);
+                        if (image != null && image.Length != 0)
+                        {
+                            MemoryStream ms = new MemoryStream(image);
+                            Image img = Image.FromStream(ms);
+                            if (img.Height > img.Width)
+                            {
+                                <img class="img Photove" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.path&type=jpg" @*src="data:image/gif;base64,@ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.Base64"*@ onclick="ClickImg(this)" />
+                            }
+                            else
+                            {
+                                <img class="img Photola" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.path&type=jpg" @*src="data:image/gif;base64,@ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.Base64"*@ onclick="ClickImg(this)" />
+                            }
+                        }
+                        else
+                        {
+                            <p>No photo found;</p>
+                        }
+
+                    }
+                    else
+                    {
+                        <p class="noPhotoP">No Photo</p>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="noPhotoP">No Photo</p>
+            }
+            <hr />
+            <hr />
+        </div>
+    </div>
+</div>
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="imgMD">
+  <div id="caption"></div>
+</div>
+<script>
+    var modal = document.getElementById("myModal");
+    var img = document.getElementById("imgMD");
+    var captionText = document.getElementById("caption");
+    var span = document.getElementsByClassName("close")[0];
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    function ClickImg(elm) {
+        modal.style.display = "block";
+        img.src = elm.src;
+    }
+</script>
+<style type="text/css">
+    * {
+        margin: 0px;
+    }
+
+    .noPhotoP{
+        color:rgba(66, 58, 58, 0.66);
+        font-size: 20px;
+        margin:5px;
+    }
+
+    .headPhoto {
+        color: rgba(59, 51, 51, 0.87);
+        font-size: 23px;
+    }
+
+    .blockAllPhoto {
+        padding: 5px;
+        display: flex;
+        flex-wrap:wrap;
+        align-items:center;
+    }
+
+    .img {
+        margin: 5px;
+        border-width: 1px;
+        padding: 5px;
+        border-style: groove;
+    }
+
+    .img:hover {opacity: 0.7;}
+
+    .Photola {
+        height: 19%;
+        width: 19%;
+    }
+
+    .Photove {
+        height: 10%;
+        width: 10%;
+    }
+
+    @@media (max-width: 600px) {
+        .Photove {
+            height: 10%;
+            width: 100%;
+        }
+
+        .Photola {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    .inspectionBlock {
+        margin: 10px;
+    }
+
+    .routeBlock {
+        margin: 5px;
+    }
+
+    .idStlP {
+        color: #421f0e;
+        font-size: 20px;
+        margin: 20px;
+    }
+
+    .headStlP {
+        color: black;
+        font-size: 27px;
+        margin: 20px, 20px, 20px, 0px;
+    }
+
+    .nameVehStlP {
+        color: #e29334;
+        font-size: 25px;
+        margin: 20px, 20px, 20px, 0px;
+    }
+
+    .typeVehStlP {
+        color: #e29334;
+        font-size: 22px;
+        margin: 20px;
+    }
+
+    .routeInfP {
+        margin: 10px;
+        font-size: 17px;
+        color: #f3a74c;
+    }
+
+    .body {
+        margin-top: 30px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .filling {
+        width: 100%;
+    }
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 300px; /* Location of the box */
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    }
+
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        margin-top:50px
+    }
+
+    #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+    }
+
+    .modal-content, #caption {
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    }
+
+    @@keyframes zoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    .close {
+        position: absolute;
+        top: 55px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    @@media only screen and (max-width: 700px) {
+        .modal-content {
+            width: 100%;
+        }
+    }
+</style>

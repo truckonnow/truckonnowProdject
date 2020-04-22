@@ -38,7 +38,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/NewLoad")]
-        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
+        [ResponseCache(Location = ResponseCacheLocation.None, Duration = 300)]
         public async Task<IActionResult> NewLoad(int page)
         {
             IActionResult actionResult = null;
@@ -251,7 +251,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Assigned")]
-        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
+        [ResponseCache(Location = ResponseCacheLocation.None, Duration = 300)]
         public async Task<IActionResult> Assigned(int page)
         {
             IActionResult actionResult = null;
@@ -495,7 +495,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Pickedup")]
-        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
+        [ResponseCache(Location = ResponseCacheLocation.None, Duration = 300)]
         public async Task<IActionResult> Pickedup(int page)
         {
             IActionResult actionResult = null;
@@ -538,7 +538,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/ArchivedOrder")]
-        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
+        [ResponseCache(Location = ResponseCacheLocation.None, Duration = 300)]
         public IActionResult DeletedOrder(string id)
         {
             IActionResult actionResult = null;
@@ -637,7 +637,7 @@ namespace WebDispacher.Controellers
         }
         
         [Route("Dashbord/Order/Edit")]
-        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
+        [ResponseCache(Location = ResponseCacheLocation.None, Duration = 300)]
         public IActionResult EditOrder(string id, string stasus)
         {
             IActionResult actionResult = null;
@@ -676,7 +676,7 @@ namespace WebDispacher.Controellers
         }
 
         [Route("Dashbord/Order/Creat")]
-        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
+        [ResponseCache(Location = ResponseCacheLocation.None, Duration = 300)]
         public async Task<IActionResult> CreatOrderpage()
         {
             IActionResult actionResult = null;
