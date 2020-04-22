@@ -391,6 +391,7 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
         {
             List<VehiclwInformation> vehiclwInformation1s = getVechicleDelegate.Invoke();
             int indexCurrentVechecle = vehiclwInformation1s.FindIndex(v => v == VehiclwInformation);
+            IVehicle Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
             if (vehiclwInformation1s.Count - 1 == indexCurrentVechecle)
             {
                 Continue();
@@ -399,11 +400,17 @@ namespace MDispatch.ViewModels.InspectionMV.DelyveryMV
             else
             {
                 await PopupNavigation.PushAsync(new HintPageVechicle("Continuing inspection Deliveri", vehiclwInformation1s[indexCurrentVechecle + 1]));
-                IVehicle Car = GetTypeCar(vehiclwInformation.Ask.TypeVehicle.Replace(" ", ""));
-                FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.TypeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", Car.TypeIndex.Replace(" ", ""), InderxPhotoInspektion + 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(InderxPhotoInspektion + 1), OnDeliveryToCarrier, TotalPaymentToCarrier);
+                FullPagePhotoDelyvery fullPagePhotoDelyvery = new FullPagePhotoDelyvery(managerDispatchMob, VehiclwInformation, IdShip, $"{Car.TypeIndex.Replace(" ", "")}{1}.png", Car.TypeIndex.Replace(" ", ""), 1, initDasbordDelegate, getVechicleDelegate, Car.GetNameLayout(1), OnDeliveryToCarrier, TotalPaymentToCarrier);
                 await Navigation.PushAsync(fullPagePhotoDelyvery);
-                await Navigation.PushAsync(new CameraPagePhoto1($"{Car.TypeIndex.Replace(" ", "")}{InderxPhotoInspektion + 1}.png", fullPagePhotoDelyvery, "PhotoIspection"));
+                await Navigation.PushAsync(new CameraPagePhoto1($"{Car.TypeIndex.Replace(" ", "")}{1}.png", fullPagePhotoDelyvery, "PhotoIspection"));
             }
+        }
+
+        private int GetIndexPhoto(VehiclwInformation vehiclwInformation, IVehicle car)
+        {
+            int indexPhoto = vehiclwInformation.PhotoInspections == null || vehiclwInformation.PhotoInspections.Count == 0 ? 1
+                : vehiclwInformation.PhotoInspections.Count >= 11 ? (vehiclwInformation.PhotoInspections.Count - car.CountCarImg) : 1;
+            return indexPhoto;
         }
 
         public void ReSetPhoto(byte[] newPhoto, byte[] oldPhoto)

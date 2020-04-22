@@ -406,19 +406,21 @@ namespace MDispatch.ViewModels.PageAppMV
                 });
                 if (state == 2)
                 {
+                    await PopupNavigation.PopAsync();
                     await PopupNavigation.PushAsync(new Errror(description, null));
                 }
                 else if (state == 3)
                 {
+                    await PopupNavigation.PopAsync();
                     initDasbordDelegate.Invoke();
                     await Navigation.PopToRootAsync(true);
                 }
                 else if (state == 4)
                 {
+                    await PopupNavigation.PopAsync();
                     await PopupNavigation.PushAsync(new Errror("Technical work on the service", null));
                 }
             }
-            await PopupNavigation.PopAsync();
         }
 
         private IVehicle GetTypeCar(string typeCar)
