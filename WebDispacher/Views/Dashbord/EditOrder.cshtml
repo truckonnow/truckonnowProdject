@@ -23,42 +23,42 @@
             <div class="content">
                 <h2 style="color:rgb(51, 51, 51);margin-bottom:2px;">Pickup Information</h2>
                 <p class="inpLabe">Name</p>
-                <input name="nameP" class="inpText" type="text" value="@ViewBag.Order.NameP" />
+                <input name="nameP" class="inpText" type="text" value="@ViewBag.Order.NameP" placeholder="Name"/>
                 <p class="inpLabe">Contact</p>
-                <input name="contactP" class="inpText" type="text" value="@ViewBag.Order.ContactNameP" />
-                <p class="inpLabe">Address</p>
-                <input name="addressP" class="inpText validation" type="text" value="@ViewBag.Order.AddresP" required/>
-                <p class="inpLabe">City</p>
-                <input name="cityP" class="inpText validation" type="text" value="@ViewBag.Order.CityP" required/>
-                <p class="inpLabe">State</p>
-                <input name="stateP" class="inpText validation" type="text" value="@ViewBag.Order.StateP" pattern="[A-Z]{2}" placeholder="XXXXX" required/>
-                <p class="inpLabe">Zip</p>
-                <input name="zipP" class="inpText validation" type="text" value="@ViewBag.Order.ZipP" pattern="[0-9]{5}" placeholder="XXXXX" required/>
-                <p class="inpLabe">Phone</p>
-                <input name="phoneP" class="inpText validation" type="tel" placeholder="XXXXXXXXXX" pattern="[0-9]{4,12}"  value="@ViewBag.Order.PhoneP" required/>
-                <p class="inpLabe">Email</p>
-                <input name="emailP" class="inpText validation" type="email" value="@ViewBag.Order.EmailP"  required/>
+                <input name="contactP" class="inpText" type="text" value="@ViewBag.Order.ContactNameP" placeholder="Contact name"/>
+                <p class="inpLabe">Address*</p>
+                <input name="addressP" class="inpText validation" type="text" value="@ViewBag.Order.AddresP" placeholder="Address" required/>
+                <p class="inpLabe">City*</p>
+                <input name="cityP" class="inpText validation" type="text" value="@ViewBag.Order.CityP" placeholder="City" required/>
+                <p class="inpLabe">State*</p>
+                <input name="stateP" class="inpText validation" type="text" value="@ViewBag.Order.StateP" pattern="[A-Z]{2}" placeholder="XX - State" required/>
+                <p class="inpLabe">Zip*</p>
+                <input name="zipP" class="inpText validation" type="text" value="@ViewBag.Order.ZipP" pattern="[0-9]{5}" placeholder="XXXXX - Zip code" required/>
+                <p class="inpLabe">Phone*</p>
+                <input name="phoneP" class="inpText validation" type="tel" placeholder="XXXXXXXXXX - Phone number" pattern="[0-9]{4,12}"  value="@ViewBag.Order.PhoneP" required/>
+                <p class="inpLabe">Email*</p>
+                <input name="emailP" class="inpText validation" type="email" value="@ViewBag.Order.EmailP" placeholder="Email" required/>
                 <p class="inpLabe">Scheduled Pickup Date</p>
                 <input name="scheduledPickupDateP" class="inpText" type="text" value="@ViewBag.Order.PickupExactly" />
             </div>
             <div class="content">
                 <h2 style="color:rgb(51, 51, 51);margin-bottom:2px;">Delivery Information</h2>
                 <p class="inpLabe">Name</p>
-                <input name="nameD" class="inpText" type="text" value="@ViewBag.Order.NameD" />
+                <input name="nameD" class="inpText" type="text" value="@ViewBag.Order.NameD" placeholder="Name" />
                 <p class="inpLabe">Contact</p>
-                <input name="contactD" class="inpText" type="text" value="@ViewBag.Order.ContactNameD" />
-                <p class="inpLabe">Address</p>
-                <input name="addressD" class="inpText validation" type="text" value="@ViewBag.Order.AddresD" required/>
-                <p class="inpLabe">City</p>
-                <input name="cityD" class="inpText validation" type="text" value="@ViewBag.Order.CityD" required/>
-                <p class="inpLabe">State</p>
-                <input name="stateD" class="inpText validation" pattern="[A-Z]{2}" type="text" value="@ViewBag.Order.StateD" placeholder="XX" required/>
-                <p class="inpLabe">Zip</p>
-                <input name="zipD" class="inpText validation" type="text" value="@ViewBag.Order.ZipD" pattern="[0-9]{5}" placeholder="XXXXX" required/>
-                <p class="inpLabe">Phone</p>
-                <input name="phoneD" class="inpText validation" placeholder="XXXXXXXXXX" type="tel" pattern="[0-9]{4,12}" value="@ViewBag.Order.PhoneD" required/>
-                <p class="inpLabe">Email</p>
-                <input name="emailD" class="inpText validation" type="email" value="@ViewBag.Order.EmailD" required/>
+                <input name="contactD" class="inpText" type="text" value="@ViewBag.Order.ContactNameD" placeholder="Contact name" />
+                <p class="inpLabe">Address*</p>
+                <input name="addressD" class="inpText validation" type="text" value="@ViewBag.Order.AddresD" placeholder="Address" required/>
+                <p class="inpLabe">City*</p>
+                <input name="cityD" class="inpText validation" type="text" value="@ViewBag.Order.CityD" placeholder="City" required/>
+                <p class="inpLabe">State*</p>
+                <input name="stateD" class="inpText validation" pattern="[A-Z]{2}" type="text" value="@ViewBag.Order.StateD" placeholder="XX - State" required/>
+                <p class="inpLabe">Zip*</p>
+                <input name="zipD" class="inpText validation" type="text" value="@ViewBag.Order.ZipD" pattern="[0-9]{5}" placeholder="XXXXX - Zip code" required/>
+                <p class="inpLabe">Phone*</p>
+                <input name="phoneD" class="inpText validation" placeholder="XXXXXXXXXX - Phone number" type="tel" pattern="[0-9]{4,12}" value="@ViewBag.Order.PhoneD" required/>
+                <p class="inpLabe">Email*</p>
+                <input name="emailD" class="inpText validation" type="email" value="@ViewBag.Order.EmailD" placeholder="Email" required/>
             </div>
         </div>
         <div class="bodyTable">
@@ -91,13 +91,14 @@
                         <td>
                             <select>
                                 <option>@ViewBag.Order.VehiclwInformations[i].Type</option>
-                                <option>Coupe</option>
                                 <option>Sedan</option>
-                                <option>SUV</option>
+                                <option>Suv</option>
+                                <option>Coupe</option>
                                 <option>Pickup</option>
+                                <option>Tricycle</option>
                                 <option>Sport bike</option>
                                 <option>Touring motorcycle</option>
-                                <option>Cruising motorcycle</option>
+                                <option>Cruise motorcycle</option>
                             </select>
                         </td>
                         <td><input class="inpTextTr" type="text" value="@ViewBag.Order.VehiclwInformations[i].Color" /></td>
@@ -116,7 +117,7 @@
             <div class="content">
                 <h2 style="color:rgb(51, 51, 51);margin-bottom:2px;">Payment Information</h2>
                 <p class="inpLabe">Payment method</p>
-                <select name="paymentMethod" class="dropDown">
+                <select name="paymentMethod" class="dropDown" required>
                     <option value="">------------------------------------</option>
                     <option value="COP">COP</option>
                     <option value="COD">COD</option>
