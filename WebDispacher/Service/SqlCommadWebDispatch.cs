@@ -575,7 +575,10 @@ namespace WebDispacher.Dao
         public async Task<List<Shipping>> GetShippings(string status, int page)
         {
             List<Shipping> shipping = null;
-            shipping = await context.Shipping.Where(s => s.CurrentStatus == status).ToListAsync();
+            shipping = await context.Shipping
+                .Where(s => s.CurrentStatus == status)
+                .Include(s => s.Driverr)
+                .ToListAsync();
             
             if (page != 0)
             {
