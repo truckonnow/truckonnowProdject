@@ -3,6 +3,218 @@
 @using System.IO.Compression;
 @using System.Drawing.Imaging;
 <style>
+    /**/
+    .imgModal {
+        vertical-align: middle;
+    }
+
+    .container {
+        position: relative;
+    }
+
+    .mySlides {
+        display: none;
+    }
+
+    .cursor {
+        cursor: pointer;
+    }
+
+    .prev,
+    .next {
+        cursor: pointer;
+        position: absolute;
+        top: 40%;
+        width: auto;
+        padding: 16px;
+        margin-top: -50px;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        -webkit-user-select: none;
+        transition: 0.3s;
+    }
+
+    .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+    }
+
+        .prev:hover,
+        .next:hover {
+            background-color: #ff4614;
+        }
+
+    .numbertext {
+        color: #f2f2f2;
+        font-size: 12px;
+        padding: 8px 12px;
+        position: absolute;
+        top: 0;
+    }
+
+    .caption-container {
+        text-align: center;
+        background-color: #222;
+        padding: 2px 16px;
+        color: white;
+    }
+
+    .demo {
+        opacity: 0.6;
+    }
+
+        .active,
+        .demo:hover {
+            opacity: 1;
+        }
+    /**/
+    dialog {
+        position: fixed;
+        z-index: 9500;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+        font-size: 0;
+        text-align: center;
+    }
+
+    .green {
+        border: 1px solid #95f816;
+        outline: none;
+        color: #95f816;
+    }
+
+    .red {
+        border: 1px solid #ff4614;
+        outline: none;
+        color: #ff4614;
+    }
+
+    .blue {
+        border: 1px solid #3df;
+        outline: none;
+        color: #3df;
+    }
+
+    .ng-modal-wrapper {
+        display: inline-block;
+        vertical-align: middle;
+        width: 100%;
+        position: relative;
+    }
+
+    modal-dialog .modal-dialog-content.multiple {
+        padding-bottom: 0;
+    }
+
+    .modal-dialog .modal-dialog-content {
+        font-size: 20px;
+    }
+
+    .modal-dialog .modal-dialog-content {
+        transition: height 0.25s linear;
+    }
+
+    .modal-dialog {
+        position: absolute;
+        left: 20%;
+        top: 80px;
+        margin-bottom: 20px;
+        width: 60%;
+        text-align: left;
+        background-color: rgba(242, 242, 242, 0.80);
+        -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15), 0px 0px 1px 1px rgba(0, 0, 0, 0.05);
+        -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15), 0px 0px 1px 1px rgba(0, 0, 0, 0.05);
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15), 0px 0px 1px 1px rgba(0, 0, 0, 0.05);
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        transition: height 0.25s linear;
+        overflow: hidden;
+    }
+
+        .modal-dialog .modal-dialog-content h1 {
+            font-size: 19px;
+            line-height: 22px;
+            letter-spacing: -.026em;
+            font-family: 'SF UI Text Medium', 'SF UI Text Light', 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, Verdana, sans-serif;
+            font-weight: 500;
+            margin-bottom: 14px;
+        }
+
+        .modal-dialog .modal-dialog-content h1 {
+            font-size: 19px;
+            line-height: 22px;
+            letter-spacing: -.026em;
+            font-family: 'SF UI Text Medium', 'SF UI Text Light', 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, Verdana, sans-serif;
+            font-weight: 500;
+            margin-bottom: 14px;
+        }
+
+        .modal-dialog .modal-dialog-content + .modal-dialog-content {
+            padding-top: 0;
+        }
+
+        .modal-dialog .modal-dialog-content {
+            padding-top: 20px;
+            font-size: 15px;
+        }
+
+        .modal-dialog .modal-dialog-content {
+            transition: height 0.25s linear;
+        }
+
+    .modal-buttons {
+        border-top: 1px solid #e5e5e5;
+        padding: 15px;
+        display: inline-block;
+        width: 100%;
+        zoom: 1;
+    }
+
+        .modal-buttons button, input {
+            margin-top: 0;
+        }
+
+        button.btnModal, a.btn.btnModal, .modal-buttons > ul li a.btnModal {
+            font-family: 'SF UI Text Medium', 'SF UI Text Light', 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, Verdana, sans-serif;
+            font-weight: 500;
+        }
+
+        .modal-dialog button, .modal-dialog input, .modal-dialog label, a.btn, .modal-buttons > ul li a {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+            cursor: pointer;
+            padding: 3px 10px 4px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            margin-top: 2px;
+            background: none;
+            font-size: 15px;
+            line-height: 19px;
+            letter-spacing: -.016em;
+            -moz-transition-property: all;
+            -o-transition-property: all;
+            -webkit-transition-property: all;
+            transition-property: all;
+            -moz-transition-duration: 300ms;
+            -o-transition-duration: 300ms;
+            -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
+        }
+
+        .modal-buttons .right-buttons {
+            float: right;
+        }
+
     .body {
         margin-top: 30px;
         margin-left: 5px;
@@ -150,62 +362,116 @@
                             using (var inputStream = new MemoryStream(imageB))
                             {
                                 image = Image.FromStream(inputStream);
-                                //Bitmap bitmap = new Bitmap(image, new Size(432, 240));
-                                //var jpegEncoder = ImageCodecInfo.GetImageDecoders()
-                                //  .First(c => c.FormatID == ImageFormat.Jpeg.Guid);
-                                //var encoderParameters = new EncoderParameters(1);
-                                //encoderParameters.Param[0] = new EncoderParameter(Encoder.Quality, 20L);
-                                //using (var outputStream = new MemoryStream())
-                                //{
-                                //    bitmap.Save(outputStream, jpegEncoder, encoderParameters);
-                                //    outputBytes = outputStream.ToArray();
-                                //}
                             }
-
-                            //string base64 = Convert.ToBase64String(outputBytes.ToArray());
 
                             if (image.Height > image.Width)
                             {
-                                    <img class="img Photove" src="@ViewBag.BaseUrl/Driver/Image?name=@ViewBag.InspectionTruck.PhotosTruck[i].path&type=jpg" onclick="ClickImg('@ViewBag.InspectionTruck.PhotosTruck[i].Base64')" />
-                                }
-                                else
-                                {
-                                    <img class="img Photola" src="@ViewBag.BaseUrl/Driver/Image?name=@ViewBag.InspectionTruck.PhotosTruck[i].path&type=jpg" onclick="ClickImg('@ViewBag.InspectionTruck.PhotosTruck[i].Base64')" />
-                                }
+                                <img class="img Photove" src="@ViewBag.BaseUrl/Driver/Image?name=@ViewBag.InspectionTruck.PhotosTruck[i].path&type=jpg" onclick="ShowAlert(0)" />
                             }
                             else
                             {
-                                <p class="img Photola">No photo found;</p>
+                                <img class="img Photola" src="@ViewBag.BaseUrl/Driver/Image?name=@ViewBag.InspectionTruck.PhotosTruck[i].path&type=jpg" onclick="ShowAlert(0)" />
                             }
                         }
-                        catch
+                        else
                         {
-
                             <p class="img Photola">No photo found;</p>
                         }
-
                     }
+                    catch
+                    {
+
+                        <p class="img Photola">No photo found;</p>
+                    }
+
+                }
             </div>
         </div>
     </div>
 </div>
+<dialog id="dialog0">
+    <content class="ng-modal-wrapper">
+        <span class="close" onclick="HiddenDialog(0)">&times;</span>
+        <div class="modal-dialog">
+            <div class="modal-dialog-content ng-scope multiple">
+                <h1>Inspection Driver</h1>
+                <div class="modal-dialog-content">
+                    <div>
+                        <div class="container">
+                            @if (ViewBag.InspectionTruck.PhotosTruck != null)
+                            {
+                                int indexPhoto = 0;
+                                        @for (int i = 0; i < ViewBag.InspectionTruck.PhotosTruck.Count; i++)
+                                        {
+                                            indexPhoto++;
+                                            <div class="mySlides mySlides0">
+                                                <div class="numbertext">@indexPhoto</div>
+                                                <img class="imgModal" src="@ViewBag.BaseUrl/Driver/Image?name=@ViewBag.InspectionTruck.PhotosTruck[i].path&type=jpg" style="width:100%">
+                                            </div>
+                                        }
+                                <a class="prev" onclick="plusSlides(-1)">❮</a>
+                                <a class="next" onclick="plusSlides(1)">❯</a>
+                            }
 
-<div id="myModal" class="modal">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="imgMD">
-    <div id="caption"></div>
-</div>
+
+                            <div class="column">
+                                @if (ViewBag.InspectionTruck.PhotosTruck != null)
+                                {
+                                    int indexPhoto = 0;
+                                            @for (int i = 0; i < ViewBag.InspectionTruck.PhotosTruck.Count; i++)
+                                            {
+                                                indexPhoto++;
+                                                <img class="demo demo0 cursor imgModal" src="@ViewBag.BaseUrl/Driver/Image?name=@ViewBag.InspectionTruck.PhotosTruck[i].path&type=jpg" style="margin:5px;width:7%;" onclick="currentSlide(@indexPhoto)">
+                                            }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    var slideIndex = 1;
+                    showSlides(slideIndex);
+
+                    function plusSlides(n) {
+                        showSlides(slideIndex += n);
+                    }
+
+                    function currentSlide(n) {
+                        showSlides(slideIndex = n);
+                    }
+
+                    function showSlides(n) {
+                        let i;
+                        let slides = document.getElementsByClassName("mySlides0");
+                        let dots = document.getElementsByClassName("demo0");
+                        if (n > slides.length) { slideIndex = 1 }
+                        if (n < 1) { slideIndex = slides.length }
+                        for (i = 0; i < slides.length; i++) {
+                            slides[i].style.display = "none";
+                        }
+                        for (i = 0; i < dots.length; i++) {
+                            dots[i].className = dots[i].className.replace(" active", "");
+                        }
+                        if (slides && slides.length != 0) {
+                            slides[slideIndex - 1].style.display = "block";
+                        }
+                        if (dots && dots.length != 0) {
+                            dots[slideIndex - 1].className += " active";
+                        }
+                    }
+                </script>
+            </div>
+        </div>
+    </content>
+</dialog>
 <script>
-    var modal = document.getElementById("myModal");
-    var img = document.getElementById("imgMD");
-    var captionText = document.getElementById("caption");
-    var span = document.getElementsByClassName("close")[0];
-    span.onclick = function () {
-        modal.style.display = "none";
+    function ShowAlert(numAlert) {
+        let dialog = document.getElementById('dialog' + numAlert);
+        dialog.show();
     }
 
-    function ClickImg(elm) {
-        modal.style.display = "block";
-        img.src = "data:image/gif;base64,"+elm;
+    function HiddenDialog(numAlert) {
+        let dialog = document.getElementById('dialog' + numAlert);
+        dialog.close();
     }
 </script>
