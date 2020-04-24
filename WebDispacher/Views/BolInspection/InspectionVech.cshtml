@@ -20,7 +20,7 @@
         <div class="inspectionBlock">
             @if (@ViewBag.Vehiclw.Scan != null)
             {
-                <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.Scan.Base64" onclick="ClickImg(this)" />
+                <img class="img Photola" src="data:image/gif;base64,@ViewBag.Vehiclw.Scan.Base64" onclick="ShowAlert(11)" />
             }
             <p class="headStlP">Pickup Inspection</p>
             <br />
@@ -372,11 +372,11 @@
                             Image img = Image.FromStream(ms);
                             if (img.Height > img.Width)
                             {
-                                <img class="img Photove" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.path&type=jpg" @*src="data:image/gif;base64,@ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.Base64"*@ onclick="ClickImg(this)" />
+                                <img class="img Photove" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.path&type=jpg" onclick="ShowAlert(9)" />
                             }
                             else
                             {
-                                <img class="img Photola" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.path&type=jpg" @*src="data:image/gif;base64,@ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.Base64"*@ onclick="ClickImg(this)" />
+                                <img class="img Photola" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.path&type=jpg" onclick="ShowAlert(9)" />
                             }
                         }
                         else
@@ -409,11 +409,11 @@
                             Image img = Image.FromStream(ms);
                             if (img.Height > img.Width)
                             {
-                                <img class="img Photove" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Shipp.askForUserDelyveryM.PhotoPay.path&type=jpg" @*src="data:image/gif;base64,@ViewBag.Shipp.askForUserDelyveryM.PhotoPay.Base64"*@ onclick="ClickImg(this)" />
+                                <img class="img Photove" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Shipp.askForUserDelyveryM.PhotoPay.path&type=jpg" onclick="ShowAlert(10)" />
                             }
                             else
                             {
-                                <img class="img Photola" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Shipp.askForUserDelyveryM.PhotoPay.path&type=jpg" @*src="data:image/gif;base64,@ViewBag.Shipp.askForUserDelyveryM.PhotoPay.Base64"*@ onclick="ClickImg(this)" />
+                                <img class="img Photola" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Shipp.askForUserDelyveryM.PhotoPay.path&type=jpg" onclick="ShowAlert(10)" />
                             }
                         }
                         else
@@ -1105,6 +1105,201 @@
                         let i;
                         let slides = document.getElementsByClassName("mySlides8");
                         let dots = document.getElementsByClassName("demo8");
+                        if (n > slides.length) { slideIndex = 1 }
+                        if (n < 1) { slideIndex = slides.length }
+                        for (i = 0; i < slides.length; i++) {
+                            slides[i].style.display = "none";
+                        }
+                        for (i = 0; i < dots.length; i++) {
+                            dots[i].className = dots[i].className.replace(" active", "");
+                        }
+                        if (slides && slides.length != 0) {
+                            slides[slideIndex - 1].style.display = "block";
+                        }
+                        if (dots && dots.length != 0) {
+                            dots[slideIndex - 1].className += " active";
+                        }
+                    }
+                </script>
+            </div>
+        </div>
+    </content>
+</dialog>
+<dialog id="dialog9">
+    <content class="ng-modal-wrapper">
+        <span class="close" onclick="HiddenDialog(9)">&times;</span>
+        <div class="modal-dialog">
+            <div class="modal-dialog-content ng-scope multiple">
+                <h1>Customer painting Delivery</h1>
+                <div class="modal-dialog-content">
+                    <div>
+                        <div class="container">
+                            @if (ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature != null)
+                            {
+                                int indexPhoto = 0;
+                                indexPhoto++;
+                                <div class="mySlides mySlides9">
+                                    <div class="numbertext">@indexPhoto</div>
+                                    <img class="imgModal" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.path&type=jpg" style="width:100%">
+                                </div>
+                            }
+                            <div class="column">
+                                @if (ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature != null)
+                                {
+                                    int indexPhoto = 0;
+                                    indexPhoto++;
+                                    <img class="demo9 demo cursor imgModal" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Shipp.askForUserDelyveryM.App_will_ask_for_signature_of_the_client_signature.path&type=jpg" style="margin:5px;width:7%;" onclick="currentSlide9(@indexPhoto)">
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    var slideIndex = 1;
+                    showSlides9(slideIndex);
+
+                    function plusSlides9(n) {
+                        showSlides9(slideIndex += n);
+                    }
+
+                    function currentSlide9(n) {
+                        showSlides9(slideIndex = n);
+                    }
+
+                    function showSlides9(n) {
+                        let i;
+                        let slides = document.getElementsByClassName("mySlides9");
+                        let dots = document.getElementsByClassName("demo9");
+                        if (n > slides.length) { slideIndex = 1 }
+                        if (n < 1) { slideIndex = slides.length }
+                        for (i = 0; i < slides.length; i++) {
+                            slides[i].style.display = "none";
+                        }
+                        for (i = 0; i < dots.length; i++) {
+                            dots[i].className = dots[i].className.replace(" active", "");
+                        }
+                        if (slides && slides.length != 0) {
+                            slides[slideIndex - 1].style.display = "block";
+                        }
+                        if (dots && dots.length != 0) {
+                            dots[slideIndex - 1].className += " active";
+                        }
+                    }
+                </script>
+            </div>
+        </div>
+    </content>
+</dialog>
+<dialog id="dialog10">
+    <content class="ng-modal-wrapper">
+        <span class="close" onclick="HiddenDialog(10)">&times;</span>
+        <div class="modal-dialog">
+            <div class="modal-dialog-content ng-scope multiple">
+                <h1>Customer painting Delivery</h1>
+                <div class="modal-dialog-content">
+                    <div>
+                        <div class="container">
+                            @if (ViewBag.Shipp.askForUserDelyveryM.PhotoPay != null)
+                            {
+                                int indexPhoto = 0;
+                                indexPhoto++;
+                                <div class="mySlides mySlides10">
+                                    <div class="numbertext">@indexPhoto</div>
+                                    <img class="imgModal" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Shipp.askForUserDelyveryM.PhotoPay.path&type=jpg" style="width:100%">
+                                </div>
+                            }
+                            <div class="column">
+                                @if (ViewBag.Shipp.askForUserDelyveryM.PhotoPay != null)
+                                {
+                                    int indexPhoto = 0;
+                                    indexPhoto++;
+                                    <img class="demo10 demo cursor imgModal" src="@ViewBag.BaseUrl/Dashbord/Image?name=@ViewBag.Shipp.askForUserDelyveryM.PhotoPay.path&type=jpg" style="margin:5px;width:7%;" onclick="currentSlide10(@indexPhoto)">
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    var slideIndex = 1;
+                    showSlides10(slideIndex);
+
+                    function plusSlides10(n) {
+                        showSlides10(slideIndex += n);
+                    }
+
+                    function currentSlide10(n) {
+                        showSlides10(slideIndex = n);
+                    }
+
+                    function showSlides10(n) {
+                        let i;
+                        let slides = document.getElementsByClassName("mySlides10");
+                        let dots = document.getElementsByClassName("demo10");
+                        if (n > slides.length) { slideIndex = 1 }
+                        if (n < 1) { slideIndex = slides.length }
+                        for (i = 0; i < slides.length; i++) {
+                            slides[i].style.display = "none";
+                        }
+                        for (i = 0; i < dots.length; i++) {
+                            dots[i].className = dots[i].className.replace(" active", "");
+                        }
+                        if (slides && slides.length != 0) {
+                            slides[slideIndex - 1].style.display = "block";
+                        }
+                        if (dots && dots.length != 0) {
+                            dots[slideIndex - 1].className += " active";
+                        }
+                    }
+                </script>
+            </div>
+        </div>
+    </content>
+</dialog>
+<dialog id="dialog11">
+    <content class="ng-modal-wrapper">
+        <span class="close" onclick="HiddenDialog(11)">&times;</span>
+        <div class="modal-dialog">
+            <div class="modal-dialog-content ng-scope multiple">
+                <div class="modal-dialog-content">
+                    <div>
+                        <div class="container">
+                            @if (@ViewBag.Vehiclw.Scan != null)
+                            {
+                                int indexPhoto = 0;
+                                indexPhoto++;
+                                <div class="mySlides mySlides11">
+                                    <div class="numbertext">@indexPhoto</div>
+                                    <img class="imgModal" src="data:image/gif;base64,@ViewBag.Vehiclw.Scan.Base64" style="width:100%">
+                                </div>
+                            }
+                        <div class="column">
+                            @if (@ViewBag.Vehiclw.Scan != null)
+
+                            {
+                                int indexPhoto = 0;
+                                indexPhoto++;
+                                <img class="demo11 demo cursor imgModal" src="data:image/gif;base64,@ViewBag.Vehiclw.Scan.Base64" style="margin:5px;width:7%;" onclick="currentSlide11(@indexPhoto)">
+                            }
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    var slideIndex = 1;
+                    showSlides11(slideIndex);
+
+                    function plusSlides11(n) {
+                        showSlides11(slideIndex += n);
+                    }
+
+                    function currentSlide11(n) {
+                        showSlides11(slideIndex = n);
+                    }
+
+                    function showSlides11(n) {
+                        let i;
+                        let slides = document.getElementsByClassName("mySlides11");
+                        let dots = document.getElementsByClassName("demo11");
                         if (n > slides.length) { slideIndex = 1 }
                         if (n < 1) { slideIndex = slides.length }
                         for (i = 0; i < slides.length; i++) {
