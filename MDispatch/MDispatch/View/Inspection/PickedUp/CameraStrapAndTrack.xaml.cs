@@ -56,8 +56,15 @@ namespace MDispatch.View.Inspection.PickedUp
             }
             else if (cameraStrapAndTrackMV.Car.GetIndexCar(countPhoto) > 0)
             {
-                photo1.path = $"../Photo/{cameraStrapAndTrackMV.VehiclwInformation.Id}/PikedUp/CameraTrack/{countPhoto}.jpg";
-                cameraStrapAndTrackMV.inTruck.Add(photo1);
+                photo1.path = $"../Photo/{cameraStrapAndTrackMV.VehiclwInformation.Id}/PikedUp/CameraTrack/{countPhoto}.jpg"; 
+                if (cameraStrapAndTrackMV.Car.GetIndexCar(countPhoto) > cameraStrapAndTrackMV.Car.CountCarImg)
+                {
+                    cameraStrapAndTrackMV.straps.Add(photo1);
+                }
+                else
+                {
+                    cameraStrapAndTrackMV.inTruck.Add(photo1);
+                }
                 paternPhoto.Source = $"{cameraStrapAndTrackMV.Car.TypeIndex.Replace(" ", "")}{cameraStrapAndTrackMV.Car.GetIndexCar(countPhoto)}.png";
                 titlePhoto.Text = cameraStrapAndTrackMV.Car.GetNameLayout(cameraStrapAndTrackMV.Car.GetIndexCar(countPhoto));
             }
