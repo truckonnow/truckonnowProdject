@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 
 namespace DaoModels.DAO.Models
@@ -10,6 +11,7 @@ namespace DaoModels.DAO.Models
         public string path { get; set; }
         public double Width { get; set; }
         public double Height { get; set; }
+        [NotMapped]
         public string Base64
         {
             set

@@ -17,8 +17,8 @@ namespace MDispatch.Models
             if (statusInspection != null)
             {
                 string[] arrData = statusInspection.Split(',');
-                IsInspectionToDayDriver = Convert.ToBoolean(arrData[1]);
                 IsInspectionDriver = Convert.ToBoolean(arrData[0]);
+                IsInspectionToDayDriver = Convert.ToBoolean(arrData[1]);
                 TimeOfInspection = arrData[2] + " Hours";
                 IdDriver = arrData[3];
                 if (IsInspectionDriver)
