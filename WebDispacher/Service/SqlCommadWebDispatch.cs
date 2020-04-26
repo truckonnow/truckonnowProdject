@@ -615,6 +615,33 @@ namespace WebDispacher.Dao
             return countPage;
         }
 
+        public bool CheckInspactionDriverToDay(int idDriver)
+        {
+            Driver driver = context.Drivers.Include(d => d.InspectionDrivers).FirstOrDefault(d => d.Id == idDriver);
+            InspectionDriver inspectionDriver = driver.InspectionDrivers != null ? driver.InspectionDrivers.Last() : null;
+            if (inspectionDriver == null)
+            {
+                driver.IsInspectionDriver = false;
+                driver.IsInspectionToDayDriver = false;
+                context.SaveChanges();
+            }
+            else if (Convert.ToDateTime(inspectionDriver.Date).Date != DateTime.Now.Date)
+            {
+                if (DateTime.Now.Hour >= 12)
+                {
+                    driver.IsInspectionDriver = false;
+                    driver.IsInspectionToDayDriver = false;
+                }
+                else if (DateTime.Now.Hour <= 12 && 6 >= DateTime.Now.Hour)
+                {
+                    driver.IsInspectionDriver = true;
+                    driver.IsInspectionToDayDriver = false;
+                }
+                context.SaveChanges();
+            }
+            return driver.IsInspectionToDayDriver;
+        }
+
         public List<Driver> GetDrivers(int page)
         {
             List<Driver> drivers = null;
@@ -809,7 +836,9 @@ namespace WebDispacher.Dao
                 Comment = comment,
                 DriversLicenseNumber = driver.DriversLicenseNumber,
                 FullName = driver.FullName,
-                IdDriver = driver.Id
+                IdDriver = driver.Id,
+                DateRegistration = driver.DateRegistration,
+                DateFired = DateTime.Now.ToString()
             };
             context.DriverReports.Add(driverReport);
             context.SaveChanges();

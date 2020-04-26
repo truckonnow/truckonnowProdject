@@ -17,8 +17,9 @@
             <div class="contentDriver">
                 <div>
                     <p class="inpData" style="white-space:nowrap;"><b>Full name:</b> @ViewBag.DriverReports[i].FullName</p>
-                    <span class="inpData" style="white-space:nowrap;"><b>Driver's License:</b> @ViewBag.DriverReports[i].DriversLicenseNumber</span>
-
+                    <span class="inpData" style="white-space:nowrap;"><b>Driver's License:</b> @ViewBag.DriverReports[i].DriversLicenseNumber</span> <br /> <br />
+                    <span class="inpData">Registration: @ViewBag.Drivers[i].DateRegistration</span><br /> <br />
+                    <span class="inpData">Fired: @ViewBag.Drivers[i].DateFired</span><br /> <br />
                 </div>
                 <div style="margin:10px;border-width:1px;border-top:solid;border-left:solid;border-color:darkblue;padding:5px;">
                     <p class="inpData">@ViewBag.DriverReports[i].Comment</p>

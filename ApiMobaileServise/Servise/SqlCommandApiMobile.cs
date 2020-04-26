@@ -296,6 +296,7 @@ namespace ApiMobaileServise.Servise
             Driver driver = await context.Drivers.Where(d => d.Id == Convert.ToUInt32(idDriver))
                    .Include(d => d.InspectionDrivers)
                    .FirstOrDefaultAsync();
+            driver.LastDateInspaction = DateTime.Now.ToString();
             InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
             inspectionDriver.Date = DateTime.Now.ToString();
             driver.IsInspectionDriver = true;

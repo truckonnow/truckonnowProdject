@@ -14,9 +14,10 @@
                 <div>
 
                     <p class="inpData">@ViewBag.Drivers[i].FullName</p>
-                    <p2 class="inpData">Trailer capacity: @ViewBag.Drivers[i].TrailerCapacity</p2>
+                    <span class="inpData">Trailer capacity: @ViewBag.Drivers[i].TrailerCapacity,</span>
                     <span class="inpData">Email: @ViewBag.Drivers[i].EmailAddress</span><br /> <br />
-                    <span class="inpData">Phone: @ViewBag.Drivers[i].PhoneNumber</span><br /> <br />
+                    <span class="inpData">Phone: @ViewBag.Drivers[i].PhoneNumber,</span>
+                    <span class="inpData">Registration: @ViewBag.Drivers[i].DateRegistration</span><br /> <br />
                     <a href="@ViewBag.BaseUrl/Driver/Drivers/Edit?id=@ViewBag.Drivers[i].Id" class="btnId">Edit</a>
                     <input class="btnId" value="Remove" type="button" onclick="ShowAlert(@ViewBag.Drivers[i].Id)" />
                     <a class="btnId" href="~/Driver/InspactionTrucks?idDriver=@ViewBag.Drivers[i].Id&idTruck=0&idTrailer=0&date=0">Inspection</a>

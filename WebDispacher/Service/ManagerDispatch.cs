@@ -321,6 +321,7 @@ namespace WebDispacher.Service
             driver.PhoneNumber = phoneNumbe;
             driver.TrailerCapacity = trailerCapacity;
             driver.DriversLicenseNumber = driversLicenseNumber;
+            driver.DateRegistration = DateTime.Now.ToString();
             _sqlEntityFramworke.AddDriver(driver);
         }
 

@@ -203,10 +203,6 @@ namespace MDispatch.Vidget.VM
                         {
                             Navigation.RemovePage(Navigation.NavigationStack[1]);
                         }
-                        if (Navigation.NavigationStack.Count >= 4)
-                        {
-                            Navigation.RemovePage(Navigation.NavigationStack[1]);
-                        }
                     }
                     DependencyService.Get<IToast>().ShowMessage($"Photo {truckCar.GetNameTruck(IndexCurent)} saved");
                 }

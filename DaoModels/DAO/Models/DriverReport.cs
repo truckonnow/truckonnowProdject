@@ -7,5 +7,7 @@
         public string Comment { get; set; }
         public string FullName { get; set; }
         public string DriversLicenseNumber { get; set; }
+        public string DateRegistration { get; set; }
+        public string DateFired { get; set; }
     }
 }
