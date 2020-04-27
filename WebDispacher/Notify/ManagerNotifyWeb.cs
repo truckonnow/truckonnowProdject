@@ -63,9 +63,9 @@ namespace WebDispacher.Notify
                         using (Stream dataStreamResponse = tResponse.GetResponseStream())
                         {
                             if (dataStreamResponse != null) using (StreamReader tReader = new StreamReader(dataStreamResponse))
-                            {
-                                String sResponseFromServer = tReader.ReadToEnd();
-                            }
+                                {
+                                    String sResponseFromServer = tReader.ReadToEnd();
+                                }
                         }
                     }
                 }
@@ -112,6 +112,47 @@ namespace WebDispacher.Notify
                         }
                     }
                 }
+                InitReqvest();
+            }
+        }
+
+        public void SendSendNotyfyRemindInspection(string tokenShope)
+        {
+            string body = null;
+            if (tokenShope != null && tokenShope != "")
+            {
+                body = "Please go through the truck and trailer inspection";
+                var payload = new
+                {
+                    to = tokenShope,
+                    content_available = true,
+                    notification = new
+                    {
+                        click_action = "Oreder",
+                        body = $"{body}",
+                        title = "Inspection truck and trailer",
+                        sound = "default",
+                        badge = 1,
+                    },
+                };
+                string postbody = JsonConvert.SerializeObject(payload).ToString();
+                Byte[] byteArray = Encoding.UTF8.GetBytes(postbody);
+                tRequest.ContentLength = byteArray.Length;
+                using (Stream dataStream = tRequest.GetRequestStream())
+                {
+                    dataStream.Write(byteArray, 0, byteArray.Length);
+                    using (WebResponse tResponse = tRequest.GetResponse())
+                    {
+                        using (Stream dataStreamResponse = tResponse.GetResponseStream())
+                        {
+                            if (dataStreamResponse != null) using (StreamReader tReader = new StreamReader(dataStreamResponse))
+                                {
+                                    String sResponseFromServer = tReader.ReadToEnd();
+                                }
+                        }
+                    }
+                }
+                InitReqvest();
             }
         }
     }

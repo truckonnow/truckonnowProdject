@@ -193,6 +193,8 @@ namespace ApiMobaileServise.Controllers
             return respons;
         }
 
+        
+
         [HttpGet]
         [Route("Document")]
         public async Task<IActionResult> Get(string id)

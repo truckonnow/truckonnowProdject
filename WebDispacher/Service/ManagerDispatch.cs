@@ -181,7 +181,7 @@ namespace WebDispacher.Service
                 tokenShope = _sqlEntityFramworke.GerShopTokenForShipping(idOrder);
             }
             List<VehiclwInformation> vehiclwInformations = await _sqlEntityFramworke.AddDriversInOrder(idOrder, idDriver);
-            Task.Run(() =>
+             Task.Run(() =>
             {
                 ManagerNotifyWeb managerNotify = new ManagerNotifyWeb();
                 string tokenShope1 = _sqlEntityFramworke.GerShopTokenForShipping(idOrder);
@@ -412,6 +412,18 @@ namespace WebDispacher.Service
         internal void RemoveDoc(string idDock)
         {
             _sqlEntityFramworke.RemoveDocDb(idDock);
+        }
+
+        internal bool SendRemindInspection(int idDriver)
+        {
+            ManagerNotifyWeb managerNotifyWeb = new ManagerNotifyWeb();
+            bool isInspactionDriverToDay = _sqlEntityFramworke.CheckInspactionDriverToDay(idDriver);
+            if (!isInspactionDriverToDay)
+            {
+                string tokenShiping = _sqlEntityFramworke.GerShopToken(idDriver.ToString());
+                managerNotifyWeb.SendSendNotyfyRemindInspection(tokenShiping);
+            }
+            return isInspactionDriverToDay;
         }
     }
 }

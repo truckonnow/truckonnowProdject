@@ -15,12 +15,14 @@
 
                     <p class="inpData">@ViewBag.Drivers[i].FullName</p>
                     <span class="inpData">Trailer capacity: @ViewBag.Drivers[i].TrailerCapacity,</span>
-                    <span class="inpData">Email: @ViewBag.Drivers[i].EmailAddress</span><br /> <br />
+                    <span class="inpData">Email: @ViewBag.Drivers[i].EmailAddress,</span>
+                    <span class="inpData">Last inspection: @ViewBag.Drivers[i].LastDateInspaction</span><br /> <br />
                     <span class="inpData">Phone: @ViewBag.Drivers[i].PhoneNumber,</span>
                     <span class="inpData">Registration: @ViewBag.Drivers[i].DateRegistration</span><br /> <br />
                     <a href="@ViewBag.BaseUrl/Driver/Drivers/Edit?id=@ViewBag.Drivers[i].Id" class="btnId">Edit</a>
                     <input class="btnId" value="Remove" type="button" onclick="ShowAlert(@ViewBag.Drivers[i].Id)" />
                     <a class="btnId" href="~/Driver/InspactionTrucks?idDriver=@ViewBag.Drivers[i].Id&idTruck=0&idTrailer=0&date=0">Inspection</a>
+                    <input class="btnId" value="Remind Inspection" type="button" onclick="SendRemindInspection(@ViewBag.Drivers[i].Id)" />
                 </div>
             </div>
         }
@@ -70,6 +72,37 @@
         if (descriptionTA.validity.valid) {
             document.location.href = "@ViewBag.BaseUrl/Driver/Drivers/Remove?id=" + IdDriver + "&comment=" + descriptionTA.value;
         }
+    }
+
+    function SendRemindInspection(idDriver) {
+        let url = "@ViewBag.BaseUrl/Driver/Remind/Inspection";
+        let xmlHttp = new XMLHttpRequest();
+        var body = 'idDriver=' + encodeURIComponent(idDriver);
+        xmlHttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.responseText == "true") {
+                    alert("Reminder sent");
+                }
+                else if (this.responseText == "false") {
+                    alert("Today's inspection was already passed");
+                }
+                else if (this.responseText == "notlogin") {
+
+                }
+                else if (this.responseText == "error") {
+                    alert("Server error, try again later");
+                }
+                else {
+                    alert("Server error, try again later");
+                }
+            }
+            else if (this.readyState == 4 && this.status != 200) {
+                alert("Server error, try again later");
+            }
+        };
+        xmlHttp.open("POST", url, true);
+        xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xmlHttp.send(body);
     }
 </script>
 

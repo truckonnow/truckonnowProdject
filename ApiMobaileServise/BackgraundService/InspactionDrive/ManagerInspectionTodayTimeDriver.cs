@@ -38,7 +38,7 @@ namespace ApiMobaileServise.BackgraundService.InspactionDrive
             foreach (var driver in drivers)
             {
                 await sqlCommandApiMobile.RefreshInspectionToDayDriverInDb(driver.Id);
-                SendNotyfyInspactionDrive(driver.TokenShope, "Truck Inspection", "You can pass the truck inspection now");
+                SendNotyfyInspactionDrive(driver.TokenShope, "Inspection truck and trailer", "You can pass the truck inspection now");
             }
         }
 
