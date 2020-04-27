@@ -107,6 +107,76 @@ namespace WebDispacher.Service
             return isStateActual;
         }
 
+        internal void AddHistory(string key, string idConmpany, string idOrder, string idVech, string idDriver, string action)
+        {
+            HistoryOrder historyOrder = new HistoryOrder();
+            int idUser = _sqlEntityFramworke.GetUserIdByKey(key);
+            if(action == "Assign")
+            {
+                string fullNameUser = _sqlEntityFramworke.GetFullNameUserByKey(key);
+                string fullNameDriver = _sqlEntityFramworke.GetFullNameDriverById(idDriver);
+                historyOrder.Action = $"{fullNameUser} assign the driver ordered {fullNameDriver}";
+            }
+            else if(action == "Unassign")
+            {
+                idDriver = _sqlEntityFramworke.GetDriverIdByIdOrder(idOrder);
+                string fullNameUser = _sqlEntityFramworke.GetFullNameUserByKey(key);
+                string fullNameDriver = _sqlEntityFramworke.GetFullNameDriverById(idDriver);
+                historyOrder.Action = $"{fullNameUser} withdrew an order from {fullNameDriver} driver";
+            }
+            else if (action == "Solved")
+            {
+                string fullNameUser = _sqlEntityFramworke.GetFullNameUserByKey(key);
+                historyOrder.Action = $"{fullNameUser} clicked on the \"Solved\" button";
+            }
+            else if (action == "ArchivedOrder")
+            {
+                string fullNameUser = _sqlEntityFramworke.GetFullNameUserByKey(key);
+                historyOrder.Action = $"{fullNameUser} transferred the order to the archive";
+            }
+            else if (action == "DeletedOrder")
+            {
+                string fullNameUser = _sqlEntityFramworke.GetFullNameUserByKey(key);
+                historyOrder.Action = $"{fullNameUser} transferred the order to deleted orders";
+            }
+            else if (action == "Creat")
+            {
+                string fullNameUser = _sqlEntityFramworke.GetFullNameUserByKey(key);
+                historyOrder.Action = $"{fullNameUser} created an order";
+            }
+            else if (action == "SavaOrder")
+            {
+                string fullNameUser = _sqlEntityFramworke.GetFullNameUserByKey(key);
+                historyOrder.Action = $"{fullNameUser} edited the order";
+            }
+            else if (action == "SavaVech")
+            {
+                string fullNameUser = _sqlEntityFramworke.GetFullNameUserByKey(key);
+                idOrder = _sqlEntityFramworke.GetIdOrderByIdVech(idVech);
+                VehiclwInformation vehiclwInformation = _sqlEntityFramworke.GetVechById(idVech);
+                historyOrder.Action = $"{fullNameUser} edited the vehicle {vehiclwInformation.Year} {vehiclwInformation.Make} {vehiclwInformation.Make}";
+            }
+            else if (action == "RemoveVech")
+            {
+                string fullNameUser = _sqlEntityFramworke.GetFullNameUserByKey(key);
+                idOrder = _sqlEntityFramworke.GetIdOrderByIdVech(idVech);
+                VehiclwInformation vehiclwInformation = _sqlEntityFramworke.GetVechById(idVech);
+                historyOrder.Action = $"{fullNameUser} removed the vehicle {vehiclwInformation.Year} {vehiclwInformation.Make} {vehiclwInformation.Make}";
+            }
+            else if (action == "AddVech")
+            {
+                string fullNameUser = _sqlEntityFramworke.GetFullNameUserByKey(key);
+                historyOrder.Action = $"{fullNameUser} created a vehicle";
+            }
+
+            historyOrder.IdConmpany = Convert.ToInt32(idConmpany);
+            historyOrder.IdDriver = Convert.ToInt32(idDriver);
+            historyOrder.IdOreder = Convert.ToInt32(idOrder);
+            historyOrder.IdUser = idUser;
+            historyOrder.DateAction = DateTime.Now.ToString();
+            _sqlEntityFramworke.AddHistory(historyOrder);
+        }
+
         internal int CheckReportDriver(string fullName, string driversLicenseNumber)
         {
             return _sqlEntityFramworke.CheckReportDriverDb(fullName, driversLicenseNumber);

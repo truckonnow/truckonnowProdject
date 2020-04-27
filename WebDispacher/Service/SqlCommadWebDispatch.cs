@@ -2,6 +2,7 @@
 using DaoModels.DAO.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -105,6 +106,29 @@ namespace WebDispacher.Dao
             return isStateActual;
         }
 
+        internal int GetUserIdByKey(string key)
+        {
+            return context.User.First(u => u.KeyAuthorized == key).Id;
+        }
+
+        internal string GetFullNameDriverById(string idDriver)
+        {
+            return context.Drivers.First(d => d.Id.ToString() == idDriver).FullName;
+        }
+
+        internal string GetDriverIdByIdOrder(string idOrder)
+        {
+            Shipping shipping = context.Shipping
+                .Include(s => s.Driverr)
+                .First(s => s.Id.ToString() == idOrder);
+            return shipping.Driverr.Id.ToString();
+        }
+
+        internal string GetFullNameUserByKey(string key)
+        {
+            return context.User.First(u => u.KeyAuthorized == key).Login;
+        }
+
         internal int CheckReportDriverDb(string nameDriver, string driversLicense)
         {
             List<DriverReport> driverReports = new List<DriverReport>();
@@ -113,6 +137,12 @@ namespace WebDispacher.Dao
                 driverReports.AddRange(context.DriverReports.Where(d => nameDriver == d.FullName && driversLicense == d.DriversLicenseNumber));
             }
             return driverReports.Count;
+        }
+
+        internal void AddHistory(HistoryOrder historyOrder)
+        {
+            context.HistoryOrders.Add(historyOrder);
+            context.SaveChanges();
         }
 
         internal string GetEmailDriverDb(string idDriver)
@@ -146,6 +176,19 @@ namespace WebDispacher.Dao
                 isStateActual = 1;
             }
             return isStateActual;
+        }
+
+        internal VehiclwInformation GetVechById(string idVech)
+        {
+            return context.VehiclwInformation.FirstOrDefault(v => v.Id.ToString() == idVech);
+        }
+
+        internal string GetIdOrderByIdVech(string idVech)
+        {
+            Shipping shipping = context.Shipping
+                .Include(s => s.VehiclwInformations)
+                .FirstOrDefault(s => s.VehiclwInformations.FirstOrDefault(v => v.Id.ToString() == idVech) != null);
+            return shipping.Id;
         }
 
         internal async Task<Truck> GetTruckByPlateDb(string truckPlate)

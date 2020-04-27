@@ -96,6 +96,7 @@ namespace WebDispacher.Controellers
                     if((idDriver != null && idDriver != "") && (idOrder != null && idOrder != ""))
                     {
                         managerDispatch.Assign(idOrder, idDriver);
+                        Task.Run(() => managerDispatch.AddHistory(key, "0", idOrder, "0",  idDriver, "Assign"));
                         actionResult = true;
                     }
                     else
@@ -133,7 +134,9 @@ namespace WebDispacher.Controellers
                 {
                     if (idOrder != null && idOrder != "")
                     {
-                        managerDispatch.Unassign(idOrder); 
+
+                        managerDispatch.AddHistory(key, "0", idOrder, "0", "0", "Unassign");
+                        managerDispatch.Unassign(idOrder);
                         actionResult = true;
                     }
                     else
@@ -171,6 +174,7 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     managerDispatch.Solved(id);
+                    Task.Run(() => managerDispatch.AddHistory(key, "0", id, "0", "0", "Solved"));
                     actionResult = Redirect($"{page}");
                 }
                 else
@@ -550,6 +554,7 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     managerDispatch.ArchvedOrder(id);
+                    Task.Run(() => managerDispatch.AddHistory(key, "0", id, "0", "0", "ArchivedOrder"));
                     actionResult = Redirect($"{Config.BaseReqvesteUrl}/Dashbord/Order/NewLoad");
                 }
                 else
@@ -580,6 +585,7 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     managerDispatch.DeletedOrder(id);
+                    Task.Run(() => managerDispatch.AddHistory(key, "0", id, "0", "0", "DeletedOrder"));
                     actionResult = Redirect($"{Config.BaseReqvesteUrl}/Dashbord/Order/{status}");
                 }
                 else
@@ -688,6 +694,7 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     Shipping shipping = await managerDispatch.CreateShiping();
+                    Task.Run(() => managerDispatch.AddHistory(key, "0", shipping.Id, "0", "0", "Creat"));
                     actionResult = Redirect($"{Config.BaseReqvesteUrl}/Dashbord/Order/Edit?id={shipping.Id}&stasus=NewLoad");
                 }
                 else
@@ -722,6 +729,7 @@ namespace WebDispacher.Controellers
                     managerDispatch.Updateorder(idOrder, idLoad, internalLoadID, driver, status, instructions, nameP, contactP, addressP, cityP, stateP, zipP,
                         phoneP, emailP, scheduledPickupDateP, nameD, contactD, addressD, cityD, stateD, zipD, phoneD, emailD, ScheduledPickupDateD, paymentMethod,
                         price, paymentTerms, brokerFee);
+                    Task.Run(() => managerDispatch.AddHistory(key, "0", idOrder, "0", "0", "SavaOrder"));
                     actionResult = Redirect($"{Config.BaseReqvesteUrl}/Dashbord/Order/NewLoad");
                 }
                 else
@@ -752,6 +760,7 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     managerDispatch.SaveVechi(idVech, VIN, Year, Make, Model, Type,  Color, LotNumber);
+                    Task.Run(() => managerDispatch.AddHistory(key, "0", "0", idVech, "0", "SavaVech"));
                     actionResult = "Vehicle information saved successfully";
                 }
                 else
@@ -781,6 +790,7 @@ namespace WebDispacher.Controellers
                 Request.Cookies.TryGetValue("KeyAvtho", out key);
                 if (managerDispatch.CheckKey(key))
                 {
+                    managerDispatch.AddHistory(key, "0", "0", idVech, "0", "RemoveVech");
                     managerDispatch.RemoveVechi(idVech);
                     actionResult = "Vehicle information removed successfully";
                 }
@@ -812,6 +822,7 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     VehiclwInformation vehiclwInformation = await managerDispatch.AddVechi(idOrder);
+                    Task.Run(() => managerDispatch.AddHistory(key, "0", idOrder, "0", "0", "AddVech"));
                     ViewBag.Vech = vehiclwInformation;
                     actionResult = "Vehicle information Added successfully";
                 }
