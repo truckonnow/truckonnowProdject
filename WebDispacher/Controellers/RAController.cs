@@ -30,7 +30,6 @@ namespace WebDispacher.Controellers
         }
 
         [HttpPost]
-        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
         public IActionResult Avthorization(string Email, string Password)
         {
             IActionResult actionResult = null;
