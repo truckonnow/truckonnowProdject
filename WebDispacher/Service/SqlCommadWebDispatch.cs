@@ -108,7 +108,10 @@ namespace WebDispacher.Dao
 
         internal int GetUserIdByKey(string key)
         {
-            return context.User.First(u => u.KeyAuthorized == key).Id;
+            using (Context _context = new Context())
+            {
+                return _context.User.First(u => u.KeyAuthorized == key).Id;
+            }
         }
 
         internal string GetFullNameDriverById(string idDriver)
@@ -307,7 +310,7 @@ namespace WebDispacher.Dao
             }
         }
 
-        internal int CreateTrukDb(string nameTruk, string yera, string make, string model, string state, string exp, string vin, string owner, string plateTruk, string color)
+        internal int CreateTrukDb(string nameTruk, string yera, string make, string model, string typeTruk, string state, string exp, string vin, string owner, string plateTruk, string color)
         {
             Truck truck = new Truck()
             {
@@ -320,7 +323,8 @@ namespace WebDispacher.Dao
                 PlateTruk = plateTruk,
                 Satet = state,
                 Vin = vin,
-                Yera = yera
+                Yera = yera,
+                TypeTruk = typeTruk
             };
             context.Trucks.Add(truck);
             context.SaveChanges();
@@ -666,7 +670,7 @@ namespace WebDispacher.Dao
         public bool CheckInspactionDriverToDay(int idDriver)
         {
             Driver driver = context.Drivers.Include(d => d.InspectionDrivers).FirstOrDefault(d => d.Id == idDriver);
-            InspectionDriver inspectionDriver = driver.InspectionDrivers != null ? driver.InspectionDrivers.Last() : null;
+            InspectionDriver inspectionDriver = driver.InspectionDrivers != null && driver.InspectionDrivers.Count != 0 ? driver.InspectionDrivers.Last() : null;
             if (inspectionDriver == null)
             {
                 driver.IsInspectionDriver = false;

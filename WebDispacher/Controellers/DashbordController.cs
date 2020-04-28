@@ -135,7 +135,6 @@ namespace WebDispacher.Controellers
                 {
                     if (idOrder != null && idOrder != "")
                     {
-
                         managerDispatch.AddHistory(key, "0", idOrder, "0", "0", "Unassign");
                         managerDispatch.Unassign(idOrder);
                         actionResult = true;

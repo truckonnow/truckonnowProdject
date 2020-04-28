@@ -200,7 +200,6 @@ namespace WebDispacher.Service
             }
             else if (action == "Unassign")
             {
-                idDriver = _sqlEntityFramworke.GetDriverIdByIdOrder(idOrder);
                 string fullNameUser = _sqlEntityFramworke.GetFullNameUserByKey(key);
                 string fullNameDriver = _sqlEntityFramworke.GetFullNameDriverById(idDriver);
                 strAction = $"{fullNameUser} withdrew an order from {fullNameDriver} driver";
@@ -340,9 +339,9 @@ namespace WebDispacher.Service
             });
         }
 
-        public void CreateTruk(string nameTruk, string yera, string make, string model, string state, string exp, string vin, string owner, string plateTruk, string color, IFormFile registrationDoc, IFormFile ensuresDoc, IFormFile _3Doc)
+        public void CreateTruk(string nameTruk, string yera, string make, string model, string typeTruk, string state, string exp, string vin, string owner, string plateTruk, string color, IFormFile registrationDoc, IFormFile ensuresDoc, IFormFile _3Doc)
         {
-            int id = _sqlEntityFramworke.CreateTrukDb(nameTruk, yera, make, model, state, exp, vin, owner, plateTruk, color);
+            int id = _sqlEntityFramworke.CreateTrukDb(nameTruk, yera, make, model, typeTruk, state, exp, vin, owner, plateTruk, color);
             Task.Run(() =>
             {
                 SaveDocTruck(registrationDoc, "Registration", id.ToString());

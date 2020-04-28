@@ -141,7 +141,7 @@ namespace WebDispacher.Controellers
         [Route("CreateTruck")]
         [DisableRequestSizeLimit]
         [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
-        public IActionResult CreateDriver(string nameTruk, string yera, string make, string model, string state, string exp, string vin, string owner, string plateTruk, string color, List<IFormFile> registrationDoc, List<IFormFile> ensuresDoc, List<IFormFile> _3Doc)
+        public IActionResult CreateDriver(string nameTruk, string yera, string make, string model , string typeTruk, string state, string exp, string vin, string owner, string plateTruk, string color, List<IFormFile> registrationDoc, List<IFormFile> ensuresDoc, List<IFormFile> _3Doc)
         {
             IActionResult actionResult = null;
             try
@@ -152,7 +152,7 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     
-                       managerDispatch.CreateTruk(nameTruk, yera, make, model, state, exp, vin, owner, plateTruk, color, registrationDoc[0], ensuresDoc[0], _3Doc[0]);
+                       managerDispatch.CreateTruk(nameTruk, yera, make, model, typeTruk, state, exp, vin, owner, plateTruk, color, registrationDoc[0], ensuresDoc[0], _3Doc[0]);
                         actionResult = Redirect($"{Config.BaseReqvesteUrl}/Equipment/Trucks");
                 }
                 else

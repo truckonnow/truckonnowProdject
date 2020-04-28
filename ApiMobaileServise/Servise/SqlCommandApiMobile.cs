@@ -858,7 +858,7 @@ namespace ApiMobaileServise.Servise
         {
             string statusAndTimeInInspection = null;
             Driver driver = context.Drivers.Include(d => d.InspectionDrivers).FirstOrDefault(d => d.Token == token);
-            InspectionDriver inspectionDriver = driver.InspectionDrivers != null ? driver.InspectionDrivers.Last() : null;
+            InspectionDriver inspectionDriver = driver.InspectionDrivers != null && driver.InspectionDrivers.Count != 0 ? driver.InspectionDrivers.Last() : null;
             if(inspectionDriver == null)
             {
                 driver.IsInspectionDriver = false;
