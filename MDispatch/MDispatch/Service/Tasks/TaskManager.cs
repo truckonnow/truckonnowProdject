@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using MDispatch.Service.Net;
 
 namespace MDispatch.Service.Tasks
 {
@@ -9,8 +10,14 @@ namespace MDispatch.Service.Tasks
         public static async void CommandToDo(string nameCommand, params object[] tasks)
         {
             ITask task = null;
+
+            await Task.Run(() => Utils.CheckNet());
+            if (!App.isNetwork)
+            {
+                return;
+            }
             await Task.Delay(1000);
-            switch(nameCommand)
+            switch (nameCommand)
             {
                 case "DashbordVehicle":
                     {
