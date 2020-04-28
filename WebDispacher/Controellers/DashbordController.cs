@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DaoModels.DAO.Models;
@@ -619,6 +620,12 @@ namespace WebDispacher.Controellers
                     if (id != "" && id != null)
                     {
                         ViewBag.Order = managerDispatch.GetOrder(id);
+                        ViewBag.Historys = managerDispatch.GetHistoryOrder(id).Select(x => new HistoryOrder()
+                        {
+                            Action = managerDispatch.GetStrAction(key, x.IdConmpany.ToString(), x.IdOreder.ToString(), x.IdVech.ToString(), x.IdDriver.ToString(), x.TypeAction),
+                            DateAction = x.DateAction
+                        })
+                        .ToList();
                         actionResult = View("FullInfoOrder");
                     }
                     else
@@ -822,7 +829,7 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
                     VehiclwInformation vehiclwInformation = await managerDispatch.AddVechi(idOrder);
-                    Task.Run(() => managerDispatch.AddHistory(key, "0", idOrder, "0", "0", "AddVech"));
+                    Task.Run(() => managerDispatch.AddHistory(key, "0", idOrder, vehiclwInformation.Id.ToString(), "0", "AddVech"));
                     ViewBag.Vech = vehiclwInformation;
                     actionResult = "Vehicle information Added successfully";
                 }

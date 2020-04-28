@@ -545,6 +545,11 @@ namespace WebDispacher.Dao
             return vehiclwInformation;
         }
 
+        internal List<HistoryOrder> GetHistoryOrderByIdOrder(string idOrder)
+        {
+            return context.HistoryOrders.Where(ho => ho.IdOreder.ToString() == idOrder).ToList();
+        }
+
         public async Task<Shipping> CreateShipping()
         {
             Shipping shipping = new Shipping();
