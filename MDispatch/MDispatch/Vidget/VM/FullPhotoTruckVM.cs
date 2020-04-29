@@ -32,12 +32,13 @@ namespace MDispatch.Vidget.VM
         private InitDasbordDelegate initDasbordDelegate = null;
 
         [System.Obsolete]
-        public FullPhotoTruckVM(ManagerDispatchMob managerDispatchMob, string idDriver, int indexCurent, INavigation navigation, List<string> plateTruck, List<string> plateTrailer, InitDasbordDelegate initDasbordDelegate = null)
+        public FullPhotoTruckVM(ManagerDispatchMob managerDispatchMob, string idDriver, int indexCurent, INavigation navigation, List<string> plateTruck,
+            List<string> plateTrailer, TruckCar truckCar, InitDasbordDelegate initDasbordDelegate = null)
         {
             this.initDasbordDelegate = initDasbordDelegate;
             this.managerDispatchMob = managerDispatchMob;
             this.Navigation = navigation;
-            truckCar = new TruckCar();
+            this.truckCar = truckCar;
             IdDriver = idDriver;
             IndexCurent = indexCurent;
             PlateTrucks = plateTruck;
@@ -53,12 +54,11 @@ namespace MDispatch.Vidget.VM
         [Obsolete]
         private async void Init()
         {
-            NameLayute = truckCar.GetNameTruck(IndexCurent);
             if(IndexCurent == 43)
             {
                 CheckPlate();
             }
-            if (IndexCurent == 3)
+            if (IndexCurent == 1)
             {
                 CheckPlate();
             }
@@ -66,7 +66,11 @@ namespace MDispatch.Vidget.VM
             {
                 CheckPlate();
             }
-            await truckCar.Orinteble(IndexCurent);
+            DependencyService.Get<IOrientationHandler>().ForceLandscape();
+            if (truckCar != null)
+            {
+                NameLayute = truckCar.NamePatern[IndexCurent - 1];
+            }
         }
 
         public string IdDriver { get; set; }
@@ -99,6 +103,13 @@ namespace MDispatch.Vidget.VM
         {
             get => nameLayute;
             set => SetProperty(ref nameLayute, value);
+        }
+
+        private string photoLayute = null;
+        public string PhotoLayute
+        {
+            get => photoLayute;
+            set => SetProperty(ref photoLayute, value);
         }
 
         private ImageSource imageSourceTake = null;
@@ -142,7 +153,7 @@ namespace MDispatch.Vidget.VM
                     CheckPlate();
                 }
                 isEndInspection = true;
-                await Navigation.PushAsync(new View.CameraPage(managerDispatchMob, IdDriver, IndexCurent + 1,  PlateTrucks, PlateTrailers, initDasbordDelegate));
+                await Navigation.PushAsync(new View.CameraPage(managerDispatchMob, IdDriver, IndexCurent + 1,  PlateTrucks, PlateTrailers, initDasbordDelegate, truckCar));
             }
             else
             {
@@ -204,7 +215,7 @@ namespace MDispatch.Vidget.VM
                             Navigation.RemovePage(Navigation.NavigationStack[1]);
                         }
                     }
-                    DependencyService.Get<IToast>().ShowMessage($"Photo {truckCar.GetNameTruck(IndexCurent)} saved");
+                    DependencyService.Get<IToast>().ShowMessage($"Photo {truckCar.NamePatern[IndexCurent-1]} saved");
                 }
                 else if (state == 4)
                 {
@@ -239,7 +250,7 @@ namespace MDispatch.Vidget.VM
                     }
                 }
                 TaskManager.CommandToDo("SaveInspactionDriver", 1, token, IdDriver, Photo, IndexCurent);
-                DependencyService.Get<IToast>().ShowMessage($"Photo {truckCar.GetNameTruck(IndexCurent)} saved");
+                DependencyService.Get<IToast>().ShowMessage($"Photo {truckCar.NamePatern[IndexCurent]} saved");
             }
         }
 
@@ -277,7 +288,7 @@ namespace MDispatch.Vidget.VM
         }
 
         [System.Obsolete]
-        internal async void SetPlate()
+        internal async void SetPlate(string nowCheck)
         {
             await PopupNavigation.PushAsync(new LoadPage());
             string token = CrossSettings.Current.GetValueOrDefault("Token", "");
@@ -289,7 +300,7 @@ namespace MDispatch.Vidget.VM
             {
                 await Task.Run(() =>
                 {
-                    state = managerDispatchMob.SetPlate(token, PlateTruck, PlateTrailer, ref description, ref isPlate);
+                    state = managerDispatchMob.SetPlate(token, PlateTruck, PlateTrailer, nowCheck, ref description, ref isPlate, ref truckCar);
                 });
                 if (state == 1)
                 {
@@ -311,6 +322,11 @@ namespace MDispatch.Vidget.VM
                     else
                     {
                         await PopupNavigation.PopAsync();
+                    }
+                    if (truckCar != null)
+                    {
+                        NameLayute = truckCar.NamePatern[IndexCurent - 1];
+                        PhotoLayute = $"{truckCar.Type}{IndexCurent}.png";
                     }
                 }
                 else if (state == 4)
@@ -357,7 +373,7 @@ namespace MDispatch.Vidget.VM
                     {
                         await PopupNavigation.PushAsync(new PlateWrite(this));
                     }
-                    else if(IndexCurent == 3)
+                    else if(IndexCurent == 1)
                     {
                         await PopupNavigation.PushAsync(new PlateTruckWrite(this));
                     }

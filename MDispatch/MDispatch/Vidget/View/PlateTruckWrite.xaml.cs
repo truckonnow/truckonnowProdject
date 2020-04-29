@@ -33,7 +33,7 @@ namespace MDispatch.Vidget.View
         [System.Obsolete]
         private void Button_Clicked(object sender, System.EventArgs e)
         {
-            fullPhotoTruckVM.SetPlate();
+            fullPhotoTruckVM.SetPlate("Truck");
         }
 
         private async void Button_Clicked_1(object sender, System.EventArgs e)

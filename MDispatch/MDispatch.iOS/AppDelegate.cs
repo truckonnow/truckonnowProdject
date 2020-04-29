@@ -74,11 +74,6 @@ namespace MDispatch.iOS
         public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
         {
             UIApplicationState state = UIApplication.SharedApplication.ApplicationState;
-            if (state == UIApplicationState.Background)
-            {
-                SystemSound systemSound = new SystemSound(1003);
-                systemSound.PlayAlertSound();
-            }
             completionHandler(UIBackgroundFetchResult.NewData);
         }
 
