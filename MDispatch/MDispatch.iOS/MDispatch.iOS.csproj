@@ -1247,4 +1247,31 @@
   <ItemGroup>
     <BundleResource Include="Resources\PickupFourWheel4.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GooseneckTrailerTwoVehicles3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GooseneckTrailerTwoVehicles4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GooseneckTrailerTwoVehicles5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GooseneckTrailerTwoVehicles6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GooseneckTrailerTwoVehicles7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GooseneckTrailerTwoVehicles8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GooseneckTrailerTwoVehicles9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GooseneckTrailerTwoVehicles1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\GooseneckTrailerTwoVehicles2.png" />
+  </ItemGroup>
 </Project>
