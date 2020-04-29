@@ -3,11 +3,15 @@ using ApiMobaileServise.Models;
 using ApiMobaileServise.Notify;
 using ApiMobaileServise.Servise.AddDamage;
 using ApiMobaileServise.Servise.GoogleApi;
+using ApiMobaileServise.Servise.ModelInspertionDriver;
+using ApiMobaileServise.Servise.ModelInspertionDriver.Trailer;
+using ApiMobaileServise.Servise.ModelInspertionDriver.Truck;
 using DaoModels.DAO.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -163,6 +167,33 @@ namespace ApiMobaileServise.Servise
             });
         }
 
+        internal ITransportVehicle GetPaternTrailerInspectionDriver(string plateTrailer)
+        {
+            ITransportVehicle transportVehicle = null;
+            Trailer truck = sqlCommandApiMobile.GetTrailers().FirstOrDefault(t => t.Plate == plateTrailer);
+            transportVehicle = GetTransportVehicle(truck.Type);
+            return transportVehicle;
+        }
+
+        internal ITransportVehicle GetPaternTruckInspectionDriver(string plateTruck)
+        {
+            ITransportVehicle transportVehicle = null;
+            Truck truck = sqlCommandApiMobile.GetTruck().FirstOrDefault(t => t.PlateTruk == plateTruck);
+            transportVehicle = GetTransportVehicle(truck.TypeTruk);
+            return transportVehicle;
+        }
+
+        private ITransportVehicle GetTransportVehicle(string typeTruk)
+        {
+            ITransportVehicle transportVehicle = null;
+            switch(typeTruk)
+            {
+                case "PickupFourWheel": transportVehicle = new PickupFourWheel(); break;
+                case "GooseneckTrailerTwoVehicles": transportVehicle = new GooseneckTrailerTwoVehicles(); break;
+            }
+            return transportVehicle;
+        }
+
         public async Task SaveSigPhoto(string idShip, string sig)
         {
             Photo photoSig = JsonConvert.DeserializeObject<Photo>(sig);
@@ -249,9 +280,9 @@ namespace ApiMobaileServise.Servise
             return sqlCommandApiMobile.CheckTralerAndTruckDb(token);
         }
 
-        internal bool SetTralerAndTruck(string token, string plateTrailer, string plateTruck)
+        internal bool SetTralerAndTruck(string token, string plateTrailer, string plateTruck, string nowCheck)
         {
-            return sqlCommandApiMobile.SetTralerAndTruck(token, plateTrailer, plateTruck);
+            return sqlCommandApiMobile.SetTralerAndTruck(token, plateTrailer, plateTruck, nowCheck);
         }
 
         internal string GetDocument(string id)

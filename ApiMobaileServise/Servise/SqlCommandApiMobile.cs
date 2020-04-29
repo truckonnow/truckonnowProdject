@@ -215,16 +215,13 @@ namespace ApiMobaileServise.Servise
                     }
                     await context.SaveChangesAsync();
                     photo.IdInspaction = inspectionDrivers.Id;
+                    //To do добавить раздилитель индех фото по тракам трейлерам
                     photo.IndexPhoto = IndexPhoto;
                     inspectionDrivers.PhotosTruck = context.PhotoDrivers.Where(p => p.IdInspaction == inspectionDrivers.Id).ToList();
                     if (inspectionDrivers.PhotosTruck.FirstOrDefault(p => p.IndexPhoto == IndexPhoto) == null)
                     {
                         inspectionDrivers.CountPhoto++;
                         inspectionDrivers.PhotosTruck.Add(photo);
-                    }
-                    else
-                    {
-
                     }
                     await context.SaveChangesAsync();
                 }
@@ -254,17 +251,24 @@ namespace ApiMobaileServise.Servise
             Driver driver =  context.Drivers.Where(d => d.Token == token)
                    .Include(d => d.InspectionDrivers)
                    .FirstOrDefault(); 
-            InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
-            List<Truck> trucks = context.Trucks.ToList();
-            List<Trailer> trailers = context.Trailers.ToList();
-            DateTime dateTime = Convert.ToDateTime(inspectionDriver.Date);
-            if (dateTime.Date == DateTime.Now.Date)
+            InspectionDriver inspectionDriver = driver.InspectionDrivers.Count != 0 ? driver.InspectionDrivers.Last() : null;
+            if (inspectionDriver != null)
             {
-                Truck truck = trucks.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck);
-                Trailer trailer = trailers.FirstOrDefault(t => t.Id == inspectionDriver.IdITrailer);
-                string plateTruck = truck != null ? truck.PlateTruk : "";
-                string plateTrailer = trailer != null ? trailer.Plate : "";
-                plates = $"{plateTruck},{plateTrailer}";
+                List<Truck> trucks = context.Trucks.ToList();
+                List<Trailer> trailers = context.Trailers.ToList();
+                DateTime dateTime = Convert.ToDateTime(inspectionDriver.Date);
+                if (dateTime.Date == DateTime.Now.Date)
+                {
+                    Truck truck = trucks.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck);
+                    Trailer trailer = trailers.FirstOrDefault(t => t.Id == inspectionDriver.IdITrailer);
+                    string plateTruck = truck != null ? truck.PlateTruk : "";
+                    string plateTrailer = trailer != null ? trailer.Plate : "";
+                    plates = $"{plateTruck},{plateTrailer}";
+                }
+                else
+                {
+                    plates = ",";
+                }
             }
             else
             {
@@ -314,6 +318,7 @@ namespace ApiMobaileServise.Servise
             {
                 InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
                 DateTime dateTime = Convert.ToDateTime(inspectionDriver.Date);
+                //To Do Под алгоритм с типами
                 if(dateTime.Date != DateTime.Now.Date || (inspectionDriver.CountPhoto <= 44))
                 {
                     isInspaction = false;
@@ -384,18 +389,27 @@ namespace ApiMobaileServise.Servise
             return lastInspectionDriver;
         }
 
-        internal bool SetTralerAndTruck(string token, string plateTrailer, string plateTruck)
+        internal bool SetTralerAndTruck(string token, string plateTrailer, string plateTruck, string nowCheck)
         {
             Truck truck = context.Trucks.FirstOrDefault(t => t.PlateTruk == plateTruck);
             Trailer trailer = context.Trailers.FirstOrDefault(t => t.Plate == plateTrailer);
             if (truck == null && trailer == null)
                 return false;
+            if(nowCheck == "Truck")
+            {
+                if (truck == null)
+                    return false;
+            }
+            else if(nowCheck == "Trailer")
+            {
+                if (trailer == null)
+                    return false;
+            }
             Driver driver = context.Drivers
                 .Include(d => d.InspectionDrivers)
                 .First(d => d.Token == token);
-            InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
-            DateTime dateTime = Convert.ToDateTime(inspectionDriver.Date);
-            if (dateTime.Date == DateTime.Now.Date)
+            InspectionDriver inspectionDriver = driver.InspectionDrivers.Count != 0 ? driver.InspectionDrivers.Last() : null;
+            if (inspectionDriver != null && Convert.ToDateTime(inspectionDriver.Date).Date == DateTime.Now.Date)
             {
                 if (truck != null)
                 {
@@ -442,18 +456,15 @@ namespace ApiMobaileServise.Servise
                 InspectionDriver inspectionDrivers = driver.InspectionDrivers.FirstOrDefault(i => DateTime.Parse(i.Date).Date == DateTime.Now.Date);
                 if (inspectionDrivers == null)
                 {
-                    File.WriteAllText("GetIndexDb.txt", "indexPhoto = 1;");
                     indexPhoto = 1;
                 }
                 else
                 {
                     indexPhoto = inspectionDrivers.CountPhoto + 1;
-                    File.WriteAllText("GetIndexDb.txt", $"indexPhoto = inspectionDrivers.CountPhoto + 1;  {inspectionDrivers.CountPhoto + 1}");
                 }
             }
             else
             {
-                File.WriteAllText("GetIndexDb.txt", "indexPhoto = 1;");
                 indexPhoto = 1;
             }
             return indexPhoto;

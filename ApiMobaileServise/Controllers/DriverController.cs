@@ -2,6 +2,7 @@
 using ApiMobaileServise.BackgraundService.Queue;
 using ApiMobaileServise.Models;
 using ApiMobaileServise.Servise;
+using ApiMobaileServise.Servise.ModelInspertionDriver;
 using DaoModels.DAO.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -31,6 +32,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
+                    //To do Удалить plates
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", await managerMobileApi.ChechToDayInspaction(token), managerMobileApi.GetIndexPhoto(token), managerMobileApi.GetTruck()
                         .Select(x => x.PlateTruk).ToList() , managerMobileApi.GetTrailer()
                         .Select(x => x.Plate).ToList()));
@@ -139,7 +141,7 @@ namespace ApiMobaileServise.Controllers
 
         [HttpPost]
         [Route("PlateTrackAndPlate")]
-        public string SetTralerAndTruck(string token, string plateTruck, string plateTrailer)
+        public string SetTralerAndTruck(string token, string plateTruck, string plateTrailer, string nowCheck)
         {
             string respons = null;
             if (token == null || token == "")
@@ -151,7 +153,17 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", managerMobileApi.SetTralerAndTruck(token, plateTrailer, plateTruck), null));
+                    bool isValidPlate = managerMobileApi.SetTralerAndTruck(token, plateTrailer, plateTruck, nowCheck);
+                    ITransportVehicle transportVehicle = null;
+                    if(nowCheck == "Truck" && isValidPlate)
+                    {
+                        transportVehicle = managerMobileApi.GetPaternTruckInspectionDriver(plateTruck);
+                    }
+                    else if(nowCheck == "Trailer" && isValidPlate)
+                    {
+                        transportVehicle = managerMobileApi.GetPaternTrailerInspectionDriver(plateTrailer);
+                    }
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", isValidPlate, transportVehicle));
                 }
                 else
                 {
