@@ -1,4 +1,5 @@
 ﻿using MDispatch.Models;
+using MDispatch.Vidget.VM;
 using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
@@ -297,7 +298,7 @@ namespace MDispatch.Service
             return stateInspection;
         }
 
-        internal int SetPlate(string token, string plateTruck, string plateTrailer, ref string description, ref bool isPlate)
+        internal int SetPlate(string token, string plateTruck, string plateTrailer, string nowCheck, ref string description, ref bool isPlate, ref TruckCar truckCar)
         {
             driverInspecktion = new DriverInspecktion();
             //WaiteNoramalReqvestCount();
@@ -305,7 +306,7 @@ namespace MDispatch.Service
             int statePay = 1;
             if (CrossConnectivity.Current.IsConnected)
             {
-                statePay = driverInspecktion.SetPlate(token, plateTruck, plateTrailer, ref description, ref isPlate);
+                statePay = driverInspecktion.SetPlate(token, plateTruck, plateTrailer, nowCheck, ref description, ref isPlate, ref truckCar);
             }
             driverInspecktion = null;
             CountReqvest--;

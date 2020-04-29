@@ -1,4 +1,5 @@
 ﻿using MDispatch.Models;
+using MDispatch.Vidget.VM;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -132,7 +133,7 @@ namespace MDispatch.Service
             }
         }
 
-        internal int SetPlate(string token, string plateTruck, string plateTrailer, ref string description, ref bool isPlate)
+        internal int SetPlate(string token, string plateTruck, string plateTrailer, string nowCheck, ref string description, ref bool isPlate, ref TruckCar truckCar)
         {
             IRestResponse response = null;
             string content = null;
@@ -145,6 +146,7 @@ namespace MDispatch.Service
                 request.AddParameter("token", token);
                 request.AddParameter("plateTruck", plateTruck);
                 request.AddParameter("plateTrailer", plateTrailer);
+                request.AddParameter("nowCheck", nowCheck);
                 response = client.Execute(request);
                 content = response.Content;
             }
@@ -158,7 +160,7 @@ namespace MDispatch.Service
             }
             else
             {
-                return GetData(content, ref isPlate, ref description);
+                return GetData(content, ref isPlate, ref truckCar,  ref description);
             }
         }
 
@@ -219,7 +221,7 @@ namespace MDispatch.Service
             }
         }
 
-        private int GetData(string respJsonStr, ref bool isPlate, ref string description)
+        private int GetData(string respJsonStr, ref bool isPlate, ref TruckCar truckCar, ref string description)
         {
             respJsonStr = respJsonStr.Replace("\\", "");
             respJsonStr = respJsonStr.Remove(0, 1);
@@ -230,6 +232,7 @@ namespace MDispatch.Service
             if (status == "success")
             {
                 isPlate = Convert.ToBoolean(responseAppS.Value<bool>("ResponseStr"));
+                truckCar = JsonConvert.DeserializeObject<TruckCar>(responseAppS.SelectToken("ResponseStr1").ToString());
                 return 3;
             }
             else
