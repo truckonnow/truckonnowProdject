@@ -399,7 +399,7 @@ namespace WebDispacher.Dao
             await context.SaveChangesAsync();
         }
 
-        internal int CreateTrailerDb(string name, string year, string make, string howLong, string vin, string owner, string color, string plate, string exp, string annualIns)
+        internal int CreateTrailerDb(string name, string typeTrailer, string year, string make, string howLong, string vin, string owner, string color, string plate, string exp, string annualIns)
         {
             Trailer trailer = new Trailer()
             {
@@ -412,7 +412,8 @@ namespace WebDispacher.Dao
                 Owner = owner,
                 Plate = plate,
                 Vin = vin,
-                Year = year
+                Year = year,
+                Type = typeTrailer
             };
             context.Trailers.Add(trailer);
             context.SaveChanges();

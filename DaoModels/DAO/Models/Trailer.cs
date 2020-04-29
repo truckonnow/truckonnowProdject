@@ -15,5 +15,6 @@ namespace DaoModels.DAO.Models
         public string Plate { get; set; }
         public string Exp { get; set; }
         public string AnnualIns { get; set; }
+        public string Type { get; set; }
     }
 }

@@ -237,7 +237,7 @@ namespace WebDispacher.Controellers
         [Route("CreateTrailer")]
         [DisableRequestSizeLimit]
         [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 300)]
-        public IActionResult CreateTrailer(string name, string year, string make, string howLong, string vin, string owner, string color, string plate, string exp, string annualIns, List<IFormFile> registrationDoc, List<IFormFile> ensuresDoc, List<IFormFile> _3Doc)
+        public IActionResult CreateTrailer(string name, string typeTrailer, string year, string make, string howLong, string vin, string owner, string color, string plate, string exp, string annualIns, List<IFormFile> registrationDoc, List<IFormFile> ensuresDoc, List<IFormFile> _3Doc)
         {
             IActionResult actionResult = null;
             try
@@ -248,7 +248,7 @@ namespace WebDispacher.Controellers
                 if (managerDispatch.CheckKey(key))
                 {
 
-                    managerDispatch.CreateTrailer(name, year, make, howLong, vin, owner, color, plate, exp, annualIns, registrationDoc[0], ensuresDoc[0], _3Doc[0]);
+                    managerDispatch.CreateTrailer(name, typeTrailer, year, make, howLong, vin, owner, color, plate, exp, annualIns, registrationDoc[0], ensuresDoc[0], _3Doc[0]);
                     actionResult = Redirect($"{Config.BaseReqvesteUrl}/Equipment/Trailers");
                 }
                 else
