@@ -6,7 +6,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Firebase;
-using Plugin.FirebasePushNotification;
+using Firebase.Provider;
 using Plugin.Permissions;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
@@ -28,7 +28,8 @@ namespace MDispatch.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
             FirebaseApp.InitializeApp(Android.App.Application.Context);
-            FirebasePushNotificationManager.ProcessIntent(this, Intent);
+            //FirebasePushNotificationManager.ProcessIntent(this, Intent);
+            //Firebase
             Xamarin.Essentials.Platform.Init(this, bundle);
             FormsControls.Droid.Main.Init(this);
             LoadApplication(new App());

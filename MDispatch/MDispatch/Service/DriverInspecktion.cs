@@ -13,7 +13,7 @@ namespace MDispatch.Service
 {
     public class DriverInspecktion
     {
-        public int CheckInspectionDriver(string token, ref string description, ref bool isInspection, ref int indexPhoto, ref List<string> plateTruck, ref List<string> plateTrailer)
+        public int CheckInspectionDriver(string token, ref string description, ref bool isInspection, ref int indexPhoto, ref TruckCar truckCar)
         {
             IRestResponse response = null;
             string content = null;
@@ -37,11 +37,11 @@ namespace MDispatch.Service
             }
             else
             {
-                return GetData(content, ref description, ref isInspection, ref indexPhoto, ref plateTruck, ref plateTrailer);
+                return GetData(content, ref description, ref isInspection, ref indexPhoto, ref truckCar);
             }
         }
 
-        public int SaveInspactionDriver(string token, ref string description, string idDriver, Photo photo, int indexPhoto)
+        public int SaveInspactionDriver(string token, ref string description, string idDriver, Photo photo, int indexPhoto, string typeTransportVehicle)
         {
             IRestResponse response = null;
             string content = null;
@@ -56,6 +56,7 @@ namespace MDispatch.Service
                 request.AddParameter("idDriver", idDriver);
                 request.AddParameter("photoJson", photoJson);
                 request.AddParameter("indexPhoto", indexPhoto);
+                request.AddParameter("typeTransportVehicle", typeTransportVehicle);
                 response = client.Execute(request);
                 content = response.Content;
             }
@@ -307,7 +308,7 @@ namespace MDispatch.Service
             }
         }
 
-        private int GetData(string respJsonStr, ref string description, ref bool isInspection, ref int indexPhoto, ref List<string> plateTruck, ref List<string> plateTrailer)
+        private int GetData(string respJsonStr, ref string description, ref bool isInspection, ref int indexPhoto, ref TruckCar truckCar)
         {
             respJsonStr = respJsonStr.Replace("\\", "");
             respJsonStr = respJsonStr.Remove(0, 1);
@@ -319,8 +320,7 @@ namespace MDispatch.Service
             {
                 isInspection = Convert.ToBoolean(responseAppS.Value<bool>("ResponseStr"));
                 indexPhoto = Convert.ToInt32(responseAppS.Value<int>("ResponseStr1"));
-                plateTruck = JsonConvert.DeserializeObject<List<string>>(responseAppS.SelectToken("ResponseStr2").ToString());
-                plateTrailer = JsonConvert.DeserializeObject<List<string>>(responseAppS.SelectToken("ResponseStr3").ToString());
+                truckCar = JsonConvert.DeserializeObject<TruckCar>(responseAppS.SelectToken("ResponseStr2").ToString());
                 return 3;
             }
             else

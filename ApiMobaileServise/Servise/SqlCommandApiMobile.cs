@@ -1,4 +1,7 @@
 ﻿using ApiMobaileServise.Models;
+using ApiMobaileServise.Servise.ModelInspertionDriver;
+using ApiMobaileServise.Servise.ModelInspertionDriver.Trailer;
+using ApiMobaileServise.Servise.ModelInspertionDriver.Truck;
 using DaoModels.DAO;
 using DaoModels.DAO.Models;
 using Microsoft.EntityFrameworkCore;
@@ -186,6 +189,34 @@ namespace ApiMobaileServise.Servise
             return driver.Id;
         }
 
+        internal string GetPlateTrailerByTokenDriver(string token)
+        {
+            string plateTrailer = null;
+            Driver driver = context.Drivers
+                .Include(d => d.InspectionDrivers)
+                .First(d => d.Token == token);
+            InspectionDriver inspectionDriver = driver.InspectionDrivers.Count != 0 ? driver.InspectionDrivers.Last() : null;
+            if(inspectionDriver != null && inspectionDriver.IdITrailer != 0)
+            {
+                plateTrailer = context.Trailers.FirstOrDefault(t => t.Id == inspectionDriver.IdITrailer) != null ? context.Trailers.FirstOrDefault(t => t.Id == inspectionDriver.IdITrailer).Plate : null;
+            }
+            return plateTrailer;
+        }
+
+        internal string GetPlateTruckByTokenDriver(string token)
+        {
+            string plateTrailer = null;
+            Driver driver = context.Drivers
+                .Include(d => d.InspectionDrivers)
+                .First(d => d.Token == token);
+            InspectionDriver inspectionDriver = driver.InspectionDrivers.Count != 0 ? driver.InspectionDrivers.Last() : null;
+            if (inspectionDriver != null && inspectionDriver.IdITruck != 0)
+            {
+                plateTrailer = context.Trucks.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck) != null ? context.Trucks.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck).PlateTruk : null;
+            }
+            return plateTrailer;
+        }
+
         internal bool CheckFullNameAndPasswrodDB(string email, string fullName)
         {
             bool isCheckFullNameAdnPassword = false;
@@ -197,7 +228,7 @@ namespace ApiMobaileServise.Servise
             return isCheckFullNameAdnPassword;
         }
 
-        public async Task SaveInspectionDriverInDb(string idDriver, PhotoDriver photo, int IndexPhoto)
+        public async Task SaveInspectionDriverInDb(string idDriver, PhotoDriver photo, int IndexPhoto, string typeTransportVehicle)
         {
             try
             {
@@ -215,12 +246,19 @@ namespace ApiMobaileServise.Servise
                     }
                     await context.SaveChangesAsync();
                     photo.IdInspaction = inspectionDrivers.Id;
-                    //To do добавить раздилитель индех фото по тракам трейлерам
+                    //To do добавить раздилитель индех фото по тракам трейлерам 
                     photo.IndexPhoto = IndexPhoto;
                     inspectionDrivers.PhotosTruck = context.PhotoDrivers.Where(p => p.IdInspaction == inspectionDrivers.Id).ToList();
                     if (inspectionDrivers.PhotosTruck.FirstOrDefault(p => p.IndexPhoto == IndexPhoto) == null)
                     {
-                        inspectionDrivers.CountPhoto++;
+                        if (typeTransportVehicle == "Truck")
+                        {
+                            inspectionDrivers.CountPhotoTruck++;
+                        }
+                        else if (typeTransportVehicle == "Trailer")
+                        {
+                            inspectionDrivers.CountPhotoTrailer++;
+                        }
                         inspectionDrivers.PhotosTruck.Add(photo);
                     }
                     await context.SaveChangesAsync();
@@ -231,7 +269,15 @@ namespace ApiMobaileServise.Servise
                     driver.InspectionDrivers = new List<InspectionDriver>();
                     inspectionDrivers.Date = DateTime.Now.ToString();
                     inspectionDrivers.PhotosTruck = new List<PhotoDriver>();
-                    inspectionDrivers.CountPhoto++;
+
+                    if (typeTransportVehicle == "Truck")
+                    {
+                        inspectionDrivers.CountPhotoTruck++;
+                    }
+                    else if (typeTransportVehicle == "Trailer")
+                    {
+                        inspectionDrivers.CountPhotoTrailer++;
+                    }
                     inspectionDrivers.PhotosTruck.Add(photo);
                     driver.InspectionDrivers.Add(inspectionDrivers);
                     await context.SaveChangesAsync();
@@ -318,8 +364,11 @@ namespace ApiMobaileServise.Servise
             {
                 InspectionDriver inspectionDriver = driver.InspectionDrivers.Last();
                 DateTime dateTime = Convert.ToDateTime(inspectionDriver.Date);
-                //To Do Под алгоритм с типами
-                if(dateTime.Date != DateTime.Now.Date || (inspectionDriver.CountPhoto <= 44))
+                Truck truck = context.Trucks.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck);
+                Trailer trailer = context.Trailers.FirstOrDefault(t => t.Id == inspectionDriver.IdITruck);
+                int countImageTruck = truck != null ? GetTransportVehicle(truck.TypeTruk).CountPhoto : 0;
+                int countImageTrailer = trailer != null ? GetTransportVehicle(trailer.Type).CountPhoto : 0;
+                if (dateTime.Date != DateTime.Now.Date || (inspectionDriver.CountPhotoTruck + inspectionDriver.CountPhotoTrailer <= countImageTruck + countImageTrailer))
                 {
                     isInspaction = false;
                 }
@@ -336,6 +385,19 @@ namespace ApiMobaileServise.Servise
             }
             await context.SaveChangesAsync();
             return isInspaction;
+        }
+
+
+
+        private ITransportVehicle GetTransportVehicle(string typeTruk)
+        {
+            ITransportVehicle transportVehicle = null;
+            switch (typeTruk)
+            {
+                case "PickupFourWheel": transportVehicle = new PickupFourWheel(); break;
+                case "GooseneckTrailerTwoVehicles": transportVehicle = new GooseneckTrailerTwoVehicles(); break;
+            }
+            return transportVehicle;
         }
 
         internal void SavePhotoStrapInDb(string id, List<Photo> photos)
@@ -428,7 +490,8 @@ namespace ApiMobaileServise.Servise
                     {
                         IdITruck = truck.Id,
                         Date = DateTime.Now.ToString(),
-                        CountPhoto = 0
+                        CountPhotoTruck = 0,
+                        CountPhotoTrailer = 0
                     });
                 }
                 if (trailer != null)
@@ -437,7 +500,8 @@ namespace ApiMobaileServise.Servise
                     {
                         IdITrailer = trailer.Id,
                         Date = DateTime.Now.ToString(),
-                        CountPhoto = 0
+                        CountPhotoTruck = 0,
+                        CountPhotoTrailer = 0
                     });
                 }
             }
@@ -460,7 +524,14 @@ namespace ApiMobaileServise.Servise
                 }
                 else
                 {
-                    indexPhoto = inspectionDrivers.CountPhoto + 1;
+                    if(inspectionDrivers.IdITrailer != 0)
+                    {
+                        indexPhoto = inspectionDrivers.CountPhotoTrailer + 1;
+                    }
+                    else
+                    {
+                        indexPhoto = inspectionDrivers.CountPhotoTruck + 1;
+                    }
                 }
             }
             else

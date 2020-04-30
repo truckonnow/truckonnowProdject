@@ -37,11 +37,7 @@ namespace MDispatch.Vidget.View
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
-            if (!((fullPhotoTruckVM.PlateTruck != null && fullPhotoTruckVM.PlateTruck != "") && (fullPhotoTruckVM.PlateTrailer != null && fullPhotoTruckVM.PlateTrailer != "")) && fullPhotoTruckVM.IndexCurent == 44)
-            {
-                await PopupNavigation.PushAsync(new PlateWrite(fullPhotoTruckVM));
-            }
-            else if (fullPhotoTruckVM.PlateTruck == null || fullPhotoTruckVM.PlateTruck == "")
+            if (fullPhotoTruckVM.PlateTruck == null || fullPhotoTruckVM.PlateTruck == "")
             {
                 await PopupNavigation.PushAsync(new PlateTruckWrite(fullPhotoTruckVM));
             }

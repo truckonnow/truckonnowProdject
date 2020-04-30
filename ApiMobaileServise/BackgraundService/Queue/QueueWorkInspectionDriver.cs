@@ -30,7 +30,7 @@ namespace ApiMobaileServise.BackgraundService.Queue
                 {
                     if (queues[i].Split("&,&")[0] == "SaveDriverInspection")
                     {
-                        await managerMobileApi.SaveInspactionDriver(queues[i].Split("&,&")[1], queues[i].Split("&,&")[2], Convert.ToInt32(queues[i].Split("&,&")[3]));
+                        await managerMobileApi.SaveInspactionDriver(queues[i].Split("&,&")[1], queues[i].Split("&,&")[2], Convert.ToInt32(queues[i].Split("&,&")[3]), queues[i].Split("&,&")[4]);
                     }
                     countQueues--;
                 }

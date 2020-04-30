@@ -10,6 +10,7 @@ namespace ApiMobaileServise.Servise.ModelInspertionDriver.Trailer
         public List<string> NamePatern { get; set; }
         public string PlateTruck { get; set; }
         public string PlateTraler { get; set; }
+        public string TypeTransportVehicle { get; set; } = "Trailer";
 
         public GooseneckTrailerTwoVehicles()
         {

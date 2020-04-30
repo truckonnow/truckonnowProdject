@@ -10,5 +10,6 @@ namespace ApiMobaileServise.Servise.ModelInspertionDriver
         List<string> NamePatern { get; set; }
         string PlateTruck { get; set; }
         string PlateTraler { get; set; }
+        string TypeTransportVehicle { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace MDispatch.Service
         private GoogleApi googleApi = null;
         private int CountReqvest = 0;
 
-        public int DriverWork(string typeDriver, string token, ref string description, ref bool isInspection, ref int indexPhoto, ref List<string> plateTruck, ref List<string> plateTrailer)
+        public int DriverWork(string typeDriver, string token, ref string description, ref bool isInspection, ref int indexPhoto, ref TruckCar truckCar)
         {
             driverInspecktion = new DriverInspecktion();
             //WaiteNoramalReqvestCount();
@@ -29,7 +29,7 @@ namespace MDispatch.Service
             {
                 if (typeDriver == "CheckInspeacktion")
                 {
-                    stateDriver = driverInspecktion.CheckInspectionDriver(token, ref description, ref isInspection, ref indexPhoto, ref plateTruck, ref plateTrailer);
+                    stateDriver = driverInspecktion.CheckInspectionDriver(token, ref description, ref isInspection, ref indexPhoto, ref truckCar);
                 }
             }
             driverInspecktion = null;
@@ -209,7 +209,7 @@ namespace MDispatch.Service
             return stateInspection;
         }
 
-        public int AskWork(string typeInspection, string token, string id, object obj, ref string description, string idShiping = null, int indexPhoto = 0)
+        public int AskWork(string typeInspection, string token, string id, object obj, ref string description, string idShiping = null, int indexPhoto = 0, string typeTransportVehicle = null)
         {
             int stateInspection = 1;
             //WaiteNoramalReqvestCount();
@@ -269,7 +269,7 @@ namespace MDispatch.Service
                 else if (typeInspection == "SaveInspactionDriver")
                 {
                     driverInspecktion = new DriverInspecktion();
-                    stateInspection = driverInspecktion.SaveInspactionDriver(token, ref description, id, (Photo)obj, indexPhoto);
+                    stateInspection = driverInspecktion.SaveInspactionDriver(token, ref description, id, (Photo)obj, indexPhoto, typeTransportVehicle);
                 }
                 else if(typeInspection == "SendBolMail")
                 {

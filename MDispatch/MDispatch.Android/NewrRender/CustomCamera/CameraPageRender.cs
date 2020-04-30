@@ -81,6 +81,7 @@ namespace MDispatch.Droid.NewrRender
 
             capturePhotoButton = new Button(Context);
             capturePhotoInspectionButton = new Button(Context);
+            capturePhotoInspectionButton1 = new Button(Context);
             scanPhotoButton = new Button(Context);
             if (((CameraPage)Element).TypeCamera == null || ((CameraPage)Element).TypeCamera == "Photo")
             {

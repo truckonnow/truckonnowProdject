@@ -91,11 +91,11 @@ namespace ApiMobaileServise.Servise
             await sqlCommandApiMobile.SetInspectionDriverInDb(idDriver, inspectionDriver);
         }
 
-        public async Task SaveInspactionDriver(string idDriver, string photoJson, int indexPhoto)
+        public async Task SaveInspactionDriver(string idDriver, string photoJson, int indexPhoto, string typeTransportVehicle)
         {
             photoJson = photoJson.Insert(photoJson.IndexOf(idDriver) + 2, $"{DateTime.Now.ToShortDateString()}/");
             PhotoDriver photo = JsonConvert.DeserializeObject<PhotoDriver>(photoJson);
-            await sqlCommandApiMobile.SaveInspectionDriverInDb(idDriver, photo, indexPhoto);
+            await sqlCommandApiMobile.SaveInspectionDriverInDb(idDriver, photo, indexPhoto, typeTransportVehicle);
             //await Task.Run(() =>
             //{
             //    IDetect detect = null;
@@ -165,6 +165,25 @@ namespace ApiMobaileServise.Servise
                 ITypeScan typeScan = GetTypeScan(vehiclwInformation.Ask.TypeVehicle);
                 await typeScan.SetDamage(damageForUsers, vehiclwInformation.Ask.TypeVehicle, vehiclwInformation.Scan.path);
             });
+        }
+
+        internal ITransportVehicle GetPaternTrailerInspectionDriverByTokenDriver(string token)
+        {
+            ITransportVehicle transportVehicle = null;
+            string plateTrailer = sqlCommandApiMobile.GetPlateTrailerByTokenDriver(token);
+            if(plateTrailer != null)
+            {
+                transportVehicle = GetPaternTrailerInspectionDriver(plateTrailer);
+            }
+            else
+            {
+                string plateTruck = sqlCommandApiMobile.GetPlateTruckByTokenDriver(token);
+                if(plateTruck != null)
+                {
+                    transportVehicle = GetPaternTruckInspectionDriver(plateTruck);
+                }
+            }
+            return transportVehicle;
         }
 
         internal ITransportVehicle GetPaternTrailerInspectionDriver(string plateTrailer)
@@ -539,7 +558,7 @@ namespace ApiMobaileServise.Servise
                 else if (nameMethod == "SaveInspactionDriver")
                 {
                     parameter = optionalParameter.Split(',');
-                    await SaveInspactionDriver(parameter[0], objSave, Convert.ToInt32(parameter[1]));
+                    //await SaveInspactionDriver(parameter[0], objSave, Convert.ToInt32(parameter[1]));
                 }
                 else if (nameMethod == "SaveRecount")
                 {

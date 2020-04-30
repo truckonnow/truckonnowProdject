@@ -29,13 +29,14 @@ namespace ApiMobaileServise.Controllers
             }
             try
             {
+                ITransportVehicle transportVehicle = null;
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    //To do Удалить plates
-                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", await managerMobileApi.ChechToDayInspaction(token), managerMobileApi.GetIndexPhoto(token), managerMobileApi.GetTruck()
-                        .Select(x => x.PlateTruk).ToList() , managerMobileApi.GetTrailer()
-                        .Select(x => x.Plate).ToList()));
+                    int indexPhoto = managerMobileApi.GetIndexPhoto(token);
+                        transportVehicle = managerMobileApi.GetPaternTrailerInspectionDriverByTokenDriver(token);
+                    
+                    respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", await managerMobileApi.ChechToDayInspaction(token), indexPhoto, transportVehicle));
                 }
                 else
                 {
@@ -82,7 +83,7 @@ namespace ApiMobaileServise.Controllers
         [HttpPost]
         [Route("SaveInspactionDriver")]
         [CompressGzip(IsCompresReqvest = true, ParamUnZip = "photoJson")]
-        public string SaveInspactionDriver(string token, string idDriver, string photoJson, int indexPhoto)
+        public string SaveInspactionDriver(string token, string idDriver, string photoJson, int indexPhoto, string typeTransportVehicle)
         {
             string respons = null;
             if (token == null || token == "")
@@ -94,7 +95,7 @@ namespace ApiMobaileServise.Controllers
                 bool isToken = managerMobileApi.CheckToken(token);
                 if (isToken)
                 {
-                    QueueWorkInspectionDriver.queues.Add($"SaveDriverInspection&,&{idDriver}&,&{photoJson}&,&{indexPhoto}");
+                    QueueWorkInspectionDriver.queues.Add($"SaveDriverInspection&,&{idDriver}&,&{photoJson}&,&{indexPhoto}&,&{typeTransportVehicle}");
                     QueueWorkInspectionDriver.countQueues++;
                     respons = JsonConvert.SerializeObject(new ResponseAppS("success", "", null));
                 }

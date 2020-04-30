@@ -1,6 +1,7 @@
 ﻿using MDispatch.Models;
 using MDispatch.Service;
 using MDispatch.Service.Net;
+using MDispatch.Vidget.VM;
 using MDispatch.View.A_R;
 using MDispatch.View.GlobalDialogView;
 using MDispatch.ViewModels.TAbbMV.DialogAsk;
@@ -119,12 +120,13 @@ namespace MDispatch.ViewModels.TAbbMV
             List<string> plateTrailer = null;
             int indexPhoto = 1;
             int state = 0;
+            TruckCar truckCar = null;
             await Task.Run(() => Utils.CheckNet());
             if (App.isNetwork)
             {
                 await Task.Run(() =>
                 {
-                    state = managerDispatchMob.DriverWork("CheckInspeacktion", token, ref description, ref isInspection, ref indexPhoto, ref plateTruck, ref plateTrailer);
+                    state = managerDispatchMob.DriverWork("CheckInspeacktion", token, ref description, ref isInspection, ref indexPhoto, ref truckCar);
                 });
                 if (state == 2)
                 {
@@ -139,7 +141,7 @@ namespace MDispatch.ViewModels.TAbbMV
                     }
                     else
                     {
-                        await Navigation.PushAsync(new Vidget.View.CameraPage(managerDispatchMob, UnTimeOfInspection.IdDriver, indexPhoto, plateTruck, plateTrailer, initDasbordDelegate));
+                        await Navigation.PushAsync(new Vidget.View.CameraPage(managerDispatchMob, UnTimeOfInspection.IdDriver, indexPhoto, initDasbordDelegate, truckCar));
                     }
                 }
                 else if (state == 4)

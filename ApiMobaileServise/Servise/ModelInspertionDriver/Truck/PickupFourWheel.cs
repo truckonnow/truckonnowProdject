@@ -10,6 +10,7 @@ namespace ApiMobaileServise.Servise.ModelInspertionDriver.Truck
         public List<string> NamePatern { get; set; }
         public string PlateTruck { get; set; }
         public string PlateTraler { get; set; }
+        public string TypeTransportVehicle { get; set; } = "Truck";
 
         public PickupFourWheel()
         {
@@ -31,8 +32,10 @@ namespace ApiMobaileServise.Servise.ModelInspertionDriver.Truck
                 "14",
                 "15",
                 "16",
+                "17",
                 "18",
                 "19",
+                "20",
                 "21",
             };
         }
